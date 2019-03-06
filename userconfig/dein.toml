@@ -1,0 +1,88 @@
+# プラグインの管理
+[[plugins]] # これ使うのに必要
+repo = 'Shougo/dein.vim'
+
+[[plugins]] # インタラクティブフィルター(ファイル検索に便利)
+repo = 'junegunn/fzf'
+build = './install --all'
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+
+[[plugins]] # ファイルツリーの表示
+repo = 'scrooloose/nerdtree'
+
+[[plugins]] # コメントアウトに便利
+repo = 'tomtom/tcomment_vim'
+
+[[plugins]] # ステータスラインの表示内容強化
+repo = 'itchyny/lightline.vim'
+
+[[plugins]] # 構文チェック
+repo = 'w0rp/ale'
+hook_add ='''
+	let b:ale_linters = {
+	\	'javascript': ['eslint', 'eslint-plugin-vue'],
+	\	'python': ['pyflakes', 'pep8'],
+	\	'c':['clang'],
+	\	'cpp':['clang'],
+	\	'ruby': ['rubocop'],
+	\	'tex': ['textlint'],
+	\	'markdown': ['textlint'],
+	\	'css': ['stylelint'],
+	\}
+	let g:ale_sign_column_always = 1
+	let g:ale_sign_error = 'x'
+	let g:ale_sign_warning = '⚠'
+	let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+	let g:ale_lint_on_text_changed = 0
+	let g:ale_lint_on_insert_leave = 1
+'''
+
+[[plugins]] # cの自動入力補完。lsp使うやつに切り替えたい。
+repo = 'justmao945/vim-clang'
+on_ft = ['c', 'cpp', 'cmake']
+
+
+[[plugins]] # lspでの補完
+repo = 'prabirshrestha/async.vim'
+
+[[plugins]] # lspでの補完
+repo = 'prabirshrestha/vim-lsp'
+hook_add='''
+if executable('clangd')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'clangd',
+        \ 'cmd': {server_info->['clangd']},
+        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+        \ })
+endif
+if executable('pyls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
+        \ })
+endif
+'''
+
+[[plugins]] # lspでの補完
+repo='prabirshrestha/asyncomplete.vim'
+
+[[plugins]] # lspでの補完
+repo='prabirshrestha/asyncomplete-lsp.vim'
+
+
+#[[plugins]] # 
+#repo = ''
+
+#[[plugins]] # 
+#repo = ''
+
+#[[plugins]] # 
+#repo = ''
+
+#[[plugins]] # 
+#repo = ''
+
+
