@@ -4,6 +4,9 @@
 repo  = 'cespare/vim-toml'
 on_ft = 'toml'
 
+[[plugins]] # その場で実行できる
+repo = 'thinca/vim-quickrun'
+
 # [[plugins]] # 構文チェック
 # repo = 'w0rp/ale'
 # hook_add='''

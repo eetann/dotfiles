@@ -73,6 +73,19 @@ repo='prabirshrestha/asyncomplete.vim'
 repo='prabirshrestha/asyncomplete-lsp.vim'
 
 
+[[plugins]] # gitをvimで操作
+repo = 'tpope/vim-fugitive'
+
+[[plugins]] # カラースキーム
+repo = 'altercation/vim-colors-solarized'
+hook_add = '''
+  set background=dark
+  au MyAutoCmd VimEnter * nested colorscheme solarized
+'''
+
+#[[plugins]] # 
+#repo = ''
+
 #[[plugins]] # 
 #repo = ''
 

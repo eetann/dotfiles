@@ -67,6 +67,11 @@ if &compatible
   set nocompatible               " Be iMproved
 endif
 
+" reset augroup
+augroup MyAutoCmd
+  autocmd!
+augroup END
+
 let s:dein_path = expand('$HOME/.vim/dein')
 let s:dein_repo_path = s:dein_path . '/repos/github.com/Shougo/dein.vim'
 
