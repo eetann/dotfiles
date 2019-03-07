@@ -13,7 +13,11 @@ repo = 'junegunn/fzf.vim'
 repo = 'scrooloose/nerdtree'
 
 [[plugins]] # コメントアウトに便利
-repo = 'tomtom/tcomment_vim'
+repo = 'scrooloose/nerdcommenter'
+hook_add ='''
+	let g:NERDSpaceDelims=1
+	let g:NERDDefaultAlign='left'
+'''
 
 [[plugins]] # ステータスラインの表示内容強化
 repo = 'itchyny/lightline.vim'
@@ -77,10 +81,42 @@ repo='prabirshrestha/asyncomplete-lsp.vim'
 repo = 'tpope/vim-fugitive'
 
 [[plugins]] # カラースキーム
-repo = 'altercation/vim-colors-solarized'
+repo = 'tomasr/molokai'
 hook_add = '''
   set background=dark
-  au MyAutoCmd VimEnter * nested colorscheme solarized
+  au MyAutoCmd VimEnter * nested colorscheme molokai
+'''
+
+[[plugins]] # 画面の移動が便利になる
+repo = 'Lokaltog/vim-easymotion'
+hook_add = '''
+  " デフォルトのキーマッピングを無効に
+    let g:EasyMotion_do_mapping = 0
+  " f + 2文字 で画面全体を検索してジャンプ
+    nmap f <plug>(easymotion-overwin-f2)
+  " 検索時、大文字小文字を区別しない
+    let g:EasyMotion_smartcase = 1
+'''
+
+[[plugins]] # クオート関連便利になる
+on_event = 'InsertEnter'
+repo = 'tpope/vim-surround'
+
+
+[[plugins]] # ドットコマンド対象を拡張
+on_event = 'InsertEnter'
+repo = 'tpope/vim-repeat'
+
+[[plugins]] # マーク位置の表示
+repo = 'kshenoy/vim-signature'
+
+[[plugins]] # NERDTreeにGitの情報を表示
+repo = 'Xuyuanp/nerdtree-git-plugin'
+
+[[plugins]] # インデントの深さを可視化(要tabstop&shiftwidth設定)
+repo = 'nathanaelkane/vim-indent-guides'
+hook_add = '''
+	let g:indent_guides_enable_on_vim_startup = 1
 '''
 
 #[[plugins]] # 
