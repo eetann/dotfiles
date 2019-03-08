@@ -38,6 +38,7 @@ set wildmenu  "コマンドモードの補完
 set clipboard=unnamed,autoselect " ヤンク&ペーストをクリップボード利用
 
 set nrformats= "数増減は10進数で扱う
+set spelllang=en,cjk
 
 "----インサートモードのためのIMEの制御(Tera Termのみ?)
 " let &t_SI .= "\e[<r" " 挿入入時、前回のIME状態復元

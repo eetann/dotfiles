@@ -43,9 +43,9 @@ hook_add ='''
 	let g:ale_lint_on_insert_leave = 1
 '''
 
-[[plugins]] # cの自動入力補完。lsp使うやつに切り替えたい。
-repo = 'justmao945/vim-clang'
-on_ft = ['c', 'cpp', 'cmake']
+# [[plugins]] # cの自動入力補完。lsp使うやつに切り替えたい。
+# repo = 'justmao945/vim-clang'
+# on_ft = ['c', 'cpp', 'cmake']
 
 
 [[plugins]] # lspでの補完
