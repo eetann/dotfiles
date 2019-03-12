@@ -3,6 +3,7 @@ scriptencoding utf-8
 set ambiwidth=double " □や○文字が崩れる問題を解決
 set nocompatible
 
+
 " reset augroup
 augroup MyAutoCmd
   autocmd!
@@ -34,9 +35,9 @@ nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
 
 set wildmenu  "コマンドモードの補完
 
-"----コピペ
+"----その他
 set clipboard=unnamed,autoselect " ヤンク&ペーストをクリップボード利用
-
+let mapleader = "\<Space>" " leaderキーの割当を変える
 set nrformats= "数増減は10進数で扱う
 set spelllang=en,cjk
 
@@ -50,15 +51,15 @@ set spelllang=en,cjk
 "----カーソル
 syntax on "コードの色分け
 set title "編集中のファイル名表示
-set number "行番号の表示
+" set number "行番号の表示
 set showmatch "括弧入力時に対応括弧表示
 set colorcolumn=80 "カラムラインを引く
 set whichwrap=b,s,h,l,[,],<,>,~ "行末から次の行へ移動できる
 filetype plugin on
 set list "空白文字の可視化
-"行末スペース、改行記号
+"行末スペース、改行記号、Tabは\<Space>\<Space>と指定(2字必要)
 "ウィンドウ幅狭いときの省略での文字表示*2、不可視のスペースを表す
-set listchars=trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+set listchars=tab:\ \ ,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 
 "----ステータスラインの表示内容強化(lightlineに必要)
 set laststatus=2 " ステータスラインを常に表示
@@ -70,12 +71,12 @@ set noswapfile " ファイル編集中にスワップファイルを作らない
 
 "----カーソルの形をモードで変化
 if has('vim_starting')
-    " 挿入モード時に非点滅の縦棒タイプのカーソル
-    let &t_SI .= "\e[6 q"
-    " ノーマルモード時に非点滅のブロックタイプのカーソル
-    let &t_EI .= "\e[2 q"
-    " 置換モード時に非点滅の下線タイプのカーソル
-    let &t_SR .= "\e[4 q"
+	" 挿入モード時に非点滅の縦棒タイプのカーソル
+	let &t_SI .= "\e[6 q"
+	" ノーマルモード時に非点滅のブロックタイプのカーソル
+	let &t_EI .= "\e[2 q"
+	" 置換モード時に非点滅の下線タイプのカーソル
+	let &t_SR .= "\e[4 q"
 endif
 
 

@@ -9,10 +9,10 @@ module.exports = {
     updateChannel: 'stable',
 
     // default font size in pixels for all tabs
-    fontSize: 12,
+    fontSize: 14,
 
     // font family with optional fallbacks
-    fontFamily: 'Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+    fontFamily: 'Myrica-MM, Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
 
     // default font weight: 'normal' or 'bold'
     fontWeight: 'normal',
@@ -46,7 +46,7 @@ module.exports = {
     backgroundColor: '#000',
 
     // terminal selection color
-    selectionColor: 'rgba(248,28,229,0.3)',
+    selectionColor: 'rgba(248,28,229,0.7)',
 
     // border color (window, tabs)
     borderColor: '#333',
@@ -129,15 +129,28 @@ module.exports = {
     // bellSoundURL: 'http://example.com/bell.mp3',
 
     // for advanced config flags please refer to https://hyper.is/#cfg
-  },
+    pokemon: 'growlithe', // Define your favorite pokemon theme
+    pokecursor: 'true', // Activate your theme's pokecursor
+    pokemonSyntax: 'dark', // Define the color of the terminal tabs
+    unibody: 'false', // Define the color of the Hyper window header
+    poketab: 'true', // Deactivate your theme's poketab
 
-  // a list of plugins to fetch and install from npm
+
+		opacity: {
+		focus: 0.95,
+		blur: 0.4,
+	  },
+  },
+	// a list of plugins to fetch and install from npm
   // format: [@org/]project[#version]
   // examples:
   //   `hyperpower`
   //   `@company/project`
   //   `project#1.0.1`
-  plugins: [],
+  plugins: [
+    'hyper-opacity',
+	  'hyper-pokemon',
+  ],
 
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here

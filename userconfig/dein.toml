@@ -2,6 +2,10 @@
 [[plugins]] # これ使うのに必要
 repo = 'Shougo/dein.vim'
 
+[[plugins]] # 非同期実行(vim-clang-formatに必要)
+repo = 'Shougo/vimproc.vim'
+build = 'make'
+
 [[plugins]] # インタラクティブフィルター(ファイル検索に便利)
 repo = 'junegunn/fzf'
 build = './install --all'
@@ -15,7 +19,7 @@ repo = 'scrooloose/nerdtree'
 [[plugins]] # コメントアウトに便利
 repo = 'scrooloose/nerdcommenter'
 hook_add ='''
-	let g:NERDSpaceDelims=1
+	let g:NERDSpaceDelims=1 "コメントアウト時に1スペース挿入
 	let g:NERDDefaultAlign='left'
 '''
 
@@ -126,6 +130,9 @@ repo = 'Xuyuanp/nerdtree-git-plugin'
 repo = 'nathanaelkane/vim-indent-guides'
 hook_add = '''
 	let g:indent_guides_enable_on_vim_startup = 1
+	let g:indent_guides_auto_colors = 0
+	autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=darkgrey
+	autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=lightgrey
 '''
 
 #[[plugins]] # 
