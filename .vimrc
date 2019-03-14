@@ -51,7 +51,7 @@ set spelllang=en,cjk
 "----カーソル
 syntax on "コードの色分け
 set title "編集中のファイル名表示
-" set number "行番号の表示
+set number "行番号の表示
 set showmatch "括弧入力時に対応括弧表示
 set colorcolumn=80 "カラムラインを引く
 set whichwrap=b,s,h,l,[,],<,>,~ "行末から次の行へ移動できる

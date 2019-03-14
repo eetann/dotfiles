@@ -11,20 +11,20 @@ repo = 'thinca/vim-quickrun'
 repo = 'plasticboy/vim-markdown'
 on_ft = ['md','mdwn','mkd','mkdn','mark']
 
-[[plugins]] # c/c++/objcのformat
-repo = 'rhysd/vim-clang-format'
-on_ft = ['c', 'cpp', 'objc']
-hook_add = '''
-  let g:clang_format#auto_format = 1
-  let g:clang_format#style_options = {
-  \ "AlignConsecutiveAssignments":"true",
-  \ "IndentCaseLabels": "true",
-  \ "IndentWidth":4,
-  \ "KeepEmptyLinesAtTheStartOfBlocks":"true",
-  \ "SpacesBeforeTrailingComments":1,
-  \ "TabWidth":4,
-  \ "UseTab":"ForIndentation"}
-'''
+# [[plugins]] # c/c++/objcのformat
+# repo = 'rhysd/vim-clang-format'
+# on_ft = ['c', 'cpp', 'objc']
+# hook_add = '''
+#   let g:clang_format#auto_format = 1
+#   let g:clang_format#style_options = {
+#   \ "AlignConsecutiveAssignments":"true",
+#   \ "IndentCaseLabels": "true",
+#   \ "IndentWidth":4,
+#   \ "KeepEmptyLinesAtTheStartOfBlocks":"true",
+#   \ "SpacesBeforeTrailingComments":1,
+#   \ "TabWidth":4,
+#   \ "UseTab":"ForIndentation"}
+# '''
 
 # # 自動補完-------------------------------------------
 # [[plugins]]

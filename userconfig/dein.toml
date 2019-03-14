@@ -29,28 +29,37 @@ repo = 'itchyny/lightline.vim'
 [[plugins]] # 構文チェック
 repo = 'w0rp/ale'
 hook_add ='''
-	let b:ale_linters = {
-	\	'javascript': ['eslint', 'eslint-plugin-vue'],
-	\	'python': ['pyflakes', 'pep8'],
-	\	'c':['clang'],
-	\	'cpp':['clang'],
-	\	'ruby': ['rubocop'],
-	\	'tex': ['textlint'],
-	\	'markdown': ['textlint'],
-	\	'css': ['stylelint'],
-	\}
+	let g:ale_fix_on_save = 1
 	let g:ale_sign_column_always = 1
 	let g:ale_sign_error = 'x'
 	let g:ale_sign_warning = '⚠'
 	let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 	let g:ale_lint_on_text_changed = 0
 	let g:ale_lint_on_insert_leave = 1
+	let b:ale_linters = {
+	\	'python': ['pyflakes', 'pep8'],
+	\	'c':['clang'],
+	\	'cpp':['clang'],
+	\	'tex': ['textlint'],
+	\	'markdown': ['textlint'],
+	\	'css': ['stylelint'],
+	\}
+	let g:ale_fixers = {
+	\   'c': ['clang-format'],
+	\   'cpp': ['clang-format'],
+	\   'python': ['autopep8'],
+	\}
+	let g:ale_cpp_clangformat = '-style="{
+	\   AlignConsecutiveAssignments:true,
+	\   AlignConsecutiveDeclarations:true,
+	\   IndentCaseLabels":true,
+	\   IndentWidth:4,
+	\   KeepEmptyLinesAtTheStartOfBlocks:true,
+	\   SpacesBeforeTrailingComments:1,
+	\   TabWidth":4,
+	\   UseTab:ForIndentation	
+	\}"'
 '''
-
-# [[plugins]] # cの自動入力補完。lsp使うやつに切り替えたい。
-# repo = 'justmao945/vim-clang'
-# on_ft = ['c', 'cpp', 'cmake']
-
 
 [[plugins]] # lspでの補完
 repo = 'prabirshrestha/async.vim'
@@ -58,21 +67,12 @@ repo = 'prabirshrestha/async.vim'
 [[plugins]] # lspでの補完
 repo = 'prabirshrestha/vim-lsp'
 hook_add='''
-if executable('clangd')
+if executable('clangd-6.0')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'clangd',
-        \ 'cmd': {server_info->['clangd']},
+        \ 'cmd': {server_info->['clangd-6.0']},
         \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
         \ })
-endif
-if executable('cquery')
-   au User lsp_setup call lsp#register_server({
-      \ 'name': 'cquery',
-      \ 'cmd': {server_info->['cquery']},
-      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-      \ 'initialization_options': { 'cacheDirectory': '/temp/cquery/cache' },
-      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
-      \ })
 endif
 if executable('pyls')
     au User lsp_setup call lsp#register_server({
@@ -81,6 +81,7 @@ if executable('pyls')
         \ 'whitelist': ['python'],
         \ })
 endif
+let g:lsp_diagnostics_enabled = 0 "w0rp/aleで対応するので無効化
 '''
 
 [[plugins]] # lspでの補完
@@ -94,20 +95,20 @@ repo='prabirshrestha/asyncomplete-lsp.vim'
 repo = 'tpope/vim-fugitive'
 
 [[plugins]] # カラースキーム
-repo = 'tomasr/molokai'
+repo = 'morhetz/gruvbox'
 hook_add = '''
   set background=dark
-  au MyAutoCmd VimEnter * nested colorscheme molokai
+  au MyAutoCmd VimEnter * nested colorscheme gruvbox
 '''
 
 [[plugins]] # 画面の移動が便利になる
 repo = 'Lokaltog/vim-easymotion'
 hook_add = '''
-  " デフォルトのキーマッピングを無効に
+    " デフォルトのキーマッピングを無効に
     let g:EasyMotion_do_mapping = 0
-  " f + 2文字 で画面全体を検索してジャンプ
+    " f + 2文字 で画面全体を検索してジャンプ
     nmap f <plug>(easymotion-overwin-f2)
-  " 検索時、大文字小文字を区別しない
+    " 検索時、大文字小文字を区別しない
     let g:EasyMotion_smartcase = 1
 '''
 
