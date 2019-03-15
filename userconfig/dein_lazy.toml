@@ -6,25 +6,52 @@ on_ft = 'toml'
 
 [[plugins]] # その場で実行できる
 repo = 'thinca/vim-quickrun'
+hook_add = '''
+	let g:quickrun_config = {
+      \ 'runner'    : 'vimproc',
+      \ 'runner/vimproc/updatetime' : 60,
+      \ 'outputter' : 'quickfix',
+      \ 'outputter/buffer/split'  : ':rightbelow 8sp',
+      \ }
+	" qでquickfixを閉じる
+	au FileType qf nnoremap <silent><buffer>q :quit<CR>
+	" normal or visual modeのとき <leader> + r で保存してからquickrunの実行
+	let g:quickrun_no_default_key_mappings = 1
+	nnoremap <leader>r :write<CR>:QuickRun -mode n<CR>
+	xnoremap <leader>r :<C-U>write<CR>gv:QuickRun -mode v<CR>
+	" <C-c> でquickrunを停止
+	nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
+'''
 
 [[plugins]] # Markdownの編集をサポート
 repo = 'plasticboy/vim-markdown'
 on_ft = ['md','mdwn','mkd','mkdn','mark']
 
-# [[plugins]] # c/c++/objcのformat
-# repo = 'rhysd/vim-clang-format'
-# on_ft = ['c', 'cpp', 'objc']
-# hook_add = '''
-#   let g:clang_format#auto_format = 1
-#   let g:clang_format#style_options = {
-#   \ "AlignConsecutiveAssignments":"true",
-#   \ "IndentCaseLabels": "true",
-#   \ "IndentWidth":4,
-#   \ "KeepEmptyLinesAtTheStartOfBlocks":"true",
-#   \ "SpacesBeforeTrailingComments":1,
-#   \ "TabWidth":4,
-#   \ "UseTab":"ForIndentation"}
-# '''
+[[plugins]] # クオート関連便利になる
+on_event = 'InsertEnter'
+repo = 'tpope/vim-surround'
+
+[[plugins]] # 括弧などを入力したときの挙動をスマートに補完
+repo = 'jiangmiao/auto-pairs'
+on_event = 'InsertEnter'
+
+[[plugins]] # カーソル位置のコンテキストのファイルタイプを判定するライブラリ
+repo = 'Shougo/context_filetype.vim'
+on_ft = 'toml'
+
+[[plugins]] # カーソル位置のコンテキストに合わせてファイルタイプを切り替え
+repo = 'osyo-manga/vim-precious'
+on_ft = 'toml'
+depends = ['context_filetype.vim']
+
+[[plugins]] # 指定した文字で整形
+repo = 'junegunn/vim-easy-align'
+hook_add = '''
+	" Start interactive EasyAlign in visual mode (e.g. vipga)
+	xmap ga <Plug>(EasyAlign)
+	" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+	nmap ga <Plug>(EasyAlign)
+'''
 
 # # 自動補完-------------------------------------------
 # [[plugins]]
@@ -57,15 +84,6 @@ on_ft = ['md','mdwn','mkd','mkdn','mark']
 # [[plugins]] # 各filetypeのsyntaxファイルの中にある記述を見て補完候補を追加
 # repo = 'Shougo/neco-syntax'
 # on_source = ['deoplete']
-#
-# [[plugins]]
-# repo = 'zchee/deoplete-clang'
-# on_ft = ['c', 'cpp', 'cmake']
-# hook_source = '''
-# let g:deoplete#sources#clang#libclang_path = 'C:\Cygwin\lib\clang\5.0.1\lib\windows\libclang_rt.builtins-x86_64.a'
-# let g:deoplete#sources#clang#clang_header = 'C:\Cygwin\usr\include'
-# '''
-# depends = ['deoplete.nvim']
 
 
 #[[plugins]]

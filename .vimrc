@@ -2,7 +2,8 @@ set encoding=utf-8
 scriptencoding utf-8
 set ambiwidth=double " □や○文字が崩れる問題を解決
 set nocompatible
-
+set guifont=Cica:h11
+set printfont=Cica:h8
 
 " reset augroup
 augroup MyAutoCmd
@@ -60,12 +61,6 @@ set list "空白文字の可視化
 "行末スペース、改行記号、Tabは\<Space>\<Space>と指定(2字必要)
 "ウィンドウ幅狭いときの省略での文字表示*2、不可視のスペースを表す
 set listchars=tab:\ \ ,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
-
-"----ステータスラインの表示内容強化(lightlineに必要)
-set laststatus=2 " ステータスラインを常に表示
-set showmode " 現在のモードを表示
-set showcmd " 打ったコマンドをステータスラインの下に表示
-set ruler " ステータスラインの右側にカーソルの現在位置を表示する
 
 set noswapfile " ファイル編集中にスワップファイルを作らない
 
