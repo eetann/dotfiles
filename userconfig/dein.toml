@@ -28,7 +28,7 @@ hook_add ='''
     " TODOコメント追加
     nmap <Leader>ctd <Plug>NERDCommenterAppendTODO:<Space>
     " TODOをlocation listとして開く
-    nnoremap <Leader>tl :vimgrep /TODO/j %<CR>:cwindow<CR>
+	nnoremap <Leader>tl :vimgrep /TODO/j %<CR>:cwindow<CR>
 '''
 
 [[plugins]]

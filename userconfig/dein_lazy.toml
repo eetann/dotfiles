@@ -50,6 +50,10 @@ on_ft = ['md','mdwn','mkd','mkdn','mark']
 [[plugins]] # テーブルの生成
 repo = 'dhruvasagar/vim-table-mode'
 on_ft = ['md','mdwn','mkd','mkdn','mark']
+hook_add = '''
+	let g:table_mode_corner='|'
+'''
+
 
 # vimprocのせい?でうまく動かない&htmlの生成をしてほしくない
 # [[plugins]] # Markdownのプレビューをする

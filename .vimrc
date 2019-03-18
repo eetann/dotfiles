@@ -10,10 +10,12 @@ augroup MyAutoCmd
   autocmd!
 augroup END
 
-autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+" autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
 
 "移動系
 set scrolloff=3 "スクロールの余裕を確保する
+
+
 "編集系
 "----コピペ関連
 set clipboard=unnamedplus " ヤンク&ペーストをクリップボード利用
@@ -41,6 +43,15 @@ nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
 " カーソル下の単語をハイライトする
 nnoremap <silent> <Space><Space> "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
 
+"---Markdownのための設定
+function! MarkdownEOLTwoSpace()
+	let s:tmppos = getpos(".") " カーソルの位置を記録しておく
+	" 行末に改行のための空白2つのみを付与
+	%s/\v(\S\zs(\s{,1})|(\s{3,}))$/  /e
+	call setpos(".", s:tmppos) " カーソルの位置を戻す
+endfunction
+autocmd BufWritePre *.{md,mdwn,mkd,mkdn,mark*} :call MarkdownEOLTwoSpace()
+
 set wildmenu  "コマンドモードの補完
 
 "----その他
@@ -54,7 +65,7 @@ set spelllang=en,cjk
 " let &t_SI .= "\e[<r" " 挿入入時、前回のIME状態復元
 " let &t_EI .= "\e[<s\e[<0t" " 挿入出時、現在のIME状態を記録&IMEオフ
 " let &t_te .= "\e[<0t\e[<s" " Vim終了時、IME無効&IMEを無効状態として記録
-" set ttimeoutlen=100 " ESCしてから挿入モード出るまでの時間を短縮
+set ttimeoutlen=100 " ESCしてから挿入モード出るまでの時間を短縮
 
 "見た目系
 "----カーソル
@@ -62,7 +73,7 @@ syntax on "コードの色分け
 set title "編集中のファイル名表示
 set number "行番号の表示
 set showmatch "括弧入力時に対応括弧表示
-set colorcolumn=80 "カラムラインを引く
+set colorcolumn=82 "カラムラインを引く(Pythonのformatter'black'基準)
 set whichwrap=b,s,h,l,[,],<,>,~ "行末から次の行へ移動できる
 filetype plugin on
 set list "空白文字の可視化
@@ -74,10 +85,10 @@ set noswapfile " ファイル編集中にスワップファイルを作らない
 
 "----カーソルの形をモードで変化
 if has('vim_starting')
-	" 挿入モード時に非点滅の縦棒タイプのカーソル
-	let &t_SI .= "\e[6 q"
-	" ノーマルモード時に非点滅のブロックタイプのカーソル
-	let &t_EI .= "\e[2 q"
+	" 挿入モード時に点滅の縦棒タイプのカーソル
+	let &t_SI .= "\e[5 q"
+	" ノーマルモード時に点滅のブロックタイプのカーソル
+	let &t_EI .= "\e[1 q"
 	" 置換モード時に非点滅の下線タイプのカーソル
 	let &t_SR .= "\e[4 q"
 endif
