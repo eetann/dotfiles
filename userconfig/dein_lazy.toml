@@ -7,6 +7,7 @@ on_ft = 'toml'
 [[plugins]] # その場で実行できる
 repo = 'thinca/vim-quickrun'
 hook_add = '''
+	let g:quickrun_config = {}
 	let g:quickrun_config = {
       \ 'runner'    : 'vimproc',
       \ 'runner/vimproc/updatetime' : 60,
@@ -23,26 +24,64 @@ hook_add = '''
 	nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
 '''
 
+# ----カーソル位置のコンテキストに合わせてファイルタイプを切り替え----
+[[plugins]] # 判定ライブラリ
+repo = 'Shougo/context_filetype.vim'
+on_ft = ['toml','md','mdwn','mkd','mkdn','mark']
+
+[[plugins]]
+repo = 'osyo-manga/vim-precious'
+on_ft = ['toml','md','mdwn','mkd','mkdn','mark']
+depends = ['context_filetype.vim']
+
+# ----Markdownサポート----
 [[plugins]] # Markdownの編集をサポート
 repo = 'plasticboy/vim-markdown'
 on_ft = ['md','mdwn','mkd','mkdn','mark']
+hook_add = '''
+	let g:vim_markdown_folding_disabled=1
+	let g:vim_markdown_math = 1
+'''
+
+[[plugins]] # テーブルの生成を補助?
+repo = 'godlygeek/tabular'
+on_ft = ['md','mdwn','mkd','mkdn','mark']
+
+[[plugins]] # テーブルの生成
+repo = 'dhruvasagar/vim-table-mode'
+on_ft = ['md','mdwn','mkd','mkdn','mark']
+
+# vimprocのせい?でうまく動かない&htmlの生成をしてほしくない
+# [[plugins]] # Markdownのプレビューをする
+# repo = 'kannokanno/previm'
+# if  = '''has('unix')'''
+# on_ft = ['md','mdwn','mkd','mkdn','mark']
+# hook_add = '''
+#     let g:previm_open_cmd = ' '
+#     nnoremap <silent> <C-p> :PrevimOpen<CR>
+#     let g:previm_enable_realtime = 1
+# '''
+
+[[plugins]] # プレビューをブラウザで開く
+repo = 'tyru/open-browser.vim'
+on_ft = ['md','mdwn','mkd','mkdn','mark']
+hook_add = '''
+	if filereadable('/proc/sys/fs/binfmt_misc/WSLInterop')
+		nnoremap <silent> <C-p> :execute "OpenBrowser" substitute(expand("%:p"), '/mnt/c', 'c:/', '')<CR>
+	" elseif has("win32unix") || has("unix")
+	else
+		nnoremap <silent> <C-p> :execute "OpenBrowser" expand("%:p")<CR>
+	endif
+	" nnoremap <silent> <C-p> :execute "OpenBrowser" expand("%:p")<CR>
+'''
 
 [[plugins]] # クオート関連便利になる
 on_event = 'InsertEnter'
 repo = 'tpope/vim-surround'
 
 [[plugins]] # 括弧などを入力したときの挙動をスマートに補完
-repo = 'jiangmiao/auto-pairs'
 on_event = 'InsertEnter'
-
-[[plugins]] # カーソル位置のコンテキストのファイルタイプを判定するライブラリ
-repo = 'Shougo/context_filetype.vim'
-on_ft = 'toml'
-
-[[plugins]] # カーソル位置のコンテキストに合わせてファイルタイプを切り替え
-repo = 'osyo-manga/vim-precious'
-on_ft = 'toml'
-depends = ['context_filetype.vim']
+repo = 'jiangmiao/auto-pairs'
 
 [[plugins]] # 指定した文字で整形
 repo = 'junegunn/vim-easy-align'
@@ -88,10 +127,16 @@ hook_add = '''
 
 #[[plugins]]
 #repo = ''
+# hook_add = '''
+# '''
 
 #[[plugins]]
 #repo = ''
+# hook_add = '''
+# '''
 
 #[[plugins]]
 #repo = ''
+# hook_add = '''
+# '''
 

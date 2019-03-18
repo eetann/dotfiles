@@ -10,14 +10,19 @@ augroup MyAutoCmd
   autocmd!
 augroup END
 
-
 autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
 
 "移動系
 set scrolloff=3 "スクロールの余裕を確保する
-
-
 "編集系
+"----コピペ関連
+set clipboard=unnamedplus " ヤンク&ペーストをクリップボード利用
+" WSLの場合のコピペも他と同じように行えるよう設定
+" if filereadable('/proc/sys/fs/binfmt_misc/WSLInterop')
+"     autocmd TextYankPost * :call system('win32yank.exe -i', @")
+"     nnoremap <silent>p :r !win32yank.exe -o<CR>
+"     vnoremap <silent>p :r !win32yank.exe -o<CR>
+" endif
 
 "----タブ設定
 set tabstop=4 "タブ幅をスペース4つ分にする
@@ -33,11 +38,14 @@ set smartcase " 検索パターンに大文字を含んでいたら大文字小�
 set hlsearch " 検索結果をハイライト
 " ESCキー2度押しでハイライトの切り替え
 nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
+" カーソル下の単語をハイライトする
+nnoremap <silent> <Space><Space> "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
 
 set wildmenu  "コマンドモードの補完
 
 "----その他
-set clipboard=unnamed,autoselect " ヤンク&ペーストをクリップボード利用
+nnoremap <Space><CR> mzo<ESC>`z " 下に空行挿入
+nnoremap  mzO<ESC>`z " 上に空行挿入
 let mapleader = "\<Space>" " leaderキーの割当を変える
 set nrformats= "数増減は10進数で扱う
 set spelllang=en,cjk
@@ -116,6 +124,5 @@ if dein#check_install()
 endif
 
 "End dein Scripts-------------------------
-
 
 

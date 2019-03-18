@@ -1,4 +1,5 @@
 set PATH $HOME/.local/bin $PATH
+export DISPLAY=localhost:0.0
 
 set -g theme_newline_cursor yes
 set -g theme_display_git_master_branch yes
