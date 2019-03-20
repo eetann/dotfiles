@@ -54,18 +54,6 @@ hook_add = '''
 	let g:table_mode_corner='|'
 '''
 
-
-# vimprocのせい?でうまく動かない&htmlの生成をしてほしくない
-# [[plugins]] # Markdownのプレビューをする
-# repo = 'kannokanno/previm'
-# if  = '''has('unix')'''
-# on_ft = ['md','mdwn','mkd','mkdn','mark']
-# hook_add = '''
-#     let g:previm_open_cmd = ' '
-#     nnoremap <silent> <C-p> :PrevimOpen<CR>
-#     let g:previm_enable_realtime = 1
-# '''
-
 [[plugins]] # プレビューをブラウザで開く
 repo = 'tyru/open-browser.vim'
 on_ft = ['md','mdwn','mkd','mkdn','mark']
@@ -96,34 +84,36 @@ hook_add = '''
 	nmap ga <Plug>(EasyAlign)
 '''
 
-# # 自動補完-------------------------------------------
-# [[plugins]]
-# repo = 'roxma/nvim-yarp'
-# if = '''!has('nvim')'''
-#
-# [[plugins]]
-# repo = 'roxma/vim-hug-neovim-rpc'
-# if = '''!has('nvim')'''
-#
-# [[plugins]] # 自動補完(要Python3)
-# repo = 'Shougo/deoplete.nvim'
-# on_event = 'InsertCharPre'
-# hook_source = '''
-#   let g:deoplete#enable_at_startup = 1
-#   let g:deoplete#auto_complete_delay = 0
-#   let g:deoplete#auto_complete_start_length = 1
-#   let g:deoplete#enable_camel_case = 0
-#   let g:deoplete#enable_ignore_case = 0
-#   let g:deoplete#enable_refresh_always = 0
-#   let g:deoplete#enable_smart_case = 1
-#   let g:deoplete#file#enable_buffer_path = 1
-#   let g:deoplete#max_list = 10000
-# '''
-#
-# [[plugins]]
-# repo = 'Shougo/neco-vim'
-# on_source = ['deoplete']
-#
+# 自動補完-------------------------------------------
+[[plugins]]
+repo = 'roxma/nvim-yarp'
+if = '''!has('nvim')'''
+on_event = 'InsertEnter'
+
+[[plugins]]
+repo = 'roxma/vim-hug-neovim-rpc'
+if = '''!has('nvim')'''
+on_event = 'InsertEnter'
+
+[[plugins]] # 自動補完(要Python3)
+repo = 'Shougo/deoplete.nvim'
+on_event = 'InsertEnter'
+hook_source = '''
+  let g:deoplete#enable_at_startup = 1
+  let g:deoplete#auto_complete_delay = 0
+  let g:deoplete#auto_complete_start_length = 1
+  let g:deoplete#enable_camel_case = 0
+  let g:deoplete#enable_ignore_case = 0
+  let g:deoplete#enable_refresh_always = 0
+  let g:deoplete#enable_smart_case = 1
+  let g:deoplete#file#enable_buffer_path = 1
+  let g:deoplete#max_list = 100
+'''
+
+[[plugins]]
+repo = 'Shougo/neco-vim'
+on_source = ['deoplete']
+
 # [[plugins]] # 各filetypeのsyntaxファイルの中にある記述を見て補完候補を追加
 # repo = 'Shougo/neco-syntax'
 # on_source = ['deoplete']
