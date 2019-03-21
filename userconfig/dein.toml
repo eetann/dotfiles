@@ -28,7 +28,8 @@ hook_add ='''
     " TODOコメント追加
     nmap <Leader>ctd <Plug>NERDCommenterAppendTODO:<Space>
     " TODOをlocation listとして開く
-	nnoremap <Leader>tl :vimgrep /TODO/j %<CR>:cwindow<CR>
+	nnoremap <Leader>tl :vimgrep /TODO:/j %<CR>:cwindow<CR>
+	" TODO: 他のアノテーションも追加
 '''
 
 [[plugins]]
@@ -65,43 +66,11 @@ hook_add = '''
       \ 'error': 80,
       \ }
 	let g:airline_section_z = '%3v:%l/%L %3p%%'
-	" function! AirlineThemePatch(palette)
-	"     let a:palette.normal.airline_warning = ['#ffffff', '#5f0000', 231, 214 ]
-	" endfunction
-	" let g:airline_theme_patch_func = 'AirlineThemePatch'
-	" let g:airline#themes#luna#palette.normal.airline_warning = [
-	" \ '#ffffff', '#5f0000', 231, 11 ]
 '''
 depends = ['vim-airline-themes']
 
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
-# hook_add = '''
-#     " worningを黄色にする
-#     function! AirlineThemePatch(palette)
-#         let a:palette.normal.airline_warning = ['#ffffff', '#5f0000', 235, 214 ]
-#     endfunction
-#     let g:airline_theme_patch_func = 'AirlineThemePatch'
-# '''
-
-# [[plugins]] # ステータスラインの表示内容強化
-# repo = 'itchyny/lightline.vim'
-# hook_add = '''
-#     " ステータスラインの表示内容強化(lightlineに必要)
-#     set laststatus=2 " ステータスラインを常に表示
-#     set noshowmode   " 現在のモードを日本語表示しない
-#     set showcmd      " 打ったコマンドをステータスラインの下に表示
-#     set ruler        " ステータスラインの右側にカーソルの現在位置を表示する
-# '''
-
-# [[plugins]]
-# repo = 'delphinus/lightline-delphinus'
-# depends = ['lightline', 'ale']
-# hook_add = '''
-#     let g:lightline_delphinus_use_powerline_glyphs = 1
-#     let g:lightline_delphinus_use_nerd_fonts_glyphs = 1
-#     let g:lightline_delphinus_colorscheme = 'nord_improved'
-# '''
 
 [[plugins]] # 構文チェック
 repo = 'w0rp/ale'

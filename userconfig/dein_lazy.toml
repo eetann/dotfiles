@@ -67,7 +67,7 @@ hook_add = '''
 	" nnoremap <silent> <C-p> :execute "OpenBrowser" expand("%:p")<CR>
 '''
 
-[[plugins]] # クオート関連便利になる
+[[plugins]] # 括弧関連便利になる
 on_event = 'InsertEnter'
 repo = 'tpope/vim-surround'
 
@@ -88,16 +88,13 @@ hook_add = '''
 [[plugins]]
 repo = 'roxma/nvim-yarp'
 if = '''!has('nvim')'''
-on_event = 'InsertEnter'
 
 [[plugins]]
 repo = 'roxma/vim-hug-neovim-rpc'
 if = '''!has('nvim')'''
-on_event = 'InsertEnter'
 
 [[plugins]] # 自動補完(要Python3)
 repo = 'Shougo/deoplete.nvim'
-on_event = 'InsertEnter'
 hook_source = '''
   let g:deoplete#enable_at_startup = 1
   let g:deoplete#auto_complete_delay = 0
