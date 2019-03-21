@@ -22,24 +22,35 @@ yes | sudo apt install manpages-ja manpages-ja-dev
 # change the time zone to JST
 yes | sudo dpkg-reconfigure tzdata
 
-# install buile tool tools & clang & make
+# for using latest viming
+yes | sudo apt remove vim
+yes | sudo add-apt-repository ppa:jonathonf/vim
+yes | sudo apt update
+yes | sudo apt upgrade
+yes | sudo apt install vim
+
+# install for c/c++
 yes | sudo apt install build-essential
-
 yes | sudo apt install clang
-
 yes | sudo apt install cmake
+yes | sudo apt install clang-format
+
+# install for Python3
+yes | sudo apt install python3-pip
+pip3 install python-language-server
+pip3 install --user flake8 isort black
+pip3 install --user neovim
 
 # make link
+sudo ln -s /mnt/c/Users/admin/dotfiles/wsl.conf /etc/wsl.conf
 ln -s /mnt/c/Users/admin/dotfiles/.vimrc .vimrc
 ln -s /mnt/c/Users/admin/.vim .vim
+ln -s /mnt/c/Users/admin/dotfiles/config.fish  ~/.config/fish/config.fish
+ln -s /mnt/c/Users/admin/dotfiles/flake8 ~/.config/flake8
 
 # install fish & change login shell
 yes | sudo apt install fish
 yes | sudo chsh -s `which fish`
 
-# to invalidate to append windows Path
-yes | sudo touch /etc/wsl.conf
-yes | sudo echo '[interop]' >> /etc/wsl.conf
-yes | sudo echo 'appendWindowsPath = false' >> /etc/wsl.conf 
 
 

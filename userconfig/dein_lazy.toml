@@ -37,7 +37,7 @@ depends = ['context_filetype.vim']
 # ----Markdownサポート----
 [[plugins]] # Markdownの編集をサポート
 repo = 'plasticboy/vim-markdown'
-on_ft = ['md','mdwn','mkd','mkdn','mark']
+on_ft = 'md'
 hook_add = '''
 	let g:vim_markdown_folding_disabled=1
 	let g:vim_markdown_math = 1
@@ -45,26 +45,21 @@ hook_add = '''
 
 [[plugins]] # テーブルの生成を補助?
 repo = 'godlygeek/tabular'
-on_ft = ['md','mdwn','mkd','mkdn','mark']
+on_ft = 'md'
 
 [[plugins]] # テーブルの生成
 repo = 'dhruvasagar/vim-table-mode'
-on_ft = ['md','mdwn','mkd','mkdn','mark']
-hook_add = '''
-	let g:table_mode_corner='|'
-'''
+on_ft = 'md'
 
 [[plugins]] # プレビューをブラウザで開く
 repo = 'tyru/open-browser.vim'
-on_ft = ['md','mdwn','mkd','mkdn','mark']
+on_ft = 'md'
 hook_add = '''
 	if filereadable('/proc/sys/fs/binfmt_misc/WSLInterop')
-		nnoremap <silent> <C-p> :execute "OpenBrowser" substitute(expand("%:p"), '/mnt/c', 'c:/', '')<CR>
-	" elseif has("win32unix") || has("unix")
+		au BufNewFile,BufRead *.md nnoremap <buffer><Leader>p :execute "OpenBrowser" substitute(expand("%:p"), '/mnt/c', 'c:/', '')<CR>
 	else
-		nnoremap <silent> <C-p> :execute "OpenBrowser" expand("%:p")<CR>
+		au BufNewFile,BufRead *.md nnoremap <buffer><Leader>p :execute "OpenBrowser" expand("%:p")<CR>
 	endif
-	" nnoremap <silent> <C-p> :execute "OpenBrowser" expand("%:p")<CR>
 '''
 
 [[plugins]] # 括弧関連便利になる
@@ -96,15 +91,15 @@ if = '''!has('nvim')'''
 [[plugins]] # 自動補完(要Python3)
 repo = 'Shougo/deoplete.nvim'
 hook_source = '''
-  let g:deoplete#enable_at_startup = 1
-  let g:deoplete#auto_complete_delay = 0
-  let g:deoplete#auto_complete_start_length = 1
-  let g:deoplete#enable_camel_case = 0
-  let g:deoplete#enable_ignore_case = 0
-  let g:deoplete#enable_refresh_always = 0
-  let g:deoplete#enable_smart_case = 1
-  let g:deoplete#file#enable_buffer_path = 1
-  let g:deoplete#max_list = 100
+		let g:deoplete#enable_at_startup = 1
+	let g:deoplete#auto_complete_delay = 0
+	let g:deoplete#auto_complete_start_length = 1
+	let g:deoplete#enable_camel_case = 0
+	let g:deoplete#enable_ignore_case = 0
+	let g:deoplete#enable_refresh_always = 0
+	let g:deoplete#enable_smart_case = 1
+	let g:deoplete#file#enable_buffer_path = 1
+	let g:deoplete#max_list = 100
 '''
 
 [[plugins]]
