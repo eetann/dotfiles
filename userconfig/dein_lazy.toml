@@ -50,6 +50,9 @@ on_ft = 'md'
 [[plugins]] # テーブルの生成
 repo = 'dhruvasagar/vim-table-mode'
 on_ft = 'md'
+hook_add = '''
+	:command TM TableModeToggle
+'''
 
 [[plugins]] # プレビューをブラウザで開く
 repo = 'tyru/open-browser.vim'

@@ -63,7 +63,7 @@ function! MarkdownEOLTwoSpace()
 	%s/\v(\S\zs(\s{,1})|(\s{3,}))$/  /e
 	call setpos(".", s:tmppos) " cursorの位置を戻す
 endfunction
-autocmd BufWritePre *.{md,mdwn,mkd,mkdn,mark*} :call MarkdownEOLTwoSpace()
+autocmd BufWritePre *.md :call MarkdownEOLTwoSpace()
 
 " ----その他
 " <Space><CR>で上、Shift+Ctrl+Enterで下に空行挿入
@@ -72,7 +72,7 @@ nnoremap  mzO<ESC>`z:delmarks z<CR>
 set spelllang=en,cjk " スペルチェックについて
 set noswapfile " ファイル編集中にスワップファイルを作らない
 set wildmenu  "コマンドモードの補完
-set history=100 " CommandHistoryを増やす
+set history=1000 " CommandHistoryを増やす
 
 " ----インサートモードのためのIMEの制御(Tera Termのみ?)
 " let &t_SI .= "\e[<r" " 挿入入時、前回のIME状態復元

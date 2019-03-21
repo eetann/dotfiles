@@ -41,16 +41,8 @@ pip3 install python-language-server
 pip3 install --user flake8 isort black
 pip3 install --user neovim
 
-# make link
-sudo ln -s /mnt/c/Users/admin/dotfiles/wsl.conf /etc/wsl.conf
-ln -s /mnt/c/Users/admin/dotfiles/.vimrc .vimrc
-ln -s /mnt/c/Users/admin/.vim .vim
-ln -s /mnt/c/Users/admin/dotfiles/config.fish  ~/.config/fish/config.fish
-ln -s /mnt/c/Users/admin/dotfiles/flake8 ~/.config/flake8
-
 # install fish & change login shell
 yes | sudo apt install fish
 yes | sudo chsh -s `which fish`
-
 
 
