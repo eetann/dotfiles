@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# change the time zone to JST
+yes | sudo dpkg-reconfigure tzdata
+
 # change Japan's repository from overseas for speed
 yes | sudo sed -i -e 's%http://.*.ubuntu.com%http://ftp.jaist.ac.jp/pub/Linux%g' /etc/apt/sources.list
 
@@ -18,9 +21,6 @@ yes | sudo update-locale LANG=ja_JP.UTF-8
 
 # install Japanese manual
 yes | sudo apt install manpages-ja manpages-ja-dev
-
-# change the time zone to JST
-yes | sudo dpkg-reconfigure tzdata
 
 # for using latest viming
 yes | sudo apt remove vim
