@@ -51,8 +51,8 @@ yes | sudo apt install fish
 sudo ln -s /mnt/c/Users/admin/dotfiles/wsl.conf /etc/wsl.conf
 ln -s /mnt/c/Users/admin/dotfiles/.vimrc .vimrc
 ln -s /mnt/c/Users/admin/.vim .vim
-mkdir .~/config
-mkdir .~/config/fish
+mkdir ~/.config
+mkdir ~/.config/fish
 ln -s /mnt/c/Users/admin/dotfiles/config.fish  ~/.config/fish/config.fish
 ln -s /mnt/c/Users/admin/dotfiles/flake8 ~/.config/flake8
 ln -s /mnt/c/Users/admin/ ~/myhome
