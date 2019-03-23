@@ -7,6 +7,7 @@
 # Original Vim  
 | Mode     | Map        | Description                                   | Original   |  
 |----------|------------|-----------------------------------------------|------------|  
+| n        | I          | cursor行頭でInsertMode                        |            |  
 | nv       | >>         | indent深くする                                |            |  
 | nv       | <<         | indent浅くする                                |            |  
 | n        | <C-a>      | cursorの数字を増やす                          |            |  

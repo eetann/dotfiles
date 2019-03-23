@@ -28,12 +28,15 @@ yes | sudo add-apt-repository ppa:jonathonf/vim
 yes | sudo apt update
 yes | sudo apt upgrade
 yes | sudo apt install vim
+yes | sudo apt install vim-gtk
+yes | sudo apt install x11-apps
 
 # install for c/c++
 yes | sudo apt install build-essential
 yes | sudo apt install clang
 yes | sudo apt install cmake
 yes | sudo apt install clang-format
+yes | sudo apt install clang-tools
 
 # install for Python3
 yes | sudo apt install python3-pip
@@ -43,6 +46,14 @@ pip3 install --user neovim
 
 # install fish & change login shell
 yes | sudo apt install fish
-yes | sudo chsh -s `which fish`
 
+# make link
+sudo ln -s /mnt/c/Users/admin/dotfiles/wsl.conf /etc/wsl.conf
+ln -s /mnt/c/Users/admin/dotfiles/.vimrc .vimrc
+ln -s /mnt/c/Users/admin/.vim .vim
+mkdir .~/config
+mkdir .~/config/fish
+ln -s /mnt/c/Users/admin/dotfiles/config.fish  ~/.config/fish/config.fish
+ln -s /mnt/c/Users/admin/dotfiles/flake8 ~/.config/flake8
+ln -s /mnt/c/Users/admin/ ~/myhome
 

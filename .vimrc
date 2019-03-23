@@ -15,7 +15,7 @@ augroup END
 
 
 " --移動系---------------------------------
-set scrolloff=3 "スクロールの余裕を確保する
+set scrolloff=5 "スクロールの余裕を確保する
 
 
 " --編集系---------------------------------
@@ -71,6 +71,7 @@ nnoremap <Space><CR> mzo<ESC>`z:delmarks z<CR>
 nnoremap  mzO<ESC>`z:delmarks z<CR>
 set spelllang=en,cjk " スペルチェックについて
 set noswapfile " ファイル編集中にスワップファイルを作らない
+set hidden " 未保存ファイルが有っても別のファイルを開ける
 set wildmenu  "コマンドモードの補完
 set history=1000 " CommandHistoryを増やす
 
