@@ -16,6 +16,38 @@ augroup END
 
 " --移動系---------------------------------
 set scrolloff=5 "スクロールの余裕を確保する
+" sはclで代用する
+nnoremap s <Nop> 
+" ----画面分割関連
+nnoremap sj <C-w>j
+nnoremap sk <C-w>k
+nnoremap sl <C-w>l
+nnoremap sh <C-w>h
+" 次に移動
+nnoremap sw <C-w>w
+nnoremap sJ <C-w>J
+nnoremap sK <C-w>K
+nnoremap sL <C-w>L
+nnoremap sH <C-w>H
+" 回転
+nnoremap sr <C-w>r
+nnoremap s> <C-w>>
+nnoremap s< <C-w><
+nnoremap s+ <C-w>+
+nnoremap s- <C-w>-
+" 大きさを揃える
+nnoremap s= <C-w>=
+nnoremap sO <C-w>=
+" 縦横に最大化
+nnoremap so <C-w>_<C-w>|
+nnoremap sN :<C-u>bn<CR>
+nnoremap sP :<C-u>bp<CR>
+" 分割(水平&垂直)
+nnoremap ss :<C-u>sp<CR>
+nnoremap sv :<C-u>vs<CR>
+nnoremap sq :<C-u>q<CR>
+" バッファを閉じる
+nnoremap sQ :<C-u>bd<CR>
 
 
 " --編集系---------------------------------
