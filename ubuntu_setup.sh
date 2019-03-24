@@ -29,6 +29,7 @@ yes | sudo apt update
 yes | sudo apt upgrade
 yes | sudo apt install vim
 yes | sudo apt install vim-gtk
+yes | sudo apt install xdg-utils
 yes | sudo apt install x11-apps
 
 # install for c/c++
