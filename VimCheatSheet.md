@@ -55,36 +55,38 @@
 | n    | <C-b>       | 一画面上へ                              | BackWards     |  
 | n    | <C-f>       | 一画面下へ                              | Forwards      |  
 | n    | ge          | 前の単語の末尾へ                        |               |  
-
-
+| term | <C-w><C-w>  | windowの切り替え                        |               |  
+| term | <C-w>:q     | windowを閉じる                          |               |  
+| term | <C-w>N      | TerminalNormalModeへ                    |               |  
 
 # From my vimrc  
-| Mode | Map    | Description              | Original           |  
-|------|--------|--------------------------|--------------------|  
-| n    | o      | 下に行増やしてinsertMode |                    |  
-| n    | O      | 上に行増やしてinsertMode |                    |  
-| v    | *      | 選択範囲の文字列を検索   |                    |  
-| n    | ss     | 水平分割                 | :splite            |  
-| n    | sv     | 垂直分割                 | :vsplite           |  
-| n    | sh     | window間を左に移動       | <C-w>h             |  
-| n    | sj     | window間を下に移動       | <C-w>j             |  
-| n    | sk     | window間を上に移動       | <C-w>k             |  
-| n    | sl     | window間を右に移動       | <C-w>l             |  
-| n    | sw     | window間を次に移動       | <C-w>w             |  
-| n    | sH     | windowを左に移動         | <C-w>H             |  
-| n    | sJ     | windowを下に移動         | <C-w>J             |  
-| n    | sK     | windowを上に移動         | <C-w>K             |  
-| n    | sL     | windowを右に移動         | <C-w>L             |  
-| n    | sr     | windowを回転             | <C-w>r             |  
-| n    | so     | windowを縦横に最大化     | <C-w>_ <C-w>パイプ |  
-| n    | sOかs= | windowの大きさを揃える   | <C-w>=             |  
-| n    | s>     | windowの幅を増やす       | <C-w>>             |  
-| n    | s<     | windowの幅を減らす       | <C-w><             |  
-| n    | s+     | windowの高さを増やす     | <C-w>+             |  
-| n    | s-     | windowの高さを減らす     | <C-w>-             |  
-| n    | sq     | windowを閉じる           | :q                 |  
-| n    | sQ     | bufferを閉じる           | :bd                |  
-
+| Mode | Map    | Description                | Original           |  
+|------|--------|----------------------------|--------------------|  
+| n    | o      | 下に行増やしてinsertMode   |                    |  
+| n    | O      | 上に行増やしてinsertMode   |                    |  
+| v    | *      | 選択範囲の文字列を検索     |                    |  
+| n    | ss     | 水平分割                   | :splite            |  
+| n    | sv     | 垂直分割                   | :vsplite           |  
+| n    | sh     | window間を左に移動         | <C-w>h             |  
+| n    | sj     | window間を下に移動         | <C-w>j             |  
+| n    | sk     | window間を上に移動         | <C-w>k             |  
+| n    | sl     | window間を右に移動         | <C-w>l             |  
+| n    | sw     | window間を次に移動         | <C-w>w             |  
+| n    | sH     | windowを左に移動           | <C-w>H             |  
+| n    | sJ     | windowを下に移動           | <C-w>J             |  
+| n    | sK     | windowを上に移動           | <C-w>K             |  
+| n    | sL     | windowを右に移動           | <C-w>L             |  
+| n    | sr     | windowを回転               | <C-w>r             |  
+| n    | so     | windowを縦横に最大化       | <C-w>_ <C-w>パイプ |  
+| n    | sOかs= | windowの大きさを揃える     | <C-w>=             |  
+| n    | s>     | windowの幅を増やす         | <C-w>>             |  
+| n    | s<     | windowの幅を減らす         | <C-w><             |  
+| n    | s+     | windowの高さを増やす       | <C-w>+             |  
+| n    | s-     | windowの高さを減らす       | <C-w>-             |  
+| n    | sq     | windowを閉じる             | :q                 |  
+| n    | sQ     | bufferを閉じる             | :bd                |  
+| t    | sf     | TernimalMode(fish)開始     |                    |  
+| t    | <C-q>  | TernimalModebufferごと終了 |                    |  
 
 
 # vim-surround  

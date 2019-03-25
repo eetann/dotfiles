@@ -48,6 +48,7 @@ nnoremap sv :<C-u>vs<CR>
 nnoremap sq :<C-u>q<CR>
 " バッファを閉じる
 nnoremap sQ :<C-u>bd<CR>
+" TerminalModeをfishで開く
 
 
 " --編集系---------------------------------
@@ -147,6 +148,12 @@ if has("autocmd")
     \   exe "normal! g'\"" |
     \ endif
 endif
+
+" ----新しいwindowは下や右に開く
+set splitbelow
+set splitright
+nnoremap sf :belowright :terminal fish<CR>
+tnoremap <C-q> <C-w>:bd!<CR>
 
 "dein Scripts-----------------------------
 if &compatible
