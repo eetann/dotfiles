@@ -2,8 +2,6 @@
 set encoding=utf-8
 scriptencoding utf-8
 set ambiwidth=double " □や○文字が崩れる問題を解決
-set guifont=Cica:h11
-set printfont=Cica:h8
 set nrformats= "数増減は10進数で扱う
 
 let mapleader = "\<Space>" " leaderキーの割当を変える
@@ -50,7 +48,9 @@ nnoremap sv :<C-u>vs<CR>
 nnoremap sq :<C-u>q<CR>
 " バッファを閉じる
 nnoremap sQ :<C-u>bd<CR>
-" TerminalModeをfishで開く
+" コマンド履歴のフィルタリングを<C-p>と<C-n>にも追加
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
 
 
 " --編集系---------------------------------
