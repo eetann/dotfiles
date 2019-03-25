@@ -9,7 +9,9 @@ set nrformats= "数増減は10進数で扱う
 let mapleader = "\<Space>" " leaderキーの割当を変える
 
 " --reset augroup-----------------------------
-augroup MyAutoCmd
+"  再読込時に２度設定しないため、最初に消す
+"  autocmdを使うときにはautocmd vimrc ゴニョゴニョと書く
+augroup vimrc
   autocmd!
 augroup END
 
@@ -96,7 +98,7 @@ function! MarkdownEOLTwoSpace()
 	%s/\v(\S\zs(\s{,1})|(\s{3,}))$/  /e
 	call setpos(".", s:tmppos) " cursorの位置を戻す
 endfunction
-autocmd BufWritePre *.md :call MarkdownEOLTwoSpace()
+autocmd vimrc BufWritePre *.md :call MarkdownEOLTwoSpace()
 
 " ----その他
 " <Space><CR>で上、Shift+Ctrl+Enterで下に空行挿入
@@ -143,7 +145,7 @@ endif
 
 " 前回開いたときのカーソル位置の復元
 if has("autocmd")
-    autocmd BufReadPost *
+    autocmd vimrc BufReadPost *
     \ if line("'\"") > 0 && line ("'\"") <= line("$") |
     \   exe "normal! g'\"" |
     \ endif

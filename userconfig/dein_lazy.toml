@@ -15,7 +15,7 @@ hook_add = '''
       \ 'outputter/buffer/split'  : ':rightbelow 8sp',
       \ }
 	" qでquickfixを閉じる
-	au FileType qf nnoremap <silent><buffer>q :quit<CR>
+	autocmd vimrc FileType qf nnoremap <silent><buffer>q :quit<CR>
 	" normal or visual modeのとき <leader> + r で保存してからquickrunの実行
 	let g:quickrun_no_default_key_mappings = 1
 	nnoremap <leader>r :write<CR>:QuickRun -mode n<CR>
@@ -94,7 +94,7 @@ if = '''!has('nvim')'''
 [[plugins]] # 自動補完(要Python3)
 repo = 'Shougo/deoplete.nvim'
 hook_source = '''
-		let g:deoplete#enable_at_startup = 1
+	let g:deoplete#enable_at_startup = 1
 	let g:deoplete#auto_complete_delay = 0
 	let g:deoplete#auto_complete_start_length = 1
 	let g:deoplete#enable_camel_case = 0
