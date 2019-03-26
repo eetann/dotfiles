@@ -59,9 +59,9 @@ repo = 'tyru/open-browser.vim'
 on_ft = 'md'
 hook_add = '''
 	if filereadable('/proc/sys/fs/binfmt_misc/WSLInterop')
-		au BufNewFile,BufRead *.md nnoremap <buffer><Leader>p :execute "OpenBrowser" substitute(expand("%:p"), '/mnt/c', 'c:/', '')<CR>
+		autocmd vimrc BufNewFile,BufRead *.md nnoremap <buffer><Leader>p :execute "OpenBrowser" substitute(expand("%:p"), '/mnt/c', 'c:/', '')<CR>
 	else
-		au BufNewFile,BufRead *.md nnoremap <buffer><Leader>p :execute "OpenBrowser" expand("%:p")<CR>
+		autocmd vimrc BufNewFile,BufRead *.md nnoremap <buffer><Leader>p :execute "OpenBrowser" expand("%:p")<CR>
 	endif
 '''
 
