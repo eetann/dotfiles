@@ -16,6 +16,8 @@ augroup END
 
 " --移動系---------------------------------
 set scrolloff=5 "スクロールの余裕を確保する
+inoremap <C-b> <left>
+inoremap <C-f> <right>
 " sはclで代用する
 nnoremap s <Nop> 
 " ----画面分割関連
@@ -93,10 +95,10 @@ endfunction
 
 " ----Markdownのための設定
 function! MarkdownEOLTwoSpace()
-	let s:tmppos = getpos(".") " cursorの位置を記録しておく
+	let s:tmppos = getpos('.') " cursorの位置を記録しておく
 	" 行末に改行のための空白2つのみを付与(空行には付与しない)
 	%s/\v(\S\zs(\s{,1})|(\s{3,}))$/  /e
-	call setpos(".", s:tmppos) " cursorの位置を戻す
+	call setpos('.', s:tmppos) " cursorの位置を戻す
 endfunction
 autocmd vimrc BufWritePre *.md :call MarkdownEOLTwoSpace()
 

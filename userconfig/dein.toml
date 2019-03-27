@@ -92,15 +92,26 @@ hook_add ='''
 	let g:ale_lint_on_text_changed = 0
 	let g:ale_lint_on_insert_leave = 1
 	let b:ale_linters = {
-	\	'python': ['flake8'],
 	\	'c':['clang'],
 	\	'cpp':['clang'],
+	\	'python': ['flake8'],
+	\	'vim': ['vint'],
 	\}
 	let g:ale_fixers = {
 	\   'c': ['clang-format'],
 	\   'cpp': ['clang-format'],
 	\   'python': ['black','isort'],
 	\}
+	let g:ale_c_clangformat = '-style="{
+	\   AlignConsecutiveAssignments:true,
+	\   AlignConsecutiveDeclarations:true,
+	\   IndentCaseLabels":true,
+	\   IndentWidth:4,
+	\   KeepEmptyLinesAtTheStartOfBlocks:true,
+	\   SpacesBeforeTrailingComments:1,
+	\   TabWidth":4,
+	\   UseTab:ForIndentation	
+	\}"'
 	let g:ale_cpp_clangformat = '-style="{
 	\   AlignConsecutiveAssignments:true,
 	\   AlignConsecutiveDeclarations:true,

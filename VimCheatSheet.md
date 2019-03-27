@@ -77,7 +77,7 @@
 | n    | sK     | windowを上に移動           | <C-w>K             |  
 | n    | sL     | windowを右に移動           | <C-w>L             |  
 | n    | sr     | windowを回転               | <C-w>r             |  
-| n    | so     | windowを縦横に最大化       | <C-w>_ <C-w>パイプ |  
+| n    | so     | windowを縦横に最大化       | <C-w_ <C-w>パイプ |  
 | n    | sOかs= | windowの大きさを揃える     | <C-w>=             |  
 | n    | s>     | windowの幅を増やす         | <C-w>>             |  
 | n    | s<     | windowの幅を減らす         | <C-w><             |  

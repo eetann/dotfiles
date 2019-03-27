@@ -44,6 +44,7 @@ yes | sudo apt install python3-pip
 pip3 install python-language-server
 pip3 install --user flake8 isort black
 pip3 install --user neovim
+pip3 install --user vim-vint
 
 # install fish & change login shell
 yes | sudo apt install fish
