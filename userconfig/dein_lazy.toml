@@ -83,31 +83,36 @@ hook_add = '''
 '''
 
 # 自動補完-------------------------------------------
-[[plugins]]
-repo = 'roxma/nvim-yarp'
-if = '''!has('nvim')'''
+# [[plugins]]
+# repo = 'roxma/nvim-yarp'
+# if = '''!has('nvim')'''
 
-[[plugins]]
-repo = 'roxma/vim-hug-neovim-rpc'
-if = '''!has('nvim')'''
+# [[plugins]]
+# repo = 'roxma/vim-hug-neovim-rpc'
+# if = '''!has('nvim')'''
 
-[[plugins]] # 自動補完(要Python3)
-repo = 'Shougo/deoplete.nvim'
-hook_source = '''
-	let g:deoplete#enable_at_startup = 1
-	let g:deoplete#auto_complete_delay = 0
-	let g:deoplete#auto_complete_start_length = 1
-	let g:deoplete#enable_camel_case = 0
-	let g:deoplete#enable_ignore_case = 0
-	let g:deoplete#enable_refresh_always = 0
-	let g:deoplete#enable_smart_case = 1
-	let g:deoplete#file#enable_buffer_path = 1
-	let g:deoplete#max_list = 100
-'''
+# [[plugins]] # 自動補完(要Python3)
+# repo = 'Shougo/deoplete.nvim'
+# depends = ['nvim-yarp', 'vim-hug-neovim-rpc']
+# hook_source = '''
+#     let g:deoplete#enable_at_startup = 1
+#     let g:deoplete#auto_complete_delay = 0
+#     " let g:deoplete#auto_complete_start_length = 1
+#     " let g:deoplete#enable_camel_case = 0
+#     " let g:deoplete#enable_ignore_case = 0
+#     " let g:deoplete#enable_refresh_always = 0
+#     " let g:deoplete#enable_smart_case = 1
+#     " let g:deoplete#file#enable_buffer_path = 1
+#     " let g:deoplete#max_list = 100
+#     inoremap <expr><tab> pumvisible() ? "\<C-n>" :
+#         \ neosnippet#expandable_or_jumpable() ?
+#         \    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
+# '''
 
-[[plugins]]
-repo = 'Shougo/neco-vim'
-on_source = ['deoplete']
+# [[plugins]]
+# repo = 'Shougo/neco-vim'
+# on_source = ['deoplete']
+
 
 # [[plugins]] # 各filetypeのsyntaxファイルの中にある記述を見て補完候補を追加
 # repo = 'Shougo/neco-syntax'
