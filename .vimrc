@@ -13,7 +13,6 @@ augroup vimrc
   autocmd!
 augroup END
 
-
 " --移動系---------------------------------
 set scrolloff=5 "スクロールの余裕を確保する
 inoremap <C-b> <left>

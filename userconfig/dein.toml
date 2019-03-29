@@ -174,12 +174,12 @@ repo = 'prabirshrestha/asyncomplete-neosnippet.vim'
 depends = ['neosnippet.vim']
 hook_source = '''
   autocmd vimrc User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
-      \ 'name': 'neosnippet',
-      \ 'whitelist': ['*'],
-      \ 'priority': 9,
-      \ 'completor': function('asyncomplete#sources#neosnippet#completor'),
-      \ }))
+	  \ 'name': 'neosnippet',
+	  \ 'whitelist': ['*'],
+	  \ 'completor': function('asyncomplete#sources#neosnippet#completor'),
+	  \ }))
 '''
+
 
 [[plugins]]
 repo = 'Shougo/neosnippet.vim'
@@ -196,13 +196,9 @@ hook_source = '''
   imap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : pumvisible() ? '<C-n>' : '<TAB>'
   smap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : '<TAB>'
 
-  let g:neosnippet#data_directory = expand('~/.vim/neosnippet')
-
-  let g:neosnippet#snippets_directory = [
-		\   '~/.vim/snippets',
-		\   '~/.vim/dein/repos/github.com/honza/vim-snippets/snippets/',
-		\ ]
+  let g:neosnippet#snippets_directory = '~/.vim/mysnippet'
 '''
+
 
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
