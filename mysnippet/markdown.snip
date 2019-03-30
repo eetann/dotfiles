@@ -6,4 +6,10 @@ options     head
     |------|-----|-------------|----------|  
     |${2:mode}
 
-
+snippet     meta
+abbr        title data
+options     head
+    ---
+    title: ${1: }
+    date: `strftime("%Y/%m/%d (%a) %H:%M")`
+    ---
