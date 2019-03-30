@@ -1,0 +1,163 @@
+# 遅延実行されるプラグイン
+
+[[plugins]] # TOMLのシンタックスハイライト
+repo  = 'cespare/vim-toml'
+on_ft = 'toml'
+
+[[plugins]] # その場で実行できる
+repo = 'thinca/vim-quickrun'
+hook_add = '''
+	let g:quickrun_config = {}
+	let g:quickrun_config = {
+      \ 'runner'    : 'vimproc',
+      \ 'runner/vimproc/updatetime' : 60,
+      \ 'outputter' : 'quickfix',
+      \ 'outputter/buffer/split'  : ':rightbelow 8sp',
+      \ }
+	" qでquickfixを閉じる
+	autocmd vimrc FileType qf nnoremap <silent><buffer>q :quit<CR>
+	" normal or visual modeのとき <leader> + r で保存してからquickrunの実行
+	let g:quickrun_no_default_key_mappings = 1
+	nnoremap <leader>r :write<CR>:QuickRun -mode n<CR>
+	xnoremap <leader>r :<C-U>write<CR>gv:QuickRun -mode v<CR>
+	" <C-c> でquickrunを停止
+	nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
+'''
+
+# ----カーソル位置のコンテキストに合わせてファイルタイプを切り替え----
+[[plugins]] # 判定ライブラリ
+repo = 'Shougo/context_filetype.vim'
+on_ft = ['toml','md','mdwn','mkd','mkdn','mark']
+
+[[plugins]]
+repo = 'osyo-manga/vim-precious'
+on_ft = ['toml','md','mdwn','mkd','mkdn','mark']
+depends = ['context_filetype.vim']
+
+# ----Markdownサポート----
+[[plugins]] # Markdownの編集をサポート
+repo = 'plasticboy/vim-markdown'
+on_ft = 'md'
+hook_add = '''
+	let g:vim_markdown_folding_disabled=1
+	let g:vim_markdown_math = 1
+'''
+
+[[plugins]] # テーブルの生成を補助?
+repo = 'godlygeek/tabular'
+on_ft = 'md'
+
+[[plugins]] # テーブルの生成
+repo = 'dhruvasagar/vim-table-mode'
+on_ft = 'md'
+hook_add = '''
+	:command TM TableModeToggle
+'''
+
+[[plugins]] # プレビューをブラウザで開く
+repo = 'tyru/open-browser.vim'
+on_ft = 'md'
+hook_add = '''
+	if filereadable('/proc/sys/fs/binfmt_misc/WSLInterop')
+		autocmd vimrc BufNewFile,BufRead *.md nnoremap <buffer><Leader>p :execute "OpenBrowser" substitute(expand("%:p"), '/mnt/c', 'c:/', '')<CR>
+	else
+		autocmd vimrc BufNewFile,BufRead *.md nnoremap <buffer><Leader>p :execute "OpenBrowser" expand("%:p")<CR>
+	endif
+'''
+
+[[plugins]] # 括弧関連便利になる
+on_event = 'InsertEnter'
+repo = 'tpope/vim-surround'
+
+[[plugins]] # 括弧などを入力したときの挙動をスマートに補完
+on_event = 'InsertEnter'
+repo = 'jiangmiao/auto-pairs'
+
+[[plugins]] # 指定した文字で整形
+repo = 'junegunn/vim-easy-align'
+hook_add = '''
+	" Start interactive EasyAlign in visual mode (e.g. vipga)
+	xmap ga <Plug>(EasyAlign)
+	" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+	nmap ga <Plug>(EasyAlign)
+'''
+
+[[plugins]]
+repo = 'roxma/nvim-yarp'
+if = '''!has('nvim')'''
+
+[[plugins]]
+repo = 'roxma/vim-hug-neovim-rpc'
+if = '''!has('nvim')'''
+
+[[plugins]] # file explorer
+repo = 'Shougo/defx.nvim'
+depends = ['nvim-yarp', 'vim-hug-neovim-rpc']
+hook_add = '''
+	nnoremap <silent> <Space>f
+	\ :<C-u>Defx -split=vertical -winwidth=40 -direction=topleft<CR>
+	autocmd FileType defx call s:defx_my_settings()
+	function! s:defx_my_settings() abort
+	  nnoremap <silent><buffer><expr> <CR>
+	  \ defx#do_action('open')
+	  nnoremap <silent><buffer><expr> c
+	  \ defx#do_action('copy')
+	  nnoremap <silent><buffer><expr> m
+	  \ defx#do_action('move')
+	  nnoremap <silent><buffer><expr> p
+	  \ defx#do_action('paste')
+	  nnoremap <silent><buffer><expr> l
+	  \ defx#do_action('open')
+	  nnoremap <silent><buffer><expr> E
+	  \ defx#do_action('open', 'vsplit')
+	  nnoremap <silent><buffer><expr> P
+	  \ defx#do_action('open', 'pedit')
+	  nnoremap <silent><buffer><expr> o
+	  \ defx#do_action('open_or_close_tree')
+	  nnoremap <silent><buffer><expr> K
+	  \ defx#do_action('new_directory')
+	  nnoremap <silent><buffer><expr> N
+	  \ defx#do_action('new_file')
+	  nnoremap <silent><buffer><expr> M
+	  \ defx#do_action('new_multiple_files')
+	  nnoremap <silent><buffer><expr> C
+	  \ defx#do_action('toggle_columns',
+	  \                'mark:filename:type:size:time')
+	  nnoremap <silent><buffer><expr> S
+	  \ defx#do_action('toggle_sort', 'time')
+	  nnoremap <silent><buffer><expr> d
+	  \ defx#do_action('remove')
+	  nnoremap <silent><buffer><expr> r
+	  \ defx#do_action('rename')
+	  nnoremap <silent><buffer><expr> !
+	  \ defx#do_action('execute_command')
+	  nnoremap <silent><buffer><expr> x
+	  \ defx#do_action('execute_system')
+	  nnoremap <silent><buffer><expr> yy
+	  \ defx#do_action('yank_path')
+	  nnoremap <silent><buffer><expr> .
+	  \ defx#do_action('toggle_ignored_files')
+	  nnoremap <silent><buffer><expr> ;
+	  \ defx#do_action('repeat')
+	  nnoremap <silent><buffer><expr> h
+	  \ defx#do_action('cd', ['..'])
+	  nnoremap <silent><buffer><expr> ~
+	  \ defx#do_action('cd')
+	  nnoremap <silent><buffer><expr> q
+	  \ defx#do_action('quit')
+	  nnoremap <silent><buffer><expr> <Space>
+	  \ defx#do_action('toggle_select') . 'j'
+	  nnoremap <silent><buffer><expr> *
+	  \ defx#do_action('toggle_select_all')
+	  nnoremap <silent><buffer><expr> j
+	  \ line('.') == line('$') ? 'gg' : 'j'
+	  nnoremap <silent><buffer><expr> k
+	  \ line('.') == 1 ? 'G' : 'k'
+	  nnoremap <silent><buffer><expr> <C-l>
+	  \ defx#do_action('redraw')
+	  nnoremap <silent><buffer><expr> <C-g>
+	  \ defx#do_action('print')
+	  nnoremap <silent><buffer><expr> cd
+	  \ defx#do_action('change_vim_cwd')
+	endfunction
+'''

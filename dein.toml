@@ -166,7 +166,7 @@ hook_add = '''
 
 # ----lsp補完とスニペット----
 
-[[plugins]] # lspでの補完
+[[plugins]] # 非同期補完
 repo='prabirshrestha/asyncomplete.vim'
 
 [[plugins]]
@@ -181,7 +181,7 @@ hook_source = '''
 '''
 
 
-[[plugins]]
+[[plugins]] # スニペット管理
 repo = 'Shougo/neosnippet.vim'
 depends = 'neosnippet-snippets'
 hook_source = '''
@@ -196,19 +196,15 @@ hook_source = '''
   imap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : pumvisible() ? '<C-n>' : '<TAB>'
   smap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : '<TAB>'
 
-  let g:neosnippet#snippets_directory = '~/.vim/mysnippet'
+  let g:neosnippet#snippets_directory = '~/dotfiles/mysnippet'
 '''
 
-
-[[plugins]]
+[[plugins]] # スニペット定義ファイル
 repo = 'Shougo/neosnippet-snippets'
 
-# [[plugins]] # snippets ファイルだけを使うので runtimepath へ追加しない
-# repo = 'honza/vim-snippets'
-# rtp = ''
-
-[[plugins]]
+[[plugins]] # 非同期ジョブ制御APIを正規化
 repo = 'prabirshrestha/async.vim'
+
 
 [[plugins]] # lspでの補完
 repo = 'prabirshrestha/vim-lsp'
@@ -234,54 +230,6 @@ hook_add='''
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-lsp.vim'
 depends = ['asyncomplete.vim', 'vim-lsp']
-
-# [[plugins]] # lspでの補完
-# repo = 'prabirshrestha/vim-lsp'
-# hook_add='''
-#     if executable('clangd-6.0')
-#         au User lsp_setup call lsp#register_server({
-#             \ 'name': 'clangd',
-#             \ 'cmd': {server_info->['clangd-6.0']},
-#             \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-#             \ })
-#     endif
-#     if executable('pyls')
-#         au User lsp_setup call lsp#register_server({
-#             \ 'name': 'pyls',
-#             \ 'cmd': {server_info->['pyls']},
-#             \ 'whitelist': ['python'],
-#             \ })
-#     endif
-#     let g:lsp_diagnostics_enabled = 0 "w0rp/aleで対応するので無効化
-#     let g:lsp_async_completion = 1
-# '''
-
-# [[plugins]] # lspでの補完
-# repo = 'prabirshrestha/async.vim'
-
-# [[plugins]] # lspでの補完
-# repo='prabirshrestha/asyncomplete.vim'
-
-# [[plugins]] # lspでの補完
-# repo='prabirshrestha/asyncomplete-lsp.vim'
-# depends = ['asyncomplete.vim', 'vim-lsp']
-
-# [[plugins]]
-# repo = 'prabirshrestha/asyncomplete-ultisnips.vim'
-
-# [[plugins]]
-# repo = 'SirVer/ultisnips'
-# hook_add = '''
-# " UltiSnips スニペット展開
-# let g:UltiSnipsExpandTrigger="<c-k>"
-# " UltiSnips スニペット次の位置に移動
-# let g:UltiSnipsJumpForwardTrigger="<c-n>"
-# " UltiSnips スニペット前の位置に戻る
-# let g:UltiSnipsJumpBackwardTrigger="<c-p>"
-# '''
-
-# [[plugins]]
-# repo = 'honza/vim-snippets'
 
 #[[plugins]] # 
 #repo = ''

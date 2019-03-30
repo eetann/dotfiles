@@ -1,0 +1,9 @@
+snippet     plugin
+abbr        add plugin
+options     head
+    [[plugins]]${1:# }
+    repo = '${2:plugin name}'
+    hook_add = '''
+        
+    '''
+
