@@ -82,11 +82,11 @@ hook_add = '''
 	nmap ga <Plug>(EasyAlign)
 '''
 
-[[plugins]]
+[[plugins]] # nvim系に必要
 repo = 'roxma/nvim-yarp'
 if = '''!has('nvim')'''
 
-[[plugins]]
+[[plugins]] # nvim系に必要
 repo = 'roxma/vim-hug-neovim-rpc'
 if = '''!has('nvim')'''
 
@@ -161,3 +161,38 @@ hook_add = '''
 	  \ defx#do_action('change_vim_cwd')
 	endfunction
 '''
+
+[[plugins]] # インタラクティブフィルター
+repo = 'Shougo/denite.nvim'
+depends = ['nvim-yarp', 'vim-hug-neovim-rpc']
+on_event = 'BufRead'
+hook_add = '''
+	" Denite用プレフィックス
+	nmap [denite] <Nop>
+	map <C-j> [denite]
+	" カレントディレクトリ以下のファイル検索
+	nmap <silent> [denite]<C-p> :<C-u>Denite file_rec -highlight-mode-insert=Search<CR>
+	" ファイル内の関数/クラス等の検索
+	nmap <silent> [denite]<C-o> :<C-u>Denite outline -highlight-mode-insert=Search<CR>
+	"Denite でバッファ内検索 
+	nnoremap <silent> [denite]<C-l> :<C-u>Denite line -highlight-mode-insert=Search<CR>
+'''
+# denite#custom#*はプラグインが読み終わってから。
+hook_post_source = '''
+	" 上下移動
+	call denite#custom#map('normal', '<C-n>', '<denite:move_to_next_line>')
+	call denite#custom#map('normal', '<C-p>', '<denite:move_to_previous_line>')
+	call denite#custom#map('insert', '<C-n>', '<denite:move_to_next_line>')
+	call denite#custom#map('insert', '<C-p>', '<denite:move_to_previous_line>')
+	" 入力履歴移動
+	call denite#custom#map('insert', '<C-j>', '<denite:assign_next_text>')
+	call denite#custom#map('insert', '<C-k>', '<denite:assign_previous_text>')
+	" file_rec検索時にfuzzymatchを有効にし、検索対象から指定のファイルを除外
+	call denite#custom#source(
+		\ 'file_rec', 'matchers', ['matcher/fuzzy', 'matcher/project_files', 'matcher_ignore_globs'])
+	" 検索対象外のファイル指定
+	call denite#custom#filter('matcher/ignore_globs', 'ignore/globs',
+		\ [ '.git/', '.ropeproject/', '__pycache__/',
+		\   'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
+'''
+

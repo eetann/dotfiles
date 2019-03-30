@@ -146,12 +146,5 @@
 | n    | vipga=          | 段落を選択して=で整形        | visual-select inner paragraph |  
 | v    | ga<Enter><char> | 選択範囲を指定した文字で整形 |  
 
-#  
-| Mode | Map | Description | Original |  
-|------|-----|-------------|----------|  
 
-#  
-| Mode | Map | Description | Original |  
-|------|-----|-------------|----------|  
-
-
+https://vim-jp.org/vimdoc-ja/intro.html#CTRL-{char}  
