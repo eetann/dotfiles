@@ -195,8 +195,9 @@ hook_source = '''
   " SuperTab like snippets behavior.
   imap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : pumvisible() ? '<C-n>' : '<TAB>'
   smap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : '<TAB>'
-
-  let g:neosnippet#snippets_directory = '~/dotfiles/mysnippet'
+'''
+hook_add = '''
+	let g:neosnippet#snippets_directory = '~/dotfiles/mysnippet'
 '''
 
 [[plugins]] # スニペット定義ファイル

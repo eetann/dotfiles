@@ -59,12 +59,6 @@ cnoremap <C-n> <Down>
 " VisualModeで置換対象ペースト時のヤンク入れ替えを防ぐ
 xnoremap <expr> p 'pgv"'.v:register.'ygv<esc>'
 set clipboard=unnamedplus " ヤンク&ペーストをクリップボード利用
-" WSLの場合のコピペも他と同じように行えるよう設定(VcXsrv使ってるので無効に)
-" if filereadable('/proc/sys/fs/binfmt_misc/WSLInterop')
-"     autocmd TextYankPost * :call system('win32yank.exe -i', @")
-"     nnoremap <silent>p :r !win32yank.exe -o<CR>
-"     vnoremap <silent>p :r !win32yank.exe -o<CR>
-" endif
 
 " ----タブ設定
 set tabstop=4 "タブ幅をスペース4つ分にする
@@ -145,19 +139,23 @@ if has('vim_starting')
 	let &t_SR .= "\e[4 q"
 endif
 
-" 前回開いたときのカーソル位置の復元
-if has("autocmd")
-    autocmd vimrc BufReadPost *
-    \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-    \   exe "normal! g'\"" |
-    \ endif
-endif
+" ----折りたたみ
+autocmd vimrc BufWritePost * if expand('%') != '' && &buftype !~ 'nofile' | mkview | endif
+autocmd vimrc BufRead * if expand('%') != '' && &buftype !~ 'nofile' | silent loadview | endif
+set viewoptions=cursor,folds
+" if has("autocmd")
+"     autocmd vimrc BufReadPost *
+"     \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+"     \   exe "normal! g'\"" |
+"     \ endif
+" endif
 
 " ----新しいwindowは下や右に開く
 set splitbelow
 set splitright
 nnoremap sf :belowright :terminal fish<CR>
 tnoremap <C-q> <C-w>:bd!<CR>
+
 
 "dein Scripts-----------------------------
 if &compatible
