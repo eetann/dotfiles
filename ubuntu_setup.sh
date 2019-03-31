@@ -46,6 +46,16 @@ pip3 install --user flake8 isort black
 pip3 install --user neovim
 pip3 install --user vim-vint
 
+# install universal-ctags
+yes | sudo apt install autoconf
+yes | sudo apt install pkg-config
+git clone https://github.com/universal-ctags/ctags.git
+cd ctags
+./autogen.sh
+./configure
+make
+sudo make install
+
 # install fish & change login shell
 yes | sudo apt install fish
 

@@ -6,13 +6,6 @@ repo = 'Shougo/dein.vim'
 repo = 'Shougo/vimproc.vim'
 build = 'make'
 
-# [[plugins]] # インタラクティブフィルター(ファイル検索に便利)
-# repo = 'junegunn/fzf'
-# build = './install --all'
-
-# [[plugins]]
-# repo = 'junegunn/fzf.vim'
-
 [[plugins]] # ファイルツリーの表示
 repo = 'scrooloose/nerdtree'
 
@@ -32,6 +25,32 @@ hook_add ='''
 	" TODO: 他のアノテーションも追加
 '''
 
+[[plugins]] # markdown用のctags
+repo = 'jszakmeister/markdown2ctags'
+
+[[plugins]] # tagジャンプ
+repo = 'majutsushi/tagbar'
+depends = ['markdown2ctags']
+hook_add = '''
+	let g:tagbar_autofocus = 1
+	let g:tagbar_width = 30
+	nnoremap <silent> <leader>t :TagbarToggle<CR>
+	let g:tagbar_type_markdown = {
+		\ 'ctagstype': 'markdown',
+		\ 'ctagsbin' : $HOME . '/.vim/dein/repos/github.com/jszakmeister/markdown2ctags/markdown2ctags.py',
+		\ 'ctagsargs' : '-f - --sort=yes',
+		\ 'kinds' : [
+		\ 's:sections',
+		\ 'i:images'
+		\ ],
+		\ 'sro' : '|',
+		\ 'kind2scope' : {
+		\ 's' : 'section',
+		\ },
+		\ 'sort': 0,
+		\ }
+'''
+
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
 
@@ -48,6 +67,7 @@ hook_add = '''
 	nnoremap <C-n> :bn<CR>
 	let g:airline_theme = 'powerlineish'
 	let g:airline_powerline_fonts = 1
+	let g:airline#extensions#tagbar#enabled = 1
 	let g:airline#extensions#branch#enabled = 1
 	let g:airline#extensions#tabline#enabled = 1
 	let g:airline#extensions#wordcount#enabled = 0
@@ -55,19 +75,19 @@ hook_add = '''
 	let g:airline#extensions#ale#error_symbol = ' '
 	let g:airline#extensions#ale#warning_symbol = ' '
 	let g:airline#extensions#default#layout = [
-      \ [ 'a', 'b', 'c' ],
-      \ [ 'x', 'y', 'z', 'warning' , 'error']]
+    \ [ 'a', 'b', 'c' ],
+    \ [ 'x', 'y', 'z', 'warning' , 'error']]
     let g:airline#extensions#default#section_truncate_width = {
-      \ 'b': 79,
-      \ 'x': 60,
-      \ 'y': 100,
-      \ 'z': 45,
-      \ 'warning': 80,
-      \ 'error': 80,
-      \ }
+    \ 'b': 79,
+    \ 'x': 60,
+    \ 'y': 100,
+    \ 'z': 45,
+    \ 'warning': 80,
+    \ 'error': 80,
+    \ }
 	let g:airline_section_z = '%3v:%l/%L %3p%%'
 '''
-depends = ['vim-airline-themes']
+depends = ['vim-airline-themes','tagbar']
 
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
@@ -81,12 +101,9 @@ hook_add ='''
 	let g:ale_sign_error = g:ale_echo_msg_error_str
 	let g:ale_sign_warning = g:ale_echo_msg_warning_str
 	let g:ale_statusline_format = [
-	  \ g:ale_echo_msg_error_str . ' %d',
-	  \ g:ale_echo_msg_warning_str . ' %d',
-	  \ nr2char(0xf4a1) . '  ']
-	" let g:ale_echo_msg_format = '%severity%  %linter% - %s'
-	" let g:ale_sign_error = 'x'
-	" let g:ale_sign_warning = '⚠'
+	\ g:ale_echo_msg_error_str . ' %d',
+	\ g:ale_echo_msg_warning_str . ' %d',
+	\ nr2char(0xf4a1) . '  ']
 	let g:ale_fix_on_save = 1
 	let g:ale_sign_column_always = 1
 	let g:ale_lint_on_text_changed = 0
@@ -130,8 +147,8 @@ repo = 'tpope/vim-fugitive'
 [[plugins]] # カラースキーム
 repo = 'morhetz/gruvbox'
 hook_add = '''
-  set background=dark
-  autocmd vimrc VimEnter * nested colorscheme gruvbox
+	set background=dark
+	autocmd vimrc VimEnter * nested colorscheme gruvbox
 '''
 
 [[plugins]] # 画面の移動が便利になる
@@ -173,11 +190,11 @@ repo='prabirshrestha/asyncomplete.vim'
 repo = 'prabirshrestha/asyncomplete-neosnippet.vim'
 depends = ['neosnippet.vim']
 hook_source = '''
-  autocmd vimrc User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
-	  \ 'name': 'neosnippet',
-	  \ 'whitelist': ['*'],
-	  \ 'completor': function('asyncomplete#sources#neosnippet#completor'),
-	  \ }))
+	autocmd vimrc User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
+	\ 'name': 'neosnippet',
+	\ 'whitelist': ['*'],
+	\ 'completor': function('asyncomplete#sources#neosnippet#completor'),
+	\ }))
 '''
 
 
@@ -185,16 +202,16 @@ hook_source = '''
 repo = 'Shougo/neosnippet.vim'
 depends = 'neosnippet-snippets'
 hook_source = '''
-  " <TAB>: completion.
-  inoremap <expr> <S-TAB> pumvisible() ? '<C-p>' : '<S-TAB>'
+	" <TAB>: completion.
+	inoremap <expr> <S-TAB> pumvisible() ? '<C-p>' : '<S-TAB>'
 
-  " Plugin key-mappings.
-  imap <C-k> <Plug>(neosnippet_expand_or_jump)
-  smap <C-k> <Plug>(neosnippet_expand_or_jump)
+	" Plugin key-mappings.
+	imap <C-k> <Plug>(neosnippet_expand_or_jump)
+	smap <C-k> <Plug>(neosnippet_expand_or_jump)
 
-  " SuperTab like snippets behavior.
-  imap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : pumvisible() ? '<C-n>' : '<TAB>'
-  smap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : '<TAB>'
+	" SuperTab like snippets behavior.
+	imap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : pumvisible() ? '<C-n>' : '<TAB>'
+	smap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : '<TAB>'
 '''
 hook_add = '''
 	let g:neosnippet#snippets_directory = '~/dotfiles/mysnippet'
@@ -231,20 +248,4 @@ hook_add='''
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-lsp.vim'
 depends = ['asyncomplete.vim', 'vim-lsp']
-
-#[[plugins]] # 
-#repo = ''
-
-#[[plugins]] # 
-#repo = ''
-
-#[[plugins]] # 
-#repo = ''
-
-#[[plugins]] # 
-#repo = ''
-
-#[[plugins]] # 
-#repo = ''
-
 
