@@ -181,3 +181,81 @@ hook_add = '''
 	autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=lightgrey
 '''
 
+[[plugins]] # nvim系に必要
+repo = 'roxma/nvim-yarp'
+
+[[plugins]] # nvim系に必要
+repo = 'roxma/vim-hug-neovim-rpc'
+
+# ----スニペット----
+[[plugins]] # スニペット定義ファイル
+repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]] # スニペット管理
+repo = 'Shougo/neosnippet.vim'
+on_ft = ['snippet']
+depends = ['neosnippet-snippets', 'nvim-yarp', 'vim-hug-neovim-rpc']
+hook_source = '''
+	" <TAB>: completion.
+	" inoremap <expr> <S-TAB> pumvisible() ? '<C-p>' : '<S-TAB>'
+	imap <C-k> <Plug>(neosnippet_expand_or_jump)
+	smap <C-k> <Plug>(neosnippet_expand_or_jump)
+	imap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : pumvisible() ? '<C-n>' : '<TAB>'
+	smap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : '<TAB>'
+	let g:neosnippet#snippets_directory = '~/dotfiles/mysnippet'
+	if has('conceal')
+		set conceallevel=2 concealcursor=niv
+	endif
+'''
+
+# ----自動補完----
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+depends = ['neosnippet.vim', 'nvim-yarp', 'vim-hug-neovim-rpc']
+on_event = 'VimEnter'
+hook_add = '''
+	let g:deoplete#enable_at_startup = 1
+	inoremap <expr><tab> pumvisible() ? "\<C-n>" :
+		\ neosnippet#expandable_or_jumpable() ?
+		\    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
+'''
+
+[[plugins]]
+repo = 'Shougo/neco-syntax'
+depends = ['deoplete.nvim']
+
+[[plugins]]
+repo = 'Shougo/neco-vim'
+on_ft = ['vim']
+depends = ['deoplete.nvim']
+
+# ----lsp補完----
+[[plugins]] # 非同期ジョブ制御APIを正規化
+repo = 'prabirshrestha/async.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+depends = ['async.vim']
+hook_add='''
+	if executable('clangd-6.0')
+		au User lsp_setup call lsp#register_server({
+			\ 'name': 'clangd',
+			\ 'cmd': {server_info->['clangd-6.0']},
+			\ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+			\ })
+	endif
+	if executable('pyls')
+		au User lsp_setup call lsp#register_server({
+			\ 'name': 'pyls',
+			\ 'cmd': {server_info->['pyls']},
+			\ 'whitelist': ['python'],
+			\ })
+	endif
+	let g:lsp_diagnostics_enabled = 0 "w0rp/aleで対応するので無効化
+	let g:lsp_async_completion = 1
+'''
+
+[[plugins]]
+repo = 'lighttiger2505/deoplete-vim-lsp'
+depends = 'deoplete.nvim'
+
