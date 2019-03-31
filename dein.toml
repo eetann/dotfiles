@@ -183,9 +183,11 @@ hook_add = '''
 
 [[plugins]] # nvim系に必要
 repo = 'roxma/nvim-yarp'
+if = "!has('nvim')"
 
 [[plugins]] # nvim系に必要
 repo = 'roxma/vim-hug-neovim-rpc'
+if = "!has('nvim')"
 
 # ----スニペット----
 [[plugins]] # スニペット定義ファイル
@@ -230,32 +232,24 @@ on_ft = ['vim']
 depends = ['deoplete.nvim']
 
 # ----lsp補完----
-[[plugins]] # 非同期ジョブ制御APIを正規化
-repo = 'prabirshrestha/async.vim'
-
 [[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-depends = ['async.vim']
-hook_add='''
-	if executable('clangd-6.0')
-		au User lsp_setup call lsp#register_server({
-			\ 'name': 'clangd',
-			\ 'cmd': {server_info->['clangd-6.0']},
-			\ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-			\ })
-	endif
-	if executable('pyls')
-		au User lsp_setup call lsp#register_server({
-			\ 'name': 'pyls',
-			\ 'cmd': {server_info->['pyls']},
-			\ 'whitelist': ['python'],
-			\ })
-	endif
-	let g:lsp_diagnostics_enabled = 0 "w0rp/aleで対応するので無効化
-	let g:lsp_async_completion = 1
+repo = 'autozimu/LanguageClient-neovim'
+rev = 'next'
+build = 'bash install.sh'
+on_event = 'VimEnter'
+hook_add = '''
+	let g:LanguageClient_serverCommands = {
+		\ 'c': ['clangd'],
+		\ 'cpp': ['clangd'],
+		\ 'objc': ['clangd'],
+		\ 'objcpp': ['clangd'],
+		\ 'python': ['pyls'],
+		\ }
+	let g:LanguageClient_autoStart = 1
+	let g:LanguageClient_diagnosticsEnable = 0
+	set completefunc=LanguageClient#complete
+	let g:deoplete#file#enable_buffer_path = 1
+	nnoremap <Leader>ld :call LanguageClient_textDocument_definition()<CR>
+	nnoremap <Leader>lr :call LanguageClient_textDocument_rename()<CR>
 '''
-
-[[plugins]]
-repo = 'lighttiger2505/deoplete-vim-lsp'
-depends = 'deoplete.nvim'
 
