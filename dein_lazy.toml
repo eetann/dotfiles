@@ -196,3 +196,127 @@ hook_post_source = '''
 		\   'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
 '''
 
+
+# ----lsp補完とスニペット----
+
+[[plugins]] # 非同期補完
+repo='prabirshrestha/asyncomplete.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-buffer.vim'
+hook_source = '''
+	autocmd vimrc User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+      \ 'name': 'buffer',
+      \ 'whitelist': ['*'],
+      \ 'completor': function('asyncomplete#sources#buffer#completor'),
+      \ }))
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-file.vim'
+on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl']
+hook_source = '''
+	autocmd vimrc User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+      \ 'name': 'file',
+      \ 'whitelist': ['*'],
+      \ 'completor': function('asyncomplete#sources#file#completor'),
+      \ }))
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-necosyntax.vim'
+on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl']
+depends = ['neco-syntax']
+hook_source = '''
+	autocmd vimrc User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#necosyntax#get_source_options({
+      \ 'name': 'necosyntax',
+      \ 'whitelist': ['*'],
+      \ 'completor': function('asyncomplete#sources#necosyntax#completor'),
+      \ }))
+'''
+
+[[plugins]]
+repo = 'Shougo/neco-syntax'
+lazy = 1
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-necovim.vim'
+on_ft = ['vim']
+depends = ['neco-vim']
+hook_source = '''
+	autocmd vimrc User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#necovim#get_source_options({
+      \ 'name': 'necovim',
+      \ 'whitelist': ['vim'],
+      \ 'priority': 10,
+      \ 'completor': function('asyncomplete#sources#necovim#completor'),
+      \ }))
+'''
+
+[[plugins]]
+repo = 'Shougo/neco-vim'
+lazy = 1
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-neosnippet.vim'
+depends = ['neosnippet.vim']
+hook_source = '''
+	autocmd vimrc User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
+	\ 'name': 'neosnippet',
+	\ 'whitelist': ['*'],
+	\ 'completor': function('asyncomplete#sources#neosnippet#completor'),
+	\ }))
+'''
+
+
+[[plugins]] # スニペット管理
+repo = 'Shougo/neosnippet.vim'
+on_ft = ['snippet']
+depends = ['neosnippet-snippets']
+hook_source = '''
+	" <TAB>: completion.
+	inoremap <expr> <S-TAB> pumvisible() ? '<C-p>' : '<S-TAB>'
+
+	" Plugin key-mappings.
+	imap <C-k> <Plug>(neosnippet_expand_or_jump)
+	smap <C-k> <Plug>(neosnippet_expand_or_jump)
+
+	" SuperTab like snippets behavior.
+	imap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : pumvisible() ? '<C-n>' : '<TAB>'
+	smap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : '<TAB>'
+'''
+hook_add = '''
+	let g:neosnippet#snippets_directory = '~/dotfiles/mysnippet'
+'''
+
+[[plugins]] # スニペット定義ファイル
+repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]] # 非同期ジョブ制御APIを正規化
+repo = 'prabirshrestha/async.vim'
+
+
+[[plugins]] # lspでの補完
+repo = 'prabirshrestha/vim-lsp'
+hook_add='''
+	if executable('clangd-6.0')
+		au User lsp_setup call lsp#register_server({
+			\ 'name': 'clangd',
+			\ 'cmd': {server_info->['clangd-6.0']},
+			\ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+			\ })
+	endif
+	if executable('pyls')
+		au User lsp_setup call lsp#register_server({
+			\ 'name': 'pyls',
+			\ 'cmd': {server_info->['pyls']},
+			\ 'whitelist': ['python'],
+			\ })
+	endif
+	let g:lsp_diagnostics_enabled = 0 "w0rp/aleで対応するので無効化
+	let g:lsp_async_completion = 1
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+depends = ['asyncomplete.vim', 'vim-lsp']
+
