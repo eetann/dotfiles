@@ -5,3 +5,4 @@ fisher add oh-my-fish/theme-bobthefish
 fisher add jethrokuan/z
 fish_update_completions
 
+go get github.com/mattn/jvgrep

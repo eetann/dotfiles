@@ -32,6 +32,12 @@ yes | sudo apt install vim-gtk
 yes | sudo apt install xdg-utils
 yes | sudo apt install x11-apps
 
+# install golang
+yes | sudo add-apt-repository ppa:longsleep/golang-backports
+yes | apt install golang-go
+mkdir ~/go
+mkdir ~/go/bin
+
 # install for c/c++
 yes | sudo apt install build-essential
 yes | sudo apt install clang

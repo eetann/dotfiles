@@ -1,5 +1,7 @@
 set PATH $HOME/.local/bin $PATH
 export DISPLAY=localhost:0.0
+set -x GOPATH $HOME/go
+set -x PATH $GOPATH/bin $PATH
 
 set -g theme_newline_cursor yes
 set -g theme_display_git_master_branch yes

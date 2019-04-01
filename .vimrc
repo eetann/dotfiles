@@ -90,6 +90,11 @@ function! s:VSetSearch()
   let @s = temp
 endfunction
 nnoremap <Leader>b :<C-u>/ oldfiles<Home>browse filter /
+" ----grepの設定
+set grepprg=jvgrep
+" grepはquickfixで開く
+autocmd vimrc QuickFixCmdPost *grep* cwindow
+let Grep_Skip_Dirs = '.svn .git'
 
 " ----Markdownのための設定
 function! MarkdownEOLTwoSpace()
@@ -164,9 +169,6 @@ set splitright
 " ターミナルモードでfishを開く
 nnoremap sf :belowright :terminal fish<CR>
 tnoremap <C-q> <C-w>:bd!<CR>
-" grepはquickfixで開く
-autocmd vimrc QuickFixCmdPost *grep* cwindow
-let Grep_Skip_Dirs = '.svn .git'
 
 "dein Scripts-----------------------------
 if &compatible

@@ -6,9 +6,6 @@ repo = 'Shougo/dein.vim'
 repo = 'Shougo/vimproc.vim'
 build = 'make'
 
-[[plugins]] # ファイルツリーの表示
-repo = 'scrooloose/nerdtree'
-
 [[plugins]] # コメントアウトに便利
 repo = 'scrooloose/nerdcommenter'
 hook_add ='''
