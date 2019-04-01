@@ -15,8 +15,6 @@ augroup END
 
 " --移動系---------------------------------
 set scrolloff=5 "スクロールの余裕を確保する
-inoremap <C-b> <left>
-inoremap <C-f> <right>
 " sはclで代用する
 nnoremap s <Nop> 
 " ----画面分割関連
@@ -49,9 +47,15 @@ nnoremap sv :<C-u>vs<CR>
 nnoremap sq :<C-u>q<CR>
 " バッファを閉じる
 nnoremap sQ :<C-u>bd<CR>
+" InsertModeでカーソル移動
+inoremap <C-b> <left>
+inoremap <C-f> <right>
 " コマンド履歴のフィルタリングを<C-p>と<C-n>にも追加
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
+" コマンドライン内でのカーソル移動をInsertModeと同じに
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
 " quickfixのコマンド
 nnoremap [q :cprevious<CR>
 nnoremap ]q :cnext<CR>
