@@ -217,6 +217,7 @@ on_event = 'VimEnter'
 # on_event = 'InsertEnter'
 hook_add = '''
 	let g:deoplete#enable_at_startup = 1
+	let g:deoplete#auto_complete_start_length = 3
 	inoremap <expr><tab> pumvisible() ? "\<C-n>" :
 		\ neosnippet#expandable_or_jumpable() ?
 		\    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"

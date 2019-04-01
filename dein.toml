@@ -24,6 +24,7 @@ hook_add ='''
 
 [[plugins]] # markdown用のctags
 repo = 'jszakmeister/markdown2ctags'
+on_ft = 'md'
 
 [[plugins]] # tagジャンプ
 repo = 'majutsushi/tagbar'
@@ -165,9 +166,6 @@ repo = 'tpope/vim-repeat'
 
 [[plugins]] # マーク位置の表示
 repo = 'kshenoy/vim-signature'
-
-[[plugins]] # NERDTreeにGitの情報を表示
-repo = 'Xuyuanp/nerdtree-git-plugin'
 
 [[plugins]] # インデントの深さを可視化(要tabstop&shiftwidth設定)
 repo = 'nathanaelkane/vim-indent-guides'
