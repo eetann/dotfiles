@@ -189,64 +189,23 @@ if = "!has('nvim')"
 repo = 'roxma/vim-hug-neovim-rpc'
 if = "!has('nvim')"
 
-# ----スニペット----
-[[plugins]] # スニペット定義ファイル
-repo = 'Shougo/neosnippet-snippets'
-
-[[plugins]] # スニペット管理
-repo = 'Shougo/neosnippet.vim'
-on_ft = ['snippet']
-depends = ['neosnippet-snippets', 'nvim-yarp', 'vim-hug-neovim-rpc']
-hook_source = '''
-	" <TAB>: completion.
-	" inoremap <expr> <S-TAB> pumvisible() ? '<C-p>' : '<S-TAB>'
-	imap <C-k> <Plug>(neosnippet_expand_or_jump)
-	smap <C-k> <Plug>(neosnippet_expand_or_jump)
-	imap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : pumvisible() ? '<C-n>' : '<TAB>'
-	smap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : '<TAB>'
-	let g:neosnippet#snippets_directory = '~/dotfiles/mysnippet'
-	if has('conceal')
-		set conceallevel=2 concealcursor=niv
-	endif
-'''
-
-# ----自動補完----
-[[plugins]]
-repo = 'Shougo/deoplete.nvim'
-depends = ['neosnippet.vim', 'nvim-yarp', 'vim-hug-neovim-rpc']
-on_event = 'VimEnter'
-hook_add = '''
-	let g:deoplete#enable_at_startup = 1
-	inoremap <expr><tab> pumvisible() ? "\<C-n>" :
-		\ neosnippet#expandable_or_jumpable() ?
-		\    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
-'''
-
-[[plugins]]
-repo = 'Shougo/neco-syntax'
-depends = ['deoplete.nvim']
-
-[[plugins]]
-repo = 'Shougo/neco-vim'
-on_ft = ['vim']
-depends = ['deoplete.nvim']
-
 # ----lsp補完----
 [[plugins]]
 repo = 'autozimu/LanguageClient-neovim'
 rev = 'next'
 build = 'bash install.sh'
-on_event = 'VimEnter'
+# on_event = 'VimEnter'
 hook_add = '''
 	let g:LanguageClient_serverCommands = {
-		\ 'c': ['clangd'],
-		\ 'cpp': ['clangd'],
-		\ 'objc': ['clangd'],
-		\ 'objcpp': ['clangd'],
+		\ 'c': ['clangd-6.0'],
+		\ 'cpp': ['clangd-6.0'],
+		\ 'objc': ['clangd-6.0'],
+		\ 'objcpp': ['clangd-6.0'],
 		\ 'python': ['pyls'],
 		\ }
 	let g:LanguageClient_autoStart = 1
 	let g:LanguageClient_diagnosticsEnable = 0
+	let g:LanguageClient_hasSnippetSupport = 0
 	set completefunc=LanguageClient#complete
 	let g:deoplete#file#enable_buffer_path = 1
 	nnoremap <Leader>ld :call LanguageClient_textDocument_definition()<CR>

@@ -52,7 +52,11 @@ nnoremap sQ :<C-u>bd<CR>
 " コマンド履歴のフィルタリングを<C-p>と<C-n>にも追加
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
-
+" quickfixのコマンド
+nnoremap [q :cprevious<CR>
+nnoremap ]q :cnext<CR>
+nnoremap [Q :<C-u>cfirst<CR>
+nnoremap ]Q :<C-u>clast<CR>
 
 " --編集系---------------------------------
 " ----コピペ関連
@@ -95,6 +99,16 @@ function! MarkdownEOLTwoSpace()
 	call setpos('.', s:tmppos) " cursorの位置を戻す
 endfunction
 autocmd vimrc BufWritePre *.md :call MarkdownEOLTwoSpace()
+function! MdListCR()
+	if getline('.')=~#'\v^-\s'
+		.s/\v.*\zs$/\r- /ge
+	elseif getline('.')=~#'\v^*\s'
+		.s/\v.*\zs$/\r* /ge
+	else
+		.s/\v.*\zs$/\r/g
+	endif
+endfunction
+autocmd vimrc BufNewFile,BufRead *.md inoremap <buffer><CR> <ESC>:call MdListCR()<CR>A
 
 " ----その他
 " <Space><CR>で上、Shift+Ctrl+Enterで下に空行挿入
@@ -143,19 +157,16 @@ endif
 autocmd vimrc BufWritePost * if expand('%') != '' && &buftype !~ 'nofile' | mkview | endif
 autocmd vimrc BufRead * if expand('%') != '' && &buftype !~ 'nofile' | silent loadview | endif
 set viewoptions=cursor,folds
-" if has("autocmd")
-"     autocmd vimrc BufReadPost *
-"     \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-"     \   exe "normal! g'\"" |
-"     \ endif
-" endif
 
 " ----新しいwindowは下や右に開く
 set splitbelow
 set splitright
+" ターミナルモードでfishを開く
 nnoremap sf :belowright :terminal fish<CR>
 tnoremap <C-q> <C-w>:bd!<CR>
-
+" grepはquickfixで開く
+autocmd vimrc QuickFixCmdPost *grep* cwindow
+let Grep_Skip_Dirs = '.svn .git'
 
 "dein Scripts-----------------------------
 if &compatible
