@@ -58,6 +58,11 @@
 | term | <C-w><C-w>  | windowの切り替え                        |               |  
 | term | <C-w>:q     | windowを閉じる                          |               |  
 | term | <C-w>N      | TerminalNormalModeへ                    |               |  
+| v    | gQ          | Exコマンドを連続で使用                  |               |  
+| v    | view        | Exコマンドを連続使用からVisualModeへ    |               |  
+| v    | visual      | Exコマンドを連続使用からVisualModeへ    |               |  
+| cmd  | :set 何か?  | optionの設定値を確認                    | question      |  
+|  
 
 # From my vimrc  
 | Mode | Map    | Description                | Original           |  
@@ -150,4 +155,16 @@
 call map(dein#check_clean(), "delete(v:val, 'rf')")  
 call dein#recache_runtimepath()  
 
-https://vim-jp.org/vimdoc-ja/intro.html#CTRL-{char}  
+# その他  
+表記で、<C-a>と<C-A>のように、Cとの組み合わせでは、大文字と小文字の区別はない  
+関数の定義で、function!のように、後ろに!をつけると、既存の関数を上書きする。  
+vimrcやdein.tomlの再読みのためにつけたほうがいい  
+
+コメントの線  
+inoreabbrev <expr> dl repeat('-', 80 - col('.')  
+
+a"やi'などは、テキストオブジェクト  
+
+
+
+
