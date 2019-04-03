@@ -62,6 +62,7 @@ cd ctags
 ./configure
 make
 sudo make install
+cd
 
 # install fish & change login shell
 yes | sudo apt install fish
