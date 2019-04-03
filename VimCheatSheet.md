@@ -62,6 +62,8 @@
 | v    | view        | Exコマンドを連続使用からVisualModeへ    |               |  
 | v    | visual      | Exコマンドを連続使用からVisualModeへ    |               |  
 | cmd  | :set 何か?  | optionの設定値を確認                    | question      |  
+| n    | <C-]>       | カーソル下の項目に飛ぶ                  |               |  
+| n    | <C-t>       | 飛ぶ前に戻る                            |               |  
 |  
 
 # From my vimrc  

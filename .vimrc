@@ -5,6 +5,8 @@ set ambiwidth=double " □や○文字が崩れる問題を解決
 set nrformats= "数増減は10進数で扱う
 
 let mapleader = "\<Space>" " leaderキーの割当を変える
+nnoremap ; :
+nnoremap : ;
 
 " --reset augroup-----------------------------
 "  再読込時に２度設定しないため、最初に消す
@@ -69,6 +71,12 @@ xnoremap <expr> p 'pgv"'.v:register.'ygv<esc>'
 set clipboard=unnamedplus " ヤンク&ペーストをクリップボード利用
 " ペーストした範囲をvisualModeで選択
 nnoremap <expr> sp '`[' . strpart(getregtype(), 0, 1) . '`]'
+" 全選択
+nnoremap s<C-a> ggVG
+
+" ----改行時自動コメントオフ
+set formatoptions=cql
+
 " ----タブ設定
 set tabstop=4 "タブ幅をスペース4つ分にする
 set softtabstop=4 " 連続空白に対してTabやBackSpaceでcursorが動く幅
@@ -95,6 +103,7 @@ function! s:VSetSearch()
   let @s = temp
 endfunction
 nnoremap <Leader>b :<C-u>/ oldfiles<Home>browse filter /
+
 " ----grepの設定
 set grepprg=jvgrep
 " grepはquickfixで開く
@@ -119,6 +128,10 @@ function! MdListCR()
 	endif
 endfunction
 autocmd vimrc BufNewFile,BufRead *.md inoremap <buffer><CR> <ESC>:call MdListCR()<CR>A
+
+" ----vimrcの編集
+nnoremap <F5> :<C-u>edit $MYVIMRC<CR>
+nnoremap <F5> :<C-u>source $MYVIMRC<CR>
 
 " ----その他
 " <Space><CR>で上、Shift+Ctrl+Enterで下に空行挿入
@@ -156,7 +169,7 @@ set list "空白文字の可視化
 set listchars=tab:\ \ ,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 
 " ----cursorの形をモードで変化
-if has('vim_starting')
+if has('vim_starting') " reloadableにするため
 	" 挿入モード時に点滅の縦棒タイプのcursor
 	let &t_SI .= "\e[5 q"
 	" ノーマルモード時に非点滅のブロックタイプのcursor

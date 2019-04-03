@@ -51,7 +51,7 @@ on_ft = 'md'
 repo = 'dhruvasagar/vim-table-mode'
 on_ft = 'md'
 hook_add = '''
-	:command TM TableModeToggle
+	:command! TM TableModeToggle
 '''
 
 [[plugins]] # プレビューをブラウザで開く
@@ -76,6 +76,13 @@ hook_add = '''
     " 検索時、大文字小文字を区別しない
     let g:EasyMotion_smartcase = 1
 	let g:EasyMotion_use_migemo = 1
+'''
+
+[[plugins]] # undoを視覚的に
+repo = 'sjl/gundo.vim'
+hook_add = '''
+	let g:gundo_prefer_python3 = 1
+	nnoremap U :<C-u>GundoToggle<CR>
 '''
 
 [[plugins]] # 指定した文字で整形
@@ -182,6 +189,14 @@ hook_add = '''
 '''
 # denite#custom#*はプラグインが読み終わってから。
 hook_post_source = '''
+	if executable('jvgrep')
+		call denite#custom#var('grep', 'command', ['jvgrep'])
+		call denite#custom#var('grep', 'default_opts', ['-i'])
+		call denite#custom#var('grep', 'recursive_opts', ['-R'])
+		call denite#custom#var('grep', 'pattern_opt', [])
+		call denite#custom#var('grep', 'separator', [])
+		call denite#custom#var('grep', 'final_opts', [])
+	endif
 	" 上下移動
 	call denite#custom#map('normal', '<C-n>', '<denite:move_to_next_line>')
 	call denite#custom#map('normal', '<C-p>', '<denite:move_to_previous_line>')
