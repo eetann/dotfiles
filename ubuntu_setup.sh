@@ -35,7 +35,7 @@ yes | sudo apt install cmigemo
 
 # install golang
 yes | sudo add-apt-repository ppa:longsleep/golang-backports
-yes | apt install golang-go
+yes | sudo apt install golang-go
 mkdir ~/go
 mkdir ~/go/bin
 
