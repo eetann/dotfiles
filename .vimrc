@@ -124,6 +124,8 @@ autocmd vimrc BufNewFile,BufRead *.md inoremap <buffer><CR> <ESC>:call MdListCR(
 " <Space><CR>で上、Shift+Ctrl+Enterで下に空行挿入
 nnoremap <Space><CR> mzo<ESC>`z:delmarks z<CR>
 nnoremap  mzO<ESC>`z:delmarks z<CR>
+" InsertModeでcccを入力し、エスケープでコメント線
+inoreabbrev <expr> ccc repeat('-', 70 - col('.'))
 set spelllang=en,cjk " スペルチェックについて
 set noswapfile " ファイル編集中にスワップファイルを作らない
 set hidden " 未保存ファイルが有っても別のファイルを開ける

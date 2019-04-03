@@ -174,7 +174,7 @@ hook_add = '''
 	nmap [denite] <Nop>
 	map <C-j> [denite]
 	" カレントディレクトリ以下のファイル検索
-	nmap <silent> [denite]<C-p> :<C-u>Denite file_rec -highlight-mode-insert=Search<CR>
+	nmap <silent> [denite]<C-p> :<C-u>Denite file/rec -highlight-mode-insert=Search<CR>
 	" ファイル内の関数/クラス等の検索
 	nmap <silent> [denite]<C-o> :<C-u>Denite outline -highlight-mode-insert=Search<CR>
 	"Denite でバッファ内検索 
