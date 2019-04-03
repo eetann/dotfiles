@@ -65,16 +65,22 @@ hook_add = '''
 	endif
 '''
 
-[[plugins]] # 括弧関連便利になる
-on_event = 'InsertEnter'
-repo = 'tpope/vim-surround'
-
-[[plugins]] # 括弧などを入力したときの挙動をスマートに補完
-on_event = 'InsertEnter'
-repo = 'jiangmiao/auto-pairs'
+[[plugins]] # 画面の移動が便利になる
+repo = 'easymotion/vim-easymotion'
+on_event = 'VimEnter'
+hook_add = '''
+    " デフォルトのキーマッピングを無効に
+    let g:EasyMotion_do_mapping = 0
+    " f + 2文字 で画面全体を検索してジャンプ
+    nmap se <plug>(easymotion-overwin-f2)
+    " 検索時、大文字小文字を区別しない
+    let g:EasyMotion_smartcase = 1
+	let g:EasyMotion_use_migemo = 1
+'''
 
 [[plugins]] # 指定した文字で整形
 repo = 'junegunn/vim-easy-align'
+on_event = 'VimEnter'
 hook_add = '''
 	" Start interactive EasyAlign in visual mode (e.g. vipga)
 	xmap ga <Plug>(EasyAlign)
@@ -82,8 +88,13 @@ hook_add = '''
 	nmap ga <Plug>(EasyAlign)
 '''
 
+[[plugins]] # ドットコマンド対象を拡張
+repo = 'tpope/vim-repeat'
+on_event = 'VimEnter'
+
 [[plugins]] # file explorer
 repo = 'Shougo/defx.nvim'
+on_event = 'VimEnter'
 depends = ['nvim-yarp', 'vim-hug-neovim-rpc']
 hook_add = '''
 	nnoremap <silent> <Space>f
@@ -189,11 +200,9 @@ hook_post_source = '''
 '''
 
 # ----スニペット----
-[[plugins]] # スニペット定義ファイル
-repo = 'Shougo/neosnippet-snippets'
-
 [[plugins]] # スニペット管理
 repo = 'Shougo/neosnippet.vim'
+on_event = 'VimEnter'
 on_ft = ['snippet']
 depends = ['neosnippet-snippets', 'nvim-yarp', 'vim-hug-neovim-rpc']
 hook_source = '''
@@ -214,7 +223,6 @@ hook_source = '''
 repo = 'Shougo/deoplete.nvim'
 depends = ['neosnippet.vim', 'nvim-yarp', 'vim-hug-neovim-rpc']
 on_event = 'VimEnter'
-# on_event = 'InsertEnter'
 hook_add = '''
 	let g:deoplete#enable_at_startup = 1
 	let g:deoplete#auto_complete_start_length = 3

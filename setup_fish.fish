@@ -6,3 +6,4 @@ fisher add jethrokuan/z
 fish_update_completions
 
 go get github.com/mattn/jvgrep
+go get github.com/mattn/memo

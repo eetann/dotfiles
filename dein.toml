@@ -149,20 +149,11 @@ hook_add = '''
 	autocmd vimrc VimEnter * nested colorscheme gruvbox
 '''
 
-[[plugins]] # 画面の移動が便利になる
-repo = 'Lokaltog/vim-easymotion'
-hook_add = '''
-    " デフォルトのキーマッピングを無効に
-    let g:EasyMotion_do_mapping = 0
-    " f + 2文字 で画面全体を検索してジャンプ
-    nmap f <plug>(easymotion-overwin-f2)
-    " 検索時、大文字小文字を区別しない
-    let g:EasyMotion_smartcase = 1
-'''
+[[plugins]] # 括弧関連便利になる
+repo = 'tpope/vim-surround'
 
-[[plugins]] # ドットコマンド対象を拡張
-on_event = 'InsertEnter'
-repo = 'tpope/vim-repeat'
+[[plugins]] # 括弧などを入力したときの挙動をスマートに補完
+repo = 'jiangmiao/auto-pairs'
 
 [[plugins]] # マーク位置の表示
 repo = 'kshenoy/vim-signature'
@@ -183,6 +174,9 @@ if = "!has('nvim')"
 [[plugins]] # nvim系に必要
 repo = 'roxma/vim-hug-neovim-rpc'
 if = "!has('nvim')"
+
+[[plugins]] # スニペット定義ファイル
+repo = 'Shougo/neosnippet-snippets'
 
 # ----lsp補完----
 [[plugins]]
