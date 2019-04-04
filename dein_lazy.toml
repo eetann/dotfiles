@@ -34,26 +34,6 @@ repo = 'osyo-manga/vim-precious'
 on_ft = ['toml','md','mdwn','mkd','mkdn','mark']
 depends = ['context_filetype.vim']
 
-# ----Markdownサポート----
-[[plugins]] # Markdownの編集をサポート
-repo = 'plasticboy/vim-markdown'
-on_ft = 'md'
-hook_add = '''
-	let g:vim_markdown_folding_disabled=1
-	let g:vim_markdown_math = 1
-'''
-
-[[plugins]] # テーブルの生成を補助?
-repo = 'godlygeek/tabular'
-on_ft = 'md'
-
-[[plugins]] # テーブルの生成
-repo = 'dhruvasagar/vim-table-mode'
-on_ft = 'md'
-hook_add = '''
-	:command! TM TableModeToggle
-'''
-
 [[plugins]] # プレビューをブラウザで開く
 repo = 'tyru/open-browser.vim'
 on_ft = 'md'
@@ -228,9 +208,6 @@ hook_source = '''
 	imap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : pumvisible() ? '<C-n>' : '<TAB>'
 	smap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : '<TAB>'
 	let g:neosnippet#snippets_directory = '~/dotfiles/mysnippet'
-	if has('conceal')
-		set conceallevel=2 concealcursor=niv
-	endif
 '''
 
 # ----自動補完----

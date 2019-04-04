@@ -22,6 +22,25 @@ hook_add ='''
 	" TODO: 他のアノテーションも追加
 '''
 
+# ----Markdownサポート----
+[[plugins]] # Markdownの編集をサポート
+repo = 'plasticboy/vim-markdown'
+on_ft = 'md'
+hook_add = '''
+	let g:vim_markdown_folding_disabled=1
+'''
+
+[[plugins]] # テーブルの生成を補助?
+repo = 'godlygeek/tabular'
+on_ft = 'md'
+
+[[plugins]] # テーブルの生成
+repo = 'dhruvasagar/vim-table-mode'
+on_ft = 'md'
+hook_add = '''
+	:command! TM TableModeToggle
+'''
+
 [[plugins]] # markdown用のctags
 repo = 'jszakmeister/markdown2ctags'
 on_ft = 'md'
@@ -32,7 +51,7 @@ depends = ['markdown2ctags']
 hook_add = '''
 	let g:tagbar_autofocus = 1
 	let g:tagbar_width = 30
-	nnoremap <silent> <leader>t :TagbarToggle<CR>
+	nnoremap <silent> <leader>tt :TagbarToggle<CR>
 	let g:tagbar_type_markdown = {
 		\ 'ctagstype': 'markdown',
 		\ 'ctagsbin' : $HOME . '/.vim/dein/repos/github.com/jszakmeister/markdown2ctags/markdown2ctags.py',

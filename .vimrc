@@ -118,19 +118,9 @@ function! MarkdownEOLTwoSpace()
 	call setpos('.', s:tmppos) " cursorの位置を戻す
 endfunction
 autocmd vimrc BufWritePre *.md :call MarkdownEOLTwoSpace()
-function! MdListCR()
-	if getline('.')=~#'\v^-\s'
-		.s/\v.*\zs$/\r- /ge
-	elseif getline('.')=~#'\v^*\s'
-		.s/\v.*\zs$/\r* /ge
-	else
-		.s/\v.*\zs$/\r/g
-	endif
-endfunction
-autocmd vimrc BufNewFile,BufRead *.md inoremap <buffer><CR> <ESC>:call MdListCR()<CR>A
 
 " ----vimrcの編集
-nnoremap <F5> :<C-u>edit $MYVIMRC<CR>
+nnoremap <F6> :<C-u>edit $MYVIMRC<CR>
 nnoremap <F5> :<C-u>source $MYVIMRC<CR>
 
 " ----その他
