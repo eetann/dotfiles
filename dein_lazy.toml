@@ -232,3 +232,6 @@ repo = 'Shougo/neco-vim'
 on_ft = ['vim']
 depends = ['deoplete.nvim']
 
+[[plugins]] # 日本語ヘルプ
+repo = 'vim-jp/vimdoc-ja'
+on_cmd = ['h', 'help']
