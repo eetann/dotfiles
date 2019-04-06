@@ -120,8 +120,10 @@ endfunction
 autocmd vimrc BufWritePre *.md :call MarkdownEOLTwoSpace()
 
 " ----vimrcの編集
-nnoremap <F6> :<C-u>edit $MYVIMRC<CR>
 nnoremap <F5> :<C-u>source $MYVIMRC<CR>
+nnoremap <F6> :<C-u>edit $MYVIMRC<CR>
+nnoremap <F7> :<C-u>edit ~/dotfiles/dein.toml<CR>
+nnoremap <F8> :<C-u>edit ~/dotfiles/dein_lazy.toml<CR>
 
 " ----その他
 " <Space><CR>で上、Shift+Ctrl+Enterで下に空行挿入
