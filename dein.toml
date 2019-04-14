@@ -156,6 +156,7 @@ hook_add ='''
 	\   TabWidth":4,
 	\   UseTab:ForIndentation	
 	\}"'
+	autocmd vimrc FileType help,qf,man,ref let b:ale_enabled = 0
 '''
 
 [[plugins]] # gitをvimで操作
@@ -220,3 +221,5 @@ hook_add = '''
 	nnoremap <Leader>lr :call LanguageClient_textDocument_rename()<CR>
 '''
 
+[[plugins]] # 日本語ヘルプ
+repo = 'vim-jp/vimdoc-ja'

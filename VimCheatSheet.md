@@ -7,6 +7,8 @@
 # Original Vim  
 | Mode   | Map           | Description                               | Original        |  
 | ------ | ------------- | ----------------------------------------- | --------------- |  
+| n      | o             | 下に行増やしてinsertMode                  |                 |  
+| n      | O             | 上に行増やしてinsertMode                  |                 |  
 | n      | I             | cursor行頭でInsertMode                    |                 |  
 | nv     | >>            | indent深くする                            |                 |  
 | nv     | <<            | indent浅くする                            |                 |  
@@ -69,8 +71,6 @@
 # From my vimrc  
 | Mode   | Map      | Description                  | Original             |  
 | ------ | -------- | ---------------------------- | -------------------- |  
-| n      | o        | 下に行増やしてinsertMode     |                      |  
-| n      | O        | 上に行増やしてinsertMode     |                      |  
 | v      | *        | 選択範囲の文字列を検索       |                      |  
 | n      | ss       | 水平分割                     | :splite              |  
 | n      | sv       | 垂直分割                     | :vsplite             |  

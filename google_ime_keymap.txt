@@ -2,13 +2,21 @@ status	key	command
 Composition	Backspace	Backspace
 Conversion	Backspace	Cancel
 Precomposition	Backspace	Revert
+DirectInput	Ctrl [	CancelAndIMEOff
+Precomposition	Ctrl [	CancelAndIMEOff
+Composition	Ctrl [	CancelAndIMEOff
+Conversion	Ctrl [	CancelAndIMEOff
+Suggestion	Ctrl [	CancelAndIMEOff
+Prediction	Ctrl [	CancelAndIMEOff
 Composition	Ctrl a	MoveCursorToBeginning
 Conversion	Ctrl a	SegmentFocusFirst
+Conversion	Ctrl b	SegmentFocusLeft
+Composition	Ctrl b	MoveCursorLeft
 Composition	Ctrl Backspace	Backspace
 Conversion	Ctrl Backspace	Cancel
 Precomposition	Ctrl Backspace	Undo
-Composition	Ctrl d	MoveCursorRight
-Conversion	Ctrl d	SegmentFocusRight
+Composition	Ctrl d	SegmentWidthShrink
+Conversion	Ctrl d	SegmentWidthShrink
 Prediction	Ctrl Delete	DeleteSelectedCandidate
 Composition	Ctrl Down	MoveCursorToEnd
 Conversion	Ctrl Down	CommitOnlyFirstSegment
@@ -16,8 +24,8 @@ Composition	Ctrl e	MoveCursorToBeginning
 Conversion	Ctrl e	ConvertPrev
 Composition	Ctrl Enter	Commit
 Conversion	Ctrl Enter	Commit
-Composition	Ctrl f	MoveCursorToEnd
-Conversion	Ctrl f	SegmentFocusLast
+Composition	Ctrl f	MoveCursorRight
+Conversion	Ctrl f	SegmentFocusRight
 Composition	Ctrl g	Delete
 Conversion	Ctrl g	Cancel
 Composition	Ctrl h	Backspace
@@ -32,12 +40,12 @@ Composition	Ctrl Left	MoveCursorToBeginning
 Conversion	Ctrl Left	SegmentFocusFirst
 Composition	Ctrl m	Commit
 Conversion	Ctrl m	Commit
-Composition	Ctrl n	MoveCursorToEnd
-Conversion	Ctrl n	CommitOnlyFirstSegment
+Composition	Ctrl n	PredictAndConvert
+Conversion	Ctrl n	ConvertNext
 Composition	Ctrl o	ConvertToHalfWidth
 Conversion	Ctrl o	ConvertToHalfWidth
-Composition	Ctrl p	ConvertToFullAlphanumeric
-Conversion	Ctrl p	ConvertToFullAlphanumeric
+Composition	Ctrl p	PredictAndConvert
+Conversion	Ctrl p	ConvertPrev
 Composition	Ctrl Right	MoveCursorToEnd
 Conversion	Ctrl Right	SegmentFocusLast
 Composition	Ctrl s	MoveCursorLeft
@@ -47,14 +55,14 @@ Conversion	Ctrl Shift Space	InsertFullSpace
 Precomposition	Ctrl Shift Space	InsertFullSpace
 Composition	Ctrl Space	InsertHalfSpace
 Conversion	Ctrl Space	InsertHalfSpace
-Composition	Ctrl t	ConvertToHalfAlphanumeric
-Conversion	Ctrl t	ConvertToHalfAlphanumeric
-Composition	Ctrl u	ConvertToHiragana
-Conversion	Ctrl u	ConvertToHiragana
+Composition	Ctrl t	SegmentWidthExpand
+Conversion	Ctrl t	SegmentWidthExpand
+Composition	Ctrl u	Backspace
+Conversion	Ctrl u	Backspace
 Composition	Ctrl Up	MoveCursorToBeginning
 Conversion	Ctrl Up	ConvertPrev
-Composition	Ctrl x	MoveCursorToEnd
-Conversion	Ctrl x	ConvertNext
+Composition	Ctrl x	PredictAndConvert
+Conversion	Ctrl x	PredictAndConvert
 Composition	Ctrl z	Cancel
 Conversion	Ctrl z	Cancel
 Composition	Delete	Delete
@@ -72,6 +80,7 @@ Composition	Enter	Commit
 Conversion	Enter	Commit
 Composition	ESC	Cancel
 Conversion	ESC	Cancel
+Precomposition	Escape	CancelAndIMEOff
 Composition	F10	ConvertToHalfAlphanumeric
 Conversion	F10	ConvertToHalfAlphanumeric
 DirectInput	F13	IMEOn
@@ -136,8 +145,6 @@ Precomposition	Space	InsertSpace
 Composition	Tab	PredictAndConvert
 Conversion	Tab	PredictAndConvert
 Conversion	Up	ConvertPrev
-Precomposition	Escape	CancelAndIMEOff
-Precomposition	Ctrl [	CancelAndIMEOff
 Composition	ASCII	InsertCharacter
 Composition	Kanji	IMEOff
 Composition	OFF	IMEOff

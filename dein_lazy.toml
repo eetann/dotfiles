@@ -39,7 +39,8 @@ repo = 'tyru/open-browser.vim'
 on_ft = 'md'
 hook_add = '''
 	if filereadable('/proc/sys/fs/binfmt_misc/WSLInterop')
-		autocmd vimrc BufNewFile,BufRead *.md nnoremap <buffer><Leader>p :execute "OpenBrowser" substitute(expand("%:p"), '/mnt/c', 'c:/', '')<CR>
+		" autocmd vimrc BufNewFile,BufRead *.md nnoremap <buffer><Leader>p :execute "OpenBrowser" substitute(expand("%:p"), '/mnt/c', 'c:/', '')<CR>
+		autocmd vimrc BufNewFile,BufRead *.md nnoremap <buffer><Leader>p :execute "OpenBrowser" substitute(expand("%:p"), '\v/mnt/(.)', '\1:/', '')<CR>
 	else
 		autocmd vimrc BufNewFile,BufRead *.md nnoremap <buffer><Leader>p :execute "OpenBrowser" expand("%:p")<CR>
 	endif
@@ -232,6 +233,3 @@ repo = 'Shougo/neco-vim'
 on_ft = ['vim']
 depends = ['deoplete.nvim']
 
-[[plugins]] # 日本語ヘルプ
-repo = 'vim-jp/vimdoc-ja'
-on_cmd = ['h', 'help']

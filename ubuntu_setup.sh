@@ -52,6 +52,8 @@ pip3 install python-language-server
 pip3 install --user flake8 isort black
 pip3 install --user neovim
 pip3 install --user vim-vint
+pip3 install --user numpy
+yes | sudo apt install python3-tk
 
 # install universal-ctags
 yes | sudo apt install autoconf

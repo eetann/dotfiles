@@ -7,6 +7,9 @@ set nrformats= "数増減は10進数で扱う
 let mapleader = "\<Space>" " leaderキーの割当を変える
 nnoremap ; :
 nnoremap : ;
+vnoremap ; :
+vnoremap : ;
+nnoremap q; q:
 
 " --reset augroup-----------------------------
 "  再読込時に２度設定しないため、最初に消す
@@ -16,6 +19,8 @@ augroup vimrc
 augroup END
 
 " --移動系---------------------------------
+nnoremap j gj
+nnoremap k gk
 set scrolloff=5 "スクロールの余裕を確保する
 " sはclで代用する
 nnoremap s <Nop> 
@@ -120,10 +125,12 @@ endfunction
 autocmd vimrc BufWritePre *.md :call MarkdownEOLTwoSpace()
 
 " ----vimrcの編集
+nnoremap <F2> :<C-u>edit ~/dotfiles/VimCheatSheet.md<CR>
 nnoremap <F5> :<C-u>source $MYVIMRC<CR>
 nnoremap <F6> :<C-u>edit $MYVIMRC<CR>
 nnoremap <F7> :<C-u>edit ~/dotfiles/dein.toml<CR>
 nnoremap <F8> :<C-u>edit ~/dotfiles/dein_lazy.toml<CR>
+autocmd vimrc FileType help nnoremap <buffer> q <C-w>c
 
 " ----その他
 " <Space><CR>で上、Shift+Ctrl+Enterで下に空行挿入
@@ -179,8 +186,8 @@ set viewoptions=cursor,folds
 set splitbelow
 set splitright
 " ターミナルモードでfishを開く
-nnoremap sf :belowright :terminal fish<CR>
-tnoremap <C-q> <C-w>:bd!<CR>
+nnoremap st :belowright :terminal<CR>
+" tnoremap <C-q> <C-w><C-c><C-w>:q!<CR>
 
 "dein Scripts-----------------------------
 if &compatible
