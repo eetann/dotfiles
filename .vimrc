@@ -119,7 +119,25 @@ let Grep_Skip_Dirs = '.svn .git'
 function! MarkdownEOLTwoSpace()
 	let s:tmppos = getpos('.') " cursorの位置を記録しておく
 	" 行末に改行のための空白2つのみを付与(空行には付与しない)
-	%s/\v(\S\zs(\s{,1})|(\s{3,}))$/  /e
+	" %s/\v(\S\zs(\s{,1})|(\s{3,}))$/  /e
+	
+	let s:iscode = 0
+	let s:cursorline = 1
+	while s:cursorline<=line('$')
+		call cursor(s:cursorline, 1)
+		if getline('.')=~? '\v^```'
+			if s:iscode == 0
+				let s:iscode = 1
+			else
+				let s:iscode = 0
+			endif
+		elseif s:iscode == 0
+			" 空行には行末空白なし
+			.s/\v(\S\zs(\s{,1})|(\s{3,}))$/  /e
+		endif
+		let s:cursorline +=1
+	endwhile
+
 	call setpos('.', s:tmppos) " cursorの位置を戻す
 endfunction
 autocmd vimrc BufWritePre *.md :call MarkdownEOLTwoSpace()
