@@ -9,4 +9,4 @@ set -g theme_color_scheme gruvbox
 set -g theme_powerline_fonts no
 set -g theme_display_date no
 set -g theme_display_cmd_duration no
-
+set -g fish_prompt_pwd_dir_length 0

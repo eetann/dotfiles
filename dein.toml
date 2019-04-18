@@ -38,7 +38,7 @@ on_ft = 'md'
 repo = 'dhruvasagar/vim-table-mode'
 on_ft = 'md'
 hook_add = '''
-	:command! TM TableModeToggle
+	let g:table_mode_corner='|'
 '''
 
 [[plugins]] # markdown用のctags
@@ -186,6 +186,9 @@ hook_add = '''
 	autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=darkgrey
 	autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=lightgrey
 '''
+
+[[plugins]] # 適切なカーソルラインのハイライト
+repo = 'delphinus/vim-auto-cursorline'
 
 [[plugins]] # nvim系に必要
 repo = 'roxma/nvim-yarp'

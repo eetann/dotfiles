@@ -32,6 +32,7 @@ yes | sudo apt install vim-gtk
 yes | sudo apt install xdg-utils
 yes | sudo apt install x11-apps
 yes | sudo apt install cmigemo
+yes | sudo apt install pandoc
 
 # install golang
 yes | sudo add-apt-repository ppa:longsleep/golang-backports
