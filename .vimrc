@@ -158,6 +158,7 @@ set hidden " 未保存ファイルが有っても別のファイルを開ける
 set wildmenu  "コマンドモードの補完
 set history=1000 " CommandHistoryを増やす
 set completeopt=menuone
+autocmd vimrc FileType text,qf,quickrun setlocal wrap
 
 " ----インサートモードのためのIMEの制御(Tera Termのみ?)
 " let &t_SI .= "\e[<r" " 挿入入時、前回のIME状態復元
