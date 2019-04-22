@@ -16,7 +16,10 @@ hook_add = '''
       \ 'outputter/error/error'   : 'quickfix',
       \ 'outputter/buffer/split'  : ':rightbelow 8sp',
       \ 'outputter/buffer/close_on_empty' : 1,
-      \ }
+	  \ 'python': {
+	  \   'command': 'python3'
+	  \  },
+	  \ }
 	" qでquickfixを閉じる
 	autocmd vimrc FileType qf nnoremap <silent><buffer>q :quit<CR>
 	" normal or visual modeのとき <leader> + r で保存してからquickrunの実行
