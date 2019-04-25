@@ -28,6 +28,7 @@ repo = 'plasticboy/vim-markdown'
 on_ft = 'md'
 hook_add = '''
 	let g:vim_markdown_folding_disabled=1
+	let g:vim_markdown_new_list_item_indent = 0
 '''
 
 [[plugins]] # テーブルの生成を補助?
@@ -218,7 +219,7 @@ hook_add = '''
 	let g:LanguageClient_autoStart = 1
 	let g:LanguageClient_diagnosticsEnable = 0
 	let g:LanguageClient_hasSnippetSupport = 0
-	set completefunc=LanguageClient#complete
+	set omnifunc=LanguageClient#complete
 	let g:deoplete#file#enable_buffer_path = 1
 	nnoremap <Leader>ld :call LanguageClient_textDocument_definition()<CR>
 	nnoremap <Leader>lr :call LanguageClient_textDocument_rename()<CR>
@@ -226,3 +227,11 @@ hook_add = '''
 
 [[plugins]] # 日本語ヘルプ
 repo = 'vim-jp/vimdoc-ja'
+
+# ----MATLAB----
+# [[plugins]] # matlab
+# repo = 'daeyun/vim-matlab'
+# on_ft = ['matlab']
+# hook_add = '''
+#     let g:matlab_server_launcher = 'vim'
+# '''

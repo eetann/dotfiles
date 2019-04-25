@@ -51,9 +51,10 @@ nnoremap sP :<C-u>bp<CR>
 " 分割(水平&垂直)
 nnoremap ss :<C-u>sp<CR>
 nnoremap sv :<C-u>vs<CR>
-nnoremap sq :<C-u>q<CR>
+" nnoremap sq :<C-u>q<CR>
 " バッファを閉じる
-nnoremap sQ :<C-u>bd<CR>
+nnoremap sq :<C-u>bd<CR>
+nnoremap sQ :<C-u>bd!<CR>
 " InsertModeでカーソル移動
 inoremap <C-b> <left>
 inoremap <C-f> <right>
@@ -144,7 +145,7 @@ nnoremap <F5> :<C-u>source $MYVIMRC<CR>
 nnoremap <F6> :<C-u>edit $MYVIMRC<CR>
 nnoremap <F7> :<C-u>edit ~/dotfiles/dein.toml<CR>
 nnoremap <F8> :<C-u>edit ~/dotfiles/dein_lazy.toml<CR>
-autocmd vimrc FileType help nnoremap <buffer> q <C-w>c
+autocmd vimrc FileType help,quickrun nnoremap <buffer> q <C-w>c
 
 " ----その他
 " <Space><CR>で上、Shift+Ctrl+Enterで下に空行挿入

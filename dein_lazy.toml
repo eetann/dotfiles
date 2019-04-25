@@ -9,19 +9,28 @@ repo = 'thinca/vim-quickrun'
 hook_add = '''
 	let g:quickrun_config = {}
 	let g:quickrun_config = {
-				\ "_":{
-				\ 'runner'    : 'vimproc',
-				\ 'runner/vimproc/updatetime' : 60,
-				\ 'outputter' : 'error',
-				\ 'outputter/error/success' : 'buffer',
-				\ 'outputter/error/error'   : 'quickfix',
-				\ 'outputter/buffer/split'  : ':rightbelow 8sp',
-				\ 'outputter/buffer/close_on_empty' : 1,
-				\},
-				\ 'python': {
-				\   'command': 'python3'
-				\  },
-				\ }
+		\ "_":{
+		\ 'runner'    : 'vimproc',
+		\ 'runner/vimproc/updatetime' : 60,
+		\ 'outputter/buffer/split'  : ':rightbelow 8sp',
+		\ 'outputter/buffer/close_on_empty' : 1,
+		\ },
+		\ 'markdown': {
+		\ 'runner'    : 'vimproc',
+		\ 'runner/vimproc/updatetime' : 60,
+		\ 'outputter' : 'null',
+		\ 'command': ':execute',
+		\ 'cmdopt': '"OpenBrowser" substitute(expand("%:p"), "\v/mnt/(.)", "\1:/", "e")',
+		\ },
+		\ 'python': {
+		\   'command': 'python3'
+		\ },
+		\ }
+		" \ 'command': ':PrevimOpen',
+		" \ 'exec': '%c',
+		" \ 'outputter' : 'quickfixerror',
+		" \ 'outputter/error/success' : 'buffer',
+		" \ 'outputter/error/error'   : 'quickfix',
 	" qでquickfixを閉じる
 	autocmd vimrc FileType qf nnoremap <silent><buffer>q :quit<CR>
 	" normal or visual modeのとき <leader> + r で保存してからquickrunの実行
@@ -98,7 +107,9 @@ hook_add = '''
 	autocmd FileType defx call s:defx_my_settings()
 	function! s:defx_my_settings() abort
 	  nnoremap <silent><buffer><expr> <CR>
-	  \ defx#do_action('open')
+	  \ defx#do_action('drop')
+	  nnoremap <silent><buffer><expr> o
+	  \ defx#do_action('multi', ['drop', 'quit'])
 	  nnoremap <silent><buffer><expr> c
 	  \ defx#do_action('copy')
 	  nnoremap <silent><buffer><expr> m
@@ -111,7 +122,7 @@ hook_add = '''
 	  \ defx#do_action('open', 'vsplit')
 	  nnoremap <silent><buffer><expr> P
 	  \ defx#do_action('open', 'pedit')
-	  nnoremap <silent><buffer><expr> o
+	  nnoremap <silent><buffer><expr> O
 	  \ defx#do_action('open_or_close_tree')
 	  nnoremap <silent><buffer><expr> K
 	  \ defx#do_action('new_directory')
