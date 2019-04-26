@@ -12,7 +12,6 @@ hook_add = '''
 		\ "_":{
 		\ 'runner'    : 'vimproc',
 		\ 'runner/vimproc/updatetime' : 60,
-		\ 'outputter/buffer/split'  : ':rightbelow 8sp',
 		\ 'outputter/buffer/close_on_empty' : 1,
 		\ },
 		\ 'markdown': {
@@ -26,6 +25,7 @@ hook_add = '''
 		\   'command': 'python3'
 		\ },
 		\ }
+		" \ 'outputter/buffer/split'  : ':rightbelow 8sp',
 		" \ 'command': ':PrevimOpen',
 		" \ 'exec': '%c',
 		" \ 'outputter' : 'quickfixerror',
@@ -103,7 +103,8 @@ on_event = 'VimEnter'
 depends = ['nvim-yarp', 'vim-hug-neovim-rpc']
 hook_add = '''
 	nnoremap <silent> <Space>f
-	\ :<C-u>Defx -split=vertical -winwidth=40 -direction=topleft<CR>
+	\ :<C-u>Defx -split=vertical -columns=icons:filename:type 
+		\ -winwidth=40 -direction=topleft<CR>
 	autocmd FileType defx call s:defx_my_settings()
 	function! s:defx_my_settings() abort
 	  nnoremap <silent><buffer><expr> <CR>
@@ -237,7 +238,11 @@ depends = ['neosnippet.vim', 'nvim-yarp', 'vim-hug-neovim-rpc']
 on_event = 'VimEnter'
 hook_add = '''
 	let g:deoplete#enable_at_startup = 1
-	let g:deoplete#auto_complete_start_length = 3
+	let g:deoplete#enable_smart_case = 1
+	let g:deoplete#auto_complete_delay = 10
+	" let g:deoplete#auto_complete_start_length = 3
+	let g:deoplete#auto_refresh_delay = 10
+	let g:deoplete#refresh_always = v:true
 	inoremap <expr><tab> pumvisible() ? "\<C-n>" :
 		\ neosnippet#expandable_or_jumpable() ?
 		\    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
