@@ -39,6 +39,8 @@ yes | sudo add-apt-repository ppa:longsleep/golang-backports
 yes | sudo apt install golang-go
 mkdir ~/go
 mkdir ~/go/bin
+go get github.com/mattn/jvgrep
+go get github.com/mattn/memo
 
 # install for c/c++
 yes | sudo apt install build-essential
@@ -81,3 +83,4 @@ ln -s /mnt/c/Users/admin/dotfiles/config.fish  ~/.config/fish/config.fish
 ln -s /mnt/c/Users/admin/dotfiles/flake8 ~/.config/flake8
 ln -s /mnt/c/Users/admin/ ~/myhome
 ln -s /mnt/c/Users/admin/dotfiles/ dotfiles
+ln -s /mnt/c/Users/admin/dotfiles/fish_user_key_bindings.fish ~/.config/fish/functions/fish_user_key_bindings.fish

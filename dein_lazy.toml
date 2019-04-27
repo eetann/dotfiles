@@ -63,6 +63,9 @@ hook_add = '''
 	endif
 '''
 
+# [[plugins]] # edit for fish
+# repo = 'dag/vim-fish'
+
 [[plugins]] # 画面の移動が便利になる
 repo = 'easymotion/vim-easymotion'
 on_event = 'VimEnter'
