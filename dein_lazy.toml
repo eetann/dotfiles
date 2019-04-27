@@ -100,10 +100,10 @@ on_event = 'VimEnter'
 [[plugins]] # file explorer
 repo = 'Shougo/defx.nvim'
 on_event = 'VimEnter'
-depends = ['nvim-yarp', 'vim-hug-neovim-rpc']
+depends = ['nvim-yarp', 'vim-hug-neovim-rpc','defx-icons']
 hook_add = '''
 	nnoremap <silent> <Space>f
-	\ :<C-u>Defx -split=vertical -columns=icons:filename:type 
+	\ :<C-u>Defx -split=vertical -columns=mark:indent:icons:filename:type
 		\ -winwidth=40 -direction=topleft<CR>
 	autocmd FileType defx call s:defx_my_settings()
 	function! s:defx_my_settings() abort
@@ -171,6 +171,14 @@ hook_add = '''
 	  nnoremap <silent><buffer><expr> cd
 	  \ defx#do_action('change_vim_cwd')
 	endfunction
+'''
+
+[[plugins]] # defx icons
+repo = 'kristijanhusak/defx-icons'
+on_source = ['Shougo/defx.nvim']
+hook_add = '''
+	let g:defx_icons_enable_syntax_highlight = 1
+	let g:defx_icons_column_length = 2
 '''
 
 [[plugins]] # インタラクティブフィルター

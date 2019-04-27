@@ -236,19 +236,3 @@ repo = 'vim-jp/vimdoc-ja'
 #     let g:matlab_server_launcher = 'vim'
 # '''
 
-[[plugins]] # defx icons
-repo = 'kristijanhusak/defx-icons'
-on_source = ['Shougo/defx.nvim']
-# hook_add = '''
-#     let g:defx_icons_enable_syntax_highlight = 1
-#     let g:defx_icons_column_length = 2
-#     let g:defx_icons_directory_icon = '爏'
-#     let g:defx_icons_mark_icon = '*'
-#     let g:defx_icons_parent_icon = '㖄'
-#     let g:defx_icons_default_icon = ''
-#     let g:defx_icons_directory_symlink_icon = '蹨'
-#     " Options below are applicable only when using "tree" feature
-#     let g:defx_icons_root_opened_tree_icon = '㖄'
-#     let g:defx_icons_nested_opened_tree_icon = '㖄'
-#     let g:defx_icons_nested_closed_tree_icon = '爏'
-# '''
