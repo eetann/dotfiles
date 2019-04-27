@@ -33,6 +33,7 @@ yes | sudo apt install xdg-utils
 yes | sudo apt install x11-apps
 yes | sudo apt install cmigemo
 yes | sudo apt install pandoc
+yes | sudo apt install tree
 
 # install golang
 yes | sudo add-apt-repository ppa:longsleep/golang-backports
@@ -69,6 +70,10 @@ cd ctags
 make
 sudo make install
 cd
+
+# fzf
+git clone https://github.com/junegunn/fzf.git ~/.fzf
+yes | ~/.fzf/install
 
 # install fish & change login shell
 yes | sudo apt install fish

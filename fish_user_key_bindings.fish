@@ -3,7 +3,6 @@ function fish_user_key_bindings
 	fish_default_key_bindings -M $mode
 	end
 	fish_vi_key_bindings --no-erase
-	set -x FZF_LEGACY_KEYBINDINGS 1
 
 	bind \ct '__fzf_find_file'
 	bind \cr '__fzf_reverse_isearch'
@@ -14,3 +13,5 @@ function fish_user_key_bindings
 		bind -M insert \ce '__fzf_cd'
 	end
 end
+
+fzf_key_bindings

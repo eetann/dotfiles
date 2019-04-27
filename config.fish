@@ -1,8 +1,19 @@
 set PATH $HOME/.local/bin $PATH
-export DISPLAY=localhost:0.0
+set -x DISPLAY localhost:0.0
 set -x GOPATH $HOME/go
 set -x PATH $GOPATH/bin $PATH
-set -x FZF_DEFAULT_COMMAND 'jvgrep'
+#set -x FZF_DEFAULT_COMMAND 'jvgrep'
+set -x FZF_LEGACY_KEYBINDINGS 0
+set -x FZF_DEFAULT_OPTS "--height=60% --reverse --no-unicode"
+set -x FZF_FIND_FILE_OPTS "--preview 'head -n 100 {}'"
+# a:ドットディレクトリもたどる
+# l:シンボリックリンクをたどる
+# C:色付きで表示
+set -x FZF_CD_OPTS  "--preview 'tree -alC {} | head -n 100'"
+#set -x FZF_PREVIEW_FILE_CMD "head -50 {}"
+#set -x FZF_PREVIEW_DIR_CMD "tree -C {} | head -200"
+
+set -x EDITOR vim
 
 set -g theme_newline_cursor yes
 set -g theme_display_git_master_branch yes
