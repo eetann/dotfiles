@@ -58,6 +58,7 @@ pip3 install --user neovim
 pip3 install --user vim-vint
 pip3 install --user numpy
 pip3 install --user matplotlib
+pip3 install --user pandas
 yes | sudo apt install python3-tk
 
 # install universal-ctags

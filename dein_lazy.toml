@@ -13,19 +13,25 @@ hook_add = '''
 		\ 'runner'    : 'vimproc',
 		\ 'runner/vimproc/updatetime' : 60,
 		\ 'outputter/buffer/close_on_empty' : 1,
+		\ 'outputter/buffer/into':1,
+		\ 'outputter/buffer/split'  :
+		\ '%{winwidth(0) * 2 < winheight(0) * 5 ? winheight(0)/4 : "vertical"}',
 		\ },
 		\ 'markdown': {
 		\ 'runner'    : 'vimproc',
 		\ 'runner/vimproc/updatetime' : 60,
 		\ 'outputter' : 'null',
-		\ 'command': ':execute',
-		\ 'cmdopt': '"OpenBrowser" substitute(expand("%:p"), "\v/mnt/(.)", "\1:/", "e")',
 		\ },
 		\ 'python': {
 		\   'command': 'python3'
 		\ },
 		\ }
-		" \ 'outputter/buffer/split'  : ':rightbelow 8sp',
+		" splitは、以下を用いている
+		" curly-braces-names(波括弧変数)で{}内を評価
+		" expr2 ? expr1 : expr1 の式でexpr2が真なら前、偽なら後ろのexpr1を評価
+		" https://vim-jp.org/vimdoc-ja/eval.html#expr1
+		" \ 'command': ':execute',
+		" \ 'cmdopt': '"OpenBrowser" substitute(expand("%:p"), "\v/mnt/(.)", "\1:/", "e")',
 		" \ 'command': ':PrevimOpen',
 		" \ 'exec': '%c',
 		" \ 'outputter' : 'quickfixerror',
