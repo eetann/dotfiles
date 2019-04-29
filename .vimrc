@@ -23,7 +23,7 @@ nnoremap j gj
 nnoremap k gk
 set scrolloff=5 "スクロールの余裕を確保する
 " sはclで代用する
-nnoremap s <Nop> 
+nnoremap s <Nop>
 " ----画面分割関連
 nnoremap sj <C-w>j
 nnoremap sk <C-w>k

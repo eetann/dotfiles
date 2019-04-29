@@ -17,11 +17,6 @@ hook_add = '''
 		\ 'outputter/buffer/split'  :
 		\ '%{winwidth(0) * 2 < winheight(0) * 5 ? winheight(0)/4 : "vertical"}',
 		\ },
-		\ 'markdown': {
-		\ 'runner'    : 'vimproc',
-		\ 'runner/vimproc/updatetime' : 60,
-		\ 'outputter' : 'null',
-		\ },
 		\ 'python': {
 		\   'command': 'python3'
 		\ },
@@ -30,13 +25,13 @@ hook_add = '''
 		" curly-braces-names(波括弧変数)で{}内を評価
 		" expr2 ? expr1 : expr1 の式でexpr2が真なら前、偽なら後ろのexpr1を評価
 		" https://vim-jp.org/vimdoc-ja/eval.html#expr1
-		" \ 'command': ':execute',
-		" \ 'cmdopt': '"OpenBrowser" substitute(expand("%:p"), "\v/mnt/(.)", "\1:/", "e")',
-		" \ 'command': ':PrevimOpen',
-		" \ 'exec': '%c',
-		" \ 'outputter' : 'quickfixerror',
-		" \ 'outputter/error/success' : 'buffer',
-		" \ 'outputter/error/error'   : 'quickfix',
+		" \ 'markdown': {
+		" \ 'runner'    : 'vimscript',
+		" \ 'command': ":OpenBrowser",
+		" \ 'args': "%{substitute(%{expand(%s:p)}, '\v/mnt/(.)', '\1:/', '')}",
+		" \ 'exec': "%c %a",
+		" \ 'outputter':'null',
+		" \ },
 	" qでquickfixを閉じる
 	autocmd vimrc FileType qf nnoremap <silent><buffer>q :quit<CR>
 	" normal or visual modeのとき <leader> + r で保存してからquickrunの実行
@@ -61,12 +56,14 @@ depends = ['context_filetype.vim']
 repo = 'tyru/open-browser.vim'
 on_ft = 'md'
 hook_add = '''
-	if filereadable('/proc/sys/fs/binfmt_misc/WSLInterop')
-		" autocmd vimrc BufNewFile,BufRead *.md nnoremap <buffer><Leader>p :execute "OpenBrowser" substitute(expand("%:p"), '/mnt/c', 'c:/', '')<CR>
-		autocmd vimrc BufNewFile,BufRead *.md nnoremap <buffer><Leader>p :execute "OpenBrowser" substitute(expand("%:p"), '\v/mnt/(.)', '\1:/', '')<CR>
-	else
-		autocmd vimrc BufNewFile,BufRead *.md nnoremap <buffer><Leader>p :execute "OpenBrowser" expand("%:p")<CR>
-	endif
+	" if filereadable('/proc/sys/fs/binfmt_misc/WSLInterop')
+	"     " autocmd vimrc BufNewFile,BufRead *.md nnoremap <buffer><Leader>p :execute "OpenBrowser" substitute(expand("%:p"), '/mnt/c', 'c:/', '')<CR>
+	"     autocmd vimrc BufNewFile,BufRead *.md nnoremap <buffer><Leader>p :execute "OpenBrowser" substitute(expand("%:p"), '\v/mnt/(.)', '\1:/', '')<CR>
+	" else
+	"     autocmd vimrc BufNewFile,BufRead *.md nnoremap <buffer><Leader>p :execute "OpenBrowser" expand("%:p")<CR>
+	" endif
+	autocmd vimrc BufNewFile,BufRead *.md nnoremap <buffer><Leader>p 
+		\:execute "OpenBrowser" substitute(expand("%:p"), '\v/mnt/(.)', '\1:/', 'c')<CR>
 '''
 
 # [[plugins]] # edit for fish
@@ -190,47 +187,47 @@ hook_add = '''
 	let g:defx_icons_column_length = 2
 '''
 
-[[plugins]] # インタラクティブフィルター
-repo = 'Shougo/denite.nvim'
-depends = ['nvim-yarp', 'vim-hug-neovim-rpc']
-on_event = 'BufRead'
-hook_add = '''
-	" Denite用プレフィックス
-	nmap [denite] <Nop>
-	map <C-j> [denite]
-	" カレントディレクトリ以下のファイル検索
-	nmap <silent> [denite]<C-p> :<C-u>Denite file/rec -highlight-mode-insert=Search<CR>
-	" ファイル内の関数/クラス等の検索
-	nmap <silent> [denite]<C-o> :<C-u>Denite outline -highlight-mode-insert=Search<CR>
-	"Denite でバッファ内検索 
-	nnoremap <silent> [denite]<C-l> :<C-u>Denite line -highlight-mode-insert=Search<CR>
-'''
-# denite#custom#*はプラグインが読み終わってから。
-hook_post_source = '''
-	if executable('jvgrep')
-		call denite#custom#var('grep', 'command', ['jvgrep'])
-		call denite#custom#var('grep', 'default_opts', ['-i'])
-		call denite#custom#var('grep', 'recursive_opts', ['-R'])
-		call denite#custom#var('grep', 'pattern_opt', [])
-		call denite#custom#var('grep', 'separator', [])
-		call denite#custom#var('grep', 'final_opts', [])
-	endif
-	" 上下移動
-	call denite#custom#map('normal', '<C-n>', '<denite:move_to_next_line>')
-	call denite#custom#map('normal', '<C-p>', '<denite:move_to_previous_line>')
-	call denite#custom#map('insert', '<C-n>', '<denite:move_to_next_line>')
-	call denite#custom#map('insert', '<C-p>', '<denite:move_to_previous_line>')
-	" 入力履歴移動
-	call denite#custom#map('insert', '<C-j>', '<denite:assign_next_text>')
-	call denite#custom#map('insert', '<C-k>', '<denite:assign_previous_text>')
-	" file_rec検索時にfuzzymatchを有効にし、検索対象から指定のファイルを除外
-	call denite#custom#source(
-		\ 'file_rec', 'matchers', ['matcher/fuzzy', 'matcher/project_files', 'matcher_ignore_globs'])
-	" 検索対象外のファイル指定
-	call denite#custom#filter('matcher/ignore_globs', 'ignore/globs',
-		\ [ '.git/', '.ropeproject/', '__pycache__/',
-		\   'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
-'''
+# [[plugins]] # インタラクティブフィルター
+# repo = 'Shougo/denite.nvim'
+# depends = ['nvim-yarp', 'vim-hug-neovim-rpc']
+# on_event = 'BufRead'
+# hook_add = '''
+#     " Denite用プレフィックス
+#     nmap [denite] <Nop>
+#     map <C-j> [denite]
+#     " カレントディレクトリ以下のファイル検索
+#     nmap <silent> [denite]<C-p> :<C-u>Denite file/rec -highlight-mode-insert=Search<CR>
+#     " ファイル内の関数/クラス等の検索
+#     nmap <silent> [denite]<C-o> :<C-u>Denite outline -highlight-mode-insert=Search<CR>
+#     "Denite でバッファ内検索 
+#     nnoremap <silent> [denite]<C-l> :<C-u>Denite line -highlight-mode-insert=Search<CR>
+# '''
+# # denite#custom#*はプラグインが読み終わってから。
+# hook_post_source = '''
+#     if executable('jvgrep')
+#         call denite#custom#var('grep', 'command', ['jvgrep'])
+#         call denite#custom#var('grep', 'default_opts', ['-i'])
+#         call denite#custom#var('grep', 'recursive_opts', ['-R'])
+#         call denite#custom#var('grep', 'pattern_opt', [])
+#         call denite#custom#var('grep', 'separator', [])
+#         call denite#custom#var('grep', 'final_opts', [])
+#     endif
+#     " 上下移動
+#     call denite#custom#map('normal', '<C-n>', '<denite:move_to_next_line>')
+#     call denite#custom#map('normal', '<C-p>', '<denite:move_to_previous_line>')
+#     call denite#custom#map('insert', '<C-n>', '<denite:move_to_next_line>')
+#     call denite#custom#map('insert', '<C-p>', '<denite:move_to_previous_line>')
+#     " 入力履歴移動
+#     call denite#custom#map('insert', '<C-j>', '<denite:assign_next_text>')
+#     call denite#custom#map('insert', '<C-k>', '<denite:assign_previous_text>')
+#     " file_rec検索時にfuzzymatchを有効にし、検索対象から指定のファイルを除外
+#     call denite#custom#source(
+#         \ 'file_rec', 'matchers', ['matcher/fuzzy', 'matcher/project_files', 'matcher_ignore_globs'])
+#     " 検索対象外のファイル指定
+#     call denite#custom#filter('matcher/ignore_globs', 'ignore/globs',
+#         \ [ '.git/', '.ropeproject/', '__pycache__/',
+#         \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
+# '''
 
 # ----スニペット----
 [[plugins]] # スニペット管理
