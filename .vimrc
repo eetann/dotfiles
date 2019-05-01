@@ -82,7 +82,6 @@ nnoremap s<C-a> ggVG
 
 " ----改行時自動コメントオフ
 set formatoptions=cql
-
 " ----タブ設定
 set tabstop=4 "タブ幅をスペース4つ分にする
 set softtabstop=4 " 連続空白に対してTabやBackSpaceでcursorが動く幅
