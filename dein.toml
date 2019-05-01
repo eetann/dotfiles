@@ -221,10 +221,15 @@ hook_add = '''
 	let g:LanguageClient_diagnosticsEnable = 0
 	let g:LanguageClient_hasSnippetSupport = 0
 	set omnifunc=LanguageClient#complete
+	let g:deoplete#enable_at_startup = 1
 	let g:deoplete#file#enable_buffer_path = 1
 	nnoremap <Leader>ld :call LanguageClient_textDocument_definition()<CR>
 	nnoremap <Leader>lr :call LanguageClient_textDocument_rename()<CR>
 '''
+# [[plugins]] # LSP補完
+# repo = 'neoclide/coc.nvim'
+# build = 'coc#util#install()'
+
 [[plugins]]
 repo = 'junegunn/fzf'
 build = './install --all'

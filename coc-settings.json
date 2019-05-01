@@ -1,0 +1,19 @@
+{
+	"languageserver": {
+		"clangd": {
+			"command": "clangd-6.0",
+			"rootPatterns": ["compile_flags.txt", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+			"filetypes": ["c", "cpp", "objc", "objcpp"]
+		}
+	},
+	"languageserver": {
+		"pyls": {
+			"command": "pyls",
+			"filetypes": ["python"],
+			"initializationOptions": {
+				""
+				"asyncStartup": true
+			}
+		}
+	}
+}

@@ -271,3 +271,17 @@ repo = 'Shougo/neco-vim'
 on_ft = ['vim']
 depends = ['deoplete.nvim']
 
+[[plugins]] # サブモードの追加
+repo = 'kana/vim-submode'
+on_event = 'VimEnter'
+hook_post_source = '''
+	call submode#enter_with('bufmove', 'n', '', 's>', '<C-w>>')
+	call submode#enter_with('bufmove', 'n', '', 's<', '<C-w><')
+	call submode#enter_with('bufmove', 'n', '', 's+', '<C-w>+')
+	call submode#enter_with('bufmove', 'n', '', 's-', '<C-w>-')
+	call submode#map('bufmove', 'n', '', '>', '<C-w>>')
+	call submode#map('bufmove', 'n', '', '<', '<C-w><')
+	call submode#map('bufmove', 'n', '', '+', '<C-w>+')
+	call submode#map('bufmove', 'n', '', '-', '<C-w>-')
+'''
+

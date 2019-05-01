@@ -37,10 +37,6 @@ nnoremap sL <C-w>L
 nnoremap sH <C-w>H
 " 回転
 nnoremap sr <C-w>r
-nnoremap s> <C-w>>
-nnoremap s< <C-w><
-nnoremap s+ <C-w>+
-nnoremap s- <C-w>-
 " 大きさを揃える
 nnoremap s= <C-w>=
 nnoremap sO <C-w>=
