@@ -138,6 +138,14 @@ return
 
 !vk1D::Send,{Blind}!{vk1D}
 
+; 変換+hでバックスペース
+vk1C & h::
+	if(HenkanShort("h")){
+		return
+	}
+	Send,{BS}
+return
+
 ;; 無変換+hjklでカーソル移動、Blindをつけると修飾キー組み合わせ（Shift、Ctrなど）も可能
 vk1D & h::
 	if(MuhenShort("h")){
