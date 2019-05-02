@@ -271,17 +271,11 @@ repo = 'Shougo/neco-vim'
 on_ft = ['vim']
 depends = ['deoplete.nvim']
 
-[[plugins]] # サブモードの追加
-repo = 'kana/vim-submode'
+[[plugins]]
+repo = 'simeji/winresizer'
 on_event = 'VimEnter'
-hook_post_source = '''
-	call submode#enter_with('bufmove', 'n', '', 's>', '<C-w>>')
-	call submode#enter_with('bufmove', 'n', '', 's<', '<C-w><')
-	call submode#enter_with('bufmove', 'n', '', 's+', '<C-w>+')
-	call submode#enter_with('bufmove', 'n', '', 's-', '<C-w>-')
-	call submode#map('bufmove', 'n', '', '>', '<C-w>>')
-	call submode#map('bufmove', 'n', '', '<', '<C-w><')
-	call submode#map('bufmove', 'n', '', '+', '<C-w>+')
-	call submode#map('bufmove', 'n', '', '-', '<C-w>-')
+hook_add = '''
+	" リサイズ幅を1ずつに変更
+    let g:winrisizer_vert_resize=1
+	let g:winresizer_horiz_resize=1
 '''
-

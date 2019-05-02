@@ -90,7 +90,7 @@ ln -s /mnt/c/Users/admin/dotfiles/flake8 ~/.config/flake8
 ln -s /mnt/c/Users/admin/ ~/myhome
 ln -s /mnt/c/Users/admin/dotfiles/ dotfiles
 ln -s /mnt/c/Users/admin/dotfiles/fish_user_key_bindings.fish ~/.config/fish/functions/fish_user_key_bindings.fish
-
+ln -s /mnt/c/Users/admin/dotfiles/tmux.conf ~/.tmux.conf
 
 # for nodejs
 curl --compressed -o- -L https://yarnpkg.com/install.sh | sh

@@ -21,29 +21,11 @@ augroup END
 " --移動系---------------------------------
 nnoremap j gj
 nnoremap k gk
+map H ^
+map L $
 set scrolloff=5 "スクロールの余裕を確保する
 " sはclで代用する
 nnoremap s <Nop>
-" ----画面分割関連
-nnoremap sj <C-w>j
-nnoremap sk <C-w>k
-nnoremap sl <C-w>l
-nnoremap sh <C-w>h
-" 次に移動
-nnoremap sw <C-w>w
-nnoremap sJ <C-w>J
-nnoremap sK <C-w>K
-nnoremap sL <C-w>L
-nnoremap sH <C-w>H
-" 回転
-nnoremap sr <C-w>r
-" 大きさを揃える
-nnoremap s= <C-w>=
-nnoremap sO <C-w>=
-" 縦横に最大化
-nnoremap so <C-w>_<C-w>|
-nnoremap sN :<C-u>bn<CR>
-nnoremap sP :<C-u>bp<CR>
 " 分割(水平&垂直)
 nnoremap ss :<C-u>sp<CR>
 nnoremap sv :<C-u>vs<CR>
@@ -60,6 +42,8 @@ cnoremap <C-n> <Down>
 " コマンドライン内でのカーソル移動をInsertModeと同じに
 cnoremap <C-b> <Left>
 cnoremap <C-f> <Right>
+cnoremap <C-a> <HOME>
+cnoremap <C-e> <End>
 " quickfixのコマンド
 nnoremap [q :cprevious<CR>
 nnoremap ]q :cnext<CR>
@@ -94,16 +78,17 @@ set hlsearch " 検索結果をハイライト
 nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
 " cursor下の単語をハイライトする
 nnoremap <silent> <Space><Space> "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
+" cursor下の単語をハイライトしてから置換
+nmap # <Space><Space>:%s/<C-r>///g<Left><Left>
 " *(前方)、#(後方)を押したら選択範囲を検索
-xnoremap * :<C-u>call <SID>VSetSearch()<CR>/<C-R>=@/<CR><CR>
-xnoremap # :<C-u>call <SID>VSetSearch()<CR>?<C-R>=@/<CR><CR>
+" xnoremap * :<C-u>call <SID>VSetSearch()<CR>/<C-R>=@/<CR><CR>
+" xnoremap # :<C-u>call <SID>VSetSearch()<CR>?<C-R>=@/<CR><CR>
 function! s:VSetSearch()
-  let temp = @s
-  norm! gv"sy
-  let @/ = '\V' . substitute(escape(@s, '/\'), '\n', '\\n', 'g')
-  let @s = temp
+	let temp = @s
+	norm! gv"sy
+	let @/ = '\V' . substitute(escape(@s, '/\'), '\n', '\\n', 'g')
+	let @s = temp
 endfunction
-nnoremap <Leader>b :<C-u>/ oldfiles<Home>browse filter /
 
 " ----grepの設定
 set grepprg=jvgrep
