@@ -73,21 +73,18 @@ set shiftwidth=4  " smartindentでずれる幅
 set incsearch " インクリメンタルサーチ. １文字入力毎に検索を行う
 set ignorecase " 検索パターンに大文字小文字を区別しない
 set smartcase " 検索パターンに大文字を含んでいたら大文字小文字を区別する
-set hlsearch " 検索結果をハイライト
 " ESCキー2度押しでハイライトの切り替え
 nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
-" cursor下の単語をハイライトする
+" cursor下の単語をハイライトと置換
 nnoremap <silent> <Space><Space> "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
-" cursor下の単語をハイライトしてから置換
-nmap # <Space><Space>:%s/<C-r>///g<Left><Left>
-" *(前方)、#(後方)を押したら選択範囲を検索
-" xnoremap * :<C-u>call <SID>VSetSearch()<CR>/<C-R>=@/<CR><CR>
-" xnoremap # :<C-u>call <SID>VSetSearch()<CR>?<C-R>=@/<CR><CR>
-function! s:VSetSearch()
-	let temp = @s
-	norm! gv"sy
-	let @/ = '\V' . substitute(escape(@s, '/\'), '\n', '\\n', 'g')
-	let @s = temp
+nnoremap # "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
+" 選択範囲の検索と置換
+xnoremap <silent> <Space> mz:call <SID>set_vsearch()<CR>:set hlsearch<CR>`z
+xnoremap * :<C-u>call <SID>set_vsearch()<CR>/<C-r>/<CR>
+xnoremap # :<C-u>call <SID>set_vsearch()<CR>/<C-r>/<CR>:%s/<C-r>///g<Left><Left>
+function! s:set_vsearch()
+  silent normal gv"zy
+  let @/ = '\V' . substitute(escape(@z, '/\'), '\n', '\\n', 'g')
 endfunction
 
 " ----grepの設定
