@@ -19,13 +19,18 @@ augroup vimrc
 augroup END
 
 " --移動系---------------------------------
+set scrolloff=5 "スクロールの余裕を確保する
 nnoremap j gj
 nnoremap k gk
 map H ^
 map L $
-set scrolloff=5 "スクロールの余裕を確保する
 " sはclで代用する
 nnoremap s <Nop>
+" ----画面移動
+nnoremap sj <C-w>j
+nnoremap sk <C-w>k
+nnoremap sl <C-w>l
+nnoremap sh <C-w>h
 " 分割(水平&垂直)
 nnoremap ss :<C-u>sp<CR>
 nnoremap sv :<C-u>vs<CR>

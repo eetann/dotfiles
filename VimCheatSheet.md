@@ -79,17 +79,7 @@
 | n      | sk       | window間を上に移動           | <C-w>k               |  
 | n      | sl       | window間を右に移動           | <C-w>l               |  
 | n      | sw       | window間を次に移動           | <C-w>w               |  
-| n      | sH       | windowを左に移動             | <C-w>H               |  
-| n      | sJ       | windowを下に移動             | <C-w>J               |  
-| n      | sK       | windowを上に移動             | <C-w>K               |  
-| n      | sL       | windowを右に移動             | <C-w>L               |  
 | n      | sr       | windowを回転                 | <C-w>r               |  
-| n      | so       | windowを縦横に最大化         | <C-w_ <C-w>パイプ    |  
-| n      | sOかs=   | windowの大きさを揃える       | <C-w>=               |  
-| n      | s>       | windowの幅を増やす           | <C-w>>               |  
-| n      | s<       | windowの幅を減らす           | <C-w><               |  
-| n      | s+       | windowの高さを増やす         | <C-w>+               |  
-| n      | s-       | windowの高さを減らす         | <C-w>-               |  
 | n      | sq       | windowを閉じる               | :q                   |  
 | n      | sQ       | bufferを閉じる               | :bd                  |  
 | t      | sf       | TernimalMode(fish)開始       |                      |  
@@ -114,20 +104,20 @@
 # vim-table-mode  (最初に:TableModeToggle)  
 | Mode       | Map    | Description             | Original          |  
 |------------|--------|-------------------------|-------------------|  
-| normal     | ML-tm  | TabaleModeにトグル      | TableMode         |  
+| n     | ML-tm  | TabaleModeにトグル      | TableMode         |  
 | insert     | ┃     | 区切りを入れて自動調節  | Pipeline          |  
 | insert     | ┃┃   | 行間の区切り            | Pipeline          |  
 | visual     | ML-tt  | カンマ区切りをTableに   | ToTable           |  
 | Tableize/, |        | デリミタ区切りをTableに |                   |  
-| normal     | ML-tdc | 列を削除                | TableDeleteColumn |  
+| n     | ML-tdc | 列を削除                | TableDeleteColumn |  
 
 # plasticboy/vim-markdown  
-| Mode   | Map | Description           | Original |  
-|--------|-----|-----------------------|----------|  
-| normal | zc  | cursorのfieldを閉じる | close    |  
-| normal | za  | cursorのfieldを開ける |          |  
-| normal | zM  | 全てのfieldを閉じる   |          |  
-| normal | xR  | 全てのfieldを開ける   |          |  
+| Mode | Map | Description           | Original |  
+|------|-----|-----------------------|----------|  
+| n    | zc  | cursorのfieldを閉じる | close    |  
+| n    | za  | cursorのfieldを開ける |          |  
+| n    | zM  | 全てのfieldを閉じる   |          |  
+| n    | xR  | 全てのfieldを開ける   |          |  
 
 
 # scrooloose/nerdcommenter  
@@ -144,7 +134,7 @@
 # vim-easymotion  
 | Mode   | Map                  | Description                           | Original |  
 |--------|----------------------|---------------------------------------|----------|  
-| normal | f<char><char>+<char> | f + 2文字で画面全体を検索してジャンプ |          |  
+| n | f<char><char>+<char> | f + 2文字で画面全体を検索してジャンプ |          |  
 
 
 # vim-easy-align  
