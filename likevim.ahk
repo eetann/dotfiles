@@ -138,14 +138,6 @@ return
 
 !vk1D::Send,{Blind}!{vk1D}
 
-; 変換+hでバックスペース
-vk1C & h::
-	if(HenkanShort("h")){
-		return
-	}
-	Send,{BS}
-return
-
 ;; 無変換+hjklでカーソル移動、Blindをつけると修飾キー組み合わせ（Shift、Ctrなど）も可能
 vk1D & h::
 	if(MuhenShort("h")){
@@ -171,11 +163,6 @@ vk1D & l::
 	}
 	Send,{Blind}{right}
 return
-; vk1D & h::Send, {Blind}{left}
-; vk1D & j::Send, {Blind}{down}
-; vk1D & k::Send, {Blind}{up}
-; vk1D & l::Send, {Blind}{right}
-
 ;;無変換+w,b,でword移動
 vk1D & w::
 	if(MuhenShort("w")){
@@ -190,7 +177,6 @@ vk1D & b::
 	Send,{Blind}^{left}
 return
 
-
 ;; 無変換+a,eでhome,end
 vk1D & a::
 	if(MuhenShort("a")){
@@ -203,5 +189,46 @@ vk1D & e::
 		return
 	}
 	Send,{Blind}{End}
+return
+
+
+; 変換+hでバックスペース
+vk1C & h::
+	if(HenkanShort("h")){
+		return
+	}
+	Send,{BS}
+return
+
+;;変換+wでword消し
+vk1C & w::
+	if(HenkanShort("w")){
+		return
+	}
+	Send,^{BS}
+return
+
+;;変換+uで手前全消し
+vk1C & u::
+	if(HenkanShort("u")){
+		return
+	}
+	Send,{Blind}+{Home}{BS}
+return
+
+;;変換+yで一行コピー
+vk1C & y::
+	if(HenkanShort("y")){
+		return
+	}
+	Send,{Blind}{End}+{Home}^{c}
+return
+
+;;変換+dで一行消し
+vk1C & d::
+	if(HenkanShort("y")){
+		return
+	}
+	Send,{Blind}{End}+{Home}{BS}
 return
 

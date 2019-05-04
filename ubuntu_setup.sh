@@ -93,6 +93,9 @@ ln -s /mnt/c/Users/admin/dotfiles/vim/flake8 ~/.config/flake8
 ln -s /mnt/c/Users/admin/.vim .vim
 ln -s /mnt/c/Users/admin/dotfiles/tmux.conf ~/.tmux.conf
 
-# for nodejs
-curl --compressed -o- -L https://yarnpkg.com/install.sh | sh
-npm install -g yarn
+# for coc.nvom
+# curl --compressed -o- -L https://yarnpkg.com/install.sh | sh
+# npm install -g yarn
+
+# tmux
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
