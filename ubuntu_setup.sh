@@ -81,15 +81,16 @@ yes | sudo apt install fish
 
 # make link
 sudo ln -s /mnt/c/Users/admin/dotfiles/wsl.conf /etc/wsl.conf
-ln -s /mnt/c/Users/admin/dotfiles/.vimrc .vimrc
-ln -s /mnt/c/Users/admin/.vim .vim
 mkdir ~/.config
 mkdir ~/.config/fish
-ln -s /mnt/c/Users/admin/dotfiles/config.fish  ~/.config/fish/config.fish
-ln -s /mnt/c/Users/admin/dotfiles/flake8 ~/.config/flake8
 ln -s /mnt/c/Users/admin/ ~/myhome
 ln -s /mnt/c/Users/admin/dotfiles/ dotfiles
-ln -s /mnt/c/Users/admin/dotfiles/fish_user_key_bindings.fish ~/.config/fish/functions/fish_user_key_bindings.fish
+ln -s /mnt/c/Users/admin/dotfiles/fish/config.fish  ~/.config/fish/config.fish
+ln -s /mnt/c/Users/admin/dotfiles/fish/fish_user_key_bindings.fish ~/.config/fish/functions/fish_user_key_bindings.fish
+ln -s /mnt/c/Users/admin/dotfiles/fish/tm.fish ~/.config/fish/functions/tm.fish
+ln -s /mnt/c/Users/admin/dotfiles/vim/.vimrc ~/.vimrc
+ln -s /mnt/c/Users/admin/dotfiles/vim/flake8 ~/.config/flake8
+ln -s /mnt/c/Users/admin/.vim .vim
 ln -s /mnt/c/Users/admin/dotfiles/tmux.conf ~/.tmux.conf
 
 # for nodejs

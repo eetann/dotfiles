@@ -122,11 +122,11 @@ endfunction
 autocmd vimrc BufWritePre *.md :call MarkdownEOLTwoSpace()
 
 " ----vimrcの編集
-nnoremap <F2> :<C-u>edit ~/dotfiles/VimCheatSheet.md<CR>
+nnoremap <F2> :<C-u>edit ~/dotfiles/vim/VimCheatSheet.md<CR>
 nnoremap <F5> :<C-u>source $MYVIMRC<CR>
 nnoremap <F6> :<C-u>edit $MYVIMRC<CR>
-nnoremap <F7> :<C-u>edit ~/dotfiles/dein.toml<CR>
-nnoremap <F8> :<C-u>edit ~/dotfiles/dein_lazy.toml<CR>
+nnoremap <F7> :<C-u>edit ~/dotfiles/vim/dein.toml<CR>
+nnoremap <F8> :<C-u>edit ~/dotfiles/vim/dein_lazy.toml<CR>
 autocmd vimrc FileType help,quickrun nnoremap <buffer> q <C-w>c
 
 " ----その他
@@ -142,6 +142,7 @@ set wildmenu  "コマンドモードの補完
 set history=1000 " CommandHistoryを増やす
 set completeopt=menuone
 autocmd vimrc FileType text,qf,quickrun setlocal wrap
+autocmd vimrc BufNewFile,BufRead *.fish setfiletype fish
 
 " ----インサートモードのためのIMEの制御(Tera Termのみ?)
 " let &t_SI .= "\e[<r" " 挿入入時、前回のIME状態復元
@@ -207,7 +208,7 @@ endif
 if dein#load_state(s:dein_path)
   call dein#begin(s:dein_path)
 
-  let g:config_dir  = expand('$HOME/dotfiles')
+  let g:config_dir  = expand('$HOME/dotfiles/vim')
   let s:toml        = g:config_dir . '/dein.toml'
   let s:lazy_toml   = g:config_dir . '/dein_lazy.toml'
 

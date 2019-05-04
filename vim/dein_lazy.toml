@@ -66,9 +66,6 @@ hook_add = '''
 		\:execute "OpenBrowser" substitute(expand("%:p"), '\v/mnt/(.)', '\1:/', 'c')<CR>
 '''
 
-# [[plugins]] # edit for fish
-# repo = 'dag/vim-fish'
-
 [[plugins]] # 画面の移動が便利になる
 repo = 'easymotion/vim-easymotion'
 on_event = 'VimEnter'
@@ -270,6 +267,10 @@ depends = ['deoplete.nvim']
 repo = 'Shougo/neco-vim'
 on_ft = ['vim']
 depends = ['deoplete.nvim']
+
+[[plugins]] # edit for fish
+on_ft = ['fish']
+repo = 'dag/vim-fish'
 
 [[plugins]]
 repo = 'simeji/winresizer'
