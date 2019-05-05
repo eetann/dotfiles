@@ -285,3 +285,17 @@ repo = 'vim-jp/vimdoc-ja'
 #     let g:matlab_server_launcher = 'vim'
 # '''
 
+# [[plugins]] # for tmux
+# repo = 'edkolev/tmuxline.vim'
+# hook_add = '''
+#     let g:tmuxline_preset = {
+#       \'a'    : '#S',
+#       \'c'    : ['#(whoami)'],
+#       \'win'  : ['#I', '#W'],
+#       \'cwin' : ['#I', '#W', '#F'],
+#       \'x'    : '',
+#       \'y'    : ['#[fg=yellow]⚡#(battery.exe -t -e)'],
+#       \'z'    : ['%m/%d(%a) %H:%M'],
+#       \'options' : {'status-justify':'left'}}
+#     let g:tmuxline_theme = 'papercolor'
+# '''

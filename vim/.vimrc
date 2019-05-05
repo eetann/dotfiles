@@ -34,7 +34,8 @@ nnoremap sh <C-w>h
 " 分割(水平&垂直)
 nnoremap ss :<C-u>sp<CR>
 nnoremap sv :<C-u>vs<CR>
-" nnoremap sq :<C-u>q<CR>
+" ウィンドウを閉じる
+nnoremap sc <C-w>c
 " バッファを閉じる
 nnoremap sq :<C-u>bd<CR>
 nnoremap sQ :<C-u>bd!<CR>
