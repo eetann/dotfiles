@@ -277,6 +277,7 @@ hook_add = '''
 [[plugins]] # 日本語ヘルプ
 repo = 'vim-jp/vimdoc-ja'
 
+# 未完----------------------------------------------------------
 # ----MATLAB----
 # [[plugins]] # matlab
 # repo = 'daeyun/vim-matlab'

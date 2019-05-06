@@ -2,7 +2,7 @@
 set encoding=utf-8
 scriptencoding utf-8
 set ambiwidth=double " □や○文字が崩れる問題を解決
-set nrformats= "数増減は10進数で扱う
+set nrformats= "数増減は10進数で扱う(<C-a>や<C-x>)
 
 let mapleader = "\<Space>" " leaderキーの割当を変える
 nnoremap ; :
@@ -12,16 +12,18 @@ vnoremap : ;
 nnoremap q; q:
 
 " --reset augroup-----------------------------
-"  再読込時に２度設定しないため、最初に消す
+"  再読込時に２度設定しないように、初期化
 "  autocmdを使うときにはautocmd vimrc ゴニョゴニョと書く
 augroup vimrc
   autocmd!
 augroup END
 
 " --移動系---------------------------------
-set scrolloff=5 "スクロールの余裕を確保する
+set scrolloff=5 " 上下のスクロールの余裕を確保する
+" 表示行と移動行を合わせる
 nnoremap j gj
 nnoremap k gk
+" 遠いので近くに
 map H ^
 map L $
 " sはclで代用する
@@ -67,7 +69,7 @@ nnoremap <expr> sp '`[' . strpart(getregtype(), 0, 1) . '`]'
 nnoremap s<C-a> ggVG
 
 " ----改行時自動コメントオフ
-set formatoptions=cql
+set formatoptions-=ro
 " ----タブ設定
 set tabstop=4 "タブ幅をスペース4つ分にする
 set softtabstop=4 " 連続空白に対してTabやBackSpaceでcursorが動く幅
@@ -94,6 +96,7 @@ function! s:set_vsearch()
 endfunction
 
 " ----grepの設定
+" 日本語grepする。要go get取得
 set grepprg=jvgrep
 " grepはquickfixで開く
 autocmd vimrc QuickFixCmdPost *grep* cwindow
@@ -134,13 +137,14 @@ autocmd vimrc FileType help,quickrun nnoremap <buffer> q <C-w>c
 " <Space><CR>で上、Shift+Ctrl+Enterで下に空行挿入
 nnoremap <Space><CR> mzo<ESC>`z:delmarks z<CR>
 nnoremap  mzO<ESC>`z:delmarks z<CR>
-" InsertModeでcccを入力し、エスケープでコメント線
+" InsertModeでcccを入力し、エスケープでコメント線以下は例(日本語があると少し減る)
+" ----------------------------------------------------------------
 inoreabbrev <expr> ccc repeat('-', 70 - col('.'))
-set spelllang=en,cjk " スペルチェックについて
 set noswapfile " ファイル編集中にスワップファイルを作らない
 set hidden " 未保存ファイルが有っても別のファイルを開ける
 set wildmenu  "コマンドモードの補完
 set history=1000 " CommandHistoryを増やす
+" Previewはいらない
 set completeopt=menuone
 autocmd vimrc FileType text,qf,quickrun setlocal wrap
 
@@ -167,7 +171,7 @@ set list "空白文字の可視化
 " ウィンドウ幅狭いときの省略での文字表示*2、不可視のスペースを表す
 set listchars=tab:\ \ ,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 
-" ----cursorの形をモードで変化
+" ----cursorの形をモードで変化(ターミナルによる)
 if has('vim_starting') " reloadableにするため
 	" 挿入モード時に点滅の縦棒タイプのcursor
 	let &t_SI .= "\e[5 q"
@@ -177,7 +181,7 @@ if has('vim_starting') " reloadableにするため
 	let &t_SR .= "\e[4 q"
 endif
 
-" ----折りたたみ
+" ----折りたたみやカーソル位置を保存
 autocmd vimrc BufWritePost * if expand('%') != '' && &buftype !~ 'nofile' | mkview | endif
 autocmd vimrc BufRead * if expand('%') != '' && &buftype !~ 'nofile' | silent loadview | endif
 set viewoptions=cursor,folds
@@ -185,9 +189,6 @@ set viewoptions=cursor,folds
 " ----新しいwindowは下や右に開く
 set splitbelow
 set splitright
-" ターミナルモードでfishを開く
-nnoremap st :belowright :terminal<CR>
-" tnoremap <C-q> <C-w><C-c><C-w>:q!<CR>
 
 "dein Scripts-----------------------------
 if &compatible
