@@ -189,6 +189,7 @@ hook_add = '''
 [[plugins]] # 括弧関連便利になる
 repo = 'tpope/vim-surround'
 
+
 [[plugins]] # 括弧などを入力したときの挙動をスマートに補完
 repo = 'jiangmiao/auto-pairs'
 
