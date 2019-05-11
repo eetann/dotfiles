@@ -12,6 +12,9 @@ hook_add = '''
 		\ "_":{
 		\ 'runner'    : 'vimproc',
 		\ 'runner/vimproc/updatetime' : 60,
+	    \ 'outputter' : 'error',
+	    \ 'outputter/error/success' : 'buffer',
+	    \ 'outputter/error/error'   : 'quickfix',
 		\ 'outputter/buffer/close_on_empty' : 1,
 		\ 'outputter/buffer/into':1,
 		\ 'outputter/buffer/split'  :
@@ -105,7 +108,7 @@ repo = 'Shougo/defx.nvim'
 on_event = 'VimEnter'
 depends = ['nvim-yarp', 'vim-hug-neovim-rpc','defx-icons']
 hook_add = '''
-	autocmd vimrc VimResized * call s:auto_open_defx()
+	autocmd vimrc VimResized,VimEnter * call s:auto_open_defx()
 	" ウィンドウ幅が大きいときはdefxを開いておく。
 	function! s:auto_open_defx() abort
 		let s:is_opened_defx = bufnr('defx')

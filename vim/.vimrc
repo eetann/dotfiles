@@ -132,6 +132,22 @@ nnoremap <F6> :<C-u>edit $MYVIMRC<CR>
 nnoremap <F7> :<C-u>edit ~/dotfiles/vim/dein.toml<CR>
 nnoremap <F8> :<C-u>edit ~/dotfiles/vim/dein_lazy.toml<CR>
 autocmd vimrc FileType help,quickrun nnoremap <buffer> q <C-w>c
+" TODO: ウィンドウ内の最後のバッファを閉じる時、defxとtagbar開いてたら閉じる
+" autocmd vimrc BufEnter * call s:is_open_sides()
+" function! s:is_open_sides() abort
+"     if winnr('$') <= 2
+"         let s:is_opened_defx = bufnr('defx')
+"         let s:is_opened_tagbar = bufnr('Tagbar')
+"         if s:is_opened_defx!=-1 && s:is_opened_tagbar!=-1
+"             execute 'bwipeout!' . s:is_opened_defx
+"             execute 'bwipeout!' . s:is_opened_tagbar
+"         elseif s:is_opened_defx!=-1 && s:is_opened_tagbar==-1
+"             execute 'bwipeout!' . s:is_opened_defx
+"         elseif s:is_opened_defx==-1 && s:is_opened_tagbar!=-1
+"             execute 'bwipeout!' . s:is_opened_tagbar
+"         endif
+"     endif
+" endfunction
 
 " ----その他
 " <Space><CR>で上、Shift+Ctrl+Enterで下に空行挿入
