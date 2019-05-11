@@ -108,13 +108,16 @@ hook_add = '''
 	autocmd vimrc VimResized * call s:auto_open_defx()
 	" ウィンドウ幅が大きいときはdefxを開いておく。
 	function! s:auto_open_defx() abort
-		let s:win_id = win_getid()
-		" フォーカスは編集中のファイルに戻す
-		if winwidth(0) > 120
+		let s:is_opened_defx = bufnr('defx')
+		if winwidth(0) >= 120 && s:is_opened_defx==-1
+			" フォーカスは編集中のファイルに戻す
+			let s:win_id = win_getid()
 			Defx -split=vertical -columns=mark:indent:icons:filename:type
 			\ -winwidth=30  -direction=topleft
+			let succeed = win_gotoid(s:win_id)
+		elseif winwidth(0) < 120 && s:is_opened_defx!=-1
+			execute "bwipeout!" . s:is_opened_defx
 		endif
-		let succeed = win_gotoid(s:win_id)
 	endfunction
 
 	nnoremap <silent> <Space>f
@@ -124,10 +127,10 @@ hook_add = '''
 	function! s:defx_my_settings() abort
 		nnoremap <silent><buffer><expr> <CR>
 		\ defx#is_directory() ?
-		\ defx#do_action('open') :
-		\ defx#do_action('multi', ['drop', 'quit'])
-		nnoremap <silent><buffer><expr> o
+		\ defx#do_action('open_or_close_tree') :
 		\ defx#do_action('drop')
+		nnoremap <silent><buffer><expr> o
+		\ defx#do_action('open_or_close_tree')
 		nnoremap <silent><buffer><expr> c
 		\ defx#do_action('copy')
 		nnoremap <silent><buffer><expr> m

@@ -54,12 +54,15 @@ hook_add = '''
 	autocmd vimrc VimResized *.py,*.c,*.cpp,*.go call s:auto_open_tagbar()
 	" ウィンドウ幅が大きいときはtagbarを開いておく。
 	function! s:auto_open_tagbar() abort
-		let s:win_id = win_getid()
-		" フォーカスは編集中のファイルに戻す
-		if winwidth(0) > 150
+		let s:is_opened_tagbar = bufnr('Tagbar')
+		if winwidth(0) >= 150 && s:is_opened_tagbar==-1
+			" フォーカスは編集中のファイルに戻す
+			let s:win_id = win_getid()
 			TagbarOpen
+			let succeed = win_gotoid(s:win_id)
+		elseif winwidth(0) < 120 && s:is_opened_tagbar!=-1
+			execute "bwipeout!" . s:is_opened_tagbar
 		endif
-		let succeed = win_gotoid(s:win_id)
 	endfunction
 
 	let g:tagbar_autofocus = 1
