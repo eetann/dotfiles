@@ -178,6 +178,17 @@ hook_add ='''
 
 [[plugins]] # gitをvimで操作
 repo = 'tpope/vim-fugitive'
+hook_add = '''
+	nnoremap [fugitive]  <Nop>
+	nmap <space>g [fugitive]
+	nnoremap <silent> [fugitive]s :Gstatus<CR><C-w>T
+	nnoremap <silent> [fugitive]a :Gwrite<CR>
+	nnoremap <silent> [fugitive]c :Gcommit-v<CR>
+	nnoremap <silent> [fugitive]b :Gblame<CR>
+	nnoremap <silent> [fugitive]d :Gdiff<CR>
+	nnoremap <silent> [fugitive]m :Gmerge<CR>
+'''
+
 
 [[plugins]] # カラースキーム
 repo = 'morhetz/gruvbox'
@@ -188,7 +199,6 @@ hook_add = '''
 
 [[plugins]] # 括弧関連便利になる
 repo = 'tpope/vim-surround'
-
 
 [[plugins]] # 括弧などを入力したときの挙動をスマートに補完
 repo = 'jiangmiao/auto-pairs'
