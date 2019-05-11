@@ -97,8 +97,8 @@ hook_add = '''
 	set showcmd      " 打ったコマンドをステータスラインの下に表示
 	set ruler        " ステータスラインの右側にカーソルの現在位置を表示する
 	" カーソルキーでbuffer移動
-	nnoremap <C-p> :bp<CR>
-	nnoremap <C-n> :bn<CR>
+	nmap <C-p> <Plug>AirlineSelectPrevTab
+	nmap <C-n> <Plug>AirlineSelectNextTab
 	let g:airline_theme = 'powerlineish'
 	let g:airline_powerline_fonts = 1
 	let g:airline#extensions#tagbar#enabled = 1
