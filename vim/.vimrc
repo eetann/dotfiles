@@ -147,6 +147,7 @@ set history=1000 " CommandHistoryを増やす
 " Previewはいらない
 set completeopt=menuone
 autocmd vimrc FileType text,qf,quickrun setlocal wrap
+set mouse=a
 
 " ----インサートモードのためのIMEの制御(Tera Termのみ?)
 " let &t_SI .= "\e[<r" " 挿入入時、前回のIME状態復元

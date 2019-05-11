@@ -221,7 +221,7 @@ hook_add = '''
 	let g:LanguageClient_autoStart = 1
 	let g:LanguageClient_diagnosticsEnable = 0
 	let g:LanguageClient_hasSnippetSupport = 0
-	set omnifunc=LanguageClient#complete
+	" set omnifunc=LanguageClient#complete
 	let g:deoplete#enable_at_startup = 1
 	let g:deoplete#file#enable_buffer_path = 1
 	nnoremap <Leader>ld :call LanguageClient_textDocument_definition()<CR>
