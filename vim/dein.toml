@@ -51,10 +51,10 @@ on_ft = 'md'
 repo = 'majutsushi/tagbar'
 depends = ['markdown2ctags']
 hook_add = '''
-	autocmd vimrc VimResized *.py,*.c,*.cpp,*.go call s:auto_open_tagbar()
+	autocmd vimrc VimResized * call s:auto_open_tagbar()
 	" ウィンドウ幅が大きいときはtagbarを開いておく。
 	function! s:auto_open_tagbar() abort
-		let s:is_opened_tagbar = bufnr('Tagbar')
+pened_tagbar = bufnr('Tagbar')
 		if winwidth(0) >= 150 && s:is_opened_tagbar==-1
 			" フォーカスは編集中のファイルに戻す
 			let s:win_id = win_getid()
@@ -176,8 +176,8 @@ hook_add ='''
 	autocmd vimrc FileType help,qf,man,ref let b:ale_enabled = 0
 '''
 
-# [[plugins]] # gitをvimで操作
-# repo = 'tpope/vim-fugitive'
+[[plugins]] # gitをvimで操作
+repo = 'tpope/vim-fugitive'
 
 [[plugins]] # カラースキーム
 repo = 'morhetz/gruvbox'
