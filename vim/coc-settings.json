@@ -1,17 +1,10 @@
 {
-    "coc.preferences.autoTrigger": "always",
-    "coc.preferences.triggerAfterInsertEnter": false,
-    "coc.preferences.timeout": 2000,
-    "coc.preferences.noselect": true,
-    "coc.preferences.formatOnType": false,
-    "coc.preferences.jumpCommand": "edit",
-    "coc.preferences.diagnostic.enable": true,
-    "coc.preferences.diagnostic.signOffset": 1000,
-    "coc.preferences.diagnostic.warningSign": "⚠",
-    "coc.preferences.diagnostic.errorSign": ">>",
-    "coc.preferences.diagnostic.infoSign": ">>",
-    "coc.preferences.diagnostic.hintSign": ">>",
-    "pyls.plugins.pycodestyle.enabled": false,
+	"signature.target": "echo",
+	"coc.preferences.hoverTarget": "echo",
+	"diagnostic.warningSign": "",
+	"diagnostic.errorSign": "",
+	"diagnostic.hintSign": "",
+	"diagnostic.infoSign": "",
 	"languageserver": {
 		"clangd": {
 			"command": "clangd-6.0",
@@ -19,14 +12,12 @@
 			"filetypes": ["c", "cpp", "objc", "objcpp"]
 		}
 	},
-	"languageserver": {
-		"pyls": {
-			"command": "pyls",
-			"filetypes": ["python"],
-			"initializationOptions": {
-				""
-				"asyncStartup": true
-			}
-		}
-	}
+	"python.pythonPath": "/usr/bin/python3.6",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": false,
+	"python.linting.flake8Path": "/home/eetann/.local/bin/flake8",
+    "python.linting.flake8Enabled": true,
+	"python.formatting.blackPath": "/home/eetann/.local/bin/",
+	"python.formatting.provider": "black",
+	"python.sortImports.path": "/home/eetann/.local/bin/isort"
 }

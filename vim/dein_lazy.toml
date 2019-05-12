@@ -206,90 +206,6 @@ hook_add = '''
 	let g:defx_icons_column_length = 2
 '''
 
-# [[plugins]] # インタラクティブフィルター
-# repo = 'Shougo/denite.nvim'
-# depends = ['nvim-yarp', 'vim-hug-neovim-rpc']
-# on_event = 'BufRead'
-# hook_add = '''
-#     " Denite用プレフィックス
-#     nmap [denite] <Nop>
-#     map <C-j> [denite]
-#     " カレントディレクトリ以下のファイル検索
-#     nmap <silent> [denite]<C-p> :<C-u>Denite file/rec -highlight-mode-insert=Search<CR>
-#     " ファイル内の関数/クラス等の検索
-#     nmap <silent> [denite]<C-o> :<C-u>Denite outline -highlight-mode-insert=Search<CR>
-#     "Denite でバッファ内検索 
-#     nnoremap <silent> [denite]<C-l> :<C-u>Denite line -highlight-mode-insert=Search<CR>
-# '''
-# # denite#custom#*はプラグインが読み終わってから。
-# hook_post_source = '''
-#     if executable('jvgrep')
-#         call denite#custom#var('grep', 'command', ['jvgrep'])
-#         call denite#custom#var('grep', 'default_opts', ['-i'])
-#         call denite#custom#var('grep', 'recursive_opts', ['-R'])
-#         call denite#custom#var('grep', 'pattern_opt', [])
-#         call denite#custom#var('grep', 'separator', [])
-#         call denite#custom#var('grep', 'final_opts', [])
-#     endif
-#     " 上下移動
-#     call denite#custom#map('normal', '<C-n>', '<denite:move_to_next_line>')
-#     call denite#custom#map('normal', '<C-p>', '<denite:move_to_previous_line>')
-#     call denite#custom#map('insert', '<C-n>', '<denite:move_to_next_line>')
-#     call denite#custom#map('insert', '<C-p>', '<denite:move_to_previous_line>')
-#     " 入力履歴移動
-#     call denite#custom#map('insert', '<C-j>', '<denite:assign_next_text>')
-#     call denite#custom#map('insert', '<C-k>', '<denite:assign_previous_text>')
-#     " file_rec検索時にfuzzymatchを有効にし、検索対象から指定のファイルを除外
-#     call denite#custom#source(
-#         \ 'file_rec', 'matchers', ['matcher/fuzzy', 'matcher/project_files', 'matcher_ignore_globs'])
-#     " 検索対象外のファイル指定
-#     call denite#custom#filter('matcher/ignore_globs', 'ignore/globs',
-#         \ [ '.git/', '.ropeproject/', '__pycache__/',
-#         \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
-# '''
-
-# ----スニペット----
-[[plugins]] # スニペット管理
-repo = 'Shougo/neosnippet.vim'
-on_event = 'VimEnter'
-on_ft = ['snippet']
-depends = ['neosnippet-snippets', 'nvim-yarp', 'vim-hug-neovim-rpc']
-hook_source = '''
-	" <TAB>: completion.
-	" inoremap <expr> <S-TAB> pumvisible() ? '<C-p>' : '<S-TAB>'
-	imap <C-k> <Plug>(neosnippet_expand_or_jump)
-	smap <C-k> <Plug>(neosnippet_expand_or_jump)
-	imap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : pumvisible() ? '<C-n>' : '<TAB>'
-	smap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : '<TAB>'
-	let g:neosnippet#snippets_directory = '~/dotfiles/mysnippet'
-'''
-
-# ----自動補完----
-[[plugins]]
-repo = 'Shougo/deoplete.nvim'
-depends = ['neosnippet.vim', 'nvim-yarp', 'vim-hug-neovim-rpc']
-on_event = 'VimEnter'
-hook_add = '''
-	let g:deoplete#enable_at_startup = 1
-	let g:deoplete#enable_smart_case = 1
-	let g:deoplete#auto_complete_delay = 10
-	" let g:deoplete#auto_complete_start_length = 3
-	let g:deoplete#auto_refresh_delay = 10
-	let g:deoplete#refresh_always = v:true
-	inoremap <expr><tab> pumvisible() ? "\<C-n>" :
-		\ neosnippet#expandable_or_jumpable() ?
-		\    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
-'''
-
-[[plugins]]
-repo = 'Shougo/neco-syntax'
-depends = ['deoplete.nvim']
-
-[[plugins]]
-repo = 'Shougo/neco-vim'
-on_ft = ['vim']
-depends = ['deoplete.nvim']
-
 [[plugins]] # edit for fish
 on_ft = ['fish']
 repo = 'dag/vim-fish'
@@ -302,3 +218,48 @@ hook_add = '''
     let g:winrisizer_vert_resize=1
 	let g:winresizer_horiz_resize=1
 '''
+
+
+
+# ----スニペット----
+# [[plugins]] # スニペット管理
+# repo = 'Shougo/neosnippet.vim'
+# on_event = 'VimEnter'
+# on_ft = ['snippet']
+# depends = ['neosnippet-snippets', 'nvim-yarp', 'vim-hug-neovim-rpc']
+# hook_source = '''
+#     " <TAB>: completion.
+#     " inoremap <expr> <S-TAB> pumvisible() ? '<C-p>' : '<S-TAB>'
+#     imap <C-k> <Plug>(neosnippet_expand_or_jump)
+#     smap <C-k> <Plug>(neosnippet_expand_or_jump)
+#     imap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : pumvisible() ? '<C-n>' : '<TAB>'
+#     smap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : '<TAB>'
+#     let g:neosnippet#snippets_directory = '~/dotfiles/mysnippet'
+# '''
+
+# # ----自動補完----
+# [[plugins]]
+# repo = 'Shougo/deoplete.nvim'
+# depends = ['neosnippet.vim', 'nvim-yarp', 'vim-hug-neovim-rpc']
+# on_event = 'VimEnter'
+# hook_add = '''
+#     let g:deoplete#enable_at_startup = 1
+#     let g:deoplete#enable_smart_case = 1
+#     let g:deoplete#auto_complete_delay = 10
+#     " let g:deoplete#auto_complete_start_length = 3
+#     let g:deoplete#auto_refresh_delay = 10
+#     let g:deoplete#refresh_always = v:true
+#     inoremap <expr><tab> pumvisible() ? "\<C-n>" :
+#         \ neosnippet#expandable_or_jumpable() ?
+#         \    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
+# '''
+
+# [[plugins]]
+# repo = 'Shougo/neco-syntax'
+# depends = ['deoplete.nvim']
+
+# [[plugins]]
+# repo = 'Shougo/neco-vim'
+# on_ft = ['vim']
+# depends = ['deoplete.nvim']
+

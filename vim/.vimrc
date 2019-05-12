@@ -125,6 +125,7 @@ function! MarkdownEOLTwoSpace()
 endfunction
 autocmd vimrc BufWritePre *.md :call MarkdownEOLTwoSpace()
 
+set signcolumn=yes
 " ----vimrcの編集
 nnoremap <F2> :<C-u>edit ~/dotfiles/vim/VimCheatSheet.md<CR>
 nnoremap <F5> :<C-u>source $MYVIMRC<CR>

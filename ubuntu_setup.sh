@@ -59,6 +59,8 @@ pip3 install --user vim-vint
 pip3 install --user numpy
 pip3 install --user matplotlib
 pip3 install --user pandas
+pip3 install --user pyls-black
+pip3 install --user pyls-isort
 yes | sudo apt install python3-tk
 
 # install universal-ctags
@@ -80,7 +82,6 @@ yes | ~/.fzf/install
 yes | sudo apt install fish
 
 # make link
-sudo ln -s /mnt/c/Users/admin/dotfiles/wsl.conf /etc/wsl.conf
 mkdir ~/.config
 mkdir ~/.config/fish
 ln -s /mnt/c/Users/admin/ ~/myhome
@@ -94,8 +95,12 @@ ln -s /mnt/c/Users/admin/.vim .vim
 ln -s /mnt/c/Users/admin/dotfiles/tmux.conf ~/.tmux.conf
 
 # for coc.nvom
-# curl --compressed -o- -L https://yarnpkg.com/install.sh | sh
-# npm install -g yarn
+curl --compressed -o- -L https://yarnpkg.com/install.sh | sh
+npm install -g yarn
+
+# /etc/wsl.conf に以下の内容を書く
+# [interop]
+# appendWindowsPath = false
 
 # tmux
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

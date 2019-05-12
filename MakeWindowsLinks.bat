@@ -3,4 +3,4 @@ cd ..
 mkdir .vim
 mkdir .vim\dein
 mklink .vimrc dotfiles\.vimrc
-mklink .vim\coc-settings.json ..\dotfiles\coc-settings.json
+mklink .vim\coc-settings.json ..\dotfiles\vim\coc-settings.json
