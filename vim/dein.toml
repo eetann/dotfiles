@@ -51,6 +51,8 @@ on_ft = 'md'
 repo = 'majutsushi/tagbar'
 depends = ['markdown2ctags']
 hook_add = '''
+	let g:tagbar_width = 30
+	let g:tagbar_map_togglesort = 'S'
 	autocmd vimrc VimResized,VimEnter * call s:auto_open_tagbar()
 	" ウィンドウ幅が大きいときはtagbarを開いておく。
 	function! s:auto_open_tagbar() abort
@@ -64,10 +66,6 @@ hook_add = '''
 			execute "bwipeout!" . s:is_opened_tagbar
 		endif
 	endfunction
-
-	let g:tagbar_autofocus = 1
-	let g:tagbar_width = 30
-	let g:tagbar_map_togglesort = 'S'
 	nnoremap <silent> <leader>tt :TagbarToggle<CR>
 	let g:tagbar_type_markdown = {
 		\ 'ctagstype': 'markdown',
@@ -129,7 +127,6 @@ repo = 'delphinus/vim-auto-cursorline'
 
 [[plugins]]
 repo = 'junegunn/fzf'
-build = './install --all'
 
 [[plugins]]
 repo = 'junegunn/fzf.vim'
@@ -181,6 +178,107 @@ if = "!has('nvim')"
 repo = 'roxma/vim-hug-neovim-rpc'
 if = "!has('nvim')"
 
+[[plugins]] # defx icons
+repo = 'kristijanhusak/defx-icons'
+on_source = ['Shougo/defx.nvim']
+hook_add = '''
+	let g:defx_icons_enable_syntax_highlight = 1
+	let g:defx_icons_column_length = 2
+'''
+
+[[plugins]] # file explorer
+repo = 'Shougo/defx.nvim'
+depends = ['nvim-yarp', 'vim-hug-neovim-rpc','defx-icons']
+hook_add = '''
+	autocmd vimrc VimResized,VimEnter * call s:auto_open_defx()
+	" ウィンドウ幅が大きいときはdefxを開いておく。
+	function! s:auto_open_defx() abort
+		let s:is_opened_defx = bufnr('defx')
+		if winwidth(0) >= 120 && s:is_opened_defx==-1
+			" フォーカスは編集中のファイルに戻す
+			let s:win_id = win_getid()
+			Defx -split=vertical -columns=mark:indent:icons:filename:type
+			\ -winwidth=30  -direction=topleft
+			let succeed = win_gotoid(s:win_id)
+		elseif winwidth(0) < 120 && s:is_opened_defx!=-1
+			execute "bwipeout!" . s:is_opened_defx
+		endif
+	endfunction
+	nnoremap <silent> <Space>f
+	\ :<C-u>Defx -split=vertical -columns=mark:indent:icons:filename:type
+		\ -winwidth=30  -direction=topleft -toggle<CR>
+	autocmd FileType defx call s:defx_my_settings()
+	function! s:defx_my_settings() abort
+		nnoremap <silent><buffer><expr> <CR>
+		\ defx#is_directory() ?
+		\ defx#do_action('open_or_close_tree') :
+		\ defx#do_action('drop')
+		nnoremap <silent><buffer><expr> o
+		\ defx#do_action('open_or_close_tree')
+		nnoremap <silent><buffer><expr> c
+		\ defx#do_action('copy')
+		nnoremap <silent><buffer><expr> m
+		\ defx#do_action('move')
+		nnoremap <silent><buffer><expr> p
+		\ defx#do_action('paste')
+		nnoremap <silent><buffer><expr> l
+		\ defx#is_directory() ?
+		\ defx#do_action('open') :
+		\ defx#do_action('multi', ['drop', 'quit'])
+		nnoremap <silent><buffer><expr> E
+		\ defx#do_action('open', 'vsplit')
+		nnoremap <silent><buffer><expr> P
+		\ defx#do_action('open', 'pedit')
+		nnoremap <silent><buffer><expr> O
+		\ defx#do_action('open_or_close_tree')
+		nnoremap <silent><buffer><expr> K
+		\ defx#do_action('new_directory')
+		nnoremap <silent><buffer><expr> N
+		\ defx#do_action('new_file')
+		nnoremap <silent><buffer><expr> M
+		\ defx#do_action('new_multiple_files')
+		nnoremap <silent><buffer><expr> C
+		\ defx#do_action('toggle_columns',
+		\                'mark:filename:type:size:time')
+		nnoremap <silent><buffer><expr> S
+		\ defx#do_action('toggle_sort', 'time')
+		nnoremap <silent><buffer><expr> d
+		\ defx#do_action('remove')
+		nnoremap <silent><buffer><expr> r
+		\ defx#do_action('rename')
+		nnoremap <silent><buffer><expr> !
+		\ defx#do_action('execute_command')
+		nnoremap <silent><buffer><expr> x
+		\ defx#do_action('execute_system')
+		nnoremap <silent><buffer><expr> yy
+		\ defx#do_action('yank_path')
+		nnoremap <silent><buffer><expr> .
+		\ defx#do_action('toggle_ignored_files')
+		nnoremap <silent><buffer><expr> ;
+		\ defx#do_action('repeat')
+		nnoremap <silent><buffer><expr> h
+		\ defx#do_action('cd', ['..'])
+		nnoremap <silent><buffer><expr> ~
+		\ defx#do_action('cd')
+		nnoremap <silent><buffer><expr> q
+		\ defx#do_action('quit')
+		nnoremap <silent><buffer><expr> <Space>
+		\ defx#do_action('toggle_select') . 'j'
+		nnoremap <silent><buffer><expr> *
+		\ defx#do_action('toggle_select_all')
+		nnoremap <silent><buffer><expr> j
+		\ line('.') == line('$') ? 'gg' : 'j'
+		nnoremap <silent><buffer><expr> k
+		\ line('.') == 1 ? 'G' : 'k'
+		nnoremap <silent><buffer><expr> <C-l>
+		\ defx#do_action('redraw')
+		nnoremap <silent><buffer><expr> <C-g>
+		\ defx#do_action('print')
+		nnoremap <silent><buffer><expr> cd
+		\ defx#do_action('change_vim_cwd')
+	endfunction
+'''
+
 [[plugins]] # スニペット定義ファイル
 repo = 'Shougo/neosnippet-snippets'
 
@@ -198,48 +296,105 @@ hook_source = '''
 	let g:neosnippet#snippets_directory = '~/dotfiles/mysnippet'
 '''
 
-[[plugins]] # LSP補完
-repo = 'neoclide/coc.nvim'
-build = './install.sh nightly'
-hook_add = '''
-	" set signcolumn=yes
-	inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-	set shortmess+=c
-	nnoremap <F9> :<C-u>CocConfig<CR>
-	" imap <C-k> <Plug>(coc-snippets-expand)
-	" Use <c-space> for trigger completion.
-	inoremap <silent><expr> <c-space> coc#refresh()
-	" Use `[c` and `]c` for navigate diagnostics
-	nmap <silent> [c <Plug>(coc-diagnostic-prev)
-	nmap <silent> ]c <Plug>(coc-diagnostic-next)
-	"
-	"" Remap keys for gotos
-	nmap <silent> gd <Plug>(coc-definition)
-	nmap <silent> gy <Plug>(coc-type-definition)
-	nmap <silent> gi <Plug>(coc-implementation)
-	nmap <silent> gr <Plug>(coc-references)"
-	" Remap for rename current word
-	nmap <leader>gr <Plug>(coc-rename)
+# ----自動補完----
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+depends = ['neosnippet.vim', 'nvim-yarp', 'vim-hug-neovim-rpc']
+hook_source = '''
+	let g:deoplete#enable_at_startup = 1
+	let g:deoplete#auto_complete_delay = 0
+	let g:deoplete#enable_camel_case = 0
+	let g:deoplete#enable_ignore_case = 0
+	let g:deoplete#refresh_always = v:true
+	let g:deoplete#enable_smart_case = 1
+	let g:deoplete#file#enable_buffer_path = 1
+	let g:deoplete#max_list = 10000
+	inoremap <expr><tab> pumvisible() ? "\<C-n>" :
+		\ neosnippet#expandable_or_jumpable() ?
+		\    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
 '''
 
-# snippets
-# [[plugins]]
-# repo = 'honza/vim-snippets'
+[[plugins]]
+repo = 'Shougo/neco-syntax'
+depends = ['deoplete.nvim']
 
-# [[plugins]]
-# repo = 'SirVer/ultisnips'
-# depends = ['honza/vim-snippets']
-# hook_add = '''
-#     let g:UltiSnipsExpandTrigger="<c-k>"
-#     let g:UltiSnipsJumpForwardTrigger="<c-k>"
-#     let g:UltiSnipsJumpBackwardTrigger="<c-j>"
-#     " If you want :UltiSnipsEdit to split your window.
-#     let g:UltiSnipsEditSplit="vertical"
-#     " make vim recognizing snippets dir
-#     " use different snippets dir
-#     let g:UltiSnipsSnippetsDir='~/dotfiles/vim/mysnippets'
-#     " let g:UltiSnipsSnippetDirectories=["UltiSnips"]
-# '''
+[[plugins]]
+repo = 'Shougo/neco-vim'
+on_ft = ['vim']
+depends = ['deoplete.nvim']
+
+[[plugins]] # 構文チェック
+repo = 'w0rp/ale'
+hook_add ='''
+	let g:ale_echo_msg_error_str = nr2char(0xf421)
+	let g:ale_echo_msg_warning_str = nr2char(0xf420)
+	let g:ale_echo_msg_info_str = nr2char(0xf05a)
+	let g:ale_sign_error = g:ale_echo_msg_error_str
+	let g:ale_sign_warning = g:ale_echo_msg_warning_str
+	let g:ale_statusline_format = [
+	\ g:ale_echo_msg_error_str . ' %d',
+	\ g:ale_echo_msg_warning_str . ' %d',
+	\ nr2char(0xf4a1) . '  ']
+	let g:ale_fix_on_save = 1
+	let g:ale_sign_column_always = 1
+	let g:ale_lint_on_text_changed = 0
+	let g:ale_lint_on_insert_leave = 1
+	let b:ale_linters = {
+	\	'c':['clang'],
+	\	'cpp':['clang'],
+	\	'python': ['flake8'],
+	\	'vim': ['vint'],
+	\}
+	let g:ale_fixers = {
+	\   'c': ['clang-format'],
+	\   'cpp': ['clang-format'],
+	\   'python': ['black','isort'],
+	\}
+	let g:ale_c_clangformat = '-style="{
+	\   AlignConsecutiveAssignments:true,
+	\   AlignConsecutiveDeclarations:true,
+	\   IndentCaseLabels":true,
+	\   IndentWidth:4,
+	\   KeepEmptyLinesAtTheStartOfBlocks:true,
+	\   SpacesBeforeTrailingComments:1,
+	\   TabWidth":4,
+	\   UseTab:ForIndentation	
+	\}"'
+	let g:ale_cpp_clangformat = '-style="{
+	\   AlignConsecutiveAssignments:true,
+	\   AlignConsecutiveDeclarations:true,
+	\   IndentCaseLabels":true,
+	\   IndentWidth:4,
+	\   KeepEmptyLinesAtTheStartOfBlocks:true,
+	\   SpacesBeforeTrailingComments:1,
+	\   TabWidth":4,
+	\   UseTab:ForIndentation	
+	\}"'
+	autocmd vimrc FileType help,qf,man,ref let b:ale_enabled = 0
+'''
+
+# ----lsp補完----
+[[plugins]]
+repo = 'autozimu/LanguageClient-neovim'
+rev = 'next'
+build = 'bash install.sh'
+hook_add = '''
+	let g:LanguageClient_serverCommands = {
+		\ 'c': ['clangd-6.0'],
+		\ 'cpp': ['clangd-6.0'],
+		\ 'objc': ['clangd-6.0'],
+		\ 'objcpp': ['clangd-6.0'],
+		\ 'python': ['pyls'],
+		\ }
+	let g:LanguageClient_autoStart = 1
+	let g:LanguageClient_diagnosticsEnable = 0
+	let g:LanguageClient_hasSnippetSupport = 1
+	" set omnifunc=LanguageClient#complete
+	let g:deoplete#enable_at_startup = 1
+	let g:deoplete#file#enable_buffer_path = 1
+	nnoremap <Leader>ld :call LanguageClient_textDocument_definition()<CR>
+	nnoremap <Leader>lr :call LanguageClient_textDocument_rename()<CR>
+'''
 
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
@@ -265,10 +420,6 @@ hook_add = '''
 	let g:airline#extensions#tabline#formatter = 'unique_tail'
 	let g:airline#extensions#ale#error_symbol = ' '
 	let g:airline#extensions#ale#warning_symbol = ' '
-	let g:airline#extensions#coc#error_symbol =  ""
-	let g:airline#extensions#coc#warning_symbol = ""
-	let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-	let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 	let g:airline#extensions#default#layout = [
     \ [ 'a', 'b', 'c' ],
     \ [ 'x', 'y', 'z', 'warning' , 'error']]
