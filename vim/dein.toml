@@ -181,6 +181,23 @@ if = "!has('nvim')"
 repo = 'roxma/vim-hug-neovim-rpc'
 if = "!has('nvim')"
 
+[[plugins]] # スニペット定義ファイル
+repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]] # スニペット管理
+repo = 'Shougo/neosnippet.vim'
+on_ft = ['snippet']
+depends = ['neosnippet-snippets', 'nvim-yarp', 'vim-hug-neovim-rpc']
+hook_source = '''
+	" <TAB>: completion.
+	" inoremap <expr> <S-TAB> pumvisible() ? '<C-p>' : '<S-TAB>'
+	imap <C-k> <Plug>(neosnippet_expand_or_jump)
+	smap <C-k> <Plug>(neosnippet_expand_or_jump)
+	imap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : pumvisible() ? '<C-n>' : '<TAB>'
+	smap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : '<TAB>'
+	let g:neosnippet#snippets_directory = '~/dotfiles/mysnippet'
+'''
+
 [[plugins]] # LSP補完
 repo = 'neoclide/coc.nvim'
 build = './install.sh nightly'
@@ -188,26 +205,41 @@ hook_add = '''
 	" set signcolumn=yes
 	inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 	set shortmess+=c
+	nnoremap <F9> :<C-u>CocConfig<CR>
+	" imap <C-k> <Plug>(coc-snippets-expand)
+	" Use <c-space> for trigger completion.
+	inoremap <silent><expr> <c-space> coc#refresh()
+	" Use `[c` and `]c` for navigate diagnostics
+	nmap <silent> [c <Plug>(coc-diagnostic-prev)
+	nmap <silent> ]c <Plug>(coc-diagnostic-next)
+	"
+	"" Remap keys for gotos
+	nmap <silent> gd <Plug>(coc-definition)
+	nmap <silent> gy <Plug>(coc-type-definition)
+	nmap <silent> gi <Plug>(coc-implementation)
+	nmap <silent> gr <Plug>(coc-references)"
+	" Remap for rename current word
+	nmap <leader>gr <Plug>(coc-rename)
 '''
 
 # snippets
-[[plugins]]
-repo = 'honza/vim-snippets'
+# [[plugins]]
+# repo = 'honza/vim-snippets'
 
-[[plugins]]
-repo = 'SirVer/ultisnips'
-depends = ['honza/vim-snippets']
-hook_add = '''
-	let g:UltiSnipsExpandTrigger="<c-k>"
-	let g:UltiSnipsJumpForwardTrigger="<c-k>"
-	let g:UltiSnipsJumpBackwardTrigger="<c-j>"
-	" If you want :UltiSnipsEdit to split your window.
-	let g:UltiSnipsEditSplit="vertical"
-	" make vim recognizing snippets dir
-	" use different snippets dir
-	let g:UltiSnipsSnippetsDir='~/dotfiles/vim/mysnippets'
-	" let g:UltiSnipsSnippetDirectories=["UltiSnips"]
-'''
+# [[plugins]]
+# repo = 'SirVer/ultisnips'
+# depends = ['honza/vim-snippets']
+# hook_add = '''
+#     let g:UltiSnipsExpandTrigger="<c-k>"
+#     let g:UltiSnipsJumpForwardTrigger="<c-k>"
+#     let g:UltiSnipsJumpBackwardTrigger="<c-j>"
+#     " If you want :UltiSnipsEdit to split your window.
+#     let g:UltiSnipsEditSplit="vertical"
+#     " make vim recognizing snippets dir
+#     " use different snippets dir
+#     let g:UltiSnipsSnippetsDir='~/dotfiles/vim/mysnippets'
+#     " let g:UltiSnipsSnippetDirectories=["UltiSnips"]
+# '''
 
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
