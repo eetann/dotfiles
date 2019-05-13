@@ -2,7 +2,6 @@
 	"suggest.detailMaxLength": 50,
 	"signature.target": "echo",
 	"coc.preferences.formatOnSaveFiletypes": ["python"],
-	"coc.preferences.currentFunctionSymbolAutoUpdate": true,
 	"coc.preferences.hoverTarget": "echo",
 	"diagnostic.refreshAfterSave": true,
 	"diagnostic.warningSign": "",

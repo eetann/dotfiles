@@ -79,6 +79,7 @@ git clone https://github.com/junegunn/fzf.git ~/.fzf
 yes | ~/.fzf/install
 
 # install fish & change login shell
+sudo apt-add-repository ppa:fish-shell/release-3
 yes | sudo apt install fish
 
 # make link

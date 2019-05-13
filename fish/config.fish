@@ -6,7 +6,7 @@ set -x PATH $GOPATH/bin $PATH
 set -x PATH /mnt/c/Users/admin/go/bin/ $PATH
 set -x PATH /mnt/c/Windows/System32 $PATH
 #set -x FZF_DEFAULT_COMMAND 'jvgrep'
-set -x FZF_LEGACY_KEYBINDINGS 0
+set -x FZF_LEGACY_KEYBINDINGS 1
 set -x FZF_DEFAULT_OPTS "--height=60% --select-1 --exit-0 --reverse --no-unicode"
 set -x FZF_FIND_FILE_OPTS "--preview 'head -n 100 {}'"
 # a:ドットディレクトリもたどる
