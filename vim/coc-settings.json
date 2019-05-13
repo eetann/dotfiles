@@ -2,6 +2,7 @@
 	"suggest.detailMaxLength": 50,
 	"signature.target": "echo",
 	"coc.preferences.formatOnSaveFiletypes": ["python"],
+	"coc.preferences.currentFunctionSymbolAutoUpdate": true,
 	"coc.preferences.hoverTarget": "echo",
 	"diagnostic.refreshAfterSave": true,
 	"diagnostic.warningSign": "",
@@ -15,11 +16,14 @@
 			"filetypes": ["c", "cpp", "objc", "objcpp"]
 		}
 	},
+	"python.jediEnabled": false,
 	"python.pythonPath": "/usr/bin/python3.6",
 	"python.autoComplete.addBrackets": true,
     "python.linting.pylintEnabled": false,
 	"python.linting.flake8Path": "/home/eetann/.local/bin/flake8",
     "python.linting.flake8Enabled": true,
 	"python.formatting.provider": "black",
-	"python.sortImports.path": "/home/eetann/.local/bin/isort"
+	"python.sortImports.path": "/home/eetann/.local/bin/isort",
+	"python.trace.server": "verbose"
+
 }

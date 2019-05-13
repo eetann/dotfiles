@@ -127,6 +127,7 @@ repo = 'delphinus/vim-auto-cursorline'
 
 [[plugins]]
 repo = 'junegunn/fzf'
+build = './install --all'
 
 [[plugins]]
 repo = 'junegunn/fzf.vim'
@@ -288,7 +289,7 @@ on_ft = ['snippet']
 depends = ['neosnippet-snippets', 'nvim-yarp', 'vim-hug-neovim-rpc']
 hook_source = '''
 	" <TAB>: completion.
-	" inoremap <expr> <S-TAB> pumvisible() ? '<C-p>' : '<S-TAB>'
+	inoremap <expr> <S-TAB> pumvisible() ? '<C-p>' : '<S-TAB>'
 	imap <C-k> <Plug>(neosnippet_expand_or_jump)
 	smap <C-k> <Plug>(neosnippet_expand_or_jump)
 	imap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : pumvisible() ? '<C-n>' : '<TAB>'
@@ -297,104 +298,34 @@ hook_source = '''
 '''
 
 # ----自動補完----
-[[plugins]]
-repo = 'Shougo/deoplete.nvim'
-depends = ['neosnippet.vim', 'nvim-yarp', 'vim-hug-neovim-rpc']
-hook_source = '''
-	let g:deoplete#enable_at_startup = 1
-	let g:deoplete#auto_complete_delay = 0
-	let g:deoplete#enable_camel_case = 0
-	let g:deoplete#enable_ignore_case = 0
-	let g:deoplete#refresh_always = v:true
-	let g:deoplete#enable_smart_case = 1
-	let g:deoplete#file#enable_buffer_path = 1
-	let g:deoplete#max_list = 10000
-	inoremap <expr><tab> pumvisible() ? "\<C-n>" :
-		\ neosnippet#expandable_or_jumpable() ?
-		\    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
-'''
-
-[[plugins]]
-repo = 'Shougo/neco-syntax'
-depends = ['deoplete.nvim']
-
-[[plugins]]
-repo = 'Shougo/neco-vim'
-on_ft = ['vim']
-depends = ['deoplete.nvim']
-
-[[plugins]] # 構文チェック
-repo = 'w0rp/ale'
-hook_add ='''
-	let g:ale_echo_msg_error_str = nr2char(0xf421)
-	let g:ale_echo_msg_warning_str = nr2char(0xf420)
-	let g:ale_echo_msg_info_str = nr2char(0xf05a)
-	let g:ale_sign_error = g:ale_echo_msg_error_str
-	let g:ale_sign_warning = g:ale_echo_msg_warning_str
-	let g:ale_statusline_format = [
-	\ g:ale_echo_msg_error_str . ' %d',
-	\ g:ale_echo_msg_warning_str . ' %d',
-	\ nr2char(0xf4a1) . '  ']
-	let g:ale_fix_on_save = 1
-	let g:ale_sign_column_always = 1
-	let g:ale_lint_on_text_changed = 0
-	let g:ale_lint_on_insert_leave = 1
-	let b:ale_linters = {
-	\	'c':['clang'],
-	\	'cpp':['clang'],
-	\	'python': ['flake8'],
-	\	'vim': ['vint'],
-	\}
-	let g:ale_fixers = {
-	\   'c': ['clang-format'],
-	\   'cpp': ['clang-format'],
-	\   'python': ['black','isort'],
-	\}
-	let g:ale_c_clangformat = '-style="{
-	\   AlignConsecutiveAssignments:true,
-	\   AlignConsecutiveDeclarations:true,
-	\   IndentCaseLabels":true,
-	\   IndentWidth:4,
-	\   KeepEmptyLinesAtTheStartOfBlocks:true,
-	\   SpacesBeforeTrailingComments:1,
-	\   TabWidth":4,
-	\   UseTab:ForIndentation	
-	\}"'
-	let g:ale_cpp_clangformat = '-style="{
-	\   AlignConsecutiveAssignments:true,
-	\   AlignConsecutiveDeclarations:true,
-	\   IndentCaseLabels":true,
-	\   IndentWidth:4,
-	\   KeepEmptyLinesAtTheStartOfBlocks:true,
-	\   SpacesBeforeTrailingComments:1,
-	\   TabWidth":4,
-	\   UseTab:ForIndentation	
-	\}"'
-	autocmd vimrc FileType help,qf,man,ref let b:ale_enabled = 0
-'''
-
-# ----lsp補完----
-[[plugins]]
-repo = 'autozimu/LanguageClient-neovim'
-rev = 'next'
-build = 'bash install.sh'
+[[plugins]] # LSP補完
+repo = 'neoclide/coc.nvim'
+build = './install.sh nightly'
 hook_add = '''
-	let g:LanguageClient_serverCommands = {
-		\ 'c': ['clangd-6.0'],
-		\ 'cpp': ['clangd-6.0'],
-		\ 'objc': ['clangd-6.0'],
-		\ 'objcpp': ['clangd-6.0'],
-		\ 'python': ['pyls'],
-		\ }
-	let g:LanguageClient_autoStart = 1
-	let g:LanguageClient_diagnosticsEnable = 0
-	let g:LanguageClient_hasSnippetSupport = 1
-	" set omnifunc=LanguageClient#complete
-	let g:deoplete#enable_at_startup = 1
-	let g:deoplete#file#enable_buffer_path = 1
-	nnoremap <Leader>ld :call LanguageClient_textDocument_definition()<CR>
-	nnoremap <Leader>lr :call LanguageClient_textDocument_rename()<CR>
+	" set signcolumn=yes
+	inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+	set shortmess+=c
+	nnoremap <F9> :<C-u>CocConfig<CR>
+	imap <C-k> <Plug>(coc-snippets-expand-jump)
+	vmap <C-k> <Plug>(coc-snippets-select)
+	" Use <c-space> for trigger completion.
+	inoremap <silent><expr> <c-space> coc#refresh()
+	" Use `[c` and `]c` for navigate diagnostics
+	nmap <silent> [c <Plug>(coc-diagnostic-prev)
+	nmap <silent> ]c <Plug>(coc-diagnostic-next)
+	" Remap keys for gotos
+	nmap <silent> gd <Plug>(coc-definition)
+	nmap <silent> gy <Plug>(coc-type-definition)
+	nmap <silent> gi <Plug>(coc-implementation)
+	nmap <silent> gr <Plug>(coc-references)"
+	" Remap for rename current word
+	nmap <leader>gr <Plug>(coc-rename)
+	let g:airline#extensions#coc#error_symbol =  ""
+	let g:airline#extensions#coc#warning_symbol = ""
+	let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+	let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 '''
+
 
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
