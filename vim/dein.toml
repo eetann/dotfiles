@@ -56,14 +56,14 @@ hook_add = '''
 	autocmd vimrc VimResized,VimEnter * call s:auto_open_tagbar()
 	" ウィンドウ幅が大きいときはtagbarを開いておく。
 	function! s:auto_open_tagbar() abort
-		let s:is_opened_tagbar = bufnr('Tagbar')
+		let s:is_opened_tagbar = bufwinid('Tagbar')
 		if winwidth(0) >= 150 && s:is_opened_tagbar==-1
 			" フォーカスは編集中のファイルに戻す
 			let s:win_id = win_getid()
 			TagbarOpen
 			let succeed = win_gotoid(s:win_id)
 		elseif winwidth(0) < 120 && s:is_opened_tagbar!=-1
-			execute "bwipeout!" . s:is_opened_tagbar
+			execute "bdelete" . winbufnr(s:is_opened_tagbar)
 		endif
 	endfunction
 	nnoremap <silent> <leader>tt :TagbarToggle<CR>
@@ -118,8 +118,8 @@ repo = 'nathanaelkane/vim-indent-guides'
 hook_add = '''
 	let g:indent_guides_enable_on_vim_startup = 1
 	let g:indent_guides_auto_colors = 0
-	autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=darkgrey
-	autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=lightgrey
+	autocmd vimrc VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=darkgrey
+	autocmd vimrc VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=lightgrey
 '''
 
 [[plugins]] # 適切なカーソルラインのハイライト
@@ -181,7 +181,7 @@ if = "!has('nvim')"
 
 [[plugins]] # defx icons
 repo = 'kristijanhusak/defx-icons'
-on_source = ['Shougo/defx.nvim']
+# on_source = ['Shougo/defx.nvim']
 hook_add = '''
 	let g:defx_icons_enable_syntax_highlight = 1
 	let g:defx_icons_column_length = 2
@@ -194,7 +194,8 @@ hook_add = '''
 	autocmd vimrc VimResized,VimEnter * call s:auto_open_defx()
 	" ウィンドウ幅が大きいときはdefxを開いておく。
 	function! s:auto_open_defx() abort
-		let s:is_opened_defx = bufnr('defx')
+		" 現在のタブページ内でのウィンドウIDで開閉判定
+		let s:is_opened_defx = bufwinid('defx')
 		if winwidth(0) >= 120 && s:is_opened_defx==-1
 			" フォーカスは編集中のファイルに戻す
 			let s:win_id = win_getid()
@@ -202,9 +203,29 @@ hook_add = '''
 			\ -winwidth=30  -direction=topleft
 			let succeed = win_gotoid(s:win_id)
 		elseif winwidth(0) < 120 && s:is_opened_defx!=-1
-			execute "bwipeout!" . s:is_opened_defx
+			execute 'bdelete' . winbufnr(s:is_opened_defx)
 		endif
 	endfunction
+	" windowが編集ファイル以外だけになったら違うバッファへ
+	autocmd vimrc WinEnter * call s:move_buffer_for_defx()
+	function! s:move_buffer_for_defx() abort
+		if &ft == 'defx' && winnr('$') == 1
+			q
+			buffer #
+			call s:auto_open_defx()
+		elseif &ft == 'defx' && winnr('$') == 2 && bufnr('Tagbar')!=-1
+			q
+			TagbarClose
+			buffer #
+			call s:auto_open_defx()
+			call s:auto_open_tagbar()
+		elseif &ft == 'Tagbar' && winnr('$') == 1
+			TagbarClose
+			buffer #
+			call s:auto_open_tagbar()
+		end
+	endfunction
+
 	nnoremap <silent> <Space>f
 	\ :<C-u>Defx -split=vertical -columns=mark:indent:icons:filename:type
 		\ -winwidth=30  -direction=topleft -toggle<CR>
@@ -285,13 +306,14 @@ repo = 'Shougo/neosnippet-snippets'
 
 [[plugins]] # スニペット管理
 repo = 'Shougo/neosnippet.vim'
-on_ft = ['snippet']
+# on_ft = ['snippet']
 depends = ['neosnippet-snippets', 'nvim-yarp', 'vim-hug-neovim-rpc']
 hook_source = '''
 	" <TAB>: completion.
 	inoremap <expr> <S-TAB> pumvisible() ? '<C-p>' : '<S-TAB>'
 	imap <C-k> <Plug>(neosnippet_expand_or_jump)
 	smap <C-k> <Plug>(neosnippet_expand_or_jump)
+	xmap <C-k> <Plug>(neosnippet_expand_or_jump)
 	imap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : pumvisible() ? '<C-n>' : '<TAB>'
 	smap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : '<TAB>'
 	let g:neosnippet#snippets_directory = '~/dotfiles/mysnippet'
@@ -342,14 +364,16 @@ hook_add = '''
 	set showcmd      " 打ったコマンドをステータスラインの下に表示
 	set ruler        " ステータスラインの右側にカーソルの現在位置を表示する
 	" カーソルキーでbuffer移動
-	nmap <C-p> <Plug>AirlineSelectPrevTab
-	nmap <C-n> <Plug>AirlineSelectNextTab
+	" nmap <C-p> <Plug>AirlineSelectPrevTab
+	" nmap <C-n> <Plug>AirlineSelectNextTab
+	nnoremap <C-p> :<C-u>bprevious<CR>
+	nnoremap <C-n> :<C-u>bnext<CR>
 	let g:airline_theme = 'powerlineish'
 	let g:airline_powerline_fonts = 1
-	let g:airline#extensions#tagbar#enabled = 1
 	let g:airline#extensions#branch#enabled = 1
-	let g:airline#extensions#tabline#enabled = 1
+	let g:airline#extensions#tagbar#enabled = 1
 	let g:airline#extensions#wordcount#enabled = 0
+	let g:airline#extensions#tabline#enabled = 1
 	let g:airline#extensions#tabline#formatter = 'unique_tail'
 	let g:airline#extensions#ale#error_symbol = ' '
 	let g:airline#extensions#ale#warning_symbol = ' '

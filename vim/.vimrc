@@ -3,8 +3,10 @@ set encoding=utf-8
 scriptencoding utf-8
 set ambiwidth=double " □や○文字が崩れる問題を解決
 set nrformats= "数増減は10進数で扱う(<C-a>や<C-x>)
-
 let mapleader = "\<Space>" " leaderキーの割当を変える
+
+let g:python_host_prog = "/usr/bin/python2"
+
 nnoremap ; :
 nnoremap : ;
 vnoremap ; :
@@ -207,6 +209,9 @@ set viewoptions=cursor,folds
 " ----新しいwindowは下や右に開く
 set splitbelow
 set splitright
+set winwidth=30
+set winminwidth=30
+
 
 "dein Scripts-----------------------------
 if &compatible

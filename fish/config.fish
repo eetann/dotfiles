@@ -27,3 +27,10 @@ set -g theme_display_cmd_duration no
 set -g fish_prompt_pwd_dir_length 0
 
 set -x LSCOLORS  exfxcxdxbxegedabagacad
+
+# for pyenv
+set -gx PYENV_ROOT "$HOME/.pyenv"
+set -x PATH $PATH "$PYENV_ROOT/bin"
+status --is-interactive; and . (pyenv init - | psub)
+
+tm

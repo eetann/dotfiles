@@ -20,10 +20,10 @@ hook_add = '''
 		\ 'outputter/buffer/split'  :
 		\ '%{winwidth(0) * 2 < winheight(0) * 5 ? winheight(0)/4 : "vertical"}',
 		\ },
-		\ 'python': {
-		\   'command': 'python3'
-		\ },
 		\ }
+		" \ 'python': {
+		" \   'command': 'python3'
+		" \ },
 		" splitは、以下を用いている
 		" curly-braces-names(波括弧変数)で{}内を評価
 		" expr2 ? expr1 : expr1 の式でexpr2が真なら前、偽なら後ろのexpr1を評価
