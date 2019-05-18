@@ -330,8 +330,8 @@ hook_add = '''
 	set signcolumn=yes
 	set updatetime=300
 	nnoremap <F9> :<C-u>CocConfig<CR>
-	imap <C-k> <Plug>(coc-snippets-expand-jump)
-	vmap <C-k> <Plug>(coc-snippets-select)
+	" imap <C-k> <Plug>(coc-snippets-expand-jump)
+	" vmap <C-k> <Plug>(coc-snippets-select)
 	" Use <c-space> for trigger completion.
 	inoremap <silent><expr> <c-space> coc#refresh()
 	" Use `[c` and `]c` for navigate diagnostics
