@@ -1,5 +1,8 @@
 set PATH $HOME/.local/bin $PATH
 set -x DISPLAY localhost:0.0
+alias python='/usr/bin/python3.7'
+alias python3='/usr/bin/python3.7'
+# for go
 set -x GOPATH $HOME/go $GOPATH
 set -x GOPATH /mnt/c/Users/admin/go $GOPATH
 set -x PATH $GOPATH/bin $PATH
@@ -28,9 +31,5 @@ set -g fish_prompt_pwd_dir_length 0
 
 set -x LSCOLORS  exfxcxdxbxegedabagacad
 
-# for pyenv
-set -gx PYENV_ROOT "$HOME/.pyenv"
-set -x PATH $PATH "$PYENV_ROOT/bin"
-status --is-interactive; and . (pyenv init - | psub)
 
 tm

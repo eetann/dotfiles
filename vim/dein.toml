@@ -309,47 +309,86 @@ repo = 'Shougo/neosnippet.vim'
 # on_ft = ['snippet']
 depends = ['neosnippet-snippets', 'nvim-yarp', 'vim-hug-neovim-rpc']
 hook_source = '''
-	" <TAB>: completion.
-	inoremap <expr> <S-TAB> pumvisible() ? '<C-p>' : '<S-TAB>'
 	imap <C-k> <Plug>(neosnippet_expand_or_jump)
 	smap <C-k> <Plug>(neosnippet_expand_or_jump)
 	xmap <C-k> <Plug>(neosnippet_expand_or_jump)
-	imap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : pumvisible() ? '<C-n>' : '<TAB>'
-	smap <expr> <TAB> neosnippet#jumpable() ? '<Plug>(neosnippet_expand_or_jump)' : '<TAB>'
 	let g:neosnippet#snippets_directory = '~/dotfiles/mysnippet'
+	let g:neosnippet#enable_completed_snippet = 1
+	let g:neosnippet#expand_word_boundary = 1
 '''
 
-# ----自動補完----
-[[plugins]] # LSP補完
-repo = 'neoclide/coc.nvim'
-build = './install.sh nightly'
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+depends = ['neosnippet.vim', 'nvim-yarp', 'vim-hug-neovim-rpc']
+hook_source = '''
+	let g:deoplete#enable_at_startup = 1
+	let g:deoplete#auto_complete_delay = 0
+	let g:deoplete#enable_camel_case = 0
+	let g:deoplete#enable_ignore_case = 0
+	let g:deoplete#refresh_always = 1
+	let g:deoplete#enable_smart_case = 1
+	let g:deoplete#file#enable_buffer_path = 1
+'''
+
+[[plugins]]
+repo = 'Shougo/neco-syntax'
+depends = ['deoplete.nvim']
+
+[[plugins]]
+repo = 'Shougo/neco-vim'
+on_ft = ['vim']
+depends = ['deoplete.nvim']
+
+# ----lsp補完----
+[[plugins]]
+repo = 'autozimu/LanguageClient-neovim'
+depends = ['deoplete.nvim']
+rev = 'next'
+build = 'bash install.sh'
 hook_add = '''
-	" set signcolumn=yes
-	inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-	set shortmess+=c
+	let g:LanguageClient_serverCommands = {
+		\ 'c': ['clangd-6.0'],
+		\ 'cpp': ['clangd-6.0'],
+		\ 'objc': ['clangd-6.0'],
+		\ 'objcpp': ['clangd-6.0'],
+		\ 'python': ['pyls'],
+		\ }
+	let g:LanguageClient_autoStart = 1
+	let g:LanguageClient_hasSnippetSupport = 0
 	set signcolumn=yes
-	set updatetime=300
-	nnoremap <F9> :<C-u>CocConfig<CR>
-	" imap <C-k> <Plug>(coc-snippets-expand-jump)
-	" vmap <C-k> <Plug>(coc-snippets-select)
-	" Use <c-space> for trigger completion.
-	inoremap <silent><expr> <c-space> coc#refresh()
-	" Use `[c` and `]c` for navigate diagnostics
-	nmap <silent> [c <Plug>(coc-diagnostic-prev)
-	nmap <silent> ]c <Plug>(coc-diagnostic-next)
-	" Remap keys for gotos
-	nmap <silent> gd <Plug>(coc-definition)
-	nmap <silent> gy <Plug>(coc-type-definition)
-	nmap <silent> gi <Plug>(coc-implementation)
-	nmap <silent> gr <Plug>(coc-references)"
-	" Remap for rename current word
-	nmap <leader>gr <Plug>(coc-rename)
-	let g:airline#extensions#coc#error_symbol =  ""
-	let g:airline#extensions#coc#warning_symbol = ""
-	let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-	let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
+	nnoremap <Leader>gd :call LanguageClient_textDocument_definition()<CR>
+	nnoremap <Leader>gr :call LanguageClient_textDocument_rename()<CR>
+	set completefunc=LanguageClient#complete
+	let g:LanguageClient_settingsPath = "$HOME/dotfiles/vim/settings.json"
+	autocmd vimrc BufWritePre * :call LanguageClient#textDocument_formatting_sync()
+	let g:LanguageClient_diagnosticsDisplay = {
+	\     1: {
+	\         "name": "Error",
+	\         "texthl": "ALEError",
+	\         "signText": "",
+	\         "signTexthl": "ALEErrorSign",
+	\     },
+	\     2: {
+	\         "name": "Warning",
+	\         "texthl": "ALEWarning",
+	\         "signText": "",
+	\         "signTexthl": "ALEWarningSign",
+	\     },
+	\     3: {
+	\         "name": "Information",
+	\         "texthl": "ALEInfo",
+	\         "signText": "",
+	\         "signTexthl": "ALEInfoSign",
+	\     },
+	\     4: {
+	\         "name": "Hint",
+	\         "texthl": "ALEInfo",
+	\         "signText": "",
+	\         "signTexthl": "ALEInfoSign",
+	\     },
+	\ }
 '''
-
 
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
@@ -375,8 +414,9 @@ hook_add = '''
 	let g:airline#extensions#wordcount#enabled = 0
 	let g:airline#extensions#tabline#enabled = 1
 	let g:airline#extensions#tabline#formatter = 'unique_tail'
-	let g:airline#extensions#ale#error_symbol = ' '
-	let g:airline#extensions#ale#warning_symbol = ' '
+	let g:airline#extensions#languageclient#enabled = 1
+	let g:airline#extensions#languageclient#error_symbol = ' '
+	let g:airline#extensions#languageclient#warning_symbol = ' '
 	let g:airline#extensions#default#layout = [
     \ [ 'a', 'b', 'c' ],
     \ [ 'x', 'y', 'z', 'warning' , 'error']]
