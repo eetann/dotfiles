@@ -179,6 +179,9 @@ if = "!has('nvim')"
 repo = 'roxma/vim-hug-neovim-rpc'
 if = "!has('nvim')"
 
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+
 [[plugins]] # defx icons
 repo = 'kristijanhusak/defx-icons'
 # on_source = ['Shougo/defx.nvim']
@@ -306,8 +309,8 @@ repo = 'Shougo/neosnippet-snippets'
 
 [[plugins]] # スニペット管理
 repo = 'Shougo/neosnippet.vim'
-# on_ft = ['snippet']
-depends = ['neosnippet-snippets', 'nvim-yarp', 'vim-hug-neovim-rpc']
+on_ft = ['snippet']
+depends = ['neosnippet-snippets']
 hook_source = '''
 	imap <C-k> <Plug>(neosnippet_expand_or_jump)
 	smap <C-k> <Plug>(neosnippet_expand_or_jump)
@@ -343,10 +346,15 @@ depends = ['deoplete.nvim']
 # ----lsp補完----
 [[plugins]]
 repo = 'autozimu/LanguageClient-neovim'
-depends = ['deoplete.nvim']
 rev = 'next'
 build = 'bash install.sh'
 hook_add = '''
+	set signcolumn=yes
+	set completefunc=LanguageClient#complete
+	let g:LanguageClient_autoStart = 1
+	let g:LanguageClient_hasSnippetSupport = 0
+	let g:LanguageClient_settingsPath = expand("$HOME/dotfiles/vim/settings.json")
+	let g:LanguageClient_diagnosticsList="Location"
 	let g:LanguageClient_serverCommands = {
 		\ 'c': ['clangd-6.0'],
 		\ 'cpp': ['clangd-6.0'],
@@ -354,13 +362,8 @@ hook_add = '''
 		\ 'objcpp': ['clangd-6.0'],
 		\ 'python': ['pyls'],
 		\ }
-	let g:LanguageClient_autoStart = 1
-	let g:LanguageClient_hasSnippetSupport = 0
-	set signcolumn=yes
 	nnoremap <Leader>gd :call LanguageClient_textDocument_definition()<CR>
 	nnoremap <Leader>gr :call LanguageClient_textDocument_rename()<CR>
-	set completefunc=LanguageClient#complete
-	let g:LanguageClient_settingsPath = "$HOME/dotfiles/vim/settings.json"
 	autocmd vimrc BufWritePre * :call LanguageClient#textDocument_formatting_sync()
 	let g:LanguageClient_diagnosticsDisplay = {
 	\     1: {
@@ -389,9 +392,6 @@ hook_add = '''
 	\     },
 	\ }
 '''
-
-[[plugins]]
-repo = 'ryanoasis/vim-devicons'
 
 [[plugins]] # ステータスラインとバッファ表示の強化
 repo = 'vim-airline/vim-airline'

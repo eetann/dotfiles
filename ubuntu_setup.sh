@@ -102,7 +102,7 @@ ln -s /mnt/c/Users/admin/dotfiles/fish/fish_user_key_bindings.fish ~/.config/fis
 ln -s /mnt/c/Users/admin/dotfiles/fish/tm.fish ~/.config/fish/functions/tm.fish
 ln -s /mnt/c/Users/admin/dotfiles/vim/.vimrc ~/.vimrc
 ln -s /mnt/c/Users/admin/dotfiles/vim/flake8 ~/.config/flake8
-ln -s /mnt/c/Users/admin/dotfiles/vim/pylintrc ~/.config/pylintrc
+# ln -s /mnt/c/Users/admin/dotfiles/vim/pylintrc ~/.pylintrc
 ln -s /mnt/c/Users/admin/.vim .vim
 ln -s /mnt/c/Users/admin/dotfiles/tmux.conf ~/.tmux.conf
 mkdir ~/.config/nvim

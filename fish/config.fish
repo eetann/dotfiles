@@ -1,7 +1,11 @@
 set PATH $HOME/.local/bin $PATH
 set -x DISPLAY localhost:0.0
+
+# for python
 alias python='/usr/bin/python3.7'
 alias python3='/usr/bin/python3.7'
+set -x PYLINTRC $HOME/dotfiles/vim/pylintrc
+
 # for go
 set -x GOPATH $HOME/go $GOPATH
 set -x GOPATH /mnt/c/Users/admin/go $GOPATH
@@ -31,5 +35,5 @@ set -g fish_prompt_pwd_dir_length 0
 
 set -x LSCOLORS  exfxcxdxbxegedabagacad
 
-
+# tmuxを自動起動する自作コマンド
 tm

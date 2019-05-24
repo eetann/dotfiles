@@ -23,6 +23,13 @@ hook_add = '''
 		\ 'python': {
 		\   'command': 'python3.7'
 		\ },
+		\ 'markdown': {
+		\ 'runner'    : 'vimscript',
+		\ 'command': "OpenBrowser",
+		\ 'cmdopt': "substitute(expand(%s:p), '\v/mnt/(.)', '\1:/', '')",
+		\ 'exec': "%c %o",
+		\ 'outputter': 'null',
+		\ },
 		\ }
 		" splitは、以下を用いている
 		" curly-braces-names(波括弧変数)で{}内を評価
@@ -40,6 +47,7 @@ hook_add = '''
 	" normal or visual modeのとき <leader> + r で保存してからquickrunの実行
 	let g:quickrun_no_default_key_mappings = 1
 	nnoremap <leader>r :write<CR>:QuickRun -mode n<CR>
+	nnoremap <leader>R :write<CR>:QuickRun -runner terminal<CR>
 	xnoremap <leader>r :<C-U>write<CR>gv:QuickRun -mode v<CR>
 	" <C-c> でquickrunを停止
 	nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"

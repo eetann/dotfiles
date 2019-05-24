@@ -1,32 +1,11 @@
 {
-    "pyls": {
-        "configurationSources": ["flake8"],
-	"python.formatting.provider": "black",
-        "plugins": {
-			"black": {
-				"enabled": true
-			},
-			"isort": {
-				"enabled": true
-			},
-			"flake8": {
-				"enabled": true
-			},
-			"yapf": {
-				"enabled": false
-			},
-            "pyflakes": {
-                "enabled": false
-            },
-            "pycodestyle": {
-                "enabled": false
-            },
-            "autopep8": {
-                "enabled": false
-            },
-            "pydocstyle": {
-                "enabled": false
-            }
-		}
-	}
+	"pyls.configurationSources":["flake8"],
+	"pyls.plugins.pyflakes.enabled":false,
+	"pyls.plugins.pycodestyle.enabled":false,
+	"pyls.plugins.pydocstyle.enabled":false,
+	"pyls.plugins.autopep8.enabled":false,
+	"pyls.plugins.yapf.enabled":false,
+	"pyls.plugins.black.enabled":true,
+	"pyls.plugins.isort.enabled":true,
+	"pyls.plugins.flake8.enabled":true
 }
