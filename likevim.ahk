@@ -80,6 +80,7 @@ if (getIMEMode = 1) {
 }
 #IfWinActive
 
+
 ; 無変換→IMEOFF、変換→IMEONにする
 ; 単独キーも有効にするためにタイマーを設定する
 SetTimer, HenMuhenChecker, 100
@@ -224,7 +225,7 @@ vk1C & y::
 	Send,{Blind}{End}+{Home}^{c}
 return
 
-;;変換+dで一行消し
+; 変換+dで一行消し
 vk1C & d::
 	if(HenkanShort("y")){
 		return
@@ -232,3 +233,20 @@ vk1C & d::
 	Send,{Blind}{End}+{Home}{BS}
 return
 
+
+;; windowサイズの変更
+WinSizeStep(XD,YD,PARAM) {
+	WinGet,win_id,ID,A
+	WinGetPos,,,w,h,ahk_id %win_id%
+	Step := 128
+	if(PARAM = 1)
+		Step := 24
+		w := w + (XD * Step)
+		h := h + (YD * Step)
+		WinMove,ahk_id %win_id%,,,,%w%,%h%
+	return
+}
++#h::WinSizeStep(-1,0,0)
++#l::WinSizeStep(1,0,0)
++#k::WinSizeStep(0,-1,0)
++#j::WinSizeStep(0,1,0)

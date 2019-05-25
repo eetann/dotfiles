@@ -7,19 +7,10 @@ repo = 'Shougo/vimproc.vim'
 build = 'make'
 
 [[plugins]] # コメントアウトに便利
-repo = 'scrooloose/nerdcommenter'
-hook_add ='''
-    let g:NERDSpaceDelims = 1
-    let g:NERDDefaultAlign='left'
-    let g:NERDCreateDefaultMappings = 0
-    nmap <Leader>c<Space> <Plug>NERDCommenterToggle
-    vmap <Leader>c<Space> <Plug>NERDCommenterToggle
-    nmap <Leader>cA <Plug>NERDCommenterAppend
-    " TODOコメント追加
-    nmap <Leader>ctd <Plug>NERDCommenterAppendTODO:<Space>
-    " TODOをlocation listとして開く
-	nnoremap <Leader>tl :vimgrep /TODO:/j %<CR>:cwindow<CR>
-	" TODO: 他のアノテーションも追加
+repo = 'tyru/caw.vim'
+hook_add = '''
+	nmap gct <Plug>(caw:jump:comment-prev)TODO:<Space>
+	nnoremap gcl :vimgrep /TODO:/j %<CR>
 '''
 
 # ----Markdownサポート----
@@ -144,7 +135,6 @@ hook_add = '''
 [[plugins]] # 検索を改善
 repo = 'haya14busa/incsearch.vim'
 hook_add = '''
-	let g:incsearch#auto_nohlsearch = 1
 	map /  <Plug>(incsearch-forward)
 	map ?  <Plug>(incsearch-backward)
 	map g/ <Plug>(incsearch-stay)
@@ -344,53 +334,113 @@ on_ft = ['vim']
 depends = ['deoplete.nvim']
 
 # ----lsp補完----
+# [[plugins]]
+# repo = 'autozimu/LanguageClient-neovim'
+# rev = 'next'
+# build = 'bash install.sh'
+# hook_add = '''
+#     set signcolumn=yes
+#     set completefunc=LanguageClient#complete
+#     let g:LanguageClient_autoStart = 1
+#     let g:LanguageClient_hasSnippetSupport = 0
+#     let g:LanguageClient_settingsPath = expand("$HOME/dotfiles/vim/settings.json")
+#     let g:LanguageClient_diagnosticsList="Location"
+#     let g:LanguageClient_serverCommands = {
+#         \ 'c': ['clangd-6.0'],
+#         \ 'cpp': ['clangd-6.0'],
+#         \ 'objc': ['clangd-6.0'],
+#         \ 'objcpp': ['clangd-6.0'],
+#         \ 'python': ['pyls'],
+#         \ }
+#     nnoremap <Leader>gd :call LanguageClient_textDocument_definition()<CR>
+#     nnoremap <Leader>gr :call LanguageClient_textDocument_rename()<CR>
+#     autocmd vimrc BufWritePre * :call LanguageClient#textDocument_formatting_sync()
+#     let g:LanguageClient_diagnosticsDisplay = {
+#     \     1: {
+#     \         "name": "Error",
+#     \         "texthl": "ALEError",
+#     \         "signText": "",
+#     \         "signTexthl": "ALEErrorSign",
+#     \     },
+#     \     2: {
+#     \         "name": "Warning",
+#     \         "texthl": "ALEWarning",
+#     \         "signText": "",
+#     \         "signTexthl": "ALEWarningSign",
+#     \     },
+#     \     3: {
+#     \         "name": "Information",
+#     \         "texthl": "ALEInfo",
+#     \         "signText": "",
+#     \         "signTexthl": "ALEInfoSign",
+#     \     },
+#     \     4: {
+#     \         "name": "Hint",
+#     \         "texthl": "ALEInfo",
+#     \         "signText": "",
+#     \         "signTexthl": "ALEInfoSign",
+#     \     },
+#     \ }
+# '''
+
 [[plugins]]
-repo = 'autozimu/LanguageClient-neovim'
-rev = 'next'
-build = 'bash install.sh'
-hook_add = '''
-	set signcolumn=yes
-	set completefunc=LanguageClient#complete
-	let g:LanguageClient_autoStart = 1
-	let g:LanguageClient_hasSnippetSupport = 0
-	let g:LanguageClient_settingsPath = expand("$HOME/dotfiles/vim/settings.json")
-	let g:LanguageClient_diagnosticsList="Location"
-	let g:LanguageClient_serverCommands = {
-		\ 'c': ['clangd-6.0'],
-		\ 'cpp': ['clangd-6.0'],
-		\ 'objc': ['clangd-6.0'],
-		\ 'objcpp': ['clangd-6.0'],
-		\ 'python': ['pyls'],
-		\ }
-	nnoremap <Leader>gd :call LanguageClient_textDocument_definition()<CR>
-	nnoremap <Leader>gr :call LanguageClient_textDocument_rename()<CR>
-	autocmd vimrc BufWritePre * :call LanguageClient#textDocument_formatting_sync()
-	let g:LanguageClient_diagnosticsDisplay = {
-	\     1: {
-	\         "name": "Error",
-	\         "texthl": "ALEError",
-	\         "signText": "",
-	\         "signTexthl": "ALEErrorSign",
-	\     },
-	\     2: {
-	\         "name": "Warning",
-	\         "texthl": "ALEWarning",
-	\         "signText": "",
-	\         "signTexthl": "ALEWarningSign",
-	\     },
-	\     3: {
-	\         "name": "Information",
-	\         "texthl": "ALEInfo",
-	\         "signText": "",
-	\         "signTexthl": "ALEInfoSign",
-	\     },
-	\     4: {
-	\         "name": "Hint",
-	\         "texthl": "ALEInfo",
-	\         "signText": "",
-	\         "signTexthl": "ALEInfoSign",
-	\     },
-	\ }
+repo='prabirshrestha/async.vim'
+
+[[plugins]]
+repo = 'lighttiger2505/deoplete-vim-lsp'
+depends = 'deoplete.nvim'
+
+[[plugins]]
+repo='prabirshrestha/vim-lsp'
+depends = ['async.vim', 'deoplete-vim-lsp']
+hook_add='''
+	if executable('clangd-6.0')
+		autocmd User lsp_setup call lsp#register_server({
+			\ 'name': 'clangd',
+			\ 'cmd': {server_info->['clangd-6.0']},
+			\ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+			\ })
+	endif
+	if executable('pyls')
+		autocmd vimrc User lsp_setup call lsp#register_server({
+		\ 'name': 'pyls',
+		\ 'cmd': {server_info->['pyls']},
+		\ 'whitelist': ['python'],
+		\ 'workspace_config': {'pyls': {
+			\ 'configurationSources': ['flake8'],
+			\ 'plugins':{
+				\ 'pydocstyle':{'enabled': v:false},
+				\ 'pycodestyle':{'enabled': v:false},
+				\ 'pyflakes':{'enabled': v:false},
+				\ 'pylint':{'enabled': v:false},
+				\ 'autopep8':{'enabled': v:false},
+				\ 'yapf':{'enabled': v:false},
+				\ 'black':{'enabled': v:true},
+				\ 'isort':{'enabled': v:true},
+				\ 'flake8':{'enabled': v:true}}}}
+		\ })
+		autocmd vimrc FileType python call s:configure_lsp()
+		autocmd vimrc  BufWritePre *.py LspDocumentFormatSync
+	endif
+	function! s:configure_lsp() abort
+		setlocal omnifunc=lsp#complete
+		" nnoremap <buffer> <C-]> :<C-u>LspDefinition<CR>
+		nnoremap <buffer> <leader>gd :<C-u>LspDefinition<CR>
+		nnoremap <buffer> <leader>gD :<C-u>LspReferences<CR>
+		nnoremap <buffer> <leader>gs :<C-u>LspDocumentSymbol<CR>
+		nnoremap <buffer> <leader>gS :<C-u>LspWorkspaceSymbol<CR>
+		nnoremap <buffer> <leader>gq :<C-u>LspDocumentFormat<CR>
+		vnoremap <buffer> <leader>gQ :LspDocumentRangeFormat<CR>
+		nnoremap <buffer> <leader>K :<C-u>LspHover<CR>
+		nnoremap <buffer> <leader>gi :<C-u>LspImplementation<CR>
+		nnoremap <buffer> <leader>gl :<C-u>LspRename<CR>
+	endfunction
+	let g:lsp_signs_enabled = 1
+	let g:lsp_diagnostics_echo_cursor = 1
+	let g:lsp_signs_error = {'text': ''}
+	let g:lsp_signs_warning = {'text': ''}
+	let g:lsp_signs_information = {'text': ''}
+	let g:lsp_signs_hint = {'text': ''}
 '''
 
 [[plugins]] # ステータスラインとバッファ表示の強化
