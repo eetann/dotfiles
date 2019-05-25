@@ -14,3 +14,5 @@ alias gsh='git push'
 funcsave gsh
 alias gst='git status'
 funcsave gst
+alias gd='git diff'
+funcsave gd
