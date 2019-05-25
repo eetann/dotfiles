@@ -7,6 +7,6 @@ function tm -d "attach or new tmux sessions"
 		end
 		# -Fでフォーマット指定
 		# #{}でフォーマット文字列
-		set session (tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) ;and tmux $change -t "$session" ;or tmux
+		set session (tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) ;and tmux $change -t "$session" ;or tmux new-session -d -s now
 	end
 end

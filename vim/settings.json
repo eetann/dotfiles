@@ -1,5 +1,4 @@
 {
-	"pyls.configurationSources":["flake8"],
 	"pyls.plugins.pyflakes.enabled":false,
 	"pyls.plugins.pycodestyle.enabled":false,
 	"pyls.plugins.pydocstyle.enabled":false,
@@ -7,5 +6,5 @@
 	"pyls.plugins.yapf.enabled":false,
 	"pyls.plugins.black.enabled":true,
 	"pyls.plugins.isort.enabled":true,
-	"pyls.plugins.flake8.enabled":true
+	"pyls.plugins.flake8.enabled":false
 }

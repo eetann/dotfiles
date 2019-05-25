@@ -138,12 +138,14 @@ disable=print-statement,
         xreadlines-attribute,
         deprecated-sys-function,
         exception-escape,
-        comprehension-escape
-		C0103
-		C0111
-		C0330
-		W0235
-		W0612
+        comprehension-escape,
+		C0103,
+		C0111,
+		C0330,
+		W0235,
+		W0401,
+		W0612,
+		W0614,
 		W0622
 
 # Enable the message, report, category or checker with the given id(s). You can
