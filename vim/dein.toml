@@ -280,19 +280,22 @@ hook_add = '''
 		\ defx#do_action('change_vim_cwd')
 	endfunction
 '''
-
-[[plugins]] # スニペット定義ファイル
+# スニペット定義ファイル
+[[plugins]]
 repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]] 
+repo = 'honza/vim-snippets'
 
 [[plugins]] # スニペット管理
 repo = 'Shougo/neosnippet.vim'
 on_ft = ['snippet']
-depends = ['neosnippet-snippets']
+depends = ['neosnippet-snippets','vim-snippets']
 hook_add = '''
 	imap <C-k> <Plug>(neosnippet_expand_or_jump)
 	smap <C-k> <Plug>(neosnippet_expand_or_jump)
 	xmap <C-k> <Plug>(neosnippet_expand_or_jump)
-	let g:neosnippet#snippets_directory = '~/dotfiles/mysnippet'
+	let g:neosnippet#snippets_directory = ['~/dotfiles/mysnippet', '~/.vim/dein/repos/github.com/honza/vim-snippets/snippets']
 	let g:neosnippet#enable_completed_snippet = 1
 	let g:neosnippet#expand_word_boundary = 1
 '''
@@ -412,12 +415,8 @@ hook_add = '''
 
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
-# 未完----------------------------------------------------------
-# ----MATLAB----
-# [[plugins]] # matlab
-# repo = 'daeyun/vim-matlab'
-# on_ft = ['matlab']
-# hook_add = '''
-#     let g:matlab_server_launcher = 'vim'
-# '''
+
+[[plugins]] # matlab
+repo = 'lazywei/vim-matlab'
+on_ft = ['matlab']
 
