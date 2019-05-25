@@ -74,19 +74,6 @@ hook_add = '''
 		\ }
 '''
 
-[[plugins]] # gitをvimで操作
-repo = 'tpope/vim-fugitive'
-hook_add = '''
-	nnoremap [fugitive]  <Nop>
-	nmap <space>g [fugitive]
-	nnoremap <silent> [fugitive]s :Gstatus<CR><C-w>T
-	nnoremap <silent> [fugitive]a :Gwrite<CR>
-	nnoremap <silent> [fugitive]c :Gcommit-v<CR>
-	nnoremap <silent> [fugitive]b :Gblame<CR>
-	nnoremap <silent> [fugitive]d :Gdiff<CR>
-	nnoremap <silent> [fugitive]m :Gmerge<CR>
-'''
-
 
 [[plugins]] # カラースキーム
 repo = 'morhetz/gruvbox'
@@ -417,7 +404,7 @@ hook_add='''
 				\ 'yapf':{'enabled': v:false},
 				\ 'black':{'enabled': v:true},
 				\ 'isort':{'enabled': v:true},
-				\ 'flake8':{'enabled': v:true}}}}
+				\ 'flake8':{'enabled': v:true},}}}
 		\ })
 		autocmd vimrc FileType python call s:configure_lsp()
 		autocmd vimrc  BufWritePre *.py LspDocumentFormatSync
@@ -433,8 +420,10 @@ hook_add='''
 		vnoremap <buffer> <leader>gQ :LspDocumentRangeFormat<CR>
 		nnoremap <buffer> <leader>K :<C-u>LspHover<CR>
 		nnoremap <buffer> <leader>gi :<C-u>LspImplementation<CR>
-		nnoremap <buffer> <leader>gl :<C-u>LspRename<CR>
+		nnoremap <buffer> <leader>gr :<C-u>LspRename<CR>
 	endfunction
+	set signcolumn=yes
+	let g:lsp_diagnostics_enabled = 1
 	let g:lsp_signs_enabled = 1
 	let g:lsp_diagnostics_echo_cursor = 1
 	let g:lsp_signs_error = {'text': ''}

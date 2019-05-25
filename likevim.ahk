@@ -235,18 +235,22 @@ return
 
 
 ;; windowサイズの変更
-WinSizeStep(XD,YD,PARAM) {
-	WinGet,win_id,ID,A
-	WinGetPos,,,w,h,ahk_id %win_id%
-	Step := 128
-	if(PARAM = 1)
-		Step := 24
-		w := w + (XD * Step)
-		h := h + (YD * Step)
-		WinMove,ahk_id %win_id%,,,,%w%,%h%
-	return
-}
-+#h::WinSizeStep(-1,0,0)
-+#l::WinSizeStep(1,0,0)
-+#k::WinSizeStep(0,-1,0)
-+#j::WinSizeStep(0,1,0)
+; WinSizeStep(XD,YD,PARAM) {
+; 	WinGet,win_id,ID,A
+; 	WinGetPos,,,w,h,ahk_id %win_id%
+; 	Step := 24
+; 	if(PARAM = 1)
+; 		Step := -24
+; 	w := w + (XD * Step)
+; 	h := h + (YD * Step)
+; 	WinMove,ahk_id %win_id%,,,,%w%,%h%
+; 	return
+; }
+; +#h::WinSizeStep(-1,0,0)
+; +#l::WinSizeStep(1,0,0)
+; +#k::WinSizeStep(0,-1,0)
+; +#j::WinSizeStep(0,1,0)
+; +#^h::WinSizeStep(-1,0,1)
+; +#^l::WinSizeStep(1,0,1)
+; +#^k::WinSizeStep(0,-1,1)
+; +#^j::WinSizeStep(0,1,1)

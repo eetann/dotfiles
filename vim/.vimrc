@@ -66,9 +66,14 @@ nnoremap ]Q :<C-u>clast<CR>
 xnoremap <expr> p 'pgv"'.v:register.'ygv<esc>'
 set clipboard=unnamedplus " ヤンク&ペーストをクリップボード利用
 " ペーストした範囲をvisualModeで選択
-nnoremap <expr> sp '`[' . strpart(getregtype(), 0, 1) . '`]'
-" 全選択
-nnoremap s<C-a> ggVG
+nnoremap <expr> sgv '`[' . strpart(getregtype(), 0, 1) . '`]'
+" 下or上の行に貼り付け
+nnoremap sp mzo<ESC>p`z:delmarks z<CR>
+nnoremap sP mzO<ESC>P`z:delmarks z<CR>
+nnoremap sgp mzo<ESC>gp`z:delmarks z<CR>
+nnoremap sgP mzO<ESC>gP`z:delmarks z<CR>
+" 全選択コピー
+nnoremap sy mzggVGy<ESC>`z:delmarks z<CR>
 
 " ----改行時自動コメントオフ
 set formatoptions-=ro
