@@ -4,7 +4,7 @@ set -x DISPLAY localhost:0.0
 # for python
 alias python='/usr/bin/python3.7'
 alias python3='/usr/bin/python3.7'
-set -x PYLINTRC /mnt/c/Users/admin/dotfiles/vim/pylintrc $PYLINTRC
+set PYLINTRC /mnt/c/Users/admin/dotfiles/vim/pylintrc $PYLINTRC
 
 # for go
 set -x GOPATH $HOME/go $GOPATH
