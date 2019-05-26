@@ -326,6 +326,7 @@ depends = ['deoplete.nvim']
 # ----lsp補完----
 [[plugins]]
 repo = 'autozimu/LanguageClient-neovim'
+depends = ['nvim-yarp', 'vim-hug-neovim-rpc']
 rev = 'next'
 build = 'bash install.sh'
 hook_add = '''
