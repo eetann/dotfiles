@@ -1,6 +1,6 @@
 " 文字関連の設定
 set encoding=utf-8
-set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
+set fileencodings=utf-8,sjis " この順番でMATLABとそれ以外がうまくいった
 scriptencoding utf-8
 set ambiwidth=double " □や○文字が崩れる問題を解決
 set nrformats= "数増減は10進数で扱う(<C-a>や<C-x>)

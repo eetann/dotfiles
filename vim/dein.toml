@@ -338,7 +338,8 @@ hook_add = '''
     let g:LanguageClient_diagnosticsList="Location"
     nnoremap <Leader>gd :call LanguageClient_textDocument_definition()<CR>
     nnoremap <Leader>gh :call LanguageClient_textDocument_hover()<CR>
-    nnoremap <Leader>gr :call LanguageClient_textDocument_rename()<CR>
+    nnoremap <Leader>gn :call LanguageClient_textDocument_rename()<CR>
+    nnoremap <Leader>gf :call LanguageClient_textDocument_references()<CR>
     autocmd vimrc BufWritePre * :call LanguageClient#textDocument_formatting_sync()
     let g:LanguageClient_serverCommands = {
         \ 'c': ['clangd-6.0'],

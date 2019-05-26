@@ -30,6 +30,12 @@ hook_add = '''
 		\ 'exec': "%c %o",
 		\ 'outputter': 'null',
 		\ },
+		\ 'matlab': {
+		\ 'runner':"shell",
+		\ 'exec':'%c %o',
+		\ 'command': '/mnt/c/Program Files/MATLAB/R2019a/bin/matlab.exe',
+		\ 'cmdopt': '-nodesktop -nosplash -r "%:r, which(%:r)"'
+		\ },
 		\ }
 		" splitは、以下を用いている
 		" curly-braces-names(波括弧変数)で{}内を評価
