@@ -53,7 +53,7 @@ yes | sudo apt install clang-tools
 # install for Python3
 yes | sudo apt install python3.7
 yes | sudo apt install python3-pip
-pip3 install --user python-language-server
+pip3 install --user python-language-server[all]
 pip3 install --user pyls-black
 pip3 install --user pyls-isort
 pip3 install --user flake8 isort black
@@ -63,6 +63,8 @@ pip3 install --user numpy
 pip3 install --user matplotlib
 pip3 install --user pandas
 yes | sudo apt install python3-tk
+# pythonのクラス図を作成
+yes | sudo apt install graphviz
 
 # for python3.7 & neovim
 # git clone git://github.com/yyuu/pyenv.git ~/.pyenv
