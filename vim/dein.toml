@@ -43,6 +43,7 @@ repo = 'majutsushi/tagbar'
 depends = ['markdown2ctags']
 hook_add = '''
 	let g:tagbar_width = 30
+	let g:tagbar_sort = 0
 	let g:tagbar_map_togglesort = 'S'
 	autocmd vimrc VimResized,VimEnter * call s:auto_open_tagbar()
 	" ウィンドウ幅が大きいときはtagbarを開いておく。
@@ -104,7 +105,6 @@ repo = 'ryanoasis/vim-devicons'
 
 [[plugins]] # defx icons
 repo = 'kristijanhusak/defx-icons'
-# on_source = ['Shougo/defx.nvim']
 hook_add = '''
 	let g:defx_icons_enable_syntax_highlight = 1
 	let g:defx_icons_column_length = 2
@@ -255,9 +255,6 @@ hook_add = '''
 	let g:deoplete#refresh_always = 1
 	let g:deoplete#enable_smart_case = 1
 	let g:deoplete#file#enable_buffer_path = 1
-'''
-hook_source = '''
-	call deoplete#custom#source('neosnippet', 'rank', 510)
 '''
 
 [[plugins]]
