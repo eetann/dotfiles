@@ -45,17 +45,28 @@ hook_add = '''
 	let g:tagbar_width = 30
 	let g:tagbar_sort = 0
 	let g:tagbar_map_togglesort = 'S'
+	let g:can_auto_opens_defx_tagbar = 1
+	" nnoremap <Leader>ao :<C-u>call <SID>set_auto_opens_defx_tagbar()<CR>
+	" function! s:set_auto_opens_defx_tagbar()
+	" 	if g:can_auto_opens_defx_tagbar==1
+	" 		g:can_auto_opens_defx_tagbar=0
+	" 	else
+	" 		g:can_auto_opens_defx_tagbar=1
+	" 	endif
+	" endfunction
 	autocmd vimrc VimResized,VimEnter * call s:auto_open_tagbar()
 	" ウィンドウ幅が大きいときはtagbarを開いておく。
 	function! s:auto_open_tagbar() abort
-		let s:is_opened_tagbar = bufwinid('Tagbar')
-		if winwidth(0) >= 150 && s:is_opened_tagbar==-1
-			" フォーカスは編集中のファイルに戻す
-			let s:win_id = win_getid()
-			TagbarOpen
-			let succeed = win_gotoid(s:win_id)
-		elseif winwidth(0) < 120 && s:is_opened_tagbar!=-1
-			execute "bdelete" . winbufnr(s:is_opened_tagbar)
+		if g:can_auto_opens_defx_tagbar==1
+			let s:is_opened_tagbar = bufwinid('Tagbar')
+			if winwidth(0) >= 120 && s:is_opened_tagbar==-1
+				" フォーカスは編集中のファイルに戻す
+				let s:win_id = win_getid()
+				TagbarOpen
+				let succeed = win_gotoid(s:win_id)
+			elseif winwidth(0) < 120 && s:is_opened_tagbar!=-1
+				execute "bdelete" . winbufnr(s:is_opened_tagbar)
+			endif
 		endif
 	endfunction
 	nnoremap <silent> <leader>tt :TagbarToggle<CR>
@@ -117,16 +128,18 @@ hook_add = '''
 	autocmd vimrc VimResized,VimEnter * call s:auto_open_defx()
 	" ウィンドウ幅が大きいときはdefxを開いておく。
 	function! s:auto_open_defx() abort
-		" 現在のタブページ内でのウィンドウIDで開閉判定
-		let s:is_opened_defx = bufwinid('defx')
-		if winwidth(0) >= 120 && s:is_opened_defx==-1
-			" フォーカスは編集中のファイルに戻す
-			let s:win_id = win_getid()
-			Defx -split=vertical -columns=mark:indent:icons:filename:type
-			\ -winwidth=30  -direction=topleft
-			let succeed = win_gotoid(s:win_id)
-		elseif winwidth(0) < 120 && s:is_opened_defx!=-1
-			execute 'bdelete' . winbufnr(s:is_opened_defx)
+		if g:can_auto_opens_defx_tagbar==1
+			" 現在のタブページ内でのウィンドウIDで開閉判定
+			let s:is_opened_defx = bufwinid('defx')
+			if winwidth(0) >= 150 && s:is_opened_defx==-1
+				" フォーカスは編集中のファイルに戻す
+				let s:win_id = win_getid()
+				Defx -split=vertical -columns=mark:indent:icons:filename:type
+				\ -winwidth=30  -direction=topleft
+				let succeed = win_gotoid(s:win_id)
+			elseif winwidth(0) < 150 && s:is_opened_defx!=-1
+				execute 'bdelete' . winbufnr(s:is_opened_defx)
+			endif
 		endif
 	endfunction
 	" windowが編集ファイル以外だけになったら違うバッファへ
