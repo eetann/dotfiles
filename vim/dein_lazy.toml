@@ -183,10 +183,10 @@ hook_add = '''
 on_ft = ['fish']
 repo = 'dag/vim-fish'
 
-[[plugins]]
-repo = 'Shougo/neco-vim'
-on_ft = ['vim']
-depends = ['deoplete.nvim']
+# [[plugins]]
+# repo = 'Shougo/neco-vim'
+# on_ft = ['vim']
+# depends = ['deoplete.nvim']
 
 [[plugins]] # matlab
 repo = 'lazywei/vim-matlab'

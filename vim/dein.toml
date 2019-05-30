@@ -256,77 +256,105 @@ hook_add = '''
 	let g:neosnippet#expand_word_boundary = 1
 '''
 
-
-[[plugins]]
-repo = 'Shougo/deoplete.nvim'
-depends = ['neosnippet.vim', 'nvim-yarp', 'vim-hug-neovim-rpc']
+[[plugins]] # LSP補完
+repo = 'neoclide/coc.nvim'
+build = './install.sh nightly'
 hook_add = '''
-	let g:deoplete#enable_at_startup = 1
-	let g:deoplete#auto_complete_delay = 0
-	let g:deoplete#enable_camel_case = 0
-	let g:deoplete#enable_ignore_case = 0
-	let g:deoplete#refresh_always = 1
-	let g:deoplete#enable_smart_case = 1
-	let g:deoplete#file#enable_buffer_path = 1
+	set signcolumn=yes
+	set updatetime=300
+	inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+	nnoremap <F10> :<C-u>CocConfig<CR>
+	" imap <C-k> <Plug>(coc-snippets-expand-jump)
+	" vmap <C-k> <Plug>(coc-snippets-select)
+	" Use <c-space> for trigger completion.
+	inoremap <silent><expr> <C-space> coc#refresh()
+	" Use `[c` and `]c` for navigate diagnostics
+	nmap <silent> [c <Plug>(coc-diagnostic-prev)
+	nmap <silent> ]c <Plug>(coc-diagnostic-next)
+	" Remap keys for gotos
+	nmap <silent> <leader>gd <Plug>(coc-definition)
+	nmap <silent> <leader>gD <Plug>(coc-type-definition)
+	nmap <silent> <leader>gi <Plug>(coc-implementation)
+	nmap <silent> <leader>gf <Plug>(coc-references)
+	" Remap for rename current word
+	nmap <silent> <leader>gn <Plug>(coc-rename)
+	" autocmd vimrc CursorHold * silent call CocActionAsync('highlight')
+	" let g:airline#extensions#coc#error_symbol =  ""
+	" let g:airline#extensions#coc#warning_symbol = ""
+	" let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+	" let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 '''
 
-[[plugins]]
-repo = 'Shougo/neco-syntax'
-depends = ['deoplete.nvim']
-
-# ----lsp補完----
-[[plugins]]
-repo = 'autozimu/LanguageClient-neovim'
-depends = ['nvim-yarp', 'vim-hug-neovim-rpc']
-rev = 'next'
-build = 'bash install.sh'
-hook_add = '''
-    set signcolumn=yes
-    set completefunc=LanguageClient#complete
-    let g:LanguageClient_autoStart = 1
-    let g:LanguageClient_hasSnippetSupport = 0
-	let g:LanguageClient_loadSettings = 1
-    let g:LanguageClient_settingsPath = "$HOME/dotfiles/vim/settings.json"
-    let g:LanguageClient_diagnosticsList="Location"
-    nnoremap <Leader>gd :call LanguageClient_textDocument_definition()<CR>
-    nnoremap <Leader>gh :call LanguageClient_textDocument_hover()<CR>
-    nnoremap <Leader>gn :call LanguageClient_textDocument_rename()<CR>
-    nnoremap <Leader>gf :call LanguageClient_textDocument_references()<CR>
-    autocmd vimrc BufWritePre * :call LanguageClient#textDocument_formatting_sync()
-    let g:LanguageClient_serverCommands = {
-        \ 'c': ['clangd-6.0'],
-        \ 'cpp': ['clangd-6.0'],
-        \ 'objc': ['clangd-6.0'],
-        \ 'objcpp': ['clangd-6.0'],
-        \ 'python': ['pyls'],
-        \ }
-    let g:LanguageClient_diagnosticsDisplay = {
-    \     1: {
-    \         "name": "Error",
-    \         "texthl": "ALEError",
-    \         "signText": "",
-    \         "signTexthl": "ALEErrorSign",
-    \     },
-    \     2: {
-    \         "name": "Warning",
-    \         "texthl": "ALEWarning",
-    \         "signText": "",
-    \         "signTexthl": "ALEWarningSign",
-    \     },
-    \     3: {
-    \         "name": "Information",
-    \         "texthl": "ALEInfo",
-    \         "signText": "",
-    \         "signTexthl": "ALEInfoSign",
-    \     },
-    \     4: {
-    \         "name": "Hint",
-    \         "texthl": "ALEInfo",
-    \         "signText": "",
-    \         "signTexthl": "ALEInfoSign",
-    \     },
-    \ }
-'''
+# [[plugins]]
+# repo = 'Shougo/deoplete.nvim'
+# depends = ['neosnippet.vim', 'nvim-yarp', 'vim-hug-neovim-rpc']
+# hook_add = '''
+# 	let g:deoplete#enable_at_startup = 1
+# 	let g:deoplete#auto_complete_delay = 0
+# 	let g:deoplete#enable_camel_case = 0
+# 	let g:deoplete#enable_ignore_case = 0
+# 	let g:deoplete#refresh_always = 1
+# 	let g:deoplete#enable_smart_case = 1
+# 	let g:deoplete#file#enable_buffer_path = 1
+# '''
+# 
+# [[plugins]]
+# repo = 'Shougo/neco-syntax'
+# depends = ['deoplete.nvim']
+# 
+# # ----lsp補完----
+# [[plugins]]
+# repo = 'autozimu/LanguageClient-neovim'
+# depends = ['nvim-yarp', 'vim-hug-neovim-rpc']
+# rev = 'next'
+# build = 'bash install.sh'
+# hook_add = '''
+#     set signcolumn=yes
+#     set completefunc=LanguageClient#complete
+#     let g:LanguageClient_autoStart = 1
+#     let g:LanguageClient_hasSnippetSupport = 0
+# 	let g:LanguageClient_loadSettings = 1
+#     let g:LanguageClient_settingsPath = "$HOME/dotfiles/vim/settings.json"
+#     let g:LanguageClient_diagnosticsList="Location"
+#     nnoremap <Leader>gd :call LanguageClient_textDocument_definition()<CR>
+#     nnoremap <Leader>gh :call LanguageClient_textDocument_hover()<CR>
+#     nnoremap <Leader>gn :call LanguageClient_textDocument_rename()<CR>
+#     nnoremap <Leader>gf :call LanguageClient_textDocument_references()<CR>
+#     autocmd vimrc BufWritePre * :call LanguageClient#textDocument_formatting_sync()
+#     let g:LanguageClient_serverCommands = {
+#         \ 'c': ['clangd-6.0'],
+#         \ 'cpp': ['clangd-6.0'],
+#         \ 'objc': ['clangd-6.0'],
+#         \ 'objcpp': ['clangd-6.0'],
+#         \ 'python': ['pyls'],
+#         \ }
+#     let g:LanguageClient_diagnosticsDisplay = {
+#     \     1: {
+#     \         "name": "Error",
+#     \         "texthl": "ALEError",
+#     \         "signText": "",
+#     \         "signTexthl": "ALEErrorSign",
+#     \     },
+#     \     2: {
+#     \         "name": "Warning",
+#     \         "texthl": "ALEWarning",
+#     \         "signText": "",
+#     \         "signTexthl": "ALEWarningSign",
+#     \     },
+#     \     3: {
+#     \         "name": "Information",
+#     \         "texthl": "ALEInfo",
+#     \         "signText": "",
+#     \         "signTexthl": "ALEInfoSign",
+#     \     },
+#     \     4: {
+#     \         "name": "Hint",
+#     \         "texthl": "ALEInfo",
+#     \         "signText": "",
+#     \         "signTexthl": "ALEInfoSign",
+#     \     },
+#     \ }
+# '''
 
 [[plugins]] # ステータスラインとバッファ表示の強化
 repo = 'vim-airline/vim-airline'

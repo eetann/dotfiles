@@ -1,7 +1,7 @@
 {
 	"suggest.detailMaxLength": 50,
 	"signature.target": "echo",
-	"suggest.timeout": 500,
+	"suggest.timeout": 1000,
 	"coc.preferences.formatOnSaveFiletypes": ["python"],
 	"coc.preferences.hoverTarget": "echo",
 	"diagnostic.refreshAfterSave": true,
@@ -14,15 +14,22 @@
 			"command": "clangd-6.0",
 			"rootPatterns": ["compile_flags.txt", "compile_commands.json", ".vim/", ".git/", ".hg/"],
 			"filetypes": ["c", "cpp", "objc", "objcpp"]
+		},
+		"pyls": {
+			"command": "pyls",
+			"filetypes":["python"],
+			"settings": {
+				"pyls.configurationSources": ["pylint","flake8"],
+				"pyls.plugins.pyflakes.enabled":false,
+				"pyls.plugins.pycodestyle.enabled":false,
+				"pyls.plugins.pydocstyle.enabled":false,
+				"pyls.plugins.autopep8.enabled":false,
+				"pyls.plugins.yapf.enabled":false,
+				"pyls.plugins.black.enabled":true,
+				"pyls.plugins.isort.enabled":true,
+				"pyls.plugins.rope_completion.enabled":true,
+				"pyls.plugins.flake8.enabled":true
+			}
 		}
-	},
-	"python.jediEnabled": false,
-	"python.autoComplete.addBrackets": true,
-    "python.linting.pylintEnabled": false,
-	"python.linting.flake8Path": "/home/eetann/.local/bin/flake8",
-    "python.linting.flake8Enabled": true,
-	"python.formatting.provider": "black",
-	"python.sortImports.path": "/home/eetann/.local/bin/isort",
-	"python.trace.server": "verbose"
-
+	}
 }
