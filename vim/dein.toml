@@ -10,6 +10,7 @@ build = 'make'
 repo = 'tyru/caw.vim'
 hook_add = '''
 	nmap gct <Plug>(caw:jump:comment-prev)TODO:<Space>
+	nmap gcO <Plug>(caw:jump:comment-prev)
 	nnoremap gcl :vimgrep /TODO:/j %<CR>
 '''
 
@@ -117,8 +118,8 @@ repo = 'ryanoasis/vim-devicons'
 [[plugins]] # defx icons
 repo = 'kristijanhusak/defx-icons'
 hook_add = '''
-	let g:defx_icons_enable_syntax_highlight = 1
-	let g:defx_icons_column_length = 2
+	let g:defx_icons_enable_syntax_highlight = 0
+	" let g:defx_icons_column_length = 2
 '''
 
 [[plugins]] # file explorer
@@ -236,6 +237,7 @@ hook_add = '''
 		\ defx#do_action('change_vim_cwd')
 	endfunction
 '''
+
 # スニペット定義ファイル
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'

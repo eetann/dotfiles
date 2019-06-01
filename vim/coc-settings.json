@@ -3,6 +3,7 @@
 	"signature.target": "echo",
 	"suggest.timeout": 1000,
 	"coc.preferences.formatOnSaveFiletypes": ["python"],
+	"coc.preferences.timeout": 500,
 	"coc.preferences.hoverTarget": "echo",
 	"diagnostic.refreshAfterSave": true,
 	"diagnostic.warningSign": "",

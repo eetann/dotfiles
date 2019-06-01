@@ -80,6 +80,7 @@ if (getIMEMode = 1) {
 }
 #IfWinActive
 
+^[::Send {Esc}
 
 ; 無変換→IMEOFF、変換→IMEONにする
 ; 単独キーも有効にするためにタイマーを設定する
