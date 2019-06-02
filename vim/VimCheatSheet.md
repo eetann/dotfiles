@@ -4,7 +4,7 @@
 | My<leader>       | <Space> |  
 |------------------|---------|  
 | 長いのでMLで表記 |         |  
-
+:so $VIMRUNTIME/syntax/hitest.vim  
 # Original Vim  
 | Mode   | Map           | Description                               | Original        |  
 | ------ | ------------- | ----------------------------------------- | --------------- |  

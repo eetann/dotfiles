@@ -24,6 +24,8 @@ set scrolloff=5 " 上下のスクロールの余裕を確保する
 " 表示行と移動行を合わせる
 nnoremap j gj
 nnoremap k gk
+autocmd vimrc FileType text,qf,quickrun nnoremap j j
+autocmd vimrc FileType text,qf,quickrun nnoremap k k
 " 遠いので近くに
 map H ^
 map L $

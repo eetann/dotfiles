@@ -3,13 +3,18 @@
 	"signature.target": "echo",
 	"suggest.timeout": 1000,
 	"coc.preferences.formatOnSaveFiletypes": ["python"],
-	"coc.preferences.timeout": 500,
 	"coc.preferences.hoverTarget": "echo",
 	"diagnostic.refreshAfterSave": true,
 	"diagnostic.warningSign": "",
 	"diagnostic.errorSign": "",
 	"diagnostic.hintSign": "",
 	"diagnostic.infoSign": "",
+	"python.formatting.provider": "black",
+	"python.jediEnabled": false,
+	"python.linting.flake8Enabled": false,
+	"python.linting.pydocstyleEnabled": false,
+	"python.linting.enabled": true,
+	"python.sortImports.path": "isort",
 	"languageserver": {
 		"clangd": {
 			"command": "clangd-6.0",
@@ -18,19 +23,7 @@
 		},
 		"pyls": {
 			"command": "pyls",
-			"filetypes":["python"],
-			"settings": {
-				"pyls.configurationSources": ["pylint","flake8"],
-				"pyls.plugins.pyflakes.enabled":false,
-				"pyls.plugins.pycodestyle.enabled":false,
-				"pyls.plugins.pydocstyle.enabled":false,
-				"pyls.plugins.autopep8.enabled":false,
-				"pyls.plugins.yapf.enabled":false,
-				"pyls.plugins.black.enabled":true,
-				"pyls.plugins.isort.enabled":true,
-				"pyls.plugins.rope_completion.enabled":true,
-				"pyls.plugins.flake8.enabled":true
-			}
+			"filetypes":["python"]
 		}
 	}
 }

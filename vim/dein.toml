@@ -279,12 +279,14 @@ hook_add = '''
 	nmap <silent> <leader>gi <Plug>(coc-implementation)
 	nmap <silent> <leader>gf <Plug>(coc-references)
 	" Remap for rename current word
-	nmap <silent> <leader>gn <Plug>(coc-rename)
-	" autocmd vimrc CursorHold * silent call CocActionAsync('highlight')
-	" let g:airline#extensions#coc#error_symbol =  ""
-	" let g:airline#extensions#coc#warning_symbol = ""
-	" let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-	" let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
+	nmap <leader>gn <Plug>(coc-rename)
+	highlight link CocHighlightText DiffChange
+	autocmd CursorHold * silent call CocActionAsync('highlight')
+	let g:airline#extensions#coc#error_symbol =  ""
+	let g:airline#extensions#coc#warning_symbol = ""
+	let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+	let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
+	let g:coc_global_extensions = ['coc-python', 'coc-neosnippet', 'coc-syntax']
 '''
 
 # [[plugins]]
@@ -323,6 +325,9 @@ hook_add = '''
 #     nnoremap <Leader>gn :call LanguageClient_textDocument_rename()<CR>
 #     nnoremap <Leader>gf :call LanguageClient_textDocument_references()<CR>
 #     autocmd vimrc BufWritePre * :call LanguageClient#textDocument_formatting_sync()
+# 	  let g:airline#extensions#languageclient#enabled = 1
+#  	  let g:airline#extensions#languageclient#error_symbol = ' '
+#     let g:airline#extensions#languageclient#warning_symbol = ' '
 #     let g:LanguageClient_serverCommands = {
 #         \ 'c': ['clangd-6.0'],
 #         \ 'cpp': ['clangd-6.0'],
@@ -379,9 +384,6 @@ hook_add = '''
 	let g:airline#extensions#wordcount#enabled = 0
 	let g:airline#extensions#tabline#enabled = 1
 	let g:airline#extensions#tabline#formatter = 'unique_tail'
-	let g:airline#extensions#languageclient#enabled = 1
-	let g:airline#extensions#languageclient#error_symbol = ' '
-	let g:airline#extensions#languageclient#warning_symbol = ' '
 	let g:airline#extensions#default#layout = [
     \ [ 'a', 'b', 'c' ],
     \ [ 'x', 'y', 'z', 'warning' , 'error']]
