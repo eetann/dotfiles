@@ -5,7 +5,7 @@
 	"pyls.plugins.pydocstyle.enabled":false,
 	"pyls.plugins.autopep8.enabled":false,
 	"pyls.plugins.yapf.enabled":false,
-	"pyls.plugins.rope_completion.enabled":true,
+	"pyls.plugins.rope_completion.enabled":false,
     "pyls.plugins.mccabe.enabled": true,
 	"pyls.plugins.black.enabled":true,
 	"pyls.plugins.isort.enabled":true,

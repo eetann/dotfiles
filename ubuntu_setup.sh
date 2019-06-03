@@ -112,8 +112,8 @@ mkdir ~/.config/nvim
 ln -s /mnt/c/Users/admin/dotfiles/vim/.vimrc ~/.config/nvim/init.vim
 
 # for coc.nvom
-# curl --compressed -o- -L https://yarnpkg.com/install.sh | sh
-# npm install -g yarn
+curl --compressed -o- -L https://yarnpkg.com/install.sh | sh
+npm install -g yarn
 
 # /etc/wsl.conf に以下の内容を書く
 # [interop]
