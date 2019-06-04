@@ -117,11 +117,17 @@ hook_add = '''
 repo = 'tpope/vim-repeat'
 on_event = 'VimEnter'
 
-# [[plugins]] # 適切なカーソルラインのハイライト
-# repo = 'delphinus/vim-auto-cursorline'
-# on_event = 'VimEnter'
+[[plugins]] # 適切なカーソルラインのハイライト
+repo = 'delphinus/vim-auto-cursorline'
+on_event = 'VimEnter'
+hook_add = '''
+	autocmd vimrc FileType defx :let b:auto_cursorline_disabled = 1
+'''
+
+# [[plugins]] # すごいやつ(語彙力)
+# repo = 'Shougo/denite.nvim'
+# depends = ['nvim-yarp', 'vim-hug-neovim-rpc']
 # hook_add = '''
-# 	autocmd vimrc FileType defx :let b:auto_cursorline_disabled = 1
 # '''
 
 [[plugins]]
