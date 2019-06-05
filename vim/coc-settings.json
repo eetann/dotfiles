@@ -2,7 +2,6 @@
 	"coc.preferences.formatOnSaveFiletypes": ["python"],
 	"coc.preferences.hoverTarget": "echo",
 	"suggest.detailMaxLength": 50,
-	"suggest.timeout": 1000,
 	"signature.target": "echo",
 	"diagnostic.refreshAfterSave": true,
 	"diagnostic.warningSign": "",
