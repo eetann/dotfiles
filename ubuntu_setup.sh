@@ -54,6 +54,7 @@ yes | sudo apt install clang-tools
 yes | sudo apt install python3.7
 yes | sudo apt install python3-pip
 pip3 install --user python-language-server[all]
+pip3 uninstall pyflakes pycodestyle
 pip3 install --user pyls-black
 pip3 install --user pyls-isort
 pip3 install --user flake8 isort black
