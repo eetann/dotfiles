@@ -290,6 +290,7 @@ hook_add = '''
 	let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
 	let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 	let g:coc_global_extensions = ['coc-neosnippet', 'coc-syntax']
+	let g:coc_start_at_startup=1
 	nnoremap <silent> <leader>gh :call My_hover()<CR>
 	function! My_hover() abort
 		" 関数の説明をpopupで表示
