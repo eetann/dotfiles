@@ -139,6 +139,17 @@ if (getIMEMode = 1) {
 	Send {Esc}
 	Return
 }
+^o:: ; 挿入ノーマルモードに入るときもIMEオフ
+getIMEMode := IME_GET()
+if (getIMEMode = 1) {
+	Sleep 1 ; wait 1 ms (Need to stop converting)
+	IME_SET(0)
+	Send ^o
+	Return
+} else {
+	Send ^o
+	Return
+}
 #IfWinActive
 
 ^[::
