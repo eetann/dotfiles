@@ -129,8 +129,16 @@ hook_add = '''
 [[plugins]] # すごいやつ(語彙力)
 repo = 'Shougo/denite.nvim'
 depends = ['nvim-yarp', 'vim-hug-neovim-rpc']
+on_event = 'VimEnter'
 hook_add = '''
-	autocmd vimrc FileType denite call s:denite_my_settings()
+	nnoremap <silent> ,fr :<C-u>Denite file/rec -auto-action=preview -start-filter<CR>
+	nnoremap <silent> ,fo :<C-u>Denite file/old -auto-action=preview -start-filter<CR>
+	nnoremap <silent> ,b :<C-u>Denite buffer -auto-action=preview -start-filter<CR>
+	nnoremap <silent> ,l :<C-u>Denite line -auto-action=preview -start-filter<CR>
+	nnoremap <silent> ,j :<C-u>Denite jump -auto-action=preview -start-filter<CR>
+	nnoremap <silent> ,o :<C-u>Denite outline -auto-action=preview -start-filter<CR>
+	nnoremap <silent> ,h :<C-u>Denite help -start-filter<CR>
+		autocmd vimrc FileType denite call s:denite_my_settings()
 		function! s:denite_my_settings() abort
 			nnoremap <silent><buffer><expr> <CR>
 			\ denite#do_map('do_action')
@@ -144,11 +152,20 @@ hook_add = '''
 			\ denite#do_map('open_filter_buffer')
 			nnoremap <silent><buffer><expr> <Space>
 			\ denite#do_map('toggle_select').'j'
-			nnoremap <silent> ,f :<C-u>Denite file/rec<CR>
-			nnoremap <silent> ,b :<C-u>Denite buffer<CR>
-			nnoremap <silent> ,l :<C-u>BLines<CR>
-			nnoremap <silent> ,h :<C-u>History<CR>
+			inoremap <silent><buffer><expr> <C-c> 
+			\ denite#do_map('quit')
+			nnoremap <silent><buffer><expr> <C-c> 
+			\ denite#do_map('quit')
 		endfunction
+'''
+hook_post_source = '''
+	call denite#custom#var('grep', 'command', ['jvgrep'])
+	call denite#custom#var('grep', 'default_opts', ['-i'])
+	call denite#custom#var('grep', 'recursive_opts', ['-R'])
+	call denite#custom#var('grep', 'pattern_opt', [])
+	call denite#custom#var('grep', 'separator', [])
+	call denite#custom#var('grep', 'final_opts', [])
+	call denite#custom#option('default', {})
 '''
 
 # [[plugins]]
