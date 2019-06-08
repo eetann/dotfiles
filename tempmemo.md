@@ -1,24 +1,2 @@
-# lspと補完について  
-前提→neosnippetを使う  
-|--------|---------|-----|----------|-----|  
-| lsp    | vim-lsp | LCN | coc.nvim | ale |  
-| format |         |     |          |     |  
-| linter |         |     |          |     |  
-| 補完   |         |     |          |     |  
-|  
+call popup_create(split(printf(execute("call CocActionAsync('doHover')")),""),{'maxheight':150,'maxwidth':100,'border':[1,1,1,1],'moved':'any'})  
 
-
-au User lsp_setup call lsp#register_server({  
-        \ 'name': 'pyls',  
-        \ 'cmd': {server_info->['/Users/hornm/.vim/run_pyls_with_venv.sh']},  
-        \ 'whitelist': ['python'],  
-        \ 'workspace_config': {  
-        \   'pyls': {  
-        \      'plugins': {  
-        \         'pyflakes': {'enabled': v:true},  
-        \         'pydocstyle': {'enabled': v:true},  
-        \         'pylint': {'enabled': v:true}  
-        \      }  
-        \   }  
-        \ }  
-        \ })  

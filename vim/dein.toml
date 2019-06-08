@@ -9,10 +9,18 @@ build = 'make'
 [[plugins]] # コメントアウトに便利
 repo = 'tyru/caw.vim'
 hook_add = '''
+	let g:caw_dollarpos_sp_left=' '
 	nmap gct <Plug>(caw:jump:comment-prev)TODO:<Space>
 	nmap gcO <Plug>(caw:jump:comment-prev)
 	nnoremap gcl :vimgrep /TODO:/j %<CR>
 '''
+[[plugins]] # 括弧関連便利になる
+repo = 'tpope/vim-surround'
+on_event = 'VimEnter'
+
+[[plugins]] # 括弧などを入力したときの挙動をスマートに補完
+repo = 'jiangmiao/auto-pairs'
+on_event = 'VimEnter'
 
 # ----Markdownサポート----
 [[plugins]] # Markdownの編集をサポート
@@ -282,6 +290,17 @@ hook_add = '''
 	let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
 	let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 	let g:coc_global_extensions = ['coc-neosnippet', 'coc-syntax']
+	nnoremap <silent> <leader>gh :call My_hover()<CR>
+	function! My_hover() abort
+		" 関数の説明をpopupで表示
+		call CocAction('doHover')
+		if exists('g:coc_last_hover_message')
+			call popup_create(g:coc_last_hover_message,
+			\ {'line':'cursor+2', 'col':'cursor',
+				\ 'maxheight':150,'maxwidth':100,'border':[1,1,1,1],'moved':'any'})
+			unlet g:coc_last_hover_message
+		end
+	endfunction
 '''
 
 

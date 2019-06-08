@@ -126,52 +126,48 @@ hook_add = '''
 	autocmd vimrc FileType defx :let b:auto_cursorline_disabled = 1
 '''
 
-# [[plugins]] # すごいやつ(語彙力)
-# repo = 'Shougo/denite.nvim'
-# depends = ['nvim-yarp', 'vim-hug-neovim-rpc']
-# hook_add = '''
-# 	autocmd vimrc FileType denite call s:denite_my_settings()
-# 		function! s:denite_my_settings() abort
-# 			nnoremap <silent><buffer><expr> <CR>
-#			\ denite#do_map('do_action')
-# 			nnoremap <silent><buffer><expr> d
-#			\ denite#do_map('do_action', 'delete')
-# 			nnoremap <silent><buffer><expr> p
-#			\ denite#do_map('do_action', 'preview')
-# 			nnoremap <silent><buffer><expr> q
-#			\ denite#do_map('quit')
-# 			nnoremap <silent><buffer><expr> i
-#			\ denite#do_map('open_filter_buffer')
-# 			nnoremap <silent><buffer><expr> <Space>
-#			\ denite#do_map('toggle_select').'j'
-# 		endfunction
-# '''
-
-[[plugins]]
-repo = 'junegunn/fzf'
-build = './install --all'
-on_event = 'VimEnter'
-
-[[plugins]]
-repo = 'junegunn/fzf.vim'
-on_event = 'VimEnter'
+[[plugins]] # すごいやつ(語彙力)
+repo = 'Shougo/denite.nvim'
+depends = ['nvim-yarp', 'vim-hug-neovim-rpc']
 hook_add = '''
-	command! -bang -nargs=? -complete=dir Files
-	  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-	let g:fzf_layout = { 'down': '~40%' }
-	nnoremap <silent> ,f :<C-u>Files<CR>
-	nnoremap <silent> ,b :<C-u>Buffers<CR>
-	nnoremap <silent> ,l :<C-u>BLines<CR>
-	nnoremap <silent> ,h :<C-u>History<CR>
+	autocmd vimrc FileType denite call s:denite_my_settings()
+		function! s:denite_my_settings() abort
+			nnoremap <silent><buffer><expr> <CR>
+			\ denite#do_map('do_action')
+			nnoremap <silent><buffer><expr> d
+			\ denite#do_map('do_action', 'delete')
+			nnoremap <silent><buffer><expr> p
+			\ denite#do_map('do_action', 'preview')
+			nnoremap <silent><buffer><expr> q
+			\ denite#do_map('quit')
+			nnoremap <silent><buffer><expr> i
+			\ denite#do_map('open_filter_buffer')
+			nnoremap <silent><buffer><expr> <Space>
+			\ denite#do_map('toggle_select').'j'
+			nnoremap <silent> ,f :<C-u>Denite file/rec<CR>
+			nnoremap <silent> ,b :<C-u>Denite buffer<CR>
+			nnoremap <silent> ,l :<C-u>BLines<CR>
+			nnoremap <silent> ,h :<C-u>History<CR>
+		endfunction
 '''
 
-[[plugins]] # 括弧関連便利になる
-repo = 'tpope/vim-surround'
-on_event = 'VimEnter'
-
-[[plugins]] # 括弧などを入力したときの挙動をスマートに補完
-repo = 'jiangmiao/auto-pairs'
-on_event = 'VimEnter'
+# [[plugins]]
+# repo = 'junegunn/fzf'
+# build = './install --all'
+# on_event = 'VimEnter'
+#
+# [[plugins]]
+# repo = 'junegunn/fzf.vim'
+# on_event = 'VimEnter'
+# hook_add = '''
+# 	command! -bang -nargs=? -complete=dir Files
+#	  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+# 	let g:fzf_layout = { 'down': '~40%' }
+# 	nnoremap <silent> ,f :<C-u>Files<CR>
+# 	nnoremap <silent> ,b :<C-u>Buffers<CR>
+# 	nnoremap <silent> ,l :<C-u>BLines<CR>
+# 	nnoremap <silent> ,h :<C-u>History<CR>
+# '''
 
 [[plugins]] # マーク位置の表示
 repo = 'kshenoy/vim-signature'

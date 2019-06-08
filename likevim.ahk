@@ -297,21 +297,30 @@ vk1C & d::
 	Send,{Blind}{End}+{Home}{BS}
 return
 
+<!vk1D::
+	Send !{vk1D}
+	Sleep 100
+	IME_SET(0)
+	Return
 
 ; vivaldiのクイックコマンドのショートカットキーを押したら
 ; IMEはオフの状態で起動するように設定
 #IfWInActive, ahk_exe vivaldi.exe
 q::
 	Send q
-	Sleep 100 ; wait 1 ms (Need to stop converting)
+	Sleep 100
 	IME_SET(0)
 	Return
 ^q::
 	Send ^q
-	Sleep 100 ; wait 1 ms (Need to stop converting)
+	Sleep 100
 	IME_SET(0)
 	Return
+^h::
+	Send {BS}
+	Return
 #IfWinActive
+
 
 ; #IfWinActive, ahk_class CabinetWClass
 ; h::

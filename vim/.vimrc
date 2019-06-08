@@ -90,6 +90,7 @@ set pastetoggle=<F3>
 set incsearch " インクリメンタルサーチ. １文字入力毎に検索を行う
 set ignorecase " 検索パターンに大文字小文字を区別しない
 set smartcase " 検索パターンに大文字を含んでいたら大文字小文字を区別する
+set shortmess-=S
 " ESCキー2度押しでハイライトの切り替え
 nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
 " cursor下の単語をハイライトと置換
@@ -158,11 +159,6 @@ set history=1000 " CommandHistoryを増やす
 set completeopt=menuone
 autocmd vimrc FileType text,qf,quickrun setlocal wrap
 set mouse=a
-
-" ----インサートモードのためのIMEの制御(Tera Termのみ?)
-" let &t_SI .= "\e[<r" " 挿入入時、前回のIME状態復元
-" let &t_EI .= "\e[<s\e[<0t" " 挿入出時、現在のIME状態を記録&IMEオフ
-" let &t_te .= "\e[<0t\e[<s" " Vim終了時、IME無効&IMEを無効状態として記録
 set ttimeoutlen=100 " ESCしてから挿入モード出るまでの時間を短縮
 
 
