@@ -37,7 +37,7 @@ hook_add = '''
 		\ 'runner':"shell",
 		\ 'exec':'%c %o',
 		\ 'command': '/mnt/c/Program Files/MATLAB/R2019a/bin/matlab.exe',
-		\ 'cmdopt': '-nodesktop -nosplash -r "%:r, which(%:r)"'
+		\ 'cmdopt': '-nodesktop -nosplash -r "workspace, %:r, which(%:r)"'
 		\ },
 		\ }
 		" splitは、以下を用いている
@@ -216,11 +216,6 @@ hook_add = '''
 [[plugins]] # edit for fish
 on_ft = ['fish']
 repo = 'dag/vim-fish'
-
-# [[plugins]]
-# repo = 'Shougo/neco-vim'
-# on_ft = ['vim']
-# depends = ['deoplete.nvim']
 
 [[plugins]] # matlab
 repo = 'lazywei/vim-matlab'
