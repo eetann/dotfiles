@@ -332,6 +332,21 @@ q::
 	Return
 #IfWinActive
 
+IsAltTabMenu := false
+!Tab::
+	Send !^{Tab}
+	IsAltTabMenu := true
+Return
+#If (IsAltTabMenu)
+	h::Send {Left}
+	j::Send {Down}
+	k::Send {Up}
+	l::Send {Right}
+	Enter::
+		Send {Enter}
+		IsAltTabMenu := false
+	Return
+#If
 
 ; #IfWinActive, ahk_class CabinetWClass
 ; h::
