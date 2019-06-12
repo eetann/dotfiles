@@ -140,9 +140,10 @@ repo = 'Shougo/denite.nvim'
 depends = ['nvim-yarp', 'vim-hug-neovim-rpc','neoyank.vim','coc-denite']
 on_event = 'VimEnter'
 hook_add = '''
-	nnoremap <silent> ,fr :<C-u>Denite file/rec -auto-action=preview -start-filter<CR>
+	nnoremap <silent> ,fr :<C-u>Denite file/rec -auto-action=preview<CR>
 	nnoremap <silent> ,fo :<C-u>Denite file/old -auto-action=preview -start-filter<CR>
 	nnoremap <silent> ,ft :<C-u>Denite filetype -start-filter<CR>
+	nnoremap <silent> ,ch :<C-u>Denite command_history -start-filter<CR>
 	nnoremap <silent> ,b :<C-u>Denite buffer -auto-action=preview<CR>
 	nnoremap <silent> ,d :<C-u>Denite coc-diagnostic -auto-action=preview<CR>
 	nnoremap <silent> ,s :<C-u>Denite coc-symbols -auto-action=preview<CR>

@@ -308,6 +308,7 @@ vk1C & d::
 	Send,{Blind}{End}+{Home}{BS}
 return
 
+; wox起動時はIMEオフに。
 <!vk1D::
 	Send !{vk1D}
 	Sleep 100
@@ -368,7 +369,7 @@ Return
 		return
 	h::
 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-			Send, !{Left}
+			Send, !{Up}
 		else
 			Send, h
 		return
