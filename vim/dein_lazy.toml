@@ -74,7 +74,7 @@ depends = ['context_filetype.vim']
 
 [[plugins]] # プレビューをブラウザで開く
 repo = 'tyru/open-browser.vim'
-on_ft = 'md'
+on_ft = ['md', 'html','python']
 hook_add = '''
 	" if filereadable('/proc/sys/fs/binfmt_misc/WSLInterop')
 	"     " autocmd vimrc BufNewFile,BufRead *.md nnoremap <buffer><Leader>p :execute "OpenBrowser" substitute(expand("%:p"), '/mnt/c', 'c:/', '')<CR>
@@ -82,8 +82,12 @@ hook_add = '''
 	" else
 	"     autocmd vimrc BufNewFile,BufRead *.md nnoremap <buffer><Leader>p :execute "OpenBrowser" expand("%:p")<CR>
 	" endif
-	autocmd vimrc BufNewFile,BufRead *.md nnoremap <buffer><Leader>p 
-		\:execute "OpenBrowser" substitute(expand("%:p"), '\v/mnt/(.)', '\1:/', 'c')<CR>
+	autocmd vimrc BufNewFile,BufRead *.html,*.md nnoremap <buffer><Leader>p
+		\ :execute "OpenBrowser" substitute(expand("%:p"), '\v/mnt/(.)', '\1:/', 'c')<CR>
+	autocmd vimrc BufNewFile,BufRead *.html,*.py nnoremap <buffer><Leader>P
+		\ :execute "OpenBrowser http://localhost:8000/" . expand('%')<CR>
+	autocmd vimrc BufNewFile,BufRead *.html,*.py nnoremap <buffer><Leader>cp
+		\ :term ++rows=8 cmd.exe /c python server.py
 '''
 
 [[plugins]] # 画面の移動が便利になる
