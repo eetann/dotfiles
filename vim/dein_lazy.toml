@@ -26,13 +26,6 @@ hook_add = '''
 		\ 'python': {
 		\   'command': 'python3.7'
 		\ },
-		\ 'markdown': {
-		\ 'runner'    : 'vimscript',
-		\ 'command': "OpenBrowser",
-		\ 'cmdopt': "substitute(expand(%s:p), '\v/mnt/(.)', '\1:/', '')",
-		\ 'exec': "%c %o",
-		\ 'outputter': 'null',
-		\ },
 		\ 'matlab': {
 		\ 'runner':"shell",
 		\ 'exec':'%c %o',
@@ -47,7 +40,7 @@ hook_add = '''
 		" \ 'markdown': {
 		" \ 'runner'    : 'vimscript',
 		" \ 'command': ":OpenBrowser",
-		" \ 'args': "%{substitute(%{expand(%s:p)}, '\v/mnt/(.)', '\1:/', '')}",
+		" \ 'args': "%{substitute(expand('%S:p'), '\v/mnt/(.)', '\1:/', 'c')}",
 		" \ 'exec': "%c %a",
 		" \ 'outputter':'null',
 		" \ },
@@ -65,25 +58,19 @@ hook_add = '''
 # ----カーソル位置のコンテキストに合わせてファイルタイプを切り替え----
 [[plugins]] # 判定ライブラリ
 repo = 'Shougo/context_filetype.vim'
-on_ft = ['toml','md','mdwn','mkd','mkdn','mark']
+on_ft = ['vim','toml','md','mdwn','mkd','mkdn','mark']
 
 [[plugins]]
 repo = 'osyo-manga/vim-precious'
-on_ft = ['toml','md','mdwn','mkd','mkdn','mark']
+on_ft = ['vim','toml','md','mdwn','mkd','mkdn','mark']
 depends = ['context_filetype.vim']
 
 [[plugins]] # プレビューをブラウザで開く
 repo = 'tyru/open-browser.vim'
 on_ft = ['md', 'html','python']
 hook_add = '''
-	" if filereadable('/proc/sys/fs/binfmt_misc/WSLInterop')
-	"     " autocmd vimrc BufNewFile,BufRead *.md nnoremap <buffer><Leader>p :execute "OpenBrowser" substitute(expand("%:p"), '/mnt/c', 'c:/', '')<CR>
-	"     autocmd vimrc BufNewFile,BufRead *.md nnoremap <buffer><Leader>p :execute "OpenBrowser" substitute(expand("%:p"), '\v/mnt/(.)', '\1:/', '')<CR>
-	" else
-	"     autocmd vimrc BufNewFile,BufRead *.md nnoremap <buffer><Leader>p :execute "OpenBrowser" expand("%:p")<CR>
-	" endif
 	autocmd vimrc BufNewFile,BufRead *.html,*.md nnoremap <buffer><Leader>p
-		\ :execute "OpenBrowser" substitute(expand("%:p"), '\v/mnt/(.)', '\1:/', 'c')<CR>
+		\ :execute "OpenBrowser" substitute(expand('%:p'), '\v/mnt/(.)', '\1:/', 'c')<CR>
 	autocmd vimrc BufNewFile,BufRead *.html,*.py nnoremap <buffer><Leader>P
 		\ :execute "OpenBrowser http://localhost:8000/" . expand('%')<CR>
 	autocmd vimrc BufNewFile,BufRead *.html,*.py nnoremap <buffer><Leader>cp
@@ -105,6 +92,7 @@ hook_add = '''
 
 [[plugins]] # undoを視覚的に
 repo = 'sjl/gundo.vim'
+on_cmd = 'GundoToggle'
 hook_add = '''
 	let g:gundo_prefer_python3 = 1
 	nnoremap U :<C-u>GundoToggle<CR>
@@ -145,7 +133,7 @@ depends = ['nvim-yarp', 'vim-hug-neovim-rpc','neoyank.vim','coc-denite']
 on_event = 'VimEnter'
 hook_add = '''
 	nnoremap <silent> ,fr :<C-u>Denite file/rec -auto-action=preview<CR>
-	nnoremap <silent> ,fo :<C-u>Denite file/old -auto-action=preview -start-filter<CR>
+	nnoremap <silent> ,fo :<C-u>Denite file/old -auto-action=preview<CR>
 	nnoremap <silent> ,ft :<C-u>Denite filetype -start-filter<CR>
 	nnoremap <silent> ,ch :<C-u>Denite command_history -start-filter<CR>
 	nnoremap <silent> ,b :<C-u>Denite buffer -auto-action=preview<CR>
@@ -156,6 +144,7 @@ hook_add = '''
 	nnoremap <silent> ,o :<C-u>Denite outline -auto-action=preview -start-filter<CR>
 	nnoremap <silent> ,h :<C-u>Denite help -start-filter<CR>
 	nnoremap <silent> ,y :<C-u>Denite neoyank -start-filter<CR>
+	nnoremap <silent> ,m :<C-u>Denite menu -auto-action=preview<CR>
 		autocmd vimrc FileType denite call s:denite_my_settings()
 		function! s:denite_my_settings() abort
 			nnoremap <silent><buffer><expr> <CR>
@@ -174,16 +163,57 @@ hook_add = '''
 			\ denite#do_map('quit')
 			nnoremap <silent><buffer><expr> <C-c> 
 			\ denite#do_map('quit')
+			nnoremap <silent><buffer><expr> ss
+			\ denite#do_map('do_action', 'split')
+			nnoremap <silent><buffer><expr> sv
+			\ denite#do_map('do_action', 'vsplit')
 		endfunction
+	let s:menus = {}
+	let s:menus.dotfiles = {
+		\ 'description': 'dotfiles'
+		\ }
+	let s:menus.dotfiles.file_candidates = [
+		\ ['vim/.vimrc', '~/dotfiles/vim/.vimrc'],
+		\ ['vim/dein.toml', '~/dotfiles/vim/dein.toml'],
+		\ ['vim/dein_lazy.toml', '~/dotfiles/vim/dein_lazy.toml'],
+		\ ['vim/VimCheatSheet.md', '~/dotfiles/vim/VimCheatSheet.md'],
+		\ ['vim/coc-settings.json', '~/dotfiles/vim/coc-settings.json'],
+		\ ['vim/flake8', '~/dotfiles/vim/flake8'],
+		\ ['vim/pylintrc', '~/dotfiles/vim/pylintrc'],
+		\ ['vim/matlab_from_vim.ahk', '~/dotfiles/vim/matlab_from_vim.ahk'],
+		\ ['./README.md', '~/dotfiles/README.md'],
+		\ ['./MakeWindowsLinks.bat', '~/dotfiles/MakeWindowsLinks.bat'],
+		\ ['./likevim.ahk', '~/dotfiles/likevim.ahk'],
+		\ ['./tmux.conf', '~/dotfiles/tmux.conf'],
+		\ ['./tempmemo.md', '~/dotfiles/tempmemo.md'],
+		\ ['./setup_fish.fish', '~/dotfiles/setup_fish.fish'],
+		\ ['./ubuntu_setup.sh', '~/dotfiles/ubuntu_setup.sh'],
+		\ ['fish/tm.fish', '~/dotfiles/fish/tm.fish'],
+		\ ['fish/config.fish', '~/dotfiles/fish/config.fish'],
+		\ ['fish/fish_user_key_bindings.fish', '~/dotfiles/fish/fish_user_key_bindings.fish'],
+		\ ['mysnippet/toml.snip', '~/dotfiles/mysnippet/toml.snip'],
+		\ ['mysnippet/markdown.snip', '~/dotfiles/mysnippet/markdown.snip'],
+		\ ['wsl.conf', '~/dotfiles/wsl.conf'],
+		\ ]
+		let s:menus.dein = { 'description': 'Plugin management' }
+		let s:menus.dein.command_candidates = [
+		\   ['🐬 Dein: Plugins update 🔸:call dein#update()', 'call dein#update()'],
+		\   ['🐬 Dein: Plugins rechash🔸:call dein#recache_runtimepath()', 'call dein#recache_runtimepath()'],
+		\   ['🐬 Dein: Plugins List   🔸:Denite dein', 'Denite dein'],
+		\   ['🐬 Dein: Update log     🔸:echo dein#get_updates_log()', 'echo dein#get_updates_log()'],
+		\   ['🐬 Dein: Log            🔸:echo dein#get_log()', 'echo dein#get_log()'],
+		\ ]
 '''
 hook_post_source = '''
+	call denite#custom#option('default', 'prompt', '🐉 ')
+	call denite#custom#option('search', 'prompt', '🔎 ')
 	call denite#custom#var('grep', 'command', ['jvgrep'])
 	call denite#custom#var('grep', 'default_opts', ['-i'])
 	call denite#custom#var('grep', 'recursive_opts', ['-R'])
 	call denite#custom#var('grep', 'pattern_opt', [])
 	call denite#custom#var('grep', 'separator', [])
 	call denite#custom#var('grep', 'final_opts', [])
-	call denite#custom#option('default', {})
+	call denite#custom#var('menu', 'menus', s:menus)
 '''
 
 [[plugins]] # マーク位置の表示
