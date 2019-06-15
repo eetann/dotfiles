@@ -169,6 +169,7 @@ hook_add = '''
 			nnoremap <silent><buffer><expr> sv
 			\ denite#do_map('do_action', 'vsplit')
 		endfunction
+
 	let s:menus = {}
 	let s:menus.dotfiles = {
 		\ 'description': 'dotfiles'
