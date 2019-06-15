@@ -145,6 +145,7 @@ hook_add = '''
 	nnoremap <silent> ,h :<C-u>Denite help -start-filter<CR>
 	nnoremap <silent> ,y :<C-u>Denite neoyank -start-filter<CR>
 	nnoremap <silent> ,m :<C-u>Denite menu -auto-action=preview<CR>
+	nnoremap <silent> ,r :<C-u>Denite -resume<CR>
 		autocmd vimrc FileType denite call s:denite_my_settings()
 		function! s:denite_my_settings() abort
 			nnoremap <silent><buffer><expr> <CR>
@@ -203,6 +204,19 @@ hook_add = '''
 		\   ['🐬 Dein: Update log     🔸:echo dein#get_updates_log()', 'echo dein#get_updates_log()'],
 		\   ['🐬 Dein: Log            🔸:echo dein#get_log()', 'echo dein#get_log()'],
 		\ ]
+		let s:menus.good_help = {
+		    \ 'description': 'good help'
+		    \ }
+		let s:menus.good_help.command_candidates = [
+		    \ ['home', 'help '],
+		    \ ['eval', 'help eval'],
+		    \ ['ex-cmd-index', 'help ex-cmd-index'],
+		    \ ['function-list', 'help function-list'],
+		    \ ['functions', 'help functions'],
+		    \ ['help-summary', 'help help-summary'],
+		    \ ['index', 'help index'],
+		    \ ['quickref', 'help quickref'],
+		    \ ]
 '''
 hook_post_source = '''
 	call denite#custom#option('default', 'prompt', '🐉 ')
