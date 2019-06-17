@@ -60,6 +60,11 @@ nnoremap [q :cprevious<CR>
 nnoremap ]q :cnext<CR>
 nnoremap [Q :<C-u>cfirst<CR>
 nnoremap ]Q :<C-u>clast<CR>
+nnoremap <C-p> :<C-u>bprevious<CR>
+nnoremap <C-n> :<C-u>bnext<CR>
+tnoremap <C-p> <C-w>:bprevious!<CR>
+tnoremap <C-n> <C-w>:bnext!<CR>
+tnoremap <C-q> <C-w><C-c>:close!<CR>
 
 " --編集系---------------------------------
 " ----コピペ関連

@@ -74,7 +74,7 @@ hook_add = '''
 	autocmd vimrc BufNewFile,BufRead *.html,*.py nnoremap <buffer><Leader>P
 		\ :execute "OpenBrowser http://localhost:8000/" . expand('%')<CR>
 	autocmd vimrc BufNewFile,BufRead *.html,*.py nnoremap <buffer><Leader>cp
-		\ :term ++rows=8 cmd.exe /c python server.py
+		\ :term ++rows=5 cmd.exe /c python server.py
 '''
 
 [[plugins]] # 画面の移動が便利になる

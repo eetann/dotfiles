@@ -316,11 +316,6 @@ hook_add = '''
 	set noshowmode   " 現在のモードを日本語表示しない
 	set showcmd      " 打ったコマンドをステータスラインの下に表示
 	set ruler        " ステータスラインの右側にカーソルの現在位置を表示する
-	" カーソルキーでbuffer移動
-	" nmap <C-p> <Plug>AirlineSelectPrevTab
-	" nmap <C-n> <Plug>AirlineSelectNextTab
-	nnoremap <C-p> :<C-u>bprevious<CR>
-	nnoremap <C-n> :<C-u>bnext<CR>
 	let g:airline_theme = 'powerlineish'
 	let g:airline_powerline_fonts = 1
 	let g:airline#extensions#branch#enabled = 1
