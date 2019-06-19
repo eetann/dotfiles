@@ -169,7 +169,8 @@ hook_add = '''
 			nnoremap <silent><buffer><expr> sv
 			\ denite#do_map('do_action', 'vsplit')
 		endfunction
-
+'''
+hook_post_source = '''
 	let s:menus = {}
 	let s:menus.dotfiles = {
 		\ 'description': 'dotfiles'
@@ -197,29 +198,27 @@ hook_add = '''
 		\ ['mysnippet/markdown.snip', '~/dotfiles/mysnippet/markdown.snip'],
 		\ ['wsl.conf', '~/dotfiles/wsl.conf'],
 		\ ]
-		let s:menus.dein = { 'description': 'Plugin management' }
-		let s:menus.dein.command_candidates = [
-		\   ['🐬 Dein: Plugins update 🔸:call dein#update()', 'call dein#update()'],
-		\   ['🐬 Dein: Plugins rechash🔸:call dein#recache_runtimepath()', 'call dein#recache_runtimepath()'],
-		\   ['🐬 Dein: Plugins List   🔸:Denite dein', 'Denite dein'],
-		\   ['🐬 Dein: Update log     🔸:echo dein#get_updates_log()', 'echo dein#get_updates_log()'],
-		\   ['🐬 Dein: Log            🔸:echo dein#get_log()', 'echo dein#get_log()'],
+	let s:menus.dein = { 'description': 'Plugin management' }
+	let s:menus.dein.command_candidates = [
+	\   ['🐬 Dein: Plugins update 🔸:call dein#update()', 'call dein#update()'],
+	\   ['🐬 Dein: Plugins rechash🔸:call dein#recache_runtimepath()', 'call dein#recache_runtimepath()'],
+	\   ['🐬 Dein: Plugins List   🔸:Denite dein', 'Denite dein'],
+	\   ['🐬 Dein: Update log     🔸:echo dein#get_updates_log()', 'echo dein#get_updates_log()'],
+	\   ['🐬 Dein: Log            🔸:echo dein#get_log()', 'echo dein#get_log()'],
+	\ ]
+	let s:menus.good_help = {
+		\ 'description': 'good help'
+		\ }
+	let s:menus.good_help.command_candidates = [
+		\ ['home', 'help '],
+		\ ['eval', 'help eval'],
+		\ ['ex-cmd-index', 'help ex-cmd-index'],
+		\ ['function-list', 'help function-list'],
+		\ ['functions', 'help functions'],
+		\ ['help-summary', 'help help-summary'],
+		\ ['index', 'help index'],
+		\ ['quickref', 'help quickref'],
 		\ ]
-		let s:menus.good_help = {
-		    \ 'description': 'good help'
-		    \ }
-		let s:menus.good_help.command_candidates = [
-		    \ ['home', 'help '],
-		    \ ['eval', 'help eval'],
-		    \ ['ex-cmd-index', 'help ex-cmd-index'],
-		    \ ['function-list', 'help function-list'],
-		    \ ['functions', 'help functions'],
-		    \ ['help-summary', 'help help-summary'],
-		    \ ['index', 'help index'],
-		    \ ['quickref', 'help quickref'],
-		    \ ]
-'''
-hook_post_source = '''
 	call denite#custom#option('default', 'prompt', '🐉 ')
 	call denite#custom#option('search', 'prompt', '🔎 ')
 	call denite#custom#var('grep', 'command', ['jvgrep'])

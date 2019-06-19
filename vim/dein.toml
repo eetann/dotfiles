@@ -293,17 +293,26 @@ hook_add = '''
 	let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 	let g:coc_global_extensions = ['coc-neosnippet', 'coc-syntax']
 	let g:coc_start_at_startup=1
-	nnoremap <silent> <leader>gh :call My_hover()<CR>
-	function! My_hover() abort
-		" 関数の説明をpopupで表示
+	" nnoremap <silent> <leader>gh :call CocAction('doHover')<CR>
+	nnoremap <silent> K :call <SID>show_documentation()<CR>
+	function! s:show_documentation()
+	  if (index(['vim','help'], &filetype) >= 0)
+		execute 'h '.expand('<cword>')
+	  else
 		call CocAction('doHover')
-		if exists('g:coc_last_hover_message')
-			call popup_create(g:coc_last_hover_message,
-			\ {'line':'cursor+2', 'col':'cursor',
-				\ 'maxheight':150,'maxwidth':100,'border':[1,1,1,1],'moved':'any'})
-			unlet g:coc_last_hover_message
-		end
+	  endif
 	endfunction
+	" nnoremap <silent> <leader>gh :call My_hover()<CR>
+	" function! My_hover() abort
+	" 	" 関数の説明をpopupで表示
+	" 	call CocAction('doHover')
+	" 	if exists('g:coc_last_hover_message')
+	" 		call popup_create(g:coc_last_hover_message,
+	"		\ {'line':'cursor+2', 'col':'cursor',
+	"			\ 'maxheight':150,'maxwidth':100,'border':[1,1,1,1],'moved':'any'})
+	" 		unlet g:coc_last_hover_message
+	" 	end
+	" endfunction
 '''
 
 

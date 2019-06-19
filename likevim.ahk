@@ -338,6 +338,10 @@ IsAltTabMenu := false
 	Send !^{Tab}
 	IsAltTabMenu := true
 Return
+; j & k::
+; 	Send !^{Tab}
+; 	IsAltTabMenu := true
+Return
 #If (IsAltTabMenu)
 	h::Send {Left}
 	j::Send {Down}

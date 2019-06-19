@@ -146,7 +146,6 @@ nnoremap <F5> :<C-u>source $MYVIMRC<CR>
 nnoremap <F6> :<C-u>edit $MYVIMRC<CR>
 nnoremap <F7> :<C-u>edit ~/dotfiles/vim/dein.toml<CR>
 nnoremap <F8> :<C-u>edit ~/dotfiles/vim/dein_lazy.toml<CR>
-nnoremap <F9> :<C-u>edit ~/dotfiles/vim/settings.json<CR>
 autocmd vimrc FileType help,quickrun nnoremap <buffer> q <C-w>c
 
 " ----その他
