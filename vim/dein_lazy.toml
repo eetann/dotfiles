@@ -130,7 +130,7 @@ on_source = 'denite.nvim'
 [[plugins]] # すごいやつ(語彙力)
 repo = 'Shougo/denite.nvim'
 depends = ['nvim-yarp', 'vim-hug-neovim-rpc','neoyank.vim','coc-denite']
-on_event = 'VimEnter'
+on_cmd = ['Denite', 'DeniteBufferDir', 'DeniteCursorWord', 'DeniteProjectDir']
 hook_add = '''
 	nnoremap <silent> ,fr :<C-u>Denite file/rec -auto-action=preview<CR>
 	nnoremap <silent> ,fo :<C-u>Denite file/old -auto-action=preview<CR>
@@ -146,6 +146,7 @@ hook_add = '''
 	nnoremap <silent> ,y :<C-u>Denite neoyank -start-filter<CR>
 	nnoremap <silent> ,m :<C-u>Denite menu -auto-action=preview<CR>
 	nnoremap <silent> ,r :<C-u>Denite -resume<CR>
+	nnoremap <silent> ,g :<C-u>DeniteBufferDir grep -auto-action=preview<CR>
 		autocmd vimrc FileType denite call s:denite_my_settings()
 		function! s:denite_my_settings() abort
 			nnoremap <silent><buffer><expr> <CR>
@@ -172,9 +173,7 @@ hook_add = '''
 '''
 hook_post_source = '''
 	let s:menus = {}
-	let s:menus.dotfiles = {
-		\ 'description': 'dotfiles'
-		\ }
+	let s:menus.dotfiles = {'description':'dotfiles'}
 	let s:menus.dotfiles.file_candidates = [
 		\ ['vim/.vimrc', '~/dotfiles/vim/.vimrc'],
 		\ ['vim/dein.toml', '~/dotfiles/vim/dein.toml'],
@@ -198,17 +197,15 @@ hook_post_source = '''
 		\ ['mysnippet/markdown.snip', '~/dotfiles/mysnippet/markdown.snip'],
 		\ ['wsl.conf', '~/dotfiles/wsl.conf'],
 		\ ]
-	let s:menus.dein = { 'description': 'Plugin management' }
+	let s:menus.dein = {'description':'Plugin management'}
 	let s:menus.dein.command_candidates = [
-	\   ['🐬 Dein: Plugins update 🔸:call dein#update()', 'call dein#update()'],
-	\   ['🐬 Dein: Plugins rechash🔸:call dein#recache_runtimepath()', 'call dein#recache_runtimepath()'],
-	\   ['🐬 Dein: Plugins List   🔸:Denite dein', 'Denite dein'],
-	\   ['🐬 Dein: Update log     🔸:echo dein#get_updates_log()', 'echo dein#get_updates_log()'],
-	\   ['🐬 Dein: Log            🔸:echo dein#get_log()', 'echo dein#get_log()'],
-	\ ]
-	let s:menus.good_help = {
-		\ 'description': 'good help'
-		\ }
+		\ ['🐬 Dein: Plugins update 🔸:call dein#update()', 'call dein#update()'],
+		\ ['🐬 Dein: Plugins rechash🔸:call dein#recache_runtimepath()', 'call dein#recache_runtimepath()'],
+		\ ['🐬 Dein: Plugins List   🔸:Denite dein', 'Denite dein'],
+		\ ['🐬 Dein: Update log     🔸:echo dein#get_updates_log()', 'echo dein#get_updates_log()'],
+		\ ['🐬 Dein: Log            🔸:echo dein#get_log()', 'echo dein#get_log()'],
+		\ ]
+	let s:menus.good_help = {'description': 'good help'}
 	let s:menus.good_help.command_candidates = [
 		\ ['home', 'help '],
 		\ ['eval', 'help eval'],
@@ -218,6 +215,11 @@ hook_post_source = '''
 		\ ['help-summary', 'help help-summary'],
 		\ ['index', 'help index'],
 		\ ['quickref', 'help quickref'],
+		\ ]
+	let s:menus.often_use = {'description':'often use commands'}
+	let s:menus.often_use.command_candidates = [
+		\ ['setlocal filetype=python', 'setlocal filetype=python'],
+		\ ['setlocal filetype=html', 'setlocal filetype=html'],
 		\ ]
 	call denite#custom#option('default', 'prompt', '🐉 ')
 	call denite#custom#option('search', 'prompt', '🔎 ')
