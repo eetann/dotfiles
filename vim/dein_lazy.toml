@@ -80,9 +80,9 @@ hook_add = '''
 [[plugins]] # Emmet
 repo = 'mattn/emmet-vim'
 on_ft = ['html', 'css', 'php', 'xml', 'javascript']
-hook_add = '''
-	let g:user_emmet_mode = 'n'
-'''
+# hook_add = '''
+# 	let g:user_emmet_mode = 'n'
+# '''
 
 [[plugins]] # 画面の移動が便利になる
 repo = 'easymotion/vim-easymotion'

@@ -150,6 +150,17 @@ if (getIMEMode = 1) {
 	Send ^o
 	Return
 }
+^y:: ; emmetで次の入力をするためにIMEオフ
+getIMEMode := IME_GET()
+if (getIMEMode = 1) {
+	Sleep 1 ; wait 1 ms (Need to stop converting)
+	IME_SET(0)
+	Send ^y
+	Return
+} else {
+	Send ^y
+	Return
+}
 #IfWinActive
 
 ^[::
