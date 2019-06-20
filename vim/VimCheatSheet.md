@@ -121,16 +121,11 @@
 | n    | xR  | 全てのfieldを開ける   |          |  
 
 
-# scrooloose/nerdcommenter  
-| Mode | Map              | Description          | Original    |  
-|------|------------------|----------------------|-------------|  
-| nv   | <leader>cA       | 行末にコメントを挿入 | Comment + A |  
-| nv   | <leader>c<Space> | コメントトグル       | Comment     |  
-
 # quickrun  
 | Mode   | Map    | Description                  | Original   |  
 | ------ | ------ | ---------------------------- | ---------- |  
 | nv     | ML-r   | 保存してからquickrunの実行   | run        |  
+| n      | ML-R   | ターミナルでquickrunの実行   | run        |  
 
 # vim-easymotion  
 | Mode   | Map                  | Description                           | Original |  

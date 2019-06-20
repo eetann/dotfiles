@@ -77,6 +77,13 @@ hook_add = '''
 		\ :term ++rows=5 cmd.exe /c python server.py
 '''
 
+[[plugins]] # Emmet
+repo = 'mattn/emmet-vim'
+on_ft = ['html', 'css', 'php', 'xml', 'javascript']
+hook_add = '''
+	let g:user_emmet_mode = 'n'
+'''
+
 [[plugins]] # 画面の移動が便利になる
 repo = 'easymotion/vim-easymotion'
 on_event = 'VimEnter'
