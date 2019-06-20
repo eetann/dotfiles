@@ -220,6 +220,7 @@ hook_post_source = '''
 	let s:menus.often_use.command_candidates = [
 		\ ['setlocal filetype=python', 'setlocal filetype=python'],
 		\ ['setlocal filetype=html', 'setlocal filetype=html'],
+		\ ['setlocal filetype=xml', 'setlocal filetype=xml'],
 		\ ]
 	call denite#custom#option('default', 'prompt', '🐉 ')
 	call denite#custom#option('search', 'prompt', '🔎 ')

@@ -67,11 +67,6 @@ yes | sudo apt install python3-tk
 # pythonのクラス図を作成
 yes | sudo apt install graphviz
 
-# for python3.7 & neovim
-# git clone git://github.com/yyuu/pyenv.git ~/.pyenv
-# sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
-# pyenv install 3.7.3
-# pyenv global 3.7.3
 sudo add-apt-repository ppa:neovim-ppa/unstable
 yes | sudo apt install neovim
 
