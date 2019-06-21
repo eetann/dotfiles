@@ -80,9 +80,6 @@ hook_add = '''
 [[plugins]] # Emmet
 repo = 'mattn/emmet-vim'
 on_ft = ['html', 'css', 'php', 'xml', 'javascript']
-# hook_add = '''
-# 	let g:user_emmet_mode = 'n'
-# '''
 
 [[plugins]] # 画面の移動が便利になる
 repo = 'easymotion/vim-easymotion'
@@ -151,7 +148,8 @@ hook_add = '''
 	nnoremap <silent> ,o :<C-u>Denite outline -auto-action=preview -start-filter<CR>
 	nnoremap <silent> ,h :<C-u>Denite help -start-filter<CR>
 	nnoremap <silent> ,y :<C-u>Denite neoyank -start-filter<CR>
-	nnoremap <silent> ,m :<C-u>Denite menu -auto-action=preview<CR>
+	nnoremap <silent> ,me :<C-u>Denite menu -auto-action=preview<CR>
+	nnoremap <silent> ,ma :<C-u>Denite mark -auto-action=preview<CR>
 	nnoremap <silent> ,r :<C-u>Denite -resume<CR>
 	nnoremap <silent> ,g :<C-u>DeniteBufferDir grep -auto-action=preview<CR>
 		autocmd vimrc FileType denite call s:denite_my_settings()

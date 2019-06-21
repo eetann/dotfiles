@@ -1,6 +1,5 @@
 {
 	"coc.preferences.formatOnSaveFiletypes": ["python"],
-	"coc.preferences.hoverTarget": "Popup",
 	"suggest.detailMaxLength": 50,
 	"suggest.timeout":5000,
 	"signature.target": "echo",
