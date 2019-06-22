@@ -296,11 +296,11 @@ hook_add = '''
 	" nnoremap <silent> <leader>gh :call CocAction('doHover')<CR>
 	nnoremap <silent> K :call <SID>show_documentation()<CR>
 	function! s:show_documentation()
-	  if (index(['vim','help'], &filetype) >= 0)
-		execute 'h '.expand('<cword>')
-	  else
-		call CocAction('doHover')
-	  endif
+		if (index(['vim','help'], &filetype) >= 0)
+			execute 'h '.expand('<cword>')
+		else
+			call CocAction('doHover')
+		endif
 	endfunction
 	" nnoremap <silent> <leader>gh :call My_hover()<CR>
 	" function! My_hover() abort
@@ -315,6 +315,8 @@ hook_add = '''
 	" endfunction
 '''
 
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
 
 [[plugins]] # ステータスラインとバッファ表示の強化
 repo = 'vim-airline/vim-airline'
@@ -350,5 +352,3 @@ hook_add = '''
 	let g:airline_section_z = '%3v:%l/%L %3p%%'
 '''
 
-[[plugins]]
-repo = 'vim-airline/vim-airline-themes'

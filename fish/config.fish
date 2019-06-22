@@ -7,23 +7,24 @@ alias python3='/usr/bin/python3.7'
 set PYLINTRC /mnt/c/Users/admin/dotfiles/vim/pylintrc $PYLINTRC
 
 # for go
-set -x GOPATH $HOME/go $GOPATH
-set -x GOPATH /mnt/c/Users/admin/go $GOPATH
-set -x PATH $GOPATH/bin $PATH
-set -x PATH /mnt/c/Users/admin/go/bin/ $PATH
-set -x PATH /mnt/c/Windows/System32 $PATH
-#set -x FZF_DEFAULT_COMMAND 'jvgrep'
-set -x FZF_LEGACY_KEYBINDINGS 1
-set -x FZF_DEFAULT_OPTS "--height=60% --select-1 --exit-0 --reverse --no-unicode"
-set -x FZF_FIND_FILE_OPTS "--preview 'head -n 100 {}'"
+set GOPATH $HOME/go $GOPATH
+set GOPATH /mnt/c/Users/admin/go $GOPATH
+set PATH $GOPATH/bin $PATH
+set PATH /usr/lib/go-1.12/bin $PATH
+set PATH /mnt/c/Users/admin/go/bin $PATH
+set PATH /mnt/c/Windows/System32 $PATH
+# set -x PATH (echo $PATH | tr ' ' '\n' | sort -u)
+#set FZF_DEFAULT_COMMAND 'jvgrep'
+set PATH /home/eetann/.fzf/bin $PATH
+set FZF_LEGACY_KEYBINDINGS 1
+set FZF_DEFAULT_OPTS "--height=60% --select-1 --exit-0 --reverse --no-unicode"
+set FZF_FIND_FILE_OPTS "--preview 'head -n 100 {}'"
 # a:ドットディレクトリもたどる
 # l:シンボリックリンクをたどる
 # C:色付きで表示
-set -x FZF_CD_OPTS  "--preview 'tree -alC {} | head -n 100'"
-#set -x FZF_PREVIEW_FILE_CMD "head -50 {}"
-#set -x FZF_PREVIEW_DIR_CMD "tree -C {} | head -200"
+set FZF_CD_OPTS  "--preview 'tree -alC {} | head -n 100'"
 
-set -x EDITOR vim
+set EDITOR vim
 
 set -g theme_newline_cursor yes
 set -g theme_display_git_master_branch yes
@@ -33,7 +34,7 @@ set -g theme_display_date no
 set -g theme_display_cmd_duration no
 set -g fish_prompt_pwd_dir_length 0
 
-set -x LSCOLORS  exfxcxdxbxegedabagacad
-
+# PATHの重複を削除
+set -x PATH (echo $PATH | tr ' ' '\n' | sort -u)
 # tmuxを自動起動する自作コマンド
 tm

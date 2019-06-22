@@ -106,6 +106,7 @@ ln -s /mnt/c/Users/admin/.vim .vim
 ln -s /mnt/c/Users/admin/dotfiles/tmux.conf ~/.tmux.conf
 mkdir ~/.config/nvim
 ln -s /mnt/c/Users/admin/dotfiles/vim/.vimrc ~/.config/nvim/init.vim
+ln -s /mnt/c/Users/admin/dotfiles/config.yaml ~/.config/efm-langserver/config.yaml
 
 # for coc.nvom
 curl --compressed -o- -L https://yarnpkg.com/install.sh | sh

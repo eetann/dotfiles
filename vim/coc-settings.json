@@ -31,6 +31,11 @@
 		 		"pyls.plugins.rope_completion.enabled":true,
 		 		"pyls.plugins.flake8.enabled":true
 		 	}
-		 }
+		},
+		"efm": {
+			"command": "efm-langserver",
+			"args": ["-c", "~/dotfiles/config.yaml"],
+			"filetypes": ["vim"]
+		}
 	}
 }

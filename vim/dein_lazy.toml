@@ -204,11 +204,11 @@ hook_post_source = '''
 		\ ]
 	let s:menus.dein = {'description':'Plugin management'}
 	let s:menus.dein.command_candidates = [
-		\ ['🐬 Dein: Plugins update 🔸:call dein#update()', 'call dein#update()'],
-		\ ['🐬 Dein: Plugins rechash🔸:call dein#recache_runtimepath()', 'call dein#recache_runtimepath()'],
-		\ ['🐬 Dein: Plugins List   🔸:Denite dein', 'Denite dein'],
-		\ ['🐬 Dein: Update log     🔸:echo dein#get_updates_log()', 'echo dein#get_updates_log()'],
-		\ ['🐬 Dein: Log            🔸:echo dein#get_log()', 'echo dein#get_log()'],
+		\ ['call dein#update()', 'call dein#update()'],
+		\ ['call dein#recache_runtimepath()', 'call dein#recache_runtimepath()'],
+		\ ['Denite dein', 'Denite dein'],
+		\ ['echo dein#get_updates_log()', 'echo dein#get_updates_log()'],
+		\ ['echo dein#get_log()', 'echo dein#get_log()'],
 		\ ]
 	let s:menus.good_help = {'description': 'good help'}
 	let s:menus.good_help.command_candidates = [
@@ -277,6 +277,13 @@ repo = 'dag/vim-fish'
 [[plugins]] # matlab
 repo = 'lazywei/vim-matlab'
 on_ft = ['matlab']
+
+[[plugins]] # matlab
+repo = 'yinflying/matlab-screen'
+on_ft = ['matlab']
+hook_add = '''
+	let g:matlab_term_cmd='"/mnt/c/Program Files/MATLAB/R2019a/bin/matlab.exe" -nodesktop -nosplash'
+'''
 
 [[plugins]] # 日本語ヘルプ
 repo = 'vim-jp/vimdoc-ja'
