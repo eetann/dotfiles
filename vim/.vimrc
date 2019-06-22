@@ -16,7 +16,7 @@ nnoremap q; q:
 "  再読込時に２度設定しないように、初期化
 "  autocmdを使うときにはautocmd vimrc ゴニョゴニョと書く
 augroup vimrc
-  autocmd!
+	autocmd!
 augroup END
 
 " --移動系---------------------------------
@@ -43,6 +43,12 @@ nnoremap sv :<C-u>vs<CR>
 nnoremap sc <C-w>c
 " バッファを閉じる
 nnoremap sq :<C-u>bd<CR>
+nnoremap sq :<C-u>call <SID>my_buffer_delete()<CR>
+function! s:my_buffer_delete()
+	let s:now_bn = bufnr("%")
+	bprevious
+	execute 'bdelete' . s:now_bn
+endfunction
 nnoremap sQ :<C-u>bd!<CR>
 " InsertModeでカーソル移動
 inoremap <C-b> <left>
@@ -206,13 +212,10 @@ set splitbelow
 set splitright
 set winwidth=30
 set winminwidth=30
+set noequalalways
 
 
 "dein Scripts-----------------------------
-if &compatible
-	set nocompatible               " Be iMproved
-endif
-
 let s:dein_path = expand('$HOME/.vim/dein')
 let s:dein_repo_path = s:dein_path . '/repos/github.com/Shougo/dein.vim'
 
