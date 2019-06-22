@@ -260,12 +260,13 @@ repo = 'Shougo/neosnippet.vim'
 on_ft = ['snippet']
 depends = ['neosnippet-snippets','vim-snippets']
 hook_add = '''
+	let g:neosnippet#snippets_directory = ['~/dotfiles/mysnippet', '~/.vim/dein/repos/github.com/honza/vim-snippets/snippets']
+	let g:neosnippet#enable_completed_snippet = 1 " 関数スニペットを展開
+	let g:neosnippet#expand_word_boundary = 0 " jump時に間違えて補完されないようにオフ
+	let g:neosnippet#disable_runtime_snippets = {'_' : 1}
 	imap <C-k> <Plug>(neosnippet_expand_or_jump)
 	smap <C-k> <Plug>(neosnippet_expand_or_jump)
-	xmap <C-k> <Plug>(neosnippet_expand_or_jump)
-	let g:neosnippet#snippets_directory = ['~/dotfiles/mysnippet', '~/.vim/dein/repos/github.com/honza/vim-snippets/snippets']
-	let g:neosnippet#enable_completed_snippet = 1
-	let g:neosnippet#expand_word_boundary = 1
+	xmap <C-k> <Plug>(neosnippet_expand_target)
 '''
 
 [[plugins]] # LSP補完
@@ -293,7 +294,6 @@ hook_add = '''
 	let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 	let g:coc_global_extensions = ['coc-neosnippet', 'coc-syntax']
 	let g:coc_start_at_startup=1
-	" nnoremap <silent> <leader>gh :call CocAction('doHover')<CR>
 	nnoremap <silent> K :call <SID>show_documentation()<CR>
 	function! s:show_documentation()
 		if (index(['vim','help'], &filetype) >= 0)
@@ -302,17 +302,6 @@ hook_add = '''
 			call CocAction('doHover')
 		endif
 	endfunction
-	" nnoremap <silent> <leader>gh :call My_hover()<CR>
-	" function! My_hover() abort
-	" 	" 関数の説明をpopupで表示
-	" 	call CocAction('doHover')
-	" 	if exists('g:coc_last_hover_message')
-	" 		call popup_create(g:coc_last_hover_message,
-	"		\ {'line':'cursor+2', 'col':'cursor',
-	"			\ 'maxheight':150,'maxwidth':100,'border':[1,1,1,1],'moved':'any'})
-	" 		unlet g:coc_last_hover_message
-	" 	end
-	" endfunction
 '''
 
 [[plugins]]
@@ -351,4 +340,3 @@ hook_add = '''
     \ }
 	let g:airline_section_z = '%3v:%l/%L %3p%%'
 '''
-

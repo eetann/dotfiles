@@ -278,12 +278,12 @@ repo = 'dag/vim-fish'
 repo = 'lazywei/vim-matlab'
 on_ft = ['matlab']
 
-[[plugins]] # matlab
-repo = 'yinflying/matlab-screen'
-on_ft = ['matlab']
-hook_add = '''
-	let g:matlab_term_cmd='"/mnt/c/Program Files/MATLAB/R2019a/bin/matlab.exe" -nodesktop -nosplash'
-'''
+# [[plugins]] # matlab
+# repo = 'yinflying/matlab-screen'
+# on_ft = ['matlab']
+# hook_add = '''
+# 	let g:matlab_term_cmd='"/mnt/c/Program Files/MATLAB/R2019a/bin/matlab.exe" -nodesktop -nosplash'
+# '''
 
 [[plugins]] # 日本語ヘルプ
 repo = 'vim-jp/vimdoc-ja'
@@ -298,8 +298,7 @@ hook_add = '''
 	let g:winresizer_horiz_resize=1
 '''
 
-# NerdFont List{{{
-# This list is useful for testing and choosing interesting symbols.
+# NerdFont # This list is useful for testing and choosing interesting symbols.
 # Also it's more consistent with current fonts than codepoints shown in README.
 # So, it may worth to add this to the wiki - I've opened issue just to ask is this appropriate. Probably it's better to put it on page with Nerd font loaded.
 # 

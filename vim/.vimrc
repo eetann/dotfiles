@@ -68,6 +68,10 @@ tnoremap <C-q> <C-w><C-c>:close!<CR>
 
 " --編集系---------------------------------
 " ----コピペ関連
+" cursor位置から行末までをヤンク
+nnoremap Y y$
+" 選択範囲をヤンクしたら選択範囲の末尾へ移動
+xnoremap gy y`>
 " VisualModeで置換対象ペースト時のヤンク入れ替えを防ぐ
 xnoremap <expr> p 'pgv"'.v:register.'ygv<esc>'
 set clipboard=unnamedplus " ヤンク&ペーストをクリップボード利用
