@@ -24,8 +24,8 @@ set scrolloff=5 " 上下のスクロールの余裕を確保する
 " 表示行と移動行を合わせる
 nnoremap j gj
 nnoremap k gk
-autocmd vimrc FileType text,qf,quickrun nnoremap j j
-autocmd vimrc FileType text,qf,quickrun nnoremap k k
+" autocmd vimrc FileType text,qf,quickrun nnoremap j j
+" autocmd vimrc FileType text,qf,quickrun nnoremap k k
 " 遠いので近くに
 map H ^
 map L $
@@ -191,6 +191,7 @@ set list "空白文字の可視化
 " 行末スペース、改行記号
 " ウィンドウ幅狭いときの省略での文字表示*2、不可視のスペースを表す
 set listchars=tab:\ \ ,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+set display=lastline
 
 " ----cursorの形をモードで変化(ターミナルによる)
 if has('vim_starting') " reloadableにするため
