@@ -22,6 +22,9 @@ yes | sudo update-locale LANG=ja_JP.UTF-8
 # install Japanese manual
 yes | sudo apt install manpages-ja manpages-ja-dev
 
+# install english dict for cmd "$look"
+yes | sudo apt install wamerican-huge
+
 # for using latest viming
 yes | sudo apt remove vim
 yes | sudo add-apt-repository ppa:jonathonf/vim
