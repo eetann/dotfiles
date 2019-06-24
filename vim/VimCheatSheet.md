@@ -1,5 +1,6 @@
 # Vim cheat sheat  
 最終更新日:2019/4/10  
+要変更  
 
 | My<leader>       | <Space> |  
 |------------------|---------|  
@@ -81,9 +82,6 @@
 | n      | sl       | window間を右に移動           | <C-w>l               |  
 | n      | sw       | window間を次に移動           | <C-w>w               |  
 | n      | sr       | windowを回転                 | <C-w>r               |  
-| n      | sq       | windowを閉じる               | :q                   |  
-| n      | sQ       | bufferを閉じる               | :bd                  |  
-| t      | sf       | TernimalMode(fish)開始       |                      |  
 | t      | <C-q>    | TernimalModebufferごと終了   |                      |  
 
 
@@ -112,14 +110,6 @@
 | Tableize/, |        | デリミタ区切りをTableに |                   |  
 | n     | ML-tdc | 列を削除                | TableDeleteColumn |  
 
-# plasticboy/vim-markdown  
-| Mode | Map | Description           | Original |  
-|------|-----|-----------------------|----------|  
-| n    | zc  | cursorのfieldを閉じる | close    |  
-| n    | za  | cursorのfieldを開ける |          |  
-| n    | zM  | 全てのfieldを閉じる   |          |  
-| n    | xR  | 全てのfieldを開ける   |          |  
-
 
 # quickrun  
 | Mode   | Map    | Description                  | Original   |  
@@ -128,9 +118,9 @@
 | n      | ML-R   | ターミナルでquickrunの実行   | run        |  
 
 # vim-easymotion  
-| Mode   | Map                  | Description                           | Original |  
-|--------|----------------------|---------------------------------------|----------|  
-| n | f<char><char>+<char> | f + 2文字で画面全体を検索してジャンプ |          |  
+| Mode | Map             | Description                           | Original |  
+|------|-----------------|---------------------------------------|----------|  
+| n    | se<char>+<char> | f + 2文字で画面全体を検索してジャンプ |          |  
 
 
 # vim-easy-align  

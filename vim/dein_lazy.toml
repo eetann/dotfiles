@@ -9,6 +9,9 @@ repo = 'thinca/vim-quickrun'
 hook_add = '''
 	let g:quickrun_config = {}
 	set errorformat=%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+	function! s:open_from_wsl_to_win()
+		execute "OpenBrowser" substitute(expand('%:p'), '\v/mnt/(.)', '\1:/', 'c')
+	endfunction
 	let g:quickrun_config = {
 		\ "_":{
 		\ 'runner'    : 'vimproc',
@@ -81,6 +84,72 @@ hook_add = '''
 repo = 'mattn/emmet-vim'
 on_ft = ['html', 'css', 'php', 'xml', 'javascript']
 
+# ----Markdownサポート----
+[[plugins]] # Markdownの編集をサポート
+repo = 'plasticboy/vim-markdown'
+on_ft = 'md'
+hook_add = '''
+	let g:vim_markdown_folding_disabled=1
+	let g:vim_markdown_new_list_item_indent = 0
+'''
+
+[[plugins]] # テーブルの生成を補助?
+repo = 'godlygeek/tabular'
+on_ft = 'md'
+
+[[plugins]] # テーブルの生成
+repo = 'dhruvasagar/vim-table-mode'
+on_ft = 'md'
+hook_add = '''
+	let g:table_mode_corner='|'
+	let g:table_mode_tableize_map = '<Leader>tb'
+'''
+
+[[plugins]] # markdown用のctags
+repo = 'jszakmeister/markdown2ctags'
+on_ft = 'md'
+
+[[plugins]] # tagジャンプ
+repo = 'majutsushi/tagbar'
+depends = ['markdown2ctags']
+on_cmd =['TagbarOpen','TagbarToggle']
+hook_add = '''
+	let g:tagbar_width = 30
+	let g:tagbar_sort = 0
+	let g:tagbar_map_togglesort = 'S'
+	let g:can_auto_opens_defx_tagbar = 1
+	autocmd vimrc VimResized,VimEnter * call s:auto_open_tagbar()
+	" ウィンドウ幅が大きいときはtagbarを開いておく。
+	function! s:auto_open_tagbar() abort
+		if g:can_auto_opens_defx_tagbar==1
+			let s:is_opened_tagbar = bufwinid('Tagbar')
+			if winwidth(0) >= 120 && s:is_opened_tagbar==-1
+				" フォーカスは編集中のファイルに戻す
+				let s:win_id = win_getid()
+				TagbarOpen
+				let succeed = win_gotoid(s:win_id)
+			elseif winwidth(0) < 120 && s:is_opened_tagbar!=-1
+				execute "bdelete" . winbufnr(s:is_opened_tagbar)
+			endif
+		endif
+	endfunction
+	nnoremap <silent> <leader>tt :TagbarToggle<CR>
+	let g:tagbar_type_markdown = {
+		\ 'ctagstype': 'markdown',
+		\ 'ctagsbin' : $HOME . '/.vim/dein/repos/github.com/jszakmeister/markdown2ctags/markdown2ctags.py',
+		\ 'ctagsargs' : '-f - --sort=yes',
+		\ 'kinds' : [
+		\ 's:sections',
+		\ 'i:images'
+		\ ],
+		\ 'sro' : '|',
+		\ 'kind2scope' : {
+		\ 's' : 'section',
+		\ },
+		\ 'sort': 0,
+		\ }
+'''
+
 [[plugins]] # 画面の移動が便利になる
 repo = 'easymotion/vim-easymotion'
 on_event = 'VimEnter'
@@ -152,31 +221,31 @@ hook_add = '''
 	nnoremap <silent> ,ma :<C-u>Denite mark -auto-action=preview<CR>
 	nnoremap <silent> ,r :<C-u>Denite -resume<CR>
 	nnoremap <silent> ,g :<C-u>DeniteBufferDir grep -auto-action=preview<CR>
-		autocmd vimrc FileType denite call s:denite_my_settings()
-		function! s:denite_my_settings() abort
-			nnoremap <silent><buffer><expr> <CR>
-			\ denite#do_map('do_action')
-			nnoremap <silent><buffer><expr> d
-			\ denite#do_map('do_action', 'delete')
-			nnoremap <silent><buffer><expr> p
-			\ denite#do_map('do_action', 'preview')
-			nnoremap <silent><buffer><expr> q
-			\ denite#do_map('quit')
-			nnoremap <silent><buffer><expr> i
-			\ denite#do_map('open_filter_buffer')
-			nnoremap <silent><buffer><expr> <Space>
-			\ denite#do_map('toggle_select').'j'
-			inoremap <silent><buffer><expr> <C-c> 
-			\ denite#do_map('quit')
-			nnoremap <silent><buffer><expr> <C-c> 
-			\ denite#do_map('quit')
-			nnoremap <silent><buffer><expr> ss
-			\ denite#do_map('do_action', 'split')
-			nnoremap <silent><buffer><expr> sv
-			\ denite#do_map('do_action', 'vsplit')
-		endfunction
 '''
 hook_post_source = '''
+	autocmd vimrc FileType denite call s:denite_my_settings()
+	function! s:denite_my_settings() abort
+		nnoremap <silent><buffer><expr> <CR>
+		\ denite#do_map('do_action')
+		nnoremap <silent><buffer><expr> d
+		\ denite#do_map('do_action', 'delete')
+		nnoremap <silent><buffer><expr> p
+		\ denite#do_map('do_action', 'preview')
+		nnoremap <silent><buffer><expr> q
+		\ denite#do_map('quit')
+		nnoremap <silent><buffer><expr> i
+		\ denite#do_map('open_filter_buffer')
+		nnoremap <silent><buffer><expr> <Space>
+		\ denite#do_map('toggle_select').'j'
+		inoremap <silent><buffer><expr> <C-c> 
+		\ denite#do_map('quit')
+		nnoremap <silent><buffer><expr> <C-c> 
+		\ denite#do_map('quit')
+		nnoremap <silent><buffer><expr> ss
+		\ denite#do_map('do_action', 'split')
+		nnoremap <silent><buffer><expr> sv
+		\ denite#do_map('do_action', 'vsplit')
+	endfunction
 	let s:menus = {}
 	let s:menus.dotfiles = {'description':'dotfiles'}
 	let s:menus.dotfiles.file_candidates = [
@@ -292,12 +361,131 @@ on_event = 'VimEnter'
 [[plugins]]
 repo = 'simeji/winresizer'
 on_event = 'VimEnter'
-hook_add = '''
+hook_post_source = '''
 	" リサイズ幅を1ずつに変更
     let g:winrisizer_vert_resize=1
 	let g:winresizer_horiz_resize=1
 '''
 
+[[plugins]] # file explorer
+repo = 'Shougo/defx.nvim'
+depends = ['nvim-yarp', 'vim-hug-neovim-rpc','defx-icons']
+on_cmd = 'Defx'
+hook_add = '''
+	autocmd vimrc VimResized,VimEnter * call s:auto_open_defx()
+	" ウィンドウ幅が大きいときはdefxを開いておく。
+	function! s:auto_open_defx() abort
+		if g:can_auto_opens_defx_tagbar==1
+			" 現在のタブページ内でのウィンドウIDで開閉判定
+			let s:is_opened_defx = bufwinid('defx')
+			if winwidth(0) >= 150 && s:is_opened_defx==-1
+				" フォーカスは編集中のファイルに戻す
+				let s:win_id = win_getid()
+				Defx -split=vertical -columns=icons:filename:type
+				\ -winwidth=30  -direction=topleft
+				let succeed = win_gotoid(s:win_id)
+			elseif winwidth(0) < 150 && s:is_opened_defx!=-1
+				execute 'bdelete' . winbufnr(s:is_opened_defx)
+			endif
+		endif
+	endfunction
+	" windowが編集ファイル以外だけになったら違うバッファへ
+	autocmd vimrc WinEnter * call s:move_buffer_for_defx()
+	function! s:move_buffer_for_defx() abort
+		if &ft == 'defx' && winnr('$') == 1
+			q
+			buffer #
+			call s:auto_open_defx()
+		elseif &ft == 'defx' && winnr('$') == 2 && bufnr('Tagbar')!=-1
+			q
+			TagbarClose
+			buffer #
+			call s:auto_open_defx()
+			call s:auto_open_tagbar()
+		elseif &ft == 'Tagbar' && winnr('$') == 1
+			TagbarClose
+			buffer #
+			call s:auto_open_tagbar()
+		end
+	endfunction
+	nnoremap <silent> <Space>f
+	\ :<C-u>Defx -split=vertical -columns=icons:filename:type
+		\ -winwidth=30 -direction=topleft -toggle<CR>
+'''
+hook_source = '''
+	autocmd FileType defx call s:defx_my_settings()
+	function! s:defx_my_settings() abort
+		nnoremap <silent><buffer><expr> <CR>
+		\ defx#is_directory() ?
+		\ defx#do_action('open_or_close_tree') :
+		\ defx#do_action('drop')
+		nnoremap <silent><buffer><expr> o
+		\ defx#do_action('open_or_close_tree')
+		nnoremap <silent><buffer><expr> c
+		\ defx#do_action('copy')
+		nnoremap <silent><buffer><expr> m
+		\ defx#do_action('move')
+		nnoremap <silent><buffer><expr> p
+		\ defx#do_action('paste')
+		nnoremap <silent><buffer><expr> l
+		\ defx#is_directory() ?
+			\ defx#do_action('open') :
+			\ ((&columns > 150) ?
+			\ defx#do_action('drop'):
+			\ defx#do_action('multi', ['drop', 'quit']))
+		nnoremap <silent><buffer><expr> ss
+		\ defx#do_action('multi', [['drop', 'split'], 'quit'])
+		nnoremap <silent><buffer><expr> sv
+		\ defx#do_action('multi', [['drop', 'vsplit'], 'quit'])
+		nnoremap <silent><buffer><expr> P
+		\ defx#do_action('open', 'pedit')
+		nnoremap <silent><buffer><expr> O
+		\ defx#do_action('open_or_close_tree')
+		nnoremap <silent><buffer><expr> K
+		\ defx#do_action('new_directory')
+		nnoremap <silent><buffer><expr> N
+		\ defx#do_action('new_file')
+		nnoremap <silent><buffer><expr> M
+		\ defx#do_action('new_multiple_files')
+		nnoremap <silent><buffer><expr> C
+		\ defx#do_action('toggle_columns',
+		\                'mark:filename:type:size:time')
+		nnoremap <silent><buffer><expr> S
+		\ defx#do_action('toggle_sort', 'time')
+		nnoremap <silent><buffer><expr> d
+		\ defx#do_action('remove')
+		nnoremap <silent><buffer><expr> r
+		\ defx#do_action('rename')
+		nnoremap <silent><buffer><expr> !
+		\ defx#do_action('execute_command')
+		nnoremap <silent><buffer><expr> x
+		\ defx#do_action('execute_system')
+		nnoremap <silent><buffer><expr> yy
+		\ defx#do_action('yank_path')
+		nnoremap <silent><buffer><expr> .
+		\ defx#do_action('toggle_ignored_files')
+		nnoremap <silent><buffer><expr> h
+		\ defx#do_action('cd', ['..'])
+		nnoremap <silent><buffer><expr> ~
+		\ defx#do_action('cd')
+		nnoremap <silent><buffer><expr> q
+		\ defx#do_action('quit')
+		nnoremap <silent><buffer><expr> <Space>
+		\ defx#do_action('toggle_select') . 'j'
+		nnoremap <silent><buffer><expr> *
+		\ defx#do_action('toggle_select_all')
+		nnoremap <silent><buffer><expr> j
+		\ line('.') == line('$') ? 'gg' : 'j'
+		nnoremap <silent><buffer><expr> k
+		\ line('.') == 1 ? 'G' : 'k'
+		nnoremap <silent><buffer><expr> <C-l>
+		\ defx#do_action('redraw')
+		nnoremap <silent><buffer><expr> <C-g>
+		\ defx#do_action('print')
+		nnoremap <silent><buffer><expr> cd
+		\ defx#do_action('change_vim_cwd')
+	endfunction
+'''
 # NerdFont # This list is useful for testing and choosing interesting symbols.
 # Also it's more consistent with current fonts than codepoints shown in README.
 # So, it may worth to add this to the wiki - I've opened issue just to ask is this appropriate. Probably it's better to put it on page with Nerd font loaded.
