@@ -6,12 +6,10 @@ on_ft = 'toml'
 
 [[plugins]] # その場で実行できる
 repo = 'thinca/vim-quickrun'
+on_cmd = "QuickRun"
 hook_add = '''
-	let g:quickrun_config = {}
 	set errorformat=%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
-	function! s:open_from_wsl_to_win()
-		execute "OpenBrowser" substitute(expand('%:p'), '\v/mnt/(.)', '\1:/', 'c')
-	endfunction
+	let g:quickrun_config = {}
 	let g:quickrun_config = {
 		\ "_":{
 		\ 'runner'    : 'job',
@@ -27,6 +25,20 @@ hook_add = '''
 		\ },
 		\ 'python': {
 		\   'command': 'python3.7'
+		\ },
+		\ 'markdown': {
+		\ 'runner'    : 'vimscript',
+		\ 'exec':'%c %a',
+		\ 'command': ":call",
+		\ 'args': 'My_opens()',
+		\ 'outputter':'null',
+		\ },
+		\ 'html': {
+		\ 'runner'    : 'vimscript',
+		\ 'exec':'%c %a',
+		\ 'command': ":call",
+		\ 'args': 'My_opens()',
+		\ 'outputter':'null',
 		\ },
 		\ 'matlab': {
 		\ 'runner':"shell",
@@ -66,21 +78,6 @@ on_ft = ['vim','toml','md','mdwn','mkd','mkdn','mark']
 repo = 'osyo-manga/vim-precious'
 on_ft = ['vim','toml','md','mdwn','mkd','mkdn','mark']
 depends = ['context_filetype.vim']
-
-[[plugins]] # プレビューをブラウザで開く
-repo = 'tyru/open-browser.vim'
-on_ft = ['md', 'html','python']
-hook_add = '''
-	autocmd vimrc BufNewFile,BufRead *.html,*.md nnoremap <buffer><Leader>p
-		\ :execute "OpenBrowser" substitute(expand('%:p'), '\v/mnt/(.)', '\1:/', 'c')<CR>
-	autocmd vimrc BufNewFile,BufRead *.html,*.py nnoremap <buffer><Leader>P
-		\ :execute "OpenBrowser http://localhost:8000/" . expand('%')<CR>
-	autocmd vimrc BufNewFile,BufRead *.html,*.py nnoremap <buffer><Leader>cp
-		\ :term ++rows=5 cmd.exe /c python server.py
-	let g:netrw_nogx = 1 " disable netrw's gx mapping.
-	nmap gx <Plug>(openbrowser-smart-search)
-	vmap gx <Plug>(openbrowser-smart-search)
-'''
 
 [[plugins]] # Emmet
 repo = 'mattn/emmet-vim'

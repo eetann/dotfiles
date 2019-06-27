@@ -2,10 +2,27 @@
 [[plugins]] # これ使うのに必要
 repo = 'Shougo/dein.vim'
 
-# [[plugins]] # 非同期実行(vim-clang-formatに必要)
-# repo = 'Shougo/vimproc.vim'
-# build = 'make'
-#
+[[plugins]] # 非同期実行(openbrowserに必要)
+repo = 'Shougo/vimproc.vim'
+build = 'make'
+
+[[plugins]] # プレビューをブラウザで開く
+repo = 'tyru/open-browser.vim'
+hook_add = '''
+	autocmd vimrc BufNewFile,BufRead *.html,*.md nnoremap <buffer><Leader>p
+		\ :execute "OpenBrowser" substitute(expand('%:p'), '\v/mnt/(.)', '\1:/', 'c')<CR>
+	autocmd vimrc BufNewFile,BufRead *.html,*.py nnoremap <buffer><Leader>P
+		\ :execute "OpenBrowser http://localhost:8000/" . expand('%')<CR>
+	autocmd vimrc BufNewFile,BufRead *.html,*.py nnoremap <buffer><Leader>cp
+		\ :term ++rows=5 cmd.exe /c python server.py
+	let g:netrw_nogx = 1 " disable netrw's gx mapping.
+	nmap gx <Plug>(openbrowser-smart-search)
+	vmap gx <Plug>(openbrowser-smart-search)
+	function! My_opens()
+		execute 'OpenBrowser ' . substitute(expand('%:p'), '\v/mnt/(.)', '\1:/', 'c')
+	endfunction
+'''
+
 [[plugins]] # コメントアウトに便利
 repo = 'tyru/caw.vim'
 hook_add = '''
@@ -68,11 +85,11 @@ hook_add = '''
 	xmap <C-k> <Plug>(neosnippet_expand_target)
 '''
 
-# [[plugins]] # use look cmd
-# repo = 'Shougo/neco-vim'
-#
-# [[plugins]] # use look cmd
-# repo = 'neoclide/coc-neco'
+[[plugins]] # use look cmd
+repo = 'Shougo/neco-vim'
+
+[[plugins]] # use look cmd
+repo = 'neoclide/coc-neco'
 
 [[plugins]] # LSP補完
 repo = 'neoclide/coc.nvim'
