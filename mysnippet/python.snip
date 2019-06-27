@@ -2,3 +2,9 @@ snippet     print
 abbr        print
 options     word
 	print(${1:#:TARGET})
+
+snippet     def
+abbr        def function(...): ...
+options     word
+	def ${1:#:name}(${2}):
+		${0:pass}

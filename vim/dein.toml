@@ -68,11 +68,11 @@ hook_add = '''
 	xmap <C-k> <Plug>(neosnippet_expand_target)
 '''
 
-[[plugins]] # use look cmd
-repo = 'Shougo/neco-vim'
-
-[[plugins]] # use look cmd
-repo = 'neoclide/coc-neco'
+# [[plugins]] # use look cmd
+# repo = 'Shougo/neco-vim'
+#
+# [[plugins]] # use look cmd
+# repo = 'neoclide/coc-neco'
 
 [[plugins]] # LSP補完
 repo = 'neoclide/coc.nvim'

@@ -77,6 +77,9 @@ hook_add = '''
 		\ :execute "OpenBrowser http://localhost:8000/" . expand('%')<CR>
 	autocmd vimrc BufNewFile,BufRead *.html,*.py nnoremap <buffer><Leader>cp
 		\ :term ++rows=5 cmd.exe /c python server.py
+	let g:netrw_nogx = 1 " disable netrw's gx mapping.
+	nmap gx <Plug>(openbrowser-smart-search)
+	vmap gx <Plug>(openbrowser-smart-search)
 '''
 
 [[plugins]] # Emmet
