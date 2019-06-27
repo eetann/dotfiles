@@ -1,6 +1,6 @@
 {
 	"coc.preferences.formatOnSaveFiletypes": ["python"],
-	"coc.source.neosnippet.priority": 95,
+	"coc.source.neosnippet.priority": 98,
 	"suggest.detailMaxLength": 50,
 	"suggest.timeout":5000,
 	"signature.target": "echo",
