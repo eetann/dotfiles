@@ -43,21 +43,10 @@ hook_add = '''
 		\ 'matlab': {
 		\ 'runner':"shell",
 		\ 'exec':'%c %o',
-		\ 'command': '/mnt/c/Program Files/MATLAB/R2019a/bin/matlab.exe',
-		\ 'cmdopt': '-nodesktop -nosplash -r "workspace, %:r, which(%:r)"'
+		\ 'command': 'matlab',
+		\ 'cmdopt': '-nodesktop -nosplash -softwareopengl -r "workspace, %:r, which(%:r)"'
 		\ },
 		\ }
-		" splitは、以下を用いている
-		" curly-braces-names(波括弧変数)で{}内を評価
-		" expr2 ? expr1 : expr1 の式でexpr2が真なら前、偽なら後ろのexpr1を評価
-		" https://vim-jp.org/vimdoc-ja/eval.html#expr1
-		" \ 'markdown': {
-		" \ 'runner'    : 'vimscript',
-		" \ 'command': ":OpenBrowser",
-		" \ 'args': "%{substitute(expand('%S:p'), '\v/mnt/(.)', '\1:/', 'c')}",
-		" \ 'exec': "%c %a",
-		" \ 'outputter':'null',
-		" \ },
 	" qでquickfixを閉じる
 	autocmd vimrc FileType qf nnoremap <silent><buffer>q :quit<CR>
 	" normal or visual modeのとき <leader> + r で保存してからquickrunの実行
@@ -219,7 +208,8 @@ hook_add = '''
 	nnoremap <silent> ,me :<C-u>Denite menu -auto-action=preview<CR>
 	nnoremap <silent> ,ma :<C-u>Denite mark -auto-action=preview<CR>
 	nnoremap <silent> ,r :<C-u>Denite -resume<CR>
-	nnoremap <silent> ,g :<C-u>DeniteBufferDir grep -auto-action=preview<CR>
+	nnoremap <silent> ,gg :<C-u>DeniteBufferDir grep -auto-action=preview<CR>
+	nnoremap <silent> ,gw :<C-u>DeniteCursorWord grep -auto-action=preview<CR>
 '''
 hook_post_source = '''
 	autocmd vimrc FileType denite call s:denite_my_settings()
@@ -346,12 +336,12 @@ repo = 'dag/vim-fish'
 repo = 'lazywei/vim-matlab'
 on_ft = ['matlab']
 
-# [[plugins]] # matlab
-# repo = 'yinflying/matlab-screen'
-# on_ft = ['matlab']
-# hook_add = '''
-# 	let g:matlab_term_cmd='"/mnt/c/Program Files/MATLAB/R2019a/bin/matlab.exe" -nodesktop -nosplash'
-# '''
+[[plugins]] # matlab
+repo = 'yinflying/matlab-screen'
+on_ft = ['matlab']
+hook_add = '''
+	let g:matlab_term_cmd='matlab -nodesktop -nosplash -softwareopengl'
+'''
 
 [[plugins]] # 日本語ヘルプ
 repo = 'vim-jp/vimdoc-ja'
