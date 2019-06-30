@@ -162,7 +162,7 @@ autocmd vimrc FileType help,quickrun nnoremap <buffer> q <C-w>c
 " <Space><CR>で上、Shift+Ctrl+Enterで下に空行挿入
 nnoremap <Space><CR> mzo<ESC>`z:delmarks z<CR>
 nnoremap  mzO<ESC>`z:delmarks z<CR>
-" InsertModeでcccを入力し、エスケープでコメント線以下は例(日本語があると少し減る)
+" InsertModeでccc を入力し、エスケープでコメント線以下は例(日本語があると少し減る)
 " ----------------------------------------------------------------
 inoreabbrev <expr> ccc repeat('-', 70 - col('.'))
 set noswapfile " ファイル編集中にスワップファイルを作らない

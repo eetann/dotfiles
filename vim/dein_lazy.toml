@@ -190,7 +190,7 @@ on_source = 'denite.nvim'
 
 [[plugins]] # すごいやつ(語彙力)
 repo = 'Shougo/denite.nvim'
-depends = ['nvim-yarp', 'vim-hug-neovim-rpc','neoyank.vim','coc-denite']
+depends = ['nvim-yarp', 'vim-hug-neovim-rpc','neoyank.vim','coc-denite','defx.nvim']
 on_cmd = ['Denite', 'DeniteBufferDir', 'DeniteCursorWord', 'DeniteProjectDir']
 hook_add = '''
 	nnoremap <silent> ,fr :<C-u>Denite file/rec -auto-action=preview<CR>
@@ -222,6 +222,8 @@ hook_post_source = '''
 		\ denite#do_map('do_action', 'preview')
 		nnoremap <silent><buffer><expr> q
 		\ denite#do_map('quit')
+		nnoremap <silent><buffer><expr> <C-d>
+		\ denite#do_map('move_up_path')
 		nnoremap <silent><buffer><expr> i
 		\ denite#do_map('open_filter_buffer')
 		nnoremap <silent><buffer><expr> <Space>
