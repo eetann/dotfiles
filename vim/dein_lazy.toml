@@ -343,6 +343,19 @@ repo = 'yinflying/matlab-screen'
 on_ft = ['matlab']
 hook_add = '''
 	let g:matlab_term_cmd='matlab -nodesktop -nosplash -softwareopengl'
+    let g:matlab_screen_default_mapping = 0
+    vnoremap <Leader>mr  :call matlab#RunSelected()<CR>
+    nnoremap <Leader>mr  :call matlab#RunCurrentFile()<CR>
+    nnoremap <Leader>mR  :call matlab#RunCell()<CR>
+    nnoremap <Leader>md  :call matlab#GetDoc()<CR>
+    nnoremap <Leader>mb  :call matlab#SetBreak()<CR>
+    nnoremap <Leader>mv  :call matlab#WatchVarible()<CR>
+    nnoremap <Leader>mf  :call matlab#OpenCurrentFile()<CR>
+    nnoremap <Leader>maf :call matlab#OpenAllFile()<CR>
+    nnoremap <Leader>mw  :call matlab#OpenWorkspace()<CR>
+    nnoremap <Leader>mc  :call matlab#ClearVariables()<CR>
+    nnoremap <Leader>ms  :call matlab#GetVariableSize()<CR>
+    nnoremap <Leader>mt  :call matlab#Toggle()<CR>
 '''
 
 [[plugins]] # 日本語ヘルプ
