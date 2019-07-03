@@ -398,18 +398,26 @@ hook_add = '''
 	function! s:move_buffer_for_defx() abort
 		if &ft == 'defx' && winnr('$') == 1
 			q
-			buffer #
-			call s:auto_open_defx()
-		elseif &ft == 'defx' && winnr('$') == 2 && bufnr('Tagbar')!=-1
+			bprevious
+			let s:win_id = win_getid()
+			Defx -split=vertical -columns=icons:filename:type
+			\ -winwidth=30  -direction=topleft
+			let succeed = win_gotoid(s:win_id)
+			" TODO: bufnrだと、隠しバッファ状態でも検知してしまう
+			" TODO: defxではなくTagbarで2つの状態のときも検知したい
+		elseif winnr('$') == 2 && &ft == 'defx' && bufnr('Tagbar')!=-1
 			q
 			TagbarClose
-			buffer #
-			call s:auto_open_defx()
-			call s:auto_open_tagbar()
+			bprevious
+			let s:win_id = win_getid()
+			Defx -split=vertical -columns=icons:filename:type
+			\ -winwidth=30  -direction=topleft
+			TagbarOpen
+			let succeed = win_gotoid(s:win_id)
 		elseif &ft == 'Tagbar' && winnr('$') == 1
 			TagbarClose
-			buffer #
-			call s:auto_open_tagbar()
+			bprevious
+			TagbarOpen
 		end
 	endfunction
 	nnoremap <silent> <Space>f

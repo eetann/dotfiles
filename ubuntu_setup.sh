@@ -13,17 +13,14 @@ yes | sudo apt-get upgrade
 # install git
 yes | sudo apt install git
 
-# change command output to Japanese
-yes | sudo apt install language-pack-ja
-
-# change error message to Japanese
-yes | sudo update-locale LANG=ja_JP.UTF-8
-
-# install Japanese manual
-yes | sudo apt install manpages-ja manpages-ja-dev
-
-# install english dict for cmd "$look"
-yes | sudo apt install wamerican-huge
+# # change command output to Japanese
+# yes | sudo apt install language-pack-ja
+#
+# # change error message to Japanese
+# yes | sudo update-locale LANG=ja_JP.UTF-8
+#
+# # install Japanese manual
+# yes | sudo apt install manpages-ja manpages-ja-dev
 
 # for using latest viming
 yes | sudo apt remove vim
