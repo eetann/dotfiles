@@ -347,6 +347,24 @@ q::
 	Sleep 100
 	IME_SET(0)
 	Return
+; それぞれのウェブパネルに割り振ったショートカットキーを通して、ウェブパネルを開く
+~,::
+	Input,MyCommands,I T0.5 L2,{Esc},ta,tw,an,tr,gc,gk,gt
+	If MyCommands = ta
+		Send, !1
+	Else If MyCommands = tw
+		Send, !2
+	Else If MyCommands = an
+		Send, !3
+	Else If MyCommands = tr
+		Send, !4
+	Else If MyCommands = gc
+		Send, !5
+	Else If MyCommands = gk
+		Send, !6
+	Else If MyCommands = gt
+		Send, !7
+	Return
 #IfWinActive
 
 IsAltTabMenu := false
