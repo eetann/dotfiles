@@ -188,13 +188,18 @@ on_source = 'denite.nvim'
 repo = 'neoclide/coc-denite'
 on_source = 'denite.nvim'
 
+[[plugins]] 
+repo = 'Shougo/neomru.vim'
+on_source = 'denite.nvim'
+
 [[plugins]] # すごいやつ(語彙力)
 repo = 'Shougo/denite.nvim'
-depends = ['nvim-yarp', 'vim-hug-neovim-rpc','neoyank.vim','coc-denite','defx.nvim']
+depends = ['nvim-yarp', 'vim-hug-neovim-rpc','neoyank.vim','coc-denite','defx.nvim','neomru.vim']
 on_cmd = ['Denite', 'DeniteBufferDir', 'DeniteCursorWord', 'DeniteProjectDir']
 hook_add = '''
 	nnoremap <silent> ,fr :<C-u>Denite file/rec -auto-action=preview<CR>
-	nnoremap <silent> ,fo :<C-u>Denite file/old -auto-action=preview<CR>
+	" nnoremap <silent> ,fo :<C-u>Denite file/old -auto-action=preview<CR>
+	nnoremap <silent> ,fo :<C-u>Denite file_mru file/old -auto-action=preview<CR>
 	nnoremap <silent> ,ft :<C-u>Denite filetype -start-filter<CR>
 	nnoremap <silent> ,ch :<C-u>Denite command_history -start-filter<CR>
 	nnoremap <silent> ,b :<C-u>Denite buffer -auto-action=preview<CR>
@@ -302,34 +307,6 @@ hook_post_source = '''
 repo = 'kshenoy/vim-signature'
 on_event = 'VimEnter'
 
-[[plugins]] # 検索を改善
-repo = 'haya14busa/incsearch.vim'
-on_event = 'VimEnter'
-hook_add = '''
-	map /  <Plug>(incsearch-forward)
-	map ?  <Plug>(incsearch-backward)
-	map g/ <Plug>(incsearch-stay)
-'''
-
-[[plugins]] # fuzzy検索
-repo = 'haya14busa/incsearch-fuzzy.vim'
-on_event = 'VimEnter'
-depends = ['incsearch.vim']
-hook_add = '''
-	map z/ <Plug>(incsearch-fuzzy-/)
-	map z? <Plug>(incsearch-fuzzy-?)
-	map zg/ <Plug>(incsearch-fuzzy-stay)
-'''
-
-[[plugins]] # migemo検索
-repo = 'haya14busa/incsearch-migemo.vim'
-on_event = 'VimEnter'
-depends = ['incsearch.vim']
-hook_add = '''
-	map s/ <Plug>(incsearch-migemo-/)
-	map s? <Plug>(incsearch-migemo-?)
-	map sg/ <Plug>(incsearch-migemo-stay)
-'''
 [[plugins]] # edit for fish
 on_ft = ['fish']
 repo = 'dag/vim-fish'

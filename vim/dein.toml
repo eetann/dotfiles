@@ -9,9 +9,7 @@ build = 'make'
 [[plugins]] # プレビューをブラウザで開く
 repo = 'tyru/open-browser.vim'
 hook_add = '''
-	autocmd vimrc BufNewFile,BufRead *.html,*.md nnoremap <buffer><Leader>p
-		\ :execute "OpenBrowser" substitute(expand('%:p'), '\v/mnt/(.)', '\1:/', 'c')<CR>
-	autocmd vimrc BufNewFile,BufRead *.html,*.py nnoremap <buffer><Leader>P
+	autocmd vimrc BufNewFile,BufRead *.html,*.py nnoremap <buffer><Leader>p
 		\ :execute "OpenBrowser http://localhost:8000/" . expand('%')<CR>
 	autocmd vimrc BufNewFile,BufRead *.html,*.py nnoremap <buffer><Leader>cp
 		\ :term ++rows=5 cmd.exe /c python server.py
