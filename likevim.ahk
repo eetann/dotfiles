@@ -342,6 +342,11 @@ q::
 ^h::
 	Send {BS}
 	Return
+^+l::
+	Send ^+l
+	Sleep 100
+	IME_SET(0)
+	Return
 #IfWinActive
 
 IsAltTabMenu := false
