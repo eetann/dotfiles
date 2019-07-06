@@ -214,6 +214,7 @@ set splitright
 set winwidth=30
 set winminwidth=30
 set noequalalways
+set belloff=all
 
 
 "dein Scripts-----------------------------

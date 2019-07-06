@@ -30,8 +30,30 @@ hook_add = '''
 	nnoremap gcl :vimgrep /TODO:/j %<CR>
 '''
 
+[[plugins]] # ヤンク時に一瞬ハイライト
+repo = "machakann/vim-highlightedyank"
+
+# textobjct-------------------------------------------------------
+[[plugins]] # テキストオブジェクトの追加のため
+repo = 'kana/vim-textobj-user'
+
+[[plugins]] # L 改行文字内で行を扱う
+repo = 'kana/vim-textobj-line'
+depends = 'vim-textobj-user'
+
+[[plugins]] # u
+repo = 'mattn/vim-textobj-url'
+depends = 'vim-textobj-user'
+
+[[plugins]] # f{char} select a range between character
+repo = 'thinca/vim-textobj-between'
+depends = 'vim-textobj-user'
+
 [[plugins]] # 括弧関連便利になる
 repo = 'tpope/vim-surround'
+hook_add ="""
+	let g:highlightedyank_highlight_duration = 500
+"""
 
 [[plugins]] # 括弧などを入力したときの挙動をスマートに補完
 repo = 'jiangmiao/auto-pairs'
@@ -140,6 +162,10 @@ hook_add = '''
 			call CocAction('doHover')
 		endif
 	endfunction
+	omap iF <Plug>(coc-funcobj-i)
+	omap aF <Plug>(coc-funcobj-a)
+	vmap iF <Plug>(coc-funcobj-i)
+	vmap aF <Plug>(coc-funcobj-a)
 '''
 
 [[plugins]]

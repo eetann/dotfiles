@@ -198,7 +198,6 @@ depends = ['nvim-yarp', 'vim-hug-neovim-rpc','neoyank.vim','coc-denite','defx.nv
 on_cmd = ['Denite', 'DeniteBufferDir', 'DeniteCursorWord', 'DeniteProjectDir']
 hook_add = '''
 	nnoremap <silent> ,fr :<C-u>Denite file/rec -auto-action=preview<CR>
-	" nnoremap <silent> ,fo :<C-u>Denite file/old -auto-action=preview<CR>
 	nnoremap <silent> ,fo :<C-u>Denite file_mru file/old -auto-action=preview<CR>
 	nnoremap <silent> ,ft :<C-u>Denite filetype -start-filter<CR>
 	nnoremap <silent> ,ch :<C-u>Denite command_history -start-filter<CR>
