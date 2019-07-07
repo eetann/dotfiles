@@ -83,13 +83,15 @@ xnoremap <expr> p 'pgv"'.v:register.'ygv<esc>'
 set clipboard=unnamedplus " ヤンク&ペーストをクリップボード利用
 " ペーストした範囲をvisualModeで選択
 nnoremap <expr> sgv '`['.strpart(getregtype(), 0, 1).'`]'
-" 下or上の行に貼り付け
-nnoremap sp mzo<ESC>p`z:delmarks z<CR>
-nnoremap sP mzO<ESC>P`z:delmarks z<CR>
-nnoremap sgp mzo<ESC>gp`z:delmarks z<CR>
-nnoremap sgP mzO<ESC>gP`z:delmarks z<CR>
+" 下or上の行に貼り付けてカーソル位置はそのまま
+nnoremap sp mzox<Esc>"_x]p`z:delmarks z<CR>
+nnoremap sP mzOx<Esc>"_x]p`z:delmarks z<CR>
+" 下の行に貼り付けたら貼り付けの末尾へ
+nnoremap sgp ox<Esc>"_x]p`]
+" 上の行へ貼り付けたら貼り付けの先頭へ
+nnoremap sgP Ox<Esc>"_x]p`[
 " 全選択コピー
-nnoremap sy mzggVGy<ESC>`z:delmarks z<CR>
+nnoremap sy :%y<CR>
 
 " ----改行時自動コメントオフ
 set formatoptions-=ro

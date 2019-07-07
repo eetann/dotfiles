@@ -97,47 +97,6 @@ hook_add = '''
 repo = 'jszakmeister/markdown2ctags'
 on_ft = 'md'
 
-[[plugins]] # tagジャンプ
-repo = 'majutsushi/tagbar'
-depends = ['markdown2ctags']
-on_cmd =['TagbarOpen','TagbarToggle']
-hook_add = '''
-	let g:tagbar_width = 30
-	let g:tagbar_sort = 0
-	let g:tagbar_map_togglesort = 'S'
-	let g:can_auto_opens_defx_tagbar = 1
-	autocmd vimrc VimResized,VimEnter * call s:auto_open_tagbar()
-	" ウィンドウ幅が大きいときはtagbarを開いておく。
-	function! s:auto_open_tagbar() abort
-		if g:can_auto_opens_defx_tagbar==1
-			let s:is_opened_tagbar = bufwinid('Tagbar')
-			if winwidth(0) >= 120 && s:is_opened_tagbar==-1
-				" フォーカスは編集中のファイルに戻す
-				let s:win_id = win_getid()
-				TagbarOpen
-				let succeed = win_gotoid(s:win_id)
-			elseif winwidth(0) < 120 && s:is_opened_tagbar!=-1
-				execute "bdelete" . winbufnr(s:is_opened_tagbar)
-			endif
-		endif
-	endfunction
-	nnoremap <silent> <leader>tt :TagbarToggle<CR>
-	let g:tagbar_type_markdown = {
-		\ 'ctagstype': 'markdown',
-		\ 'ctagsbin' : $HOME . '/.vim/dein/repos/github.com/jszakmeister/markdown2ctags/markdown2ctags.py',
-		\ 'ctagsargs' : '-f - --sort=yes',
-		\ 'kinds' : [
-		\ 's:sections',
-		\ 'i:images'
-		\ ],
-		\ 'sro' : '|',
-		\ 'kind2scope' : {
-		\ 's' : 'section',
-		\ },
-		\ 'sort': 0,
-		\ }
-'''
-
 [[plugins]] # 画面の移動が便利になる
 repo = 'easymotion/vim-easymotion'
 on_event = 'VimEnter'
