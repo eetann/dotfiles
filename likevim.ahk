@@ -372,10 +372,13 @@ IsAltTabMenu := false
 	Send !^{Tab}
 	IsAltTabMenu := true
 Return
-; j & k::
-; 	Send !^{Tab}
-; 	IsAltTabMenu := true
-Return
+vk1C & m::
+	if(HenkanShort("m")){
+		return
+	}
+	Send !^{Tab}
+	IsAltTabMenu := true
+return
 #If (IsAltTabMenu)
 	h::Send {Left}
 	j::Send {Down}
