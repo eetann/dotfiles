@@ -37,7 +37,7 @@ nnoremap sk <C-w>k
 nnoremap sl <C-w>l
 nnoremap sh <C-w>h
 " 分割(水平&垂直)
-nnoremap ss :<C-u>sp<CR>
+nnoremap sb :<C-u>sp<CR>
 nnoremap sv :<C-u>vs<CR>
 " ウィンドウを閉じる
 nnoremap sc <C-w>c
@@ -80,7 +80,7 @@ nnoremap Y y$
 xnoremap gy y`>
 " VisualModeで置換対象ペースト時のヤンク入れ替えを防ぐ
 xnoremap <expr> p 'pgv"'.v:register.'ygv<esc>'
-set clipboard=unnamedplus " ヤンク&ペーストをクリップボード利用
+set clipboard^=unnamedplus " ヤンク&ペーストをクリップボード利用
 " ペーストした範囲をvisualModeで選択
 nnoremap <expr> sgv '`['.strpart(getregtype(), 0, 1).'`]'
 " 下or上の行に貼り付けてカーソル位置はそのまま
@@ -177,6 +177,8 @@ set completeopt=menuone
 autocmd vimrc FileType text,qf,quickrun setlocal wrap
 set mouse=a
 set ttimeoutlen=100 " ESCしてから挿入モード出るまでの時間を短縮
+" 押し間違え多すぎだし使わないのでマッピング
+imap <C-@> <C-[>
 
 
 " --見た目系---------------------------------

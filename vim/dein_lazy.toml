@@ -99,12 +99,12 @@ on_ft = 'md'
 
 [[plugins]] # 画面の移動が便利になる
 repo = 'easymotion/vim-easymotion'
-on_event = 'VimEnter'
+on_map = '<Plug>'
 hook_add = '''
     " デフォルトのキーマッピングを無効に
     let g:EasyMotion_do_mapping = 0
     " f + 2文字 で画面全体を検索してジャンプ
-    nmap se <plug>(easymotion-overwin-f2)
+    nmap ss <plug>(easymotion-overwin-f2)
     " 検索時、大文字小文字を区別しない
     let g:EasyMotion_smartcase = 1
 	let g:EasyMotion_use_migemo = 1
@@ -201,6 +201,12 @@ hook_post_source = '''
 		\ denite#do_map('do_action', 'vsplit')
 	endfunction
 	let s:menus = {}
+	let s:menus.often_use = {'description':'often use commands'}
+	let s:menus.often_use.command_candidates = [
+		\ ['setlocal filetype=python', 'setlocal filetype=python'],
+		\ ['setlocal filetype=html', 'setlocal filetype=html'],
+		\ ['setlocal filetype=xml', 'setlocal filetype=xml'],
+		\ ]
 	let s:menus.dotfiles = {'description':'dotfiles'}
 	let s:menus.dotfiles.file_candidates = [
 		\ ['vim/.vimrc', '~/dotfiles/vim/.vimrc'],
@@ -243,12 +249,6 @@ hook_post_source = '''
 		\ ['help-summary', 'help help-summary'],
 		\ ['index', 'help index'],
 		\ ['quickref', 'help quickref'],
-		\ ]
-	let s:menus.often_use = {'description':'often use commands'}
-	let s:menus.often_use.command_candidates = [
-		\ ['setlocal filetype=python', 'setlocal filetype=python'],
-		\ ['setlocal filetype=html', 'setlocal filetype=html'],
-		\ ['setlocal filetype=xml', 'setlocal filetype=xml'],
 		\ ]
 	call denite#custom#option('default', 'prompt', '🐉 ')
 	call denite#custom#option('search', 'prompt', '🔎 ')
@@ -311,23 +311,23 @@ repo = 'Shougo/defx.nvim'
 depends = ['nvim-yarp', 'vim-hug-neovim-rpc','defx-icons']
 on_cmd = 'Defx'
 hook_add = '''
-	autocmd vimrc VimResized,VimEnter * call s:auto_open_defx()
-	" ウィンドウ幅が大きいときはdefxを開いておく。
-	function! s:auto_open_defx() abort
-		if g:can_auto_opens_defx_tagbar==1
-			" 現在のタブページ内でのウィンドウIDで開閉判定
-			let s:is_opened_defx = bufwinid('defx')
-			if winwidth(0) >= 150 && s:is_opened_defx==-1
-				" フォーカスは編集中のファイルに戻す
-				let s:win_id = win_getid()
-				Defx -split=vertical -columns=icons:filename:type
-				\ -winwidth=30  -direction=topleft
-				let succeed = win_gotoid(s:win_id)
-			elseif winwidth(0) < 150 && s:is_opened_defx!=-1
-				execute 'bdelete' . winbufnr(s:is_opened_defx)
-			endif
-		endif
-	endfunction
+	" autocmd vimrc VimResized,VimEnter * call s:auto_open_defx()
+	" " ウィンドウ幅が大きいときはdefxを開いておく。
+	" function! s:auto_open_defx() abort
+	" 	if g:can_auto_opens_defx_tagbar==1
+	" 		" 現在のタブページ内でのウィンドウIDで開閉判定
+	" 		let s:is_opened_defx = bufwinid('defx')
+	" 		if winwidth(0) >= 150 && s:is_opened_defx==-1
+	" 			" フォーカスは編集中のファイルに戻す
+	" 			let s:win_id = win_getid()
+	" 			Defx -split=vertical -columns=icons:filename:type
+	"			\ -winwidth=30  -direction=topleft
+	" 			let succeed = win_gotoid(s:win_id)
+	" 		elseif winwidth(0) < 150 && s:is_opened_defx!=-1
+	" 			execute 'bdelete' . winbufnr(s:is_opened_defx)
+	" 		endif
+	" 	endif
+	" endfunction
 	" windowが編集ファイル以外だけになったら違うバッファへ
 	autocmd vimrc WinEnter * call s:move_buffer_for_defx()
 	function! s:move_buffer_for_defx() abort
