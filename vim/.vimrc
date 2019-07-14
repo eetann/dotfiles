@@ -93,6 +93,7 @@ nnoremap sgP Ox<Esc>"_x]p`[
 " 全選択コピー
 nnoremap sy :%y<CR>
 nnoremap st :term<CR>
+nnoremap sgg :let @*=expand('%')<CR>
 
 " ----改行時自動コメントオフ
 set formatoptions-=ro
