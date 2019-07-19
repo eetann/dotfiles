@@ -396,13 +396,13 @@ return
 		return
 	^n::
 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-			Send, *!n
+			Send, +!n
 		else
 			Send, ^n
 		return
 	^p::
 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-			Send, *!p
+			Send, +!p
 		else
 			Send, ^p
 		return
