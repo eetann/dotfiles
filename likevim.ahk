@@ -394,6 +394,18 @@ return
 	^l::
 		Send, !d
 		return
+	^n::
+		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
+			Send, *!n
+		else
+			Send, ^n
+		return
+	^p::
+		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
+			Send, *!p
+		else
+			Send, ^p
+		return
 #IfWinActive
 
 ; #IfWinActive ahk_class AcrobatSDIWindow
