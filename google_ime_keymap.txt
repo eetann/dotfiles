@@ -20,36 +20,26 @@ Conversion	Ctrl d	SegmentWidthShrink
 Prediction	Ctrl Delete	DeleteSelectedCandidate
 Composition	Ctrl Down	MoveCursorToEnd
 Conversion	Ctrl Down	CommitOnlyFirstSegment
-Composition	Ctrl e	MoveCursorToBeginning
-Conversion	Ctrl e	ConvertPrev
+Composition	Ctrl e	MoveCursorToEnd
+Conversion	Ctrl e	SegmentFocusLast
 Composition	Ctrl Enter	Commit
 Conversion	Ctrl Enter	Commit
 Composition	Ctrl f	MoveCursorRight
 Conversion	Ctrl f	SegmentFocusRight
-Composition	Ctrl g	Delete
-Conversion	Ctrl g	Cancel
 Composition	Ctrl h	Backspace
-Conversion	Ctrl h	Cancel
-Composition	Ctrl i	ConvertToFullKatakana
-Conversion	Ctrl i	ConvertToFullKatakana
-Composition	Ctrl k	MoveCursorLeft
-Conversion	Ctrl k	SegmentWidthShrink
-Composition	Ctrl l	MoveCursorRight
-Conversion	Ctrl l	SegmentWidthExpand
+Conversion	Ctrl h	Backspace
+Composition	Ctrl k	Commit
+Conversion	Ctrl k	Commit
 Composition	Ctrl Left	MoveCursorToBeginning
 Conversion	Ctrl Left	SegmentFocusFirst
 Composition	Ctrl m	Commit
 Conversion	Ctrl m	Commit
 Composition	Ctrl n	PredictAndConvert
 Conversion	Ctrl n	ConvertNext
-Composition	Ctrl o	ConvertToHalfWidth
-Conversion	Ctrl o	ConvertToHalfWidth
 Composition	Ctrl p	PredictAndConvert
 Conversion	Ctrl p	ConvertPrev
 Composition	Ctrl Right	MoveCursorToEnd
 Conversion	Ctrl Right	SegmentFocusLast
-Composition	Ctrl s	MoveCursorLeft
-Conversion	Ctrl s	SegmentFocusLeft
 Composition	Ctrl Shift Space	InsertFullSpace
 Conversion	Ctrl Shift Space	InsertFullSpace
 Precomposition	Ctrl Shift Space	InsertFullSpace
@@ -57,12 +47,10 @@ Composition	Ctrl Space	InsertHalfSpace
 Conversion	Ctrl Space	InsertHalfSpace
 Composition	Ctrl t	SegmentWidthExpand
 Conversion	Ctrl t	SegmentWidthExpand
-Composition	Ctrl u	Backspace
-Conversion	Ctrl u	Backspace
+Composition	Ctrl u	Cancel
+Conversion	Ctrl u	Cancel
 Composition	Ctrl Up	MoveCursorToBeginning
 Conversion	Ctrl Up	ConvertPrev
-Composition	Ctrl x	PredictAndConvert
-Conversion	Ctrl x	PredictAndConvert
 Composition	Ctrl z	Cancel
 Conversion	Ctrl z	Cancel
 Composition	Delete	Delete

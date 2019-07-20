@@ -74,8 +74,10 @@ tnoremap <C-q> <C-w><C-c>:close!<CR>
 
 " --編集系---------------------------------
 " ----コピペ関連
-" cursor位置から行末までをヤンク
-nnoremap Y y$
+" cursor位置から行末までを改行を含めずにヤンク
+nnoremap Y mzv$hy`z:delmarks z<CR>
+" 行頭から行末までを改行を含めずにヤンク
+nnoremap yY mz0v$hy`z:delmarks z<CR>
 " 選択範囲をヤンクしたら選択範囲の末尾へ移動
 xnoremap gy y`>
 " VisualModeで置換対象ペースト時のヤンク入れ替えを防ぐ
