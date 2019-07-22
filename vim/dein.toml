@@ -37,17 +37,39 @@ repo = "machakann/vim-highlightedyank"
 [[plugins]] # テキストオブジェクトの追加のため
 repo = 'kana/vim-textobj-user'
 
-[[plugins]] # L 改行文字内で行を扱う
-repo = 'kana/vim-textobj-line'
-depends = 'vim-textobj-user'
+# [[plugins]] # l 改行文字を含まずに行を扱う
+# repo = 'kana/vim-textobj-line'
+# depends = 'vim-textobj-user'
 
-[[plugins]] # u
+[[plugins]] # uでURLをtextobj
 repo = 'mattn/vim-textobj-url'
 depends = 'vim-textobj-user'
 
-[[plugins]] # f{char} select a range between character
+[[plugins]] # f{char} で指定文字で囲まれた部分をtextobj
 repo = 'thinca/vim-textobj-between'
 depends = 'vim-textobj-user'
+
+[[plugins]] # sbで近いペアをtextobj
+repo = 'osyo-manga/vim-textobj-multiblock'
+depends = 'vim-textobj-user'
+
+[[plugins]] # ,で引数をtextobj
+repo = 'sgur/vim-textobj-parameter'
+depends = 'vim-textobj-user'
+
+[[plugins]] # dでデリミタ(_,#,-や大文字間)をtextobj
+repo = 'machakann/vim-textobj-delimited'
+depends = 'vim-textobj-user'
+hook_add = """
+	let g:textobj_delimited_patterns =[
+	\ ['\m/', '\m\%(/[-.[:alnum:]_~]\+\)\+'],
+	\ ['\m\\', '\m\a:\%(\\[^\\/?:*"<>|]\+\)\+\ze\%(''[^a-z]\|$\)'],
+	\ ['\m\.', '\m\<\%(\.\k\+\|\k\+\.\)\%(\k*\.\?\)*\>', 10],
+	\ ['\m#', '\m\<\%(#\k\+\|\k\+#\)\%(\k*#\?\)*\>', 10],
+	\ ['\m_', '\m\<\%(_\k\+\|\k\+_\)\%(\k*_\?\)*\>', 10],
+	\ ['\m-', '\m\<\%(-\k\+\|\k\+-\)\%(\k*-\?\)*\>', 10],
+	\ ['\m\C[^A-Z]\zs\ze[A-Z]', '\m\C\<[A-Z]\?\k\+[A-Z]\%(\k*[A-Z]\?\)*\>', 10]]
+"""
 
 [[plugins]] # 括弧関連便利になる
 repo = 'tpope/vim-surround'
@@ -121,8 +143,6 @@ hook_add = '''
 	smap <C-k> <Plug>(neosnippet_expand_or_jump)
 	xmap <C-k> <Plug>(neosnippet_expand_target)
 '''
-
-
 
 [[plugins]] # use look cmd
 repo = 'Shougo/neco-vim'

@@ -75,16 +75,17 @@ tnoremap <C-q> <C-w><C-c>:close!<CR>
 " --編集系---------------------------------
 " ----コピペ関連
 " cursor位置から行末までを改行を含めずにヤンク
-nnoremap Y mzv$hy`z:delmarks z<CR>
+nnoremap Y mzvg$y`z:delmarks z<CR>
 " 行頭から行末までを改行を含めずにヤンク
-nnoremap yY mz0v$hy`z:delmarks z<CR>
+nnoremap yY mz0vg$y`z:delmarks z<CR>
+
 " 選択範囲をヤンクしたら選択範囲の末尾へ移動
 xnoremap gy y`>
 " VisualModeで置換対象ペースト時のヤンク入れ替えを防ぐ
 xnoremap <expr> p 'pgv"'.v:register.'ygv<esc>'
 set clipboard^=unnamedplus " ヤンク&ペーストをクリップボード利用
 " ペーストした範囲をvisualModeで選択
-nnoremap <expr> sgv '`['.strpart(getregtype(), 0, 1).'`]'
+nnoremap sgv `[v`]
 " 下or上の行に貼り付けてカーソル位置はそのまま
 nnoremap sp mzox<Esc>"_x]p`z:delmarks z<CR>
 nnoremap sP mzOx<Esc>"_x]p`z:delmarks z<CR>
