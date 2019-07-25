@@ -57,11 +57,14 @@ IME_SET(SetSts, WinTitle="A")    {
 }
 ;-----------------------------------------------------------
 
+;-----------------------------------------------------------
+; ターミナル以外でもエスケープ設定
 ^[::
 	Send {Esc}
 	Return
 
 
+;-----------------------------------------------------------
 ; 無変換→IMEOFF、変換→IMEONにする
 ; 単独キーも有効にするためにタイマーを設定する
 SetTimer, HenMuhenChecker, 100
@@ -72,7 +75,7 @@ HenMuhenChecker:
 	} else {
 		HenMuhenTime:=0
 	}
-return
+	return
 
 MuhenShort(k){
 	global HenMuhenTime
@@ -107,112 +110,168 @@ HenkanShort(k){
 }
 
 vk1D::
+	If (A_PriorHotKey == A_ThisHotKey and A_TimeSincePriorHotkey < 1000){
+		Input,MyCommands,I T1 L2,{Esc},vi,ws,re,ta,tw,an,tr,gc,gk,gt
+		If MyCommands = vi
+			WinActivate, ahk_exe vivaldi.exe
+		Else If MyCommands = ws
+			WinActivate, ahk_group TerminalVim
+		Else If MyCommands = re
+			Reload
+		Else If MyCommands = ta
+		{
+			WinActivate, ahk_exe vivaldi.exe
+			Send, !1
+		}
+		Else If MyCommands = tw
+		{
+			WinActivate, ahk_exe vivaldi.exe
+			Send, !2
+		}
+		Else If MyCommands = an
+		{
+			WinActivate, ahk_exe vivaldi.exe
+			Send, !3
+		}
+		Else If MyCommands = tr
+		{
+			WinActivate, ahk_exe vivaldi.exe
+			Send, !4
+		}
+		Else If MyCommands = gc
+		{
+			WinActivate, ahk_exe vivaldi.exe
+			Send, !5
+		}
+		Else If MyCommands = gk
+		{
+			WinActivate, ahk_exe vivaldi.exe
+			Send, !6
+		}
+		Else If MyCommands = gt
+		{
+			WinActivate, ahk_exe vivaldi.exe
+			Send, !7
+		}
+		return
+	}
 	if(HenMuhenTime<3){
 		IME_SET(0)
 	}
-return
+	return
 
 vk1C::
 	if(HenMuhenTime<3){
 		IME_SET(1)
 	}
-return
+	return
 
 !vk1D::Send,{Blind}!{vk1D}
 
-;; 無変換+hjklでカーソル移動、Blindをつけると修飾キー組み合わせ（Shift、Ctrなど）も可能
+
+;-----------------------------------------------------------
+; 無変換+hjklでカーソル移動
+; Blindをつけると修飾キー組み合わせ(Shift、Ctrなど)も可能
+; 無変換+Ctrl+hでバックスペース
 vk1D & h::
 	if(MuhenShort("h")){
 		return
 	}
-	Send,{Blind}{left}
-return
+	if (GetKeyState("Ctrl" ,"h")){
+		Send,{BS}
+	} else {
+		Send,{Blind}{left}
+	}
+	return
+
 vk1D & j::
 	if(MuhenShort("j")){
 		return
 	}
 	Send,{Blind}{down}
-return
+	return
+
 vk1D & k::
 	if(MuhenShort("k")){
 		return
 	}
 	Send,{Blind}{up}
-return
+	return
+
 vk1D & l::
 	if(MuhenShort("l")){
 		return
 	}
 	Send,{Blind}{right}
-return
-;;無変換+w,b,でword移動
+	return
+
+; 無変換+wでword移動、無変換+CTRL+wでword消し
 vk1D & w::
 	if(MuhenShort("w")){
 		return
 	}
-	Send,{Blind}^{right}
-return
+	if (GetKeyState("Ctrl" ,"w")){
+		Send,^{BS}
+	} else {
+		Send,{Blind}^{right}
+	}
+	return
+
+; 無変換+bでwordバック移動
 vk1D & b::
 	if(MuhenShort("b")){
 		return
 	}
 	Send,{Blind}^{left}
-return
+	return
 
-;; 無変換+a,eでhome,end
+; 無変換+a,eでhome,end
 vk1D & a::
 	if(MuhenShort("a")){
 		return
 	}
 	Send,{Blind}{Home}
-return
+	return
 vk1D & e::
 	if(MuhenShort("e")){
 		return
 	}
 	Send,{Blind}{End}
-return
+	return
 
-; 変換+hでバックスペース
-vk1C & h::
-	if(HenkanShort("h")){
+; 無変換+uでページアップ、無変換+Ctrl+uで手前全消し
+vk1D & u::
+	if(MuhenShort("u")){
 		return
 	}
-	Send,{BS}
-return
+	if (GetKeyState("Ctrl" ,"u")){
+		Send,{Blind}+{Home}{BS}
+	} else {
+		Send,{PgUp}
+	}
+	return
 
-;;変換+wでword消し
-vk1C & w::
-	if(HenkanShort("w")){
+; 無変換+dでページダウン、無変換+Ctrl+dで一行消し
+vk1D & d::
+	if(MuhenShort("d")){
 		return
 	}
-	Send,^{BS}
-return
-
-;;変換+uで手前全消し
-vk1C & u::
-	if(HenkanShort("u")){
-		return
+	if (GetKeyState("Ctrl" ,"d")){
+		Send,{Blind}{End}+{Home}{BS}
+	} else {
+		Send,{PgDn}
 	}
-	Send,{Blind}+{Home}{BS}
-return
+	return
 
-;;変換+yで一行コピー
-vk1C & y::
-	if(HenkanShort("y")){
+; 無変換+yで一行コピー
+vk1D & y::
+	if(MuhenShort("y")){
 		return
 	}
 	Send,{Blind}{End}+{Home}^{c}
-return
+	return
 
-; 変換+dで一行消し
-vk1C & d::
-	if(HenkanShort("y")){
-		return
-	}
-	Send,{Blind}{End}+{Home}{BS}
-return
-
+;-----------------------------------------------------------
 ; wox起動時はIMEオフに。
 <!vk1D::
 	Send !{vk1D}
@@ -220,53 +279,52 @@ return
 	IME_SET(0)
 	Return
 
+;-----------------------------------------------------------
+; ターミナルでvimのためのIME
 #IfWInActive, ahk_group TerminalVim
 Esc::
-getIMEMode := IME_GET()
-if (getIMEMode = 1) {
-	IME_SET(0)
-	Send {Esc}
-	Return
-} else {
-	Send {Esc}
-	Return
-}
+	getIMEMode := IME_GET()
+	if (getIMEMode = 1) {
+		IME_SET(0)
+		Send {Esc}
+	} else {
+		Send {Esc}
+	}
+	return
 ^[::
-getIMEMode := IME_GET()
-if (getIMEMode = 1) {
-	Send {Esc}
-	Sleep 1 ; wait 1 ms (Need to stop converting)
-	IME_SET(0)
-	Send {Esc}
-	Return
-} else {
-	Send {Esc}
-	Return
-}
+	getIMEMode := IME_GET()
+	if (getIMEMode = 1) {
+		Send {Esc}
+		Sleep 1 ; wait 1 ms (Need to stop converting)
+		IME_SET(0)
+		Send {Esc}
+	} else {
+		Send {Esc}
+	}
+	return
 ^o:: ; 挿入ノーマルモードに入るときもIMEオフ
-getIMEMode := IME_GET()
-if (getIMEMode = 1) {
-	Sleep 1 ; wait 1 ms (Need to stop converting)
-	IME_SET(0)
-	Send ^o
-	Return
-} else {
-	Send ^o
-	Return
-}
+	getIMEMode := IME_GET()
+	if (getIMEMode = 1) {
+		Sleep 1 ; wait 1 ms (Need to stop converting)
+		IME_SET(0)
+		Send ^o
+	} else {
+		Send ^o
+	}
+	return
 ^y:: ; emmetで次の入力をするためにIMEオフ
-getIMEMode := IME_GET()
-if (getIMEMode = 1) {
-	Sleep 1 ; wait 1 ms (Need to stop converting)
-	IME_SET(0)
-	Send ^y
-	Return
-} else {
-	Send ^y
-	Return
-}
+	getIMEMode := IME_GET()
+	if (getIMEMode = 1) {
+		Sleep 1 ; wait 1 ms (Need to stop converting)
+		IME_SET(0)
+		Send ^y
+	} else {
+		Send ^y
+	}
+	return
 #IfWinActive
 
+;-----------------------------------------------------------
 ; vivaldiのクイックコマンドのショートカットキーを押したら
 ; IMEはオフの状態で起動するように設定
 #IfWInActive, ahk_exe vivaldi.exe
@@ -289,37 +347,39 @@ q::
 	IME_SET(0)
 	Return
 ; それぞれのウェブパネルに割り振ったショートカットキーを通して、ウェブパネルを開く
-~,::
-	Input,MyCommands,I T0.5 L2,{Esc},ta,tw,an,tr,gc,gk,gt
-	If MyCommands = ta
-		Send, !1
-	Else If MyCommands = tw
-		Send, !2
-	Else If MyCommands = an
-		Send, !3
-	Else If MyCommands = tr
-		Send, !4
-	Else If MyCommands = gc
-		Send, !5
-	Else If MyCommands = gk
-		Send, !6
-	Else If MyCommands = gt
-		Send, !7
-	Return
+; 無変換2度押しに試験移行中
+; ~,::
+; 	Input,MyCommands,I T0.5 L2,{Esc},ta,tw,an,tr,gc,gk,gt
+; 	If MyCommands = ta
+; 		Send, !1
+; 	Else If MyCommands = tw
+; 		Send, !2
+; 	Else If MyCommands = an
+; 		Send, !3
+; 	Else If MyCommands = tr
+; 		Send, !4
+; 	Else If MyCommands = gc
+; 		Send, !5
+; 	Else If MyCommands = gk
+; 		Send, !6
+; 	Else If MyCommands = gt
+; 		Send, !7
+; 	Return
 #IfWinActive
 
+
+;-----------------------------------------------------------
+; AltTab
 IsAltTabMenu := false
 !Tab::
 	Send !^{Tab}
 	IsAltTabMenu := true
-Return
-vk1C & m::
-	if(HenkanShort("m")){
-		return
-	}
+	return
+; カタカナひらがなローマ字キーでAltTabMenuキーとして割当
+vkF2::
 	Send !^{Tab}
 	IsAltTabMenu := true
-return
+	return
 #If (IsAltTabMenu)
 	h::Send {Left}
 	j::Send {Down}
@@ -335,6 +395,9 @@ return
 	Return
 #If
 
+
+
+;-----------------------------------------------------------
 ; explorer
 #IfWinActive ahk_class CabinetWClass 
 	j::

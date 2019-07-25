@@ -89,16 +89,8 @@ Composition	Henkan	IMEOn
 Conversion	Henkan	IMEOn
 DirectInput	Henkan	IMEOn
 Precomposition	Henkan	IMEOn
-Composition	Hiragana	InputModeHiragana
-Conversion	Hiragana	InputModeHiragana
-DirectInput	Hiragana	IMEOn
-Precomposition	Hiragana	InputModeHiragana
 Composition	Home	MoveCursorToBeginning
 Conversion	Home	SegmentFocusFirst
-Composition	Katakana	InputModeFullKatakana
-Conversion	Katakana	InputModeFullKatakana
-DirectInput	Katakana	IMEOn
-Precomposition	Katakana	InputModeFullKatakana
 Composition	Left	MoveCursorLeft
 Conversion	Left	SegmentFocusLeft
 Composition	Muhenkan	IMEOff

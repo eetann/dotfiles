@@ -45,13 +45,15 @@ repo = 'kana/vim-textobj-user'
 repo = 'mattn/vim-textobj-url'
 depends = 'vim-textobj-user'
 
-[[plugins]] # f{char} で指定文字で囲まれた部分をtextobj
-repo = 'thinca/vim-textobj-between'
-depends = 'vim-textobj-user'
-
-[[plugins]] # sbで近いペアをtextobj
+[[plugins]] # bかsbで近いペアをtextobj
 repo = 'osyo-manga/vim-textobj-multiblock'
 depends = 'vim-textobj-user'
+hook_add = '''
+	omap ab <Plug>(textobj-multiblock-a)
+	omap ib <Plug>(textobj-multiblock-i)
+	xmap ab <Plug>(textobj-multiblock-a)
+	xmap ib <Plug>(textobj-multiblock-i)
+'''
 
 [[plugins]] # ,で引数をtextobj
 repo = 'sgur/vim-textobj-parameter'
