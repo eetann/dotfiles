@@ -18,7 +18,8 @@ set PATH /mnt/c/Windows/System32 $PATH
 set PATH /home/eetann/.fzf/bin $PATH
 set FZF_LEGACY_KEYBINDINGS 1
 set FZF_DEFAULT_OPTS "--height=60% --select-1 --exit-0 --reverse --no-unicode"
-set FZF_FIND_FILE_OPTS "--preview 'head -n 100 {}'"
+# set FZF_FIND_FILE_OPTS "--preview 'head -n 100 {}'"
+set FZF_FIND_FILE_OPTS "--preview 'test [(file {} | grep ASCII)=ASCII];and head -n 100 {}|nkf -Sw ;or head -n 100 {}'"
 # a:ドットディレクトリもたどる
 # l:シンボリックリンクをたどる
 # C:色付きで表示
