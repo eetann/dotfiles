@@ -61,11 +61,45 @@ hook_add = '''
 # ----カーソル位置のコンテキストに合わせてファイルタイプを切り替え----
 [[plugins]] # 判定ライブラリ
 repo = 'Shougo/context_filetype.vim'
-on_ft = ['vim','toml','md','mdwn','mkd','mkdn','mark']
+on_ft = ['vim','toml','md','mdwn','mkd','mkdn','mark','python']
+hook_add = """
+	let g:context_filetype#filetypes = {
+	\ 'python' :[
+	\ {
+		\ 'start' : 'template = \"\"\"',
+		\ 'end': '\"\"\"',
+		\ 'filetype' : 'html',
+	\ },
+	\ ],
+	\}
+	function! My_context_on()
+		let g:context_filetype#filetypes = {
+		\ 'python' :[
+		\ {
+			\ 'start' : '= .\?\"\"\"$',
+			\ 'end': '\"\"\"$',
+			\ 'filetype' : 'html',
+		\ },
+		\ ],
+		\}
+	endfunction
+	function! My_context_off()
+		let g:context_filetype#filetypes = {
+		\ 'python' :[
+		\ {
+			\ 'start' : 'template = \"\"\"',
+			\ 'end': '\"\"\"',
+			\ 'filetype' : 'html',
+		\ },
+		\ ],
+		\}
+	endfunction
+
+"""
 
 [[plugins]]
 repo = 'osyo-manga/vim-precious'
-on_ft = ['vim','toml','md','mdwn','mkd','mkdn','mark']
+on_ft = ['vim','toml','md','mdwn','mkd','mkdn','mark','python']
 depends = ['context_filetype.vim']
 
 [[plugins]] # Emmet
@@ -203,6 +237,8 @@ hook_post_source = '''
 	let s:menus = {}
 	let s:menus.often_use = {'description':'often use commands'}
 	let s:menus.often_use.command_candidates = [
+		\ ['on \"\"\" change html', ':call My_context_on()'],
+		\ ['off \"\"\" change html', ':call My_context_off()'],
 		\ ['setlocal filetype=python', 'setlocal filetype=python'],
 		\ ['setlocal filetype=html', 'setlocal filetype=html'],
 		\ ['setlocal filetype=xml', 'setlocal filetype=xml'],

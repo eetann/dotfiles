@@ -23,7 +23,7 @@ set FZF_FIND_FILE_OPTS "--preview 'test [(file {} | grep ASCII)=ASCII];and head 
 # a:ドットディレクトリもたどる
 # l:シンボリックリンクをたどる
 # C:色付きで表示
-set FZF_CD_OPTS  "--preview 'tree -alC {} | head -n 100'"
+set FZF_CD_OPTS  "--preview 'tree -al {} | head -n 100'"
 
 set EDITOR vim
 

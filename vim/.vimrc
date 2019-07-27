@@ -83,7 +83,9 @@ nnoremap yY mz0vg$y`z:delmarks z<CR>
 xnoremap gy y`>
 " VisualModeで置換対象ペースト時のヤンク入れ替えを防ぐ
 xnoremap <expr> p 'pgv"'.v:register.'ygv<esc>'
-set clipboard^=unnamedplus " ヤンク&ペーストをクリップボード利用
+set clipboard&
+set clipboard^=unnamedplus
+" set clipboard+=unnamedplus " ヤンク&ペーストをクリップボード利用
 " ペーストした範囲をvisualModeで選択
 nnoremap sgv `[v`]
 " 下or上の行に貼り付けてカーソル位置はそのまま
@@ -96,7 +98,7 @@ nnoremap sgP Ox<Esc>"_x]p`[
 " 全選択コピー
 nnoremap sy :%y<CR>
 nnoremap st :term<CR>
-nnoremap sgg :let @*=expand('%')<CR>
+nnoremap sgg :let @+=expand('%')<CR>
 
 " ----改行時自動コメントオフ
 set formatoptions-=ro
@@ -126,6 +128,7 @@ function! s:set_vsearch()
    	silent normal gv"zy
    	let @/ = '\V' . substitute(escape(@z, '/\'), '\n', '\\n', 'g')
 endfunction
+set includeexpr=substitute(v:fname,'^\\/','','')
 
 " ----grepの設定
 " 日本語grepする。要go get取得
