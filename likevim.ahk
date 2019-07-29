@@ -109,48 +109,57 @@ HenkanShort(k){
 	}
 }
 
+IsOpenVivaldi() {
+    Process, Exist, vivaldi.exe
+    if ErrorLevel<>0
+        WinActivate, ahk_exe vivaldi.exe
+    else
+        Run,C:\Program Files (x86)\Vivaldi\Application\vivaldi.exe
+        Sleep 3000
+}
+
 vk1D::
 	If (A_PriorHotKey == A_ThisHotKey and A_TimeSincePriorHotkey < 1000){
 		Input,MyCommands,I T1 L2,{Esc},vi,ws,re,ta,tw,an,tr,gc,gk,gt
 		If MyCommands = vi
-			WinActivate, ahk_exe vivaldi.exe
+            IsOpenVivaldi()
 		Else If MyCommands = ws
 			WinActivate, ahk_group TerminalVim
 		Else If MyCommands = re
 			Reload
 		Else If MyCommands = ta
 		{
-			WinActivate, ahk_exe vivaldi.exe
+			IsOpenVivaldi()
 			Send, !1
 		}
 		Else If MyCommands = tw
 		{
-			WinActivate, ahk_exe vivaldi.exe
+			IsOpenVivaldi()
 			Send, !2
 		}
 		Else If MyCommands = an
 		{
-			WinActivate, ahk_exe vivaldi.exe
+			IsOpenVivaldi()
 			Send, !3
 		}
 		Else If MyCommands = tr
 		{
-			WinActivate, ahk_exe vivaldi.exe
+			IsOpenVivaldi()
 			Send, !4
 		}
 		Else If MyCommands = gc
 		{
-			WinActivate, ahk_exe vivaldi.exe
+			IsOpenVivaldi()
 			Send, !5
 		}
 		Else If MyCommands = gk
 		{
-			WinActivate, ahk_exe vivaldi.exe
+			IsOpenVivaldi()
 			Send, !6
 		}
 		Else If MyCommands = gt
 		{
-			WinActivate, ahk_exe vivaldi.exe
+			IsOpenVivaldi()
 			Send, !7
 		}
 		return
@@ -346,25 +355,6 @@ q::
 	Sleep 100
 	IME_SET(0)
 	Return
-; それぞれのウェブパネルに割り振ったショートカットキーを通して、ウェブパネルを開く
-; 無変換2度押しに試験移行中
-; ~,::
-; 	Input,MyCommands,I T0.5 L2,{Esc},ta,tw,an,tr,gc,gk,gt
-; 	If MyCommands = ta
-; 		Send, !1
-; 	Else If MyCommands = tw
-; 		Send, !2
-; 	Else If MyCommands = an
-; 		Send, !3
-; 	Else If MyCommands = tr
-; 		Send, !4
-; 	Else If MyCommands = gc
-; 		Send, !5
-; 	Else If MyCommands = gk
-; 		Send, !6
-; 	Else If MyCommands = gt
-; 		Send, !7
-; 	Return
 #IfWinActive
 
 

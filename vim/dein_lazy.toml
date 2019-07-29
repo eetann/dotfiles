@@ -333,28 +333,23 @@ hook_post_source = '''
 	let g:winresizer_horiz_resize=1
 '''
 
+[[plugins]] # defx icons
+repo = 'kristijanhusak/defx-icons'
+on_cmd = 'Defx'
+hook_add = '''
+	let g:defx_icons_enable_syntax_highlight = 0
+	let g:defx_icons_column_length = 1
+    let g:defx_icons_directory_icon = '+'
+    let g:defx_icons_root_opendtree_icon = '+'
+    let g:defx_icons_nested_opened_tree_icon = '-'
+    let g:defx_icons_nested_closed_tree_icon = '+'
+'''
+
 [[plugins]] # file explorer
 repo = 'Shougo/defx.nvim'
 depends = ['nvim-yarp', 'vim-hug-neovim-rpc','defx-icons']
 on_cmd = 'Defx'
 hook_add = '''
-	" autocmd vimrc VimResized,VimEnter * call s:auto_open_defx()
-	" " ウィンドウ幅が大きいときはdefxを開いておく。
-	" function! s:auto_open_defx() abort
-	" 	if g:can_auto_opens_defx_tagbar==1
-	" 		" 現在のタブページ内でのウィンドウIDで開閉判定
-	" 		let s:is_opened_defx = bufwinid('defx')
-	" 		if winwidth(0) >= 150 && s:is_opened_defx==-1
-	" 			" フォーカスは編集中のファイルに戻す
-	" 			let s:win_id = win_getid()
-	" 			Defx -split=vertical -columns=icons:filename:type
-	"			\ -winwidth=30  -direction=topleft
-	" 			let succeed = win_gotoid(s:win_id)
-	" 		elseif winwidth(0) < 150 && s:is_opened_defx!=-1
-	" 			execute 'bdelete' . winbufnr(s:is_opened_defx)
-	" 		endif
-	" 	endif
-	" endfunction
 	" windowが編集ファイル以外だけになったら違うバッファへ
 	autocmd vimrc WinEnter * call s:move_buffer_for_defx()
 	function! s:move_buffer_for_defx() abort
@@ -362,7 +357,7 @@ hook_add = '''
 			q
 			bprevious
 			let s:win_id = win_getid()
-			Defx -split=vertical -columns=icons:filename:type
+			Defx -split=vertical -columns=icons:indent:filename:type
 			\ -winwidth=30  -direction=topleft
 			let succeed = win_gotoid(s:win_id)
 			" TODO: bufnrだと、隠しバッファ状態でも検知してしまう
@@ -372,7 +367,7 @@ hook_add = '''
 			TagbarClose
 			bprevious
 			let s:win_id = win_getid()
-			Defx -split=vertical -columns=icons:filename:type
+			Defx -split=vertical -columns=icons:indent:filename:type
 			\ -winwidth=30  -direction=topleft
 			TagbarOpen
 			let succeed = win_gotoid(s:win_id)
@@ -383,7 +378,7 @@ hook_add = '''
 		end
 	endfunction
 	nnoremap <silent> <Space>f
-	\ :<C-u>Defx -split=vertical -columns=icons:filename:type
+	\ :<C-u>Defx -split=vertical -columns=icons:indent:filename:type
 		\ -winwidth=30 -direction=topleft -toggle<CR>
 '''
 hook_source = '''
@@ -391,41 +386,30 @@ hook_source = '''
 	function! s:defx_my_settings() abort
 		nnoremap <silent><buffer><expr> <CR>
 		\ defx#is_directory() ?
-		\ defx#do_action('open_or_close_tree') :
-		\ defx#do_action('drop')
+            \ defx#do_action('open_or_close_tree') :
+            \ defx#do_action('drop')
 		nnoremap <silent><buffer><expr> o
-		\ defx#do_action('open_or_close_tree')
-		nnoremap <silent><buffer><expr> c
-		\ defx#do_action('copy')
-		nnoremap <silent><buffer><expr> m
-		\ defx#do_action('move')
-		nnoremap <silent><buffer><expr> p
-		\ defx#do_action('paste')
+		\ defx#do_action('open')
 		nnoremap <silent><buffer><expr> l
+        \ defx#is_opened_tree() ?
+            \ defx#do_action('open') :
+            \ defx#is_directory() ?
+                \ defx#do_action('open_tree') :
+                \ ((&columns > 150) ?
+                    \ defx#do_action('drop'):
+                    \ defx#do_action('multi', ['drop', 'quit']))
+		nnoremap <silent><buffer><expr> L
 		\ defx#is_directory() ?
 			\ defx#do_action('open') :
-			\ ((&columns > 150) ?
-			\ defx#do_action('drop'):
-			\ defx#do_action('multi', ['drop', 'quit']))
-		nnoremap <silent><buffer><expr> ss
+			\ defx#do_action('drop')
+		nnoremap <silent><buffer><expr> sb
 		\ defx#do_action('multi', [['drop', 'split'], 'quit'])
 		nnoremap <silent><buffer><expr> sv
 		\ defx#do_action('multi', [['drop', 'vsplit'], 'quit'])
-		nnoremap <silent><buffer><expr> P
+		nnoremap <silent><buffer><expr> p
 		\ defx#do_action('open', 'pedit')
-		nnoremap <silent><buffer><expr> O
-		\ defx#do_action('open_or_close_tree')
-		nnoremap <silent><buffer><expr> K
-		\ defx#do_action('new_directory')
-		nnoremap <silent><buffer><expr> N
-		\ defx#do_action('new_file')
-		nnoremap <silent><buffer><expr> M
-		\ defx#do_action('new_multiple_files')
-		nnoremap <silent><buffer><expr> C
-		\ defx#do_action('toggle_columns',
-		\                'mark:filename:type:size:time')
 		nnoremap <silent><buffer><expr> S
-		\ defx#do_action('toggle_sort', 'time')
+		\ defx#do_action('toggle_sort', 'extension')
 		nnoremap <silent><buffer><expr> d
 		\ defx#do_action('remove')
 		nnoremap <silent><buffer><expr> r
@@ -438,8 +422,12 @@ hook_source = '''
 		\ defx#do_action('yank_path')
 		nnoremap <silent><buffer><expr> .
 		\ defx#do_action('toggle_ignored_files')
-		nnoremap <silent><buffer><expr> h
-		\ defx#do_action('cd', ['..'])
+        nnoremap <silent><buffer><expr> h
+        \ defx#is_opened_tree() ?
+            \ defx#do_action('close_tree') :
+            \ defx#do_action('cd', ['..'])
+        nnoremap <silent><buffer><expr> H
+        \ defx#do_action('cd', ['..'])
 		nnoremap <silent><buffer><expr> ~
 		\ defx#do_action('cd')
 		nnoremap <silent><buffer><expr> q
