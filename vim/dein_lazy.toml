@@ -62,40 +62,31 @@ hook_add = '''
 [[plugins]] # 判定ライブラリ
 repo = 'Shougo/context_filetype.vim'
 on_ft = ['vim','toml','md','mdwn','mkd','mkdn','mark','python']
-hook_add = """
-	let g:context_filetype#filetypes = {
-	\ 'python' :[
-	\ {
-		\ 'start' : 'template = \"\"\"',
-		\ 'end': '\"\"\"',
-		\ 'filetype' : 'html',
-	\ },
-	\ ],
-	\}
+hook_add = '''
 	function! My_context_on()
 		let g:context_filetype#filetypes = {
 		\ 'python' :[
 		\ {
-			\ 'start' : '= .\?\"\"\"$',
-			\ 'end': '\"\"\"$',
+			\ 'start' : '=\s.\?"\{3}$',
+			\ 'end': '"\{3}$',
 			\ 'filetype' : 'html',
 		\ },
 		\ ],
 		\}
 	endfunction
+    call My_context_on()
 	function! My_context_off()
 		let g:context_filetype#filetypes = {
 		\ 'python' :[
 		\ {
-			\ 'start' : 'template = \"\"\"',
-			\ 'end': '\"\"\"',
+			\ 'start' : 'template = "\{3}',
+			\ 'end': '"\{3}',
 			\ 'filetype' : 'html',
 		\ },
 		\ ],
 		\}
 	endfunction
-
-"""
+'''
 
 [[plugins]]
 repo = 'osyo-manga/vim-precious'

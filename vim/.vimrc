@@ -85,6 +85,7 @@ xnoremap gy y`>
 xnoremap <expr> p 'pgv"'.v:register.'ygv<esc>'
 set clipboard&
 set clipboard^=unnamedplus
+set clipboard-=autoselect
 " set clipboard+=unnamedplus " ヤンク&ペーストをクリップボード利用
 " ペーストした範囲をvisualModeで選択
 nnoremap sgv `[v`]
@@ -103,6 +104,7 @@ nnoremap sgg :let @+=expand('%')<CR>
 " ----改行時自動コメントオフ
 set formatoptions-=ro
 " ----タブ設定
+set expandtab " インデントをタブの代わりにスペース
 set tabstop=4 "タブ幅をスペース4つ分にする
 set softtabstop=4 " 連続空白に対してTabやBackSpaceでcursorが動く幅
 set autoindent    " 改行時に前の行のintentを継続する
