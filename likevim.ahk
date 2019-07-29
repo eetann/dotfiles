@@ -113,9 +113,10 @@ IsOpenVivaldi() {
     Process, Exist, vivaldi.exe
     if ErrorLevel<>0
         WinActivate, ahk_exe vivaldi.exe
-    else
+    Else {
         Run,C:\Program Files (x86)\Vivaldi\Application\vivaldi.exe
         Sleep 3000
+    }
 }
 
 vk1D::
