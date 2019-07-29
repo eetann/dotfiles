@@ -73,6 +73,19 @@ hook_add = """
 	\ ['\m\C[^A-Z]\zs\ze[A-Z]', '\m\C\<[A-Z]\?\k\+[A-Z]\%(\k*[A-Z]\?\)*\>', 10]]
 """
 
+[[plugins]] # 選択範囲の拡大
+repo = 'terryma/vim-expand-region'
+hook_add = """
+    vmap v <Plug>(expand_region_expand)
+    vmap <C-v> <Plug>(expand_region_shrink)
+    let g:expand_region_text_objects = {
+    \ 'id' :1,
+    \ 'ib' :1,
+    \ 'iB' :1,
+    \ 'ip' :0,
+    \ }
+"""
+
 [[plugins]] # 括弧関連便利になる
 repo = 'tpope/vim-surround'
 hook_add ="""
