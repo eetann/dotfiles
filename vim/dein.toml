@@ -173,7 +173,6 @@ hook_add = '''
 	set signcolumn=yes
 	set updatetime=300
 	highlight link CocHighlightText GruvboxBlueSign
-	autocmd CursorHold * silent call CocActionAsync('highlight')
 	inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 	nnoremap <F10> :<C-u>CocConfig<CR>
 	inoremap <silent><expr> <C-space> coc#refresh()

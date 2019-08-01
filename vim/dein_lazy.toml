@@ -92,6 +92,9 @@ hook_add = '''
 repo = 'osyo-manga/vim-precious'
 on_ft = ['vim','toml','md','mdwn','mkd','mkdn','mark','python']
 depends = ['context_filetype.vim']
+hook_add = """
+    let g:precious_enable_switchers = {'defx': {'setfiletype': 0}}
+"""
 
 [[plugins]] # Emmet
 repo = 'mattn/emmet-vim'
@@ -301,7 +304,7 @@ repo = 'lazywei/vim-matlab'
 on_ft = ['matlab']
 
 [[plugins]] # matlab
-repo = 'yinflying/matlab-screen'
+repo = 'eetann/matlab-screen'
 on_ft = ['matlab']
 hook_add = '''
 	let g:matlab_term_cmd='matlab -nodesktop -nosplash -softwareopengl'
