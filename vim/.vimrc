@@ -199,7 +199,7 @@ set colorcolumn=88 "カラムラインを引く(Pythonのformatter'black'基準)
 set whichwrap=b,s,h,l,[,],<,>,~ "行末から次の行へ移動できる
 filetype plugin on
 set list "空白文字の可視化
-" Tabは\<Space>\<Space>と指定(2字必要)
+" Tabは2文字必要
 " 行末スペース、改行記号
 " ウィンドウ幅狭いときの省略での文字表示*2、不可視のスペースを表す
 set listchars=tab:\ \ ,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
