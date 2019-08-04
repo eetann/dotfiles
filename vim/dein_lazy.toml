@@ -229,16 +229,16 @@ hook_post_source = '''
 		\ denite#do_map('do_action', 'vsplit')
 	endfunction
 	let s:menus = {}
-	let s:menus.often_use = {'description':'often use commands'}
-	let s:menus.often_use.command_candidates = [
+	let s:menus.a_often_use = {'description':'often use commands'}
+	let s:menus.a_often_use.command_candidates = [
 		\ ['on \"\"\" change html', ':call My_context_on()'],
 		\ ['off \"\"\" change html', ':call My_context_off()'],
 		\ ['setlocal filetype=python', 'setlocal filetype=python'],
 		\ ['setlocal filetype=html', 'setlocal filetype=html'],
 		\ ['setlocal filetype=xml', 'setlocal filetype=xml'],
 		\ ]
-	let s:menus.dotfiles = {'description':'dotfiles'}
-	let s:menus.dotfiles.file_candidates = [
+	let s:menus.b_dotfiles = {'description':'dotfiles'}
+	let s:menus.b_dotfiles.file_candidates = [
 		\ ['vim/.vimrc', '~/dotfiles/vim/.vimrc'],
 		\ ['vim/dein.toml', '~/dotfiles/vim/dein.toml'],
 		\ ['vim/dein_lazy.toml', '~/dotfiles/vim/dein_lazy.toml'],
@@ -261,16 +261,16 @@ hook_post_source = '''
 		\ ['mysnippet/markdown.snip', '~/dotfiles/mysnippet/markdown.snip'],
 		\ ['wsl.conf', '~/dotfiles/wsl.conf'],
 		\ ]
-	let s:menus.dein = {'description':'Plugin management'}
-	let s:menus.dein.command_candidates = [
+	let s:menus.c_dein = {'description':'Plugin management'}
+	let s:menus.c_dein.command_candidates = [
 		\ ['call dein#update()', 'call dein#update()'],
 		\ ['call dein#recache_runtimepath()', 'call dein#recache_runtimepath()'],
 		\ ['Denite dein', 'Denite dein'],
 		\ ['echo dein#get_updates_log()', 'echo dein#get_updates_log()'],
 		\ ['echo dein#get_log()', 'echo dein#get_log()'],
 		\ ]
-	let s:menus.good_help = {'description': 'good help'}
-	let s:menus.good_help.command_candidates = [
+	let s:menus.d_good_help = {'description': 'good help'}
+	let s:menus.d_good_help.command_candidates = [
 		\ ['home', 'help '],
 		\ ['eval', 'help eval'],
 		\ ['ex-cmd-index', 'help ex-cmd-index'],
@@ -280,8 +280,11 @@ hook_post_source = '''
 		\ ['index', 'help index'],
 		\ ['quickref', 'help quickref'],
 		\ ]
-	call denite#custom#option('default', 'prompt', '🐉 ')
-	call denite#custom#option('search', 'prompt', '🔎 ')
+    call denite#custom#filter('matcher/ignore_globs', 'ignore_globs',
+        \ ['*~', '*.o', '*.exe', '*.bak',
+        \ '.git/', '.ropeproject/', '__pycache__/', 'tmp/', 'var/', '.deprecated/',
+        \ 'venv/', 'images/', '*.min.*', 'img/', 'fonts/', 'tags', '*.png', '*.bmp',
+        \ '*.pdf', '*.docx', '*.xlsx'])
 	call denite#custom#var('grep', 'command', ['jvgrep'])
 	call denite#custom#var('grep', 'default_opts', ['-i'])
 	call denite#custom#var('grep', 'recursive_opts', ['-R'])
