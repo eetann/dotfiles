@@ -217,20 +217,26 @@ hook_post_source = '''
 		\ denite#do_map('move_up_path')
 		nnoremap <silent><buffer><expr> i
 		\ denite#do_map('open_filter_buffer')
+		nnoremap <silent><buffer><expr> a
+		\ denite#do_map('open_filter_buffer')
+		nnoremap <silent><buffer><expr> o
+		\ denite#do_map('open_filter_buffer')
 		nnoremap <silent><buffer><expr> <Space>
 		\ denite#do_map('toggle_select').'j'
-		inoremap <silent><buffer><expr> <C-c> 
-		\ denite#do_map('quit')
 		nnoremap <silent><buffer><expr> <C-c> 
 		\ denite#do_map('quit')
-		nnoremap <silent><buffer><expr> ss
+		nnoremap <silent><buffer><expr> sb
 		\ denite#do_map('do_action', 'split')
 		nnoremap <silent><buffer><expr> sv
 		\ denite#do_map('do_action', 'vsplit')
+		nnoremap <C-n> j
+		nnoremap <C-p> k
 	endfunction
 	let s:menus = {}
 	let s:menus.a_often_use = {'description':'often use commands'}
 	let s:menus.a_often_use.command_candidates = [
+		\ ['diffthis on', 'windo diffthis'],
+		\ ['diff off', 'windo diffof'],
 		\ ['on \"\"\" change html', ':call My_context_on()'],
 		\ ['off \"\"\" change html', ':call My_context_off()'],
 		\ ['setlocal filetype=python', 'setlocal filetype=python'],
@@ -285,6 +291,7 @@ hook_post_source = '''
         \ '.git/', '.ropeproject/', '__pycache__/', 'tmp/', 'var/', '.deprecated/',
         \ 'venv/', 'images/', '*.min.*', 'img/', 'fonts/', 'tags', '*.png', '*.bmp',
         \ '*.pdf', '*.docx', '*.xlsx'])
+    call denite#custom#source('file/rec', 'matchers', ['matcher/ignore_globs'])
 	call denite#custom#var('grep', 'command', ['jvgrep'])
 	call denite#custom#var('grep', 'default_opts', ['-i'])
 	call denite#custom#var('grep', 'recursive_opts', ['-R'])
