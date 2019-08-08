@@ -229,8 +229,8 @@ hook_post_source = '''
 		\ denite#do_map('do_action', 'split')
 		nnoremap <silent><buffer><expr> sv
 		\ denite#do_map('do_action', 'vsplit')
-		nnoremap <C-n> j
-		nnoremap <C-p> k
+		nnoremap <silent><buffer><C-n> j
+		nnoremap <silent><buffer><C-p> k
 	endfunction
 	let s:menus = {}
 	let s:menus.a_often_use = {'description':'often use commands'}
@@ -259,6 +259,7 @@ hook_post_source = '''
 		\ ['./tmux.conf', '~/dotfiles/tmux.conf'],
 		\ ['./tempmemo.md', '~/dotfiles/tempmemo.md'],
 		\ ['./setup_fish.fish', '~/dotfiles/setup_fish.fish'],
+		\ ['./config.yaml', '~/dotfiles/config.yaml'],
 		\ ['./ubuntu_setup.sh', '~/dotfiles/ubuntu_setup.sh'],
 		\ ['fish/tm.fish', '~/dotfiles/fish/tm.fish'],
 		\ ['fish/config.fish', '~/dotfiles/fish/config.fish'],
@@ -330,7 +331,7 @@ hook_add = '''
     nnoremap <Leader>mc  :call matlab#ClearVariables()<CR>
     nnoremap <Leader>ms  :call matlab#GetVariableSize()<CR>
     nnoremap <Leader>mt  :call matlab#Toggle()<CR>
-	autocmd vimrc VimEnter *.m :call matlab#Start()
+	" autocmd vimrc VimEnter *.m :call matlab#Start()
 '''
 
 [[plugins]] # 日本語ヘルプ

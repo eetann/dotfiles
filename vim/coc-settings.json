@@ -14,7 +14,7 @@
 			"rootPatterns": ["compile_flags.txt", "compile_commands.json", ".vim/", ".git/", ".hg/"],
 			"filetypes": ["c", "cpp", "objc", "objcpp"]
 		},
-		 "pyls": {
+		"pyls": {
 		 	"command": "pyls",
 		 	"filetypes":["python"],
 		 	"settings": {
@@ -34,8 +34,8 @@
 		},
 		"efm": {
 			"command": "efm-langserver",
-			"args": ["-c", "~/dotfiles/config.yaml"],
-			"filetypes": ["vim"]
+			"args": ["-c", "/home/eetann/dotfiles/config.yaml"],
+			"filetypes": ["vim", "matlab"]
 		}
 	}
 }
