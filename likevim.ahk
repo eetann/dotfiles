@@ -7,7 +7,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 ; For Terminal/Vim
 GroupAdd Terminal, ahk_class PuTTY
-GroupAdd Terminal, ahk_class mintty ; cygwin
+GroupAdd Terminal, ahk_class mintty
 GroupAdd TerminalVim, ahk_group Terminal
 GroupAdd TerminalVim, ahk_class Vim
 
@@ -121,7 +121,7 @@ IsOpenVivaldi() {
 
 vk1D::
 	If (A_PriorHotKey == A_ThisHotKey and A_TimeSincePriorHotkey < 1000){
-		Input,MyCommands,I T1 L2,{Esc},vi,ws,re,ta,tw,an,tr,gc,gk,gt
+		Input,MyCommands,I T1 L2,{Esc},vi,ws,re,ta,tw,an,tr,gc,gk,gt,ex
 		If MyCommands = vi
             IsOpenVivaldi()
 		Else If MyCommands = ws
@@ -162,6 +162,16 @@ vk1D::
 		{
 			IsOpenVivaldi()
 			Send, !7
+		}
+		Else If MyCommands = ex
+		{
+            ; explorer.exeは常に存在するため、Process, Exist, explorer.exeは使えない
+            IfWinExist, ahk_class CabinetWClass
+            {
+                WinActivate ahk_class CabinetWClass
+            } else {
+                Run, explorer.exe
+            }
 		}
 		return
 	}

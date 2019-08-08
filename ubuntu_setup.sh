@@ -58,7 +58,7 @@ pip3 uninstall pyflakes pycodestyle
 pip3 install --user pyls-black
 pip3 install --user pyls-isort
 pip3 install --user flake8 isort black
-pip3 install --user neovim
+pip3 install --user pynvim
 pip3 install --user vim-vint
 pip3 install --user numpy
 pip3 install --user matplotlib

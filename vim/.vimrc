@@ -46,7 +46,9 @@ function! s:my_buffer_delete()
     bprevious
     execute 'bdelete' . s:now_bn
 endfunction
+" バッファもウィンドウも閉じる
 nnoremap sQ :<C-u>bd!<CR>
+nnoremap sC :<C-u>bd!<CR>
 " InsertModeでカーソル移動
 inoremap <C-b> <left>
 inoremap <C-f> <right>
