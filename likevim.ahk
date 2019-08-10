@@ -378,9 +378,11 @@ IsAltTabMenu := false
 	return
 ; カタカナひらがなローマ字キーでAltTabMenuキーとして割当
 vkF2::
-	Send !^{Tab}
-	IsAltTabMenu := true
-	return
+    If (A_PriorHotKey == A_ThisHotKey and A_TimeSincePriorHotkey < 1000){
+        Send !^{Tab}
+        IsAltTabMenu := true
+    }
+    return
 #If (IsAltTabMenu)
 	h::Send {Left}
 	j::Send {Down}
