@@ -156,6 +156,9 @@ repo = 'honza/vim-snippets'
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
 
+[[plugins]]
+repo = 'ujihisa/neco-look'
+
 [[plugins]] # use look cmd
 repo = 'Shougo/neco-vim'
 

@@ -110,6 +110,8 @@ function! My_yank_echo()
         let @+ = execute("1messages")
     endif
 endfunction
+" 直前の検索をヤンク
+nnoremap sg/ let @+ = histget("search",-1)
 
 " ----タブ設定----------------------------------------------------
 set expandtab " インデントをタブの代わりにスペース
