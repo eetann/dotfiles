@@ -136,80 +136,28 @@ if = "!has('nvim')"
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
 
+[[plugins]] # 補完
+repo = 'Shougo/deoplete.nvim'
+depends = ['context_filetype.vim','nvim-yarp', 'vim-hug-neovim-rpc']
+hook_add = '''
+    let g:deoplete#enable_at_startup = 1
+    let g:deoplete#auto_complete_delay = 0
+    let g:deoplete#enable_smart_case = 1
+    let g:deoplete#enable_underbar_completion = 1
+    let g:deoplete#enable_camel_case = 1
+    let g:deoplete#max_list = 10000
+    imap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
+'''
+
 # スニペット定義ファイル
 [[plugins]] 
 repo = 'honza/vim-snippets'
 
-[[plugins]] # snippet
-repo = 'SirVer/ultisnips'
-
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
 
-[[plugins]] # スニペット管理
-repo = 'Shougo/neosnippet.vim'
-depends = ['neosnippet-snippets','vim-snippets']
-hook_add = '''
-	let g:neosnippet#snippets_directory = ['~/dotfiles/mysnippet', '~/.vim/dein/repos/github.com/honza/vim-snippets/snippets']
-	let g:neosnippet#enable_completed_snippet = 1 " 関数スニペットを展開
-	let g:neosnippet#expand_word_boundary = 0 " jump時に間違えて補完されないようにオフ
-	let g:neosnippet#disable_runtime_snippets = {'_' : 1}
-	imap <C-k> <Plug>(neosnippet_expand_or_jump)
-	smap <C-k> <Plug>(neosnippet_expand_or_jump)
-	xmap <C-k> <Plug>(neosnippet_expand_target)
-'''
-
 [[plugins]] # use look cmd
 repo = 'Shougo/neco-vim'
-
-[[plugins]] # use look cmd
-repo = 'neoclide/coc-neco'
-
-[[plugins]] # LSP補完
-repo = 'neoclide/coc.nvim'
-build = './install.sh nightly'
-depends = ['neosnippet.vim']
-hook_add = '''
-	set signcolumn=yes
-	set updatetime=300
-	" highlight link CocHighlightText GruvboxBlueSign
-    " autocmd CursorHold * silent call CocActionAsync('highlight')
-	inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-	nnoremap <F10> :<C-u>CocConfig<CR>
-	inoremap <silent><expr> <C-space> coc#refresh()
-	" Use `[c` and `]c` for navigate diagnostics
-	nmap <silent> [c <Plug>(coc-diagnostic-prev)
-	nmap <silent> ]c <Plug>(coc-diagnostic-next)
-	nmap <silent> <leader>gd <Plug>(coc-definition)
-	nmap <silent> <leader>gD <Plug>(coc-type-definition)
-	nmap <silent> <leader>gi <Plug>(coc-implementation)
-	nmap <silent> <leader>gf <Plug>(coc-references)
-	nmap <leader>gn <Plug>(coc-rename)
-	let g:airline#extensions#coc#error_symbol =  ""
-	let g:airline#extensions#coc#warning_symbol = ""
-	let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-	let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
-	let g:coc_start_at_startup=1
-	nnoremap <silent> K :call <SID>show_documentation()<CR>
-	function! s:show_documentation()
-		if (index(['vim','help'], &filetype) >= 0)
-			execute 'h '.expand('<cword>')
-		else
-			call CocAction('doHover')
-		endif
-	endfunction
-	omap iF <Plug>(coc-funcobj-i)
-	omap aF <Plug>(coc-funcobj-a)
-	vmap iF <Plug>(coc-funcobj-i)
-	vmap aF <Plug>(coc-funcobj-a)
-	" imap <silent><expr> <C-k>
-	"\ pumvisible() ? coc#_select_confirm() :
-	"\ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-	"\ coc#refresh()
-	" smap <C-k> <Plug>(coc-snippets-expand-jump)
-	" let g:coc_snippet_next = '<C-k>'
-	" let g:coc_snippet_prev = '<S-tab>'
-'''
 
 [[plugins]] # tagジャンプ
 repo = 'majutsushi/tagbar'
@@ -255,7 +203,7 @@ repo = 'vim-airline/vim-airline-themes'
 
 [[plugins]] # ステータスラインとバッファ表示の強化
 repo = 'vim-airline/vim-airline'
-depends = ['vim-airline-themes','tagbar','vim-devicons','coc.nvim']
+depends = ['vim-airline-themes','tagbar','vim-devicons']
 hook_add = '''
 	" ステータスラインの表示内容強化
 	set laststatus=2 " ステータスラインを常に表示

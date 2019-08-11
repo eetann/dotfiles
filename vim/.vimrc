@@ -100,7 +100,16 @@ nnoremap <expr> sgP 'Ox<Esc>V]p`[mygv"'.v:register.'y`ydmy'
 " 全選択コピー
 nnoremap sy :%y<CR>
 nnoremap sgg :let @+=expand('%')<CR>
-nnoremap sge q:?echo<CR>0vg$"zy<CR>:redir @a<CR>:<C-r>z<BS><CR>:redir end<CR>:let @+=@a<CR>
+" 直前にechoを実行していたらヤンク
+nnoremap sge :call My_yank_echo()<CR>
+function! My_yank_echo()
+    let s:echo_hist = histget("cmd", -1)
+    if s:echo_hist =~ '^echo '
+        let @z = substitute(s:echo_hist, '^echo\s','echomsg ', '')
+        execute "normal ;\<C-r>z\<CR>"
+        let @+ = execute("1messages")
+    endif
+endfunction
 
 " ----タブ設定----------------------------------------------------
 set expandtab " インデントをタブの代わりにスペース
@@ -188,6 +197,8 @@ set ttimeoutlen=100 " ESCしてから挿入モード出るまでの時間を短�
 " 押し間違え多すぎだし使わないのでマッピング
 imap <C-@> <C-[>
 set helplang=ja,en
+" \入力時自動インデント阻止
+let g:vim_indent_cont = 0
 
 
 " --見た目系------------------------------------------------------
@@ -199,6 +210,7 @@ set nowrap " 折り返さない
 set showmatch "括弧入力時に対応括弧表示
 set colorcolumn=88 "カラムラインを引く(Pythonのformatter'black'基準)
 set whichwrap=b,s,h,l,[,],<,>,~ "行末から次の行へ移動できる
+set signcolumn=yes
 filetype plugin on
 set list "空白文字の可視化
 " Tabは2文字必要
