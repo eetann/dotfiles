@@ -172,10 +172,6 @@ repo = 'Shougo/neoyank.vim'
 on_source = 'denite.nvim'
 
 [[plugins]] 
-repo = 'neoclide/coc-denite'
-on_source = 'denite.nvim'
-
-[[plugins]] 
 repo = 'Shougo/neomru.vim'
 on_source = 'denite.nvim'
 
