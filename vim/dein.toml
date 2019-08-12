@@ -149,6 +149,10 @@ hook_add = '''
     imap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
 '''
 
+[[plugins]]
+repo = 'tbodt/deoplete-tabnine'
+build = './install.sh'
+
 # スニペット定義ファイル
 [[plugins]] 
 repo = 'honza/vim-snippets'
@@ -156,11 +160,14 @@ repo = 'honza/vim-snippets'
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
 
-[[plugins]]
+[[plugins]] # use look cmd
 repo = 'ujihisa/neco-look'
 
-[[plugins]] # use look cmd
+[[plugins]] 
 repo = 'Shougo/neco-vim'
+
+[[plugins]] 
+repo = 'Shougo/neco-syntax'
 
 [[plugins]] # tagジャンプ
 repo = 'majutsushi/tagbar'
