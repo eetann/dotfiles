@@ -1,5 +1,20 @@
 # 遅延実行されるプラグイン
 
+[[plugins]] # use look cmd
+repo = 'ujihisa/neco-look'
+on_event = 'VimEnter'
+hook_source = '''
+    call deoplete#custom#source('look', 'max_candidates', 10)
+'''
+
+[[plugins]] 
+repo = 'Shougo/neco-vim'
+on_event = 'VimEnter'
+
+[[plugins]] 
+repo = 'Shougo/neco-syntax'
+on_event = 'VimEnter'
+
 [[plugins]] # スニペット管理
 repo = 'Shougo/neosnippet.vim'
 depends = ['neosnippet-snippets','context_filetype.vim']
@@ -199,7 +214,7 @@ on_ft = ['vim','toml','md','mdwn','mkd','mkdn','mark','python']
 
 [[plugins]] # 画面の移動が便利になる
 repo = 'easymotion/vim-easymotion'
-on_map = '<Plug>'
+on_event = 'VimEnter'
 hook_add = '''
     " デフォルトのキーマッピングを無効に
     let g:EasyMotion_do_mapping = 0
@@ -228,10 +243,6 @@ hook_add = '''
 	nmap ga <Plug>(EasyAlign)
 '''
 
-[[plugins]] # ドットコマンド対象を拡張
-repo = 'tpope/vim-repeat'
-on_event = 'VimEnter'
-
 [[plugins]] # 適切なカーソルラインのハイライト
 repo = 'delphinus/vim-auto-cursorline'
 on_event = 'VimEnter'
@@ -239,17 +250,37 @@ hook_add = '''
 	autocmd vimrc FileType defx :let b:auto_cursorline_disabled = 1
 '''
 
-[[plugins]] 
-repo = 'Shougo/neoyank.vim'
-on_source = 'denite.nvim'
-
+# [[pluginr]] # マルチカーソル(矩形の拡張)
+# repo = 'terryma/vim-multiple-currors'
+# on_event = 'VimEnter'
+# depends = ['deoplete.nvim']
+# hook_add = '''
+# 	let g:multi_cursor_use_default_mapping = 0
+# 	let g:multi_cursor_start_word_key      = '<C-s>'
+# 	let g:multi_cursor_select_all_word_key = '<A-s>'
+# 	let g:multi_cursor_start_key           = 'g<C-s>'
+# 	let g:multi_cursor_select_all_key      = 'g<A-s>'
+# 	let g:multi_cursor_next_key            = '<C-s>'
+# 	let g:multi_cursor_prev_key            = '<C-p>'
+# 	let g:multi_cursor_skip_key            = '<C-x>'
+# 	let g:multi_cursor_quit_key            = '<Esc>'
+#     function Multiple_cursors_before()
+#         call deoplete#custom#buffer_option('auto_complete', v:false)
+#         let g:deoplete_is_enable_before_multi_cursors = 1
+#     endfunction
+#     function Multiple_cursors_after()
+#         call deoplete#custom#buffer_option('auto_complete', v:true)
+#         let g:deoplete_is_enable_before_multi_cursors = 0
+#     endfunction
+# '''
+#
 [[plugins]] 
 repo = 'Shougo/neomru.vim'
 on_source = 'denite.nvim'
 
 [[plugins]] # すごいやつ(語彙力)
 repo = 'Shougo/denite.nvim'
-depends = ['nvim-yarp', 'vim-hug-neovim-rpc','neoyank.vim','coc-denite','defx.nvim','neomru.vim']
+depends = ['nvim-yarp', 'vim-hug-neovim-rpc', 'neomru.vim']
 on_cmd = ['Denite', 'DeniteBufferDir', 'DeniteCursorWord', 'DeniteProjectDir']
 hook_add = '''
 	nnoremap <silent> ,fr :<C-u>Denite file/rec -auto-action=preview<CR>
@@ -257,13 +288,10 @@ hook_add = '''
 	nnoremap <silent> ,ft :<C-u>Denite filetype -start-filter<CR>
 	nnoremap <silent> ,ch :<C-u>Denite command_history -start-filter<CR>
 	nnoremap <silent> ,b :<C-u>Denite buffer -auto-action=preview<CR>
-	nnoremap <silent> ,d :<C-u>Denite coc-diagnostic -auto-action=preview<CR>
-	nnoremap <silent> ,s :<C-u>Denite coc-symbols -auto-action=preview<CR>
 	nnoremap <silent> ,l :<C-u>Denite line -auto-action=preview -start-filter<CR>
 	nnoremap <silent> ,j :<C-u>Denite jump -auto-action=preview<CR>
 	nnoremap <silent> ,o :<C-u>Denite outline -auto-action=preview -start-filter<CR>
 	nnoremap <silent> ,h :<C-u>Denite help -start-filter<CR>
-	nnoremap <silent> ,y :<C-u>Denite neoyank -start-filter<CR>
 	nnoremap <silent> ,me :<C-u>Denite menu -auto-action=preview<CR>
 	nnoremap <silent> ,ma :<C-u>Denite mark -auto-action=preview<CR>
 	nnoremap <silent> ,r :<C-u>Denite -resume<CR>
@@ -373,10 +401,6 @@ hook_post_source = '''
 [[plugins]] # マーク位置の表示
 repo = 'kshenoy/vim-signature'
 on_event = 'VimEnter'
-
-[[plugins]] # edit for fish
-on_ft = ['fish']
-repo = 'dag/vim-fish'
 
 [[plugins]] # matlab
 repo = 'lazywei/vim-matlab'

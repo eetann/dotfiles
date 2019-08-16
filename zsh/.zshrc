@@ -87,6 +87,8 @@ unsetopt CHASE_LINKS # シンボリックリンクは実体を追うようにな
 # alias
 alias la='ls -al'
 alias grep=jvgrep
+alias gs='git status'
+alias gcm='git commit -m'
 
 # 色--------------------------------------------------------------
 autoload -Uz colors

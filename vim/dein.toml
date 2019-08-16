@@ -32,6 +32,9 @@ hook_add = '''
 
 [[plugins]] # ヤンク時に一瞬ハイライト
 repo = "machakann/vim-highlightedyank"
+hook_add = '''
+    let g:highlightedyank_highlight_duration = 300
+'''
 
 # textobjct-------------------------------------------------------
 [[plugins]] # テキストオブジェクトの追加のため
@@ -55,9 +58,14 @@ hook_add = '''
 	xmap ib <Plug>(textobj-multiblock-i)
 '''
 
-[[plugins]] # ,で引数をtextobj
-repo = 'sgur/vim-textobj-parameter'
-depends = 'vim-textobj-user'
+[[plugins]] # 引数や配列の入れ替え
+repo = 'machakann/vim-swap'
+hook_add = '''
+    omap i, <Plug>(swap-textobject-i)
+    xmap i, <Plug>(swap-textobject-i)
+    omap a, <Plug>(swap-textobject-a)
+    xmap a, <Plug>(swap-textobject-a)
+'''
 
 [[plugins]] # dでデリミタ(_,#,-や大文字間)をtextobj
 repo = 'machakann/vim-textobj-delimited'
@@ -87,27 +95,10 @@ hook_add = """
 """
 
 [[plugins]] # 括弧関連便利になる
-repo = 'tpope/vim-surround'
-hook_add ="""
-	let g:highlightedyank_highlight_duration = 500
-"""
+repo = 'machakann/vim-sandwich'
 
 [[plugins]] # 括弧などを入力したときの挙動をスマートに補完
 repo = 'jiangmiao/auto-pairs'
-
-[[plugins]] # マルチカーソル(矩形の拡張)
-repo = 'terryma/vim-multiple-cursors'
-hook_add = '''
-	let g:multi_cursor_use_default_mapping = 0
-	let g:multi_cursor_start_word_key      = '<C-s>'
-	let g:multi_cursor_select_all_word_key = '<A-s>'
-	let g:multi_cursor_start_key           = 'g<C-s>'
-	let g:multi_cursor_select_all_key      = 'g<A-s>'
-	let g:multi_cursor_next_key            = '<C-s>'
-	let g:multi_cursor_prev_key            = '<C-p>'
-	let g:multi_cursor_skip_key            = '<C-x>'
-	let g:multi_cursor_quit_key            = '<Esc>'
-'''
 
 [[plugins]] # カラースキーム
 repo = 'morhetz/gruvbox'
@@ -148,10 +139,19 @@ hook_add = '''
     let g:deoplete#max_list = 10000
     imap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
 '''
+hook_source = '''
+    call deoplete#custom#option('refresh_always', 'v:false')
+'''
 
 [[plugins]]
 repo = 'tbodt/deoplete-tabnine'
 build = './install.sh'
+hook_source = '''
+    call deoplete#custom#var('tabnine', {
+    \ 'line_limit': 500,
+    \ 'max_num_results': 10,
+    \ })
+'''
 
 # スニペット定義ファイル
 [[plugins]] 
@@ -159,15 +159,6 @@ repo = 'honza/vim-snippets'
 
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
-
-[[plugins]] # use look cmd
-repo = 'ujihisa/neco-look'
-
-[[plugins]] 
-repo = 'Shougo/neco-vim'
-
-[[plugins]] 
-repo = 'Shougo/neco-syntax'
 
 [[plugins]] # tagジャンプ
 repo = 'majutsushi/tagbar'
