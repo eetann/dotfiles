@@ -12,6 +12,10 @@ nnoremap : ;
 vnoremap ; :
 vnoremap : ;
 nnoremap q; q:
+" 誤爆防止のためにremapping
+imap <C-@> <C-[>
+nnoremap q <NOP>
+nnoremap <leader>q q
 
 " ----reset augroup-----------------------------------------------
 " 再読込時に2度設定しないように、初期化
@@ -196,8 +200,6 @@ set completeopt=menuone
 autocmd vimrc FileType text,qf,quickrun setlocal wrap
 set mouse=a
 set ttimeoutlen=100 " ESCしてから挿入モード出るまでの時間を短縮
-" 押し間違え多すぎだし使わないのでマッピング
-imap <C-@> <C-[>
 set helplang=ja,en
 " \入力時自動インデント阻止
 let g:vim_indent_cont = 0
