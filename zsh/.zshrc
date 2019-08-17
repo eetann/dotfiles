@@ -88,8 +88,8 @@ unsetopt CHASE_LINKS # シンボリックリンクは実体を追うようにな
 alias la='ls -al'
 alias gs='git status'
 alias ga='git add -A'
-alias gcm="(){git commit -m '$1'}"
-alias gpu='git push'
+alias gcm='(){git commit -m "$1"}'
+alias gsh='git push'
 alias grep=jvgrep
 
 # 色--------------------------------------------------------------
@@ -173,7 +173,6 @@ zplug "zplug/zplug", hook-build:'zplug --self-manage'
 # zplug "ユーザー名/リポジトリ名", タグ
 # 補完------------------------------------------------------------
 zplug "zsh-users/zsh-completions"
-zplug "plugins/git", from:oh-my-zsh
 zplug "zsh-users/zsh-autosuggestions"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
