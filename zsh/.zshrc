@@ -87,8 +87,9 @@ unsetopt CHASE_LINKS # シンボリックリンクは実体を追うようにな
 # alias
 alias la='ls -al'
 alias gs='git status'
-alias ga='git add -- -A'
-alias gcm="(){git commit -- -m '$1'}"
+alias ga='git add -A'
+alias gcm="(){git commit -m '$1'}"
+alias gpu='git push'
 alias grep=jvgrep
 
 # 色--------------------------------------------------------------
