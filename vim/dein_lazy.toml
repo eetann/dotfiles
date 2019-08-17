@@ -1,5 +1,16 @@
 # 遅延実行されるプラグイン
 
+[[plugins]]
+repo = 'tbodt/deoplete-tabnine'
+build = './install.sh'
+on_event = 'VimEnter'
+hook_source = '''
+    call deoplete#custom#var('tabnine', {
+    \ 'line_limit': 500,
+    \ 'max_num_results': 10,
+    \ })
+'''
+
 [[plugins]] # use look cmd
 repo = 'ujihisa/neco-look'
 on_event = 'VimEnter'

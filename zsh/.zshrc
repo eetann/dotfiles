@@ -86,9 +86,10 @@ unsetopt CHASE_LINKS # シンボリックリンクは実体を追うようにな
 
 # alias
 alias la='ls -al'
-alias grep=jvgrep
 alias gs='git status'
-alias gcm='git commit -m'
+alias ga='git add -- -A'
+alias gcm="(){git commit -- -m '$1'}"
+alias grep=jvgrep
 
 # 色--------------------------------------------------------------
 autoload -Uz colors
@@ -186,7 +187,7 @@ export FZF_COMPLETION_TRIGGER=''
 bindkey '^T' fzf-completion
 bindkey '^I' $fzf_default_completion
 # zplug "junegunn/fzf-bin", as:command, from:gh-r, rename-to:fzf
-# zplug "junegunn/fzf", as:command, use:bin/fzf-tmux
+zplug "junegunn/fzf", as:command, use:bin/fzf-tmux
 # Ctrl-Rで履歴検索、Ctrl-Tでファイル名検索補完できる
 zplug "junegunn/fzf", use:shell/key-bindings.zsh
 # cd **[TAB], vim **[TAB]などでファイル名を補完できる
@@ -225,16 +226,16 @@ fadd() {
         git status --short |
             awk '{if (substr($0,2,1) !~ / /) print $2}' |
                 fzf-tmux --multi --exit-0 --expect=ctrl-d); do
-                    q=$(head -1 <<< "$out")
-                    n=$[$(wc -l <<< "$out") - 1]
-                    addfiles=(`echo $(tail "-$n" <<< "$out")`)
-                    [[ -z "$addfiles" ]] && continue
-                    if [ "$q" = ctrl-d ]; then
-                        git diff --color=always $addfiles | less -R
-                    else
-                        git add $addfiles
-                    fi
-                done
+        q=$(head -1 <<< "$out")
+        n=$[$(wc -l <<< "$out") - 1]
+        addfiles=(`echo $(tail "-$n" <<< "$out")`)
+        [[ -z "$addfiles" ]] && continue
+        if [ "$q" = ctrl-d ]; then
+            git diff --color=always $addfiles | less -R
+        else
+            git add $addfiles
+        fi
+    done
 }
 
 if ! zplug check --verbose; then
@@ -248,3 +249,5 @@ fi
 zplug load --verbose
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+[[ -z "$TMUX" && ! -z "$PS1" ]] && tmux

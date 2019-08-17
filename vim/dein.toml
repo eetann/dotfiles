@@ -143,16 +143,6 @@ hook_source = '''
     call deoplete#custom#option('refresh_always', 'v:false')
 '''
 
-[[plugins]]
-repo = 'tbodt/deoplete-tabnine'
-build = './install.sh'
-hook_source = '''
-    call deoplete#custom#var('tabnine', {
-    \ 'line_limit': 500,
-    \ 'max_num_results': 10,
-    \ })
-'''
-
 # スニペット定義ファイル
 [[plugins]] 
 repo = 'honza/vim-snippets'
