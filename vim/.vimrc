@@ -125,6 +125,7 @@ set autoindent    " 改行時に前の行のintentを継続する
 set smartindent   " 改行時に入力された行の末尾に合わせて次行のintentを増減
 set shiftwidth=4  " smartindentでずれる幅
 set pastetoggle=<F3>
+autocmd vimrc FileType make setlocal noexpandtab
 
 " ----文字列検索--------------------------------------------------
 set incsearch " インクリメンタルサーチ. １文字入力毎に検索を行う
