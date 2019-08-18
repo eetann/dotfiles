@@ -195,6 +195,8 @@ zplug "junegunn/fzf", use:shell/completion.zsh
 # cdコマンドをインタラクティブに
 zplug "b4b4r07/enhancd", use:init.sh
 zplug "rupa/z", use:z.sh
+zplug "arks22/tmuximum", as:command
+alias t="tmuximum"
 
 # プラグインによる関数--------------------------------------------
 # z ×fzf
@@ -250,4 +252,4 @@ zplug load --verbose
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-[[ -z "$TMUX" && ! -z "$PS1" ]] && tmux
+[[ -z "$TMUX" && ! -z "$PS1" ]] && tmuximum

@@ -223,6 +223,10 @@ hook_add = '''
 repo = 'jszakmeister/markdown2ctags'
 on_ft = ['vim','toml','md','mdwn','mkd','mkdn','mark','python']
 
+[[plugins]] # vimのpluginのhelpとreadme.md自動生成
+on_cmd = 'HelpIntoMarkdown'
+repo = 'tsuyoshicho/vimhelpgenerator'
+
 [[plugins]] # 画面の移動が便利になる
 repo = 'easymotion/vim-easymotion'
 on_event = 'VimEnter'
