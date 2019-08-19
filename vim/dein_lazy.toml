@@ -1,30 +1,44 @@
 # 遅延実行されるプラグイン
 
-[[plugins]]
-repo = 'tbodt/deoplete-tabnine'
-build = './install.sh'
+[[plugins]] # 補完
+repo = 'Shougo/deoplete.nvim'
+depends = ['context_filetype.vim','nvim-yarp', 'vim-hug-neovim-rpc']
 on_event = 'VimEnter'
-hook_source = '''
+hook_add = '''
+    let g:deoplete#enable_at_startup = 1
+    let g:deoplete#auto_complete_delay = 0
+    let g:deoplete#enable_smart_case = 1
+    let g:deoplete#enable_underbar_completion = 1
+    let g:deoplete#enable_camel_case = 1
+    let g:deoplete#max_list = 10000
+    imap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
+'''
+hook_post_source = '''
+    " call deoplete#custom#option('refresh_always', 'v:false')
     call deoplete#custom#var('tabnine', {
     \ 'line_limit': 500,
     \ 'max_num_results': 10,
     \ })
+    call deoplete#custom#source('look', 'max_candidates', 10)
+    call deoplete#custom#source('look', 'max_pattern_length', 10)
 '''
+
+[[plugins]]
+repo = 'tbodt/deoplete-tabnine'
+build = './install.sh'
+on_source = ['deoplete.nvim']
 
 [[plugins]] # use look cmd
 repo = 'ujihisa/neco-look'
-on_event = 'VimEnter'
-hook_source = '''
-    call deoplete#custom#source('look', 'max_candidates', 10)
-'''
+on_source = ['deoplete.nvim']
 
 [[plugins]] 
 repo = 'Shougo/neco-vim'
-on_event = 'VimEnter'
+on_source = ['deoplete.nvim']
 
 [[plugins]] 
 repo = 'Shougo/neco-syntax'
-on_event = 'VimEnter'
+on_source = ['deoplete.nvim']
 
 [[plugins]] # スニペット管理
 repo = 'Shougo/neosnippet.vim'

@@ -127,22 +127,6 @@ if = "!has('nvim')"
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
 
-[[plugins]] # 補完
-repo = 'Shougo/deoplete.nvim'
-depends = ['context_filetype.vim','nvim-yarp', 'vim-hug-neovim-rpc']
-hook_add = '''
-    let g:deoplete#enable_at_startup = 1
-    let g:deoplete#auto_complete_delay = 0
-    let g:deoplete#enable_smart_case = 1
-    let g:deoplete#enable_underbar_completion = 1
-    let g:deoplete#enable_camel_case = 1
-    let g:deoplete#max_list = 10000
-    imap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
-'''
-hook_source = '''
-    call deoplete#custom#option('refresh_always', 'v:false')
-'''
-
 # スニペット定義ファイル
 [[plugins]] 
 repo = 'honza/vim-snippets'
