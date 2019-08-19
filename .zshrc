@@ -91,6 +91,8 @@ alias ga='git add -A'
 alias gd='git diff'
 alias gcm='(){git commit -m "$1"}'
 alias gsh='git push'
+alias gsh='git status'
+alias mytree='tree -a -I ".git"'
 alias grep=jvgrep
 
 # 色--------------------------------------------------------------

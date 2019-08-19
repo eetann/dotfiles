@@ -1,5 +1,10 @@
 # dotfiles  
 This is a repository for my dotfiles  
 
-# TODO  
-write this  
+# Installation  
+```sh
+git clone https://github.com/eetann/dotfiles ~/.dotfiles
+cd ~/.dotfiles
+make init
+make deploy
+```

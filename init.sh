@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # change the time zone to JST
 yes | sudo dpkg-reconfigure tzdata
@@ -71,7 +71,6 @@ cd ctags
 ./configure
 make
 sudo make install
-cd
 
 # fzf
 git clone https://github.com/junegunn/fzf.git ~/.fzf
@@ -79,29 +78,8 @@ yes | ~/.fzf/install
 
 # install for zsh
 yes | sudo apt install zsh
-# install fish & change login shell
-# sudo apt-add-repository ppa:fish-shell/release-3
-# yes | sudo apt install fish
 
-# make link
 mkdir ~/.config
-# mkdir ~/.config/fish
-ln -s /mnt/c/Users/admin/ ~/myhome
-ln -s /mnt/c/Users/admin/dotfiles/ dotfiles
-ln -s /mnt/c/Users/admin/dotfiles/zsh/.zshrc ~/.zshrc
-# ln -s /mnt/c/Users/admin/dotfiles/fish/config.fish  ~/.config/fish/config.fish
-# ln -s /mnt/c/Users/admin/dotfiles/fish/fish_user_key_bindings.fish ~/.config/fish/functions/fish_user_key_bindings.fish
-# ln -s /mnt/c/Users/admin/dotfiles/fish/tm.fish ~/.config/fish/functions/tm.fish
-# ln -s /mnt/c/Users/admin/dotfiles/fish/zz.fish ~/.config/fish/functions/zz.fish
-# ln -s /mnt/c/Users/admin/dotfiles/fish/zz.fish ~/.config/fish/functions/zz.fish
-ln -s /mnt/c/Users/admin/dotfiles/vim/.vimrc ~/.vimrc
-ln -s /mnt/c/Users/admin/dotfiles/vim/flake8 ~/.config/flake8
-ln -s /mnt/c/Users/admin/dotfiles/vim/pylintrc ~/.pylintrc
-ln -s /mnt/c/Users/admin/dotfiles/.dir_colors ~/.dir_colors
-ln -s /mnt/c/Users/admin/.vim .vim
-ln -s /mnt/c/Users/admin/dotfiles/tmux.conf ~/.tmux.conf
-# mkdir ~/.config/nvim
-# ln -s /mnt/c/Users/admin/dotfiles/vim/.vimrc ~/.config/nvim/init.vim
 
 # /etc/wsl.conf に以下の内容を書く
 # [interop]
