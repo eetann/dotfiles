@@ -202,6 +202,7 @@ autocmd vimrc FileType text,qf,quickrun setlocal wrap
 set mouse=a
 set ttimeoutlen=100 " ESCしてから挿入モード出るまでの時間を短縮
 set helplang=ja,en
+set keywordprg=:help
 " \入力時自動インデント阻止
 let g:vim_indent_cont = 0
 
