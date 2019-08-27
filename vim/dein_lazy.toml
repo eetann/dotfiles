@@ -97,11 +97,15 @@ hook_add = '''
         setlocal omnifunc=lsp#complete " オムニ補完を有効化
         nnoremap <buffer> <C-]> :<C-u>LspDefinition<CR>
         nnoremap <buffer> gd :<C-u>LspDefinition<CR>
+        nnoremap <buffer> gD :<C-u>LspDeclaration<CR>
+        nnoremap <buffer> <Leader>gd :<C-u>LspDocumentDiagnostics<CR>
         " nnoremap <buffer> gs :<C-u>LspDocumentSymbol<CR>
         " nnoremap <buffer> gS :<C-u>LspWorkspaceSymbol<CR>
         nnoremap <buffer> K :<C-u>LspHover<CR>
         nnoremap <buffer> <Leader>grn :<C-u>LspRename<CR>
         nnoremap <buffer> <Leader>grf :<C-u>LspReferences<CR>
+        nnoremap <buffer> ]e  :LspNextError<CR>
+        nnoremap <buffer> [e  :LspPreviousError<CR>
         autocmd vimrc BufWritePre <buffer> :silent LspDocumentFormatSync
     endfunction
     let g:lsp_signs_error = {'text': ''}
