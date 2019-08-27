@@ -26,19 +26,8 @@ autoload -Uz smart-insert-last-word
 zstyle :insert-last-word match '*([[:alpha:]/\\]?|?[[:alpha:]/\\])*'
 zle -N insert-last-word smart-insert-last-word
 bindkey '^]' insert-last-word
-
-# backspace,deleteキーを使えるように
-# stty erase ^H
-# bindkey "^[[3~" delete-char
-# bindkey -v '^a' beginning-of-line                             # 行頭へ(menuselectでは補完候補の先頭へ)
-# bindkey -v '^b' backward-char                                 # 1文字左へ(menuselectでは補完候補1つ左へ)
-# bindkey -v '^e' end-of-line                                   # 行末へ(menuselectでは補完候補の最後尾へ)
-# bindkey -v '^f' forward-char                                  # 1文字右へ(menuselectでは補完候補1つ右へ)
-# bindkey -v '^h' backward-delete-char                          # 1文字削除(menuselectでは絞り込みの1文字削除)
-# bindkey -v '^i' expand-or-complete                            # 補完開始
-# bindkey -M menuselect '^n' down-line-or-history               # 補完候補1つ下へ
-# bindkey -M menuselect '^p' up-line-or-history                 # 補完候補1つ上へ
-# bindkey -M menuselect '^r' history-incremental-search-forward # 補完候補内インクリメンタルサーチ
+WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+setopt no_beep
 
 # 履歴------------------------------------------------------------
 setopt hist_ignore_all_dups
@@ -64,7 +53,6 @@ setopt hist_expand
 # 大文字・小文字を区別しない(大文字を入力した場合は区別する)
 zstyle ':completion:*:default' menu select=2
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-zstyle ':completion:*' list-colors "${LS_COLORS}"
 zstyle ':completion:*' use-cache yes
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
     /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin \
@@ -83,8 +71,9 @@ setopt interactive_comments # 対話中にもコメント
 setopt AUTO_MENU # タブキーの連打で自動的にメニュー補完
 setopt chase_links # 移動先がシンボリックリンクならば実際のディレクトリに移動する
 
-# alias
-alias la='ls -al'
+# alias-----------------------------------------------------------
+alias la='ls -F --color -al'
+alias ls='ls -F --color'
 alias gs='git status'
 alias ga='git add -A'
 alias gd='git diff'
@@ -97,9 +86,10 @@ alias grep=jvgrep
 # 色--------------------------------------------------------------
 autoload -Uz colors
 colors
-export LSCOLORS=gxfxxxxxcxxxxxxxxxgxgx
-export LS_COLORS='di=01;36:ln=01;35:ex=01;32'
-zstyle ':completion:*' list-colors 'di=36' 'ln=35' 'ex=32'
+if [[ -f ~/.dircolors && -x `which dircolors` ]]; then
+    eval `dircolors ~/.dircolors`
+    zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+fi
 
 # プロンプト------------------------------------------------------
 setopt prompt_cr # 改行のない出力をプロンプトで上書きするのを防ぐ
@@ -127,41 +117,6 @@ precmd () { vcs_info }
 local prompt_git=' %B$vcs_info_msg_0_%b'
 local prompt_end="%F{040}%F{039}%f"
 PROMPT="$prompt_job$prompt_dir$prompt_git"$'\n'"$prompt_end"
-# local myPROMPT="$prompt_job$prompt_dir$prompt_git"$'\n'"$prompt_end"
-
-# vi表示(コピペなのでよくわかってない)----------------------------
-# autoload -Uz add-zsh-hook
-# autoload -Uz terminfo
-#
-# terminfo_down_sc=$terminfo[cud1]$terminfo[cuu1]$terminfo[sc]$terminfo[cud1]
-# left_down_prompt_preexec() {
-#     print -rn -- $terminfo[el]
-# }
-# add-zsh-hook preexec left_down_prompt_preexec
-#
-# function zle-keymap-select zle-line-init zle-line-finish
-# {
-#     case $KEYMAP in
-#         main|viins)
-#             PROMPT_2="$fg[cyan]INSERT$reset_color"
-#             ;;
-#         vicmd)
-#             PROMPT_2="$fg[white]NORMAL$reset_color"
-#             ;;
-#     esac
-#     PROMPT="$prompt_job$prompt_dir$prompt_git$my_sep$PROMPT_2"$'\n'$prompt_end
-#     zle reset-prompt
-# }
-#
-# zle -N zle-line-init
-# zle -N zle-line-finish
-# zle -N zle-keymap-select
-# zle -N edit-command-line
-
-# zstyle ':completion:*:*:コマンド:*:タグ' スタイル
-
-WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
-setopt no_beep
 
 # .zplugディレクトリが無ければgit clone
 if [[ ! -d ~/.zplug ]];then
@@ -181,19 +136,20 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-history-substring-search", defer:3
 
 # fzf-------------------------------------------------------------
-export FZF_DEFAULT_OPTS="-m --height=60% --select-1 --exit-0 --reverse"
-# export FZF_CTRL_T_OPTS="--preview 'test [(file {} | grep ASCII)=ASCII];and head -n 100 {}|nkf -Sw ;or head -n 100 {}'"
-export FZF_CTRL_T_OPTS="--preview 'head -n 100 {}'"
-export FZF_ALT_C_OPTS="--preview 'tree -al {} | head -n 100'"
-export FZF_COMPLETION_TRIGGER=''
-bindkey '^T' fzf-completion
-bindkey '^I' $fzf_default_completion
 # zplug "junegunn/fzf-bin", as:command, from:gh-r, rename-to:fzf
 zplug "junegunn/fzf", as:command, use:bin/fzf-tmux
 # Ctrl-Rで履歴検索、Ctrl-Tでファイル名検索補完できる
 zplug "junegunn/fzf", use:shell/key-bindings.zsh
 # cd **[TAB], vim **[TAB]などでファイル名を補完できる
 zplug "junegunn/fzf", use:shell/completion.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_OPTS="-m --height=60% --select-1 --exit-0 --reverse"
+# export FZF_CTRL_T_OPTS="--preview 'test [(file {} | grep ASCII)=ASCII];and head -n 100 {}|nkf -Sw ;or head -n 100 {}'"
+export FZF_CTRL_T_OPTS="--preview 'head -n 100 {}'"
+export FZF_ALT_C_OPTS="--preview 'tree -al {} | head -n 100'"
+export FZF_COMPLETION_TRIGGER='**'
+bindkey "^I" expand-or-complete
+
 # cdコマンドをインタラクティブに
 zplug "b4b4r07/enhancd", use:init.sh
 zplug "rupa/z", use:z.sh
@@ -202,18 +158,14 @@ alias t="tmuximum"
 
 # プラグインによる関数--------------------------------------------
 # z ×fzf
-fzf-z-search() {
+zz() {
     local res=$(z | sort -rn | cut -c 12- | fzf)
     if [ -n "$res" ]; then
-        BUFFER+="cd $res"
-        zle accept-line
+        cd $res
     else
         return 1
     fi
 }
-
-zle -N fzf-z-search
-bindkey '^k' fzf-z-search
 
 # fbr - checkout git branch
 fbr() {
@@ -251,7 +203,5 @@ fi
 
 # コマンドをリンクして、PATH に追加し、プラグインは読み込む
 zplug load --verbose
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 [[ -z "$TMUX" && ! -z "$PS1" ]] && tmuximum
