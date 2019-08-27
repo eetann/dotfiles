@@ -450,6 +450,10 @@ hook_add = '''
 	" autocmd vimrc VimEnter *.m :call matlab#Start()
 '''
 
+[[plugins]] # matlab
+repo = '~/.vim/my_plugins/deoplete-matlab'
+on_ft = ['matlab']
+
 [[plugins]] # 日本語ヘルプ
 repo = 'vim-jp/vimdoc-ja'
 on_event = 'VimEnter'

@@ -3,7 +3,7 @@
 export DISPLAY=localhost:0.0
 export EDITOR=vim
 export PATH=$PATH:/mnt/c/Windows/System32
-export PATH=$PATH:$HOME/.fzf/bin
+export PATH=$PATH:$HOME/.fzf/bin:$HOME/.local/bin
 
 # python
 alias python=/usr/bin/python3.7
@@ -14,7 +14,6 @@ export PYLINTRC=$HOME/dotfiles/vim/pylintrc
 export GOPATH=$HOME/go
 export GOPATH=/mnt/c/Users/admin/go:$GOPATH
 export PATH=$PATH:$GOPATH:$GOPATH/bin:/usr/lib/go-1.12/bin:/mnt/c/Users/admin/go/bin
-unsetopt CHASE_LINKS #シンボリックリンクは実体を追うようになる
 
 # 操作------------------------------------------------------------
 # bindkey -v
@@ -82,7 +81,7 @@ bindkey "^N" history-beginning-search-forward-end
 
 setopt interactive_comments # 対話中にもコメント
 setopt AUTO_MENU # タブキーの連打で自動的にメニュー補完
-unsetopt CHASE_LINKS # シンボリックリンクは実体を追うようになる
+setopt chase_links # 移動先がシンボリックリンクならば実際のディレクトリに移動する
 
 # alias
 alias la='ls -al'
@@ -91,7 +90,7 @@ alias ga='git add -A'
 alias gd='git diff'
 alias gcm='(){git commit -m "$1"}'
 alias gsh='git push'
-alias gsh='git status'
+alias gst='git status'
 alias mytree='tree -a -I ".git"'
 alias grep=jvgrep
 
@@ -224,8 +223,8 @@ fbr() {
         git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
     }
 
-# fadd
-fadd() {
+# gadd
+gadd() {
     local out q n addfiles
     while out=$(
         git status --short |
