@@ -10,23 +10,27 @@ hook_add = '''
 '''
 hook_post_source = '''
     imap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
-    " call deoplete#custom#option('refresh_always', 'v:false')
-    call deoplete#custom#var('tabnine', {
-    \ 'line_limit': 500,
-    \ 'max_num_results': 10,
-    \ })
-    call deoplete#custom#source('look', 'max_candidates', 10)
-    call deoplete#custom#source('look', 'max_pattern_length', 10)
 '''
 
 [[plugins]]
 repo = 'tbodt/deoplete-tabnine'
 build = './install.sh'
 on_event = 'VimEnter'
+hook_post_source='''
+    call deoplete#custom#var('tabnine', {
+    \ 'line_limit': 500,
+    \ 'max_num_results': 10,
+    \ })
+'''
 
 [[plugins]] # use look cmd
 repo = 'ujihisa/neco-look'
 on_event = 'VimEnter'
+hook_post_source='''
+    call deoplete#custom#source('look', 'max_candidates', 10)
+    call deoplete#custom#source('look', 'max_candidates', 10)
+    call deoplete#custom#source('look', 'rank', 10)
+'''
 
 [[plugins]] 
 repo = 'Shougo/neco-vim'
@@ -106,11 +110,13 @@ hook_add = '''
         nnoremap <buffer> <Leader>grf :<C-u>LspReferences<CR>
         nnoremap <buffer> ]e  :LspNextError<CR>
         nnoremap <buffer> [e  :LspPreviousError<CR>
-        autocmd vimrc BufWritePre <buffer> :silent LspDocumentFormatSync
+        nnoremap <buffer> <Leader>gf :<C-u>LspDocumentFormatSync<CR>
+        autocmd vimrc BufWritePre <buffer> silent LspDocumentFormatSync
     endfunction
     let g:lsp_signs_error = {'text': ''}
     let g:lsp_signs_warning = {'text': ''}
-    let g:lsp_signs_hint = {'text': ''}
+    let g:lsp_signs_information = {'text': ''}
+    let g:lsp_signs_hint = {'text': ''}
     let g:lsp_diagnostics_echo_cursor = 1
 '''
 
@@ -118,6 +124,30 @@ hook_add = '''
 repo      = 'lighttiger2505/deoplete-vim-lsp'
 on_source = 'vim-lsp'
 depends = 'deoplete.nvim'
+
+[[plugins]] # lspないやつ
+repo = 'dense-analysis/ale'
+on_ft = "matlab"
+hook_add = '''
+	let g:ale_echo_msg_error_str = nr2char(0xf421)
+	let g:ale_echo_msg_warning_str = nr2char(0xf420)
+	let g:ale_echo_msg_info_str = nr2char(0xf05a)
+	let g:ale_sign_error = g:ale_echo_msg_error_str
+	let g:ale_sign_warning = g:ale_echo_msg_warning_str
+	let g:ale_statusline_format = [
+	\ g:ale_echo_msg_error_str . ' %d',
+	\ g:ale_echo_msg_warning_str . ' %d',
+	\ nr2char(0xf4a1) . '  ']
+	let g:ale_fix_on_save = 1
+	let g:ale_sign_column_always = 1
+	let g:ale_lint_on_text_changed = 0
+	let g:ale_lint_on_insert_leave = 1
+	let b:ale_linters = {
+	\	'matlab': ['mlint'],
+	\}
+	autocmd vimrc FileType help,qf,man,ref let b:ale_enabled = 0
+'''
+
 
 [[plugins]] # TOMLのシンタックスハイライト
 repo  = 'cespare/vim-toml'
@@ -176,6 +206,10 @@ hook_add = '''
 	" <C-c> でquickrunを停止
 	nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
 '''
+
+[[plugins]] # csvを見やすく
+repo = 'mechatroner/rainbow_csv'
+on_ft ="csv"
 
 # ----カーソル位置のコンテキストに合わせてファイルタイプを切り替え----
 [[plugins]] # 判定ライブラリ

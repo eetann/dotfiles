@@ -5,7 +5,7 @@ export EDITOR=vim
 export PATH=$PATH:/mnt/c/Windows/System32
 export PATH=$PATH:$HOME/.fzf/bin:$HOME/.local/bin
 
-# python
+# Python
 alias python=/usr/bin/python3.7
 alias python3=/usr/bin/python3.7
 export PYLINTRC=$HOME/dotfiles/vim/pylintrc
@@ -14,6 +14,9 @@ export PYLINTRC=$HOME/dotfiles/vim/pylintrc
 export GOPATH=$HOME/go
 export GOPATH=/mnt/c/Users/admin/go:$GOPATH
 export PATH=$PATH:$GOPATH:$GOPATH/bin:/usr/lib/go-1.12/bin:/mnt/c/Users/admin/go/bin
+
+# MATLAB
+export PATH=$PATH:/usr/local/MATLAB/R2019a/bin/glnxa64
 
 # 操作------------------------------------------------------------
 # bindkey -v
