@@ -375,30 +375,10 @@ hook_post_source = '''
 		\ ['setlocal filetype=html', 'setlocal filetype=html'],
 		\ ['setlocal filetype=xml', 'setlocal filetype=xml'],
 		\ ]
-	let s:menus.b_dotfiles = {'description':'dotfiles'}
-	let s:menus.b_dotfiles.file_candidates = [
-		\ ['vim/.vimrc', '~/dotfiles/vim/.vimrc'],
-		\ ['vim/dein.toml', '~/dotfiles/vim/dein.toml'],
-		\ ['vim/dein_lazy.toml', '~/dotfiles/vim/dein_lazy.toml'],
-		\ ['vim/VimCheatSheet.md', '~/dotfiles/vim/VimCheatSheet.md'],
-		\ ['vim/coc-settings.json', '~/dotfiles/vim/coc-settings.json'],
-		\ ['vim/flake8', '~/dotfiles/vim/flake8'],
-		\ ['vim/pylintrc', '~/dotfiles/vim/pylintrc'],
-		\ ['vim/matlab_from_vim.ahk', '~/dotfiles/vim/matlab_from_vim.ahk'],
-		\ ['./README.md', '~/dotfiles/README.md'],
-		\ ['./MakeWindowsLinks.bat', '~/dotfiles/MakeWindowsLinks.bat'],
-		\ ['./likevim.ahk', '~/dotfiles/likevim.ahk'],
-		\ ['./tmux.conf', '~/dotfiles/tmux.conf'],
-		\ ['./tempmemo.md', '~/dotfiles/tempmemo.md'],
-		\ ['./setup_fish.fish', '~/dotfiles/setup_fish.fish'],
-		\ ['./config.yaml', '~/dotfiles/config.yaml'],
-		\ ['./ubuntu_setup.sh', '~/dotfiles/ubuntu_setup.sh'],
-		\ ['fish/tm.fish', '~/dotfiles/fish/tm.fish'],
-		\ ['fish/config.fish', '~/dotfiles/fish/config.fish'],
-		\ ['fish/fish_user_key_bindings.fish', '~/dotfiles/fish/fish_user_key_bindings.fish'],
-		\ ['mysnippet/toml.snip', '~/dotfiles/mysnippet/toml.snip'],
-		\ ['mysnippet/markdown.snip', '~/dotfiles/mysnippet/markdown.snip'],
-		\ ['wsl.conf', '~/dotfiles/wsl.conf'],
+	let s:menus.b_files = {'description':'files'}
+	let s:menus.b_files.command_candidates = [
+		\ ['dotfiles', "call denite#start([{'name': 'file/rec', 'args': ['~/dotfiles']}])"],
+		\ ['my_plugins', "call denite#start([{'name': 'file/rec', 'args': ['~/.vim/my_plugins']}])"],
 		\ ]
 	let s:menus.c_dein = {'description':'Plugin management'}
 	let s:menus.c_dein.command_candidates = [
