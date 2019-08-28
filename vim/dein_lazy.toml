@@ -308,7 +308,7 @@ repo = 'junegunn/vim-easy-align'
 on_event = 'VimEnter'
 hook_add = '''
 	" Start interactive EasyAlign in visual mode (e.g. vipga)
-	xmap ga <Plug>(EasyAlign)
+	vmap ga <Plug>(EasyAlign)
 	" Start interactive EasyAlign for a motion/text object (e.g. gaip)
 	nmap ga <Plug>(EasyAlign)
 '''
