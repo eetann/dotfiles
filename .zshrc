@@ -1,36 +1,44 @@
+# tmuxが起動していない&vimの中でなければ、tmux起動
+if [[ -z "$TMUX"  ]] && [[ -z "$VIM" ]] ; then
+    # golang tmuxに必要なので読み込む
+    export GOPATH=$HOME/go
+    export GOPATH=/mnt/c/Users/admin/go:$GOPATH
+    export PATH=$PATH:$GOPATH:$GOPATH/bin:/usr/lib/go-1.12/bin:/mnt/c/Users/admin/go/bin
+
+    tmux has-session -t e 2>/dev/null || tmux new-session -ds e \
+        && tmux attach-session -t e
+    exit
+fi
+
+
 # =では空白入れないこと!!!
 # pathなどの設定--------------------------------------------------
+typeset -U path PATH
 export DISPLAY=localhost:0.0
 export EDITOR=vim
 export PATH=$PATH:/mnt/c/Windows/System32
-export PATH=$PATH:$HOME/.fzf/bin:$HOME/.local/bin
+export PATH=$PATH:$HOME/.local/bin
+# export PATH=$PATH:$HOME/.fzf/bin:$HOME/.local/bin
 
 # Python
 alias python=/usr/bin/python3.7
 alias python3=/usr/bin/python3.7
 export PYLINTRC=$HOME/dotfiles/vim/pylintrc
 
-# golang
-export GOPATH=$HOME/go
-export GOPATH=/mnt/c/Users/admin/go:$GOPATH
-export PATH=$PATH:$GOPATH:$GOPATH/bin:/usr/lib/go-1.12/bin:/mnt/c/Users/admin/go/bin
-
 # MATLAB
 export PATH=$PATH:/usr/local/MATLAB/R2019a/bin/glnxa64
 
 # 操作------------------------------------------------------------
-# bindkey -v
-bindkey -e
-bindkey "^U" backward-kill-line
+setopt no_beep
 setopt IGNOREEOF # Ctrl+Dでログアウトしてしまうことを防ぐ
-bindkey "^C" send-break
+bindkey -e
 autoload -Uz smart-insert-last-word
 # [a-zA-Z], /, \ のうち少なくとも1文字を含む長さ2以上の単語
 zstyle :insert-last-word match '*([[:alpha:]/\\]?|?[[:alpha:]/\\])*'
 zle -N insert-last-word smart-insert-last-word
 bindkey '^]' insert-last-word
-WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
-setopt no_beep
+bindkey "^U" backward-kill-line
+bindkey "^C" send-break
 
 # 履歴------------------------------------------------------------
 setopt hist_ignore_all_dups
@@ -53,6 +61,7 @@ setopt auto_pushd # ディレクトリスタックon
 setopt pushd_ignore_dups # 履歴を賢く
 setopt COMPLETE_IN_WORD # 語の途中でもカーソル位置で補完
 setopt hist_expand
+WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 # 大文字・小文字を区別しない(大文字を入力した場合は区別する)
 zstyle ':completion:*:default' menu select=2
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
@@ -85,6 +94,8 @@ alias gsh='git push'
 alias gst='git status'
 alias mytree='tree -a -I ".git"'
 alias grep=jvgrep
+alias t="tmuximum"
+alias reload="exec zsh -l"
 
 # 色--------------------------------------------------------------
 autoload -Uz colors
@@ -121,43 +132,55 @@ local prompt_git=' %B$vcs_info_msg_0_%b'
 local prompt_end="%F{040}%F{039}%f"
 PROMPT="$prompt_job$prompt_dir$prompt_git"$'\n'"$prompt_end"
 
-# .zplugディレクトリが無ければgit clone
-if [[ ! -d ~/.zplug ]];then
-    git clone https://github.com/zplug/zplug ~/.zplug
+# plugins --------------------------------------------------------
+# zplugin がなければ取ってくる
+if [ ! -e $HOME/.zplugin ]; then
+    git clone https://github.com/zdharma/zplugin.git ~/.zplugin/bin
 fi
 
-# zplugを使う
-source ~/.zplug/init.zsh
-zplug "zplug/zplug", hook-build:'zplug --self-manage'
+# zplugin をロード
+source $HOME/.zplugin/bin/zplugin.zsh
+# zplugin のコマンド補完をロード
+autoload -Uz _zplugin
+(( ${+_comps} )) && _comps[zplugin]=_zplugin
 
-# zplug "ユーザー名/リポジトリ名", タグ
-# 補完------------------------------------------------------------
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-autosuggestions"
+# `zplugin light {plugin}`で読み込み
+# その前に`zplugin ice {option}`でオプションをつける
+# blockf : プラグインの中で$fpathに書き込むのを禁止
+zplugin ice blockf
+zplugin light zsh-users/zsh-completions
+
+zplugin light zsh-users/zsh-autosuggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "zsh-users/zsh-history-substring-search", defer:3
 
-# fzf-------------------------------------------------------------
-# zplug "junegunn/fzf-bin", as:command, from:gh-r, rename-to:fzf
-zplug "junegunn/fzf", as:command, use:bin/fzf-tmux
-# Ctrl-Rで履歴検索、Ctrl-Tでファイル名検索補完できる
-zplug "junegunn/fzf", use:shell/key-bindings.zsh
-# cd **[TAB], vim **[TAB]などでファイル名を補完できる
-zplug "junegunn/fzf", use:shell/completion.zsh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+zplugin light zdharma/fast-syntax-highlighting
+
+# wait'n' : .zshrc が読み込まれて n 秒で読み込む
+zplugin ice wait'0'; zplugin light b4b4r07/enhancd
+zplugin ice wait'0'; zplugin light rupa/z
+zplugin ice wait'0'; zplugin light zsh-users/zsh-history-substring-search
+
+# as"program" : プラグインをsourceせず、$PATHに追加
+zplugin ice wait'0' as"program"; zplugin light arks22/tmuximum
+
+# from"{hoge}" : hogeからclone
+# pick"hoge.zsh" : $PATHに追加するファイルを指定
+# multisrc"{hoge,fuga}.zsh" : 複数のファイルをsource
+# id-as : ニックネーム
+# atload : プラグインがロード後に実行
+zplugin ice wait"0" from"gh-r" as"program"; zplugin load junegunn/fzf-bin
+zplugin ice wait"0" as"program" pick"bin/fzf-tmux"; zplugin load junegunn/fzf
+zplugin ice wait"0" multisrc"shell/{completion,key-bindings}.zsh"\
+    id-as"junegunn/fzf_completions" pick"/dev/null"\
+    atload"bindkey '^I' expand-or-complete"
+zplugin light junegunn/fzf
 export FZF_DEFAULT_OPTS="-m --height=60% --select-1 --exit-0 --reverse"
 # export FZF_CTRL_T_OPTS="--preview 'test [(file {} | grep ASCII)=ASCII];and head -n 100 {}|nkf -Sw ;or head -n 100 {}'"
 export FZF_CTRL_T_OPTS="--preview 'head -n 100 {}'"
 export FZF_ALT_C_OPTS="--preview 'tree -al {} | head -n 100'"
-export FZF_COMPLETION_TRIGGER='**'
-bindkey "^I" expand-or-complete
-
-# cdコマンドをインタラクティブに
-zplug "b4b4r07/enhancd", use:init.sh
-zplug "rupa/z", use:z.sh
-zplug "arks22/tmuximum", as:command
-alias t="tmuximum"
+export FZF_COMPLETION_OPTS="--preview 'head -n 100 {}'"
+export FZF_COMPLETION_TRIGGER=''
+bindkey '^K' fzf-completion
 
 # プラグインによる関数--------------------------------------------
 # z ×fzf
@@ -196,16 +219,3 @@ gadd() {
         fi
     done
 }
-
-# 高速化のため以下はコメントアウトし、`zplug install && zplug load`追加時に行う
-# if ! zplug check --verbose; then
-#     printf "Install? [y/N]: "
-#     if read -q; then
-#         echo; zplug install
-#     fi
-# fi
-
-# コマンドをリンクして、PATH に追加し、プラグインは読み込む
-zplug load --verbose
-
-[[ -z "$TMUX" && ! -z "$PS1" ]] && tmuximum
