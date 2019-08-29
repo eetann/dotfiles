@@ -39,6 +39,7 @@ zle -N insert-last-word smart-insert-last-word
 bindkey '^]' insert-last-word
 bindkey "^U" backward-kill-line
 bindkey "^C" send-break
+stty stop undef
 
 # 履歴------------------------------------------------------------
 setopt hist_ignore_all_dups

@@ -81,24 +81,33 @@ hook_add = """
 	\ ['\m\C[^A-Z]\zs\ze[A-Z]', '\m\C\<[A-Z]\?\k\+[A-Z]\%(\k*[A-Z]\?\)*\>', 10]]
 """
 
-[[plugins]] # 選択範囲の拡大
-repo = 'terryma/vim-expand-region'
-hook_add = """
-    vmap v <Plug>(expand_region_expand)
-    vmap <C-v> <Plug>(expand_region_shrink)
-    let g:expand_region_text_objects = {
-    \ 'id' :1,
-    \ 'ib' :1,
-    \ 'iB' :1,
-    \ 'ip' :1,
-    \ }
-"""
-
 [[plugins]] # 括弧関連便利になる
 repo = 'machakann/vim-sandwich'
 
 [[plugins]] # 括弧などを入力したときの挙動をスマートに補完
 repo = 'jiangmiao/auto-pairs'
+
+[[plugins]] # マルチカーソル(矩形の拡張)
+repo = 'terryma/vim-multiple-cursors'
+hook_add = '''
+	let g:multi_cursor_use_default_mapping=0
+    let g:multi_cursor_start_word_key      = '<C-h>'
+    let g:multi_cursor_select_all_word_key = '<A-n>'
+    let g:multi_cursor_start_key           = 'g<C-h>'
+    let g:multi_cursor_select_all_key      = 'g<A-h>'
+    let g:multi_cursor_next_key            = '<C-n>'
+    let g:multi_cursor_prev_key            = '<C-p>'
+    let g:multi_cursor_skip_key            = '<C-x>'
+    let g:multi_cursor_quit_key            = '<Esc>'
+	" let g:multi_cursor_start_word_key      = '<C-s>'
+	" let g:multi_cursor_select_all_word_key = '<A-s>'
+	" let g:multi_cursor_start_key           = 'g<C-s>'
+	" let g:multi_cursor_select_all_key      = 'g<A-s>'
+	" let g:multi_cursor_next_key            = '<C-s>'
+	" let g:multi_cursor_prev_key            = '<C-p>'
+	" let g:multi_cursor_skip_key            = '<C-x>'
+	" let g:multi_cursor_quit_key            = '<Esc>'
+'''
 
 [[plugins]] # カラースキーム
 repo = 'morhetz/gruvbox'
@@ -128,7 +137,7 @@ if = "!has('nvim')"
 repo = 'ryanoasis/vim-devicons'
 
 # スニペット定義ファイル
-[[plugins]] 
+[[plugins]]
 repo = 'honza/vim-snippets'
 
 [[plugins]]
