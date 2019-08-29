@@ -315,10 +315,10 @@ hook_add = '''
 repo = 'junegunn/vim-easy-align'
 on_event = 'VimEnter'
 hook_add = '''
-    " Start interactive EasyAlign in visual mode (e.g. vipga)
     xmap ga <Plug>(EasyAlign)
-    " Start interactive EasyAlign for a motion/text object (e.g. gaip)
     nmap ga <Plug>(EasyAlign)
+    " コメントや文字列中でも有効化
+    let g:easy_align_ignore_groups = []
 '''
 
 [[plugins]] # Camel _ のmotionを<leader>w b e geに対応

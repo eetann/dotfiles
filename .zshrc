@@ -164,11 +164,11 @@ zplugin ice wait'0'; zplugin light zsh-users/zsh-history-substring-search
 # as"program" : プラグインをsourceせず、$PATHに追加
 zplugin ice wait'0' as"program"; zplugin light arks22/tmuximum
 
-# from"{hoge}" : hogeからclone
-# pick"hoge.zsh" : $PATHに追加するファイルを指定
+# from"{hoge}"              : hogeからclone
+# pick"hoge.zsh"            : $PATHに追加するファイルを指定
 # multisrc"{hoge,fuga}.zsh" : 複数のファイルをsource
-# id-as : ニックネーム
-# atload : プラグインがロード後に実行
+# id-as                     : ニックネーム
+# atload                    : プラグインがロード後に実行
 zplugin ice wait"0" from"gh-r" as"program"; zplugin load junegunn/fzf-bin
 zplugin ice wait"0" as"program" pick"bin/fzf-tmux"; zplugin load junegunn/fzf
 zplugin ice wait"0" multisrc"shell/{completion,key-bindings}.zsh"\
