@@ -29,6 +29,7 @@ hook_post_source='''
     \ 'line_limit': 500,
     \ 'max_num_results': 10,
     \ })
+    call deoplete#custom#source('tabnine', 'rank', 400)
 '''
 
 [[plugins]] # use look cmd
@@ -260,6 +261,11 @@ hook_add = """
 [[plugins]] # Emmet
 repo = 'mattn/emmet-vim'
 on_ft = ['html', 'css', 'php', 'xml', 'javascript']
+hook_add = """
+    let g:user_emmet_settings = {
+    \   'lang' : 'ja'
+    \ }
+"""
 
 # ----Markdownサポート----
 [[plugins]] # Markdownの編集をサポート
