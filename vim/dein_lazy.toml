@@ -267,6 +267,11 @@ hook_add = """
     \ }
 """
 
+[[plugins]] # カラーコードの色表示
+repo = 'ap/vim-css-color'
+on_event = 'VimEnter'
+
+
 # ----Markdownサポート----
 [[plugins]] # Markdownの編集をサポート
 repo = 'plasticboy/vim-markdown'
