@@ -121,10 +121,10 @@ IsOpenVivaldi() {
 
 vk1D::
 	If (A_PriorHotKey == A_ThisHotKey and A_TimeSincePriorHotkey < 1000){
-		Input,MyCommands,I T1 L2,{Esc},vi,ws,re,ta,tw,an,tr,gc,gk,gt,ex
-		If MyCommands = vi
+		Input,MyCommands,I T1 L2,{Esc},v,w,re,ta,tw,an,tr,gc,gk,gt,ex
+		If MyCommands = v
             IsOpenVivaldi()
-		Else If MyCommands = ws
+		Else If MyCommands = w
 			WinActivate, ahk_group TerminalVim
 		Else If MyCommands = re
 			Reload
@@ -473,66 +473,6 @@ vkF2::
 			Send, ^p
 		return
 #IfWinActive
-
-; #IfWinActive ahk_class AcrobatSDIWindow
-; 	j::
-; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-; 			Send, {Down}
-; 		else
-; 			Send, j
-; 		return
-; 	k::
-; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-; 			Send, {Up}
-; 		else
-; 			Send, k
-; 		return
-; 	h::
-; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-; 			Send, !{Left}
-; 		else
-; 			Send, h
-; 		return
-; 	l::
-; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-; 			Send, {Enter}
-; 		else
-; 			Send, l
-; 		return
-; 	Space::
-; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-; 			Send, {AppsKey}
-; 		else
-; 			Send, {Space}
-; 		return
-; 	y::
-; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-; 			Send, ^c
-; 		else
-; 			Send, y
-; 		return
-; 	p::
-; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-; 			Send, ^v
-; 		else
-; 			Send, p
-; 		return
-; 	r::
-; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-; 			Send, {F2}
-; 		else
-; 			Send, r
-; 		return
-; 	f::
-; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-; 			Send, {F5}
-; 		else
-; 			Send, f
-; 		return
-; 	^l::
-; 		Send, !d
-; 		return
-; #IfWinActive
 
 GetClassNameOnWindow(hWindow)
 {
