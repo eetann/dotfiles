@@ -95,12 +95,12 @@ xnoremap <expr> p 'pgv"'.v:register.'ygv<esc>'
 " ペーストした範囲をvisualModeで選択
 nnoremap sgv `[v`]
 " 下or上の行に貼り付けてカーソル位置はそのまま
-nnoremap <expr> sp 'mzox<Esc>V]pgv"'.v:register.'y`zdmz'
-nnoremap <expr> sP 'mzOx<Esc>V]pgv"'.v:register.'y`zdmz'
+nnoremap sp mzox<Esc>my]p`y"_d'y`zdmz
+nnoremap sP mzOx<Esc>my]p`y"_d'y`zdmz
 " 下の行に貼り付けたら貼り付けの末尾へ
-nnoremap <expr> sgp 'ox<Esc>V]p`]mygv"'.v:register.'y`ydmy'
-" 上の行へ貼り付けたら貼り付けの先頭へ
-nnoremap <expr> sgP 'Ox<Esc>V]p`[mygv"'.v:register.'y`ydmy'
+nnoremap sgp ox<Esc>my]p`]mz`y"_d'y`zdmz
+" 上の行へ貼り付けたら貼り付けの先頭(インデントじゃない)へ
+nnoremap sgP Ox<Esc>my]p`[mz`y"_d'y`zdmz^
 " 全選択コピー
 nnoremap sy :%y<CR>
 nnoremap sgg :let @+=expand('%')<CR>
