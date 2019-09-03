@@ -177,6 +177,7 @@ function! MarkdownEOLTwoSpace()
     call setpos('.', s:tmppos) " cursorの位置を戻す
 endfunction
 autocmd vimrc BufWritePre *.md :call MarkdownEOLTwoSpace()
+autocmd vimrc BufNewFile,BufRead *.csv set filetype=csv
 
 " ----設定の編集--------------------------------------------------
 nnoremap <F2> :<C-u>edit ~/dotfiles/vim/VimCheatSheet.md<CR>

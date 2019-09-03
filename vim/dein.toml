@@ -138,9 +138,6 @@ repo = 'ryanoasis/vim-devicons'
 
 # スニペット定義ファイル
 [[plugins]]
-repo = 'honza/vim-snippets'
-
-[[plugins]]
 repo = 'Shougo/neosnippet-snippets'
 
 [[plugins]] # tagジャンプ
