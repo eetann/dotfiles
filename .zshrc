@@ -177,15 +177,16 @@ zplugin ice wait"0" multisrc"shell/{completion,key-bindings}.zsh"\
 zplugin light junegunn/fzf
 export FZF_DEFAULT_OPTS="-m --height=60% --select-1 --exit-0 --reverse"
 # export FZF_CTRL_T_OPTS="--preview 'test [(file {} | grep ASCII)=ASCII];and head -n 100 {}|nkf -Sw ;or head -n 100 {}'"
+export FZF_CTRL_T_COMMAND="find * -type f"
 export FZF_CTRL_T_OPTS="--preview 'head -n 100 {}'"
+export FZF_ALT_C_COMMAND="find * -type d -maxdepth 1"
 export FZF_ALT_C_OPTS="--preview 'tree -al {} | head -n 100'"
 export FZF_COMPLETION_OPTS="--preview 'head -n 100 {}'"
 export FZF_COMPLETION_TRIGGER=''
-bindkey '^K' fzf-completion
 
 # プラグインによる関数--------------------------------------------
 # z ×fzf
-zz() {
+function zz() {
     local res=$(z | sort -rn | cut -c 12- | fzf)
     if [ -n "$res" ]; then
         cd $res
@@ -195,7 +196,7 @@ zz() {
 }
 
 # fbr - checkout git branch
-fbr() {
+function fbr() {
     local branches branch
     branches=$(git branch -vv) &&
         branch=$(echo "$branches" | fzf +m) &&
@@ -203,7 +204,7 @@ fbr() {
     }
 
 # gadd
-gadd() {
+function gadd() {
     local out q n addfiles
     while out=$(
             git status --short |
@@ -220,3 +221,21 @@ gadd() {
         fi
     done
 }
+
+function my_fzf_completion() {
+    ary=(`echo $LBUFFER`)
+    selected=$(find * -type f \
+        | fzf --multi --height=60% --select-1 --exit-0 --reverse --preview \
+        'if [[ "file {} | grep ASCII" ]]; then head -n 100 {}; else head -n 100 {} | nkf -Sw; fi' --query ${ary[-1]})
+    # ファイルを選択した場合のみバッファを更新
+    if [[ -n "$selected" ]]; then
+        # 改行をスペースに置換
+        selected=$(tr '\n' ' ' <<< "$selected")
+        BUFFER="${ary[1,-2]} ${selected}"
+    fi
+    CURSOR=$#BUFFER
+    zle reset-prompt
+}
+
+zle -N my_fzf_completion
+bindkey "^k" my_fzf_completion
