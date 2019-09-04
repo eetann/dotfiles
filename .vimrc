@@ -95,12 +95,12 @@ xnoremap <expr> p 'pgv"'.v:register.'ygv<esc>'
 " ペーストした範囲をvisualModeで選択
 nnoremap sgv `[v`]
 " 下or上の行に貼り付けてカーソル位置はそのまま
-nnoremap sp mzox<Esc>my]p`y"_d'y`zdmz
-nnoremap sP mzOx<Esc>my]p`y"_d'y`zdmz
+nnoremap sp mz:put<CR>`[v`]=`zdmz
+nnoremap sP mz:put!<CR>`[v`]=`zdmz
 " 下の行に貼り付けたら貼り付けの末尾へ
-nnoremap sgp ox<Esc>my]p`]mz`y"_d'y`zdmz
+nnoremap sgp :put<CR>`[v`]=`>$
 " 上の行へ貼り付けたら貼り付けの先頭(インデントじゃない)へ
-nnoremap sgP Ox<Esc>my]p`[mz`y"_d'y`zdmz^
+nnoremap sgP :put!<CR>`[v`]=`<^
 " 全選択コピー
 nnoremap sy :%y<CR>
 nnoremap sgg :let @+=expand('%')<CR>
@@ -115,7 +115,7 @@ function! My_yank_echo()
     endif
 endfunction
 " 直前の検索をヤンク
-nnoremap sg/ let @+ = histget("search",-1)
+nnoremap sg/ :let @+ = histget("search",-1)<CR>
 
 " ----タブ設定----------------------------------------------------
 set expandtab " インデントをタブの代わりにスペース
