@@ -175,8 +175,9 @@ zplugin ice wait"0" multisrc"shell/{completion,key-bindings}.zsh"\
     id-as"junegunn/fzf_completions" pick"/dev/null"\
     atload"bindkey '^I' expand-or-complete"
 zplugin light junegunn/fzf
-export FZF_DEFAULT_OPTS="-m --height=60% --select-1 --exit-0 --reverse"
-# export FZF_CTRL_T_OPTS="--preview 'test [(file {} | grep ASCII)=ASCII];and head -n 100 {}|nkf -Sw ;or head -n 100 {}'"
+FZF_DEFAULT_OPTS="--multi --height=60% --select-1 --exit-0 --reverse"
+FZF_DEFAULT_OPTS+=" --bind ctrl-j:preview-down,ctrl-k:preview-up,ctrl-d:preview-page-down,ctrl-u:preview-page-up"
+export FZF_DEFAULT_OPTS
 export FZF_CTRL_T_COMMAND="find * -type f"
 export FZF_CTRL_T_OPTS="--preview 'head -n 100 {}'"
 export FZF_ALT_C_COMMAND="find * -type d -maxdepth 1"
@@ -238,7 +239,7 @@ function my_fzf_completion() {
     fi
     # fzfでファイルを選択
     selected=$(find * -type f \
-        | fzf --multi --height=60% --select-1 --exit-0 --reverse --preview \
+        | fzf --preview \
         'if [[ "file {} | grep ASCII" ]]; then head -n 100 {}; else head -n 100 {} | nkf -Sw; fi' --query "${query}")
     # ファイルを選択した場合のみバッファを更新
     if [[ -n "$selected" ]]; then
