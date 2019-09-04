@@ -153,6 +153,7 @@ zplugin light zsh-users/zsh-completions
 
 zplugin light zsh-users/zsh-autosuggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 zplugin light zdharma/fast-syntax-highlighting
 
