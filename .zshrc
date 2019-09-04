@@ -223,16 +223,30 @@ function gadd() {
 }
 
 function my_fzf_completion() {
-    ary=(`echo $LBUFFER`)
+    # 入力をスペースで区切って配列に
+    local ary=(`echo $LBUFFER`)
+    local query
+    local prebuffer
+    # 単語を入力途中ならそれをクエリにする
+    if [[ "${LBUFFER: -1}" == " " ]]; then
+        query=""
+        # 最後のスペースは削除するので配列の方
+        prebuffer=$ary
+    else
+        query=${ary[-1]}
+        prebuffer=${ary[1,-2]}
+    fi
+    # fzfでファイルを選択
     selected=$(find * -type f \
         | fzf --multi --height=60% --select-1 --exit-0 --reverse --preview \
-        'if [[ "file {} | grep ASCII" ]]; then head -n 100 {}; else head -n 100 {} | nkf -Sw; fi' --query ${ary[-1]})
+        'if [[ "file {} | grep ASCII" ]]; then head -n 100 {}; else head -n 100 {} | nkf -Sw; fi' --query "${query}")
     # ファイルを選択した場合のみバッファを更新
     if [[ -n "$selected" ]]; then
         # 改行をスペースに置換
         selected=$(tr '\n' ' ' <<< "$selected")
-        BUFFER="${ary[1,-2]} ${selected}"
+        BUFFER="${prebuffer} ${selected}"
     fi
+    # カーソル位置を行末にして更新
     CURSOR=$#BUFFER
     zle reset-prompt
 }
