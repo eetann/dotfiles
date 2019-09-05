@@ -179,8 +179,7 @@ zplugin light junegunn/fzf
 FZF_DEFAULT_OPTS="--multi --height=60% --select-1 --exit-0 --reverse"
 FZF_DEFAULT_OPTS+=" --bind ctrl-j:preview-down,ctrl-k:preview-up,ctrl-d:preview-page-down,ctrl-u:preview-page-up"
 export FZF_DEFAULT_OPTS
-export FZF_CTRL_T_COMMAND="find * -type f"
-export FZF_CTRL_T_OPTS="--preview 'head -n 100 {}'"
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 export FZF_ALT_C_COMMAND="find * -type d -maxdepth 1"
 export FZF_ALT_C_OPTS="--preview 'tree -al {} | head -n 100'"
 export FZF_COMPLETION_OPTS="--preview 'head -n 100 {}'"
@@ -239,9 +238,13 @@ function my_fzf_completion() {
         prebuffer=${ary[1,-2]}
     fi
     # fzfでファイルを選択
+    # テキストファイル以外をプレビュー
+    # ASCIIは変換して表示
     selected=$(find * -type f \
-        | fzf --preview \
-        'if [[ "file {} | grep ASCII" ]]; then head -n 100 {}; else head -n 100 {} | nkf -Sw; fi' --query "${query}")
+        | fzf --query "${query}" --preview \
+        '[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file ||
+        ( [[ $(file {}) =~ ASCII ]] &&
+        ( head -n 100 {} | nkf -Sw ) || head -n 100 {} )')
     # ファイルを選択した場合のみバッファを更新
     if [[ -n "$selected" ]]; then
         # 改行をスペースに置換
