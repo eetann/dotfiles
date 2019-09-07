@@ -19,8 +19,8 @@ do
     ln -fs ${dot_directory}/${f} ${HOME}/${f}
 done
 
-# ln -s $home_for_dot/dotfiles/.zshrc ~/.zshrc
-# ln -s $home_for_dot/dotfiles/.vimrc ~/.vimrc
-# ln -s $home_for_dot/dotfiles/.pylintrc ~/.pylintrc
-# ln -s $home_for_dot/dotfiles/.tmux.conf ~/.tmux.conf
-ln -s ${home_for_dot}/dotfiles/flake8 ${HOME}/.config/flake8
+# ln -s ${home_for_dot}/dotfiles/flake8 ${HOME}/.config/flake8
+for f in `find ./.config -type f`
+do
+    ln -fs ${home_for_dot}/dotfiles/${f:2} ${HOME}/${f:2}
+done

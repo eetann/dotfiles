@@ -21,9 +21,9 @@ export PATH=$PATH:$HOME/.local/bin
 # export PATH=$PATH:$HOME/.fzf/bin:$HOME/.local/bin
 
 # Python
-alias python=/usr/bin/python3.7
-alias python3=/usr/bin/python3.7
 export PYLINTRC=$HOME/dotfiles/vim/pylintrc
+export PATH="$HOME/.poetry/bin:$PATH"
+alias python=python3
 
 # MATLAB
 export PATH=$PATH:/usr/local/MATLAB/R2019a/bin/glnxa64
@@ -51,7 +51,7 @@ SAVEHIST=10000
 
 # 補完------------------------------------------------------------
 # 補完を有効化
-fpath=(/usr/local/share/zsh-completions $fpath)
+fpath=(/usr/local/share/zsh-completions ~/.zfunc $fpath)
 autoload -Uz compinit
 compinit -u
 setopt correct # コマンドのスペルチェックをする
@@ -67,6 +67,7 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 zstyle ':completion:*:default' menu select=2
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' use-cache yes
+zstyle ':completion::complete:*' use-cache true
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
     /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin \
     /usr/local/git/bin
@@ -153,7 +154,8 @@ zplugin light zsh-users/zsh-completions
 
 zplugin light zsh-users/zsh-autosuggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
-ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+# 遅くなる
+# ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 zplugin light zdharma/fast-syntax-highlighting
 

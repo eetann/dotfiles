@@ -20,18 +20,6 @@ hook_post_source = '''
     endfunction
 '''
 
-# [[plugins]]
-# repo = 'tbodt/deoplete-tabnine'
-# build = './install.sh'
-# on_event = 'VimEnter'
-# hook_post_source='''
-#     call deoplete#custom#var('tabnine', {
-#    \ 'line_limit': 500,
-#    \ 'max_num_results': 10,
-#    \ })
-#     call deoplete#custom#source('tabnine', 'rank', 400)
-# '''
-
 [[plugins]] # use look cmd
 repo = 'ujihisa/neco-look'
 on_event = 'VimEnter'
@@ -143,6 +131,9 @@ hook_add = '''
 repo      = 'lighttiger2505/deoplete-vim-lsp'
 on_source = 'vim-lsp'
 depends = 'deoplete.nvim'
+hook_source = '''
+    call deoplete#custom#source('lsp', 'rank', 510)
+'''
 
 [[plugins]] # lspないやつ
 repo = 'dense-analysis/ale'
@@ -190,9 +181,6 @@ hook_add = '''
         \ 'outputter/buffer/into':1,
         \ 'outputter/buffer/split'  :
         \ '%{winwidth(0) * 2 < winheight(0) * 5 ? winheight(0)/4 : "vertical"}',
-        \ },
-        \ 'python': {
-        \   'command': 'python3.7'
         \ },
         \ 'markdown': {
         \ 'runner'    : 'vimscript',

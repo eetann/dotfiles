@@ -22,7 +22,6 @@ yes | sudo apt install vim
 yes | sudo apt install vim-gtk
 yes | sudo apt install xdg-utils
 yes | sudo apt install x11-apps
-yes | sudo apt install cmigemo
 yes | sudo apt install pandoc
 yes | sudo apt install tree
 
@@ -42,10 +41,10 @@ yes | sudo apt install clang-format
 yes | sudo apt install clang-tools
 
 # install for Python3
-yes | sudo apt install python3.7
+# 別のパッケージ管理する?
 yes | sudo apt install python3-pip
 pip3 install --user python-language-server[all]
-# pip3 uninstall pyflakes pycodestyle
+pip3 uninstall pyflakes pycodestyle
 pip3 install --user pyls-black
 pip3 install --user pyls-isort
 pip3 install --user flake8 isort black
@@ -56,10 +55,8 @@ pip3 install --user matplotlib
 pip3 install --user pandas
 yes | sudo apt install python3-tk
 # pythonのクラス図を作成
-# yes | sudo apt install graphviz
-
-sudo add-apt-repository ppa:neovim-ppa/unstable
-yes | sudo apt install neovim
+yes | sudo apt install graphviz
+yes | sudo apt install python3.7
 
 
 # install universal-ctags
@@ -78,8 +75,9 @@ yes | ~/.fzf/install
 
 # install for zsh
 yes | sudo apt install zsh
-
+chsh -s /usr/bin/zsh
 mkdir ~/.config
+exec $SHELL -l
 
 # /etc/wsl.conf に以下の内容を書く
 # [interop]
