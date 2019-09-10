@@ -1,4 +1,9 @@
 #!/bin/sh
+# install for zsh
+yes | sudo apt install zsh
+chsh -s /usr/bin/zsh
+mkdir ~/.config
+exec /usr/bin/zsh -l
 
 # change the time zone to JST
 yes | sudo dpkg-reconfigure tzdata
@@ -43,20 +48,17 @@ yes | sudo apt install clang-tools
 # install for Python3
 # 別のパッケージ管理する?
 yes | sudo apt install python3-pip
-pip3 install --user python-language-server[all]
-pip3 uninstall pyflakes pycodestyle
-pip3 install --user pyls-black
-pip3 install --user pyls-isort
-pip3 install --user flake8 isort black
-pip3 install --user pynvim
-pip3 install --user vim-vint
-pip3 install --user numpy
-pip3 install --user matplotlib
-pip3 install --user pandas
-yes | sudo apt install python3-tk
+git clone https://github.com/anyenv/anyenv ~/.anyenv
+export PATH="$HOME/.anyenv/bin:$PATH"
+eval "$(anyenv init -)"
+pyenv install 3.7.3
+pyenv global 3.7.3
+pip install pylint mccabe rope python-language-server pyls-black pyls-isort \
+    pynvim vim-vint numpy matplotlib pandas
+# yes | sudo apt install python3-tk
 # pythonのクラス図を作成
-yes | sudo apt install graphviz
-yes | sudo apt install python3.7
+# yes | sudo apt install graphviz
+# pip3 uninstall pyflakes pycodestyle
 
 
 # install universal-ctags
@@ -68,16 +70,6 @@ cd ctags
 ./configure
 make
 sudo make install
-
-# fzf
-git clone https://github.com/junegunn/fzf.git ~/.fzf
-yes | ~/.fzf/install
-
-# install for zsh
-yes | sudo apt install zsh
-chsh -s /usr/bin/zsh
-mkdir ~/.config
-exec $SHELL -l
 
 # /etc/wsl.conf に以下の内容を書く
 # [interop]

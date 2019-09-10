@@ -4,6 +4,8 @@ if [[ -z "$TMUX"  ]] && [[ -z "$VIM" ]] ; then
     export GOPATH=$HOME/go
     export GOPATH=/mnt/c/Users/admin/go:$GOPATH
     export PATH=$PATH:$GOPATH:$GOPATH/bin:/usr/lib/go-1.12/bin:/mnt/c/Users/admin/go/bin
+    export PATH="$HOME/.anyenv/bin:$PATH"
+    eval "$(anyenv init -)"
 
     tmux has-session -t e 2>/dev/null || tmux new-session -ds e \
         && tmux attach-session -t e
@@ -18,12 +20,10 @@ export DISPLAY=localhost:0.0
 export EDITOR=vim
 export PATH=$PATH:/mnt/c/Windows/System32
 export PATH=$PATH:$HOME/.local/bin
-# export PATH=$PATH:$HOME/.fzf/bin:$HOME/.local/bin
 
 # Python
 export PYLINTRC=$HOME/dotfiles/vim/pylintrc
-export PATH="$HOME/.poetry/bin:$PATH"
-alias python=python3
+# alias python="python3"
 
 # MATLAB
 export PATH=$PATH:/usr/local/MATLAB/R2019a/bin/glnxa64
@@ -51,7 +51,7 @@ SAVEHIST=10000
 
 # 補完------------------------------------------------------------
 # 補完を有効化
-fpath=(/usr/local/share/zsh-completions ~/.zfunc $fpath)
+fpath=(/usr/local/share/zsh-completions $fpath)
 autoload -Uz compinit
 compinit -u
 setopt correct # コマンドのスペルチェックをする
