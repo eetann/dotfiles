@@ -6,100 +6,17 @@ repo = 'Shougo/dein.vim'
 repo = 'Shougo/vimproc.vim'
 build = 'make'
 
-[[plugins]] # プレビューをブラウザで開く
-repo = 'tyru/open-browser.vim'
-hook_add = '''
-	autocmd vimrc BufNewFile,BufRead *.html,*.py nnoremap <buffer><Leader>p
-		\ :execute "OpenBrowser http://localhost:8000/" . expand('%')<CR>
-	autocmd vimrc BufNewFile,BufRead *.html,*.py nnoremap <buffer><Leader>cp
-		\ :term ++rows=5 cmd.exe /c python server.py
-	let g:netrw_nogx = 1 " disable netrw's gx mapping.
-	nmap gx <Plug>(openbrowser-smart-search)
-	vmap gx <Plug>(openbrowser-smart-search)
-	function! My_opens()
-		execute 'OpenBrowser ' . substitute(expand('%:p'), '\v/mnt/(.)', '\1:/', 'c')
-	endfunction
-'''
-
-[[plugins]] # コメントアウトに便利
-repo = 'tyru/caw.vim'
-hook_add = '''
-	let g:caw_dollarpos_sp_left=' '
-	nmap gct <Plug>(caw:jump:comment-prev)TODO:<Space>
-	nmap gcO <Plug>(caw:jump:comment-prev)
-	nnoremap gcl :vimgrep /TODO:/j %<CR>
-'''
-
 [[plugins]] # ヤンク時に一瞬ハイライト
 repo = "machakann/vim-highlightedyank"
 hook_add = '''
     let g:highlightedyank_highlight_duration = 300
 '''
 
-# textobjct-------------------------------------------------------
 [[plugins]] # テキストオブジェクトの追加のため
 repo = 'kana/vim-textobj-user'
 
-# [[plugins]] # l 改行文字を含まずに行を扱う
-# repo = 'kana/vim-textobj-line'
-# depends = 'vim-textobj-user'
-
-[[plugins]] # uでURLをtextobj
-repo = 'mattn/vim-textobj-url'
-depends = 'vim-textobj-user'
-
-[[plugins]] # bかsbで近いペアをtextobj
-repo = 'osyo-manga/vim-textobj-multiblock'
-depends = 'vim-textobj-user'
-hook_add = '''
-	omap ab <Plug>(textobj-multiblock-a)
-	omap ib <Plug>(textobj-multiblock-i)
-	xmap ab <Plug>(textobj-multiblock-a)
-	xmap ib <Plug>(textobj-multiblock-i)
-'''
-
-[[plugins]] # 引数や配列の入れ替え
-repo = 'machakann/vim-swap'
-hook_add = '''
-    omap i, <Plug>(swap-textobject-i)
-    xmap i, <Plug>(swap-textobject-i)
-    omap a, <Plug>(swap-textobject-a)
-    xmap a, <Plug>(swap-textobject-a)
-'''
-
-[[plugins]] # dでデリミタ(_,#,-や大文字間)をtextobj
-repo = 'machakann/vim-textobj-delimited'
-depends = 'vim-textobj-user'
-hook_add = """
-	let g:textobj_delimited_patterns =[
-	\ ['\m/', '\m\%(/[-.[:alnum:]_~]\+\)\+'],
-	\ ['\m\\', '\m\a:\%(\\[^\\/?:*"<>|]\+\)\+\ze\%(''[^a-z]\|$\)'],
-	\ ['\m\.', '\m\<\%(\.\k\+\|\k\+\.\)\%(\k*\.\?\)*\>', 10],
-	\ ['\m#', '\m\<\%(#\k\+\|\k\+#\)\%(\k*#\?\)*\>', 10],
-	\ ['\m_', '\m\<\%(_\k\+\|\k\+_\)\%(\k*_\?\)*\>', 10],
-	\ ['\m-', '\m\<\%(-\k\+\|\k\+-\)\%(\k*-\?\)*\>', 10],
-	\ ['\m\C[^A-Z]\zs\ze[A-Z]', '\m\C\<[A-Z]\?\k\+[A-Z]\%(\k*[A-Z]\?\)*\>', 10]]
-"""
-
-[[plugins]] # 括弧関連便利になる
-repo = 'machakann/vim-sandwich'
-
 [[plugins]] # 括弧などを入力したときの挙動をスマートに補完
 repo = 'jiangmiao/auto-pairs'
-
-[[plugins]] # マルチカーソル(矩形の拡張)
-repo = 'terryma/vim-multiple-cursors'
-hook_add = '''
-	let g:multi_cursor_use_default_mapping=0
-    let g:multi_cursor_start_word_key      = '<C-h>'
-    let g:multi_cursor_select_all_word_key = '<A-n>'
-    let g:multi_cursor_start_key           = 'g<C-h>'
-    let g:multi_cursor_select_all_key      = 'g<A-h>'
-    let g:multi_cursor_next_key            = '<C-n>'
-    let g:multi_cursor_prev_key            = '<C-p>'
-    let g:multi_cursor_skip_key            = '<C-x>'
-    let g:multi_cursor_quit_key            = '<Esc>'
-'''
 
 [[plugins]] # カラースキーム
 repo = 'morhetz/gruvbox'
@@ -131,30 +48,6 @@ repo = 'ryanoasis/vim-devicons'
 # スニペット定義ファイル
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
-
-[[plugins]] # tagジャンプ
-repo = 'majutsushi/tagbar'
-hook_add = '''
-	let g:tagbar_width = 30
-	let g:tagbar_sort = 0
-	let g:tagbar_map_togglesort = 'S'
-	let g:can_auto_opens_defx_tagbar = 1
-	nnoremap <silent> <leader>tt :TagbarToggle<CR>
-	let g:tagbar_type_markdown = {
-		\ 'ctagstype': 'markdown',
-		\ 'ctagsbin' : $HOME . '/.vim/dein/repos/github.com/jszakmeister/markdown2ctags/markdown2ctags.py',
-		\ 'ctagsargs' : '-f - --sort=yes',
-		\ 'kinds' : [
-		\ 's:sections',
-		\ 'i:images'
-		\ ],
-		\ 'sro' : '|',
-		\ 'kind2scope' : {
-		\ 's' : 'section',
-		\ },
-		\ 'sort': 0,
-		\ }
-'''
 
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
