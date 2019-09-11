@@ -61,7 +61,7 @@ repo = 'prabirshrestha/async.vim'
 
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
-on_ft = ['c', 'cpp', 'python', 'vim']
+on_ft = ['c', 'cpp', 'python', 'vim', 'javascript']
 depends = ['async.vim', 'deoplete-vim-lsp']
 hook_add = '''
     let g:lsp_async_completion = 1
@@ -97,9 +97,8 @@ hook_add = '''
     endif
     if executable('typescript-language-server')
         autocmd User lsp_setup call lsp#register_server({
-        \ 'name': 'javascript support using typescript-language-server',
+        \ 'name': 'typescript-language-server',
         \ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-        \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
         \ 'whitelist': ['javascript', 'javascript.jsx']
         \ })
         autocmd vimrc FileType javascript call s:configure_lsp()
@@ -137,7 +136,7 @@ hook_source = '''
 
 [[plugins]] # lspないやつ
 repo = 'dense-analysis/ale'
-on_ft = "matlab"
+on_ft = ["matlab"]
 hook_add = '''
     let g:ale_echo_msg_error_str = nr2char(0xf421)
     let g:ale_echo_msg_warning_str = nr2char(0xf420)
@@ -153,8 +152,11 @@ hook_add = '''
     let g:ale_lint_on_text_changed = 0
     let g:ale_lint_on_insert_leave = 1
     let b:ale_linters = {
-    \   'matlab': ['mlint'],
+    \ 'matlab': ['mlint'],
     \}
+    " let g:ale_fixers = {
+    "\ 'javascript': ['prettier']
+    "\ }
     autocmd vimrc FileType help,qf,man,ref let b:ale_enabled = 0
 '''
 
@@ -224,7 +226,7 @@ hook_add = '''
 # ----カーソル位置のコンテキストに合わせてファイルタイプを切り替え----
 [[plugins]] # 判定ライブラリ
 repo = 'Shougo/context_filetype.vim'
-on_ft = ['vim','toml','md','mdwn','mkd','mkdn','mark','python']
+on_ft = ['vim','toml','md','mdwn','mkd','mkdn','mark','python','html']
 hook_add = '''
     function! My_context_on()
         let g:context_filetype#filetypes = {
@@ -253,7 +255,7 @@ hook_add = '''
 
 [[plugins]]
 repo = 'osyo-manga/vim-precious'
-on_ft = ['vim','toml','md','mdwn','mkd','mkdn','mark','python']
+on_ft = ['vim','toml','md','mdwn','mkd','mkdn','mark','python','html']
 depends = ['context_filetype.vim']
 hook_add = """
     let g:precious_enable_switchers = {'defx': {'setfiletype': 0}}
@@ -264,8 +266,9 @@ repo = 'mattn/emmet-vim'
 on_ft = ['html', 'css', 'php', 'xml', 'javascript']
 hook_add = """
     let g:user_emmet_settings = {
-    \   'lang' : 'ja'
-    \ }
+    \ 'variables' : {
+    \     'lang' : 'ja',
+    \}}
 """
 
 [[plugins]] # カラーコードの色表示
@@ -424,6 +427,7 @@ hook_post_source = '''
         \ ['Denite dein', 'Denite dein'],
         \ ['echo dein#get_updates_log()', 'echo dein#get_updates_log()'],
         \ ['echo dein#get_log()', 'echo dein#get_log()'],
+        \ ['clean nouse plugins', 'call map(dein#check_clean(), "delete(v:val, \"rf\")")'],
         \ ]
     let s:menus.d_good_help = {'description': 'good help'}
     let s:menus.d_good_help.command_candidates = [
