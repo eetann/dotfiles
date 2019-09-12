@@ -308,6 +308,10 @@ hook_add = '''
 	endfunction
 '''
 
+[[plugins]]
+repo = 'thinca/vim-partedit'
+on_cmd = 'Partedit'
+
 [[plugins]] # TOMLのシンタックスハイライト
 repo  = 'cespare/vim-toml'
 on_ft = 'toml'
