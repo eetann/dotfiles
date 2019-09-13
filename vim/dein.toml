@@ -34,6 +34,9 @@ hook_add = '''
     hi IndentGuidesEven ctermbg=darkgrey
 '''
 
+[[plugins]] # 括弧関連便利になる
+repo = 'machakann/vim-sandwich'
+
 [[plugins]] # nvim系に必要
 repo = 'roxma/nvim-yarp'
 if = "!has('nvim')"

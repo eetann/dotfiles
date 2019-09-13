@@ -5,14 +5,13 @@ if [[ -z "$TMUX"  ]] && [[ -z "$VIM" ]] ; then
     export GOPATH=/mnt/c/Users/admin/go:$GOPATH
     export PATH=$PATH:$GOPATH:$GOPATH/bin:/usr/lib/go-1.12/bin:/mnt/c/Users/admin/go/bin
     export PATH=$HOME/.anyenv/bin:$PATH
-    eval "$(anyenv init -)"
 
     tmux has-session -t e 2>/dev/null || tmux new-session -ds e \
         && tmux attach-session -t e
     exit
 fi
 
-
+eval "$(anyenv init -)"
 # =では空白入れないこと!!!
 # pathなどの設定--------------------------------------------------
 typeset -U path PATH
