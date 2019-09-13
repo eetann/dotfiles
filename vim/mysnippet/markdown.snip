@@ -1,15 +1,18 @@
-snippet     cheatsheet
-abbr        cheat sheet for vim
-options     head
-    # ${1:name} 
-    | Mode | Map | Description | Original |  
-    |------|-----|-------------|----------|  
-    |${2:mode}
-
 snippet     meta
 abbr        title data
 options     head
-    +++
+    ---
     title: ${1:}
     date: `strftime("%Y/%m/%d")`
-    +++
+    ---
+
+snippet     blog
+abbr        title data
+options     head
+    ---
+    title: ${1:}
+    date: `strftime("%Y/%m/%d")`
+    draft: false
+    tags: [${2:}]
+    categories: [${3:}]
+    ---

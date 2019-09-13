@@ -182,7 +182,7 @@ function! MarkdownEOLTwoSpace()
             else
                 let s:iscode = 0
             endif
-        elseif s:iscode == 0 && (getline('.') !~? '\v^(\-{3}|\+{3}|#+)')
+        elseif s:iscode == 0 && (getline('.') !~? '\v^(\-{3}|\+{3}|#+|\-\s|\+\s|\*\s)')
             " 見出しや区切り線には空白をいれない
             " 空行には行末空白なし
             .s/\v(\S\zs(\s{,1})|(\s{3,}))$/  /e
