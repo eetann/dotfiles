@@ -61,7 +61,7 @@ repo = 'prabirshrestha/async.vim'
 
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
-on_ft = ['c', 'cpp', 'python', 'vim', 'javascript']
+on_ft = ['c', 'cpp', 'python', 'javascript']
 depends = ['async.vim', 'deoplete-vim-lsp']
 hook_add = '''
     let g:lsp_async_completion = 1
@@ -87,13 +87,6 @@ hook_add = '''
                     \ 'pylint': {'enabled': v:true}}}},
         \ })
         autocmd vimrc FileType python call s:configure_lsp()
-    endif
-    if executable('vint')
-        autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'efm-langserver',
-          \ 'cmd': {server_info->['efm-langserver', '-c=~/dotfiles/config.yaml']},
-          \ 'whitelist': ['vim'],
-          \ })
     endif
     if executable('typescript-language-server')
         autocmd User lsp_setup call lsp#register_server({
@@ -136,7 +129,7 @@ hook_source = '''
 
 [[plugins]] # lspないやつ
 repo = 'dense-analysis/ale'
-on_ft = ["matlab"]
+on_ft = ['matlab', 'vim']
 hook_add = '''
     let g:ale_echo_msg_error_str = nr2char(0xf421)
     let g:ale_echo_msg_warning_str = nr2char(0xf420)
@@ -151,8 +144,9 @@ hook_add = '''
     let g:ale_sign_column_always = 1
     let g:ale_lint_on_text_changed = 0
     let g:ale_lint_on_insert_leave = 1
-    let b:ale_linters = {
+    let g:ale_linters = {
     \ 'matlab': ['mlint'],
+    \ 'vim': ['vint'],
     \}
     " let g:ale_fixers = {
     "\ 'javascript': ['prettier']

@@ -107,11 +107,11 @@ nnoremap sgg :let @+=expand('%')<CR>
 " 直前にechoを実行していたらヤンク
 nnoremap sge :call My_yank_echo()<CR>
 function! My_yank_echo()
-    let s:echo_hist = histget("cmd", -1)
+    let s:echo_hist = histget('cmd', -1)
     if s:echo_hist =~ '^echo '
         let @z = substitute(s:echo_hist, '^echo\s','echomsg ', '')
         execute "normal ;\<C-r>z\<CR>"
-        let @+ = execute("1messages")
+        let @+ = execute('1messages')
     endif
 endfunction
 " 直前の検索をヤンク
@@ -160,6 +160,20 @@ function! MarkdownEOLTwoSpace()
     let s:tmppos = getpos('.') " cursorの位置を記録しておく
     let s:iscode = 0
     let s:cursorline = 1
+
+    " 最初にメタデータがあったらスキップ
+    if getline(1)=~? '\v^(\-{3}|\+{3})'
+        let s:cursorline +=1
+        " 書きかけで1行だったら怖いので冗長でもこの判定
+        while s:cursorline<=line('$')
+            call cursor(s:cursorline, 1)
+            if getline('.')=~? '\v^(\-{3}|\+{3})'
+                break
+            endif
+            let s:cursorline +=1
+        endwhile
+    endif
+
     while s:cursorline<=line('$')
         call cursor(s:cursorline, 1)
         if getline('.')=~? '\v^```'
@@ -168,12 +182,14 @@ function! MarkdownEOLTwoSpace()
             else
                 let s:iscode = 0
             endif
-        elseif s:iscode == 0
+        elseif s:iscode == 0 && (getline('.') !~? '\v^(\-{3}|\+{3}|#+)')
+            " 見出しや区切り線には空白をいれない
             " 空行には行末空白なし
             .s/\v(\S\zs(\s{,1})|(\s{3,}))$/  /e
         endif
         let s:cursorline +=1
     endwhile
+
     call setpos('.', s:tmppos) " cursorの位置を戻す
 endfunction
 autocmd vimrc BufWritePre *.md :call MarkdownEOLTwoSpace()
