@@ -103,6 +103,7 @@ nnoremap sgp :put<CR>`[v`]=`>$
 nnoremap sgP :put!<CR>`[v`]=`<^
 " 全選択コピー
 nnoremap sy :%y<CR>
+" 今のファイル名取得
 nnoremap sgg :let @+=expand('%')<CR>
 " 直前にechoを実行していたらヤンク
 nnoremap sge :call My_yank_echo()<CR>
@@ -125,7 +126,10 @@ set autoindent    " 改行時に前の行のintentを継続する
 set smartindent   " 改行時に入力された行の末尾に合わせて次行のintentを増減
 set shiftwidth=4  " smartindentでずれる幅
 set pastetoggle=<F3>
+" \入力時自動インデント阻止
+let g:vim_indent_cont = 0
 autocmd vimrc FileType make setlocal noexpandtab
+autocmd vimrc FileType html,css,javascript setlocal sw=2 sts=2 ts=2
 
 " ----文字列検索--------------------------------------------------
 set incsearch " インクリメンタルサーチ. １文字入力毎に検索を行う
@@ -220,13 +224,10 @@ set mouse=a
 set ttimeoutlen=100 " ESCしてから挿入モード出るまでの時間を短縮
 set helplang=ja,en
 set keywordprg=:help
-" \入力時自動インデント阻止
-let g:vim_indent_cont = 0
 
 
 " --見た目系------------------------------------------------------
 " ----cursor------------------------------------------------------
-syntax on "コードの色分け
 set title "編集中のファイル名表示
 set number "行番号の表示
 set nowrap " 折り返さない
@@ -234,7 +235,6 @@ set showmatch "括弧入力時に対応括弧表示
 set colorcolumn=88 "カラムラインを引く(Pythonのformatter'black'基準)
 set whichwrap=b,s,h,l,[,],<,>,~ "行末から次の行へ移動できる
 set signcolumn=yes
-filetype plugin on
 set list "空白文字の可視化
 " Tabは2文字必要
 " 行末スペース、改行記号

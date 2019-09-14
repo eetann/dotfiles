@@ -222,6 +222,9 @@ hook_add = '''
     xmap i, <Plug>(swap-textobject-i)
     omap a, <Plug>(swap-textobject-a)
     xmap a, <Plug>(swap-textobject-a)
+    nmap g< <Plug>(swap-prev)
+    nmap g> <Plug>(swap-next)
+    nmap gS <Plug>(swap-interactive)
 '''
 
 [[plugins]] # マルチカーソル(矩形の拡張)
