@@ -129,7 +129,7 @@ hook_source = '''
 
 [[plugins]] # lspないやつ
 repo = 'dense-analysis/ale'
-on_ft = ['matlab', 'vim']
+on_ft = ['matlab', 'vim', 'html', 'css']
 hook_add = '''
     let g:ale_echo_msg_error_str = nr2char(0xf421)
     let g:ale_echo_msg_warning_str = nr2char(0xf420)
@@ -147,6 +147,8 @@ hook_add = '''
     let g:ale_linters = {
     \ 'matlab': ['mlint'],
     \ 'vim': ['vint'],
+    \ 'html': ['htmlhint'],
+    \ 'css': ['csslint'],
     \}
     " let g:ale_fixers = {
     "\ 'javascript': ['prettier']

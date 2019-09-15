@@ -37,6 +37,9 @@ hook_add = '''
 [[plugins]] # 括弧関連便利になる
 repo = 'machakann/vim-sandwich'
 
+[[plugins]] # %を拡張
+repo = 'tmhedberg/matchit'
+
 [[plugins]] # nvim系に必要
 repo = 'roxma/nvim-yarp'
 if = "!has('nvim')"
