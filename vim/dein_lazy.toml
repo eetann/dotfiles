@@ -372,7 +372,7 @@ hook_add = '''
 # ----カーソル位置のコンテキストに合わせてファイルタイプを切り替え----
 [[plugins]] # 判定ライブラリ
 repo = 'Shougo/context_filetype.vim'
-on_ft = ['vim','toml','md','mdwn','mkd','mkdn','mark','python','html']
+on_ft = ['vim','toml','markdown','md','mdwn','mkd','mkdn','mark','python','html']
 hook_add = '''
     function! My_context_on()
         let g:context_filetype#filetypes = {
@@ -401,7 +401,7 @@ hook_add = '''
 
 [[plugins]]
 repo = 'osyo-manga/vim-precious'
-on_ft = ['vim','toml','md','mdwn','mkd','mkdn','mark','python','html']
+on_ft = ['vim','toml','markdown','md','mdwn','mkd','mkdn','mark','python','html']
 depends = ['context_filetype.vim']
 hook_add = """
     let g:precious_enable_switchers = {'defx': {'setfiletype': 0}}
