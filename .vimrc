@@ -224,6 +224,7 @@ set mouse=a
 set ttimeoutlen=100 " ESCしてから挿入モード出るまでの時間を短縮
 set helplang=ja,en
 set keywordprg=:help
+set formatoptions-=ro
 
 
 " --見た目系------------------------------------------------------
