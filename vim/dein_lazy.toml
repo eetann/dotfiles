@@ -1,33 +1,80 @@
 # 遅延実行されるプラグイン
 
+[[plugins]] # 補完とLSP
+repo = 'neoclide/coc.nvim'
+build = './install.sh nightly'
+depends = ['neosnippet.vim']
+on_ft = [
+'vim','toml','markdown','md','mdwn','mkd','mkdn','mark','python','html',
+'css','javascript','txt','csv','c','cpp','objc','objcpp','snippet','go',
+'zsh','bash','fish','sh'
+]
+hook_add = '''
+    set updatetime=300
+    let g:coc_global_extensions = [
+    \ 'coc-json',
+    \ 'coc-highlight',
+    \ 'coc-word',
+    \ 'coc-snippets',
+    \ 'coc-neosnippet',
+    \ 'coc-css',
+    \ 'coc-html',
+    \ 'coc-tsserver',
+    \ 'coc-emmet',
+    \ 'coc-vimlsp',
+    \ ]
+    let g:airline#extensions#coc#error_symbol =  ""
+    let g:airline#extensions#coc#warning_symbol = ""
+    let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+    let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
+    let g:coc_start_at_startup=1
+'''
+hook_post_source = '''
+    highlight link CocHighlightText GruvboxBlueSign
+    autocmd vimrc CursorHold * silent call CocActionAsync('highlight')
+    nnoremap <F10> :<C-u>CocConfig<CR>
+    inoremap <silent><expr> <C-space> coc#refresh()
+    nmap <silent> [c <Plug>(coc-diagnostic-prev)
+    nmap <silent> ]c <Plug>(coc-diagnostic-next)
+    nmap <silent> <leader>gd <Plug>(coc-definition)
+    nmap <silent> <leader>gD <Plug>(coc-type-definition)
+    nmap <silent> <leader>gi <Plug>(coc-implementation)
+    nmap <silent> <leader>gf <Plug>(coc-references)
+    nmap <leader>gn <Plug>(coc-rename)
+    nnoremap <silent> K :call <SID>show_documentation()<CR>
+    function! s:show_documentation()
+        if (index(['vim','help'], &filetype) >= 0)
+            execute 'h '.expand('<cword>')
+        else
+            call CocAction('doHover')
+        endif
+    endfunction
+    omap iF <Plug>(coc-funcobj-i)
+    omap aF <Plug>(coc-funcobj-a)
+    vmap iF <Plug>(coc-funcobj-i)
+    vmap aF <Plug>(coc-funcobj-a)
+    imap <expr> <C-k> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
+    \ pumvisible() ? coc#_select_confirm() :
+    \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+    \ coc#refresh()
+    smap <C-k> <Plug>(neosnippet_expand_or_jump)
+    xmap <C-k> <Plug>(neosnippet_expand_target)
+'''
+
 [[plugins]] # 補完
 repo = 'Shougo/deoplete.nvim'
 depends = ['context_filetype.vim','nvim-yarp', 'vim-hug-neovim-rpc']
-on_event = 'VimEnter'
+# on_event = 'VimEnter'
+on_ft = ['matlab']
 hook_add = '''
-    let g:deoplete#enable_at_startup = 1
     let g:deoplete#max_list = 10000
+    let g:deoplete#enable_at_startup = 1
 '''
 hook_post_source = '''
     imap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
+    autocmd vimrc FileType * call deoplete#custom#buffer_option('auto_complete', v:false)
+    autocmd vimrc FileType matlab call deoplete#custom#buffer_option('auto_complete', v:true)
 '''
-
-[[plugins]] # use look cmd
-repo = 'ujihisa/neco-look'
-on_source = 'deoplete.nvim'
-hook_post_source='''
-    call deoplete#custom#source('look', 'max_candidates', 10)
-    call deoplete#custom#source('look', 'max_candidates', 10)
-    call deoplete#custom#source('look', 'rank', 10)
-'''
-
-[[plugins]]
-repo = 'Shougo/neco-vim'
-on_source = 'deoplete.nvim'
-
-[[plugins]]
-repo = 'Shougo/neco-syntax'
-on_source = 'deoplete.nvim'
 
 [[plugins]] # スニペット管理
 repo = 'Shougo/neosnippet.vim'
@@ -39,89 +86,10 @@ hook_add = '''
     let g:neosnippet#enable_completed_snippet = 1 " 関数スニペットを展開
     let g:neosnippet#expand_word_boundary = 0 " jump時に間違えて補完されないようにオフ
 '''
-hook_source = '''
-    imap <C-k> <Plug>(neosnippet_expand_or_jump)
-    smap <C-k> <Plug>(neosnippet_expand_or_jump)
-    xmap <C-k> <Plug>(neosnippet_expand_target)
-    imap <expr><CR> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-y>" : "\<CR>"
-    imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-    call deoplete#custom#source('neosnippet', 'rank', 510)
-'''
-
-[[plugins]]
-repo = 'prabirshrestha/async.vim'
-
-[[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-on_ft = ['c', 'cpp', 'python', 'javascript']
-depends = ['async.vim', 'deoplete-vim-lsp']
-hook_add = '''
-    let g:lsp_async_completion = 1
-    if executable('clangd-6.0')
-        autocmd User lsp_setup call lsp#register_server({
-            \ 'name': 'clangd',
-            \ 'cmd': {server_info->['clangd-6.0']},
-            \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-            \ })
-    endif
-    if executable('pyls')
-        autocmd User lsp_setup call lsp#register_server({
-            \ 'name': 'pyls',
-            \ 'cmd': {server_info->['pyls']},
-            \ 'whitelist': ['python', 'py'],
-            \ 'workspace_config': {'pyls': {
-                \ 'plugins': {
-                    \ 'black': {'enabled': v:true},
-                    \ 'yapf': {'enabled': v:false},
-                    \ 'pyflakes': {'enabled': v:false},
-                    \ 'pydocstyle': {'enabled': v:false},
-                    \ 'pycodestyle': {'enabled': v:false},
-                    \ 'pylint': {'enabled': v:true}}}},
-        \ })
-        autocmd vimrc FileType python call s:configure_lsp()
-    endif
-    if executable('typescript-language-server')
-        autocmd User lsp_setup call lsp#register_server({
-        \ 'name': 'typescript-language-server',
-        \ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-        \ 'whitelist': ['javascript', 'javascript.jsx']
-        \ })
-        autocmd vimrc FileType javascript call s:configure_lsp()
-    endif
-    function! s:configure_lsp() abort
-        setlocal omnifunc=lsp#complete " オムニ補完を有効化
-        nnoremap <buffer> <C-]> :<C-u>LspDefinition<CR>
-        nnoremap <buffer> gd :<C-u>LspDefinition<CR>
-        nnoremap <buffer> gD :<C-u>LspDeclaration<CR>
-        nnoremap <buffer> <Leader>gd :<C-u>LspDocumentDiagnostics<CR>
-        " nnoremap <buffer> gs :<C-u>LspDocumentSymbol<CR>
-        " nnoremap <buffer> gS :<C-u>LspWorkspaceSymbol<CR>
-        nnoremap <buffer> K :<C-u>LspHover<CR>
-        nnoremap <buffer> <Leader>grn :<C-u>LspRename<CR>
-        nnoremap <buffer> <Leader>grf :<C-u>LspReferences<CR>
-        nnoremap <buffer> ]e  :LspNextError<CR>
-        nnoremap <buffer> [e  :LspPreviousError<CR>
-        nnoremap <buffer> <Leader>gf :<C-u>LspDocumentFormatSync<CR>
-        autocmd vimrc BufWritePre <buffer> silent LspDocumentFormatSync
-    endfunction
-    let g:lsp_signs_error = {'text': ''}
-    let g:lsp_signs_warning = {'text': ''}
-    let g:lsp_signs_information = {'text': ''}
-    let g:lsp_signs_hint = {'text': ''}
-    let g:lsp_diagnostics_echo_cursor = 1
-'''
-
-[[plugins]]
-repo      = 'lighttiger2505/deoplete-vim-lsp'
-on_source = 'vim-lsp'
-depends = 'deoplete.nvim'
-hook_source = '''
-    call deoplete#custom#source('lsp', 'rank', 510)
-'''
 
 [[plugins]] # lspないやつ
 repo = 'dense-analysis/ale'
-on_ft = ['matlab', 'vim', 'html', 'css']
+on_ft = ['matlab']
 hook_add = '''
     let g:ale_echo_msg_error_str = nr2char(0xf421)
     let g:ale_echo_msg_warning_str = nr2char(0xf420)
@@ -138,12 +106,12 @@ hook_add = '''
     let g:ale_lint_on_insert_leave = 1
     let g:ale_linters = {
     \ 'matlab': ['mlint'],
-    \ 'vim': ['vint'],
-    \ 'html': ['htmlhint'],
-    \ 'css': ['csslint'],
     \}
     " let g:ale_fixers = {
     "\ 'javascript': ['prettier']
+    "\ 'vim': ['vint'],
+    "\ 'html': ['htmlhint'],
+    "\ 'css': ['csslint'],
     "\ }
     autocmd vimrc FileType help,qf,man,ref let b:ale_enabled = 0
 '''
@@ -222,34 +190,6 @@ hook_add = '''
     nmap gS <Plug>(swap-interactive)
 '''
 
-# 重いプラグインを入れるくらいなら置換などを駆使する
-# [[plugins]] # マルチカーソル(矩形の拡張)
-# repo = 'terryma/vim-multiple-cursors'
-# on_map = ['<C-h>']
-# hook_add = '''
-# 	let g:multi_cursor_use_default_mapping=0
-#     let g:multi_cursor_start_word_key      = '<C-h>'
-#     let g:multi_cursor_select_all_word_key = '<A-h>'
-#     let g:multi_cursor_start_key           = 'g<C-h>'
-#     let g:multi_cursor_select_all_key      = 'g<A-h>'
-#     let g:multi_cursor_next_key            = '<C-h>'
-#     let g:multi_cursor_prev_key            = '<C-p>'
-#     let g:multi_cursor_skip_key            = '<C-x>'
-#     let g:multi_cursor_quit_key            = '<Esc>'
-# '''
-# hook_post_source = '''
-#     function! Multiple_cursors_before()
-#         call deoplete#custom#buffer_option('auto_complete', v:false)
-#         let b:auto_cursorline_disabled = 1
-#         " call lsp#disable()
-#     endfunction
-#     function! Multiple_cursors_after()
-#         call deoplete#custom#buffer_option('auto_complete', v:true)
-#         let b:auto_cursorline_disabled = 0
-#         " call lsp#enable()
-#     endfunction
-# '''
-
 [[plugins]]
 repo = 'terryma/vim-expand-region'
 on_map = [['x', '<Plug>(expand_region_']]
@@ -309,10 +249,6 @@ hook_add = '''
 		execute 'OpenBrowser ' . substitute(expand('%:p'), '\v/mnt/(.)', '\1:/', 'c')
 	endfunction
 '''
-
-[[plugins]]
-repo = 'thinca/vim-partedit'
-on_cmd = 'Partedit'
 
 [[plugins]] # TOMLのシンタックスハイライト
 repo  = 'cespare/vim-toml'
