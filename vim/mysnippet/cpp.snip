@@ -1,0 +1,56 @@
+snippet     meta
+abbr        abbr
+options     head
+    /*
+     * ${1:`expand('%:t')`}
+     *
+     *  ${2:Created on: `strftime("%Y/%m/%d")`}
+     *      ${3:Author:} ${4:name}
+     */${5:}
+
+snippet     using
+abbr        using namespace std;
+options     head
+    using namespace std;
+
+snippet     intmain
+abbr        intmain(){}
+options     head
+    int main() {
+        ${0:TARGET}
+    }
+
+snippet     void
+abbr        void
+options     head
+    void ${0:} = ${1:};${2:}
+
+snippet     char
+abbr        char
+options     head
+    char ${0:} = ${1:};${2:}
+
+snippet     short
+abbr        short
+options     head
+    short ${0:} = ${1:};${2:}
+
+snippet     int
+abbr        int
+options     head
+    int ${0:} = ${1:};${2:}
+
+snippet     long
+abbr        long
+options     head
+    long ${0:} = ${1:};${2:}
+
+snippet     float
+abbr        float
+options     head
+    float ${0:} = ${1:};${2:}
+
+snippet     double
+abbr        double
+options     head
+    double ${0:} = ${1:};${2:}

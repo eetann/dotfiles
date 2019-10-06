@@ -10,14 +10,6 @@ hook_add = '''
 '''
 hook_post_source = '''
     imap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
-    function! Multiple_cursors_before()
-        call deoplete#custom#buffer_option('auto_complete', v:false)
-        let b:auto_cursorline_disabled = 1
-    endfunction
-    function! Multiple_cursors_after()
-        call deoplete#custom#buffer_option('auto_complete', v:true)
-        let b:auto_cursorline_disabled = 0
-    endfunction
 '''
 
 [[plugins]] # use look cmd
@@ -205,6 +197,7 @@ hook_add = """
 	\ ['\m_', '\m\<\%(_\k\+\|\k\+_\)\%(\k*_\?\)*\>', 10],
 	\ ['\m-', '\m\<\%(-\k\+\|\k\+-\)\%(\k*-\?\)*\>', 10],
 	\ ['\m\C[^A-Z]\zs\ze[A-Z]', '\m\C\<[A-Z]\?\k\+[A-Z]\%(\k*[A-Z]\?\)*\>', 10]]
+    " TODO: *でも囲む
     let g:textobj_delimited_no_default_key_mappings = 1
     xmap id <Plug>(textobj-delimited-forward-i)
     xmap ad <Plug>(textobj-delimited-forward-a)
@@ -229,20 +222,33 @@ hook_add = '''
     nmap gS <Plug>(swap-interactive)
 '''
 
-[[plugins]] # マルチカーソル(矩形の拡張)
-repo = 'terryma/vim-multiple-cursors'
-on_map = ['<C-h>']
-hook_add = '''
-	let g:multi_cursor_use_default_mapping=0
-    let g:multi_cursor_start_word_key      = '<C-h>'
-    let g:multi_cursor_select_all_word_key = '<A-h>'
-    let g:multi_cursor_start_key           = 'g<C-h>'
-    let g:multi_cursor_select_all_key      = 'g<A-h>'
-    let g:multi_cursor_next_key            = '<C-h>'
-    let g:multi_cursor_prev_key            = '<C-p>'
-    let g:multi_cursor_skip_key            = '<C-x>'
-    let g:multi_cursor_quit_key            = '<Esc>'
-'''
+# 重いプラグインを入れるくらいなら置換などを駆使する
+# [[plugins]] # マルチカーソル(矩形の拡張)
+# repo = 'terryma/vim-multiple-cursors'
+# on_map = ['<C-h>']
+# hook_add = '''
+# 	let g:multi_cursor_use_default_mapping=0
+#     let g:multi_cursor_start_word_key      = '<C-h>'
+#     let g:multi_cursor_select_all_word_key = '<A-h>'
+#     let g:multi_cursor_start_key           = 'g<C-h>'
+#     let g:multi_cursor_select_all_key      = 'g<A-h>'
+#     let g:multi_cursor_next_key            = '<C-h>'
+#     let g:multi_cursor_prev_key            = '<C-p>'
+#     let g:multi_cursor_skip_key            = '<C-x>'
+#     let g:multi_cursor_quit_key            = '<Esc>'
+# '''
+# hook_post_source = '''
+#     function! Multiple_cursors_before()
+#         call deoplete#custom#buffer_option('auto_complete', v:false)
+#         let b:auto_cursorline_disabled = 1
+#         " call lsp#disable()
+#     endfunction
+#     function! Multiple_cursors_after()
+#         call deoplete#custom#buffer_option('auto_complete', v:true)
+#         let b:auto_cursorline_disabled = 0
+#         " call lsp#enable()
+#     endfunction
+# '''
 
 [[plugins]]
 repo = 'terryma/vim-expand-region'
@@ -282,7 +288,8 @@ hook_add = '''
     xmap gcb    <Plug>(caw:box:comment)
     nmap gco    <Plug>(caw:jump:comment-next)
     nmap gcO    <Plug>(caw:jump:comment-prev)
-    nmap gct    <Plug>(caw:jump:comment-prev)TODO:<Space>
+    nmap gct    <Plug>(caw:jump:comment-next)TODO:<Space>
+    nmap gcT    <Plug>(caw:jump:comment-prev)TODO:<Space>
     nnoremap gcl :vimgrep /TODO:/j %<CR>
 '''
 
@@ -663,6 +670,14 @@ hook_add = '''
 [[plugins]] # matlab
 repo = '~/.vim/my_plugins/deoplete-matlab'
 on_ft = ['matlab']
+
+[[plugins]] # matlab
+repo = '~/.vim/my_plugins/foldppp'
+on_cmd = 'Foldppp'
+on_map = '<Plug>(foldppp-show)'
+hook_add = '''
+    nmap <leader>s <Plug>(foldppp-show)
+'''
 
 [[plugins]] # 日本語ヘルプ
 repo = 'vim-jp/vimdoc-ja'

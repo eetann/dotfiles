@@ -198,6 +198,7 @@ function! MarkdownEOLTwoSpace()
 endfunction
 autocmd vimrc BufWritePre *.md :call MarkdownEOLTwoSpace()
 autocmd vimrc BufNewFile,BufRead *.csv set filetype=csv
+autocmd vimrc BufNewFile,BufRead *.m set fileencoding=sjis
 
 " ----設定の編集--------------------------------------------------
 nnoremap <F2> :<C-u>edit ~/dotfiles/vim/VimCheatSheet.md<CR>
