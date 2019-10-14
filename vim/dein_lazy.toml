@@ -6,7 +6,7 @@ build = './install.sh nightly'
 depends = ['neosnippet.vim']
 on_ft = [
 'vim','toml','markdown','md','mdwn','mkd','mkdn','mark','python','html',
-'css','javascript','txt','csv','c','cpp','objc','objcpp','snippet','go',
+'css','javascript','text','csv','c','cpp','objc','objcpp','snippet','go',
 'zsh','bash','fish','sh'
 ]
 hook_add = '''
@@ -29,9 +29,11 @@ hook_add = '''
     let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
     let g:coc_start_at_startup=1
 '''
-hook_post_source = '''
+# hook_post_source
+hook_source = '''
     highlight link CocHighlightText GruvboxBlueSign
     autocmd vimrc CursorHold * silent call CocActionAsync('highlight')
+    autocmd vimrc User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
     nnoremap <F10> :<C-u>CocConfig<CR>
     inoremap <silent><expr> <C-space> coc#refresh()
     nmap <silent> [c <Plug>(coc-diagnostic-prev)
@@ -360,6 +362,7 @@ hook_add = """
     \}}
 """
 
+# TODO: どうして必要か
 [[plugins]]
 repo = 'billyvg/tigris.nvim'
 build = './install.sh'
@@ -469,6 +472,10 @@ on_event = 'VimEnter'
 hook_add = '''
     autocmd vimrc FileType defx :let b:auto_cursorline_disabled = 1
 '''
+
+[[plugins]]
+repo = 'skanehira/translate.vim'
+on_cmd = ['Translate','AutoTranslateModeEnable','AutoTranslateModeDisable','AutoTranslateModeToggle']
 
 [[plugins]]
 repo = 'Shougo/neomru.vim'
@@ -604,7 +611,7 @@ hook_add = '''
 '''
 
 [[plugins]] # matlab
-repo = '~/.vim/my_plugins/deoplete-matlab'
+repo = '~/.vim/my_plugins/matlab-vim'
 on_ft = ['matlab']
 
 [[plugins]] # matlab
@@ -614,6 +621,10 @@ on_map = '<Plug>(foldppp-show)'
 hook_add = '''
     nmap <leader>s <Plug>(foldppp-show)
 '''
+
+[[plugins]]
+repo = '~/.vim/my_plugins/fromd'
+on_cmd = 'Fromd'
 
 [[plugins]] # 日本語ヘルプ
 repo = 'vim-jp/vimdoc-ja'

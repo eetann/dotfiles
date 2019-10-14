@@ -80,6 +80,10 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 # wslでwindowsのバッテリーを見るために以下をwindows側で実行
 # go get -u github.com/Code-Hex/battery/cmd/battery
 
+# git clone https://github.com/skanehira/gtran.git ~/.gtran
+# cd ~/.gtran
+# go install
+
 # HTML CSS
 # sudo npm i -g csslint
 # sudo npm i -g htmlhint

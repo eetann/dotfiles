@@ -1,12 +1,13 @@
 snippet     meta
-abbr        abbr
+abbr        meta
 options     head
     /*
      * ${1:`expand('%:t')`}
      *
      *  ${2:Created on: `strftime("%Y/%m/%d")`}
      *      ${3:Author:} ${4:name}
-     */${5:}
+     */
+    ${5:}
 
 snippet     using
 abbr        using namespace std;
@@ -17,40 +18,40 @@ snippet     intmain
 abbr        intmain(){}
 options     head
     int main() {
-        ${0:TARGET}
+        ${1:hoge}
     }
-
-snippet     void
-abbr        void
-options     head
-    void ${1:} = ${2:};${3:}
 
 snippet     char
 abbr        char
-options     head
+options     word
     char ${1:} = ${2:};${3:}
 
 snippet     short
 abbr        short
-options     head
+options     word
     short ${1:} = ${2:};${3:}
 
 snippet     int
 abbr        int
-options     head
+options     word
     int ${1:} = ${2:};${3:}
 
 snippet     long
 abbr        long
-options     head
+options     word
     long ${1:} = ${2:};${3:}
 
 snippet     float
 abbr        float
-options     head
+options     word
     float ${1:} = ${2:};${3:}
 
 snippet     double
 abbr        double
-options     head
+options     word
     double ${1:} = ${2:};${3:}
+
+snippet     string
+abbr        string
+options     word
+    string ${1:} = "${2:}";${3:}
