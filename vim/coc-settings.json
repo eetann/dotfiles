@@ -1,5 +1,5 @@
 {
-	"coc.preferences.formatOnSaveFiletypes": ["python"],
+	"coc.preferences.formatOnSaveFiletypes": ["python", "c", "cpp"],
 	"suggest.timeout":5000,
     "suggest.maxPreviewWidth": 15,
 	"diagnostic.refreshAfterSave": true,
