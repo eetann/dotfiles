@@ -424,20 +424,6 @@ on_ft = ['md','mdwn','mkd','mkdn','mark']
 on_cmd = 'HelpIntoMarkdown'
 repo = 'tsuyoshicho/vimhelpgenerator'
 
-[[plugins]] # (別ウィンドウを含めた)画面の移動が便利になる
-repo = 'easymotion/vim-easymotion'
-on_map = ['<plug>(easymotion-']
-hook_add = '''
-    " デフォルトのキーマッピングを無効に
-    let g:EasyMotion_do_mapping = 0
-    " f + 2文字 で画面全体を検索してジャンプ
-    nmap ss <plug>(easymotion-overwin-f2)
-    " 検索時、大文字小文字を区別しない
-    let g:EasyMotion_smartcase = 1
-    let g:EasyMotion_use_migemo = 1
-    nmap <leader><leader> <Plug>(easymotion-overwin-line)
-'''
-
 [[plugins]] # undoを視覚的に
 repo = 'sjl/gundo.vim'
 on_cmd = 'GundoToggle'

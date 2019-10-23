@@ -39,7 +39,7 @@ nnoremap sk <C-w>k
 nnoremap sl <C-w>l
 nnoremap sh <C-w>h
 " 分割(水平&垂直)
-nnoremap sb :<C-u>sp<CR>
+nnoremap ss :<C-u>sp<CR>
 nnoremap sv :<C-u>vs<CR>
 " ウィンドウを閉じる
 nnoremap sc <C-w>c

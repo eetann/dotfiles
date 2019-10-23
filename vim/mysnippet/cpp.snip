@@ -14,8 +14,8 @@ abbr        using namespace std;
 options     head
     using namespace std;
 
-snippet     intmain
-abbr        intmain(){}
+snippet     mymain
+abbr        int main() { hoge }
 options     head
     int main() {
         ${1:hoge}
@@ -24,34 +24,49 @@ options     head
 snippet     char
 abbr        char
 options     word
-    char ${1:} = ${2:};${3:}
+    char ${1}${2: = }${3};${0:}
 
 snippet     short
 abbr        short
 options     word
-    short ${1:} = ${2:};${3:}
+    short ${1}${2: = }${3};${0:}
 
 snippet     int
 abbr        int
 options     word
-    int ${1:} = ${2:};${3:}
+    int ${1}${2: = }${3};${0:}
 
 snippet     long
 abbr        long
 options     word
-    long ${1:} = ${2:};${3:}
+    long ${1}${2: = }${3};${0:}
 
 snippet     float
 abbr        float
 options     word
-    float ${1:} = ${2:};${3:}
+    float ${1}${2: = }${3};${0:}
 
 snippet     double
 abbr        double
 options     word
-    double ${1:} = ${2:};${3:}
+    double ${1}${2: = }${3};${0:}
 
 snippet     string
 abbr        string
 options     word
-    string ${1:} = "${2:}";${3:}
+    string ${1:} = "${2:}";${0:}
+
+snippet     cout
+abbr        cout << endl;
+options     head
+    cout << "${1:#:hoge}" ${2:#:use snippet my connect}${3:<< endl};${0}
+
+snippet     myconnect
+abbr        << ""
+options     word
+    << "${1:#:hoge}" ${2:#:use snippet my connect}
+
+snippet     cin
+abbr        cin >>;
+options     head
+    cin >> ${1};${0}
