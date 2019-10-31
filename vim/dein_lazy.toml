@@ -4,6 +4,7 @@
 repo = 'neoclide/coc.nvim'
 build = './install.sh nightly'
 depends = ['neosnippet.vim']
+# if = "!exists('g:loaded_deoplete')"
 on_ft = [
 'vim','toml','markdown','md','mdwn','mkd','mkdn','mark','python','html',
 'css','javascript','text','csv','c','cpp','objc','objcpp','snippet','go',
@@ -76,6 +77,8 @@ hook_post_source = '''
     imap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
     autocmd vimrc FileType * call deoplete#custom#buffer_option('auto_complete', v:false)
     autocmd vimrc FileType matlab call deoplete#custom#buffer_option('auto_complete', v:true)
+    " 共存のため
+    let g:did_coc_loaded = 1
 '''
 
 [[plugins]] # スニペット管理
@@ -217,6 +220,7 @@ repo = 'tyru/caw.vim'
 on_map = ['<Plug>(caw:']
 hook_add = '''
     let g:caw_dollarpos_sp_left=' '
+    " TODO: コメントアウト時にカーソル位置を移動しない
     nmap gc     <Plug>(caw:prefix)
     xmap gc     <Plug>(caw:prefix)
     nmap gcc    <Plug>(caw:hatpos:toggle)
