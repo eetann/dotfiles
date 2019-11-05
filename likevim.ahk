@@ -565,13 +565,13 @@ q::
     if (getIMEMode = 2) {
         Send ^p
     } else {
-        Send ^{Tab}
+        Send ^+{Tab}
     }
     return
 ^h::
 	Send {BS}
 	Return
-^+l::
+^l::
 	Send ^+l
 	Sleep 100
 	IME_SET(0)
