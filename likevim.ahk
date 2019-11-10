@@ -519,55 +519,16 @@ Esc::
 		Send ^y
 	}
 	return
-#IfWinActive
-
-;-----------------------------------------------------------
-; vivaldiのクイックコマンドのショートカットキーを押したら
-; IMEはオフの状態で起動するように設定
-#IfWInActive, ahk_exe vivaldi.exe
-q::
-	Send q
-	Sleep 100
-	IME_SET(0)
-	Return
-^q::
-	Send ^q
-	Sleep 100
-	IME_SET(0)
-	Return
-^h::
-	Send {BS}
-	Return
-^+l::
-	Send ^+l
-	Sleep 100
-	IME_SET(0)
-	Return
+^+Tab:: ; CTRL Shift Tab でバッファの切り替え
+    Send {Space}{Tab}
+    return
 #IfWinActive
 
 ;-----------------------------------------------------------
 ; Chrome
-; クイックコマンドのショートカットキーを押したら
+; アドレスバーのショートカットキーを押したら
 ; IMEはオフの状態で起動するように設定
 #IfWInActive, ahk_exe chrome.exe
-^n::
-    ; 変換候補窓が出ているときは、そちらになる
-	getIMEMode := IME_GetConverting()
-    if (getIMEMode = 2) {
-        Send ^n
-    } else {
-        Send ^{Tab}
-    }
-    return
-^p::
-    ; 変換候補窓が出ているときは、そちらになる
-	getIMEMode := IME_GetConverting()
-    if (getIMEMode = 2) {
-        Send ^p
-    } else {
-        Send ^+{Tab}
-    }
-    return
 ^h::
 	Send {BS}
 	Return
@@ -608,95 +569,93 @@ vkF2::
 	Return
 #If
 
-
-
 ;-----------------------------------------------------------
 ; explorer
-#IfWinActive ahk_class CabinetWClass 
-	j::
-		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-			Send, {Down}
-		else
-			Send, j
-		return
-	k::
-		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-			Send, {Up}
-		else
-			Send, k
-		return
-	h::
-		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-			Send, !{Up}
-		else
-			Send, h
-		return
-	l::
-		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-			Send, {Enter}
-		else
-			Send, l
-		return
-	Space::
-		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-			Send, {AppsKey}
-		else
-			Send, {Space}
-		return
-	y::
-		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-			Send, ^c
-		else
-			Send, y
-		return
-	p::
-		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-			Send, ^v
-		else
-			Send, p
-		return
-	r::
-		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-			Send, {F2}
-		else
-			Send, r
-		return
-	f::
-		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-			Send, {F5}
-		else
-			Send, f
-		return
-	^l::
-		Send, !d
-		return
-	^n::
-		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-			Send, +!n
-		else
-			Send, ^n
-		return
-	^p::
-		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-			Send, +!p
-		else
-			Send, ^p
-		return
-#IfWinActive
-
-GetClassNameOnWindow(hWindow)
-{
-	max := VarSetCapacity(s, 256)
-	ActiveThreadID := DllCall("GetWindowThreadProcessId", "UInt", hWindow, "UIntP",0)
-	if(DllCall("AttachThreadInput", "UInt", DllCall("GetCurrentThreadId"), "UInt", ActiveThreadID, "Int", 1))
-	{
-		hFocus := DllCall("GetFocus")
-		DllCall("GetClassName", "UInt", hFocus, "Str", s, "Int", max)
-		DllCall("AttachThreadInput", "UInt", DllCall("GetCurrentThreadId"), "UInt", ActiveThreadID, "Int", 0)
-	} 
-    else
-    {
-		s := "Error"
-    }
-	return s
-}
+; #IfWinActive ahk_class CabinetWClass 
+; 	j::
+; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
+; 			Send, {Down}
+; 		else
+; 			Send, j
+; 		return
+; 	k::
+; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
+; 			Send, {Up}
+; 		else
+; 			Send, k
+; 		return
+; 	h::
+; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
+; 			Send, !{Up}
+; 		else
+; 			Send, h
+; 		return
+; 	l::
+; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
+; 			Send, {Enter}
+; 		else
+; 			Send, l
+; 		return
+; 	Space::
+; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
+; 			Send, {AppsKey}
+; 		else
+; 			Send, {Space}
+; 		return
+; 	y::
+; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
+; 			Send, ^c
+; 		else
+; 			Send, y
+; 		return
+; 	p::
+; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
+; 			Send, ^v
+; 		else
+; 			Send, p
+; 		return
+; 	r::
+; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
+; 			Send, {F2}
+; 		else
+; 			Send, r
+; 		return
+; 	f::
+; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
+; 			Send, {F5}
+; 		else
+; 			Send, f
+; 		return
+; 	^l::
+; 		Send, !d
+; 		return
+; 	^n::
+; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
+; 			Send, +!n
+; 		else
+; 			Send, ^n
+; 		return
+; 	^p::
+; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
+; 			Send, +!p
+; 		else
+; 			Send, ^p
+; 		return
+; #IfWinActive
+;
+; GetClassNameOnWindow(hWindow)
+; {
+; 	max := VarSetCapacity(s, 256)
+; 	ActiveThreadID := DllCall("GetWindowThreadProcessId", "UInt", hWindow, "UIntP",0)
+; 	if(DllCall("AttachThreadInput", "UInt", DllCall("GetCurrentThreadId"), "UInt", ActiveThreadID, "Int", 1))
+; 	{
+; 		hFocus := DllCall("GetFocus")
+; 		DllCall("GetClassName", "UInt", hFocus, "Str", s, "Int", max)
+; 		DllCall("AttachThreadInput", "UInt", DllCall("GetCurrentThreadId"), "UInt", ActiveThreadID, "Int", 0)
+; 	} 
+;     else
+;     {
+; 		s := "Error"
+;     }
+; 	return s
+; }
