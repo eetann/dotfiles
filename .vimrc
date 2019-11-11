@@ -72,8 +72,8 @@ nnoremap ]q :cnext<CR>
 nnoremap [Q :<C-u>cfirst<CR>
 nnoremap ]Q :<C-u>clast<CR>
 " バッファの移動
-nnoremap <space><Tab> :<C-u>bprevious<CR>
-nnoremap <C-Tab> :<C-u>bnext<CR>
+nnoremap <space><Tab>p :<C-u>bprevious<CR>
+nnoremap <space><Tab>n :<C-u>bnext<CR>
 " ターミナル設定
 nnoremap st :term<CR>
 tnoremap <space><Tab> <C-w>:bprevious!<CR>

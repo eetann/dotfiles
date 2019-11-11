@@ -14,44 +14,44 @@ abbr        using namespace std;
 options     head
     using namespace std;
 
-snippet     mymain
+snippet     qmain
 abbr        int main() { hoge }
 options     head
     int main() {
         ${1:hoge}
     }
 
-snippet     char
+snippet     qchar
 abbr        char
 options     word
     char ${1}${2: = }${3};${0:}
 
-snippet     short
+snippet     qshort
 abbr        short
 options     word
     short ${1}${2: = }${3};${0:}
 
-snippet     int
+snippet     qint
 abbr        int
 options     word
     int ${1}${2: = }${3};${0:}
 
-snippet     long
+snippet     qlong
 abbr        long
 options     word
     long ${1}${2: = }${3};${0:}
 
-snippet     float
+snippet     qfloat
 abbr        float
 options     word
     float ${1}${2: = }${3};${0:}
 
-snippet     double
+snippet     qdouble
 abbr        double
 options     word
     double ${1}${2: = }${3};${0:}
 
-snippet     string
+snippet     qstring
 abbr        string
 options     word
     string ${1:} = "${2:}";${0:}
@@ -61,7 +61,7 @@ abbr        cout << endl;
 options     head
     cout << "${1:#:hoge}" ${2:#:use snippet my connect}${3:<< endl};${0}
 
-snippet     myconnect
+snippet     qconnect
 abbr        << ""
 options     word
     << "${1:#:hoge}" ${2:#:use snippet my connect}

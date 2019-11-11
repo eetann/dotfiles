@@ -519,8 +519,11 @@ Esc::
 		Send ^y
 	}
 	return
+^Tab:: ; CTRL Shift Tab でバッファの切り替え
+    Send {Space}{Tab}n
+    return
 ^+Tab:: ; CTRL Shift Tab でバッファの切り替え
-    Send {Space}{Tab}
+    Send {Space}{Tab}p
     return
 #IfWinActive
 
