@@ -138,6 +138,7 @@ set smartcase " 検索パターンに大文字を含んでいたら大文字小�
 set shortmess-=S " 検索時に検索件数メッセージを表示
 " ESC2度押しでハイライトの切り替え
 nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
+" 一気に置換するときは以下ではなく、/or?検索->cgn->n.n.nnn.
 " cursor下の単語をハイライトと置換
 nnoremap * <Space><Space> "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
 nnoremap # "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
@@ -232,7 +233,8 @@ set formatoptions-=ro
 " --見た目系------------------------------------------------------
 " ----cursor------------------------------------------------------
 set title "編集中のファイル名表示
-set number "行番号の表示
+set relativenumber " 相対的な行番号の表示
+set number " 現在の行番号の表示
 set nowrap " 折り返さない
 set showmatch "括弧入力時に対応括弧表示
 set colorcolumn=88 "カラムラインを引く(Pythonのformatter'black'基準)

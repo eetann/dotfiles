@@ -4,12 +4,7 @@
 repo = 'neoclide/coc.nvim'
 build = './install.sh nightly'
 depends = ['neosnippet.vim']
-# if = "!exists('g:loaded_deoplete')"
-on_ft = [
-'vim','toml','markdown','md','mdwn','mkd','mkdn','mark','python','html',
-'css','javascript','text','csv','c','cpp','objc','objcpp','snippet','go',
-'zsh','bash','fish','sh'
-]
+on_event = "VimEnter"
 hook_add = '''
     set updatetime=300
     let g:coc_global_extensions = [
@@ -65,23 +60,6 @@ hook_source = '''
     \ coc#refresh()
     " smap <C-k> <Plug>(neosnippet_expand_or_jump)
     xmap <C-k> <Plug>(neosnippet_expand_target)
-'''
-
-[[plugins]] # 補完
-repo = 'Shougo/deoplete.nvim'
-depends = ['context_filetype.vim','nvim-yarp', 'vim-hug-neovim-rpc']
-# on_event = 'VimEnter'
-on_ft = ['matlab']
-hook_add = '''
-    let g:deoplete#max_list = 10000
-    let g:deoplete#enable_at_startup = 1
-'''
-hook_post_source = '''
-    imap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
-    autocmd vimrc FileType * call deoplete#custom#buffer_option('auto_complete', v:false)
-    autocmd vimrc FileType matlab call deoplete#custom#buffer_option('auto_complete', v:true)
-    " 共存のため
-    let g:did_coc_loaded = 1
 '''
 
 [[plugins]] # スニペット管理
