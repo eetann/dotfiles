@@ -30,13 +30,12 @@ hook_add = '''
     let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
     let g:coc_start_at_startup=1
 '''
-# hook_post_source
 hook_source = '''
     highlight link CocHighlightText GruvboxBlueSign
     autocmd vimrc CursorHold * silent call CocActionAsync('highlight')
-    autocmd vimrc User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
     nnoremap <F10> :<C-u>CocConfig<CR>
-    inoremap <silent><expr> <C-space> coc#refresh()
+    inoremap <C-g> <C-o>:call CocActionAsync('showSignatureHelp')<CR>
     nmap <silent> [c <Plug>(coc-diagnostic-prev)
     nmap <silent> ]c <Plug>(coc-diagnostic-next)
     nmap <silent> <leader>gd <Plug>(coc-definition)
@@ -60,7 +59,11 @@ hook_source = '''
     \ pumvisible() ? coc#_select_confirm() :
     \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
     \ coc#refresh()
-    smap <C-k> <Plug>(neosnippet_expand_or_jump)
+    smap <expr> <C-k> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
+    \ pumvisible() ? coc#_select_confirm() :
+    \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+    \ coc#refresh()
+    " smap <C-k> <Plug>(neosnippet_expand_or_jump)
     xmap <C-k> <Plug>(neosnippet_expand_target)
 '''
 
@@ -630,8 +633,8 @@ hook_post_source = '''
 repo = 'kristijanhusak/defx-icons'
 on_cmd = 'Defx'
 hook_add = '''
-    let g:defx_icons_enable_syntax_highlight = 0
-    let g:defx_icons_column_length = 1
+    let g:defx_icons_enable_syntax_highlight = 1
+    let g:defx_icons_column_length = 2
     let g:defx_icons_directory_icon = '+'
     let g:defx_icons_root_opendtree_icon = '+'
     let g:defx_icons_nested_opened_tree_icon = '-'

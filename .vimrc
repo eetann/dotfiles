@@ -47,7 +47,7 @@ nnoremap sc <C-w>c
 nnoremap sq :<C-u>call <SID>my_buffer_delete()<CR>
 function! s:my_buffer_delete()
     let s:now_bn = bufnr("%")
-    bprevious
+    bnext
     execute 'bdelete' . s:now_bn
 endfunction
 " バッファもウィンドウも閉じる
