@@ -3,7 +3,7 @@
 [[plugins]] # 補完とLSP
 repo = 'neoclide/coc.nvim'
 build = './install.sh nightly'
-depends = ['neosnippet.vim']
+# depends = ['neosnippet.vim']
 on_event = "VimEnter"
 hook_add = '''
     set updatetime=300
@@ -18,6 +18,7 @@ hook_add = '''
     \ 'coc-tsserver',
     \ 'coc-emmet',
     \ 'coc-vimlsp',
+    \ 'coc-vimtex',
     \ ]
     let g:airline#extensions#coc#error_symbol =  ""
     let g:airline#extensions#coc#warning_symbol = ""
@@ -29,6 +30,7 @@ hook_source = '''
     highlight link CocHighlightText GruvboxBlueSign
     autocmd vimrc CursorHold * silent call CocActionAsync('highlight')
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    " autocmd CursorHoldI,CursorMovedI * silent! call CocAction('showSignatureHelp')
     nnoremap <F10> :<C-u>CocConfig<CR>
     inoremap <C-g> <C-o>:call CocActionAsync('showSignatureHelp')<CR>
     nmap <silent> [c <Plug>(coc-diagnostic-prev)
@@ -50,16 +52,19 @@ hook_source = '''
     omap aF <Plug>(coc-funcobj-a)
     vmap iF <Plug>(coc-funcobj-i)
     vmap aF <Plug>(coc-funcobj-a)
-    imap <expr> <C-k> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
-    \ pumvisible() ? coc#_select_confirm() :
+    imap <silent><expr> <C-k>
+    \ neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
     \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-    \ coc#refresh()
-    smap <expr> <C-k> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
     \ pumvisible() ? coc#_select_confirm() :
-    \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
     \ coc#refresh()
-    " smap <C-k> <Plug>(neosnippet_expand_or_jump)
+    smap <silent><expr> <C-k>
+    \ neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
+    \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+    \ pumvisible() ? coc#_select_confirm() :
+    \ coc#refresh()
     xmap <C-k> <Plug>(neosnippet_expand_target)
+    let g:coc_snippet_next =  '<c-k>'
+    let g:coc_snippet_prev = '<s-tab>'
 '''
 
 [[plugins]] # スニペット管理
@@ -405,10 +410,6 @@ hook_add = '''
 repo = 'jszakmeister/markdown2ctags'
 on_ft = ['md','mdwn','mkd','mkdn','mark']
 
-[[plugins]] # vimのpluginのhelpとreadme.md自動生成
-on_cmd = 'HelpIntoMarkdown'
-repo = 'tsuyoshicho/vimhelpgenerator'
-
 [[plugins]] # undoを視覚的に
 repo = 'sjl/gundo.vim'
 on_cmd = 'GundoToggle'
@@ -598,6 +599,10 @@ repo = 'vim-jp/vimdoc-ja'
 on_ft = ['help']
 
 [[plugins]]
+repo = 'lervag/vimtex'
+on_ft = ['tex']
+
+[[plugins]]
 repo = 'simeji/winresizer'
 on_event = 'WinEnter'
 on_if = 'winnr("$") > 1'
@@ -605,18 +610,6 @@ hook_post_source = '''
     " リサイズ幅を1ずつに変更
     let g:winrisizer_vert_resize=1
     let g:winresizer_horiz_resize=1
-'''
-
-[[plugins]] # defx icons
-repo = 'kristijanhusak/defx-icons'
-on_cmd = 'Defx'
-hook_add = '''
-    let g:defx_icons_enable_syntax_highlight = 1
-    let g:defx_icons_column_length = 2
-    let g:defx_icons_directory_icon = '+'
-    let g:defx_icons_root_opendtree_icon = '+'
-    let g:defx_icons_nested_opened_tree_icon = '-'
-    let g:defx_icons_nested_closed_tree_icon = '+'
 '''
 
 [[plugins]] # file explorer
@@ -631,7 +624,7 @@ hook_add = '''
             q
             bprevious
             let s:win_id = win_getid()
-            Defx -split=vertical -columns=icons:indent:filename:type
+            Defx -split=vertical -columns=indent:filename:type
             \ -winwidth=30  -direction=topleft
             let succeed = win_gotoid(s:win_id)
             " TODO: bufnrだと、隠しバッファ状態でも検知してしまう
@@ -641,7 +634,7 @@ hook_add = '''
             TagbarClose
             bprevious
             let s:win_id = win_getid()
-            Defx -split=vertical -columns=icons:indent:filename:type
+            Defx -split=vertical -columns=indent:filename:type
             \ -winwidth=30  -direction=topleft
             TagbarOpen
             let succeed = win_gotoid(s:win_id)
@@ -652,7 +645,7 @@ hook_add = '''
         end
     endfunction
     nnoremap <silent> <Space>f
-    \ :<C-u>Defx -split=vertical -columns=icons:indent:filename:type
+    \ :<C-u>Defx -split=vertical -columns=indent:filename:type
         \ -winwidth=30 -direction=topleft -toggle<CR>
 '''
 hook_source = '''

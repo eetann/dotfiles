@@ -21,51 +21,6 @@ options     head
         ${1:hoge}
     }
 
-snippet     qchar
-abbr        char
-options     word
-    char ${1}${2: = }${3};${0:}
-
-snippet     qshort
-abbr        short
-options     word
-    short ${1}${2: = }${3};${0:}
-
-snippet     qint
-abbr        int
-options     word
-    int ${1}${2: = }${3};${0:}
-
-snippet     qlong
-abbr        long
-options     word
-    long ${1}${2: = }${3};${0:}
-
-snippet     qfloat
-abbr        float
-options     word
-    float ${1}${2: = }${3};${0:}
-
-snippet     qdouble
-abbr        double
-options     word
-    double ${1}${2: = }${3};${0:}
-
-snippet     qstring
-abbr        string
-options     word
-    string ${1:} = "${2:}";${0:}
-
-snippet     cout
-abbr        cout << endl;
-options     head
-    cout << "${1:#:hoge}" ${2:#:use snippet my connect}${3:<< endl};${0}
-
-snippet     qconnect
-abbr        << ""
-options     word
-    << "${1:#:hoge}" ${2:#:use snippet my connect}
-
 snippet     mainq
 abbr        int main() { hoge }
 options     head
@@ -73,45 +28,20 @@ options     head
         ${1:hoge}
     }
 
-snippet     charq
-abbr        char
-options     word
-    char ${1}${2: = }${3};${0:}
-
-snippet     shortq
-abbr        short
-options     word
-    short ${1}${2: = }${3};${0:}
-
-snippet     intq
-abbr        int
-options     word
-    int ${1}${2: = }${3};${0:}
-
-snippet     longq
-abbr        long
-options     word
-    long ${1}${2: = }${3};${0:}
-
-snippet     floatq
-abbr        float
-options     word
-    float ${1}${2: = }${3};${0:}
-
-snippet     doubleq
-abbr        double
-options     word
-    double ${1}${2: = }${3};${0:}
-
-snippet     stringq
-abbr        string
-options     word
-    string ${1:} = "${2:}";${0:}
-
-snippet     connectq
+snippet     cq
 abbr        << ""
 options     word
     << "${1:#:hoge}" ${2:#:use snippet my connect}
+
+snippet     qc
+abbr        << ""
+options     word
+    << "${1:#:hoge}" ${2:#:use snippet my connect}
+
+snippet     cout
+abbr        cout << endl;
+options     head
+    cout << "${1:#:hoge}" ${2:#:use snippet my connect}${3:<< endl};${0}
 
 snippet     cin
 abbr        cin >>;
@@ -131,3 +61,8 @@ options     head
     typedef struct ${1:#:name of struct}{
         ${0:TARGET}
     }${2:#:name of type};
+
+snippet     qq
+abbr        =;
+options     word
+     ${1:} = ${2:};${0:}

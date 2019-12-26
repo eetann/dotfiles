@@ -79,6 +79,9 @@ nnoremap st :term<CR>
 tnoremap <space><Tab> <C-w>:bprevious!<CR>
 tnoremap <C-Tab> <C-w>:bnext!<CR>
 tnoremap <C-q> <C-w><C-c>:close!<CR>
+nnoremap <space><C-a> ?\v[0-9]<CR><C-a>
+nnoremap <space><C-x> ?\v[0-9]<CR><C-x>
+nnoremap <space>;e q:?^e\s\S<CR>$
 
 "---- コピペ関連--------------------------------------------------
 set clipboard&
@@ -140,11 +143,11 @@ set shortmess-=S " 検索時に検索件数メッセージを表示
 nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
 " 一気に置換するときは以下ではなく、/or?検索->cgn->n.n.nnn.
 " cursor下の単語をハイライトと置換
-nnoremap * <Space><Space> "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
+nnoremap * <Space><Space> "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>N
 nnoremap # "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
 " 選択範囲の検索と置換
 xnoremap <silent> <Space> mz:call <SID>set_vsearch()<CR>:set hlsearch<CR>`z
-xnoremap * :<C-u>call <SID>set_vsearch()<CR>/<C-r>/<CR>
+xnoremap * :<C-u>call <SID>set_vsearch()<CR>/<C-r>/<CR>N
 xnoremap # :<C-u>call <SID>set_vsearch()<CR>/<C-r>/<CR>:%s/<C-r>///g<Left><Left>
 function! s:set_vsearch()
     silent normal gv"zy
@@ -201,6 +204,7 @@ autocmd vimrc BufWritePre *.md :call MarkdownEOLTwoSpace()
 autocmd vimrc BufNewFile,BufRead *.csv set filetype=csv
 autocmd vimrc BufNewFile,BufRead *.m set fileencoding=sjis
 autocmd vimrc BufNewFile,BufRead *.m set filetype=matlab
+let g:tex_flavor = "latex"
 
 " ----設定の編集--------------------------------------------------
 nnoremap <F2> :<C-u>edit ~/dotfiles/vim/VimCheatSheet.md<CR>
@@ -211,9 +215,6 @@ nnoremap <F8> :<C-u>edit ~/dotfiles/vim/dein_lazy.toml<CR>
 autocmd vimrc FileType help,quickrun nnoremap <buffer> q <C-w>c
 
 " ----その他------------------------------------------------------
-" <Space><CR>で上、Shift+Ctrl+Enterで下に空行挿入
-nnoremap <Space><CR> mzo<ESC>`z:delmarks z<CR>
-nnoremap  mzO<ESC>`z:delmarks z<CR>
 " InsertModeでccc を入力し、エスケープでコメント線
 inoreabbrev <expr> ccc repeat('-', 70 - virtcol('.'))
 set noswapfile " ファイル編集中にスワップファイルを作らない
@@ -221,13 +222,14 @@ set hidden " 未保存ファイルが有っても別のファイルを開ける
 set wildmenu  "コマンドモードの補完
 set history=1000 " CommandHistoryを増やす
 " Previewはいらない
-set completeopt=menuone
+set completeopt=menuone,popup
 autocmd vimrc FileType text,qf,quickrun setlocal wrap
 set mouse=a
 set ttimeoutlen=100 " ESCしてから挿入モード出るまでの時間を短縮
 set helplang=ja,en
 set keywordprg=:help
 set formatoptions-=ro
+set formatoptions+=Mj
 
 
 " --見た目系------------------------------------------------------
