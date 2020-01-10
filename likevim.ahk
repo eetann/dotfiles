@@ -240,241 +240,36 @@ hwnd := DllCall("GetGUIThreadInfo", Uint,0, Uint,&stGTI)
 	Send {Esc}
 	Return
 
-
-;-----------------------------------------------------------
-; 無変換→IMEOFF、変換→IMEONにする
-; 単独キーも有効にするためにタイマーを設定する
-SetTimer, HenMuhenChecker, 100
-HenMuhenChecker:
-	ListLines,Off	;実行履歴の邪魔なので記録しない
-	if(GetKeyState("vk1C","P") or GetKeyState("vk1D","P")){
-		HenMuhenTime++
-	} else {
-		HenMuhenTime:=0
-	}
-	return
-
-MuhenShort(k){
-	global HenMuhenTime
-	if(HenMuhenTime<3){
-		Input,kb,T0.1
-		if(GetKeyState("vk1D","P")){
-			return 0
-		} else {
-			Gosub,vk1D
-			Send,{Blind}%k%{Blind}%kb%
-			return 1
-		}
-	} else {
-		return 0
-	}
-}
-
-HenkanShort(k){
-	global HenMuhenTime
-	if(HenMuhenTime<3){
-		Input,kb,T0.1
-		if(GetKeyState("vk1C","P")){
-			return 0
-		} else {
-			Gosub,vk1C
-			Send,{Blind}%k%{Blind}%kb%
-			return 1
-		}
-	} else {
-		return 0
-	}
-}
-
-IsOpenVivaldi() {
-    Process, Exist, vivaldi.exe
+IsOpenChrome() {
+    Process, Exist, chrome.exe
     if ErrorLevel<>0
-        WinActivate, ahk_exe vivaldi.exe
+        WinActivate, ahk_exe chrome.exe
     Else {
-        Run,C:\Program Files (x86)\Vivaldi\Application\vivaldi.exe
+        Run,C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
         Sleep 3000
     }
 }
 
 vk1D::
-	If (A_PriorHotKey == A_ThisHotKey and A_TimeSincePriorHotkey < 1000){
-		Input,MyCommands,I T1 L2,{Esc},v,w,re,ta,tw,an,tr,gc,gk,gt,ex
-		If MyCommands = v
-            IsOpenVivaldi()
-		Else If MyCommands = w
-			WinActivate, ahk_group TerminalVim
-		Else If MyCommands = re
-			Reload
-		Else If MyCommands = ta
-		{
-			IsOpenVivaldi()
-			Send, !1
-		}
-		Else If MyCommands = tw
-		{
-			IsOpenVivaldi()
-			Send, !2
-		}
-		Else If MyCommands = an
-		{
-			IsOpenVivaldi()
-			Send, !3
-		}
-		Else If MyCommands = tr
-		{
-			IsOpenVivaldi()
-			Send, !4
-		}
-		Else If MyCommands = gc
-		{
-			IsOpenVivaldi()
-			Send, !5
-		}
-		Else If MyCommands = gk
-		{
-			IsOpenVivaldi()
-			Send, !6
-		}
-		Else If MyCommands = gt
-		{
-			IsOpenVivaldi()
-			Send, !7
-		}
-		Else If MyCommands = ex
-		{
-            ; explorer.exeは常に存在するため、Process, Exist, explorer.exeは使えない
-            IfWinExist, ahk_class CabinetWClass
-            {
-                WinActivate ahk_class CabinetWClass
-            } else {
-                Run, explorer.exe
-            }
-		}
-		return
-	}
-	if(HenMuhenTime<3){
-		IME_SET(0)
-	}
-	return
+    Input,MyCommands,I T1 L2,{Esc},b,w,re,e
+    If MyCommands = b
+        IsOpenChrome()
+    Else If MyCommands = w
+        WinActivate, ahk_group TerminalVim
+    Else If MyCommands = re
+        Reload
+    Else If MyCommands = e
+    {
+        ; explorer.exeは常に存在するため、Process, Exist, explorer.exeは使えない
+        IfWinExist, ahk_class CabinetWClass
+        {
+            WinActivate ahk_class CabinetWClass
+        } else {
+            Run, explorer.exe
+        }
+    }
+    return
 
-vk1C::
-	if(HenMuhenTime<3){
-		IME_SET(1)
-	}
-	return
-
-!vk1D::Send,{Blind}!{vk1D}
-
-
-;-----------------------------------------------------------
-; 無変換+hjklでカーソル移動
-; Blindをつけると修飾キー組み合わせ(Shift、Ctrなど)も可能
-; 無変換+Ctrl+hでバックスペース
-vk1D & h::
-	if(MuhenShort("h")){
-		return
-	}
-	if (GetKeyState("Ctrl" ,"h")){
-		Send,{BS}
-	} else {
-		Send,{Blind}{left}
-	}
-	return
-
-vk1D & j::
-	if(MuhenShort("j")){
-		return
-	}
-	Send,{Blind}{down}
-	return
-
-vk1D & k::
-	if(MuhenShort("k")){
-		return
-	}
-	Send,{Blind}{up}
-	return
-
-vk1D & l::
-	if(MuhenShort("l")){
-		return
-	}
-	Send,{Blind}{right}
-	return
-
-; 無変換+wでword移動、無変換+CTRL+wでword消し
-vk1D & w::
-	if(MuhenShort("w")){
-		return
-	}
-	if (GetKeyState("Ctrl" ,"w")){
-		Send,^{BS}
-	} else {
-		Send,{Blind}^{right}
-	}
-	return
-
-; 無変換+bでwordバック移動
-vk1D & b::
-	if(MuhenShort("b")){
-		return
-	}
-	Send,{Blind}^{left}
-	return
-
-; 無変換+a,eでhome,end
-vk1D & a::
-	if(MuhenShort("a")){
-		return
-	}
-	Send,{Blind}{Home}
-	return
-vk1D & e::
-	if(MuhenShort("e")){
-		return
-	}
-	Send,{Blind}{End}
-	return
-
-; 無変換+uでページアップ、無変換+Ctrl+uで手前全消し
-vk1D & u::
-	if(MuhenShort("u")){
-		return
-	}
-	if (GetKeyState("Ctrl" ,"u")){
-		Send,{Blind}+{Home}{BS}
-	} else {
-		Send,{PgUp}
-	}
-	return
-
-; 無変換+dでページダウン、無変換+Ctrl+dで一行消し
-vk1D & d::
-	if(MuhenShort("d")){
-		return
-	}
-	if (GetKeyState("Ctrl" ,"d")){
-		Send,{Blind}{End}+{Home}{BS}
-	} else {
-		Send,{PgDn}
-	}
-	return
-
-; 無変換+yで一行コピー
-vk1D & y::
-	if(MuhenShort("y")){
-		return
-	}
-	Send,{Blind}{End}+{Home}^{c}
-	return
-
-;-----------------------------------------------------------
-; wox起動時はIMEオフに。
-<!vk1D::
-	Send !{vk1D}
-	Sleep 100
-	IME_SET(0)
-	Return
 
 ;-----------------------------------------------------------
 ; ターミナルでvimのためのIME
