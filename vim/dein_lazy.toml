@@ -285,7 +285,12 @@ hook_add = '''
         \ 'command': ':call',
         \ 'cmdopt': 'matlab#RunCurrentFile()'
         \ },
+        \ 'tex': {
+        \ 'command': 'latexmk',
+        \ 'exec':'%c %s',
+        \ },
         \ }
+        "\ 'src': '%{system("wslpath -w %{expand(\"%:p\")}")}',
     " qでquickfixを閉じる
     autocmd vimrc FileType qf nnoremap <silent><buffer>q :quit<CR>
     " normal or visual modeのとき <leader> + r で保存してからquickrunの実行
@@ -598,10 +603,10 @@ on_cmd = 'Fromd'
 repo = 'vim-jp/vimdoc-ja'
 on_ft = ['help']
 
-[[plugins]]
-repo = 'lervag/vimtex'
-on_ft = ['tex']
-
+# [[plugins]]
+# repo = 'lervag/vimtex'
+# on_ft = ['tex']
+#
 [[plugins]]
 repo = 'simeji/winresizer'
 on_event = 'WinEnter'
