@@ -1,0 +1,68 @@
+[[plugins]] # bかsbで近いペアをtextobj
+repo = 'osyo-manga/vim-textobj-multiblock'
+depends = 'vim-textobj-user'
+on_map = [['xo', '<Plug>(textobj-multiblock-']]
+hook_add = '''
+	omap ab <Plug>(textobj-multiblock-a)
+	omap ib <Plug>(textobj-multiblock-i)
+	xmap ab <Plug>(textobj-multiblock-a)
+	xmap ib <Plug>(textobj-multiblock-i)
+'''
+
+[[plugins]] # dでデリミタ(_,#,-や大文字間)をtextobj
+repo = 'machakann/vim-textobj-delimited'
+depends = 'vim-textobj-user'
+on_map = [['xo', '<Plug>(textobj-delimited-']]
+hook_add = """
+	let g:textobj_delimited_patterns =[
+	\ ['\m/', '\m\%(/[-.[:alnum:]_~]\+\)\+'],
+	\ ['\m\\', '\m\a:\%(\\[^\\/?:*"<>|]\+\)\+\ze\%(''[^a-z]\|$\)'],
+	\ ['\m\.', '\m\<\%(\.\k\+\|\k\+\.\)\%(\k*\.\?\)*\>', 10],
+	\ ['\m#', '\m\<\%(#\k\+\|\k\+#\)\%(\k*#\?\)*\>', 10],
+	\ ['\m_', '\m\<\%(_\k\+\|\k\+_\)\%(\k*_\?\)*\>', 10],
+	\ ['\m-', '\m\<\%(-\k\+\|\k\+-\)\%(\k*-\?\)*\>', 10],
+	\ ['\m\C[^A-Z]\zs\ze[A-Z]', '\m\C\<[A-Z]\?\k\+[A-Z]\%(\k*[A-Z]\?\)*\>', 10]]
+    " TODO: *でも囲む
+    let g:textobj_delimited_no_default_key_mappings = 1
+    xmap id <Plug>(textobj-delimited-forward-i)
+    xmap ad <Plug>(textobj-delimited-forward-a)
+    omap id <Plug>(textobj-delimited-forward-i)
+    omap ad <Plug>(textobj-delimited-forward-a)
+    xmap iD <Plug>(textobj-delimited-backward-i)
+    xmap aD <Plug>(textobj-delimited-backward-a)
+    omap iD <Plug>(textobj-delimited-backward-i)
+    omap aD <Plug>(textobj-delimited-backward-a)
+"""
+
+[[plugins]] # 引数や配列の入れ替え
+repo = 'machakann/vim-swap'
+on_map = [['nxo', '<Plug>(swap-']]
+hook_add = '''
+    omap i, <Plug>(swap-textobject-i)
+    xmap i, <Plug>(swap-textobject-i)
+    omap a, <Plug>(swap-textobject-a)
+    xmap a, <Plug>(swap-textobject-a)
+    nmap g< <Plug>(swap-prev)
+    nmap g> <Plug>(swap-next)
+    nmap gS <Plug>(swap-interactive)
+'''
+
+[[plugins]]
+repo = 'terryma/vim-expand-region'
+on_map = [['x', '<Plug>(expand_region_']]
+hook_add = """
+    vmap + <Plug>(expand_region_expand)
+    vmap - <Plug>(expand_region_shrink)
+    let g:expand_region_text_objects = {
+    \ 'iw' :0,
+    \ 'iW' :0,
+    \ 'id' :1,
+    \ 'ad' :1,
+    \ 'iD' :1,
+    \ 'aD' :1,
+    \ 'ib' :1,
+    \ 'ab' :1,
+    \ 'i,' :1,
+    \ 'ip' :0,
+    \ }
+"""
