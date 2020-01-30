@@ -156,13 +156,9 @@ if dein#load_state(s:dein_path)
     call dein#begin(s:dein_path)
 
     let g:config_dir  = expand('$HOME/dotfiles/vim')
-    " TODO: TOMLからvim scriptへ変更
-    " TOMLではなくvim scriptなのは、lazyへの切り替えを変数としてまとめて書けるから
-    let s:toml        = g:config_dir . '/dein.toml'
-    let s:lazy_toml   = g:config_dir . '/dein_lazy.toml'
 
-    call dein#load_toml(s:toml,      {'lazy': 0})
-    call dein#load_toml(s:lazy_toml, {'lazy': 1})
+    call dein#load_toml(g:config_dir . '/dein.toml', {'lazy': 0})
+    call dein#load_toml(g:config_dir . '/dein_lazy.toml', {'lazy': 1})
 
     " Required:
     call dein#end()
