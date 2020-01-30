@@ -29,8 +29,6 @@ set shiftwidth=4  " smartindentでずれる幅
 set pastetoggle=<F3>
 " \入力時自動インデント阻止
 let g:vim_indent_cont = 0
-autocmd vimrc FileType make setlocal noexpandtab
-autocmd vimrc FileType html,css,javascript setlocal sw=2 sts=2 ts=2
 
 " ----文字列検索--------------------------------------------------
 set incsearch " インクリメンタルサーチ. １文字入力毎に検索を行う
@@ -47,52 +45,6 @@ set grepprg=jvgrep
 autocmd vimrc QuickFixCmdPost *grep* cwindow
 let Grep_Skip_Dirs = '.svn .git'
 
-" ----Markdownのための設定
-function! MarkdownEOLTwoSpace()
-    let s:tmppos = getpos('.') " cursorの位置を記録しておく
-    let s:iscode = 0
-    let s:cursorline = 1
-
-    " 最初にメタデータがあったらスキップ
-    if getline(1)=~? '\v^(\-{3}|\+{3})'
-        let s:cursorline +=1
-        " 書きかけで1行だったら怖いので冗長でもこの判定
-        while s:cursorline<=line('$')
-            call cursor(s:cursorline, 1)
-            if getline('.')=~? '\v^(\-{3}|\+{3})'
-                break
-            endif
-            let s:cursorline +=1
-        endwhile
-    endif
-
-    while s:cursorline<=line('$')
-        call cursor(s:cursorline, 1)
-        if getline('.')=~? '\v^```'
-            if s:iscode == 0
-                let s:iscode = 1
-            else
-                let s:iscode = 0
-            endif
-        elseif s:iscode == 0 && (getline('.') !~? '\v^(\-{3}|\+{3}|#+|\-\s|\+\s|\*\s)')
-            " 見出しや区切り線には空白をいれない
-            " 空行には行末空白なし
-            .s/\v(\S\zs(\s{,1})|(\s{3,}))$/  /e
-        endif
-        let s:cursorline +=1
-    endwhile
-
-    call setpos('.', s:tmppos) " cursorの位置を戻す
-endfunction
-autocmd vimrc BufWritePre *.md :call MarkdownEOLTwoSpace()
-autocmd vimrc BufNewFile,BufRead *.csv set filetype=csv
-autocmd vimrc BufNewFile,BufRead *.m set fileencoding=sjis
-autocmd vimrc BufNewFile,BufRead *.m set filetype=matlab
-let g:tex_flavor = "latex"
-
-" ----設定の編集--------------------------------------------------
-autocmd vimrc FileType help,quickrun nnoremap <buffer> q <C-w>c
-
 " ----その他------------------------------------------------------
 set noswapfile " ファイル編集中にスワップファイルを作らない
 set hidden " 未保存ファイルが有っても別のファイルを開ける
@@ -100,14 +52,12 @@ set wildmenu  "コマンドモードの補完
 set history=1000 " CommandHistoryを増やす
 " Previewはいらない
 set completeopt=menuone,popup
-autocmd vimrc FileType text,qf,quickrun setlocal wrap
 set mouse=a
 set ttimeoutlen=100 " ESCしてから挿入モード出るまでの時間を短縮
 set helplang=ja,en
 set keywordprg=:help
 set formatoptions-=ro
 set formatoptions+=Mj
-
 
 " --見た目系------------------------------------------------------
 " ----cursor------------------------------------------------------
