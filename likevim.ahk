@@ -236,9 +236,9 @@ hwnd := DllCall("GetGUIThreadInfo", Uint,0, Uint,&stGTI)
 
 ;-----------------------------------------------------------
 ; ターミナル以外でもエスケープ設定
-^[::
-	Send {Esc}
-	Return
+; ^[::
+; 	Send {Esc}
+; 	Return
 
 IsOpenChrome() {
     Process, Exist, chrome.exe
@@ -251,13 +251,15 @@ IsOpenChrome() {
 }
 
 vk1D::
-    Input,MyCommands,I T1 L2,{Esc},b,w,re,e
+    Input,MyCommands,I T1 L2,{Esc},b,w,re,e,[
     If MyCommands = b
         IsOpenChrome()
     Else If MyCommands = w
         WinActivate, ahk_group TerminalVim
     Else If MyCommands = re
         Reload
+    Else If MyCommands = re
+        Send {Esc}
     Else If MyCommands = e
     {
         ; explorer.exeは常に存在するため、Process, Exist, explorer.exeは使えない

@@ -84,6 +84,16 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 # cd ~/.gtran
 # go install
 
-# HTML CSS
-# sudo npm i -g csslint
-# sudo npm i -g htmlhint
+# latexのために
+# suto apt install texlive
+# https://osdn.net/projects/mytexpert/downloads/26068/jlisting.sty.bz2/
+# https://ctan.org/tex-archive/macros/generic/dirtree
+# をDL
+# ファイルを適切なディレクトリに移動してから
+# bunzip2 jlisting.sty.bz2
+# sudo mv jlisting.sty /usr/share/texlive/texmf-dist/tex/latex/listings
+# cd /usr/share/texlive/texmf-dist/tex/latex/listings
+# chmod 644 jlisting.sty
+# sudo mktexlsr
+# unzip dirtree.zip
+# cd dirtree

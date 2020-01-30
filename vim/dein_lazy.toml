@@ -287,7 +287,8 @@ hook_add = '''
         \ },
         \ 'tex': {
         \ 'command': 'latexmk',
-        \ 'exec':'%c %s',
+        \ 'args':'-pvc',
+        \ 'exec':'%c %s %a',
         \ },
         \ }
         "\ 'src': '%{system("wslpath -w %{expand(\"%:p\")}")}',
