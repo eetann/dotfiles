@@ -9,14 +9,14 @@ else
     home_for_dot=${HOME}
 fi
 
-dot_directory=${home_for_dot}/dotfiles
+dot_dir=${home_for_dot}/dotfiles
 for f in .??*
 do
     #無視したいファイルやディレクトリ
     [ "$f" = ".git" ] && continue
     [ "$f" = ".config" ] && continue
     [ "$f" = ".vim" ] && continue
-    ln -fs ${dot_directory}/${f} ${HOME}/${f}
+    ln -fs ${dot_dir}/${f} ${HOME}/${f}
 done
 
 # ln -s ${home_for_dot}/dotfiles/flake8 ${HOME}/.config/flake8
