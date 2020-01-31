@@ -4,6 +4,8 @@ yes | sudo apt install zsh
 chsh -s /usr/bin/zsh
 mkdir ~/.config
 exec /usr/bin/zsh -l
+# zshのプラグインマネージャーzinit
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
 
 # change the time zone to JST
 yes | sudo dpkg-reconfigure tzdata
@@ -17,6 +19,10 @@ yes | sudo apt-get upgrade
 
 # install git
 yes | sudo apt install git
+# lazygitの追加
+yes | sudo add-apt-repository ppa:lazygit-team/release
+yes | sudo apt-get update
+yes | sudo apt-get install lazygit
 
 # for using latest viming
 yes | sudo apt remove vim
@@ -55,21 +61,16 @@ pyenv install 3.7.3
 pyenv global 3.7.3
 pip install pylint mccabe rope python-language-server pyls-black pyls-isort \
     pynvim vim-vint numpy matplotlib pandas
-# yes | sudo apt install python3-tk
-# pythonのクラス図を作成
-# yes | sudo apt install graphviz
-# pip3 uninstall pyflakes pycodestyle
-
 
 # install universal-ctags
-yes | sudo apt install autoconf
-yes | sudo apt install pkg-config
-git clone https://github.com/universal-ctags/ctags.git
-cd ctags
-./autogen.sh
-./configure
-make
-sudo make install
+# yes | sudo apt install autoconf
+# yes | sudo apt install pkg-config
+# git clone https://github.com/universal-ctags/ctags.git
+# cd ctags
+# ./autogen.sh
+# ./configure
+# make
+# sudo make install
 
 # /etc/wsl.conf に以下の内容を書く
 # [interop]

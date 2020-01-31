@@ -84,12 +84,6 @@ setopt chase_links # 移動先がシンボリックリンクならば実際の�
 # alias-----------------------------------------------------------
 alias la='ls -F --color -al'
 alias ls='ls -F --color'
-alias gs='git status'
-alias ga='git add -A'
-alias gd='git diff'
-alias gcm='(){git commit -m "$1"}'
-alias gsh='git push origin HEAD'
-alias gst='git status'
 alias mytree='tree -a -I ".git"'
 alias grep=jvgrep
 alias t="tmuximum"
@@ -194,31 +188,37 @@ function zz() {
     fi
 }
 
-# fbr - checkout git branch
-function fbr() {
-    local branches branch
-    branches=$(git branch -vv) &&
-        branch=$(echo "$branches" | fzf +m) &&
-        git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
-    }
+EMOJI_LIST=$(cat << "EOF"
+🎉 Initial commit
+📝 Update README.md
+📝 Add README.md
+♻ Refactor code
+✨ Add new function
+🐛 Fix bug
+🐛 Fix typo
+🚚 Rename variable
+🔥 Remove unused files
+🔥 Remove extra whitespace
+🔥 Remove debug statement
+🔥 Remove unused variable
+🔥 Remove some dead code
+🎨 Add convenience API
+🎨 Change API
+🎨 Improve readability of some code
+💄 Improve UI/UX
+💄 Fix designs
+📦 Update package version
+⚡ Improve performance
+💬 Fix comment
+🔒 Don't use unsafe function
+EOF
+)
 
-# gadd
-function gadd() {
-    local out q n addfiles
-    while out=$(
-            git status --short |
-            awk '{if (substr($0,2,1) !~ / /) print $2}' |
-            fzf-tmux --multi --exit-0 --expect=ctrl-d); do
-        q=$(head -1 <<< "$out")
-        n=$[$(wc -l <<< "$out") - 1]
-        addfiles=(`echo $(tail "-$n" <<< "$out")`)
-        [[ -z "$addfiles" ]] && continue
-        if [ "$q" = ctrl-d ]; then
-            git diff --color=always $addfiles | less -R
-        else
-            git add $addfiles
-        fi
-    done
+function gcm() {
+    local msg1=$(echo $EMOJI_LIST | fzf)
+    echo -n $msg1:
+    read msg2
+    echo $msg1 $msg2 | clip.exe
 }
 
 function my_fzf_completion() {
