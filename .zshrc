@@ -238,7 +238,7 @@ function my_fzf_completion() {
     # fzfでファイルを選択
     # テキストファイル以外をプレビュー
     # ASCIIは変換して表示
-    selected=$(find * -type f \
+    selected=$(find . -type f -not -path "*/\.git/*" | sed "s/^\.\///" \
         | fzf --query "${query}" --preview \
         '[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file ||
         ( [[ $(file {}) =~ ASCII ]] &&
@@ -256,3 +256,5 @@ function my_fzf_completion() {
 
 zle -N my_fzf_completion
 bindkey "^k" my_fzf_completion
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

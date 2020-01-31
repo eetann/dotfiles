@@ -138,107 +138,27 @@ hook_add = '''
 
 [[plugins]]
 repo = 'skanehira/translate.vim'
-on_cmd = ['Translate','AutoTranslateModeEnable','AutoTranslateModeDisable','AutoTranslateModeToggle']
+on_cmd = ['Translate','AutoTranslateModeEnable',
+'AutoTranslateModeDisable','AutoTranslateModeToggle']
 
-[[plugins]] # すごいやつ(語彙力)
-repo = 'Shougo/denite.nvim'
-depends = ['nvim-yarp', 'vim-hug-neovim-rpc']
-on_cmd = ['Denite', 'DeniteBufferDir', 'DeniteCursorWord', 'DeniteProjectDir']
+[[plugins]]
+repo = 'junegunn/fzf'
+build = './install --all'
+merged = 0
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+on_cmd = [
+'Files', 'Buffers', 'Lines', 'Blines', 'Marks', 'History',
+'Maps', 'Filetypes', 'Dotfiles']
 hook_add = '''
-    nnoremap <silent> ,fr :<C-u>Denite file/rec -auto-action=preview<CR>
-    nnoremap <silent> ,fo :<C-u>Denite file/old -auto-action=preview<CR>
-    nnoremap <silent> ,ft :<C-u>Denite filetype -start-filter<CR>
-    nnoremap <silent> ,ch :<C-u>Denite command_history -start-filter<CR>
-    nnoremap <silent> ,b :<C-u>Denite buffer -auto-action=preview<CR>
-    nnoremap <silent> ,l :<C-u>Denite line -auto-action=preview -start-filter<CR>
-    nnoremap <silent> ,j :<C-u>Denite jump -auto-action=preview<CR>
-    nnoremap <silent> ,o :<C-u>Denite outline -auto-action=preview -start-filter<CR>
-    nnoremap <silent> ,h :<C-u>Denite help -start-filter<CR>
-    nnoremap <silent> ,me :<C-u>Denite menu -auto-action=preview<CR>
-    nnoremap <silent> ,ma :<C-u>Denite mark -auto-action=preview<CR>
-    nnoremap <silent> ,r :<C-u>Denite -resume<CR>
-    nnoremap <silent> ,gg :<C-u>DeniteBufferDir grep -auto-action=preview<CR>
-    nnoremap <silent> ,gw :<C-u>DeniteCursorWord grep -auto-action=preview<CR>
-'''
-hook_post_source = '''
-    autocmd vimrc FileType denite call s:denite_my_settings()
-    function! s:denite_my_settings() abort
-        nnoremap <silent><buffer><expr> <CR>
-        \ denite#do_map('do_action')
-        nnoremap <silent><buffer><expr> d
-        \ denite#do_map('do_action', 'delete')
-        nnoremap <silent><buffer><expr> p
-        \ denite#do_map('do_action', 'preview')
-        nnoremap <silent><buffer><expr> q
-        \ denite#do_map('quit')
-        nnoremap <silent><buffer><expr> <C-d>
-        \ denite#do_map('move_up_path')
-        nnoremap <silent><buffer><expr> i
-        \ denite#do_map('open_filter_buffer')
-        nnoremap <silent><buffer><expr> a
-        \ denite#do_map('open_filter_buffer')
-        nnoremap <silent><buffer><expr> o
-        \ denite#do_map('open_filter_buffer')
-        nnoremap <silent><buffer><expr> <Space>
-        \ denite#do_map('toggle_select').'j'
-        nnoremap <silent><buffer><expr> <C-c>
-        \ denite#do_map('quit')
-        nnoremap <silent><buffer><expr> sb
-        \ denite#do_map('do_action', 'split')
-        nnoremap <silent><buffer><expr> sv
-        \ denite#do_map('do_action', 'vsplit')
-        nnoremap <silent><buffer><C-n> j
-        nnoremap <silent><buffer><C-p> k
-    endfunction
-    let s:menus = {}
-    let s:menus.a_often_use = {'description':'often use commands'}
-    let s:menus.a_often_use.command_candidates = [
-        \ ['diffthis on', 'windo diffthis'],
-        \ ['diff off', 'windo diffof'],
-        \ ['on \"\"\" change html', ':call My_context_on()'],
-        \ ['off \"\"\" change html', ':call My_context_off()'],
-        \ ['setlocal filetype=python', 'setlocal filetype=python'],
-        \ ['setlocal filetype=html', 'setlocal filetype=html'],
-        \ ['setlocal filetype=xml', 'setlocal filetype=xml'],
-        \ ]
-    let s:menus.b_files = {'description':'files'}
-    let s:menus.b_files.command_candidates = [
-        \ ['dotfiles', "call denite#start([{'name': 'file/rec', 'args': ['~/dotfiles']}])"],
-        \ ['my_plugins', "call denite#start([{'name': 'file/rec', 'args': ['~/.vim/my_plugins']}])"],
-        \ ]
-    let s:menus.c_dein = {'description':'Plugin management'}
-    let s:menus.c_dein.command_candidates = [
-        \ ['call dein#update()', 'call dein#update()'],
-        \ ['call dein#recache_runtimepath()', 'call dein#recache_runtimepath()'],
-        \ ['Denite dein', 'Denite dein'],
-        \ ['echo dein#get_updates_log()', 'echo dein#get_updates_log()'],
-        \ ['echo dein#get_log()', 'echo dein#get_log()'],
-        \ ['clean nouse plugins', 'call map(dein#check_clean(), "delete(v:val, \"rf\")")'],
-        \ ]
-    let s:menus.d_good_help = {'description': 'good help'}
-    let s:menus.d_good_help.command_candidates = [
-        \ ['home', 'help '],
-        \ ['eval', 'help eval'],
-        \ ['ex-cmd-index', 'help ex-cmd-index'],
-        \ ['function-list', 'help function-list'],
-        \ ['functions', 'help functions'],
-        \ ['help-summary', 'help help-summary'],
-        \ ['index', 'help index'],
-        \ ['quickref', 'help quickref'],
-        \ ]
-    call denite#custom#filter('matcher/ignore_globs', 'ignore_globs',
-        \ ['*~', '*.o', '*.exe', '*.bak',
-        \ '.git/', '.ropeproject/', '__pycache__/', 'tmp/', 'var/', '.deprecated/',
-        \ 'venv/', 'images/', '*.min.*', 'img/', 'fonts/', 'tags', '*.png', '*.bmp',
-        \ '*.pdf', '*.docx', '*.xlsx'])
-    call denite#custom#source('file/rec', 'matchers', ['matcher/ignore_globs'])
-    call denite#custom#var('grep', 'command', ['jvgrep'])
-    call denite#custom#var('grep', 'default_opts', ['-i'])
-    call denite#custom#var('grep', 'recursive_opts', ['-R'])
-    call denite#custom#var('grep', 'pattern_opt', [])
-    call denite#custom#var('grep', 'separator', [])
-    call denite#custom#var('grep', 'final_opts', [])
-    call denite#custom#var('menu', 'menus', s:menus)
+    command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, {'options':
+    \ ['--layout=reverse', '--preview', 'cat {}']}, <bang>0)
+    command! -bang Dotfiles
+    \ call fzf#vim#files('~/dotfiles',
+    \ {'source':'find . -type f -not -path "*/\.git/*" | sed "s/^\.\///"'}, <bang>0)
+    nnoremap <F6> :Dotfiles<CR>
 '''
 
 [[plugins]] # マーク位置の表示

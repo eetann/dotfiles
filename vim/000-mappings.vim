@@ -125,11 +125,7 @@ function! s:set_vsearch()
 endfunction
 
 " 設定ファイル短縮e
-nnoremap <F2> :<C-u>edit ~/dotfiles/vim/VimCheatSheet.md<CR>
 nnoremap <F5> :<C-u>source $MYVIMRC<CR>
-nnoremap <F6> :<C-u>edit $MYVIMRC<CR>
-nnoremap <F7> :<C-u>edit ~/dotfiles/vim/dein.toml<CR>
-nnoremap <F8> :<C-u>edit ~/dotfiles/vim/dein_lazy.toml<CR>
 
 " InsertModeでccc を入力し、エスケープでコメント線
 inoreabbrev <expr> ccc repeat('-', 70 - virtcol('.'))
