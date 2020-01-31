@@ -24,9 +24,6 @@ export PATH=$PATH:$HOME/.local/bin
 export PYLINTRC=$HOME/dotfiles/vim/pylintrc
 # alias python="python3"
 
-# MATLAB
-export PATH=$PATH:/usr/local/MATLAB/R2019a/bin/glnxa64
-
 # 操作------------------------------------------------------------
 setopt no_beep
 setopt IGNOREEOF # Ctrl+Dでログアウトしてしまうことを防ぐ
@@ -134,49 +131,49 @@ local prompt_end="%F{040}%F{039}%f"
 PROMPT="$prompt_job$prompt_dir$prompt_git"$'\n'"$prompt_end"
 
 # plugins --------------------------------------------------------
-# zplugin がなければ取ってくる
-if [ ! -e $HOME/.zplugin ]; then
-    git clone https://github.com/zdharma/zplugin.git ~/.zplugin/bin
+# zinit がなければ取ってくる
+if [ ! -e $HOME/.zinit ]; then
+    git clone https://github.com/zdharma/zinit.git ~/.zinit/bin
 fi
 
-# zplugin をロード
-source $HOME/.zplugin/bin/zplugin.zsh
-# zplugin のコマンド補完をロード
-autoload -Uz _zplugin
-(( ${+_comps} )) && _comps[zplugin]=_zplugin
+# zinit をロード
+source $HOME/.zinit/bin/zinit.zsh
+# zinit のコマンド補完をロード
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
-# `zplugin light {plugin}`で読み込み
-# その前に`zplugin ice {option}`でオプションをつける
+# `zinit light {plugin}`で読み込み
+# その前に`zinit ice {option}`でオプションをつける
 # blockf : プラグインの中で$fpathに書き込むのを禁止
-zplugin ice blockf
-zplugin light zsh-users/zsh-completions
+zinit ice blockf
+zinit light zsh-users/zsh-completions
 
-zplugin light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-autosuggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
 # 遅くなる
 # ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
-zplugin light zdharma/fast-syntax-highlighting
+zinit light zdharma/fast-syntax-highlighting
 
 # wait'n' : .zshrc が読み込まれて n 秒で読み込む
-zplugin ice wait'0'; zplugin light b4b4r07/enhancd
-zplugin ice wait'0'; zplugin light rupa/z
-zplugin ice wait'0'; zplugin light zsh-users/zsh-history-substring-search
+zinit ice wait'0'; zinit light b4b4r07/enhancd
+zinit ice wait'0'; zinit light rupa/z
+zinit ice wait'0'; zinit light zsh-users/zsh-history-substring-search
 
 # as"program" : プラグインをsourceせず、$PATHに追加
-zplugin ice wait'0' as"program"; zplugin light arks22/tmuximum
+zinit ice wait'0' as"program"; zinit light arks22/tmuximum
 
 # from"{hoge}"              : hogeからclone
 # pick"hoge.zsh"            : $PATHに追加するファイルを指定
 # multisrc"{hoge,fuga}.zsh" : 複数のファイルをsource
 # id-as                     : ニックネーム
 # atload                    : プラグインがロード後に実行
-zplugin ice wait"0" from"gh-r" as"program"; zplugin load junegunn/fzf-bin
-zplugin ice wait"0" as"program" pick"bin/fzf-tmux"; zplugin load junegunn/fzf
-zplugin ice wait"0" multisrc"shell/{completion,key-bindings}.zsh"\
+zinit ice wait"0" from"gh-r" as"program"; zinit load junegunn/fzf-bin
+zinit ice wait"0" as"program" pick"bin/fzf-tmux"; zinit load junegunn/fzf
+zinit ice wait"0" multisrc"shell/{completion,key-bindings}.zsh"\
     id-as"junegunn/fzf_completions" pick"/dev/null"\
     atload"bindkey '^I' expand-or-complete"
-zplugin light junegunn/fzf
+zinit light junegunn/fzf
 FZF_DEFAULT_OPTS="--multi --height=60% --select-1 --exit-0 --reverse"
 FZF_DEFAULT_OPTS+=" --bind ctrl-j:preview-down,ctrl-k:preview-up,ctrl-d:preview-page-down,ctrl-u:preview-page-up"
 export FZF_DEFAULT_OPTS
