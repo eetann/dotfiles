@@ -1,7 +1,18 @@
+[[plugins]] # スニペット管理
+repo = 'Shougo/neosnippet.vim'
+depends = ['neosnippet-snippets','context_filetype.vim']
+on_event = 'InsertEnter'
+on_ft = 'snippet'
+hook_add = '''
+    let g:neosnippet#snippets_directory = ['~/dotfiles/vim/mysnippet']
+    let g:neosnippet#enable_completed_snippet = 1 " 関数スニペットを展開
+    let g:neosnippet#expand_word_boundary = 0 " jump時に間違えて補完されないようにオフ
+'''
+
 [[plugins]] # 補完とLSP
 repo = 'neoclide/coc.nvim'
 build = './install.sh nightly'
-# depends = ['neosnippet.vim']
+depends = ['neosnippet.vim']
 on_event = "VimEnter"
 hook_add = '''
     set updatetime=300
@@ -28,7 +39,7 @@ hook_source = '''
     highlight link CocHighlightText GruvboxBlueSign
     autocmd vimrc CursorHold * silent call CocActionAsync('highlight')
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-    " autocmd CursorHoldI,CursorMovedI * silent! call CocAction('showSignatureHelp')
+    autocmd CursorHoldI,CursorMovedI * silent! call CocAction('showSignatureHelp')
     nnoremap <F10> :<C-u>CocConfig<CR>
     inoremap <C-g> <C-o>:call CocActionAsync('showSignatureHelp')<CR>
     nmap <silent> [c <Plug>(coc-diagnostic-prev)
@@ -63,46 +74,6 @@ hook_source = '''
     xmap <C-k> <Plug>(neosnippet_expand_target)
     let g:coc_snippet_next =  '<c-k>'
     let g:coc_snippet_prev = '<s-tab>'
-'''
-
-[[plugins]] # スニペット管理
-repo = 'Shougo/neosnippet.vim'
-depends = ['neosnippet-snippets','context_filetype.vim']
-on_event = 'InsertEnter'
-on_ft = 'snippet'
-hook_add = '''
-    let g:neosnippet#snippets_directory = ['~/dotfiles/vim/mysnippet']
-    let g:neosnippet#enable_completed_snippet = 1 " 関数スニペットを展開
-    let g:neosnippet#expand_word_boundary = 0 " jump時に間違えて補完されないようにオフ
-'''
-
-[[plugins]] # lspないやつ
-repo = 'dense-analysis/ale'
-on_ft = ['matlab']
-hook_add = '''
-    let g:ale_echo_msg_error_str = nr2char(0xf421)
-    let g:ale_echo_msg_warning_str = nr2char(0xf420)
-    let g:ale_echo_msg_info_str = nr2char(0xf05a)
-    let g:ale_sign_error = g:ale_echo_msg_error_str
-    let g:ale_sign_warning = g:ale_echo_msg_warning_str
-    let g:ale_statusline_format = [
-    \ g:ale_echo_msg_error_str . ' %d',
-    \ g:ale_echo_msg_warning_str . ' %d',
-    \ nr2char(0xf4a1) . '  ']
-    let g:ale_fix_on_save = 1
-    let g:ale_sign_column_always = 1
-    let g:ale_lint_on_text_changed = 0
-    let g:ale_lint_on_insert_leave = 1
-    let g:ale_linters = {
-    \ 'matlab': ['mlint'],
-    \}
-    " let g:ale_fixers = {
-    "\ 'javascript': ['prettier']
-    "\ 'vim': ['vint'],
-    "\ 'html': ['htmlhint'],
-    "\ 'css': ['csslint'],
-    "\ }
-    autocmd vimrc FileType help,qf,man,ref let b:ale_enabled = 0
 '''
 
 [[plugins]] # tagジャンプ

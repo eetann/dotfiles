@@ -89,6 +89,12 @@ set winminwidth=30
 set noequalalways
 set belloff=all
 
+" 設定ファイルの読み込み------------------------------------------
+call map(sort(split(glob('~/dotfiles/vim/*.vim'), '\n')),
+\ {->[execute('exec "so" v:val')]})
+" 参考
+" echo map([1, 2, 3], {-> v:val + v:val })
+" {args -> expr1} lambda
 
 " dein Scripts-----------------------------------------------------
 let s:dein_path = expand('$HOME/.vim/dein')
@@ -128,10 +134,3 @@ if dein#check_install()
 endif
 
 " End dein Scripts------------------------------------------------
-
-" 設定ファイルの読み込み------------------------------------------
-call map(sort(split(glob('~/dotfiles/vim/*.vim'), '\n')),
-        \ {->[execute('exec "so" v:val')]})
-" 参考
-" echo map([1, 2, 3], {-> v:val + v:val })
-" {args -> expr1} lambda
