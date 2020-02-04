@@ -251,25 +251,15 @@ IsOpenChrome() {
 }
 
 vk1D::
-    Input,MyCommands,I T1 L2,{Esc},b,w,re,e,[
+    Input,MyCommands,I T1 L2, {Esc},b,w,re,e
     If MyCommands = b
         IsOpenChrome()
     Else If MyCommands = w
         WinActivate, ahk_group TerminalVim
     Else If MyCommands = re
         Reload
-    Else If MyCommands = re
-        Send {Esc}
     Else If MyCommands = e
-    {
-        ; explorer.exeは常に存在するため、Process, Exist, explorer.exeは使えない
-        IfWinExist, ahk_class CabinetWClass
-        {
-            WinActivate ahk_class CabinetWClass
-        } else {
-            Run, explorer.exe
-        }
-    }
+        Run, D:\tablacusexplorer\TE64.exe
     return
 
 
@@ -368,94 +358,3 @@ vkF2::
 		IsAltTabMenu := false
 	Return
 #If
-
-;-----------------------------------------------------------
-; explorer
-; #IfWinActive ahk_class CabinetWClass 
-; 	j::
-; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-; 			Send, {Down}
-; 		else
-; 			Send, j
-; 		return
-; 	k::
-; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-; 			Send, {Up}
-; 		else
-; 			Send, k
-; 		return
-; 	h::
-; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-; 			Send, !{Up}
-; 		else
-; 			Send, h
-; 		return
-; 	l::
-; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-; 			Send, {Enter}
-; 		else
-; 			Send, l
-; 		return
-; 	Space::
-; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-; 			Send, {AppsKey}
-; 		else
-; 			Send, {Space}
-; 		return
-; 	y::
-; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-; 			Send, ^c
-; 		else
-; 			Send, y
-; 		return
-; 	p::
-; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-; 			Send, ^v
-; 		else
-; 			Send, p
-; 		return
-; 	r::
-; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-; 			Send, {F2}
-; 		else
-; 			Send, r
-; 		return
-; 	f::
-; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-; 			Send, {F5}
-; 		else
-; 			Send, f
-; 		return
-; 	^l::
-; 		Send, !d
-; 		return
-; 	^n::
-; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-; 			Send, +!n
-; 		else
-; 			Send, ^n
-; 		return
-; 	^p::
-; 		if GetClassNameOnWindow(WinExist("A")) <> "Edit"
-; 			Send, +!p
-; 		else
-; 			Send, ^p
-; 		return
-; #IfWinActive
-;
-; GetClassNameOnWindow(hWindow)
-; {
-; 	max := VarSetCapacity(s, 256)
-; 	ActiveThreadID := DllCall("GetWindowThreadProcessId", "UInt", hWindow, "UIntP",0)
-; 	if(DllCall("AttachThreadInput", "UInt", DllCall("GetCurrentThreadId"), "UInt", ActiveThreadID, "Int", 1))
-; 	{
-; 		hFocus := DllCall("GetFocus")
-; 		DllCall("GetClassName", "UInt", hFocus, "Str", s, "Int", max)
-; 		DllCall("AttachThreadInput", "UInt", DllCall("GetCurrentThreadId"), "UInt", ActiveThreadID, "Int", 0)
-; 	} 
-;     else
-;     {
-; 		s := "Error"
-;     }
-; 	return s
-; }
