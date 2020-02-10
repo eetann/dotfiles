@@ -44,11 +44,11 @@ hook_source = '''
     inoremap <C-g> <C-o>:call CocActionAsync('showSignatureHelp')<CR>
     nmap <silent> [c <Plug>(coc-diagnostic-prev)
     nmap <silent> ]c <Plug>(coc-diagnostic-next)
-    nmap <silent> <leader>gd <Plug>(coc-definition)
-    nmap <silent> <leader>gD <Plug>(coc-type-definition)
-    nmap <silent> <leader>gi <Plug>(coc-implementation)
-    nmap <silent> <leader>gf <Plug>(coc-references)
-    nmap <leader>gn <Plug>(coc-rename)
+    nmap <silent> gd <Plug>(coc-definition)
+    nmap <silent> gD <Plug>(coc-type-definition)
+    nmap <silent> gi <Plug>(coc-implementation)
+    nmap <silent> gr <Plug>(coc-references)
+    nmap <F2> <Plug>(coc-rename)
     nnoremap <silent> K :call <SID>show_documentation()<CR>
     function! s:show_documentation()
         if (index(['vim','help'], &filetype) >= 0)
