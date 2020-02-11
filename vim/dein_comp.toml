@@ -13,7 +13,7 @@ hook_add = '''
 repo = 'neoclide/coc.nvim'
 build = './install.sh nightly'
 depends = ['neosnippet.vim']
-on_event = "VimEnter"
+on_event = 'VimEnter'
 hook_add = '''
     set updatetime=300
     let g:coc_global_extensions = [
@@ -33,10 +33,11 @@ hook_add = '''
     let g:airline#extensions#coc#warning_symbol = ""
     let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
     let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
-    let g:coc_start_at_startup=1
+    let g:coc_start_at_startup = 1
     let g:coc_config_home = '~/dotfiles/vim'
 '''
 hook_source = '''
+    command! -nargs=0 Format :call CocAction('format')
     highlight link CocHighlightText GruvboxBlueSign
     autocmd vimrc CursorHold * silent call CocActionAsync('highlight')
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')

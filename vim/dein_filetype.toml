@@ -44,9 +44,9 @@ hook_add = '''
 repo = 'osyo-manga/vim-precious'
 on_ft = ['vim','toml','markdown','md','mdwn','mkd','mkdn','mark','python','html']
 depends = ['context_filetype.vim']
-hook_add = """
+hook_add = '''
     let g:precious_enable_switchers = {'defx': {'setfiletype': 0}}
-"""
+'''
 
 [[plugins]] # Emmet
 repo = 'mattn/emmet-vim'
@@ -107,8 +107,3 @@ hook_add = '''
     let g:table_mode_corner='|'
     let g:table_mode_tableize_map = '<Leader>tb'
 '''
-
-[[plugins]] # markdown用のctags
-repo = 'jszakmeister/markdown2ctags'
-on_ft = ['md','mdwn','mkd','mkdn','mark']
-

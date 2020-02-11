@@ -148,9 +148,7 @@ merged = 0
 
 [[plugins]]
 repo = 'junegunn/fzf.vim'
-on_cmd = [
-'Files', 'Buffers', 'Lines', 'Blines', 'Marks', 'History',
-'Maps', 'Filetypes', 'Dotfiles']
+on_event = 'VimEnter'
 hook_add = '''
     command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, {'options':

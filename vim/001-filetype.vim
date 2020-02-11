@@ -2,6 +2,7 @@ autocmd vimrc FileType make setlocal noexpandtab
 autocmd vimrc FileType html,css,javascript setlocal sw=2 sts=2 ts=2
 autocmd vimrc FileType help,quickrun nnoremap <buffer> q <C-w>c
 autocmd vimrc FileType text,qf,quickrun setlocal wrap
+autocmd vimrc FileType json syntax match Comment +\/\/.\+$+
 autocmd vimrc BufWritePre *.md :call MarkdownEOLTwoSpace()
 autocmd vimrc BufNewFile,BufRead *.csv set filetype=csv
 autocmd vimrc BufNewFile,BufRead *.m set fileencoding=sjis
