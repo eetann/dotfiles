@@ -7,28 +7,28 @@
 	"diagnostic.errorSign": "",
 	"diagnostic.hintSign": "",
 	"diagnostic.infoSign": "",
-	"languageserver": {
+    "languageserver": {
 		"clangd": {
 			"command": "clangd-6.0",
 			"filetypes": ["c", "cpp", "objc", "objcpp"]
 		},
-		"pyls": {
-		 	"command": "pyls",
-		 	"filetypes":["python"],
-		 	"settings": {
-				"pyls.configurationSources": ["flake8"],
-		 		"pyls.plugins.pyflakes.enabled":false,
-				"pyls.plugins.pylint.enabled":false,
-		 		"pyls.plugins.pycodestyle.enabled":false,
-		 		"pyls.plugins.pydocstyle.enabled":false,
-		 		"pyls.plugins.autopep8.enabled":false,
-		 		"pyls.plugins.yapf.enabled":false,
-		 		"pyls.plugins.black.enabled":true,
-		 		"pyls.plugins.isort.enabled":true,
-				"pyls.plugins.mccabe.enabled": true,
-		 		"pyls.plugins.rope_completion.enabled":true,
-		 		"pyls.plugins.flake8.enabled":true
-		 	}
-		}
-	}
+        "pyls": {
+            "command": "pyls",
+            "filetypes":["python"],
+            "settings": {
+                "pyls.configurationSources": ["flake8"],
+                "pyls.plugins.pyflakes.enabled":false,
+                "pyls.plugins.pylint.enabled":false,
+                "pyls.plugins.pycodestyle.enabled":false,
+                "pyls.plugins.pydocstyle.enabled":false,
+                "pyls.plugins.autopep8.enabled":false,
+                "pyls.plugins.yapf.enabled":false,
+                "pyls.plugins.black.enabled":true,
+                "pyls.plugins.isort.enabled":true,
+                "pyls.plugins.mccabe.enabled": true,
+                "pyls.plugins.rope_completion.enabled":true,
+                "pyls.plugins.flake8.enabled":true
+            }
+        }
+  }
 }

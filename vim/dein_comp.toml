@@ -34,6 +34,7 @@ hook_add = '''
     let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
     let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
     let g:coc_start_at_startup=1
+    let g:coc_config_home = '~/dotfiles/vim'
 '''
 hook_source = '''
     highlight link CocHighlightText GruvboxBlueSign
