@@ -96,19 +96,6 @@ hook_add = '''
     nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
 '''
 
-
-[[plugins]] # カラーコードの色表示
-repo = 'ap/vim-css-color'
-on_event = 'VimEnter'
-
-[[plugins]] # undoを視覚的に
-repo = 'sjl/gundo.vim'
-on_cmd = 'GundoToggle'
-hook_add = '''
-    let g:gundo_prefer_python3 = 1
-    nnoremap U :<C-u>GundoToggle<CR>
-'''
-
 [[plugins]] # 指定した文字で整形
 repo = 'junegunn/vim-easy-align'
 on_map = ['<Plug>(EasyAlign)']
