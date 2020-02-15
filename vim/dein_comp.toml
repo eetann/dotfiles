@@ -1,81 +1,135 @@
+[[plugins]]
+repo = 'prabirshrestha/async.vim'
+on_event = 'VimEnter'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+on_event = 'VimEnter'
+depends = ['async.vim']
+hook_add = '''
+augroup LspPython
+  if executable('pyls')
+    autocmd!
+    autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
+        \ 'workspace_config': {'pyls': {'plugins': {
+        \   'pycodestyle': {'enabled': v:false},
+        \   'jedi_definition': {'follow_imports': v:true, 'follow_builtin_imports': v:true},}}}
+        \ })
+    autocmd FileType python call <SID>configure_lsp()
+  endif
+augroup END
+function! s:configure_lsp() abort
+  setlocal omnifunc=lsp#complete
+  nnoremap <buffer> <silent> K          :<C-u>LspHover<CR>
+  nnoremap <buffer> <silent> <C-]>      :<C-u>LspDefinition<CR>
+  " Windowsだと、うまく動かない？
+  "nnoremap <buffer> <silent> gr         :<C-u>LspRename<CR>
+  " エラー箇所に移動
+  " :help <M-
+  nmap <buffer> <silent> <M-k>      :<C-u>LspPreviousError<CR>
+  nmap <buffer> <silent> <M-j>      :<C-u>LspNextError<CR>
+endfunction
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+on_event = 'VimEnter'
+hook_source = '''
+let g:asyncomplete_auto_popup = 1
+let g:asyncomplete_popup_delay = 0
+" 補完開始
+imap <C-g> <Plug>(asyncomplete_force_refresh)
+" close
+inoremap <expr> <C-y> pumvisible() ? asyncomplete#close_popup() : "\<C-y>"
+" calcel
+inoremap <expr> <C-e> pumvisible() ? asyncomplete#cancel_popup() : "\<C-e>"
+augroup asynctomplete_setup
+  autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
+      \   'name': 'neosnippet',
+      \   'whitelist': ['*'],
+      \   'completor': function('asyncomplete#sources#neosnippet#completor'),
+      \ }))
+  autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#necosyntax#get_source_options({
+      \   'name': 'necosyntax',
+      \   'whitelist': ['*'],
+      \   'blacklist': ['python'],
+      \   'completor': function('asyncomplete#sources#necosyntax#completor'),
+      \ }))
+  autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#necovim#get_source_options({
+      \   'name': 'necovim',
+      \   'whitelist': ['vim'],
+      \   'completor': function('asyncomplete#sources#necovim#completor'),
+      \ }))
+  autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
+      \   'name': 'omni',
+      \   'whitelist': ['*'],
+      \   'blacklist': ['c', 'cpp', 'html'],
+      \   'completor': function('asyncomplete#sources#omni#completor')
+      \  }))
+  autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+      \   'name': 'buffer',
+      \   'whitelist': ['*'],
+      \   'blacklist': ['go'],
+      \   'completor': function('asyncomplete#sources#buffer#completor'),
+      \   'config': {
+      \      'max_buffer_size': 5000000,
+      \    },
+      \ }))
+augroup END
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+depends = ['vim-lsp']
+on_source = ['asyncomplete.vim']
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-neosnippet.vim'
+depends = ['neosnippet.vim']
+on_source = ['asyncomplete.vim']
+
 [[plugins]] # スニペット管理
 repo = 'Shougo/neosnippet.vim'
 depends = ['neosnippet-snippets','context_filetype.vim']
-on_event = 'InsertEnter'
+on_source = ['asyncomplete-neosnippet.vim']
 on_ft = 'snippet'
 hook_add = '''
     let g:neosnippet#snippets_directory = ['~/dotfiles/vim/mysnippet']
     let g:neosnippet#enable_completed_snippet = 1 " 関数スニペットを展開
     let g:neosnippet#expand_word_boundary = 0 " jump時に間違えて補完されないようにオフ
+    imap <C-k> <Plug>(neosnippet_expand_or_jump)
+    smap <C-k> <Plug>(neosnippet_expand_or_jump)
+    xmap <C-k> <Plug>(neosnippet_expand_target)
 '''
 
-[[plugins]] # 補完とLSP
-repo = 'neoclide/coc.nvim'
-build = './install.sh nightly'
-depends = ['neosnippet.vim']
-on_event = 'VimEnter'
-hook_add = '''
-    set updatetime=300
-    let g:coc_global_extensions = [
-    \ 'coc-json',
-    \ 'coc-highlight',
-    \ 'coc-word',
-    \ 'coc-snippets',
-    \ 'coc-neosnippet',
-    \ 'coc-css',
-    \ 'coc-html',
-    \ 'coc-tsserver',
-    \ 'coc-emmet',
-    \ 'coc-vimlsp',
-    \ 'coc-vimtex',
-    \ ]
-    let g:airline#extensions#coc#error_symbol =  ""
-    let g:airline#extensions#coc#warning_symbol = ""
-    let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-    let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
-    let g:coc_start_at_startup = 1
-    let g:coc_config_home = '~/dotfiles/vim'
-'''
-hook_source = '''
-    command! -nargs=0 Format :call CocAction('format')
-    highlight link CocHighlightText GruvboxBlueSign
-    autocmd vimrc CursorHold * silent call CocActionAsync('highlight')
-    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-    nnoremap <F10> :<C-u>CocConfig<CR>
-    inoremap <C-g> <C-o>:call CocActionAsync('showSignatureHelp')<CR>
-    nmap <silent> [c <Plug>(coc-diagnostic-prev)
-    nmap <silent> ]c <Plug>(coc-diagnostic-next)
-    nmap <silent> gd <Plug>(coc-definition)
-    nmap <silent> gD <Plug>(coc-type-definition)
-    nmap <silent> gi <Plug>(coc-implementation)
-    nmap <silent> gr <Plug>(coc-references)
-    nmap <F2> <Plug>(coc-rename)
-    nnoremap <silent> K :call <SID>show_documentation()<CR>
-    function! s:show_documentation()
-        if (index(['vim','help'], &filetype) >= 0)
-            execute 'h '.expand('<cword>')
-        else
-            call CocAction('doHover')
-        endif
-    endfunction
-    omap iF <Plug>(coc-funcobj-i)
-    omap aF <Plug>(coc-funcobj-a)
-    vmap iF <Plug>(coc-funcobj-i)
-    vmap aF <Plug>(coc-funcobj-a)
-    imap <silent><expr> <C-k>
-    \ neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
-    \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-    \ pumvisible() ? coc#_select_confirm() :
-    \ coc#refresh()
-    smap <silent><expr> <C-k>
-    \ neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
-    \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-    \ pumvisible() ? coc#_select_confirm() :
-    \ coc#refresh()
-    xmap <C-k> <Plug>(neosnippet_expand_target)
-    let g:coc_snippet_next =  '<c-k>'
-    let g:coc_snippet_prev = '<s-tab>'
-'''
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-necosyntax.vim'
+on_source = ['asyncomplete.vim']
+depends = ['neco-syntax']
+
+[[plugins]]
+repo = 'Shougo/neco-syntax'
+on_source = ['asyncomplete-necosyntax.vim']
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-necovim.vim'
+on_source = ['asyncomplete.vim']
+depends = ['neco-vim']
+
+[[plugins]]
+repo = 'Shougo/neco-vim'
+on_ft = ['vim']
+
+[[plugins]]
+repo = 'yami-beta/asyncomplete-omni.vim'
+on_source = ['asyncomplete.vim']
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-buffer.vim'
+on_source = ['asyncomplete.vim']
 
 [[plugins]] # tagジャンプ
 repo = 'majutsushi/tagbar'
