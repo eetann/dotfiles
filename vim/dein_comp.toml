@@ -1,101 +1,54 @@
 [[plugins]]
 repo = 'prabirshrestha/async.vim'
-on_event = 'VimEnter'
-
-[[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-on_event = 'VimEnter'
-depends = ['async.vim']
-hook_add = '''
-augroup LspPython
-  if executable('pyls')
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-        \ 'workspace_config': {'pyls': {'plugins': {
-        \   'pycodestyle': {'enabled': v:false},
-        \   'jedi_definition': {'follow_imports': v:true, 'follow_builtin_imports': v:true},}}}
-        \ })
-    autocmd FileType python call <SID>configure_lsp()
-  endif
-augroup END
-function! s:configure_lsp() abort
-  setlocal omnifunc=lsp#complete
-  nnoremap <buffer> <silent> K          :<C-u>LspHover<CR>
-  nnoremap <buffer> <silent> <C-]>      :<C-u>LspDefinition<CR>
-  " Windowsだと、うまく動かない？
-  "nnoremap <buffer> <silent> gr         :<C-u>LspRename<CR>
-  " エラー箇所に移動
-  " :help <M-
-  nmap <buffer> <silent> <M-k>      :<C-u>LspPreviousError<CR>
-  nmap <buffer> <silent> <M-j>      :<C-u>LspNextError<CR>
-endfunction
-'''
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete.vim'
-on_event = 'VimEnter'
-hook_source = '''
-let g:asyncomplete_auto_popup = 1
-let g:asyncomplete_popup_delay = 0
-" 補完開始
-imap <C-g> <Plug>(asyncomplete_force_refresh)
-" close
-inoremap <expr> <C-y> pumvisible() ? asyncomplete#close_popup() : "\<C-y>"
-" calcel
-inoremap <expr> <C-e> pumvisible() ? asyncomplete#cancel_popup() : "\<C-e>"
-augroup asynctomplete_setup
-  autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
-      \   'name': 'neosnippet',
-      \   'whitelist': ['*'],
-      \   'completor': function('asyncomplete#sources#neosnippet#completor'),
-      \ }))
-  autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#necosyntax#get_source_options({
-      \   'name': 'necosyntax',
-      \   'whitelist': ['*'],
-      \   'blacklist': ['python'],
-      \   'completor': function('asyncomplete#sources#necosyntax#completor'),
-      \ }))
-  autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#necovim#get_source_options({
-      \   'name': 'necovim',
-      \   'whitelist': ['vim'],
-      \   'completor': function('asyncomplete#sources#necovim#completor'),
-      \ }))
-  autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
-      \   'name': 'omni',
-      \   'whitelist': ['*'],
-      \   'blacklist': ['c', 'cpp', 'html'],
-      \   'completor': function('asyncomplete#sources#omni#completor')
-      \  }))
-  autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
-      \   'name': 'buffer',
-      \   'whitelist': ['*'],
-      \   'blacklist': ['go'],
-      \   'completor': function('asyncomplete#sources#buffer#completor'),
-      \   'config': {
-      \      'max_buffer_size': 5000000,
-      \    },
-      \ }))
-augroup END
+hook_add = '''
+    let g:asyncomplete_auto_popup = 1
+    let g:asyncomplete_popup_delay = 0
+    " 補完開始
+    imap <C-g> <Plug>(asyncomplete_force_refresh)
+    augroup asynctomplete_setup
+      autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
+         \   'name': 'neosnippet',
+         \   'whitelist': ['*'],
+         \   'completor': function('asyncomplete#sources#neosnippet#completor'),
+         \ }))
+      autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#necosyntax#get_source_options({
+          \   'name': 'necosyntax',
+          \   'whitelist': ['*'],
+          \   'blacklist': ['python'],
+          \   'completor': function('asyncomplete#sources#necosyntax#completor'),
+          \ }))
+      autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#necovim#get_source_options({
+          \   'name': 'necovim',
+          \   'whitelist': ['vim'],
+          \   'completor': function('asyncomplete#sources#necovim#completor'),
+          \ }))
+      autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
+         \   'name': 'omni',
+         \   'whitelist': ['*'],
+         \   'blacklist': ['c', 'cpp', 'html'],
+         \   'completor': function('asyncomplete#sources#omni#completor')
+         \  }))
+      autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+          \   'name': 'buffer',
+          \   'whitelist': ['*'],
+          \   'blacklist': ['go'],
+          \   'completor': function('asyncomplete#sources#buffer#completor'),
+          \   'config': {
+          \      'max_buffer_size': 5000000,
+          \    },
+          \ }))
+    augroup END
 '''
 
 [[plugins]]
-repo = 'prabirshrestha/asyncomplete-lsp.vim'
-depends = ['vim-lsp']
-on_source = ['asyncomplete.vim']
-
-[[plugins]]
 repo = 'prabirshrestha/asyncomplete-neosnippet.vim'
-depends = ['neosnippet.vim']
-on_source = ['asyncomplete.vim']
 
 [[plugins]] # スニペット管理
 repo = 'Shougo/neosnippet.vim'
 depends = ['neosnippet-snippets','context_filetype.vim']
-on_source = ['asyncomplete-neosnippet.vim']
-on_ft = 'snippet'
 hook_add = '''
     let g:neosnippet#snippets_directory = ['~/dotfiles/vim/mysnippet']
     let g:neosnippet#enable_completed_snippet = 1 " 関数スニペットを展開
@@ -107,29 +60,57 @@ hook_add = '''
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-necosyntax.vim'
-on_source = ['asyncomplete.vim']
 depends = ['neco-syntax']
 
 [[plugins]]
 repo = 'Shougo/neco-syntax'
-on_source = ['asyncomplete-necosyntax.vim']
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-necovim.vim'
-on_source = ['asyncomplete.vim']
 depends = ['neco-vim']
 
 [[plugins]]
 repo = 'Shougo/neco-vim'
-on_ft = ['vim']
 
 [[plugins]]
 repo = 'yami-beta/asyncomplete-omni.vim'
-on_source = ['asyncomplete.vim']
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-buffer.vim'
-on_source = ['asyncomplete.vim']
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+merged = 0
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+depends = ['async.vim']
+hook_add = '''
+    let g:lsp_async_completion = 1
+    " let g:lsp_text_edit_enable = 0
+    function! s:on_lsp_buffer_enabled() abort
+        setlocal omnifunc=lsp#complete
+        setlocal signcolumn=yes
+        nmap <buffer> gd <plug>(lsp-definition)
+        nmap <buffer> <f2> <plug>(lsp-rename)
+    endfunction
+    augroup lsp_install
+        au!
+        autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+    augroup END
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+
+[[plugins]]
+repo = 'mattn/vim-lsp-icons'
+
+[[plugins]]
+repo = 'hrsh7th/vim-vsnip'
+
+[[plugins]]
+repo = 'hrsh7th/vim-vsnip-integ'
 
 [[plugins]] # tagジャンプ
 repo = 'majutsushi/tagbar'
