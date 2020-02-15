@@ -41,7 +41,6 @@ hook_source = '''
     highlight link CocHighlightText GruvboxBlueSign
     autocmd vimrc CursorHold * silent call CocActionAsync('highlight')
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-    autocmd CursorHoldI,CursorMovedI * silent! call CocAction('showSignatureHelp')
     nnoremap <F10> :<C-u>CocConfig<CR>
     inoremap <C-g> <C-o>:call CocActionAsync('showSignatureHelp')<CR>
     nmap <silent> [c <Plug>(coc-diagnostic-prev)
