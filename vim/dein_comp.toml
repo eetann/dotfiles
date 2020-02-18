@@ -81,16 +81,39 @@ repo = 'prabirshrestha/asyncomplete-buffer.vim'
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
 merged = 0
+hook_add = '''
+    let g:lsp_settings = {}
+    let g:lsp_settings['clangd'] = {'cmd': ['clangd-8']}
+    let g:lsp_settings['pyls'] =
+    \ {
+    \   'workspace_config': {'pyls': {
+    \     'configurationSources': ['flake8'],
+    \     'plugins': {
+    \       'black': {'enabled': v:true},
+    \       'flake8': {'enabled': v:true},
+    \       'pyflakes': {'enabled': v:false},
+    \     }
+    \   }}
+    \ }
+    " cd .vim/dein/repos/github.com/mattn/vim-lsp-settings/servers/pyls
+    " ./venv/bin/pip3 install flake8
+    " ./venv/bin/pip3 install pyls-black
+    " ./venv/bin/pip3 install black
+'''
 
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
 depends = ['async.vim']
 hook_add = '''
     let g:lsp_async_completion = 1
-    " let g:lsp_text_edit_enable = 0
+    let g:lsp_diagnostics_float_cursor = 1
+    let g:lsp_log_file = expand('~/vim-lsp.log')
+    let g:lsp_signs_error = {'text': ''}
+    let g:lsp_signs_warning = {'text': ''}
+    let g:lsp_signs_information = {'text': ''}
+    let g:lsp_signs_hint = {'text': ''}
     function! s:on_lsp_buffer_enabled() abort
         setlocal omnifunc=lsp#complete
-        setlocal signcolumn=yes
         nmap <buffer> gd <plug>(lsp-definition)
         nmap <buffer> <f2> <plug>(lsp-rename)
     endfunction
@@ -102,9 +125,6 @@ hook_add = '''
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-lsp.vim'
-
-[[plugins]]
-repo = 'mattn/vim-lsp-icons'
 
 [[plugins]]
 repo = 'hrsh7th/vim-vsnip'

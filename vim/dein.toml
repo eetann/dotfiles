@@ -25,20 +25,23 @@ hook_add = '''
 	autocmd vimrc VimEnter * nested colorscheme gruvbox
 '''
 
-[[plugins]] # インデントの深さを可視化(要tabstop&shiftwidth設定)
-repo = 'nathanaelkane/vim-indent-guides'
-hook_add = '''
-	let g:indent_guides_enable_on_vim_startup = 1
-	let g:indent_guides_auto_colors = 0
-    hi IndentGuidesOdd  ctermbg=black
-    hi IndentGuidesEven ctermbg=darkgrey
-'''
+# [[plugins]] # インデントの深さを可視化(要tabstop&shiftwidth設定)
+# repo = 'nathanaelkane/vim-indent-guides'
+# hook_add = '''
+# 	let g:indent_guides_enable_on_vim_startup = 1
+# 	let g:indent_guides_auto_colors = 0
+#     hi IndentGuidesOdd  ctermbg=black
+#     hi IndentGuidesEven ctermbg=darkgrey
+# '''
 
 [[plugins]] # 括弧関連便利になる
 repo = 'machakann/vim-sandwich'
 
 [[plugins]] # %を拡張
 repo = 'tmhedberg/matchit'
+
+# [[plugins]] # python
+# repo = 'lambdalisue/vim-pyenv'
 
 [[plugins]] # nvim系に必要
 repo = 'roxma/nvim-yarp'

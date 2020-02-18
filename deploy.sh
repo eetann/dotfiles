@@ -19,7 +19,7 @@ do
     ln -fs ${dot_dir}/${f} ${HOME}/${f}
 done
 
-# ln -s ${home_for_dot}/dotfiles/flake8 ${HOME}/.config/flake8
+mkdir -p ~/.config/pypoetry
 for f in `find ./.config -type f`
 do
     ln -fs ${home_for_dot}/dotfiles/${f:2} ${HOME}/${f:2}
