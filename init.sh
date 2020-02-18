@@ -1,5 +1,14 @@
 #!/bin/sh
 
+grep appendWindasdfowsPath /etc/wsl.conf
+if [ $? != 0 ]; then
+    echo '1. sudo vim /etc/wsl.conf で以下を書き込む'
+    echo '[interop]'
+    echo 'appendWindowsPath = false'
+    echo '2. exec $SHELL -l'
+    exit
+fi
+
 # change the time zone to JST
 yes | sudo dpkg-reconfigure tzdata
 
@@ -17,7 +26,7 @@ yes | sudo add-apt-repository ppa:lazygit-team/release
 yes | sudo apt update
 yes | sudo apt install lazygit
 
-# for using latest viming
+# for using latest vim
 yes | sudo apt remove vim
 yes | sudo add-apt-repository ppa:jonathonf/vim
 yes | sudo apt update
@@ -35,7 +44,6 @@ yes | sudo apt update
 yes | sudo apt install golang-go
 mkdir ~/go
 mkdir ~/go/bin
-go get github.com/mattn/jvgrep
 
 # install for c/c++
 sudo apt install clang-tools-8
@@ -66,11 +74,6 @@ pip install pylint mccabe rope python-language-server pyls-black pyls-isort \
 # ./configure
 # make
 # sudo make install
-
-# vim 初回起動は sudo 絶対しない
-# /etc/wsl.conf に以下の内容を書く
-# [interop]
-# appendWindowsPath = false
 
 # tmux
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

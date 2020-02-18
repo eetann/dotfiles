@@ -10,6 +10,7 @@ else
 fi
 
 dot_dir=${home_for_dot}/dotfiles
+ln -fs ${dot_dir} ${HOME}/dotfiles
 for f in .??*
 do
     #無視したいファイルやディレクトリ
