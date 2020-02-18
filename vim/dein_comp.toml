@@ -46,8 +46,8 @@ hook_add = '''
     let g:neosnippet#snippets_directory = ['~/dotfiles/vim/mysnippet']
     let g:neosnippet#enable_completed_snippet = 1 " 関数スニペットを展開
     let g:neosnippet#expand_word_boundary = 0 " jump時に間違えて補完されないようにオフ
-    imap <C-k> <Plug>(neosnippet_expand_or_jump)
-    smap <C-k> <Plug>(neosnippet_expand_or_jump)
+    " imap <C-k> <Plug>(neosnippet_expand_or_jump)
+    " smap <C-k> <Plug>(neosnippet_expand_or_jump)
     xmap <C-k> <Plug>(neosnippet_expand_target)
 '''
 
@@ -114,6 +114,13 @@ repo = 'prabirshrestha/asyncomplete-lsp.vim'
 
 [[plugins]]
 repo = 'hrsh7th/vim-vsnip'
+depends = ['neosnippet.vim']
+hook_add = '''
+    imap <expr> <C-k> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : neosnippet#expandable_or_jumpable() ?
+    \ '<Plug>(neosnippet_jump_or_expand)' : '<C-n>'
+    smap <expr> <C-k> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : neosnippet#expandable_or_jumpable() ?
+    \ '<Plug>(neosnippet_jump_or_expand)' : '<C-n>'
+'''
 
 [[plugins]]
 repo = 'hrsh7th/vim-vsnip-integ'
