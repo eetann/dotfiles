@@ -77,6 +77,7 @@ pip install pylint mccabe rope python-language-server pyls-black pyls-isort \
 
 # tmux
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+echo "tmux起動したら prefix + I で プラグインをインストール"
 # wslでwindowsのバッテリーを見るために以下をwindows側で実行
 # go get -u github.com/Code-Hex/battery/cmd/battery
 
