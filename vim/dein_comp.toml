@@ -14,32 +14,25 @@ hook_add = '''
          \   'whitelist': ['*'],
          \   'completor': function('asyncomplete#sources#neosnippet#completor'),
          \ }))
-      autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#necosyntax#get_source_options({
-          \   'name': 'necosyntax',
-          \   'whitelist': ['*'],
-          \   'blacklist': ['python'],
-          \   'completor': function('asyncomplete#sources#necosyntax#completor'),
-          \ }))
       autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#necovim#get_source_options({
           \   'name': 'necovim',
           \   'whitelist': ['vim'],
           \   'completor': function('asyncomplete#sources#necovim#completor'),
           \ }))
-      autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
-         \   'name': 'omni',
-         \   'whitelist': ['*'],
-         \   'blacklist': ['c', 'cpp', 'html'],
-         \   'completor': function('asyncomplete#sources#omni#completor')
-         \  }))
       autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
           \   'name': 'buffer',
           \   'whitelist': ['*'],
-          \   'blacklist': ['go'],
           \   'completor': function('asyncomplete#sources#buffer#completor'),
           \   'config': {
           \      'max_buffer_size': 5000000,
           \    },
           \ }))
+      autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+      \ 'name': 'file',
+      \ 'whitelist': ['*'],
+      \ 'priority': 10,
+      \ 'completor': function('asyncomplete#sources#file#completor')
+      \ }))
     augroup END
 '''
 
@@ -59,13 +52,6 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'prabirshrestha/asyncomplete-necosyntax.vim'
-depends = ['neco-syntax']
-
-[[plugins]]
-repo = 'Shougo/neco-syntax'
-
-[[plugins]]
 repo = 'prabirshrestha/asyncomplete-necovim.vim'
 depends = ['neco-vim']
 
@@ -73,10 +59,10 @@ depends = ['neco-vim']
 repo = 'Shougo/neco-vim'
 
 [[plugins]]
-repo = 'yami-beta/asyncomplete-omni.vim'
+repo = 'prabirshrestha/asyncomplete-buffer.vim'
 
 [[plugins]]
-repo = 'prabirshrestha/asyncomplete-buffer.vim'
+repo = 'prabirshrestha/asyncomplete-file.vim'
 
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
