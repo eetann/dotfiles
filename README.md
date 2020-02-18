@@ -12,6 +12,7 @@ ssh-keygen -t rsa -b 4096 -C "eetann's mail adress"
 <CR>
 cat ~/.ssh/id_rsa.pub | clip.exe
 ssh -T git@github.com
+eval `ssh-agent`
 ssh-add ~/.ssh/id_rsa
 git remote set-url origin git@github.com:eetann/dotfiles.git
 go get github.com/mattn/jvgrep
