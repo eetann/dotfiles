@@ -1,23 +1,14 @@
 #!/bin/sh
 
-# install for zsh
-# yes | sudo apt install zsh
-# chsh -s /usr/bin/zsh
-# mkdir ~/.config
-exec /usr/bin/zsh -l
-# zshのプラグインマネージャーzinit
-#sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
-zinit self-update
-
 # change the time zone to JST
-#yes | sudo dpkg-reconfigure tzdata
+yes | sudo dpkg-reconfigure tzdata
 
 # change Japan's repository from overseas for speed
-#yes | sudo sed -i -e 's%http://.*.ubuntu.com%http://ftp.jaist.ac.jp/pub/Linux%g' /etc/apt/sources.list
+yes | sudo sed -i -e 's%http://.*.ubuntu.com%http://ftp.jaist.ac.jp/pub/Linux%g' /etc/apt/sources.list
 
 # update & upgrade pacage
-#yes | sudo apt update
-#yes | sudo apt upgrade
+yes | sudo apt update
+yes | sudo apt upgrade
 
 # install git
 yes | sudo apt install git
@@ -40,25 +31,20 @@ yes | sudo apt install tree
 
 # install golang
 yes | sudo add-apt-repository ppa:longsleep/golang-backports
+yes | sudo apt update
 yes | sudo apt install golang-go
 mkdir ~/go
 mkdir ~/go/bin
 go get github.com/mattn/jvgrep
 
 # install for c/c++
-sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-8 100
 sudo apt install clang-tools-8
-# sudo apt install clang-6.0
-#yes | sudo apt install build-essential
-#yes | sudo apt install clang
-#yes | sudo apt install cmake
-#yes | sudo apt install clang-format
-#yes | sudo apt install clang-tools
+sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-8 100
 
 # install for Python3
 # 別のパッケージ管理する?
-yes | sudo apt install python3-pip
-#pip3 install pip -U
+yes | sudo apt install python3 python3-pip
+pip3 install pip -U
 git clone https://github.com/anyenv/anyenv ~/.anyenv
 export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init -)"
@@ -120,3 +106,12 @@ sudo apt install latexmk
 # cd /usr/share/texlive/texmf-dist/tex/latex/matlab-prettifier
 # chmod 644 matlab-prettifier.sty
 # sudo mktexlsr
+
+# install for zsh
+yes | sudo apt install zsh
+chsh -s /usr/bin/zsh
+mkdir ~/.config
+exec /usr/bin/zsh -l
+# zshのプラグインマネージャーzinit
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
+zinit self-update
