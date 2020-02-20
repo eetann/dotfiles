@@ -49,14 +49,14 @@ hook_add = '''
         \ "_":{
         \ 'runner'    : 'job',
         \ 'runner/terminal/into':1,
-        \ 'outputter' : 'quickfix',
-        \ 'outputter/quickfix/into':1,
+        \ 'outputter' : 'error',
         \ 'outputter/error/success' : 'buffer',
         \ 'outputter/error/error'   : 'quickfix',
         \ 'outputter/buffer/close_on_empty' : 1,
         \ 'outputter/buffer/into':1,
         \ 'outputter/buffer/split'  :
-        \ '%{winwidth(0) * 2 < winheight(0) * 5 ? winheight(0)/4 : "vertical"}',
+            \ '%{winwidth(0) * 2 < winheight(0) * 5 ? winheight(0)/4 : "vertical"}',
+        \ 'outputter/quickfix/into':1,
         \ },
         \ 'markdown': {
         \ 'runner'    : 'vimscript',
@@ -72,19 +72,18 @@ hook_add = '''
         \ 'args': 'My_opens()',
         \ 'outputter':'null',
         \ },
-        \ 'matlab': {
-        \ 'runner':"vimscript",
-        \ 'exec':'%c %o',
-        \ 'command': ':call',
-        \ 'cmdopt': 'matlab#RunCurrentFile()'
-        \ },
         \ 'tex': {
         \ 'command': 'latexmk',
         \ 'args':'-pvc',
         \ 'exec':'%c %s %a',
         \ },
         \ }
-        "\ 'src': '%{system("wslpath -w %{expand(\"%:p\")}")}',
+        "\ 'matlab': {
+        "\ 'runner':"vimscript",
+        "\ 'exec':'%c %o',
+        "\ 'command': ':call',
+        "\ 'cmdopt': 'matlab#RunCurrentFile()'
+        "\ },
     " qでquickfixを閉じる
     autocmd vimrc FileType qf nnoremap <silent><buffer>q :quit<CR>
     " normal or visual modeのとき <leader> + r で保存してからquickrunの実行
