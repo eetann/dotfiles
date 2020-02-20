@@ -193,7 +193,7 @@ EMOJI_LIST=$(cat << "EOF"
 📝 Update README.md
 📝 Add README.md
 ♻ Refactor code
-✨ Add new function
+✨ Add new
 🐛 Fix bug
 🐛 Fix typo
 🚚 Rename variable
@@ -203,9 +203,8 @@ EMOJI_LIST=$(cat << "EOF"
 🔥 Remove unused variable
 🔥 Remove some dead code
 🎨 Add convenience API
-🎨 Change API
-🎨 Improve readability of some code
-💄 Improve UI/UX
+🎨 Change
+🎨 Improve
 💄 Fix designs
 📦 Update package version
 ⚡ Improve performance
