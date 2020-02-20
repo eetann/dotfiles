@@ -19,6 +19,9 @@ yes | sudo sed -i -e 's%http://.*.ubuntu.com%http://ftp.jaist.ac.jp/pub/Linux%g'
 yes | sudo apt update
 yes | sudo apt upgrade
 
+# for 音声処理
+yes | sudo apt install sox
+
 # install git
 yes | sudo apt install git
 # lazygitの追加
