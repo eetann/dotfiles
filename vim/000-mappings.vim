@@ -1,11 +1,5 @@
 let mapleader = "\<Space>" " leaderキーの割当を変える
 
-" 入れ替え
-nnoremap ; :
-nnoremap : ;
-vnoremap ; :
-vnoremap : ;
-nnoremap q; q:
 " 誤爆防止のためにremapping
 imap <C-@> <C-[>
 nnoremap q <NOP>
@@ -16,9 +10,6 @@ nnoremap s <Nop>
 " 表示行と移動行を合わせる
 nnoremap j gj
 nnoremap k gk
-" 遠いので近くのキーに
-map H ^
-map L $
 " 画面移動
 nnoremap sj <C-w>j
 nnoremap sk <C-w>k
@@ -62,9 +53,8 @@ nnoremap <space><Tab>p :<C-u>bprevious<CR>
 nnoremap <space><Tab>n :<C-u>bnext<CR>
 
 " ターミナル設定
-nnoremap st :term<CR>
-tnoremap <space><Tab> <C-w>:bprevious!<CR>
-tnoremap <C-Tab> <C-w>:bnext!<CR>
+tnoremap <space><Tab>p <C-w>:bprevious!<CR>
+tnoremap <space><Tab>n <C-w>:bnext!<CR>
 tnoremap <C-q> <C-w><C-c>:close!<CR>
 
 " カーソル前方の数字に対してインクリメント&デクリメント
@@ -73,32 +63,31 @@ nnoremap <space><C-x> :call search("[0-9]",'b', line("."))<CR><C-x>
 
 " コマンド履歴から、｢e hoge1.cpp｣のようなコマンドを探し、末尾にカーソルを置く
 " 上記の<space><C-a>と合わせると、課題で楽
-nnoremap <space>;e q:?^e\s\S<CR>$
+nnoremap <space>:e q:?^e\s\S<CR>$
 
-" cursor位置から行末までを改行を含めずにヤンク
-nnoremap Y mzvg$y`z:delmarks z<CR>
 " 行頭から行末までを改行を含めずにヤンク
-nnoremap yY mz0vg$y`z:delmarks z<CR>
+nnoremap Y mz0vg$y`z:delmarks z<CR>
 " 選択範囲をヤンクしたら選択範囲の末尾へ移動
 xnoremap gy y`>
 " VisualModeで置換対象ペースト時のヤンク入れ替えを防ぐ
 xnoremap <expr> p 'pgv"'.v:register.'ygv<esc>'
 " ペーストした範囲をvisualModeで選択
 nnoremap sgv `[v`]
-" 下or上の行に貼り付けてカーソル位置はそのまま
+" 下の行に貼り付けてカーソル位置はそのまま
 nnoremap sp mz:put<CR>`[v`]=`zdmz
+" 上の行に貼り付けてカーソル位置はそのまま
 nnoremap sP mz:put!<CR>`[v`]=`zdmz
 " 下の行に貼り付けたら貼り付けの末尾へ
 nnoremap sgp :put<CR>`[v`]=`>$
 " 上の行へ貼り付けたら貼り付けの先頭(インデントじゃない)へ
 nnoremap sgP :put!<CR>`[v`]=`<^
-" 全選択コピー
+" 全選択コピー yank
 nnoremap sy :%y<CR>
-" 今のファイル名取得
-nnoremap sgg :let @+=expand('%')<CR>
-" 直前にechoを実行していたらヤンク
-nnoremap sge :call My_yank_echo()<CR>
-function! My_yank_echo()
+" 今のファイル名をヤンク get filename
+nnoremap sgf :let @+=expand('%')<CR>:echo 'Clipboard << ' . @+<CR>
+" 直前にechoを実行していたらヤンク get echo
+nnoremap sge :call <SID>my_yank_echo()<CR>:echo 'Clipboard << ' . @+<CR>
+function! s:my_yank_echo()
     let s:echo_hist = histget('cmd', -1)
     if s:echo_hist =~ '^echo '
         let @z = substitute(s:echo_hist, '^echo\s','echomsg ', '')
@@ -106,17 +95,16 @@ function! My_yank_echo()
         let @+ = execute('1messages')
     endif
 endfunction
-" 直前の検索をヤンク
-nnoremap sg/ :let @+ = histget("search",-1)<CR>
+" 直前の検索をヤンク get 検索/
+nnoremap sg/ :let @+ = histget("search",-1)<CR>:echo 'Clipboard << ' . @+<CR>
 
 " ESC2度押しでハイライトの切り替え
-nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
+nnoremap <silent> <Esc><Esc> :<C-u>set nohlsearch!<CR>
 " 一気に置換するときは以下ではなく、/or?検索->cgn->n.n.nnn.
 " cursor下の単語をハイライトと置換
-nnoremap * <Space><Space> "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
+nnoremap * "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
 nnoremap # "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
 " 選択範囲の検索と置換
-xnoremap <silent> <Space> mz:call <SID>set_vsearch()<CR>:set hlsearch<CR>`zdmz
 xnoremap * :<C-u>call <SID>set_vsearch()<CR>mz/<C-r>/<CR>`zdmz
 xnoremap # :<C-u>call <SID>set_vsearch()<CR>/<C-r>/<CR>:%s/<C-r>///g<Left><Left>
 function! s:set_vsearch()
