@@ -58,10 +58,10 @@ Conversion	Delete	Cancel
 Composition	Down	MoveCursorToEnd
 Conversion	Down	ConvertNext
 Suggestion	Down	PredictAndConvert
-Composition	Eisu	CancelAndIMEOff
-Conversion	Eisu	CancelAndIMEOff
+Composition	Eisu	IMEOff
+Conversion	Eisu	IMEOff
 DirectInput	Eisu	IMEOn
-Precomposition	Eisu	CancelAndIMEOff
+Precomposition	Eisu	IMEOff
 Composition	End	MoveCursorToEnd
 Conversion	End	SegmentFocusLast
 Composition	Enter	Commit
