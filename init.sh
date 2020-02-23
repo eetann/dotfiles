@@ -40,6 +40,7 @@ yes | sudo apt install xdg-utils
 yes | sudo apt install x11-apps
 yes | sudo apt install pandoc
 yes | sudo apt install tree
+yes | sudo apt install nkf
 
 # install golang
 yes | sudo add-apt-repository ppa:longsleep/golang-backports

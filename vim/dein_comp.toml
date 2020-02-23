@@ -13,6 +13,9 @@ hook_add = '''
          \   'name': 'neosnippet',
          \   'whitelist': ['*'],
          \   'completor': function('asyncomplete#sources#neosnippet#completor'),
+         \   'triggers': {
+         \     '*': ['']
+         \   }
          \ }))
       autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#necovim#get_source_options({
           \   'name': 'necovim',
@@ -27,12 +30,6 @@ hook_add = '''
           \      'max_buffer_size': 5000000,
           \    },
           \ }))
-      autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
-      \ 'name': 'file',
-      \ 'whitelist': ['*'],
-      \ 'priority': 10,
-      \ 'completor': function('asyncomplete#sources#file#completor')
-      \ }))
     augroup END
 '''
 
@@ -60,9 +57,6 @@ repo = 'Shougo/neco-vim'
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-buffer.vim'
-
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete-file.vim'
 
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
@@ -101,7 +95,14 @@ hook_add = '''
     function! s:on_lsp_buffer_enabled() abort
         setlocal omnifunc=lsp#complete
         nmap <buffer> gd <plug>(lsp-definition)
+        nmap <buffer> gr <plug>(lsp-references)
+        nmap <buffer> gpd <plug>(lsp-peek-definition)
+        nmap <buffer> gh <plug>(lsp-hover)
         nmap <buffer> <f2> <plug>(lsp-rename)
+        autocmd vimrc BufWritePre <buffer>
+        \ call execute('LspCodeActionSync source.organizeImports')
+        autocmd vimrc BufWritePre <buffer> LspDocumentFormatSync
+        command! -nargs=0 Format :LspDocumentFormatSync
     endfunction
     augroup lsp_install
         au!
