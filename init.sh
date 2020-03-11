@@ -56,6 +56,8 @@ sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-8 100
 # install for Python3
 # 別のパッケージ管理する?
 yes | sudo apt install python3 python3-pip
+yes | sudo apt install python3-tk
+yes | sudo apt install tk-dev
 pip3 install pip -U
 git clone https://github.com/anyenv/anyenv ~/.anyenv
 export PATH="$HOME/.anyenv/bin:$PATH"
@@ -66,7 +68,7 @@ exec $SHELL -l
 sudo apt install zlib1g-dev libssl-dev libbz2-dev libreadline-dev libsqlite3-dev libffi-dev
 pyenv install 3.8.1
 pyenv global 3.8.1
-pip install pylint mccabe rope python-language-server pyls-black pyls-isort \
+pip install pylint mccabe rope python-language-server flake8 pyls-black pyls-isort \
     pynvim vim-vint numpy matplotlib pandas opencv-python
 
 # install universal-ctags
