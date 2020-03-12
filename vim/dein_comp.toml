@@ -1,151 +1,87 @@
-[[plugins]]
-repo = 'prabirshrestha/async.vim'
+[[plugins]] # snippet
+repo = 'honza/vim-snippets'
+on_event = 'VimEnter'
 
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete.vim'
+[[plugins]] # snippet
+repo = 'SirVer/ultisnips'
+on_event = 'VimEnter'
 hook_add = '''
-    let g:asyncomplete_auto_popup = 1
-    let g:asyncomplete_popup_delay = 0
-    " 補完開始
-    imap <C-g> <Plug>(asyncomplete_force_refresh)
-    augroup asynctomplete_setup
-      autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
-         \   'name': 'neosnippet',
-         \   'whitelist': ['*'],
-         \   'completor': function('asyncomplete#sources#neosnippet#completor'),
-         \   'triggers': {
-         \     '*': ['']
-         \   }
-         \ }))
-      autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#necovim#get_source_options({
-          \   'name': 'necovim',
-          \   'whitelist': ['vim'],
-          \   'completor': function('asyncomplete#sources#necovim#completor'),
-          \ }))
-      autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
-          \   'name': 'buffer',
-          \   'whitelist': ['*'],
-          \   'completor': function('asyncomplete#sources#buffer#completor'),
-          \   'config': {
-          \      'max_buffer_size': 5000000,
-          \    },
-          \ }))
-    augroup END
+    let g:UltiSnipsSnippetDirectories = ["~/dotfiles/vim/mysnippet", "UltiSnips"]
+    " let g:ulti_expand_or_jump_res = 0 "default value, just set once
+    " function! Ulti_ExpandOrJump_and_getRes()
+    "     call UltiSnips#ExpandSnippet()
+    "     return g:ulti_expand_res
+    " endfunction
+    " inoremap <C-k> <C-R>=(Ulti_ExpandOrJump_and_getRes() > 0)?"":deoplete#close_popup()<CR>
 '''
 
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete-neosnippet.vim'
 
-[[plugins]] # スニペット管理
-repo = 'Shougo/neosnippet.vim'
-depends = ['neosnippet-snippets','context_filetype.vim']
+[[plugins]] # 補完とLSP
+repo = 'neoclide/coc.nvim'
+build = './install.sh nightly'
+on_event = 'VimEnter'
 hook_add = '''
-    let g:neosnippet#snippets_directory = ['~/dotfiles/vim/mysnippet']
-    let g:neosnippet#enable_completed_snippet = 1 " 関数スニペットを展開
-    let g:neosnippet#expand_word_boundary = 0 " jump時に間違えて補完されないようにオフ
-    " imap <C-k> <Plug>(neosnippet_expand_or_jump)
-    " smap <C-k> <Plug>(neosnippet_expand_or_jump)
-    xmap <C-k> <Plug>(neosnippet_expand_target)
+    set updatetime=300
+    let g:coc_global_extensions = [
+    \ 'coc-json',
+    \ 'coc-highlight',
+    \ 'coc-word',
+    \ 'coc-snippets',
+    \ 'coc-ultisnips',
+    \ 'coc-css',
+    \ 'coc-html',
+    \ 'coc-tsserver',
+    \ 'coc-emmet',
+    \ 'coc-vimlsp',
+    \ 'coc-vimtex',
+    \ ]
+    let g:airline#extensions#coc#error_symbol =  ""
+    let g:airline#extensions#coc#warning_symbol = ""
+    let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+    let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
+    let g:coc_start_at_startup = 1
+    let g:coc_config_home = $HOME.'/dotfiles/vim'
 '''
-
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete-necovim.vim'
-depends = ['neco-vim']
-
-[[plugins]]
-repo = 'Shougo/neco-vim'
-
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete-buffer.vim'
-
-[[plugins]]
-repo = 'mattn/vim-lsp-settings'
-merged = 0
-hook_add = '''
-    let g:lsp_settings = {}
-    let g:lsp_settings['clangd'] = {'cmd': ['clangd-8']}
-    let g:lsp_settings['pyls'] =
-    \ {
-    \   'workspace_config': {'pyls': {
-    \     'configurationSources': ['flake8'],
-    \     'plugins': {
-    \       'black': {'enabled': v:true},
-    \       'flake8': {'enabled': v:true},
-    \       'pyflakes': {'enabled': v:false},
-    \     }
-    \   }}
-    \ }
-    " cd .vim/dein/repos/github.com/mattn/vim-lsp-settings/servers/pyls
-    " ./venv/bin/pip3 install flake8
-    " ./venv/bin/pip3 install pyls-black
-    " ./venv/bin/pip3 install black
-'''
-
-[[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-depends = ['async.vim']
-hook_add = '''
-    let g:lsp_async_completion = 1
-    let g:lsp_diagnostics_float_cursor = 1
-    let g:lsp_log_file = expand('~/vim-lsp.log')
-    let g:lsp_signs_error = {'text': ''}
-    let g:lsp_signs_warning = {'text': ''}
-    let g:lsp_signs_information = {'text': ''}
-    let g:lsp_signs_hint = {'text': ''}
-    function! s:on_lsp_buffer_enabled() abort
-        setlocal omnifunc=lsp#complete
-        nmap <buffer> gd <plug>(lsp-definition)
-        nmap <buffer> gr <plug>(lsp-references)
-        nmap <buffer> gpd <plug>(lsp-peek-definition)
-        nmap <buffer> gh <plug>(lsp-hover)
-        nmap <buffer> <f2> <plug>(lsp-rename)
-        autocmd vimrc BufWritePre <buffer>
-        \ call execute('LspCodeActionSync source.organizeImports')
-        autocmd vimrc BufWritePre <buffer> LspDocumentFormatSync
-        command! -nargs=0 Format :LspDocumentFormatSync
+hook_source = '''
+    command! -nargs=0 Format :call CocAction('format')
+    highlight link CocHighlightText GruvboxBlueSign
+    autocmd vimrc CursorHold * silent call CocActionAsync('highlight')
+    autocmd vimrc User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    nnoremap <F10> :<C-u>CocConfig<CR>
+    inoremap <C-g> <C-o>:call CocActionAsync('showSignatureHelp')<CR>
+    nmap <silent> [c <Plug>(coc-diagnostic-prev)
+    nmap <silent> ]c <Plug>(coc-diagnostic-next)
+    nmap <silent> gd <Plug>(coc-definition)
+    nmap <silent> gD <Plug>(coc-type-definition)
+    nmap <silent> gi <Plug>(coc-implementation)
+    nmap <silent> gr <Plug>(coc-references)
+    nmap <F2> <Plug>(coc-rename)
+    if has('patch8.1.1068')
+        " Use `complete_info` if your (Neo)Vim version supports it.
+        inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+    else
+        imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+    endif
+    nnoremap <silent> K :call <SID>show_documentation()<CR>
+    function! s:show_documentation()
+        if (index(['vim','help'], &filetype) >= 0)
+            execute 'h '.expand('<cword>')
+        else
+            call CocAction('doHover')
+        endif
     endfunction
-    augroup lsp_install
-        au!
-        autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-    augroup END
-'''
-
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete-lsp.vim'
-
-[[plugins]]
-repo = 'hrsh7th/vim-vsnip'
-depends = ['neosnippet.vim']
-hook_add = '''
-    imap <expr> <C-k> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : neosnippet#expandable_or_jumpable() ?
-    \ '<Plug>(neosnippet_jump_or_expand)' : '<C-n>'
-    smap <expr> <C-k> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : neosnippet#expandable_or_jumpable() ?
-    \ '<Plug>(neosnippet_jump_or_expand)' : '<C-n>'
-'''
-
-[[plugins]]
-repo = 'hrsh7th/vim-vsnip-integ'
-
-[[plugins]] # tagジャンプ
-repo = 'majutsushi/tagbar'
-on_cmd = 'TagbarToggle'
-hook_add = '''
-	let g:tagbar_width = 30
-	let g:tagbar_sort = 0
-	let g:tagbar_map_togglesort = 'S'
-	nnoremap <silent> <leader>tt :TagbarToggle<CR>
-	let g:tagbar_type_markdown = {
-		\ 'ctagstype': 'markdown',
-		\ 'ctagsbin' : $HOME . '/.vim/dein/repos/github.com/jszakmeister/markdown2ctags/markdown2ctags.py',
-		\ 'ctagsargs' : '-f - --sort=yes',
-		\ 'kinds' : [
-		\ 's:sections',
-		\ 'i:images'
-		\ ],
-		\ 'sro' : '|',
-		\ 'kind2scope' : {
-		\ 's' : 'section',
-		\ },
-		\ 'sort': 0,
-		\ }
+    omap iF <Plug>(coc-funcobj-i)
+    omap aF <Plug>(coc-funcobj-a)
+    vmap iF <Plug>(coc-funcobj-i)
+    vmap aF <Plug>(coc-funcobj-a)
+    imap <silent><expr> <C-k>
+    \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+    \ pumvisible() ? coc#_select_confirm() :
+    \ coc#refresh()
+    smap <silent><expr> <C-k>
+    \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+    \ pumvisible() ? coc#_select_confirm() :
+    \ coc#refresh()
+    let g:coc_snippet_next =  '<c-k>'
+    let g:coc_snippet_prev = '<s-tab>'
 '''

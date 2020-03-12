@@ -114,7 +114,7 @@ if dein#load_state(s:dein_path)
     let g:config_dir  = expand('$HOME/dotfiles/vim')
 
     call dein#load_toml(g:config_dir . '/dein.toml', {'lazy': 0})
-    call dein#load_toml(g:config_dir . '/dein_comp.toml', {'lazy': 0})
+    call dein#load_toml(g:config_dir . '/dein_comp.toml', {'lazy': 1})
     call dein#load_toml(g:config_dir . '/dein_textobj.toml', {'lazy': 1})
     call dein#load_toml(g:config_dir . '/dein_filetype.toml', {'lazy': 1})
     call dein#load_toml(g:config_dir . '/dein_lazy.toml', {'lazy': 1})

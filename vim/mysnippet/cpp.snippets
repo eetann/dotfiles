@@ -1,0 +1,58 @@
+snippet meta "meta" b
+/*
+ * ${1:`!v expand('%:t')`}
+ *
+ * Created on: ${2:`!v strftime("%Y/%m/%d")`}
+ *      Author: ${3:name}
+ */
+${4:finish}
+endsnippet
+
+snippet using "using namespace std;" b
+using namespace std;
+endsnippet
+
+snippet qmain "int main() {}" b
+int main() {
+	${1:hoge}
+}
+endsnippet
+
+snippet mainq "int main() { }" b
+int main() {
+	${1:hoge}
+}
+endsnippet
+
+snippet cq "<< ''" w
+<< "${1:hoge}" ${2:use snippet my connect}
+endsnippet
+
+snippet qc "<< ''" w
+<< "${1:hoge}" ${2:use snippet my connect}
+endsnippet
+
+snippet cout "cout << endl;" b
+cout << "${1:hoge}" ${2:use snippet my connect}${3:<< endl};${0}
+endsnippet
+
+snippet cin "cin >>;" b
+cin >> ${1};${0}
+endsnippet
+
+snippet qtypedefstruct "typedef struct" b
+typedef struct ${1:name of struct}{
+	${0:TARGET}
+}${2:name of type};
+endsnippet
+
+snippet typedefstructq "typedef struct" b
+typedef struct ${1:name of struct}{
+	${0:TARGET}
+}${2:name of type};
+endsnippet
+
+snippet qq "=;"
+options     word
+${1:} = ${2:};${0:}
+endsnippet

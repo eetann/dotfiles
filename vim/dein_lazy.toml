@@ -149,13 +149,13 @@ hook_add = '''
 repo = 'kshenoy/vim-signature'
 on_event = 'VimEnter'
 
-[[plugins]]
-repo = '~/.vim/my_plugins/foldppp'
-on_cmd = 'Foldppp'
-on_map = '<Plug>(foldppp-show)'
-hook_add = '''
-    nmap <leader>s <Plug>(foldppp-show)
-'''
+# [[plugins]]
+# repo = '~/.vim/my_plugins/foldppp'
+# on_cmd = 'Foldppp'
+# on_map = '<Plug>(foldppp-show)'
+# hook_add = '''
+#     nmap <leader>s <Plug>(foldppp-show)
+# '''
 
 [[plugins]] # 日本語ヘルプ
 repo = 'vim-jp/vimdoc-ja'
