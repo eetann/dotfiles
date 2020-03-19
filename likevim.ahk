@@ -327,6 +327,11 @@ Esc::
 	Sleep 100
 	IME_SET(0)
 	Return
+^t::
+    Send ^t
+    Sleep 100
+    IME_SET(0)
+    Return
 #IfWinActive
 
 
