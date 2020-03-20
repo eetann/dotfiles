@@ -40,8 +40,18 @@ repo = 'machakann/vim-sandwich'
 [[plugins]] # %を拡張
 repo = 'tmhedberg/matchit'
 
-# [[plugins]] # python
-# repo = 'lambdalisue/vim-pyenv'
+[[plugins]] # f系を押したときにfで繰り返せる
+repo = 'rhysd/clever-f.vim'
+hook_add = '''
+    let g:clever_f_use_migemo = 1
+    let g:clever_f_fix_key_direction = 1
+'''
+
+# [[plugins]] # f系を押したときに、ユニークな文字を表示
+# repo = 'unblevable/quick-scope'
+# hook_add = '''
+#     let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+# '''
 
 [[plugins]] # nvim系に必要
 repo = 'roxma/nvim-yarp'
