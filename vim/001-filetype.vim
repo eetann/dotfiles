@@ -5,7 +5,7 @@ autocmd vimrc FileType text,qf,quickrun setlocal wrap
 autocmd vimrc FileType json syntax match Comment +\/\/.\+$+
 autocmd vimrc BufWritePre *.md :call MarkdownEOLTwoSpace()
 autocmd vimrc BufNewFile,BufRead *.csv set filetype=csv
-autocmd vimrc BufNewFile,BufRead *.m set fileencoding=sjis
+" autocmd vimrc BufNewFile,BufRead *.m set fileencoding=sjis
 autocmd vimrc BufNewFile,BufRead *.m set filetype=matlab
 let g:tex_flavor = "latex"
 
