@@ -34,6 +34,12 @@ hook_add = '''
 #     hi IndentGuidesEven ctermbg=darkgrey
 # '''
 
+[[plugins]] # インデントの深さを可視化
+repo = 'Yggdroot/indentLine'
+hook_add = '''
+    let g:indentLine_conceal=0
+'''
+
 [[plugins]] # 括弧関連便利になる
 repo = 'machakann/vim-sandwich'
 

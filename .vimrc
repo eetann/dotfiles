@@ -74,7 +74,7 @@ set list "空白文字の可視化
 " Tabは2文字必要
 " 行末スペース、改行記号
 " ウィンドウ幅狭いときの省略での文字表示*2、不可視のスペースを表す
-set listchars=tab:\ \ ,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+set listchars=tab:\|\ ,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 set display=lastline
 
 " ----折りたたみやカーソル位置を保存------------------------------
