@@ -233,6 +233,50 @@ hwnd := DllCall("GetGUIThreadInfo", Uint,0, Uint,&stGTI)
         return ret
 }
 ;-----------------------------------------------------------
+; バッテリー確認
+SAlloc(size){
+    return DllCall("GlobalAlloc",UInt,0x40,UInt,size,UInt)
+}
+SFree(ptr){
+    DllCall("GlobalFree","UInt",ptr)
+}
+SGetInt(pStruct,offset){
+    DllCall("RtlMoveMemory", "UIntP",val, "UInt",pStruct+offset, "Int",4)
+        return val
+}
+SGetByte(pStruct,offset){
+    DllCall("RtlMoveMemory", UCharP,val, UInt,pStruct+offset, Int,1)
+        return val
+}
+GetSystemPowerStatus(type=0){
+	pSPS:=SAlloc(12)
+	if(DllCall("GetSystemPowerStatus",UInt,pSPS,Int)){
+		if(type<2){
+			if(type<1){
+				f:=SGetByte(pSPS,1)
+				if(f=128){
+					return 0
+				}else if(f=8){
+					return 2
+				}else if(SGetByte(pSPS,0)=1){
+					return 3
+				}else{
+					return 1
+				}
+			}else{
+				return SGetByte(pSPS,2)
+			}
+		}else{
+			if(type<3){
+				return SGetInt(pSPS,4)
+			}else{
+				return SGetInt(pSPS,8)
+			}
+		}
+	}
+	
+	SFree(pSPS)
+}
 
 ;-----------------------------------------------------------
 ; ターミナル以外でもエスケープ設定
@@ -251,7 +295,7 @@ IsOpenChrome() {
 }
 
 vk1D::
-    Input,MyCommands,I T1 L2, {Esc},b,w,re,e
+    Input,MyCommands,I T1 L2, {Esc},b,w,re,e,q
     If MyCommands = b
         IsOpenChrome()
     Else If MyCommands = w
@@ -259,7 +303,15 @@ vk1D::
     Else If MyCommands = re
         Reload
     Else If MyCommands = e
+        ; tablacusexplorer を開く
         Run, D:\tablacusexplorer\TE64.exe
+    Else If MyCommands = q
+        ; バッテリー確認
+        btp := GetSystemPowerStatus(1)
+        bts := GetSystemPowerStatus(2)
+        bth := bts // (60 * 60)
+        btm := (bts // 60) - bth*60
+        TrayTip, Battery, %btp%`% 残り%bth%時間%btm%分, 10
     return
 
 
