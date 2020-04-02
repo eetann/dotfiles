@@ -1,6 +1,8 @@
 {
     "coc.preferences.formatOnSaveFiletypes": [
         "python",
+        "html",
+        "javascript",
         "cpp"
     ],
     "suggest.timeout": 5000,
