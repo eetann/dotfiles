@@ -173,7 +173,7 @@ hook_post_source = '''
 
 [[plugins]] # file explorer
 repo = 'Shougo/defx.nvim'
-depends = ['nvim-yarp', 'vim-hug-neovim-rpc','defx-icons']
+depends = ['nvim-yarp', 'vim-hug-neovim-rpc']
 on_cmd = 'Defx'
 hook_add = '''
     " windowが編集ファイル以外だけになったら違うバッファへ
