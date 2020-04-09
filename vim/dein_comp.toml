@@ -1,20 +1,15 @@
-[[plugins]] # snippet
-repo = 'honza/vim-snippets'
-on_event = 'VimEnter'
-
-[[plugins]] # snippet
-repo = 'SirVer/ultisnips'
+[[plugins]] # スニペット管理
+repo = 'Shougo/neosnippet.vim'
+depends = ['neosnippet-snippets','context_filetype.vim']
 on_event = 'VimEnter'
 hook_add = '''
-    let g:UltiSnipsSnippetDirectories = ["~/dotfiles/vim/mysnippet"]
-    " let g:ulti_expand_or_jump_res = 0 "default value, just set once
-    " function! Ulti_ExpandOrJump_and_getRes()
-    "     call UltiSnips#ExpandSnippet()
-    "     return g:ulti_expand_res
-    " endfunction
-    " inoremap <C-k> <C-R>=(Ulti_ExpandOrJump_and_getRes() > 0)?"":deoplete#close_popup()<CR>
+    let g:neosnippet#snippets_directory = ['~/dotfiles/vim/mysnippet']
+    let g:neosnippet#enable_completed_snippet = 1 " 関数スニペットを展開
+    let g:neosnippet#expand_word_boundary = 0 " jump時に間違えて補完されないようにオフ
+    " imap <C-k> <Plug>(neosnippet_expand_or_jump)
+    " smap <C-k> <Plug>(neosnippet_expand_or_jump)
+    " xmap <C-k> <Plug>(neosnippet_expand_target)
 '''
-
 
 [[plugins]] # 補完とLSP
 repo = 'neoclide/coc.nvim'
@@ -27,7 +22,7 @@ hook_add = '''
     \ 'coc-highlight',
     \ 'coc-word',
     \ 'coc-snippets',
-    \ 'coc-ultisnips',
+    \ 'coc-neosnippet',
     \ 'coc-css',
     \ 'coc-html',
     \ 'coc-tsserver',
@@ -45,8 +40,8 @@ hook_add = '''
 hook_source = '''
     command! -nargs=0 Format :call CocAction('format')
     highlight link CocHighlightText GruvboxBlueSign
-    autocmd vimrc CursorHold * silent call CocActionAsync('highlight')
-    autocmd vimrc User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    autocmd CursorHold * silent call CocActionAsync('highlight')
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
     nnoremap <F10> :<C-u>CocConfig<CR>
     inoremap <C-g> <C-o>:call CocActionAsync('showSignatureHelp')<CR>
     nmap <silent> [c <Plug>(coc-diagnostic-prev)
@@ -75,13 +70,16 @@ hook_source = '''
     vmap iF <Plug>(coc-funcobj-i)
     vmap aF <Plug>(coc-funcobj-a)
     imap <silent><expr> <C-k>
+    \ neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
     \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
     \ pumvisible() ? coc#_select_confirm() :
     \ coc#refresh()
     smap <silent><expr> <C-k>
+    \ neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
     \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
     \ pumvisible() ? coc#_select_confirm() :
     \ coc#refresh()
+    xmap <C-k> <Plug>(neosnippet_expand_target)
     let g:coc_snippet_next =  '<c-k>'
     let g:coc_snippet_prev = '<s-tab>'
 '''
