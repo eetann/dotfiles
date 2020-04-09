@@ -86,6 +86,11 @@ hook_add = '''
     autocmd vimrc FileType css setlocal iskeyword+=-
 '''
 
+
+[[plugins]] # css, html, less, sass, scss, stylus, vim の色付け
+repo = 'gko/vim-coloresque'
+on_ft = ['css']
+
 # ----Markdownサポート----
 [[plugins]] # Markdownの編集をサポート
 repo = 'plasticboy/vim-markdown'
