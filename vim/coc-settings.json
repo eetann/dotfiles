@@ -7,6 +7,7 @@
     ],
     "suggest.timeout": 5000,
     "suggest.maxPreviewWidth": 15,
+    "coc.preferences.colorSupport": true,
     "diagnostic.refreshAfterSave": true,
     "diagnostic.warningSign": "",
     "diagnostic.errorSign": "",

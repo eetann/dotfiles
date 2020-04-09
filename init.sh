@@ -41,7 +41,6 @@ yes | sudo apt install x11-apps
 yes | sudo apt install pandoc
 yes | sudo apt install tree
 yes | sudo apt install nkf
-sudo curl -sL install-node.now.sh/lts | sudo bash
 
 # install golang
 yes | sudo add-apt-repository ppa:longsleep/golang-backports
@@ -87,6 +86,10 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 echo "tmux起動したら prefix + I で プラグインをインストール"
 # wslでwindowsのバッテリーを見るために以下をwindows側で実行
 # go get -u github.com/Code-Hex/battery/cmd/battery
+# for nodejs
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+reload
+nvm install --lts
 
 # latexのために
 sudo apt install texlive

@@ -81,6 +81,42 @@ setopt interactive_comments # 対話中にもコメント
 setopt AUTO_MENU # タブキーの連打で自動的にメニュー補完
 setopt chase_links # 移動先がシンボリックリンクならば実際のディレクトリに移動する
 
+setopt extended_glob
+
+# 展開------------------------------------------------------------
+# Gスペース のように入力したら、勝手に | grep に置き換えてくれる
+typeset -A abbreviations
+abbreviations=(
+    "G"    "| grep"
+    "X"    "| xargs"
+    "T"    "| tail"
+    "C"    "| cat"
+    "W"    "| wc"
+    "A"    "| awk"
+    "S"    "| sed"
+    "E"    "2>&1 > /dev/null"
+    "N"    "> /dev/null"
+    "CD"   "&& cd \$_"
+)
+
+magic-abbrev-expand() {
+    local MATCH
+    LBUFFER=${LBUFFER%%(#m)[-_a-zA-Z0-9]#}
+    LBUFFER+=${abbreviations[$MATCH]:-$MATCH}
+    zle self-insert
+
+}
+
+no-magic-abbrev-expand() {
+    LBUFFER+=' '
+
+}
+
+zle -N magic-abbrev-expand
+zle -N no-magic-abbrev-expand
+bindkey " " magic-abbrev-expand
+bindkey "^x " no-magic-abbrev-expand
+
 # alias-----------------------------------------------------------
 alias la='ls -F --color -al'
 alias ls='ls -F --color'
@@ -257,3 +293,6 @@ zle -N my_fzf_completion
 bindkey "^k" my_fzf_completion
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  This loads nvm bash_completion
