@@ -51,6 +51,9 @@ hook_add = '''
 #     let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 # '''
 
+[[plugins]] # 括弧関連便利になる
+repo = 'machakann/vim-sandwich'
+
 [[plugins]] # nvim系に必要
 repo = 'roxma/nvim-yarp'
 if = "!has('nvim')"
@@ -61,6 +64,9 @@ if = "!has('nvim')"
 
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
+
+[[plugins]] # スニペット集
+repo = 'honza/vim-snippets'
 
 # スニペット定義ファイル
 [[plugins]]
