@@ -90,6 +90,10 @@ echo "tmux起動したら prefix + I で プラグインをインストール"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 reload
 nvm install --lts
+# for yarn
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt install --no-install-recommends yarn
 
 # latexのために
 sudo apt install texlive
