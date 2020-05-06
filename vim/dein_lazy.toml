@@ -102,6 +102,10 @@ hook_add = '''
     let g:sonictemplate_vim_template_dir = ['~/dotfiles/vim/template']
 '''
 
+[[plugins]]
+repo = 'lambdalisue/gina.vim'
+on_cmd = ['Gina']
+
 [[plugins]] # 指定した文字で整形
 repo = 'junegunn/vim-easy-align'
 on_map = ['<Plug>(EasyAlign)']
