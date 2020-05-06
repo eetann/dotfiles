@@ -2,8 +2,8 @@
     "coc.preferences.formatOnSaveFiletypes": [
         "python",
         "html",
-        "javascript",
-        "cpp"
+        "cpp",
+        "javascript"
     ],
     "suggest.timeout": 5000,
     "suggest.maxPreviewWidth": 15,

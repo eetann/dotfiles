@@ -1,5 +1,6 @@
 autocmd vimrc FileType make setlocal noexpandtab
 autocmd vimrc FileType html,css,javascript setlocal sw=2 sts=2 ts=2
+autocmd vimrc FileType cpp setlocal sw=4 sts=4 ts=4
 autocmd vimrc FileType help,quickrun nnoremap <buffer> q <C-w>c
 autocmd vimrc FileType text,qf,quickrun setlocal wrap
 autocmd vimrc FileType json syntax match Comment +\/\/.\+$+
