@@ -251,7 +251,7 @@ EOF
 
 function gcm() {
     local msg1=$(echo $EMOJI_LIST | fzf)
-    echo -n $msg1:
+    echo -n "$msg1 "
     read msg2
     echo $msg1 $msg2 | clip.exe
 }
