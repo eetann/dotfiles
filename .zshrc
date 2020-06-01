@@ -81,8 +81,6 @@ setopt interactive_comments # 対話中にもコメント
 setopt AUTO_MENU # タブキーの連打で自動的にメニュー補完
 setopt chase_links # 移動先がシンボリックリンクならば実際のディレクトリに移動する
 
-setopt extended_glob
-
 # 展開------------------------------------------------------------
 # Gスペース のように入力したら、勝手に | grep に置き換えてくれる
 typeset -A abbreviations

@@ -14,7 +14,7 @@ hook_add = '''
     nmap gcuI   <Plug>(caw:zeropos:uncomment)
     nmap gca    <Plug>(caw:dollarpos:comment)
     nmap gcua   <Plug>(caw:dollarpos:uncomment)
-    xmap gcb    <Plug>(caw:box:comment)
+    xmap gcw    <Plug>(caw:wrap:comment)
     nmap gco    <Plug>(caw:jump:comment-next)
     nmap gcO    <Plug>(caw:jump:comment-prev)
     nmap gct    <Plug>(caw:jump:comment-next)TODO:<Space>
@@ -93,6 +93,9 @@ hook_add = '''
     xnoremap <leader>r :<C-U>write<CR>gv:QuickRun -mode v<CR>
     " <C-c> でquickrunを停止
     nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
+    command! -nargs=+ -complete=command Capture QuickRun -type vim -src <q-args>
+    " Capture messages
+    " Capture scriptnames
 '''
 
 [[plugins]]
