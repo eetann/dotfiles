@@ -29,7 +29,7 @@ hook_add = '''
     \ 'coc-tsserver',
     \ 'coc-emmet',
     \ 'coc-vimlsp',
-    \ 'coc-vimtex',
+    \ 'coc-texlab',
     \ ]
     let g:airline#extensions#coc#error_symbol =  ""
     let g:airline#extensions#coc#warning_symbol = ""

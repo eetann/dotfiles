@@ -102,6 +102,7 @@ sudo apt install latexmk
 # https://ctan.org/tex-archive/macros/generic/dirtree
 # https://www.ctan.org/pkg/matlab-prettifier
 # をDL
+# curl -OL https://github.com/h-kitagawa/plistings/archive/master.zip
 # ファイルを適切なディレクトリに移動してから
 # bunzip2 jlisting.sty.bz2
 # sudo mv jlisting.sty /usr/share/texlive/texmf-dist/tex/latex/listings
@@ -124,6 +125,10 @@ sudo apt install latexmk
 # cd /usr/share/texlive/texmf-dist/tex/latex/matlab-prettifier
 # chmod 644 matlab-prettifier.sty
 # sudo mktexlsr
+# sudo mkdir /usr/share/texlive/texmf-dist/tex/latex/plistings && cd $_
+# sudo mktexlsr
+# 右記のようにして、eps画像に変換できる convert round.jpg eps2:round.eps
+sudo apt install imagemagick
 
 # install for zsh
 yes | sudo apt install zsh

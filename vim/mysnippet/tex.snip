@@ -1,0 +1,79 @@
+snippet     image
+abbr        image
+options     head
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=6.5cm]{./${1}.eps}
+        \caption{${2:caption}}
+        \label{fig:$1}
+    \end{figure}
+
+snippet     image_vertical
+abbr        line up tow image
+options     head
+    \begin{figure}[h]
+        \begin{tabular}{cc}
+            \begin{minipage}[t]{0.45\hsize}
+                \centering
+                \includegraphics[width=6.0cm]{./${1}.eps}
+                \caption{${2}}
+                \label{fig:$1}
+            \end{minipage} &
+            \begin{minipage}[t]{0.45\hsize}
+                \centering
+                \includegraphics[width=6.0cm]{./${3}.eps}
+                \caption{${4}}
+                \label{fig:$3}
+            \end{minipage}
+        \end{tabular}
+    \end{figure}
+
+
+snippet     programinnner
+abbr        program inner
+options     head
+    \begin{lstlisting}[
+        caption=${1:caption},
+        label=pro:${2:label},
+    ]
+    ${0:TARGET}
+    \end{lstlisting}
+
+snippet     programouter
+abbr        program outer
+options     head
+    \lstinputlisting[
+        caption=${1:caption}, label=pro:$2]{${2:#filename}}
+
+snippet     dirtree
+abbr        directory tree
+options     head
+    \dirtree{%
+     .1 \includegraphics[width=0.25cm]{./dire.eps} src.
+     .2 \includegraphics[width=0.25cm]{./dire.eps} hoge.
+     .3 hoge.
+     .2 \includegraphics[width=0.25cm]{./dire.eps} hoge.
+     .3 hoge.
+     .3 hoge.
+     .3 \vdots.
+     .2 hoge.
+     }
+
+snippet     qeq
+abbr        equatoin
+options     head
+    \begin{equation}
+        \label{eq:${1:label}}
+        ${0:TARGET}
+    \end{equation}
+
+snippet     qmatrix
+abbr        matrix
+options     head
+    \left( 
+    \begin{array}{${1:r_rr_rrr_c_r}}
+        ${2:element11} & ${3:element12} \\\\
+        ${3:element21} & ${4:element22} \\\\
+    \end{array}
+    \right)
+
