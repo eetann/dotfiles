@@ -295,7 +295,7 @@ IsOpenChrome() {
 }
 
 vk1D::
-    Input,MyCommands,I T1 L2, {Esc},b,w,re,e,q
+    Input,MyCommands,I T1 L2, {Esc},b,w,re,e
     If MyCommands = b
         IsOpenChrome()
     Else If MyCommands = w
@@ -305,13 +305,13 @@ vk1D::
     Else If MyCommands = e
         ; tablacusexplorer を開く
         Run, D:\tablacusexplorer\TE64.exe
-    Else If MyCommands = q
-        ; バッテリー確認
-        btp := GetSystemPowerStatus(1)
-        bts := GetSystemPowerStatus(2)
-        bth := bts // (60 * 60)
-        btm := (bts // 60) - bth*60
-        TrayTip, Battery, %btp%`% 残り%bth%時間%btm%分, 10
+    ; Else If MyCommands = q
+    ;     ; バッテリー確認
+    ;     btp := GetSystemPowerStatus(1)
+    ;     bts := GetSystemPowerStatus(2)
+    ;     bth := bts // (60 * 60)
+    ;     btm := (bts // 60) - bth*60
+    ;     TrayTip, Battery, %btp%`% 残り%bth%時間%btm%分, 10
     return
 
 
