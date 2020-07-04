@@ -223,38 +223,6 @@ function zz() {
     fi
 }
 
-EMOJI_LIST=$(cat << "EOF"
-🎉 Initial commit
-📝 Update README.md
-📝 Add README.md
-♻ Refactor code
-✨ Add new
-🐛 Fix bug
-🐛 Fix typo
-🚚 Rename variable
-🔥 Remove unused files
-🔥 Remove extra whitespace
-🔥 Remove debug statement
-🔥 Remove unused variable
-🔥 Remove some dead code
-🎨 Add convenience API
-🎨 Change
-🎨 Improve
-💄 Fix designs
-📦 Update package version
-⚡ Improve performance
-💬 Fix comment
-🔒 Don't use unsafe function
-EOF
-)
-
-function gcm() {
-    local msg1=$(echo $EMOJI_LIST | fzf)
-    echo -n "$msg1 "
-    read msg2
-    echo $msg1 $msg2 | clip.exe
-}
-
 function my_fzf_completion() {
     # 入力をスペースで区切って配列に
     local ary=(`echo $LBUFFER`)
