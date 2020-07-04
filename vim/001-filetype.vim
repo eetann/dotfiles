@@ -4,7 +4,7 @@ autocmd vimrc FileType cpp setlocal sw=4 sts=4 ts=4
 autocmd vimrc FileType help,quickrun nnoremap <buffer> q <C-w>c
 autocmd vimrc FileType text,qf,quickrun setlocal wrap
 autocmd vimrc FileType json syntax match Comment +\/\/.\+$+
-autocmd vimrc BufWritePre *.md :call MarkdownEOLTwoSpace()
+" autocmd vimrc BufWritePre *.md :call MarkdownEOLTwoSpace()
 autocmd vimrc BufNewFile,BufRead *.csv set filetype=csv
 " autocmd vimrc BufNewFile,BufRead *.m set fileencoding=sjis
 autocmd vimrc BufNewFile,BufRead *.m set filetype=matlab
