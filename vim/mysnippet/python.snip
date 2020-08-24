@@ -8,3 +8,24 @@ abbr        def function(...): ...
 options     word
 	def ${1:#:name}(${2}):
 		${0:pass}
+
+snippet     resolve
+abbr        def resolve(...): ...
+options     word
+	def resolve():
+		${0}
+
+snippet     mapintinputsplit
+abbr        a, b = map(int, input().split())
+options     word
+    map(int, input().split())
+
+snippet     listmapintinputsplit
+abbr        A = list(map(int, input().split()))
+options     word
+    list(map(int, input().split()))
+
+snippet     intinputforinrange
+abbr        [int(input()) for _ in range(n)]
+options     word
+    [int(input()) for _ in range(${1})]

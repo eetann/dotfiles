@@ -4,6 +4,7 @@
 \usepackage{plistings}
 \usepackage{dirtree}
 \usepackage{url}
+\usepackage{amsmath}
 \newcommand{\dq}[1]{`` #1 "}
 \renewcommand{\lstlistingname}{プログラム}
 \lstset{
@@ -15,7 +16,8 @@
     stringstyle={\small\ttfamily},
     frame={tb},
     breaklines=true,
-    columns=[l]{fullflexible},
+    columns=fixed,
+    basewidth=0.5em,
     numbers=left,
     xrightmargin=0zw,
     xleftmargin=3zw,
@@ -23,7 +25,7 @@
     stepnumber=1,
     numbersep=1zw,
     lineskip=-0.5ex,
-    language=Python,
+    language=,
     tabsize=4
 }
 \setlength\intextsep{0pt}

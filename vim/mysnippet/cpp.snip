@@ -81,3 +81,15 @@ options     head
             $1(${4}): ${5} {}
             ${6}
     };
+
+snippet     qvector
+abbr        vector
+options     head
+    vector<${1}> ${2};
+
+snippet     qvectorfor
+abbr        for vector
+options     head
+    for (vector<${1}>::size_type ${2} = ${3}; $2 < ${4}; $2++) {
+        ${0}
+    }

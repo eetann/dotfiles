@@ -2,13 +2,10 @@
 <!-- ![Badge Status](https://ci-as-a-service) -->  
 <!-- OverviewOverviewOverview -->  
 
-## Description
-<!-- DescriptionDescriptionDescription -->  
-
+## Features
 ***DEMO:***  
 <!-- ![Demo](https://image-url.gif) -->  
-
-## Features
+<!-- ![demo](./images/Awesome_demo.gif)   -->
 <!-- - Awesome function -->  
 
 <!-- For more information, see `awesome-tool help`. -->  
