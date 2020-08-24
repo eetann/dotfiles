@@ -18,7 +18,8 @@ typeset -U path PATH
 export DISPLAY=localhost:0.0
 export EDITOR=vim
 export PATH=$PATH:/mnt/c/Windows/System32
-export PATH=$PATH:$HOME/.local/bin
+export MYNODEBIN=`npm bin -g`
+export PATH=$PATH:$HOME/.local/bin:$MYNODEBIN
 
 # Python
 export PYLINTRC=$HOME/dotfiles/vim/pylintrc
