@@ -124,6 +124,7 @@ alias mytree='tree -a -I ".git"'
 alias grep=jvgrep
 alias t="tmuximum"
 alias reload="exec zsh -l"
+alias atopen="tmux split-window -v && tmux select-pane -t 0 && vim +/N, main.py"
 
 # 色--------------------------------------------------------------
 autoload -Uz colors

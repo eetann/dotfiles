@@ -82,10 +82,6 @@ hook_source = '''
 [[plugins]] # CSS3 syntax
 repo = 'hail2u/vim-css3-syntax'
 on_ft = ['css']
-hook_add = '''
-    autocmd vimrc FileType css setlocal iskeyword+=-
-'''
-
 
 [[plugins]] # css, html, less, sass, scss, stylus, vim の色付け
 repo = 'gko/vim-coloresque'

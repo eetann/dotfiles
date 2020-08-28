@@ -68,14 +68,15 @@ exec $SHELL -l
 sudo apt install zlib1g-dev libssl-dev libbz2-dev libreadline-dev libsqlite3-dev libffi-dev
 pyenv install 3.8.1
 pyenv global 3.8.1
-pip install pylint mccabe rope python-language-server flake8 pyls-black pyls-isort \
-    pynvim vim-vint numpy matplotlib pandas opencv-python
+pip3 install pylint mccabe rope python-language-server flake8 pyls-black pyls-isort \
+    pynvim vim-vint numpy matplotlib pandas opencv-python online-judge-tools
 
 # nodenvを入れてnodeを管理
 anyenv install nodenv
 nodenv install 12.18.2
 reload
 nodenv global 12.18.2
+npm install -g atcoder-cli
 
 # install universal-ctags
 # yes | sudo apt install autoconf

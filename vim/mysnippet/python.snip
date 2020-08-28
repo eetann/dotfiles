@@ -29,3 +29,8 @@ snippet     intinputforinrange
 abbr        [int(input()) for _ in range(n)]
 options     word
     [int(input()) for _ in range(${1})]
+
+snippet     mapintopenreadsplit
+abbr        A, B, C, X = map(int, open(0).read().split())
+options     head
+    map(int, open(0).read().split())
