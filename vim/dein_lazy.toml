@@ -140,12 +140,16 @@ merged = 0
 repo = 'junegunn/fzf.vim'
 on_event = 'VimEnter'
 hook_add = '''
+    let g:fzf_layout = {'window': { 'width': 0.9, 'height': 0.8 } }
     command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, {'options':
     \ ['--layout=reverse', '--preview', 'cat {}']}, <bang>0)
+    nnoremap <leader>ff :Files<CR>
+    nnoremap <leader>fb :Buffers<CR>
     command! -bang Dotfiles
     \ call fzf#vim#files('~/dotfiles',
-    \ {'source':'find . -type f -not -path "*/\.git/*" | sed "s/^\.\///"'}, <bang>0)
+    \ {'source':'find . -type f -not -path "*/\.git/*" | sed "s/^\.\///"',
+    \ 'options': ['--layout=reverse', '--preview', 'cat {}']}, <bang>0)
     nnoremap <F6> :Dotfiles<CR>
 '''
 

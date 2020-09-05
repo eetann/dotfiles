@@ -1,8 +1,0 @@
-languages:
-  vim:
-    lint-command: 'vint -'
-    lint-stdin: true
-
-  matlab:
-    lint-command: '/usr/local/MATLAB/R2019a/bin/glnxa64/mlint -'
-    lint-stdin: true
