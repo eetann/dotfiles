@@ -154,4 +154,22 @@ go get github.com/mattn/jvgrep
 make deploy
 ```
 
-vim 初回起動は sudo しないもしくはviminfoあとで消す  
+## AtCoder
+The following two commands have already been executed in this README.md and init.sh.
+The configuration files are at `dotfiles/atcoder` .
+
+```sh
+pip3 install online-judge-tools
+npm install -g atcoder-cli
+```
+
+```sh
+acc check-oj
+acc login
+oj login https://beta.atcoder.jp/
+acc config default-test-dirname-format test
+acc config default-task-choice all
+acc config default-template cpp
+```
+
+**Don't sudo the first time you start vim, or delete the viminfo later**

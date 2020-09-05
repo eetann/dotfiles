@@ -20,6 +20,8 @@ do
 done
 
 ln -fs ${dot_dir}/dotfiles/.flake8 ${HOME}/.config/flake8
+ln -fs ${dot_dir}/dotfiles/atcoder/main.cpp `acc config-dir`/cpp/main.cpp
+ln -fs ${dot_dir}/dotfiles/atcoder/template.json `acc config-dir`/cpp/template.json
 mkdir -p ~/.config/pypoetry
 for f in `find ./.config -type f`
 do

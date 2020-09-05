@@ -1,0 +1,6 @@
+{
+    "task":{
+        "program": ["main.cpp"],
+        "submit": "main.cpp"
+    }
+}
