@@ -75,15 +75,9 @@ hook_add = '''
         \ 'tex': {
         \ 'command': 'latexmk',
         \ 'args':'-pvc',
-        \ 'exec':'%c %s %a',
+        \ 'exec':'%c %a %s',
         \ },
         \ }
-        "\ 'matlab': {
-        "\ 'runner':"vimscript",
-        "\ 'exec':'%c %o',
-        "\ 'command': ':call',
-        "\ 'cmdopt': 'matlab#RunCurrentFile()'
-        "\ },
     " qでquickfixを閉じる
     autocmd vimrc FileType qf nnoremap <silent><buffer>q :quit<CR>
     " normal or visual modeのとき <leader> + r で保存してからquickrunの実行

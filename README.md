@@ -77,15 +77,14 @@ npm install -g atcoder-cli
 **TODO: jsarticle関連**
 
 ```sh
-yes | sudo apt install texlive latexmk
+yes | sudo apt install texlive-lang-cjk latexmk unzip
 cd ~
 mkdir ~/work
 cd ~/work
 curl -OL https://github.com/h-kitagawa/plistings/archive/master.zip
-yes | sudo apt install unzip
 unzip master.zip
 cd plistings-master
-sudo mkdir /usr/share/texlive/texmf-dist/tex/latex/plistings
+sudo mkdir -p /usr/share/texlive/texmf-dist/tex/latex/plistings
 cd /usr/share/texlive/texmf-dist/tex/latex/plistings
 sudo mv ~/work/plistings-master/plistings.sty .
 mktexlsr
@@ -96,49 +95,32 @@ mktexlsr
 [matlab-prettifier](https://www.ctan.org/pkg/matlab-prettifier)
 
 
-Move the file into the appropriate directory and then
-
 ```sh
+cd ~/work
 bunzip2 jlisting.sty.bz2
-sudo mv jlisting.sty /usr/share/texlive/texmf-dist/tex/latex/listings
+sudo mv jlisting.sty /usr/share/texlive/texmf-dist/tex/latex/listings/.
 cd /usr/share/texlive/texmf-dist/tex/latex/listings
 chmod 644 jlisting.sty
 sudo mktexlsr
-```
-
-Come back to the directory, and
-
-```sh
+cd ~/work
 unzip dirtree.zip
 cd dirtree
 latex dirtree.ins
-sudo mkdir /usr/share/texlive/texmf-dist/tex/latex/dirtree
-sudo mv dirtree.sty /usr/share/texlive/texmf-dist/tex/latex/dirtree/.
+sudo mkdir -p /usr/share/texlive/texmf-dist/tex/latex/dirtree
+sudo cp * /usr/share/texlive/texmf-dist/tex/latex/dirtree/.
 cd /usr/share/texlive/texmf-dist/tex/latex/dirtree
 chmod 644 dirtree.sty
 sudo mktexlsr
-```
-
-Come back to the directory, and
-
-```sh
+cd ~/work
 unzip matlab-prettifier.zip
 cd matlab-prettifier
 latex matlab-prettifier.ins
-sudo mkdir /usr/share/texlive/texmf-dist/tex/latex/matlab-prettifier
+sudo mkdir -p /usr/share/texlive/texmf-dist/tex/latex/matlab-prettifier
 sudo mv matlab-prettifier.sty /usr/share/texlive/texmf-dist/tex/latex/matlab-prettifier/.
 cd /usr/share/texlive/texmf-dist/tex/latex/matlab-prettifier
 chmod 644 matlab-prettifier.sty
 sudo mktexlsr
 ```
-
-If you convert to eps images like this `convert round.jpg eps2:round.eps`,
-you need to install imagemagick like this↓.
-
-```sh
-yes | sudo apt install imagemagick
-```
-
 
 ## Install tmux plugins
 
