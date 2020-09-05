@@ -144,8 +144,8 @@ hook_add = '''
     command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, {'options':
     \ ['--layout=reverse', '--preview', 'cat {}']}, <bang>0)
-    nnoremap <leader>ff :Files<CR>
-    nnoremap <leader>fb :Buffers<CR>
+    nnoremap sf :Files<CR>
+    nnoremap sb :Buffers<CR>
     command! -bang Dotfiles
     \ call fzf#vim#files('~/dotfiles',
     \ {'source':'find . -type f -not -path "*/\.git/*" | sed "s/^\.\///"',

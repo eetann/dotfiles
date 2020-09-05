@@ -48,7 +48,7 @@ nnoremap [q :cprevious<CR>
 nnoremap ]q :cnext<CR>
 nnoremap [Q :<C-u>cfirst<CR>
 nnoremap ]Q :<C-u>clast<CR>
-" バッファの移動
+" バッファの移動 ahkとの組み合わせで、ctrl + (shift) + tabで切替可能
 nnoremap <space><S-Tab> :<C-u>bprevious<CR>
 nnoremap <space><Tab> :<C-u>bnext<CR>
 
@@ -56,10 +56,9 @@ nnoremap <space><Tab> :<C-u>bnext<CR>
 tnoremap <space><S-Tab> <C-w>:bprevious!<CR>
 tnoremap <space><Tab> <C-w>:bnext!<CR>
 tnoremap <C-q> <C-w><C-c>:close!<CR>
-
 " カーソル前方の数字に対してインクリメント&デクリメント
-nnoremap <space><C-a> :call search("[0-9]",'b', line("."))<CR><C-a>
-nnoremap <space><C-x> :call search("[0-9]",'b', line("."))<CR><C-x>
+nnoremap s<C-a> :call search("[0-9]",'b', line("."))<CR><C-a>
+nnoremap s<C-x> :call search("[0-9]",'b', line("."))<CR><C-x>
 
 " コマンド履歴から、｢e hoge1.cpp｣のようなコマンドを探し、末尾にカーソルを置く
 " 上記の<space><C-a>と合わせると、課題で楽
@@ -112,7 +111,7 @@ function! s:set_vsearch()
     let @/ = '\V' . substitute(escape(@z, '/\'), '\n', '\\n', 'g')
 endfunction
 
-" 設定ファイル短縮e
+" vimrcの適用
 nnoremap <F5> :<C-u>source $MYVIMRC<CR>
 
 " InsertModeでccc を入力し、エスケープでコメント線

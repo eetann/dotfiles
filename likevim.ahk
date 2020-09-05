@@ -7,7 +7,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 ; For Terminal/Vim
 GroupAdd Terminal, ahk_class PuTTY
-GroupAdd Terminal, ahk_class mintty
+GroupAdd Terminal, ahk_class CASCADIA_HOSTING_WINDOW_CLASS
 GroupAdd TerminalVim, ahk_group Terminal
 GroupAdd TerminalVim, ahk_class Vim
 
@@ -294,6 +294,7 @@ IsOpenChrome() {
     }
 }
 
+; 無変換キー + b, w, re, e
 vk1D::
     Input,MyCommands,I T1 L2, {Esc},b,w,re,e
     If MyCommands = b
@@ -305,13 +306,6 @@ vk1D::
     Else If MyCommands = e
         ; tablacusexplorer を開く
         Run, D:\tablacusexplorer\TE64.exe
-    ; Else If MyCommands = q
-    ;     ; バッテリー確認
-    ;     btp := GetSystemPowerStatus(1)
-    ;     bts := GetSystemPowerStatus(2)
-    ;     bth := bts // (60 * 60)
-    ;     btm := (bts // 60) - bth*60
-    ;     TrayTip, Battery, %btp%`% 残り%bth%時間%btm%分, 10
     return
 
 
@@ -358,11 +352,11 @@ Esc::
 		Send ^y
 	}
 	return
-^Tab:: ; CTRL Shift Tab でバッファの切り替え
-    Send {Space}{Tab}n
+^Tab:: ; CTRL Tab でバッファの切り替え
+    Send {Space}{Tab}
     return
 ^+Tab:: ; CTRL Shift Tab でバッファの切り替え
-    Send {Space}{Tab}p
+    Send {Space}+{Tab}
     return
 #IfWinActive
 
@@ -394,8 +388,15 @@ IsAltTabMenu := false
 	Send !^{Tab}
 	IsAltTabMenu := true
 	return
-; カタカナひらがなローマ字キーでAltTabMenuキーとして割当
+; カタカナひらがなローマ字キー2連打でAltTabMenuキーとして割当
 vkF2::
+    If (A_PriorHotKey == A_ThisHotKey and A_TimeSincePriorHotkey < 1000){
+        Send !^{Tab}
+        IsAltTabMenu := true
+    }
+    return
+; 変換キー2連打でAltTabMenuキーとして割当
+vk1C::
     If (A_PriorHotKey == A_ThisHotKey and A_TimeSincePriorHotkey < 1000){
         Send !^{Tab}
         IsAltTabMenu := true
