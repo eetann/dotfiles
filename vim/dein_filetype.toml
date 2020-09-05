@@ -84,7 +84,7 @@ repo = 'hail2u/vim-css3-syntax'
 on_ft = ['css']
 
 [[plugins]] # css, html, less, sass, scss, stylus, vim の色付け
-repo = 'gko/vim-coloresque'
+repo = 'ap/vim-css-color'
 on_ft = ['css']
 
 # ----Markdownサポート----

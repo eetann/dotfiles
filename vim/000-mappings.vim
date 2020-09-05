@@ -49,12 +49,12 @@ nnoremap ]q :cnext<CR>
 nnoremap [Q :<C-u>cfirst<CR>
 nnoremap ]Q :<C-u>clast<CR>
 " バッファの移動
-nnoremap <space><Tab>p :<C-u>bprevious<CR>
-nnoremap <space><Tab>n :<C-u>bnext<CR>
+nnoremap <space><S-Tab> :<C-u>bprevious<CR>
+nnoremap <space><Tab> :<C-u>bnext<CR>
 
 " ターミナル設定
-tnoremap <space><Tab>p <C-w>:bprevious!<CR>
-tnoremap <space><Tab>n <C-w>:bnext!<CR>
+tnoremap <space><S-Tab> <C-w>:bprevious!<CR>
+tnoremap <space><Tab> <C-w>:bnext!<CR>
 tnoremap <C-q> <C-w><C-c>:close!<CR>
 
 " カーソル前方の数字に対してインクリメント&デクリメント

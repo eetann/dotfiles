@@ -45,12 +45,6 @@ hook_add = '''
     let g:clever_f_fix_key_direction = 1
 '''
 
-# [[plugins]] # f系を押したときに、ユニークな文字を表示
-# repo = 'unblevable/quick-scope'
-# hook_add = '''
-#     let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-# '''
-
 [[plugins]] # 括弧関連便利になる
 repo = 'machakann/vim-sandwich'
 

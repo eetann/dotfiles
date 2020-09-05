@@ -1,9 +1,9 @@
 snippet     image
 abbr        image
 options     head
-    \begin{figure}[h]
+    \begin{figure}[ht]
         \centering
-        \includegraphics[width=6.5cm]{./${1}.eps}
+        \includegraphics[width=6.5cm]{./${1}}
         \caption{${2:caption}}
         \label{fig:$1}
     \end{figure}
@@ -11,17 +11,17 @@ options     head
 snippet     image_vertical
 abbr        line up tow image
 options     head
-    \begin{figure}[h]
+    \begin{figure}[ht]
         \begin{tabular}{cc}
             \begin{minipage}[t]{0.45\hsize}
                 \centering
-                \includegraphics[width=6.0cm]{./${1}.eps}
+                \includegraphics[width=6.0cm]{./${1}}
                 \caption{${2}}
                 \label{fig:$1}
             \end{minipage} &
             \begin{minipage}[t]{0.45\hsize}
                 \centering
-                \includegraphics[width=6.0cm]{./${3}.eps}
+                \includegraphics[width=6.0cm]{./${3}}
                 \caption{${4}}
                 \label{fig:$3}
             \end{minipage}

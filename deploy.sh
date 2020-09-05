@@ -1,10 +1,9 @@
 #!/bin/sh
 
-if [[ $(uname -a) =~ Linux && $(uname -a) =~ Microsoft ]]; then
+if [[ $(uname -a) =~ Linux && $(uname -a) =~ microsoft ]]; then
     # /mnt/c/Users/hoge みたいな感じ
     home_for_dot=$(wslpath -u $(cmd.exe /c echo %HOMEPATH%) | sed -e "s/[\r\n]\+//g")
     ln -fs ${home_for_dot}/ ${HOME}/myhome
-    ln -fs ${home_for_dot}/.vim ${HOME}/.vim
 else
     home_for_dot=${HOME}
 fi

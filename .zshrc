@@ -1,9 +1,8 @@
 # tmuxが起動していない&vimの中でなければ、tmux起動
-if [[ -z "$TMUX"  ]] && [[ -z "$VIM" ]] ; then
+if [[ -z "$TMUX" ]] && [[ -z "$VIM" ]] ; then
     # golang tmuxに必要なので読み込む
     export GOPATH=$HOME/go
-    export GOPATH=/mnt/c/Users/admin/go:$GOPATH
-    export PATH=$PATH:$GOPATH:$GOPATH/bin:/usr/lib/go-1.12/bin:/mnt/c/Users/admin/go/bin
+    export PATH=$PATH:$GOPATH:$GOPATH/bin
     export PATH=$HOME/.anyenv/bin:$PATH
 
     tmux has-session -t e 2>/dev/null || tmux new-session -ds e \
@@ -15,7 +14,10 @@ eval "$(anyenv init -)"
 # =では空白入れないこと!!!
 # pathなどの設定--------------------------------------------------
 typeset -U path PATH
-export DISPLAY=localhost:0.0
+# WSL用
+LOCAL_IP=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}')
+export DISPLAY=$LOCAL_IP:0
+
 export EDITOR=vim
 export PATH=$PATH:/mnt/c/Windows/System32
 export MYNODEBIN=`npm bin -g`
@@ -36,6 +38,7 @@ zle -N insert-last-word smart-insert-last-word
 bindkey '^]' insert-last-word
 bindkey "^U" backward-kill-line
 bindkey "^C" send-break
+# Ctrl + s の停止を無効化
 stty stop undef
 
 # 履歴------------------------------------------------------------
@@ -54,16 +57,16 @@ compinit -u
 setopt correct # コマンドのスペルチェックをする
 setopt mark_dirs # file名の展開でdirectoryにマッチした場合末尾に/付加
 setopt auto_param_keys # カッコの対応などを自動的に補完する
-setopt auto_cd # 入力コマンド不在 & ディレクトリ名と一致: cdする
 setopt auto_pushd # ディレクトリスタックon
 setopt pushd_ignore_dups # 履歴を賢く
-setopt COMPLETE_IN_WORD # 語の途中でもカーソル位置で補完
-setopt hist_expand
+setopt complete_in_word # 語の途中でもカーソル位置で補完
+setopt list_packed # 補完候補を詰めて表示
+# setopt hist_expand # 補完時にヒストリを自動的に展開する
+unsetopt print_exit_value # 戻り値が0以外の場合終了コードを表示
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
-# 大文字・小文字を区別しない(大文字を入力した場合は区別する)
 zstyle ':completion:*:default' menu select=2
+# 大文字・小文字を区別しない(大文字を入力した場合は区別する)
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-zstyle ':completion:*' use-cache yes
 zstyle ':completion::complete:*' use-cache true
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
     /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin \
@@ -78,7 +81,7 @@ zle -N history-beginning-search-forward-end history-search-end
 bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 
-setopt interactive_comments # 対話中にもコメント
+setopt interactive_comments # 対話中にもコメント可
 setopt AUTO_MENU # タブキーの連打で自動的にメニュー補完
 setopt chase_links # 移動先がシンボリックリンクならば実際のディレクトリに移動する
 
@@ -104,12 +107,10 @@ magic-abbrev-expand() {
     LBUFFER=${LBUFFER%%(#m)[-_a-zA-Z0-9]#}
     LBUFFER+=${abbreviations[$MATCH]:-$MATCH}
     zle self-insert
-
 }
 
 no-magic-abbrev-expand() {
     LBUFFER+=' '
-
 }
 
 zle -N magic-abbrev-expand
@@ -124,7 +125,6 @@ alias mytree='tree -a -I ".git"'
 alias grep=jvgrep
 alias t="tmuximum"
 alias reload="exec zsh -l"
-alias atopen="tmux split-window -v && tmux select-pane -t 0 && vim +/N, main.py"
 
 # 色--------------------------------------------------------------
 autoload -Uz colors
@@ -155,6 +155,7 @@ zstyle ':vcs_info:git:*' stagedstr '%F{yellow}'
 zstyle ':vcs_info:git:*' unstagedstr '%F{red}'
 zstyle ':vcs_info:git:*' formats '%F{255} %r'$my_sep' %F{green}%c%u%b%f'
 zstyle ':vcs_info:git:*' actionformats '%F{255} %r'$my_sep' %F{004}%b%f'
+# プロンプト表示前にversion管理から情報を取ってくる
 precmd () { vcs_info }
 
 local prompt_git=' %B$vcs_info_msg_0_%b'
@@ -181,30 +182,28 @@ zinit light zsh-users/zsh-completions
 
 zinit light zsh-users/zsh-autosuggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
-# 遅くなる
-# ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 zinit light zdharma/fast-syntax-highlighting
 
 # wait'n' : .zshrc が読み込まれて n 秒で読み込む
-zinit ice wait'0'; zinit light b4b4r07/enhancd
-zinit ice wait'0'; zinit light rupa/z
-zinit ice wait'0'; zinit light zsh-users/zsh-history-substring-search
+# nの前に!をつけると読み込み完了メッセージを非表示
+zinit ice wait'!0'; zinit light rupa/z
+zinit ice wait'!0'; zinit light zsh-users/zsh-history-substring-search
 
 # as"program" : プラグインをsourceせず、$PATHに追加
-zinit ice wait'0' as"program"; zinit light arks22/tmuximum
+zinit ice wait'!0' as"program"; zinit light arks22/tmuximum
 
 # from"{hoge}"              : hogeからclone
 # pick"hoge.zsh"            : $PATHに追加するファイルを指定
 # multisrc"{hoge,fuga}.zsh" : 複数のファイルをsource
 # id-as                     : ニックネーム
 # atload                    : プラグインがロード後に実行
-zinit ice wait"0" from"gh-r" as"program"; zinit load junegunn/fzf-bin
-zinit ice wait"0" as"program" pick"bin/fzf-tmux"; zinit load junegunn/fzf
-zinit ice wait"0" multisrc"shell/{completion,key-bindings}.zsh"\
-    id-as"junegunn/fzf_completions" pick"/dev/null"\
-    atload"bindkey '^I' expand-or-complete"
-zinit light junegunn/fzf
+zinit ice wait"!0" from"gh-r" as"program"; zinit load junegunn/fzf-bin
+zinit ice wait"!0" as"program" pick"bin/fzf-tmux"; zinit load junegunn/fzf
+zinit ice wait"!0" multisrc"shell/{completion,key-bindings}.zsh"\
+    id-as"junegunn/fzf_completions" pick"/dev/null"
+    # atload"bindkey '^I' expand-or-complete"
+# zinit light junegunn/fzf
 FZF_DEFAULT_OPTS="--multi --height=60% --select-1 --exit-0 --reverse"
 FZF_DEFAULT_OPTS+=" --bind ctrl-j:preview-down,ctrl-k:preview-up,ctrl-d:preview-page-down,ctrl-u:preview-page-up"
 export FZF_DEFAULT_OPTS
@@ -212,7 +211,7 @@ export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap 
 export FZF_ALT_C_COMMAND="find * -type d -maxdepth 1"
 export FZF_ALT_C_OPTS="--preview 'tree -al {} | head -n 100'"
 export FZF_COMPLETION_OPTS="--preview 'head -n 100 {}'"
-export FZF_COMPLETION_TRIGGER=''
+export FZF_COMPLETION_TRIGGER='**'
 
 # プラグインによる関数--------------------------------------------
 # z ×fzf
@@ -260,5 +259,8 @@ function my_fzf_completion() {
 
 zle -N my_fzf_completion
 bindkey "^k" my_fzf_completion
+# bindkey '^k' expand-or-complete
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

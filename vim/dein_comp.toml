@@ -14,7 +14,8 @@ hook_add = '''
 
 [[plugins]] # 補完とLSP
 repo = 'neoclide/coc.nvim'
-build = './install.sh nightly'
+merged = 0
+rev = "release"
 on_event = 'VimEnter'
 hook_add = '''
     set updatetime=300

@@ -15,7 +15,7 @@
     "diagnostic.infoSign": "",
     "languageserver": {
         "clangd": {
-            "command": "clangd-8",
+            "command": "clangd-10",
             "filetypes": [
                 "c",
                 "cpp",
