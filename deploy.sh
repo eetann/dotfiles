@@ -4,18 +4,23 @@ if [[ $(uname -a) =~ Linux && $(uname -a) =~ microsoft ]]; then
     # /mnt/c/Users/hoge みたいな感じ
     home_for_dot=$(wslpath -u $(cmd.exe /c echo %HOMEPATH%) | sed -e "s/[\r\n]\+//g")
     ln -fs ${home_for_dot}/ ${HOME}/myhome
+    dot_dir=${home_for_dot}/dotfiles
+    ln -fs ${dot_dir} ${HOME}/dotfiles
 else
     home_for_dot=${HOME}
+    dot_dir=${home_for_dot}/dotfiles
+fi
+echo ${dot_dir}
+read -p "dotfilesのフルパスは正しいですか? (y/n) :" YN
+if [ "${YN}" = "y" ]; then
+    echo "処理を進めます"
+else
+    echo "シェルスクリプトを更新してください"
+    exit 1;
 fi
 
-dot_dir=${home_for_dot}/dotfiles
-ln -fs ${dot_dir} ${HOME}/dotfiles
-for f in .??*
+for f in `find ~/dotfiles/. -maxdepth 1 -type f -name ".*" | gawk -F/ '{print $NF}'`
 do
-    #無視したいファイルやディレクトリ
-    [ "$f" = ".git" ] && continue
-    [ "$f" = ".config" ] && continue
-    [ "$f" = ".vim" ] && continue
     ln -fs ${dot_dir}/${f} ${HOME}/${f}
 done
 

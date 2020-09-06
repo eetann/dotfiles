@@ -151,6 +151,7 @@ ssh-add ~/.ssh/id_rsa
 cd ~/dotfiles
 git remote set-url origin git@github.com:eetann/dotfiles.git
 go get github.com/mattn/jvgrep
+go get github.com/itchyny/mmv/cmd/mmv
 make deploy
 ```
 
@@ -171,5 +172,14 @@ acc config default-test-dirname-format test
 acc config default-task-choice all
 acc config default-template cpp
 ```
+
+# for autohotkey
+To use `likevim.ahk` , you need to regist the file at startup.
+
+1. make shortcut of `likevim.ahk`
+2. etner `Win + r`
+3. enter `shell:startup`, then open a directory for startup
+4. move the shortcut file at the directory
+
 
 **Don't sudo the first time you start vim, or delete the viminfo later**
