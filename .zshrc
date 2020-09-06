@@ -125,6 +125,8 @@ alias mytree='tree -a -I ".git"'
 alias grep=jvgrep
 alias t="tmuximum"
 alias reload="exec zsh -l"
+alias attest="[[ -e main.cpp ]] && g++ main.cpp && oj test"
+alias atsubmit="[[ -e main.cpp ]] && acc submit main.cpp"
 
 # 色--------------------------------------------------------------
 autoload -Uz colors
