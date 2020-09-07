@@ -21,16 +21,16 @@ repo = 'jiangmiao/auto-pairs'
 [[plugins]] # カラースキーム
 repo = 'morhetz/gruvbox'
 hook_add = '''
-	set background=dark
-	autocmd vimrc VimEnter * nested colorscheme gruvbox
+    set background=dark
+    autocmd vimrc VimEnter * nested colorscheme gruvbox
 '''
 
 [[plugins]] # インデントの深さを可視化(要tabstop&shiftwidth設定)
 repo = 'nathanaelkane/vim-indent-guides'
 hook_add = '''
-	let g:indent_guides_enable_on_vim_startup = 1
-	let g:indent_guides_auto_colors = 0
-	let g:indent_guides_start_level = 2
+    let g:indent_guides_enable_on_vim_startup = 1
+    let g:indent_guides_auto_colors = 0
+    let g:indent_guides_start_level = 2
     hi IndentGuidesOdd  ctermbg=black
     hi IndentGuidesEven ctermbg=darkgrey
 '''
@@ -73,23 +73,24 @@ repo = 'vim-airline/vim-airline-themes'
 repo = 'vim-airline/vim-airline'
 depends = ['vim-airline-themes', 'vim-devicons']
 hook_add = '''
-	" ステータスラインの表示内容強化
-	set laststatus=2 " ステータスラインを常に表示
-	set noshowmode   " 現在のモードを日本語表示しない
-	set showcmd      " 打ったコマンドをステータスラインの下に表示
-	set ruler        " ステータスラインの右側にカーソルの現在位置を表示する
-	let g:airline_theme = 'powerlineish'
-	let g:airline_powerline_fonts = 1
-	let g:airline#extensions#branch#enabled = 1
-	let g:airline#extensions#tagbar#enabled = 1
-	let g:airline#extensions#wordcount#enabled = 0
-	let g:airline#extensions#tabline#enabled = 1
-	let g:airline#extensions#tabline#formatter = 'unique_tail'
-	let g:airline_left_sep =''
-	let g:airline_left_alt_sep=''
-	let g:airline_right_sep =''
-	let g:airline_right_alt_sep=''
-	let g:airline#extensions#default#layout = [
+    " ステータスラインの表示内容強化
+    set laststatus=2 " ステータスラインを常に表示
+    set noshowmode   " 現在のモードを日本語表示しない
+    set showcmd      " 打ったコマンドをステータスラインの下に表示
+    set ruler        " ステータスラインの右側にカーソルの現在位置を表示する
+    let g:airline_theme = 'powerlineish'
+    let g:airline_powerline_fonts = 1
+    let g:airline#extensions#branch#enabled = 1
+    let g:airline#extensions#tagbar#enabled = 1
+    let g:airline#extensions#wordcount#enabled = 0
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#formatter = 'unique_tail'
+    let g:airline#extensions#tabline#alt_sep = 1
+    let g:airline_left_sep ='▙'
+    let g:airline_left_alt_sep=''
+    let g:airline_right_sep ='▟'
+    let g:airline_right_alt_sep=''
+    let g:airline#extensions#default#layout = [
     \ [ 'a', 'b', 'c' ],
     \ [ 'x', 'y', 'z', 'warning' , 'error']]
     let g:airline#extensions#default#section_truncate_width = {
@@ -100,5 +101,5 @@ hook_add = '''
     \ 'warning': 80,
     \ 'error': 80,
     \ }
-	let g:airline_section_z = '%3v:%l/%L %3p%%'
+    let g:airline_section_z = '%3v:%l/%L %3p%%'
 '''
