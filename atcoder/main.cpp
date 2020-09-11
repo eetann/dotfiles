@@ -9,6 +9,8 @@
 #define SORT(c) sort((c).begin(), (c).end())
 #define SORTR(c) sort((c).begin(), (c).end(), greater<int>())
 using namespace std;
+typedef long long ll;
+
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);

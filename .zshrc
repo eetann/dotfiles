@@ -100,6 +100,7 @@ abbreviations=(
     "E"    "2>&1 > /dev/null"
     "N"    "> /dev/null"
     "CD"   "&& cd \$_"
+    "CL"   "| clip.exe"
 )
 
 magic-abbrev-expand() {
