@@ -147,6 +147,8 @@ hook_add = '''
     \ {'source':'find . -type f -not -path "*/\.git/*" | sed "s/^\.\///"',
     \ 'options': ['--layout=reverse', '--preview', 'cat {}']}, <bang>0)
     nnoremap <F6> :Dotfiles<CR>
+    " 登録したいコマンド
+    " echo expand("%:p")
 '''
 
 [[plugins]] # マーク位置の表示

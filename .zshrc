@@ -211,7 +211,17 @@ FZF_DEFAULT_OPTS="--multi --height=60% --select-1 --exit-0 --reverse"
 FZF_DEFAULT_OPTS+=" --bind ctrl-j:preview-down,ctrl-k:preview-up,ctrl-d:preview-page-down,ctrl-u:preview-page-up"
 export FZF_DEFAULT_OPTS
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
-export FZF_ALT_C_COMMAND="find * -type d -maxdepth 1"
+nosearch=('\$RECYCLE.BIN')
+nosearch+=('.git')
+nosearch+=('RECYCLER')
+nosearch+=('.metadata')
+find_dir="find ./ -type d \("
+for d in $nosearch; do
+    find_dir="$find_dir -name '$d' -o"
+done
+find_dir=${find_dir:0:-3}
+find_dir="$find_dir \) -prune -o -type d -print"
+export FZF_ALT_C_COMMAND="$find_dir"
 export FZF_ALT_C_OPTS="--preview 'tree -al {} | head -n 100'"
 export FZF_COMPLETION_OPTS="--preview 'head -n 100 {}'"
 export FZF_COMPLETION_TRIGGER='**'
