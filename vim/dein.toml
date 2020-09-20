@@ -43,6 +43,7 @@ repo = 'rhysd/clever-f.vim'
 hook_add = '''
     let g:clever_f_use_migemo = 1
     let g:clever_f_fix_key_direction = 1
+    let g:clever_f_mark_direct=1
 '''
 
 [[plugins]] # 括弧関連便利になる
