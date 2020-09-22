@@ -105,6 +105,7 @@ abbreviations=(
     "N"    "> /dev/null"
     "CD"   "&& cd \$_"
     "CL"   "| clip.exe"
+    "TREE" "tree -a -I '.git|hoge'"
 )
 
 magic-abbrev-expand() {
