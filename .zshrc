@@ -220,15 +220,22 @@ nosearch=('\$RECYCLE.BIN')
 nosearch+=('.git')
 nosearch+=('RECYCLER')
 nosearch+=('.metadata')
+nosearch+=('node_modules')
 find_dir="find ./ -type d \("
 for d in $nosearch; do
     find_dir="$find_dir -name '$d' -o"
 done
 find_dir=${find_dir:0:-3}
+find_file="$find_dir \) -prune -o -type f -print"
 find_dir="$find_dir \) -prune -o -type d -print"
 export FZF_ALT_C_COMMAND="$find_dir"
 export FZF_ALT_C_OPTS="--preview 'tree -al {} | head -n 100'"
-export FZF_COMPLETION_OPTS="--preview 'head -n 100 {}'"
+export FZF_CTRL_T_COMMAND="$find_file"
+preview='[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file ||'
+preview+='( [[ $(file {}) =~ ASCII ]] &&'
+preview+='( head -n 100 {} | nkf -Sw ) || head -n 100 {} )'
+export FZF_CTRL_T_OPTS="--preview \"$preview\""
+export FZF_COMPLETION_OPTS="$preview"
 export FZF_COMPLETION_TRIGGER='**'
 
 # プラグインによる関数--------------------------------------------
@@ -241,43 +248,6 @@ function zz() {
         return 1
     fi
 }
-
-function my_fzf_completion() {
-    # 入力をスペースで区切って配列に
-    local ary=(`echo $LBUFFER`)
-    local query
-    local prebuffer
-    # 単語を入力途中ならそれをクエリにする
-    if [[ "${LBUFFER: -1}" == " " ]]; then
-        query=""
-        # 最後のスペースは削除するので配列の方
-        prebuffer=$ary
-    else
-        query=${ary[-1]}
-        prebuffer=${ary[1,-2]}
-    fi
-    # fzfでファイルを選択
-    # テキストファイル以外をプレビュー
-    # ASCIIは変換して表示
-    selected=$(find . -type f -not -path "*/\.git/*" | sed "s/^\.\///" \
-        | fzf --query "${query}" --preview \
-        '[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file ||
-        ( [[ $(file {}) =~ ASCII ]] &&
-        ( head -n 100 {} | nkf -Sw ) || head -n 100 {} )')
-    # ファイルを選択した場合のみバッファを更新
-    if [[ -n "$selected" ]]; then
-        # 改行をスペースに置換
-        selected=$(tr '\n' ' ' <<< "$selected")
-        BUFFER="${prebuffer} ${selected}"
-    fi
-    # カーソル位置を行末にして更新
-    CURSOR=$#BUFFER
-    zle reset-prompt
-}
-
-zle -N my_fzf_completion
-bindkey "^k" my_fzf_completion
-# bindkey '^k' expand-or-complete
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
