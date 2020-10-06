@@ -41,7 +41,7 @@ repo = 'tmhedberg/matchit'
 [[plugins]] # f系を押したときにfで繰り返せる
 repo = 'rhysd/clever-f.vim'
 hook_add = '''
-    let g:clever_f_use_migemo = 1
+    " let g:clever_f_use_migemo = 1
     let g:clever_f_fix_key_direction = 1
     let g:clever_f_mark_direct=1
 '''
