@@ -5,6 +5,7 @@ autocmd vimrc FileType css,help setlocal iskeyword+=-
 autocmd vimrc FileType help,quickrun nnoremap <buffer> q <C-w>c
 autocmd vimrc FileType text,qf,quickrun setlocal wrap
 autocmd vimrc FileType json syntax match Comment +\/\/.\+$+
+autocmd vimrc FileType markdown setlocal wrap
 " autocmd vimrc BufWritePre *.md :call MarkdownEOLTwoSpace()
 autocmd vimrc BufNewFile,BufRead *.csv set filetype=csv
 " autocmd vimrc BufNewFile,BufRead *.m set fileencoding=sjis
