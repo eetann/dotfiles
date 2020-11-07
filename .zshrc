@@ -5,9 +5,8 @@ if [[ -z "$TMUX" ]] && [[ -z "$VIM" ]] ; then
     export PATH=$PATH:$GOPATH:$GOPATH/bin
     export PATH=$HOME/.anyenv/bin:$PATH
 
-    tmux has-session -t e 2>/dev/null || tmux new-session -ds e \
-        && tmux attach-session -t e
-    exit
+    tmux -u has-session -t e 2>/dev/null || tmux -u new-session -ds e \
+        && tmux -u attach-session -t e
 fi
 
 eval "$(anyenv init -)"
@@ -129,7 +128,7 @@ alias la='ls -F --color -al'
 alias ls='ls -F --color'
 alias mytree='tree -a -I ".git"'
 alias grep=jvgrep
-alias t="tmuximum"
+# alias t="tmuximum"
 alias reload="exec zsh -l"
 alias attest="[[ -e main.cpp ]] && g++ main.cpp && oj test"
 alias atsubmit="[[ -e main.cpp ]] && acc submit main.cpp"
