@@ -3,6 +3,7 @@
         "python",
         "html",
         "cpp",
+        "go",
         "javascript"
     ],
     "suggest.timeout": 5000,
