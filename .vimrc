@@ -5,6 +5,7 @@ set fileencodings=utf-8
 scriptencoding utf-8
 set ambiwidth=double " □や○文字が崩れる問題を解決
 set nrformats= "数増減は10進数で扱う(<C-a>や<C-x>)
+set backspace=indent,eol,start
 
 " ----reset augroup-----------------------------------------------
 " 再読込時に2度設定しないように、初期化
