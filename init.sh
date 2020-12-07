@@ -39,7 +39,7 @@ cd vim
     --with-features=huge \
     --enable-multibyte \
     --enable-gtk3-check \
-    --enable-python3interp
+    --enable-python3interp \
     --enable-fail-if-missing \
     --with-x
 make
