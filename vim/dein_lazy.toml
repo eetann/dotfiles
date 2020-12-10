@@ -130,14 +130,15 @@ on_event = 'VimEnter'
 hook_source = '''
     let g:fzf_layout = {'window': { 'width': 0.9, 'height': 0.8 } }
     command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, {'options':
-    \ ['--layout=reverse', '--preview', 'cat {}']}, <bang>0)
+    \ call fzf#vim#files(<q-args>, 
+    \ fzf#vim#with_preview({'options': ['--layout=reverse']}), <bang>0)
     nnoremap sf :Files<CR>
     nnoremap sb :Buffers<CR>
     command! -bang Dotfiles
     \ call fzf#vim#files('~/dotfiles',
+    \ fzf#vim#with_preview(
     \ {'source':'find . -type f -not -path "*/\.git/*" | sed "s/^\.\///"',
-    \ 'options': ['--layout=reverse', '--preview', 'cat {}']}, <bang>0)
+    \ 'options': ['--layout=reverse', '--preview', '~/.vim /fzf.vim/bin/preview.sh']}), <bang>0)
     nnoremap <F6> :Dotfiles<CR>
     " 登録したいコマンド
     " echo expand("%:p")

@@ -231,8 +231,7 @@ export FZF_ALT_C_COMMAND="$find_dir"
 export FZF_ALT_C_OPTS="--preview 'tree -al {} | head -n 100'"
 export FZF_CTRL_T_COMMAND="$find_file"
 preview='[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file ||'
-preview+='( [[ $(file {}) =~ ASCII ]] &&'
-preview+='( head -n 100 {} | nkf -Sw ) || head -n 100 {} )'
+preview+='bat --color=always --style=header,grid --line-range :100 {}'
 export FZF_CTRL_T_OPTS="--preview \"$preview\""
 export FZF_COMPLETION_OPTS="$preview"
 export FZF_COMPLETION_TRIGGER='**'

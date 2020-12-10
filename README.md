@@ -73,6 +73,19 @@ nodenv global 12.18.2
 npm install -g atcoder-cli
 ```
 
+## Install Homebrew
+Because it may be changed, see [Official page](https://brew.sh/) to install.
+```sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >> ~/.zprofile
+eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+```
+
+## Install tools from brew
+```sh
+brew install bat
+```
+
 ## Install latex
 **TODO: jsarticle関連**
 
