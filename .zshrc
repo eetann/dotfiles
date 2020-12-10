@@ -15,7 +15,7 @@ eval "$(anyenv init -)"
 typeset -U path PATH
 # WSL用
 LOCAL_IP=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}')
-export DISPLAY=$LOCAL_IP:0
+export DISPLAY=$LOCAL_IP:0.0
 
 export EDITOR=vim
 export PATH=$PATH:/mnt/c/Windows/System32
