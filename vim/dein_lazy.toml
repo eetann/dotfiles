@@ -138,7 +138,7 @@ hook_source = '''
     \ call fzf#vim#files('~/dotfiles',
     \ fzf#vim#with_preview(
     \ {'source':'find . -type f -not -path "*/\.git/*" | sed "s/^\.\///"',
-    \ 'options': ['--layout=reverse', '--preview', '~/.vim /fzf.vim/bin/preview.sh']}), <bang>0)
+    \ 'options': ['--layout=reverse', '--preview', '~/.vim/fzf.vim/bin/preview.sh']}), <bang>0)
     nnoremap <F6> :Dotfiles<CR>
     " 登録したいコマンド
     " echo expand("%:p")
