@@ -136,9 +136,8 @@ hook_source = '''
     nnoremap sb :Buffers<CR>
     command! -bang Dotfiles
     \ call fzf#vim#files('~/dotfiles',
-    \ fzf#vim#with_preview(
     \ {'source':'find . -type f -not -path "*/\.git/*" | sed "s/^\.\///"',
-    \ 'options': ['--layout=reverse', '--preview', '~/.vim/fzf.vim/bin/preview.sh']}), <bang>0)
+    \ 'options': ['--layout=reverse', '--preview', '~/.vim/dein/repos/github.com/junegunn/fzf.vim/bin/preview.sh {}']}, <bang>0)
     nnoremap <F6> :Dotfiles<CR>
     " 登録したいコマンド
     " echo expand("%:p")
