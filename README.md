@@ -2,6 +2,8 @@
 This is a repository for my dotfiles.  
 The environment for WSL2.
 
+**TODO: もう少しシェルスクリプトにする**
+
 # Installation  
 ## Get something
 1. download [白源](https://github.com/yuru7/HackGen/releases) or 
@@ -71,19 +73,6 @@ nodenv install 12.18.2
 exec /usr/bin/zsh -l
 nodenv global 12.18.2
 npm install -g atcoder-cli
-```
-
-## Install Homebrew
-Because it may be changed, see [Official page](https://brew.sh/) to install.
-```sh
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >> ~/.zprofile
-eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-```
-
-## Install tools from brew
-```sh
-brew install bat
 ```
 
 ## Install latex
@@ -167,6 +156,23 @@ go get github.com/mattn/jvgrep
 go get github.com/itchyny/mmv/cmd/mmv
 make deploy
 ```
+
+## Install Homebrew
+Because it may be changed, see [Official page](https://brew.sh/) to install.
+```sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >> ~/.zprofile
+eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+```
+
+## Install tools from brew
+```sh
+brew install bat
+brew install ghq
+git config --global --add ghq.root $GOPATH/src
+git config --global --add ghq.root $HOME/ghq
+```
+
 
 ## AtCoder
 The following two commands have already been executed in this README.md and init.sh.

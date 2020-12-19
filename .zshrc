@@ -238,13 +238,48 @@ export FZF_COMPLETION_TRIGGER='**'
 
 # プラグインによる関数--------------------------------------------
 # z ×fzf
-function zz() {
+function fz() {
     local res=$(z | sort -rn | cut -c 12- | fzf)
     if [ -n "$res" ]; then
-        cd $res
+        BUFFER+="cd $res"
+        zle accept-line
     else
         return 1
     fi
+}
+zle -N fz
+bindkey '^xz' fz
+
+function fghq() {
+    local res=$(ghq list |fzf --preview "bat --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
+    if [ -n "$res" ]; then
+        BUFFER+="cd $(ghq root)/$res"
+        zle accept-line
+    else
+        return 1
+    fi
+}
+zle -N fghq
+bindkey '^xg' fghq
+
+function ghq-new() {
+  local root=`ghq root`
+  local user=`git config --get github.user`
+  if [ -z "$user" ]; then
+    echo "you need to set github.user."
+    echo "git config --global github.user YOUR_GITHUB_USER_NAME"
+    return 1
+  fi
+  local name=$1
+  local repo="$root/github.com/$user/$name"
+  if [ -e "$repo" ]; then
+    echo "$repo is already exists."
+    return 1
+  fi
+  git init $repo
+  cd $repo
+  sed -e "s/Awesome-name/${name}/" ~/dotfiles/vim/template/markdown/base-readme.md > README.md
+  git add .
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
