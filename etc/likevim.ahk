@@ -320,9 +320,6 @@ Esc::
 ; アドレスバーのショートカットキーを押したら
 ; IMEはオフの状態で起動するように設定
 #IfWInActive, ahk_exe chrome.exe
-^h::
-	Send {BS}
-	Return
 ^l::
 	Send ^l
 	Sleep 100
