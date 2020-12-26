@@ -50,7 +50,7 @@ hook_add = '''
 
 [[plugins]] # Emmet
 repo = 'mattn/emmet-vim'
-on_ft = ['html', 'css', 'php', 'xml', 'javascript']
+on_ft = ['html', 'css', 'php', 'xml', 'javascript', 'vue']
 hook_add = """
     let g:user_emmet_settings = {
     \ 'variables' : {
