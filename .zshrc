@@ -104,7 +104,7 @@ abbreviations=(
     "N"    "> /dev/null"
     "CD"   "&& cd \$_"
     "CL"   "| clip.exe"
-    "TREE" "tree -a -I '.git|hoge'"
+    "TREE" "tree -a -I '.git|node_modules'"
 )
 
 magic-abbrev-expand() {
@@ -126,7 +126,7 @@ bindkey "^x " no-magic-abbrev-expand
 # alias-----------------------------------------------------------
 alias la='ls -F --color -al'
 alias ls='ls -F --color'
-alias mytree='tree -a -I ".git"'
+alias mytree='tree -a -I ".git|node_modules"'
 alias grep=jvgrep
 # alias t="tmuximum"
 alias reload="exec zsh -l"
