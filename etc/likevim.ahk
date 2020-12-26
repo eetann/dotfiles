@@ -17,14 +17,14 @@ GroupAdd TerminalVim, ahk_class Vim
 ;   戻り値          1:ON / 0:OFF
 ;-----------------------------------------------------------
 IME_GET(WinTitle="A")  {
-	ControlGet,hwnd,HWND,,,%WinTitle%
-	if	(WinActive(WinTitle))	{
-		ptrSize := !A_PtrSize ? 4 : A_PtrSize
-	    VarSetCapacity(stGTI, cbSize:=4+4+(PtrSize*6)+16, 0)
-	    NumPut(cbSize, stGTI,  0, "UInt")   ;	DWORD   cbSize;
-		hwnd := DllCall("GetGUIThreadInfo", Uint,0, Uint,&stGTI)
-	             ? NumGet(stGTI,8+PtrSize,"UInt") : hwnd
-	}
+    ControlGet,hwnd,HWND,,,%WinTitle%
+    if  (WinActive(WinTitle))   {
+        ptrSize := !A_PtrSize ? 4 : A_PtrSize
+        VarSetCapacity(stGTI, cbSize:=4+4+(PtrSize*6)+16, 0)
+        NumPut(cbSize, stGTI,  0, "UInt")   ;   DWORD   cbSize;
+        hwnd := DllCall("GetGUIThreadInfo", Uint,0, Uint,&stGTI)
+                 ? NumGet(stGTI,8+PtrSize,"UInt") : hwnd
+    }
 
     return DllCall("SendMessage"
           , UInt, DllCall("imm32\ImmGetDefaultIMEWnd", Uint,hwnd)
@@ -40,14 +40,14 @@ IME_GET(WinTitle="A")  {
 ;   戻り値          0:成功 / 0以外:失敗
 ;-----------------------------------------------------------
 IME_SET(SetSts, WinTitle="A")    {
-	ControlGet,hwnd,HWND,,,%WinTitle%
-	if	(WinActive(WinTitle))	{
-		ptrSize := !A_PtrSize ? 4 : A_PtrSize
-	    VarSetCapacity(stGTI, cbSize:=4+4+(PtrSize*6)+16, 0)
-	    NumPut(cbSize, stGTI,  0, "UInt")   ;	DWORD   cbSize;
-		hwnd := DllCall("GetGUIThreadInfo", Uint,0, Uint,&stGTI)
-	             ? NumGet(stGTI,8+PtrSize,"UInt") : hwnd
-	}
+    ControlGet,hwnd,HWND,,,%WinTitle%
+    if  (WinActive(WinTitle))   {
+        ptrSize := !A_PtrSize ? 4 : A_PtrSize
+        VarSetCapacity(stGTI, cbSize:=4+4+(PtrSize*6)+16, 0)
+        NumPut(cbSize, stGTI,  0, "UInt")   ;   DWORD   cbSize;
+        hwnd := DllCall("GetGUIThreadInfo", Uint,0, Uint,&stGTI)
+                 ? NumGet(stGTI,8+PtrSize,"UInt") : hwnd
+    }
 
     return DllCall("SendMessage"
           , UInt, DllCall("imm32\ImmGetDefaultIMEWnd", Uint,hwnd)
@@ -236,8 +236,8 @@ hwnd := DllCall("GetGUIThreadInfo", Uint,0, Uint,&stGTI)
 ;-----------------------------------------------------------
 ; ターミナル以外でもエスケープ設定
 ; ^[::
-; 	Send {Esc}
-; 	Return
+;   Send {Esc}
+;   Return
 
 IsOpenChrome() {
     Process, Exist, chrome.exe
@@ -268,45 +268,45 @@ vk1D::
 ; ターミナルでvimのためのIME
 #IfWInActive, ahk_group TerminalVim
 Esc::
-	getIMEMode := IME_GET()
-	if (getIMEMode = 1) {
-		IME_SET(0)
-		Send {Esc}
-	} else {
-		Send {Esc}
-	}
-	return
+    getIMEMode := IME_GET()
+    if (getIMEMode = 1) {
+        IME_SET(0)
+        Send {Esc}
+    } else {
+        Send {Esc}
+    }
+    return
 ^[::
-	getIMEMode := IME_GET()
-	if (getIMEMode = 1) {
-		Send {Esc}
-		Sleep 1 ; wait 1 ms (Need to stop converting)
-		IME_SET(0)
-		Send {Esc}
-	} else {
-		Send {Esc}
-	}
-	return
+    getIMEMode := IME_GET()
+    if (getIMEMode = 1) {
+        Send {Esc}
+        Sleep 1 ; wait 1 ms (Need to stop converting)
+        IME_SET(0)
+        Send {Esc}
+    } else {
+        Send {Esc}
+    }
+    return
 ^o:: ; 挿入ノーマルモードに入るときもIMEオフ
-	getIMEMode := IME_GET()
-	if (getIMEMode = 1) {
-		Sleep 1 ; wait 1 ms (Need to stop converting)
-		IME_SET(0)
-		Send ^o
-	} else {
-		Send ^o
-	}
-	return
+    getIMEMode := IME_GET()
+    if (getIMEMode = 1) {
+        Sleep 1 ; wait 1 ms (Need to stop converting)
+        IME_SET(0)
+        Send ^o
+    } else {
+        Send ^o
+    }
+    return
 ^y:: ; emmetで次の入力をするためにIMEオフ
-	getIMEMode := IME_GET()
-	if (getIMEMode = 1) {
-		Sleep 1 ; wait 1 ms (Need to stop converting)
-		IME_SET(0)
-		Send ^y
-	} else {
-		Send ^y
-	}
-	return
+    getIMEMode := IME_GET()
+    if (getIMEMode = 1) {
+        Sleep 1 ; wait 1 ms (Need to stop converting)
+        IME_SET(0)
+        Send ^y
+    } else {
+        Send ^y
+    }
+    return
 ^Tab:: ; CTRL Tab でバッファの切り替え
     Send {Space}{Tab}
     return
@@ -321,10 +321,10 @@ Esc::
 ; IMEはオフの状態で起動するように設定
 #IfWInActive, ahk_exe chrome.exe
 ^l::
-	Send ^l
-	Sleep 100
-	IME_SET(0)
-	Return
+    Send ^l
+    Sleep 100
+    IME_SET(0)
+    Return
 ^t::
     Send ^t
     Sleep 100
@@ -337,9 +337,9 @@ Esc::
 ; AltTab
 IsAltTabMenu := false
 !Tab::
-	Send !^{Tab}
-	IsAltTabMenu := true
-	return
+    Send !^{Tab}
+    IsAltTabMenu := true
+    return
 ; カタカナひらがなローマ字キー2連打でAltTabMenuキーとして割当
 vkF2::
     If (A_PriorHotKey == A_ThisHotKey and A_TimeSincePriorHotkey < 1000){
@@ -355,16 +355,16 @@ vk1C::
     }
     return
 #If (IsAltTabMenu)
-	h::Send {Left}
-	j::Send {Down}
-	k::Send {Up}
-	l::Send {Right}
-	Enter::
-		Send {Enter}
-		IsAltTabMenu := false
-	Return
-	Space::
-		Send {Space}
-		IsAltTabMenu := false
-	Return
+    h::Send {Left}
+    j::Send {Down}
+    k::Send {Up}
+    l::Send {Right}
+    Enter::
+        Send {Enter}
+        IsAltTabMenu := false
+    Return
+    Space::
+        Send {Space}
+        IsAltTabMenu := false
+    Return
 #If
