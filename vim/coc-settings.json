@@ -4,7 +4,8 @@
         "html",
         "cpp",
         "go",
-        "javascript"
+        "javascript",
+        "vue"
     ],
     "suggest.timeout": 5000,
     "suggest.maxPreviewWidth": 15,
