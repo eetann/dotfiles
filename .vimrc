@@ -79,9 +79,10 @@ set listchars=tab:\|\ ,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 set display=lastline
 
 " ----折りたたみやカーソル位置を保存------------------------------
-autocmd vimrc BufWritePost * if expand('%') != '' && &buftype !~ 'nofile' | mkview | endif
-autocmd vimrc BufRead * if expand('%') != '' && &buftype !~ 'nofile' | silent loadview | endif
-set viewoptions=cursor,folds
+" set viewoptions=cursor,folds
+" autocmd vimrc BufWritePost * if expand('%') != '' && &buftype !~ 'nofile' | mkview | endif
+" autocmd vimrc BufRead * if expand('%') != '' && &buftype !~ 'nofile' | silent loadview | endif
+autocmd vimrc BufRead * if line("'\"") > 0 && line("'\"") <= line("$") | execute "normal g`\"" | endif
 
 " ----新しいwindowは下や右に開く----------------------------------
 set splitbelow
