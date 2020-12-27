@@ -262,7 +262,8 @@ vk1D::
         ; tablacusexplorer を開く
         Run, D:\tablacusexplorer\TE64.exe
     Else If MyCommands = f
-        Run, D:\fitwin\fitwin.exe
+        Run,D:\fitwin\fitwin.exe
+        WinActivate, ahk_exe fitwin.exe
     return
 
 
