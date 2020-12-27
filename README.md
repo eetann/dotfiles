@@ -171,6 +171,7 @@ brew install bat
 brew install ghq
 git config --global --add ghq.root $GOPATH/src
 git config --global --add ghq.root $HOME/ghq
+brew install ripgrep
 ```
 
 
