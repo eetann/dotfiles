@@ -251,7 +251,7 @@ IsOpenChrome() {
 
 ; 無変換キー + b, w, re, e
 vk1D::
-    Input,MyCommands,I T1 L2, {Esc},b,w,re,e
+    Input,MyCommands,I T1 L2, {Esc},b,w,re,e,f
     If MyCommands = b
         IsOpenChrome()
     Else If MyCommands = w
@@ -261,6 +261,8 @@ vk1D::
     Else If MyCommands = e
         ; tablacusexplorer を開く
         Run, D:\tablacusexplorer\TE64.exe
+    Else If MyCommands = f
+        Run, D:\fitwin\fitwin.exe
     return
 
 
