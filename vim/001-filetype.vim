@@ -6,47 +6,34 @@ autocmd vimrc FileType help,quickrun nnoremap <buffer> q <C-w>c
 autocmd vimrc FileType text,qf,quickrun setlocal wrap
 autocmd vimrc FileType json syntax match Comment +\/\/.\+$+
 autocmd vimrc FileType markdown setlocal wrap
-" autocmd vimrc BufWritePre *.md :call MarkdownEOLTwoSpace()
 autocmd vimrc BufNewFile,BufRead *.csv set filetype=csv
-" autocmd vimrc BufNewFile,BufRead *.m set fileencoding=sjis
 autocmd vimrc BufNewFile,BufRead *.m set filetype=matlab
 let g:tex_flavor = "latex"
 
+" gitcommitのための設定
+let s:git_commit_prefixs = [
+    \ {'word':'🎉initial commit', 'menu':'初めてのコミット',       'kind': 'pre'},
+    \ {'word':'🐛fix:',           'menu':'バグ修正',               'kind': 'pre'},
+    \ {'word':'👍',               'menu':'機能改善',               'kind': 'pre'},
+    \ {'word':'✨feat:',          'menu':'機能追加',               'kind': 'pre'},
+    \ {'word':'🎨design:',        'menu':'デザイン変更のみ',       'kind': 'pre'},
+    \ {'word':'🚧WIP:',           'menu':'工事中',                 'kind': 'pre'},
+    \ {'word':'📝memo:',          'menu':'文言修正',               'kind': 'pre'},
+    \ {'word':'♻️ refactor:',      'menu':'リファクタリング',       'kind': 'pre'},
+    \ {'word':'🔥remove:',        'menu':'削除',                   'kind': 'pre'},
+    \ {'word':'🚀perform:',       'menu':'パフォーマンス改善',     'kind': 'pre'},
+    \ {'word':'🔒sec:',           'menu':'セキュリティ関連の改善', 'kind': 'pre'},
+    \ {'word':'⚙ ',               'menu':'config変更 ',            'kind': 'pre'},
+    \ {'word':'📚',               'menu':'ドキュメント',           'kind': 'pre'},
+    \ {'word':'➕add:',           'menu':'追加',                   'kind': 'pre'},
+    \ {'word':'➖remove:',        'menu':'削除',                   'kind': 'pre'},
+    \ ]
 
-" ----Markdownのための設定
-function! MarkdownEOLTwoSpace()
-    let s:tmppos = getpos('.') " cursorの位置を記録しておく
-    let s:iscode = 0
-    let s:cursorline = 1
-
-    " 最初にメタデータがあったらスキップ
-    if getline(1)=~? '\v^(\-{3}|\+{3})'
-        let s:cursorline +=1
-        " 書きかけで1行だったら怖いので冗長でもこの判定
-        while s:cursorline<=line('$')
-            call cursor(s:cursorline, 1)
-            if getline('.')=~? '\v^(\-{3}|\+{3})'
-                break
-            endif
-            let s:cursorline +=1
-        endwhile
+function! CompleteGitCommit() abort
+    if empty(getline(1))
+        call complete(col('.'), s:git_commit_prefixs)
     endif
-
-    while s:cursorline<=line('$')
-        call cursor(s:cursorline, 1)
-        if getline('.')=~? '\v^```'
-            if s:iscode == 0
-                let s:iscode = 1
-            else
-                let s:iscode = 0
-            endif
-        elseif s:iscode == 0 && (getline('.') !~? '\v^(\-{3}|\+{3}|#+|\-\s|\+\s|\*\s)')
-            " 見出しや区切り線には空白をいれない
-            " 空行には行末空白なし
-            .s/\v(\S\zs(\s{,1})|(\s{3,}))$/  /e
-        endif
-        let s:cursorline +=1
-    endwhile
-
-    call setpos('.', s:tmppos) " cursorの位置を戻す
+    return ''
 endfunction
+
+autocmd vimrc FileType gitcommit startinsert | call feedkeys("\<C-R>=CompleteGitCommit()\<CR>")
