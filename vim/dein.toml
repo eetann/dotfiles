@@ -36,7 +36,7 @@ hook_add = '''
 '''
 
 [[plugins]] # %を拡張
-repo = 'tmhedberg/matchit'
+repo = 'andymass/vim-matchup'
 
 [[plugins]] # f系を押したときにfで繰り返せる
 repo = 'rhysd/clever-f.vim'

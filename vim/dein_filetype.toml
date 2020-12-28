@@ -10,13 +10,20 @@ hook_add = '''
     let g:disable_rainbow_hover = 1
 '''
 
+[[plugins]]
+repo = 'posva/vim-vue'
+on_ft ="vue"
+
 # ----カーソル位置のコンテキストに合わせてファイルタイプを切り替え----
 [[plugins]] # 判定ライブラリ
 repo = 'Shougo/context_filetype.vim'
 on_ft = ['vim','toml','markdown','md','mdwn','mkd','mkdn','mark','python','html']
 hook_add = '''
+    let g:context_filetype#filetypes = {
+    \ 'vue' :[],
+    \}
     function! My_context_on()
-        let g:context_filetype#filetypes = {
+        let b:context_filetype_filetypes = {
         \ 'python' :[
         \ {
             \ 'start' : '=\s.\?"\{3}$',
@@ -28,7 +35,7 @@ hook_add = '''
     endfunction
     call My_context_on()
     function! My_context_off()
-        let g:context_filetype#filetypes = {
+        let b:context_filetype_filetypes = {
         \ 'python' :[
         \ {
             \ 'start' : 'template = "\{3}',
