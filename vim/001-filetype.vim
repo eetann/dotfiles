@@ -13,20 +13,20 @@ let g:tex_flavor = "latex"
 " gitcommitのための設定
 let s:git_commit_prefixs = [
     \ {'word':'🎉initial commit', 'menu':'初めてのコミット',       'kind': 'pre'},
-    \ {'word':'🐛fix:',           'menu':'バグ修正',               'kind': 'pre'},
+    \ {'word':'🐛',               'menu':'バグ修正',               'kind': 'pre'},
     \ {'word':'👍',               'menu':'機能改善',               'kind': 'pre'},
-    \ {'word':'✨feat:',          'menu':'機能追加',               'kind': 'pre'},
-    \ {'word':'🎨design:',        'menu':'デザイン変更のみ',       'kind': 'pre'},
-    \ {'word':'🚧WIP:',           'menu':'工事中',                 'kind': 'pre'},
-    \ {'word':'📝memo:',          'menu':'文言修正',               'kind': 'pre'},
-    \ {'word':'♻️ refactor:',      'menu':'リファクタリング',       'kind': 'pre'},
-    \ {'word':'🔥remove:',        'menu':'削除',                   'kind': 'pre'},
-    \ {'word':'🚀perform:',       'menu':'パフォーマンス改善',     'kind': 'pre'},
-    \ {'word':'🔒sec:',           'menu':'セキュリティ関連の改善', 'kind': 'pre'},
+    \ {'word':'✨',               'menu':'機能追加',               'kind': 'pre'},
+    \ {'word':'🎨',               'menu':'デザイン変更のみ',       'kind': 'pre'},
+    \ {'word':'🚧',               'menu':'工事中',                 'kind': 'pre'},
+    \ {'word':'📝',               'menu':'文言修正',               'kind': 'pre'},
+    \ {'word':'♻️',                'menu':'リファクタリング',       'kind': 'pre'},
+    \ {'word':'🔥',               'menu':'削除',                   'kind': 'pre'},
+    \ {'word':'🚀',               'menu':'パフォーマンス改善',     'kind': 'pre'},
+    \ {'word':'🔒',               'menu':'セキュリティ関連の改善', 'kind': 'pre'},
     \ {'word':'⚙ ',               'menu':'config変更 ',            'kind': 'pre'},
     \ {'word':'📚',               'menu':'ドキュメント',           'kind': 'pre'},
-    \ {'word':'➕add:',           'menu':'追加',                   'kind': 'pre'},
-    \ {'word':'➖remove:',        'menu':'削除',                   'kind': 'pre'},
+    \ {'word':'➕',               'menu':'追加',                   'kind': 'pre'},
+    \ {'word':'➖',               'menu':'削除',                   'kind': 'pre'},
     \ ]
 
 function! CompleteGitCommit() abort
