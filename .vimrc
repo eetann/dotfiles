@@ -28,7 +28,6 @@ set softtabstop=4 " 連続空白に対してTabやBackSpaceでcursorが動く幅
 set autoindent    " 改行時に前の行のintentを継続する
 set smartindent   " 改行時に入力された行の末尾に合わせて次行のintentを増減
 set shiftwidth=4  " smartindentでずれる幅
-set pastetoggle=<F3>
 " \入力時自動インデント阻止
 let g:vim_indent_cont = 0
 

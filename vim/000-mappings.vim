@@ -97,8 +97,6 @@ endfunction
 " 直前の検索をヤンク get 検索/
 nnoremap sg/ :let @+ = histget("search",-1)<CR>:echo 'Clipboard << ' . @+<CR>
 
-" ESC2度押しでハイライトの切り替え
-nnoremap <silent> <Esc><Esc> :<C-u>set nohlsearch!<CR>
 " 一気に置換するときは以下ではなく、/or?検索->cgn->n.n.nnn.
 " cursor下の単語をハイライトと置換
 nnoremap * "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
@@ -110,6 +108,14 @@ function! s:set_vsearch()
     silent normal gv"zy
     let @/ = '\V' . substitute(escape(@z, '/\'), '\n', '\\n', 'g')
 endfunction
+
+" 切り替え
+nnoremap <Plug>(my-switch) <Nop>
+nmap <Leader>s <Plug>(my-switch)
+nnoremap <silent> <Plug>(my-switch)w :<C-u>setl wrap! wrap?<CR>
+nnoremap <silent> <Plug>(my-switch)p :<C-u>setl paste! paste?<CR>
+nnoremap <silent> <Plug>(my-switch)b :<C-u>setl scrollbind! scrollbind?<CR>
+nnoremap <silent> <Plug>(my-switch)h :<C-u>set nohlsearch! hlsearch?<CR>
 
 " vimrcの適用
 nnoremap <F5> :<C-u>source $MYVIMRC<CR>
