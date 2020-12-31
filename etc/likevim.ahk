@@ -5,12 +5,6 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 ; Auto execute section is the region before any return/hotkey
 
-; For Terminal/Vim
-GroupAdd Terminal, ahk_class PuTTY
-GroupAdd Terminal, ahk_class CASCADIA_HOSTING_WINDOW_CLASS
-GroupAdd TerminalVim, ahk_group Terminal
-GroupAdd TerminalVim, ahk_class Vim
-
 ;-----------------------------------------------------------
 ; IMEの状態の取得
 ;   WinTitle="A"    対象Window
@@ -249,27 +243,32 @@ IsOpenChrome() {
     }
 }
 
-; 無変換キー + b, w, re, e
+; 無変換キー + b, w, re, e, f
 vk1D::
     Input,MyCommands,I T1 L2, {Esc},b,w,re,e,f
     If MyCommands = b
+    {
         IsOpenChrome()
-    Else If MyCommands = w
-        WinActivate, ahk_group TerminalVim
-    Else If MyCommands = re
+    } Else If MyCommands = w
+    {
+        WinActivate, ahk_exe mintty.exe
+    } Else If MyCommands = re
+    {
         Reload
-    Else If MyCommands = e
+    } Else If MyCommands = e
+    {
         ; tablacusexplorer を開く
         Run, D:\tablacusexplorer\TE64.exe
-    Else If MyCommands = f
+    } Else If MyCommands = f
+    {
         Run,D:\fitwin\fitwin.exe
-        WinActivate, ahk_exe fitwin.exe
-    return
+    }
+return
 
 
 ;-----------------------------------------------------------
 ; ターミナルでvimのためのIME
-#IfWInActive, ahk_group TerminalVim
+#IfWInActive, ahk_exe mintty.exe
 Esc::
     getIMEMode := IME_GET()
     if (getIMEMode = 1) {
