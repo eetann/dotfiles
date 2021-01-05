@@ -21,3 +21,15 @@ hook_add = '''
     nmap g> <Plug>(swap-next)
     nmap gS <Plug>(swap-interactive)
 '''
+hook_source = '''
+    let g:swap#rules = deepcopy(g:swap#default_rules)
+    let g:swap#rules += [{
+          \   "filetype": ['html', 'vue'],
+          \   "delimiter": ['\s'],
+          \   "surrounds": ['class="', '"', 0],
+          \ },{
+          \   "filetype": ['html', 'vue'],
+          \   "delimiter": ['\s'],
+          \   "surrounds": ["class='", "'", 0],
+          \ }]
+'''
