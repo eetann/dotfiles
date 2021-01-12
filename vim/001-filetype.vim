@@ -23,7 +23,7 @@ let s:git_commit_prefixs = [
     \ {'word':'🔥',               'menu':'削除',                   'kind': 'pre'},
     \ {'word':'🚀',               'menu':'パフォーマンス改善',     'kind': 'pre'},
     \ {'word':'🔒',               'menu':'セキュリティ関連の改善', 'kind': 'pre'},
-    \ {'word':'⚙ ',               'menu':'config変更 ',            'kind': 'pre'},
+    \ {'word':'⚙',                'menu':'config変更 ',            'kind': 'pre'},
     \ {'word':'📚',               'menu':'ドキュメント',           'kind': 'pre'},
     \ {'word':'➕',               'menu':'追加',                   'kind': 'pre'},
     \ {'word':'➖',               'menu':'削除',                   'kind': 'pre'},

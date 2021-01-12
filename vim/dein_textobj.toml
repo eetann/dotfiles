@@ -3,10 +3,10 @@ repo = 'osyo-manga/vim-textobj-multiblock'
 depends = 'vim-textobj-user'
 on_map = [['xo', '<Plug>(textobj-multiblock-']]
 hook_add = '''
-	omap ab <Plug>(textobj-multiblock-a)
-	omap ib <Plug>(textobj-multiblock-i)
-	xmap ab <Plug>(textobj-multiblock-a)
-	xmap ib <Plug>(textobj-multiblock-i)
+    omap ab <Plug>(textobj-multiblock-a)
+    omap ib <Plug>(textobj-multiblock-i)
+    xmap ab <Plug>(textobj-multiblock-a)
+    xmap ib <Plug>(textobj-multiblock-i)
 '''
 
 [[plugins]] # 引数や配列の入れ替え
@@ -19,17 +19,17 @@ hook_add = '''
     xmap a, <Plug>(swap-textobject-a)
     nmap g< <Plug>(swap-prev)
     nmap g> <Plug>(swap-next)
-    nmap gS <Plug>(swap-interactive)
+    nmap gs <Plug>(swap-interactive)
 '''
 hook_source = '''
     let g:swap#rules = deepcopy(g:swap#default_rules)
     let g:swap#rules += [{
-          \   "filetype": ['html', 'vue'],
-          \   "delimiter": ['\s'],
-          \   "surrounds": ['class="', '"', 0],
-          \ },{
-          \   "filetype": ['html', 'vue'],
-          \   "delimiter": ['\s'],
-          \   "surrounds": ["class='", "'", 0],
-          \ }]
+        \   'filetype': ['html', 'vue', 'md'],
+        \   'delimiter': ['\s'],
+        \   'surrounds': ['class="', '"', 0],
+        \ },{
+        \   'filetype': ['html', 'vue', 'md'],
+        \   'delimiter': ['\s'],
+        \   'surrounds': ["class='", "'", 0],
+        \ }]
 '''
