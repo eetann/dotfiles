@@ -7,6 +7,7 @@ hook_add = '''
     nmap gc     <Plug>(caw:prefix)
     xmap gc     <Plug>(caw:prefix)
     nmap gcc    <Plug>(caw:hatpos:toggle)
+    nmap <C-_>  <Plug>(caw:hatpos:toggle)
     xmap gcc    <Plug>(caw:hatpos:toggle)
     nmap gci    <Plug>(caw:hatpos:comment)
     nmap gcui   <Plug>(caw:hatpos:uncomment)
