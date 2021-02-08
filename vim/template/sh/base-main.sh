@@ -91,9 +91,9 @@ parse_params() {
 parse_params "$@"
 setup_colors
 
-# script logic here
-
 msg "${RED}Read parameters:${NOFORMAT}"
 msg "- flag: ${flag}"
 msg "- param: ${param}"
 msg "- arguments: ${args[*]-}"
+
+# script logic here
