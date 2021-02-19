@@ -40,10 +40,8 @@ repo = 'andymass/vim-matchup'
 
 [[plugins]] # f系を押したときにfで繰り返せる
 repo = 'rhysd/clever-f.vim'
-hook_source = '''
-    let g:clever_f_mark_direct=1
-'''
 hook_add = '''
+    let g:clever_f_mark_direct=1
     let g:clever_f_fix_key_direction = 1
 '''
 

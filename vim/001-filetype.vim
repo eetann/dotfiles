@@ -1,5 +1,5 @@
 autocmd vimrc FileType make setlocal noexpandtab
-autocmd vimrc FileType html,css,javascript,vue setlocal sw=2 sts=2 ts=2
+autocmd vimrc FileType html,css,javascript,vue,sh setlocal sw=2 sts=2 ts=2
 autocmd vimrc FileType cpp setlocal sw=4 sts=4 ts=4
 autocmd vimrc FileType css,help setlocal iskeyword+=-
 autocmd vimrc FileType help,quickrun nnoremap <buffer> q <C-w>c

@@ -262,6 +262,7 @@ vk1D::
     } Else If MyCommands = f
     {
         Run,D:\fitwin\fitwin.exe
+        WinActivate, ahk_exe fitwin.exe
     }
 return
 
