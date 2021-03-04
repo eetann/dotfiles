@@ -95,3 +95,20 @@ snippet     qin
 abbr        lstinline code
 options     word
     \lstinline{${1}}${0}
+
+snippet     enum1
+abbr        enumerate (1)
+options     head
+    \begin{enumerate}[(1)]
+    \item ${0}
+    \end{enumerate}
+
+snippet     lim
+abbr        limit and to
+options     word
+    \lim_{${1} \to ${2}} ${3}
+
+snippet     \lim
+abbr        limit and to
+options     word
+    \lim_{${1} \to ${2}} ${3}

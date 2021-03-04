@@ -17,6 +17,9 @@ repo = 'kana/vim-textobj-user'
 
 [[plugins]] # 括弧などを入力したときの挙動をスマートに補完
 repo = 'jiangmiao/auto-pairs'
+hook_add = '''
+    autocmd vimrc Filetype tex let b:AutoPairs = {"$": "$"}
+'''
 
 [[plugins]] # カラースキーム
 repo = 'morhetz/gruvbox'
