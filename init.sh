@@ -38,9 +38,10 @@ vim --version
 
 # install for c/c++
 # https://clangd.llvm.org/installation.html
-sudo apt install clangd-10
-sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-10 100
+yes | sudo apt install clangd-10
+yes | sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-10 100
 
 # install for Python3
+yes | sudo apt install python3-pip
 pip3 install pylint mccabe rope python-language-server flake8 pyls-black pyls-isort \
     pynvim numpy matplotlib pandas opencv-python pysimplegui
