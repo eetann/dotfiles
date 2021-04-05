@@ -8,7 +8,7 @@ yes | sudo sed -i -e 's%http://.*.ubuntu.com%http://ftp.jaist.ac.jp/pub/Linux%g'
 # update & upgrade pacage
 yes | sudo apt update
 yes | sudo apt upgrade
-yes | sudo apt install tree nkf golang
+yes | sudo apt install tree nkf golang tmux
 
 # for golang
 # pオプションで親子両方作成

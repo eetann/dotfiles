@@ -1,6 +1,6 @@
 # dotfiles  
-This is a repository for my dotfiles.  
-The environment for WSL2.
+dotfilesのレポジトリです。
+WSL2のUbuntuがメインですが、純Ubuntuでも動作するように少しずつ書き換えを進めています。
 
 **TODO: このREADMEをもう少しシェルスクリプトに移す**
 
@@ -69,8 +69,13 @@ Install zsh and zsh plugins manager.
 ```sh
 yes | sudo apt install zsh
 chsh -s /usr/bin/zsh
+cd ~
 mkdir -p ~/.config
 exec /usr/bin/zsh -l
+```
+
+```sh
+sudo apt install curl
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
 zinit self-update
 ```
@@ -93,14 +98,15 @@ export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init -)"
 export PATH="$HOME/.anyenv/bin:$PATH"
 yes | anyenv install --init
-exec $SHELL -l
+exec /usr/bin/zsh -l
+```
+
+```sh
 sudo apt install zlib1g-dev libssl-dev libbz2-dev libreadline-dev libsqlite3-dev libffi-dev
 
 anyenv install nodenv
-nodenv install 12.18.2
-exec /usr/bin/zsh -l
-nodenv global 12.18.2
-npm install -g atcoder-cli
+nodenv install 14.16.0
+nodenv global 14.16.0
 ```
 
 ## Install latex
@@ -152,20 +158,21 @@ chmod 644 matlab-prettifier.sty
 sudo mktexlsr
 ```
 
-## Install tmux plugins
+## Install tmux
 
 ```sh
+yes | sudo install tmux
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
 1. install tmux plugins with the above command
-2. launch tmux
-3. enter `prefix(maybe ctrl + s or ctrl + b)` to install tmux plugins.
+2. launch tmux = `tmux`
+3. enter `prefix(maybe ctrl + s or ctrl + b) + U` to install tmux plugins.
+4. enter `all`
 
 ```sh
 go get github.com/mattn/jvgrep
 go get github.com/itchyny/mmv/cmd/mmv
-make deploy
 ```
 
 ## Install Homebrew
@@ -186,31 +193,30 @@ brew install ripgrep
 ```
 
 
-## AtCoder
-The following two commands have already been executed in this README.md and init.sh.
-The configuration files are at `dotfiles/atcoder` .
-
-```sh
-pip3 install online-judge-tools
-npm install -g atcoder-cli
-```
-
-```sh
-acc check-oj
-acc login
-oj login https://beta.atcoder.jp/
-acc config default-test-dirname-format test
-acc config default-task-choice all
-acc config default-template cpp
-```
-
 # for autohotkey
-To use `likevim.ahk` , you need to regist the file at startup.
+Windowsのキーボード操作変更のためのスクリプト`likevim.ahk`を使うには、ファイルをスタートアップに登録する必要がある。
 
-1. make shortcut of `likevim.ahk`
-2. etner `Win + r`
-3. enter `shell:startup`, then open a directory for startup
-4. move the shortcut file at the directory
+1. `likevim.ahk`のショートカットを作成
+2. `Win + r`を入力
+3. `shell:startup`を入力すると、スタートアップのフォルダが開く
+4. 1で作成したショートカットをスタートアップのフォルダに移動
 
 
 **Don't sudo the first time you start vim, or delete the viminfo later**
+
+# Ubuntu
+## Super-pの入力でディスプレイ設定が戻ってしまう問題
+```sh
+sudo apt install dconf-editor
+dconf-editor
+```
+
+もし`dconf-editor`が開けなかったら`DISPLAY`の値を見直すこと。たぶん`export DISPLAY=:0.0`とかで開ける。
+
+dconf-editor の
+`/org/gnome/mutter/keybindings/switch-monitor` で
+デフォルト設定を無効にして、`['<Super>p', 'XF86Display']`を`[]`に変更
+もし`/org/gnome/settings-daemon/plugins/media-keys/video-out`もあったら同様にカスタマイズ
+
+参考
+[gnome - How to disable global Super-p shortcut? - Ask Ubuntu](https://askubuntu.com/questions/68463/how-to-disable-global-super-p-shortcut)

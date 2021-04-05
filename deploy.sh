@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [[ $(uname -a) =~ Linux && $(uname -a) =~ microsoft ]]; then
+if [ $(uname -a) =~ Linux && $(uname -a) =~ microsoft ]; then
     # /mnt/c/Users/hoge みたいな感じ
     home_for_dot=$(wslpath -u $(cmd.exe /c echo %HOMEPATH%) | sed -e "s/[\r\n]\+//g")
     ln -fs ${home_for_dot}/ ${HOME}/myhome
@@ -19,7 +19,7 @@ else
     exit 1;
 fi
 
-for f in `find ~/dotfiles/. -maxdepth 1 -type f -name ".*" | gawk -F/ '{print $NF}'`
+for f in `find ~/dotfiles/. -maxdepth 1 -type f -name ".*" | awk -F/ '{print $NF}'`
 do
     ln -fs ${dot_dir}/${f} ${HOME}/${f}
 done
