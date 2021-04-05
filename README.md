@@ -2,35 +2,63 @@
 This is a repository for my dotfiles.  
 The environment for WSL2.
 
-**TODO: もう少しシェルスクリプトにする**
+**TODO: このREADMEをもう少しシェルスクリプトに移す**
 
-# Installation  
-## Get something
+# Installation
+## 最初にやっておくこと
 1. download [白源](https://github.com/yuru7/HackGen/releases) or 
 [Cica](https://github.com/miiton/Cica)
 2. install windows terminal and WSL2
+3. `sudo apt install git`
 
 ## Write /etc/wsl.conf
-The default setting adds a lot of windows paths.
-To turn this off,
-1. write the following into `/etc/wsl.conf`
-2. reboot the PC
+WSLならこれをやること。
 
+デフォルトの設定では、WSLのパスにWindowsのパスがたくさん追加されてしまう。  
+この設定をオフにするためには、
+以下のコマンドで `/etc/wsl.conf` を変更
 ```sh
 echo "[interop]\nappendWindowsPath = false" | sudo tee /etc/wsl.conf
+exec $SHELL -l
 ```
 
 <details>
-<summary>Q. What is `tee`?</summary>
-
-A command to write the content received from the stdin to the stdout and file.
-
+<summary>Q. `tee`とは?</summary>
+標準入力で受け取った内容をファイルに出力するコマンド。
 </details>
+
+## git and GitHub
+```sh
+git config --global user.name "eetann"
+git config --global user.email "eetann's mail adress"
+ssh-keygen -t rsa -b 4096 -C "eetann's mail adress"
+```
+数回 `<CR>`
+
+WSLなら
+```sh
+cat ~/.ssh/id_rsa.pub | clip.exe
+```
+Ubuntuなら
+```sh
+sudo apt install xsel
+cat ~/.ssh/id_rsa.pub | xsel -ib
+```
+
+You need to resist the key.
+
+```sh
+ssh -T git@github.com
+eval `ssh-agent`
+ssh-add ~/.ssh/id_rsa
+cd ~/dotfiles
+git remote set-url origin git@github.com:eetann/dotfiles.git
+```
 
 ## Execute the command
 
 ```sh
-cd ~
+cd ~/dotfiles
 sh init.sh
 sh deploy.sh
 ```
@@ -134,24 +162,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 2. launch tmux
 3. enter `prefix(maybe ctrl + s or ctrl + b)` to install tmux plugins.
 
-## git and GitHub
-enter some '<CR>'
-
 ```sh
-git config --global user.name "eetann"
-git config --global user.email "eetann's mail adress"
-ssh-keygen -t rsa -b 4096 -C "eetann's mail adress"
-cat ~/.ssh/id_rsa.pub | clip.exe
-```
-
-You need to resist the key.
-
-```sh
-ssh -T git@github.com
-eval `ssh-agent`
-ssh-add ~/.ssh/id_rsa
-cd ~/dotfiles
-git remote set-url origin git@github.com:eetann/dotfiles.git
 go get github.com/mattn/jvgrep
 go get github.com/itchyny/mmv/cmd/mmv
 make deploy

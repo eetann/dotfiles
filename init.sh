@@ -1,14 +1,4 @@
 #!/bin/sh
-
-grep appendWindasdfowsPath /etc/wsl.conf
-if [ $? != 0 ]; then
-    echo '1. sudo vim /etc/wsl.conf で以下を書き込む'
-    echo '[interop]'
-    echo 'appendWindowsPath = false'
-    echo '2. exec $SHELL -l'
-    exit
-fi
-
 # change the time zone to JST
 yes | sudo dpkg-reconfigure tzdata
 
@@ -18,7 +8,7 @@ yes | sudo sed -i -e 's%http://.*.ubuntu.com%http://ftp.jaist.ac.jp/pub/Linux%g'
 # update & upgrade pacage
 yes | sudo apt update
 yes | sudo apt upgrade
-yes | sudo apt install sox tree nkf git golang
+yes | sudo apt install tree nkf golang
 
 # for golang
 # pオプションで親子両方作成
@@ -53,4 +43,4 @@ sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-10 100
 
 # install for Python3
 pip3 install pylint mccabe rope python-language-server flake8 pyls-black pyls-isort \
-    pynvim numpy matplotlib pandas opencv-python online-judge-tools pysimplegui
+    pynvim numpy matplotlib pandas opencv-python pysimplegui
