@@ -11,7 +11,7 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'posva/vim-vue'
+repo = 'leafOfTree/vim-vue-plugin'
 on_ft ="vue"
 
 # ----カーソル位置のコンテキストに合わせてファイルタイプを切り替え----
