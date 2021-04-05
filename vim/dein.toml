@@ -18,7 +18,17 @@ repo = 'kana/vim-textobj-user'
 [[plugins]] # 括弧などを入力したときの挙動をスマートに補完
 repo = 'jiangmiao/auto-pairs'
 hook_add = '''
-    autocmd vimrc Filetype tex let b:AutoPairs = {"$": "$"}
+    let g:AutoPairsFlyMode = 1
+    " let g:AutoPairsShortcutJump = '<Tab>'
+    autocmd vimrc Filetype tex let b:AutoPairs = deepcopy(g:AutoPairs)
+    autocmd vimrc Filetype tex let b:AutoPairs['$'] = '$'
+    inoremap <Tab> <ESC>:call TexAutoPairsJump()<CR>a
+    function! TexAutoPairsJump() abort
+        let s:match = search('\$', 'e', line("."))
+        if s:match == 0
+            call AutoPairsJump()
+        endif
+    endfunction
 '''
 
 [[plugins]] # カラースキーム
