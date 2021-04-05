@@ -4,7 +4,7 @@ depends = ['neosnippet-snippets','context_filetype.vim']
 on_event = 'VimEnter'
 hook_add = '''
     let g:neosnippet#snippets_directory = ['~/dotfiles/vim/snippet']
-    let g:neosnippet#snippets_directory+=['~/.vim/dein/repos/github.com/honza/vim-snippets/snippets']
+    " let g:neosnippet#snippets_directory+=['~/.vim/dein/repos/github.com/honza/vim-snippets/snippets']
     let g:neosnippet#enable_completed_snippet = 1 " 関数スニペットを展開
     let g:neosnippet#expand_word_boundary = 0 " jump時に間違えて補完されないようにオフ
     " imap <C-k> <Plug>(neosnippet_expand_or_jump)
