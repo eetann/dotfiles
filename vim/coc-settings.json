@@ -1,65 +1,70 @@
 {
-    "coc.preferences.formatOnSaveFiletypes": [
-        "python",
-        "html",
+  "coc.preferences.formatOnSaveFiletypes": [
+    "python",
+    "html",
+    "cpp",
+    "go",
+    "javascript",
+    "vue"
+  ],
+  "suggest.timeout": 5000,
+  "suggest.maxPreviewWidth": 15,
+  "coc.preferences.colorSupport": true,
+  "diagnostic.warningSign": "",
+  "diagnostic.errorSign": "",
+  "diagnostic.hintSign": "",
+  "diagnostic.infoSign": "",
+  "languageserver": {
+    "clangd": {
+      "command": "clangd-10",
+      "filetypes": [
+        "c",
         "cpp",
-        "go",
-        "javascript",
-        "vue"
-    ],
-    "suggest.timeout": 5000,
-    "suggest.maxPreviewWidth": 15,
-    "coc.preferences.colorSupport": true,
-    "diagnostic.warningSign": "",
-    "diagnostic.errorSign": "",
-    "diagnostic.hintSign": "",
-    "diagnostic.infoSign": "",
-    "languageserver": {
-        "clangd": {
-            "command": "clangd-10",
-            "filetypes": [
-                "c",
-                "cpp",
-                "objc",
-                "objcpp"
-            ]
-        },
+        "objc",
+        "objcpp"
+      ]
+    },
+    "pyls": {
+      "command": "pyls",
+      "filetypes": [
+        "python"
+      ],
+      "settings": {
         "pyls": {
-            "command": "pyls",
-            "filetypes": [
-                "python"
-            ],
-            "settings": {
-                "pyls": {
-                    "enable": true,
-                    "commandPath": "",
-                    "configurationSources": [
-                        "flake8"
-                    ],
-                    "plugins": {
-                        "pycodestyle": {
-                            "enabled": false
-                        },
-                        "pydocstyle": {
-                            "enabled": false,
-                            "match": "(?!test_).*\\.py",
-                            "matchDir": "[^\\.].*"
-                        },
-                        "pyflakes": {
-                            "enabled": false
-                        },
-                        "flake8": {
-                            "enabled": true
-                        },
-                        "black": {
-                            "enabled": true
-                        },
-                        "yapf": {
-                            "enabled": false
-                        }
-                    }
-                }
+          "enable": true,
+          "commandPath": "",
+          "configurationSources": [
+            "flake8"
+          ],
+          "plugins": {
+            "pycodestyle": {
+              "enabled": false
+            },
+            "pydocstyle": {
+              "enabled": false,
+              "match": "(?!test_).*\\.py",
+              "matchDir": "[^\\.].*"
+            },
+            "pyflakes": {
+              "enabled": false
+            },
+            "flake8": {
+              "enabled": true
+            },
+            "black": {
+              "enabled": true
+            },
+            "yapf": {
+              "enabled": false
             }
+          }
         }
+      }
+    },
+    "efm": {
+      "command": "efm-langserver",
+      "args": [],
+      "filetypes": ["markdown"]
     }
+  }
 }
