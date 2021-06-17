@@ -7,9 +7,9 @@ nnoremap <leader>q q
 " sはclで代用する
 nnoremap s <Nop>
 
-" 表示行と移動行を合わせる
-nnoremap j gj
-nnoremap k gk
+" 表示行と移動行を合わせる これをやると相対行表示がずれるのでオフ
+" nnoremap j gj
+" nnoremap k gk
 " 画面移動
 nnoremap sj <C-w>j
 nnoremap sk <C-w>k
@@ -116,6 +116,8 @@ nnoremap <silent> <Plug>(my-switch)w :<C-u>setl wrap! wrap?<CR>
 nnoremap <silent> <Plug>(my-switch)p :<C-u>setl paste! paste?<CR>
 nnoremap <silent> <Plug>(my-switch)b :<C-u>setl scrollbind! scrollbind?<CR>
 nnoremap <silent> <Plug>(my-switch)h :<C-u>set nohlsearch! hlsearch?<CR>
+
+nnoremap <Leader>, :<C-u>%s/、/，/ge<CR>:<C-u>%s/。/．/ge<CR>
 
 " vimrcの適用
 nnoremap <F5> :<C-u>source $MYVIMRC<CR>
