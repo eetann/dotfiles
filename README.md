@@ -55,6 +55,9 @@ ssh-add ~/.ssh/id_rsa
 ```
 
 ## Execute the command
+```sh
+sudo apt install git make
+```
 
 ```sh
 git clone https://github.com/eetann/dotfiles.git $HOME/.dotfiles
