@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+trap 'echo Error: $0:$LINENO stopped; exit 1' ERR INT
+set -euo pipefail
+
+if [ -z "${DOTPATH:-}" ]; then
+  DOTPATH=$HOME/.dotfiles; export DOTPATH
+fi
+
+# load useful functions
+. "$DOTPATH"/etc/scripts/header.sh
+
+ubuntu() {
+  if ! has "pip3"; then
+    sudo apt install -q -y python3-pip
+    log "Installed pip3 packages."
+  fi
+  # https://www.python.jp/install/ubuntu/pip.html#2XQ9V7
+}
+
+
+case $(detect_os) in
+  ubuntu)
+    ubuntu ;;
+esac
+
+pip3 install --user pynvim numpy matplotlib pandas opencv-python pysimplegui
+
+echo ""

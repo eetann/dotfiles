@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+trap 'echo Error: $0:$LINENO stopped; exit 1' ERR INT
+set -euo pipefail
+
+if [ -z "${DOTPATH:-}" ]; then
+  DOTPATH=$HOME/.dotfiles; export DOTPATH
+fi
+
+# load useful functions
+. "$DOTPATH"/etc/scripts/header.sh
+
+echo ""
+info "Start creating symbolic links."
+
+for f in .??*
+do
+  # exeptions
+  [[ ${f} = ".git/" ]] && continue
+  [[ ${f} = ".config/" ]] && continue
+  [[ ${f} = ".flake8/" ]] && continue
+  [[ ${f} = ".gitignore" ]] && continue
+
+
+  ln -fs ${DOTPATH}/${f} ${HOME}/${f} &&
+  log "Created a symbolic link to $HOME/$f"
+done
+
+ln -fs ${DOTPATH}/.flake8 ${HOME}/.config/flake8 &&
+log "Created a symbolic link to $HOME/.config/flake8"
+
+for f in `find ./.config -type f`
+do
+  ln -fs ${DOTPATH}/${f:2} ${HOME}/${f:2} &&
+  log "Created a symbolic link to $HOME/${f:2}"
+done
+echo ""

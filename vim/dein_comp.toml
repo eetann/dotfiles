@@ -38,6 +38,7 @@ hook_add = '''
     \ 'coc-vimlsp',
     \ 'coc-texlab',
     \ 'coc-tailwindcss',
+    \ 'coc-pyright',
     \ 'coc-vetur',
     \ 'coc-fzf-preview',
     \ ]

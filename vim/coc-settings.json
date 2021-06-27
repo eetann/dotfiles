@@ -24,43 +24,6 @@
         "objcpp"
       ]
     },
-    "pyls": {
-      "command": "pyls",
-      "filetypes": [
-        "python"
-      ],
-      "settings": {
-        "pyls": {
-          "enable": true,
-          "commandPath": "",
-          "configurationSources": [
-            "flake8"
-          ],
-          "plugins": {
-            "pycodestyle": {
-              "enabled": false
-            },
-            "pydocstyle": {
-              "enabled": false,
-              "match": "(?!test_).*\\.py",
-              "matchDir": "[^\\.].*"
-            },
-            "pyflakes": {
-              "enabled": false
-            },
-            "flake8": {
-              "enabled": true
-            },
-            "black": {
-              "enabled": true
-            },
-            "yapf": {
-              "enabled": false
-            }
-          }
-        }
-      }
-    },
     "efm": {
       "command": "efm-langserver",
       "args": [],

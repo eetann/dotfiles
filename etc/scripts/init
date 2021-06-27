@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+trap 'echo Error: $0:$LINENO stopped; exit 1' ERR INT
+set -euo pipefail
+
+if [ -z "${DOTPATH:-}" ]; then
+  DOTPATH=$HOME/.dotfiles; export DOTPATH
+fi
+
+# load useful functions
+. "$DOTPATH"/etc/scripts/header.sh
+
+
+
+echo ""

@@ -1,0 +1,162 @@
+#!/usr/bin/env bash
+
+# -E:errtrace:エラーを継承
+# -e:errexit:エラーならシェル終了
+# -u:nounset:未設定変数はエラー
+# -o:オプションをonにする
+# pipefail:パイプライン途中のエラーを返り値にする
+set -Eeuo pipefail
+
+# trap コマンド シグナルs : シグナルを受け取った時に実行するコマンドを設定
+# INT: CTRL+c : 割り込み
+trap 'echo Error: $0:$LINENO stopped; exit 1' ERR INT
+
+tput=$(which tput)
+if [ -n "$tput" ]; then
+  ncolors=$($tput colors)
+fi
+if [ -t 1 ] && [ -n "$ncolors" ] && [ "$ncolors" -ge 8 ]; then
+  RED="$(tput setaf 1)"
+  GREEN="$(tput setaf 2)"
+  YELLOW="$(tput setaf 3)"
+  BOLD="$(tput bold)"
+  NORMAL="$(tput sgr0)"
+else
+  RED=""
+  GREEN=""
+  YELLOW=""
+  BOLD=""
+  NORMAL=""
+fi
+
+info() { 
+  printf "%s" "$GREEN"
+  echo -n "[+] "
+  printf "%s" "$NORMAL"
+  echo "$1"
+}
+
+error() {
+  printf "%s" "$RED"
+  echo -n "[-] "
+  printf "%s" "$NORMAL"
+  echo "$1"
+}
+
+warn() {
+  printf "%s" "$YELLOW"
+  echo -n "[*] "
+  printf "%s" "$NORMAL"
+  echo "$1"
+}
+
+log() { 
+  echo "  $1" 
+}
+
+is_exists() {
+  which "$1" >/dev/null 2>&1
+  return $?
+}
+
+DOTFILES_GITHUB="https://github.com/eetann/dotfiles.git"
+
+dotfiles_logo='
+               __                               
+  ____   _____/  |______    ____   ____         
+_/ __ \_/ __ \   __\__  \  /    \ /    \        
+\  ___/\  ___/|  |  / __ \|   |  \   |  \       
+ \___  >\___  >__| (____  /___|  /___|  /       
+     \/     \/          \/     \/     \/        
+    .___      __    _____.__.__                 
+  __| _/_____/  |__/ ____\__|  |   ____   ______
+ / __ |/  _ \   __\   __\|  |  | _/ __ \ /  ___/
+/ /_/ (  <_> )  |  |  |  |  |  |_\  ___/ \___ \ 
+\____ |\____/|__|  |__|  |__|____/\___  >____  >
+     \/                               \/     \/ 
+'
+
+echo   "$dotfiles_logo"
+echo ""
+
+read -p "$(warn '|дﾟ) Are you sure you want to install it? [y/N] ')" -n 1 -r
+echo ""
+
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+  echo ""
+  error 'OK. Goodbye.'
+  exit 1
+fi
+
+DOTPATH=$HOME/dotfiles
+
+_download() {
+  info "Downloading dotfiles..."
+
+  if [ ! -d "$DOTPATH" ]; then
+    if is_exists "git"; then
+      git clone "$DOTFILES_GITHUB" "$DOTPATH"
+      info "Downloaded"
+
+    elif is_exists "curl" || is_exists "wget"; then
+      local zip_url="https://github.com/eetann/dotfiles/archive/refs/heads/master.zip"
+
+      if is_exists "curl"; then
+        curl -L "$zip_url"
+
+      elif is_exists "wget"; then
+        wget -O - "$zip_url"
+      fi | tar xvz
+      
+      if [ ! -d dotfiles-master ]; then
+        error "dotfiles-master: not found"
+        exit 1
+      fi
+      mv -f dotfiles-master "$DOTPATH"
+      info "Downloaded!"
+
+    else
+      error "curl or wget required"
+      exit 1
+    fi
+  else
+    warn "Dotfiles are already installed"
+  fi
+}
+
+_deploy() {
+  info "Deploying dotfiles..."
+  if [ ! -d "$DOTPATH" ]; then
+    error "$DOTPATH: not found"
+    exit 1
+  fi
+  
+  cd "$DOTPATH"
+  make deploy
+  info "Deployed!"
+}
+
+_initialize() {
+  case "$@" in
+    "-i" | "--init" | "init")
+      info "Initializing dotfiles..."
+      cd "$DOTPATH"
+      if [ -f Makefile ]; then
+        make init
+        info "Initialized!"
+      else
+        error "Makefile: not found"
+        exit 1
+      fi
+      ;;
+    *)
+      info "Skipped initialize"
+      ;;
+  esac
+}
+
+dotfiles_setup() {
+    _download && _deploy && _initialize "$@"
+}
+
+dotfiles_setup "$@"
