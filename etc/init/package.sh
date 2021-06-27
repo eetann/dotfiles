@@ -10,16 +10,14 @@ fi
 # load useful functions
 . "$DOTPATH"/etc/scripts/header.sh
 
-PKG_DEFAULT="git tmux tree nkf tmux curl"
+PKG_DEFAULT="git tree nkf tmux curl"
 
 ubuntu() {
   log "Installing packages ..."
 
-  # PKG_UBUNTU=""
   sudo apt update -q -y
   sudo apt upgrade -q -y
   sudo apt install -q -y "$PKG_DEFAULT"
-  sudo apt install -q -y "$PKG_UBUNTU"
 	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
   info "Installed packages."
