@@ -60,8 +60,8 @@ sudo apt install git make
 ```
 
 ```sh
-git clone https://github.com/eetann/dotfiles.git $HOME/.dotfiles
-cd $HOME/.dotfiles
+git clone https://github.com/eetann/dotfiles.git $HOME/dotfiles
+cd $HOME/dotfiles
 make install
 ```
 
