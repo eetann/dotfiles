@@ -55,3 +55,5 @@ preview+='bat --color=always --style=header,grid --line-range :100 {}'
 export FZF_CTRL_T_OPTS="--preview \"$preview\""
 export FZF_COMPLETION_OPTS="--preview \"$preview\""
 export FZF_COMPLETION_TRIGGER='**'
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
