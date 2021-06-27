@@ -29,9 +29,12 @@ done
 ln -fs ${DOTPATH}/.flake8 ${HOME}/.config/flake8 &&
 log "Created a symbolic link to $HOME/.config/flake8"
 
-for f in `find ./.config -type f`
-do
-  ln -fs ${DOTPATH}/${f:2} ${HOME}/${f:2} &&
-  log "Created a symbolic link to $HOME/${f:2}"
-done
+ln -fs ${DOTPATH}/.config/efm-langserver/config.yaml ${HOME}/.config/efm-langserver/config.yaml &&
+log "Created a symbolic link to $HOME/.config/efm-langserver/config.yaml"
+
+# for f in `find ./.config -type f`
+# do
+#   ln -fs ${DOTPATH}/${f:2} ${HOME}/${f:2} &&
+#   log "Created a symbolic link to $HOME/${f:2}"
+# done
 echo ""
