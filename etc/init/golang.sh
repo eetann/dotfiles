@@ -11,7 +11,7 @@ fi
 . "$DOTPATH"/etc/scripts/header.sh
 
 ubuntu() {
-  yes | sudo add-apt-repository ppa:longsleep/golang-backports
+  sudo add-apt-repository -y ppa:longsleep/golang-backports
   sudo apt update -y -qq
   sudo apt install -y -qq golang
   # https://github.com/golang/go/wiki/Ubuntu
