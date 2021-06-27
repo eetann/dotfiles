@@ -15,7 +15,9 @@ echo ""
 ubuntu() {
   log "Changing for jp ..."
   # change the time zone to JST
-  yes | sudo dpkg-reconfigure tzdata
+  if has "tzdata"; then
+    yes | sudo dpkg-reconfigure tzdata
+  fi
 
   # change Japan's repository from overseas for speed
   yes | sudo sed -i -e 's%http://.*.ubuntu.com%http://ftp.jaist.ac.jp/pub/Linux%g' /etc/apt/sources.list
