@@ -20,6 +20,9 @@ WSLならこれをやること。
 ```sh
 echo "[interop]\nappendWindowsPath = false" | sudo tee /etc/wsl.conf
 exec $SHELL -l
+# change Japan's repository from overseas for speed
+yes | sudo dpkg-reconfigure tzdata
+yes | sudo sed -i -e 's%http://.*.ubuntu.com%http://ftp.jaist.ac.jp/pub/Linux%g' /etc/apt/sources.list
 ```
 
 <details>
