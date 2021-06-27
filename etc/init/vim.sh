@@ -21,7 +21,7 @@ ubuntu() {
   PKG_BUILD+="python-dev python3-dev"
   sudo apt update -q -y
   sudo apt upgrade -q -y
-  sudo apt install -q -y "$PKG_BUILD"
+  sudo apt install -q -y $PKG_BUILD
 }
 
 case $(detect_os) in

@@ -16,7 +16,7 @@ ubuntu() {
   PKG_UBUNTU="build-essential procps curl file git"
   sudo apt update -q -y
   sudo apt upgrade -q -y
-  sudo apt install -q -y "$PKG_UBUNTU"
+  sudo apt install -q -y $PKG_UBUNTU
 
   # Homebrew
   test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)

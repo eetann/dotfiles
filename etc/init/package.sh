@@ -17,8 +17,8 @@ ubuntu() {
 
   sudo apt update -q -y
   sudo apt upgrade -q -y
-  sudo apt install -q -y "$PKG_DEFAULT"
-	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  sudo apt install -q -y $PKG_DEFAULT
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
   info "Installed packages."
 }
