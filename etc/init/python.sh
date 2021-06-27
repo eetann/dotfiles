@@ -12,7 +12,7 @@ fi
 
 ubuntu() {
   if ! has "pip3"; then
-    sudo apt install -q -y python3-pip
+    sudo apt install -qq -y python3-pip
     log "Installed pip3 packages."
   fi
   # https://www.python.jp/install/ubuntu/pip.html#2XQ9V7

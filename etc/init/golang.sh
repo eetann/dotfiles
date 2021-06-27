@@ -12,8 +12,8 @@ fi
 
 ubuntu() {
   yes | sudo add-apt-repository ppa:longsleep/golang-backports
-  yes | sudo apt update
-  yes | sudo apt install golang-go
+  sudo apt update -y -qq
+  sudo apt install -y -qq golang-go
   # https://github.com/golang/go/wiki/Ubuntu
 }
 

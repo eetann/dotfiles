@@ -19,9 +19,9 @@ ubuntu() {
   PKG_BUILD+="libxt-dev"
   PKG_BUILD+="libxmu-dev libgtk-3-dev libxpm-dev"
   PKG_BUILD+="python-dev python3-dev"
-  sudo apt update -q -y
-  sudo apt upgrade -q -y
-  sudo apt install -q -y $PKG_BUILD
+  sudo apt update -qq -y
+  sudo apt upgrade -qq -y
+  sudo apt install -qq -y $PKG_BUILD
 }
 
 case $(detect_os) in

@@ -14,9 +14,9 @@ fi
 log "Installing Zsh ..."
 
 ubuntu() {
-  sudo apt update -q -y
-  sudo apt upgrade -q -y
-  sudo apt install -q -y zsh
+  sudo apt update -qq -y
+  sudo apt upgrade -qq -y
+  sudo apt install -qq -y zsh
 }
 
 case $(detect_os) in

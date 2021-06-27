@@ -15,10 +15,10 @@ PKG_DEFAULT="git tree nkf tmux curl"
 ubuntu() {
   log "Installing packages ..."
 
-  sudo apt update -q -y
-  sudo apt upgrade -q -y
-  sudo apt install -q -y $PKG_DEFAULT
-  sudo apt install -q -y software-properties-common
+  sudo apt update -qq -y
+  sudo apt upgrade -qq -y
+  sudo apt install -qq -y $PKG_DEFAULT
+  sudo apt install -qq -y software-properties-common
   info "Installed packages."
 }
 
