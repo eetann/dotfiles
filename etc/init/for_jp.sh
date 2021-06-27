@@ -4,7 +4,7 @@ trap 'echo Error: $0:$LINENO stopped; exit 1' ERR INT
 set -euo pipefail
 
 if [ -z "${DOTPATH:-}" ]; then
-  DOTPATH=$HOME/.dotfiles; export DOTPATH
+  DOTPATH=$HOME/dotfiles; export DOTPATH
 fi
 
 # load useful functions
