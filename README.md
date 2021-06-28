@@ -68,6 +68,29 @@ cd $HOME/dotfiles
 make install
 ```
 
+```sh
+git clone https://github.com/anyenv/anyenv ~/.anyenv
+export PATH="$HOME/.anyenv/bin:$PATH"
+eval "$(anyenv init -)"
+export PATH="$HOME/.anyenv/bin:$PATH"
+yes | anyenv install --init
+exec /usr/bin/zsh -l
+```
+
+Check the latest good version at https://nodejs.org/ja/download/
+You need to rewrite `nodenv install xx.xx.x` and `nodenv global xx.xx.x`
+```sh
+sudo apt install zlib1g-dev libssl-dev libbz2-dev libreadline-dev libsqlite3-dev libffi-dev
+
+anyenv install nodenv
+nodenv install 14.16.0
+nodenv global 14.16.0
+```
+
+```sh
+npm install -g textlint textlint-rule-preset-ja-technical-writing
+```
+
 
 ## Install tmux
 
