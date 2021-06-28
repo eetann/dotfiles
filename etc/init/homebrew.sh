@@ -19,18 +19,24 @@ ubuntu() {
   sudo apt install -q -y $PKG_UBUNTU
 
   # Homebrew
-  test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
-  test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-  test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
-  echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  # test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
+  # test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+  # test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
+  # echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
+  echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >> ~/.bash_profile
+  echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >> ~/.zprofile
+  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
   info "Installed Homebrew."
   # https://docs.brew.sh/Homebrew-on-Linux
 }
 
-case $(detect_os) in
-  ubuntu)
-    ubuntu ;;
-esac
+if ! has "brew"; then
+  case $(detect_os) in
+    ubuntu)
+      ubuntu ;;
+  esac
+fi
 
 log "Installing packages ..."
 brew install bat ripgrep lazygit ghq
@@ -40,21 +46,14 @@ git config --global --add ghq.root $HOME/ghq
 
 # zsh
 brew install zsh
-chsh -s /usr/bin/zsh
 cd ~
 mkdir -p ~/.config
-exec /usr/bin/zsh -l
 
 # zinit
 mkdir -p ~/.zinit
 if [ ! -d ~/.zinit/bin ]; then
   git clone https://github.com/zdharma/zinit.git ~/.zinit/bin
 fi
-source ~/.zinit/bin/zinit.zsh
-zinit self-update
-# For change the commandline theme
-fast-theme clean
-# https://github.com/zdharma/zinit#manual-installation
 
 # efm-langserver
 mkdir -p ~/.config/efm-langserver
