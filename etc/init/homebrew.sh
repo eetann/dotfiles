@@ -40,6 +40,7 @@ fi
 
 log "Installing packages ..."
 brew install bat ripgrep lazygit ghq
+export GOPATH=$HOME/go
 git config --global --add ghq.root $GOPATH/src
 git config --global --add ghq.root $HOME/ghq
 
