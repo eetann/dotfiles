@@ -17,6 +17,10 @@ ubuntu() {
   # https://github.com/golang/go/wiki/Ubuntu
 }
 
+mkdir -p $HOME/go
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH:$GOPATH/bin
+
 if ! has "go"; then
   log "Installing golang ..."
   case $(detect_os) in
