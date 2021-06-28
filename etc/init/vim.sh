@@ -16,9 +16,9 @@ log "Building Vim ..."
 
 ubuntu() {
   PKG_BUILD="git gettext libtinfo-dev libacl1-dev libgpm-dev build-essential"
-  PKG_BUILD+="libxt-dev"
-  PKG_BUILD+="libxmu-dev libgtk-3-dev libxpm-dev"
-  PKG_BUILD+="python-dev python3-dev"
+  PKG_BUILD+=" libxt-dev"
+  PKG_BUILD+=" libxmu-dev libgtk-3-dev libxpm-dev"
+  PKG_BUILD+=" python-dev python3-dev"
   sudo apt update -qq -y
   sudo apt upgrade -qq -y
   sudo apt install -qq -y $PKG_BUILD
