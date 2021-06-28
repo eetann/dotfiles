@@ -13,7 +13,9 @@ fi
 ubuntu() {
   if ! has "asdf"; then
     # asdf
-    git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+    if [ ! -d ~/.asdf ]; then
+      git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+    fi
     cd ~/.asdf
     git checkout "$(git describe --abbrev=0 --tags)"
     # https://asdf-vm.com/#/core-manage-asdf

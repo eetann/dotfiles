@@ -31,7 +31,9 @@ esac
 
 
 cd ~
-git clone https://github.com/vim/vim.git
+if [ ! -d ~/vim ]; then
+  git clone https://github.com/vim/vim.git ~/vim
+fi
 cd ~/vim/src
 ./configure \
     --with-features=huge \

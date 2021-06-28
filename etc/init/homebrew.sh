@@ -46,8 +46,10 @@ mkdir -p ~/.config
 exec /usr/bin/zsh -l
 
 # zinit
-mkdir ~/.zinit
-git clone https://github.com/zdharma/zinit.git ~/.zinit/bin
+mkdir -p ~/.zinit
+if [ ! -d ~/.zinit/bin ]; then
+  git clone https://github.com/zdharma/zinit.git ~/.zinit/bin
+fi
 source ~/.zinit/bin/zinit.zsh
 zinit self-update
 # For change the commandline theme

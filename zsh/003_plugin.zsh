@@ -29,7 +29,10 @@ zinit ice wait'!0' as"program"; zinit light arks22/tmuximum
 # multisrc"{hoge,fuga}.zsh" : 複数のファイルをsource
 # id-as                     : ニックネーム
 # atload                    : プラグインがロード後に実行
-zinit pack for fzf
+zinit ice wait"!0" from"gh-r" as"program"; zinit load junegunn/fzf-bin
+zinit ice wait"!0" as"program" pick"bin/fzf-tmux"; zinit load junegunn/fzf
+zinit ice wait"!0" multisrc"shell/{completion,key-bindings}.zsh"\
+    id-as"junegunn/fzf_completions" pick"/dev/null"
 FZF_DEFAULT_OPTS="--multi --height=60% --select-1 --exit-0 --reverse"
 FZF_DEFAULT_OPTS+=" --bind ctrl-j:preview-down,ctrl-k:preview-up,ctrl-d:preview-page-down,ctrl-u:preview-page-up"
 export FZF_DEFAULT_OPTS
