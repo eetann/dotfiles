@@ -30,7 +30,6 @@ zinit ice wait'!0' as"program"; zinit light arks22/tmuximum
 # id-as                     : ニックネーム
 # atload                    : プラグインがロード後に実行
 zinit pack for fzf
-zinit light Aloxaf/fzf-tab
 FZF_DEFAULT_OPTS="--multi --height=60% --select-1 --exit-0 --reverse"
 FZF_DEFAULT_OPTS+=" --bind ctrl-j:preview-down,ctrl-k:preview-up,ctrl-d:preview-page-down,ctrl-u:preview-page-up"
 export FZF_DEFAULT_OPTS

@@ -18,6 +18,7 @@ ubuntu() {
     git checkout "$(git describe --abbrev=0 --tags)"
     # https://asdf-vm.com/#/core-manage-asdf
     log "Installed asdf."
+    exec $SHELL -l
 
     # nodejs
     # Check the latest good version at https://nodejs.org/ja/download/
