@@ -68,22 +68,15 @@ cd $HOME/dotfiles
 make install
 ```
 
+## anyenv
 ```sh
+cd ~
 git clone https://github.com/anyenv/anyenv ~/.anyenv
 export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init -)"
 export PATH="$HOME/.anyenv/bin:$PATH"
 yes | anyenv install --init
 exec $SHELL -l
-```
-
-```sh
-chsh -s /usr/bin/zsh
-exec /usr/bin/zsh -l
-zinit self-update
-# For change the commandline theme
-fast-theme clean
-# https://github.com/zdharma/zinit#manual-installation
 ```
 
 Check the latest good version at https://nodejs.org/ja/download/
@@ -98,6 +91,19 @@ nodenv global 14.16.0
 
 ```sh
 npm install -g textlint textlint-rule-preset-ja-technical-writing
+```
+
+## zsh
+```sh
+chsh -s /usr/bin/zsh
+```
+ものすごい更新が入る
+
+```sh
+zinit self-update
+# For change the commandline theme
+fast-theme clean
+# https://github.com/zdharma/zinit#manual-installation
 ```
 
 
