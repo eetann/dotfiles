@@ -19,7 +19,7 @@ ubuntu() {
     cd ~/.asdf
     git checkout "$(git describe --abbrev=0 --tags)"
     # https://asdf-vm.com/#/core-manage-asdf
-    log "Installed asdf."
+    info "Installed asdf."
     . $HOME/.asdf/asdf.sh
 
     # nodejs
