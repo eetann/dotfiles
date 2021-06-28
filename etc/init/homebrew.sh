@@ -39,11 +39,13 @@ if ! has "brew"; then
 fi
 
 log "Installing packages ..."
-brew install bat ripgrep lazygit ghq
-export GOPATH=$HOME/go
-git config --global --add ghq.root $GOPATH/src
-git config --global --add ghq.root $HOME/ghq
-
+brew install bat ripgrep lazygit
+if ! has "ghq"; then
+  brew install ghq
+  export GOPATH=$HOME/go
+  git config --global --add ghq.root $GOPATH/src
+  git config --global --add ghq.root $HOME/ghq
+fi
 
 # zsh
 brew install zsh
