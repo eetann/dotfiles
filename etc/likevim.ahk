@@ -243,29 +243,10 @@ IsOpenChrome() {
     }
 }
 
-; 無変換キー + b, w, re, e, f
-vk1D::
-    Input,MyCommands,I T1 L2, {Esc},b,w,re,e,f
-    If MyCommands = b
-    {
-        IsOpenChrome()
-    } Else If MyCommands = w
-    {
-        WinActivate, ahk_exe mintty.exe
-    } Else If MyCommands = re
-    {
-        Reload
-    } Else If MyCommands = e
-    {
-        ; tablacusexplorer を開く
-        Run, D:\tablacusexplorer\TE64.exe
-    } Else If MyCommands = f
-    {
-        Run,D:\fitwin\fitwin.exe
-        WinActivate, ahk_exe fitwin.exe
-    }
-return
-
+; 無変換キー + Noe, r, e
+vk1D::Send, {Blind}{vk1D}
+vk1D & r::Reload
+vk1D & e::Run, D:\tablacusexplorer\TE64.exe
 
 ;-----------------------------------------------------------
 ; ターミナルでvimのためのIME
@@ -345,13 +326,6 @@ IsAltTabMenu := false
     return
 ; カタカナひらがなローマ字キー2連打でAltTabMenuキーとして割当
 vkF2::
-    If (A_PriorHotKey == A_ThisHotKey and A_TimeSincePriorHotkey < 1000){
-        Send !^{Tab}
-        IsAltTabMenu := true
-    }
-    return
-; 変換キー2連打でAltTabMenuキーとして割当
-vk1C::
     If (A_PriorHotKey == A_ThisHotKey and A_TimeSincePriorHotkey < 1000){
         Send !^{Tab}
         IsAltTabMenu := true
