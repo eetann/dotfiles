@@ -52,6 +52,7 @@ abbreviations=(
     "S"    "| sed"
     "E"    "2>&1 > /dev/null"
     "N"    "> /dev/null"
+    "DC"   "docker-compose "
     "CD"   "&& cd \$_"
     "CL"   "| clip.exe"
     "TREE" "tree -a -I '.git|node_modules'"
