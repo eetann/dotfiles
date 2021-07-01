@@ -14,6 +14,7 @@
   "diagnostic.errorSign": "",
   "diagnostic.hintSign": "",
   "diagnostic.infoSign": "",
+  "python.formatting.provider": "black",
   "languageserver": {
     "clangd": {
       "command": "clangd-10",
