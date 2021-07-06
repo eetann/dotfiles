@@ -39,7 +39,7 @@ if ! has "brew"; then
 fi
 
 log "Installing packages ..."
-brew install bat ripgrep lazygit
+brew install bat ripgrep lazygit tmux
 if ! has "ghq"; then
   brew install ghq
   export GOPATH=$HOME/go
