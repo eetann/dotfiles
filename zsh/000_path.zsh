@@ -3,6 +3,7 @@ if [[ -z "$TMUX" ]] && [[ -z "$VIM" ]] ; then
     # golang tmuxに必要なので読み込む
     export GOPATH=$HOME/go
     export PATH=$PATH:$GOPATH:$GOPATH/bin
+    export PATH=$HOME/.local/bin:$PATH
     export PATH=$HOME/.anyenv/bin:$PATH
 
     tmux -u has-session -t e 2>/dev/null || tmux -u new-session -ds e \
