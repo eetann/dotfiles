@@ -4,6 +4,8 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 ; Auto execute section is the region before any return/hotkey
+GroupAdd, browser, ahk_exe chrome.exe
+GroupAdd, browser, ahk_exe vivaldi.exe
 
 ;-----------------------------------------------------------
 ; IMEの状態の取得
@@ -250,7 +252,7 @@ vk1D & e::Run, D:\tablacusexplorer\TE64.exe
 
 ;-----------------------------------------------------------
 ; ターミナルでvimのためのIME
-#IfWInActive, ahk_exe mintty.exe
+#IfWinActive, ahk_exe mintty.exe
 Esc::
     getIMEMode := IME_GET()
     if (getIMEMode = 1) {
@@ -303,7 +305,7 @@ Esc::
 ; Chrome
 ; アドレスバーのショートカットキーを押したら
 ; IMEはオフの状態で起動するように設定
-#IfWInActive, ahk_exe chrome.exe
+#IfWinActive ahk_group browser
 ^l::
     Send ^l
     Sleep 100
@@ -311,6 +313,16 @@ Esc::
     Return
 ^t::
     Send ^t
+    Sleep 100
+    IME_SET(0)
+    Return
+^j::
+    Send ^j
+    Sleep 100
+    IME_SET(0)
+    Return
+F2::
+    Send {F2}
     Sleep 100
     IME_SET(0)
     Return
