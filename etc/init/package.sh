@@ -10,7 +10,7 @@ fi
 # load useful functions
 . "$DOTPATH"/etc/scripts/header.sh
 
-PKG_DEFAULT="git tree nkf tmux curl"
+PKG_DEFAULT="git tree nkf curl"
 
 ubuntu() {
   log "Installing packages ..."
