@@ -8,11 +8,6 @@ hook_add = '''
     xmap ab <Plug>(textobj-multiblock-a)
     xmap ib <Plug>(textobj-multiblock-i)
 '''
-hook_source = '''
-    let g:textobj_multiblock_blocks = [
-    \   [ "`", "`"],
-    \ ]
-'''
 
 [[plugins]] # 引数や配列の入れ替え
 repo = 'machakann/vim-swap'
