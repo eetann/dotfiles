@@ -34,3 +34,26 @@ snippet     mapintopenreadsplit
 abbr        A, B, C, X = map(int, open(0).read().split())
 options     head
     map(int, open(0).read().split())
+
+snippet     docstring
+abbr        Numpy docstring
+options     head
+	"""
+	${1:#:description}
+
+	Parameters
+	----------
+	${2:#:param} : ${3:#:type}
+		${4:#:description}
+
+	Returns
+	-------
+	${4:#:value} : ${5:#:type}
+		${6:#:description}
+	"""
+
+snippet     docparam
+abbr        Numpy docstring param
+options     head
+	${1:#:param} : ${2:#:type}
+		${3:#:description}
