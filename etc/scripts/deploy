@@ -17,7 +17,7 @@ ln -fs ${DOTPATH}/.clang-format ${HOME}/.clang-format
 ln -fs ${DOTPATH}/.dircolors ${HOME}/.dircolors
 ln -fs ${DOTPATH}/.latexmkrc ${HOME}/.latexmkrc
 ln -fs ${DOTPATH}/.tmux.conf ${HOME}/.tmux.conf
-ln -fs ${DOTPATH}/.vimrc ${HOME}/vimrc.
+ln -fs ${DOTPATH}/.vimrc ${HOME}/.vimrc
 ln -fs ${DOTPATH}/.zshrc ${HOME}/.zshrc
 mkdir -p ${HOME}/.config
 ln -fs ${DOTPATH}/.flake8 ${HOME}/.config/flake8
