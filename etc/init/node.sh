@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+trap 'echo Error: $0:$LINENO stopped; exit 1' ERR INT
+set -euo pipefail
+
+if [ -z "${DOTPATH:-}" ]; then
+  DOTPATH=$HOME/dotfiles; export DOTPATH
+fi
+
+# load useful functions
+. "$DOTPATH"/etc/scripts/header.sh
+
+PKG_DEFAULT="textlint textlint-rule-preset-ja-technical-writing"
+
+all_env() {
+  log "Installing packages ..."
+
+  curl https://get.volta.sh | bash
+  volta install node
+  npm install $PKG_DEFAULT
+  info "Installed packages."
+}
+
+all_env
+
+echo ""

@@ -4,7 +4,8 @@ if [[ -z "$TMUX" ]] && [[ -z "$VIM" ]] ; then
     export GOPATH=$HOME/go
     export PATH=$PATH:$GOPATH:$GOPATH/bin
     export PATH=$HOME/.local/bin:$PATH
-    export PATH=$HOME/.anyenv/bin:$PATH
+  export VOLTA_HOME=$HOME/.volta
+  export PATH=$PATH:$$VOLTA_HOME/bin
 
     tmux -u has-session -t e 2>/dev/null || tmux -u new-session -ds e \
         && tmux -u attach-session -t e
@@ -21,5 +22,3 @@ if [[ "$(uname -r)" == *microsoft* ]]; then
 fi
 
 export EDITOR=vim
-
-eval "$(anyenv init -)"
