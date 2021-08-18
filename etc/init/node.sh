@@ -16,6 +16,8 @@ all_env() {
   log "Installing packages ..."
 
   curl https://get.volta.sh | bash
+  export VOLTA_HOME=$HOME/.volta
+  export PATH=$PATH:$VOLTA_HOME/bin
   volta install node
   npm install $PKG_DEFAULT
   info "Installed packages."
