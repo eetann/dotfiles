@@ -18,7 +18,7 @@ WSLならこれをやること。
 この設定をオフにするためには、
 以下のコマンドで `/etc/wsl.conf` を変更
 ```sh
-echo "[interop]\nappendWindowsPath = false" | sudo tee /etc/wsl.conf
+echo -e "[interop]\nappendWindowsPath = false" | sudo tee /etc/wsl.conf
 exec $SHELL -l
 # change Japan's repository from overseas for speed
 yes | sudo dpkg-reconfigure tzdata
