@@ -231,9 +231,9 @@ hwnd := DllCall("GetGUIThreadInfo", Uint,0, Uint,&stGTI)
 
 ;-----------------------------------------------------------
 ; ターミナル以外でもエスケープ設定
-; ^[::
-;   Send {Esc}
-;   Return
+^[::
+  Send {Esc}
+  Return
 
 IsOpenChrome() {
     Process, Exist, chrome.exe
@@ -298,6 +298,51 @@ Esc::
     return
 ^+Tab:: ; CTRL Shift Tab でバッファの切り替え
     Send {Space}+{Tab}
+    return
+#IfWinActive
+
+;-----------------------------------------------------------
+; ObsidianでvimのためのIME
+#IfWinActive, ahk_exe Obsidian.exe
+Esc::
+    getIMEMode := IME_GET()
+    if (getIMEMode = 1) {
+        IME_SET(0)
+        Send {Esc}
+    } else {
+        Send {Esc}
+    }
+    return
+^[::
+    getIMEMode := IME_GET()
+    if (getIMEMode = 1) {
+        Send {Esc}
+        Sleep 1 ; wait 1 ms (Need to stop converting)
+        IME_SET(0)
+        Send {Esc}
+    } else {
+        Send {Esc}
+    }
+    return
+^o:: ; 挿入ノーマルモードに入るときもIMEオフ
+    getIMEMode := IME_GET()
+    if (getIMEMode = 1) {
+        Sleep 1 ; wait 1 ms (Need to stop converting)
+        IME_SET(0)
+        Send ^o
+    } else {
+        Send ^o
+    }
+    return
+^y:: ; emmetで次の入力をするためにIMEオフ
+    getIMEMode := IME_GET()
+    if (getIMEMode = 1) {
+        Sleep 1 ; wait 1 ms (Need to stop converting)
+        IME_SET(0)
+        Send ^y
+    } else {
+        Send ^y
+    }
     return
 #IfWinActive
 
