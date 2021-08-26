@@ -33,6 +33,9 @@ esac
 cd ~
 if [ ! -d ~/vim ]; then
   git clone https://github.com/vim/vim.git ~/vim
+else
+  git pull
+  make clean
 fi
 cd ~/vim/src
 ./configure \
@@ -47,6 +50,7 @@ make
 sudo make install
 hash -r
 vim --version
+cd ~
 info "Built Vim."
 
 echo ""
