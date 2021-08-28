@@ -32,6 +32,10 @@ yes | sudo sed -i -e 's%http://.*.ubuntu.com%http://ftp.jaist.ac.jp/pub/Linux%g'
 
 ## git and GitHub
 ```sh
+sudo apt install git build-essential curl
+```
+
+```sh
 git config --global user.name "eetann"
 git config --global user.email "eetann's mail adress"
 ssh-keygen -t rsa -b 4096 -C "eetann's mail adress"
@@ -59,45 +63,14 @@ ssh-add ~/.ssh/id_rsa
 
 ## Execute the command
 ```sh
-sudo apt install git make
-```
-
-```sh
-git clone https://github.com/eetann/dotfiles.git $HOME/dotfiles
-cd $HOME/dotfiles
-make install
-```
-
-## anyenv
-```sh
-cd ~
-git clone https://github.com/anyenv/anyenv ~/.anyenv
-export PATH="$HOME/.anyenv/bin:$PATH"
-eval "$(anyenv init -)"
-export PATH="$HOME/.anyenv/bin:$PATH"
-yes | anyenv install --init
-exec $SHELL -l
-```
-
-Check the latest good version at https://nodejs.org/ja/download/
-You need to rewrite `nodenv install xx.xx.x` and `nodenv global xx.xx.x`
-```sh
-sudo apt install zlib1g-dev libssl-dev libbz2-dev libreadline-dev libsqlite3-dev libffi-dev
-
-anyenv install nodenv
-nodenv install 14.16.0
-nodenv global 14.16.0
-```
-
-```sh
-npm install -g textlint textlint-rule-preset-ja-technical-writing
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/eetann/dotfiles/master/install.sh)"
 ```
 
 ## zsh
 ```sh
 chsh -s /usr/bin/zsh
+zsh
 ```
-ものすごい更新が入る
 
 ```sh
 zinit self-update
