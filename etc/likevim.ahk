@@ -31,6 +31,22 @@ vk1D & e::Run, D:\tablacusexplorer\TE64.exe
 ;-----------------------------------------------------------
 ; ターミナルでvimのためのIME
 #IfWinActive, ahk_exe mintty.exe
+Esc::
+    Send {Esc}
+    Send {Esc}
+    return
+^[::
+    Send {Esc}
+    Send {Esc}
+    return
+^o:: ; 挿入ノーマルモードに入るときもIMEオフ
+    Send {Esc}
+    Send ^o
+    return
+^y:: ; emmetで次の入力をするためにIMEオフ
+    Send {Esc}
+    Send ^y
+    return
 ^Tab:: ; CTRL Tab でバッファの切り替え
     Send {Space}{Tab}
     return
@@ -38,6 +54,29 @@ vk1D & e::Run, D:\tablacusexplorer\TE64.exe
     Send {Space}+{Tab}
     return
 #IfWinActive
+
+;-----------------------------------------------------------
+; Chrome
+; アドレスバーのショートカットキーを押したら
+; IMEはオフの状態で起動するように設定
+; #IfWinActive ahk_group browser
+; ^l::
+;     Send ^l
+;     Sleep 100
+;     Return
+; ^t::
+;     Send ^t
+;     Sleep 100
+;     Return
+; ^k::
+;     Send ^k
+;     Sleep 100
+;     Return
+; F2::
+;     Send {F2}
+;     Sleep 100
+;     Return
+; #IfWinActive
 
 
 ;-----------------------------------------------------------
