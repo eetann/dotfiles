@@ -361,8 +361,8 @@ Esc::
     Sleep 100
     IME_SET(0)
     Return
-^j::
-    Send ^j
+^k::
+    Send ^k
     Sleep 100
     IME_SET(0)
     Return
