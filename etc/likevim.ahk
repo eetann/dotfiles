@@ -43,6 +43,9 @@ Esc::
 ^y:: ; emmetで次の入力をするためにIMEオフ
     Send {vk1D}^y
     return
+^k:: ; snippetで次の入力をするためにIMEオフ
+    Send {vk1D}^k
+    return
 ^Tab:: ; CTRL Tab でバッファの切り替え
     Send {Space}{Tab}
     return
