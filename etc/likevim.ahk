@@ -70,7 +70,7 @@ Esc::
     Send {vk1D}
     Return
 ^j::
-    Send ^k
+    Send ^j
     Sleep 100
     Send {vk1D}
     Return
