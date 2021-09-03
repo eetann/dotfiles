@@ -31,15 +31,7 @@ hook_add = '''
     \ 'coc-word',
     \ 'coc-snippets',
     \ 'coc-neosnippet',
-    \ 'coc-css',
-    \ 'coc-html',
-    \ 'coc-tsserver',
-    \ 'coc-emmet',
-    \ 'coc-vimlsp',
-    \ 'coc-texlab',
-    \ 'coc-tailwindcss',
     \ 'coc-pyright',
-    \ 'coc-vetur',
     \ 'coc-fzf-preview',
     \ ]
     let g:airline#extensions#coc#error_symbol =  ""
