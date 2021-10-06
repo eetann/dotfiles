@@ -2,10 +2,6 @@
 [[plugins]] # これ使うのに必要
 repo = 'Shougo/dein.vim'
 
-[[plugins]] # 非同期実行(openbrowserに必要)
-repo = 'Shougo/vimproc.vim'
-build = 'make'
-
 [[plugins]] # ヤンク時に一瞬ハイライト
 repo = "machakann/vim-highlightedyank"
 hook_add = '''
