@@ -53,6 +53,11 @@ if = "!has('nvim')"
 
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
+if = "!has('nvim')"
+
+[[plugins]]
+repo = 'kyazdani42/nvim-web-devicons'
+if = "has('nvim')"
 
 [[plugins]] # スニペット集
 repo = 'honza/vim-snippets'
@@ -78,9 +83,11 @@ hook_add = '''
     let g:airline#extensions#branch#enabled = 1
     let g:airline#extensions#tagbar#enabled = 1
     let g:airline#extensions#wordcount#enabled = 0
-    let g:airline#extensions#tabline#enabled = 1
-    let g:airline#extensions#tabline#formatter = 'unique_tail'
-    let g:airline#extensions#tabline#alt_sep = 1
+    if !has('nvim')
+        let g:airline#extensions#tabline#enabled = 1
+        let g:airline#extensions#tabline#formatter = 'unique_tail'
+        let g:airline#extensions#tabline#alt_sep = 1
+    endif
     let g:airline_left_sep ='▙'
     let g:airline_left_alt_sep=''
     let g:airline_right_sep ='▟'
@@ -97,4 +104,19 @@ hook_add = '''
     \ 'error': 80,
     \ }
     let g:airline_section_z = '%3v:%l/%L %3p%%'
+'''
+
+[[plugins]]
+repo = 'romgrk/barbar.nvim'
+if = "has('nvim')"
+hook_add = '''
+let g:bufferline = get(g:, 'bufferline', {})
+let g:bufferline.icons = v:false
+let g:bufferline.icon_separator_active = '|'
+let g:bufferline.icon_separator_inactive = '|'
+let g:bufferline.icon_close_tab = 'x'
+let g:bufferline.icon_close_tab_modified = '●'
+let g:bufferline.icon_pinned = 'L'
+let g:bufferline.insert_at_end = v:true
+nnoremap <Leader><Space> :BufferPick<CR>
 '''
