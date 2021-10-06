@@ -87,8 +87,8 @@ hook_source = '''
     let g:coc_snippet_next =  '<c-k>'
     let g:coc_snippet_prev = '<s-tab>'
     " for fzf-preview
-    nmap <Leader><Leader> [fzf-p]
-    xmap <Leader><Leader> [fzf-p]
+    nmap <Leader>f [fzf-p]
+    xmap <Leader>f [fzf-p]
 
     " For not installed ripgrep
     let g:fzf_preview_directory_files_command="rg --files --hidden --follow --no-messages --glob '!**/.git/*' --glob '!**/node_modules/*'"
