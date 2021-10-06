@@ -23,5 +23,7 @@ mkdir -p ${HOME}/.config
 ln -fs ${DOTPATH}/.flake8 ${HOME}/.config/flake8
 mkdir -p ${HOME}/.config/efm-langserver
 ln -fs ${DOTPATH}/.config/efm-langserver/config.yaml ${HOME}/.config/efm-langserver/config.yaml
+mkdir -p ${HOME}/.config/nvim
+ln -fs ${DOTPATH}/.vimrc ${HOME}/.config/nvim/init.vim
 
 echo ""
