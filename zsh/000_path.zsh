@@ -21,4 +21,8 @@ if [[ "$(uname -r)" == *microsoft* ]]; then
     export PATH=$PATH:/mnt/c/Windows/System32
 fi
 
-export EDITOR=vim
+if type nvim > /dev/null; then
+    export EDITOR=nvim
+else
+    export EDITOR=vim
+fi
