@@ -52,7 +52,9 @@ set hidden " 未保存ファイルが有っても別のファイルを開ける
 set wildmenu  "コマンドモードの補完
 set history=1000 " CommandHistoryを増やす
 " Previewはいらない
-set completeopt=menuone,popup
+if !has('nvim')
+    set completeopt=menuone,popup
+endif
 set mouse=a
 set ttimeoutlen=100 " ESCしてから挿入モード出るまでの時間を短縮
 set helplang=ja,en
