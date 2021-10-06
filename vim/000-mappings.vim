@@ -109,6 +109,37 @@ function! s:set_vsearch()
     let @/ = '\V' . substitute(escape(@z, '/\'), '\n', '\\n', 'g')
 endfunction
 
+" digraph f<C-k>xxで対応文字に飛べる
+" カッコ
+digraphs j( 65288  " （
+digraphs j) 65289  " ）
+digraphs j[ 12300  " 「
+digraphs j] 12301  " 」
+digraphs j{ 12302  " 『
+digraphs j} 12303  " 』
+
+" 句読点
+digraphs j, 12289  " 、
+digraphs j. 12290  " 。
+digraphs j< 65292  " ，
+digraphs j> 65294  " ．
+digraphs j! 65281  " ！
+digraphs j? 65311  " ？
+digraphs j: 65306  " ：
+
+" その他
+digraphs j~ 12316  " 〜
+digraphs j/ 12539  " ・
+digraphs js 12288  " 　
+digraphs jj 106  " 潰されるjのために
+
+" fjde で 'で'に飛べる
+noremap fj f<C-k>
+noremap Fj F<C-k>
+noremap tj t<C-k>
+noremap Tj T<C-k>
+
+
 " 切り替え
 nnoremap <Plug>(my-switch) <Nop>
 nmap <Leader>s <Plug>(my-switch)
