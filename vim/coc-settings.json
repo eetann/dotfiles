@@ -10,10 +10,10 @@
   "suggest.timeout": 5000,
   "suggest.maxPreviewWidth": 15,
   "coc.preferences.colorSupport": true,
-  "diagnostic.warningSign": "",
-  "diagnostic.errorSign": "",
-  "diagnostic.hintSign": "",
-  "diagnostic.infoSign": "",
+  "diagnostic.warningSign": "!",
+  "diagnostic.errorSign": "x",
+  "diagnostic.hintSign": "♪",
+  "diagnostic.infoSign": "i",
   "python.formatting.provider": "black",
   "languageserver": {
     "clangd": {
