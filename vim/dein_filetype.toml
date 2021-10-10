@@ -7,7 +7,7 @@ on_ft = 'toml'
 repo = 'mechatroner/rainbow_csv'
 on_ft ="csv"
 hook_add = '''
-    let g:disable_rainbow_hover = 1
+let g:disable_rainbow_hover = 1
 '''
 
 [[plugins]]
@@ -19,32 +19,32 @@ on_ft ="vue"
 repo = 'Shougo/context_filetype.vim'
 on_ft = ['vim','toml','python','html']
 hook_add = '''
-    let g:context_filetype#filetypes = {
-    \ 'vue' :[],
+let g:context_filetype#filetypes = {
+\ 'vue' :[],
+\}
+function! My_context_on()
+    let b:context_filetype_filetypes = {
+    \ 'python' :[
+    \ {
+        \ 'start' : '=\s.\?"\{3}$',
+        \ 'end': '"\{3}$',
+        \ 'filetype' : 'html',
+    \ },
+    \ ],
     \}
-    function! My_context_on()
-        let b:context_filetype_filetypes = {
-        \ 'python' :[
-        \ {
-            \ 'start' : '=\s.\?"\{3}$',
-            \ 'end': '"\{3}$',
-            \ 'filetype' : 'html',
-        \ },
-        \ ],
-        \}
-    endfunction
-    call My_context_on()
-    function! My_context_off()
-        let b:context_filetype_filetypes = {
-        \ 'python' :[
-        \ {
-            \ 'start' : 'template = "\{3}',
-            \ 'end': '"\{3}',
-            \ 'filetype' : 'html',
-        \ },
-        \ ],
-        \}
-    endfunction
+endfunction
+call My_context_on()
+function! My_context_off()
+    let b:context_filetype_filetypes = {
+    \ 'python' :[
+    \ {
+        \ 'start' : 'template = "\{3}',
+        \ 'end': '"\{3}',
+        \ 'filetype' : 'html',
+    \ },
+    \ ],
+    \}
+endfunction
 '''
 
 [[plugins]]
@@ -52,17 +52,17 @@ repo = 'osyo-manga/vim-precious'
 on_ft = ['vim','toml','markdown','md','mdwn','mkd','mkdn','mark','python','html']
 depends = ['context_filetype.vim']
 hook_add = '''
-    let g:precious_enable_switchers = {'defx': {'setfiletype': 0}}
+let g:precious_enable_switchers = {'defx': {'setfiletype': 0}}
 '''
 
 [[plugins]] # Emmet
 repo = 'mattn/emmet-vim'
 on_ft = ['html', 'css', 'php', 'xml', 'javascript', 'vue', 'typescriptreact', 'react']
 hook_add = """
-    let g:user_emmet_settings = {
-    \ 'variables' : {
-    \     'lang' : 'ja',
-    \}}
+let g:user_emmet_settings = {
+\ 'variables' : {
+\     'lang' : 'ja',
+\}}
 """
 
 [[plugins]] # css, html, less, sass, scss, stylus, vim の色付け
@@ -74,10 +74,10 @@ on_ft = ['css']
 repo = 'plasticboy/vim-markdown'
 on_ft = ['markdown','md','mdwn','mkd','mkdn','mark']
 hook_add = '''
-    let g:vim_markdown_folding_disabled=1
-    let g:vim_markdown_new_list_item_indent = 0
-    let g:vim_markdown_frontmatter = 1
-    let g:vim_markdown_no_default_key_mappings = 1
+let g:vim_markdown_folding_disabled=1
+let g:vim_markdown_new_list_item_indent = 0
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_no_default_key_mappings = 1
 '''
 
 [[plugins]] # テーブルの生成を補助?
@@ -88,6 +88,6 @@ on_ft = ['markdown','md','mdwn','mkd','mkdn','mark']
 repo = 'dhruvasagar/vim-table-mode'
 on_ft = ['markdown','md','mdwn','mkd','mkdn','mark']
 hook_add = '''
-    let g:table_mode_corner='|'
-    let g:table_mode_tableize_map = '<Leader>tb'
+let g:table_mode_corner='|'
+let g:table_mode_tableize_map = '<Leader>tb'
 '''
