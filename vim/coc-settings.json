@@ -10,7 +10,6 @@
     "vue"
   ],
   "suggest.timeout": 5000,
-  "suggest.maxPreviewWidth": 15,
   "coc.preferences.colorSupport": true,
   "diagnostic.warningSign": "!",
   "diagnostic.errorSign": "x",
