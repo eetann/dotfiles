@@ -5,6 +5,8 @@
     "cpp",
     "go",
     "javascript",
+    "typescript",
+    "typescriptreact",
     "vue"
   ],
   "suggest.timeout": 5000,
