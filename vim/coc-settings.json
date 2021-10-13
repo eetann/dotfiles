@@ -10,11 +10,10 @@
     "vue"
   ],
   "suggest.timeout": 5000,
-  "suggest.maxPreviewWidth": 15,
   "coc.preferences.colorSupport": true,
   "diagnostic.warningSign": "!",
   "diagnostic.errorSign": "x",
-  "diagnostic.hintSign": "♪",
+  "diagnostic.hintSign": "H",
   "diagnostic.infoSign": "i",
   "python.formatting.provider": "black",
   "languageserver": {
