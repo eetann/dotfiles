@@ -50,14 +50,6 @@ if = "!has('nvim')"
 repo = 'roxma/vim-hug-neovim-rpc'
 if = "!has('nvim')"
 
-[[plugins]]
-repo = 'ryanoasis/vim-devicons'
-if = "!has('nvim')"
-
-[[plugins]]
-repo = 'kyazdani42/nvim-web-devicons'
-if = "has('nvim')"
-
 [[plugins]] # スニペット集
 repo = 'honza/vim-snippets'
 
@@ -70,7 +62,7 @@ repo = 'vim-airline/vim-airline-themes'
 
 [[plugins]] # ステータスラインとバッファ表示の強化
 repo = 'vim-airline/vim-airline'
-depends = ['vim-airline-themes', 'vim-devicons']
+depends = ['vim-airline-themes']
 hook_add = '''
 " ステータスラインの表示内容強化
 set laststatus=2 " ステータスラインを常に表示
