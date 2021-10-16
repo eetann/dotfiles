@@ -60,12 +60,12 @@ Conversion	Down	ConvertNext
 Suggestion	Down	PredictAndConvert
 DirectInput	Muhenkan	IMEOff
 Precomposition	Muhenkan	IMEOff
-Composition	Muhenkan	Commit
-Conversion	Muhenkan	Commit
+Composition	Muhenkan	IMEOff
+Conversion	Muhenkan	IMEOff
 DirectInput	Henkan	IMEOn
 Precomposition	Henkan	IMEOn
 Composition	Henkan	Convert
-Conversion	Henkan	CommitOnlyFirstSegment
+Conversion	Henkan	Commit
 Composition	End	MoveCursorToEnd
 Conversion	End	SegmentFocusLast
 Composition	Enter	Commit
@@ -115,6 +115,8 @@ Precomposition	Space	InsertSpace
 Composition	Tab	PredictAndConvert
 Conversion	Tab	PredictAndConvert
 Conversion	Up	ConvertPrev
+Composition	Shift Henkan	CommitOnlyFirstSegment
+Conversion	Shift Henkan	CommitOnlyFirstSegment
 Composition	ASCII	InsertCharacter
 Composition	Kanji	IMEOff
 Composition	OFF	IMEOff
