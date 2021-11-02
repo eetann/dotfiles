@@ -98,11 +98,22 @@ if = "has('nvim')"
 hook_add = '''
 let g:bufferline = get(g:, 'bufferline', {})
 let g:bufferline.icons = v:false
+let g:bufferline.animation = v:false
 let g:bufferline.icon_separator_active = '|'
 let g:bufferline.icon_separator_inactive = '|'
 let g:bufferline.icon_close_tab = 'x'
-let g:bufferline.icon_close_tab_modified = '●'
+let g:bufferline.icon_close_tab_modified = '@'
 let g:bufferline.icon_pinned = 'L'
 let g:bufferline.insert_at_end = v:true
+let g:bufferline.maximum_padding = 1
+let g:bufferline.semantic_letters = v:false
 nnoremap <Leader><Space> :BufferPick<CR>
+'''
+
+[[plugins]] # f系のunique highlightと同じキーで繰り返し
+repo = 'rhysd/clever-f.vim'
+hook_add = '''
+    let g:clever_f_across_no_line = 1
+    let g:clever_f_mark_direct = 1
+    let g:clever_f_fix_key_direction = 1
 '''
