@@ -100,10 +100,10 @@ let g:sonictemplate_vim_template_dir = ['~/dotfiles/vim/template']
 
 [[plugins]] # 指定した文字で整形
 repo = 'junegunn/vim-easy-align'
-on_map = ['<Plug>(EasyAlign)']
+on_map = ['<Plug>(LiveEasyAlign)']
 hook_add = '''
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(LiveEasyAlign)
+nmap ga <Plug>(LiveEasyAlign)
 " コメントや文字列中でも有効化
 let g:easy_align_ignore_groups = []
 '''
