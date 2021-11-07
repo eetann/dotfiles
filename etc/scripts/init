@@ -16,6 +16,7 @@ bash $DOTPATH/etc/init/homebrew.sh
 bash $DOTPATH/etc/init/python.sh
 bash $DOTPATH/etc/init/node.sh
 bash $DOTPATH/etc/init/zsh.sh
+bash $DOTPATH/etc/init/oh-my-zsh.sh
 bash $DOTPATH/etc/init/neovim.sh
 
 echo ""
