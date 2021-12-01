@@ -93,6 +93,7 @@ hook_source = '''
     let g:fzf_preview_filelist_command="rg --files --hidden --follow --no-messages --glob '!**/.git/*' --glob '!**/node_modules/*'"
     " let g:fzf_preview_use_dev_icons=1
     nnoremap <silent> [fzf-p]p  :<C-u>CocCommand fzf-preview.FromResources project git<CR>
+    nnoremap <silent> [fzf-p]P  :<C-u> CocCommand fzf-preview.DirectoryFiles<CR>
     nnoremap <silent> [fzf-p]o  :<C-u>CocCommand fzf-preview.FromResources mru<CR>
     nnoremap <silent> [fzf-p]b  :<C-u>CocCommand fzf-preview.Buffers<CR>
     nnoremap <silent> [fzf-p]B  :<C-u>CocCommand fzf-preview.AllBuffers<CR>
