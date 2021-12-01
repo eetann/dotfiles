@@ -43,6 +43,7 @@ endfunction
 [[plugins]] # その場で実行できる
 repo = 'thinca/vim-quickrun'
 on_cmd = "QuickRun"
+depends = ["vim-quickrun-neovim-job"]
 hook_add = '''
 set errorformat=%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 let g:quickrun_config = {}
@@ -89,7 +90,17 @@ xnoremap <leader>r :<C-U>write<CR>gv:QuickRun -mode v<CR>
 " <C-c> でquickrunを停止
 nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
 command! -nargs=+ -complete=command Capture QuickRun -type vim -src <q-args>
+if has('nvim')
+  " Use 'neovim_job' in Neovim
+  let g:quickrun_config._.runner = 'neovim_job'
+elseif exists('*ch_close_in')
+  " Use 'job' in Vim which support job feature
+  let g:quickrun_config._.runner = 'job'
+endif
 '''
+
+[[plugins]]
+repo = "lambdalisue/vim-quickrun-neovim-job"
 
 [[plugins]]
 repo = 'mattn/vim-sonictemplate'
