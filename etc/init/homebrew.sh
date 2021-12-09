@@ -52,12 +52,6 @@ brew install zsh
 cd ~
 mkdir -p ~/.config
 
-# zinit
-mkdir -p ~/.zinit
-if [ ! -d ~/.zinit/bin ]; then
-  git clone https://github.com/zdharma/zinit.git ~/.zinit/bin
-fi
-
 # efm-langserver
 mkdir -p ~/.config/efm-langserver
 brew install efm-langserver
