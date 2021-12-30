@@ -26,7 +26,6 @@ IsOpenChrome() {
 ; 無変換キー + Noe, r, e
 vk1D::Send, {Blind}{vk1D}
 vk1D & r::Reload
-vk1D & e::Run, D:\tablacusexplorer\TE64.exe
 
 ;-----------------------------------------------------------
 ; ターミナルでvimのためのIME
