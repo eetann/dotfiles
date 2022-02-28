@@ -10,12 +10,12 @@
     "vue"
   ],
   "suggest.timeout": 5000,
-  "coc.preferences.colorSupport": true,
   "diagnostic.warningSign": "W",
   "diagnostic.errorSign": "E",
   "diagnostic.hintSign": "H",
   "diagnostic.infoSign": "i",
   "python.formatting.provider": "black",
+  "eslint.autoFixOnSave": true,
   "languageserver": {
     "clangd": {
       "command": "clangd-10",
