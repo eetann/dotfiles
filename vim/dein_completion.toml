@@ -7,6 +7,8 @@ hook_add = '''
     " let g:neosnippet#snippets_directory+=['~/.vim/dein/repos/github.com/honza/vim-snippets/snippets']
     let g:neosnippet#enable_completed_snippet = 1 " 関数スニペットを展開
     let g:neosnippet#expand_word_boundary = 0 " jump時に間違えて補完されないようにオフ
+    let g:neosnippet#scope_aliases = {}
+    let g:neosnippet#scope_aliases["typescript"] = "typescript,typescriptreact,react"
     " imap <C-k> <Plug>(neosnippet_expand_or_jump)
     " smap <C-k> <Plug>(neosnippet_expand_or_jump)
     " xmap <C-k> <Plug>(neosnippet_expand_target)
@@ -59,6 +61,17 @@ hook_source = '''
     else
         imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
     endif
+
+    " Remap <C-d> and <C-u> for scroll float windows/popups.
+    if has('nvim-0.4.0') || has('patch-8.2.0750')
+      nnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
+      nnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
+      inoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+      inoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+      vnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
+      vnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
+    endif
+
     nnoremap <silent> K :call <SID>show_documentation()<CR>
     function! s:show_documentation()
         if (index(['vim','help'], &filetype) >= 0)
