@@ -79,6 +79,7 @@ set list "空白文字の可視化
 set listchars=tab:\|\ ,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 set display=lastline
 set termguicolors
+set background=dark
 
 " ----折りたたみやカーソル位置を保存------------------------------
 " set viewoptions=cursor,folds
@@ -93,7 +94,7 @@ set winwidth=30
 set winminwidth=30
 set noequalalways
 set belloff=all
-
+"
 " 設定ファイルの読み込み------------------------------------------
 call map(sort(split(glob('~/dotfiles/vim/*.vim'), '\n')),
 \ {->[execute('exec "so" v:val')]})
@@ -101,41 +102,107 @@ call map(sort(split(glob('~/dotfiles/vim/*.vim'), '\n')),
 " echo map([1, 2, 3], {-> v:val + v:val })
 " {args -> expr1} lambda
 
-" dein Scripts-----------------------------------------------------
-let s:dein_path = expand('$HOME/.vim/dein')
-let s:dein_repo_path = s:dein_path . '/repos/github.com/Shougo/dein.vim'
-
-" dein.vim がなければ github からclone
-if &runtimepath !~# '/dein.vim'
-    if !isdirectory(s:dein_repo_path)
-        execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_path
-    endif
-    execute 'set runtimepath^=' . fnamemodify(s:dein_repo_path, ':p')
-endif
-
-if dein#load_state(s:dein_path)
-    call dein#begin(s:dein_path)
-
-    let g:config_dir  = expand('$HOME/dotfiles/vim')
-
-    call dein#load_toml(g:config_dir . '/dein.toml', {'lazy': 0})
-    call dein#load_toml(g:config_dir . '/dein_completion.toml', {'lazy': 1})
-    call dein#load_toml(g:config_dir . '/dein_textobj.toml', {'lazy': 1})
-    call dein#load_toml(g:config_dir . '/dein_filetype.toml', {'lazy': 1})
-    call dein#load_toml(g:config_dir . '/dein_lazy.toml', {'lazy': 1})
-
-    " Required:
-    call dein#end()
-    call dein#save_state()
-endif
-
-" Required:
 filetype plugin indent on
 syntax enable
+let g:loaded_netrw       = 1
+let g:loaded_netrwPlugin = 1
 
-" If you want to install not installed plugins on startup.
-if dein#check_install()
-    call dein#install()
+" vim-plug--------------------------------------------------------
+function! Cond(cond, ...)
+  let opts = get(a:000, 0, {})
+  return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
+endfunction
+
+" Install vim-plug if not found
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  " silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  silent execute '!curl -fLo '.data_dir.
+   \ '/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 endif
 
-" End dein Scripts------------------------------------------------
+" Run PlugInstall if there are missing plugins
+autocmd vimrc VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+ \| PlugInstall --sync | source $MYVIMRC
+ \| endif
+
+" Plugins will be downloaded under the specified directory.
+call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
+
+" Declare the list of plugins.
+Plug 'machakann/vim-highlightedyank' " vim/plug/vim-highlightedyank.vim
+Plug 'kana/vim-textobj-user' " add textobj
+  Plug 'osyo-manga/vim-textobj-multiblock',
+  \ {'on': ['<Plug>(textobj-multiblock-']} " vim/plug/vim-textobj-multiblock.vim
+
+Plug 'machakann/vim-swap', {'on': ['<Plug>(swap-']} " vim/plug/vim-swap.vim
+Plug 'jiangmiao/auto-pairs' " vim/plug/auto-pairs.vim
+Plug 'andymass/vim-matchup' " %を拡張
+Plug 'machakann/vim-sandwich' " 括弧関連便利になる
+
+Plug 'roxma/nvim-yarp', Cond(!has('nvim')) " nvim系に必要
+Plug 'roxma/vim-hug-neovim-rpc', Cond(!has('nvim')) " nvim系に必要
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+" Plug 'honza/vim-snippets' " スニペット集
+Plug 'Shougo/neosnippet-snippets' " スニペット集
+Plug 'Shougo/neosnippet.vim' " vim/plug/neosnippet.vim.vim
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " vim/plug/coc.nvim.vim
+
+Plug 'morhetz/gruvbox' " color scheme
+Plug 'nathanaelkane/vim-indent-guides' " vim/plug/vim-indent-guides.vim
+Plug 'vim-airline/vim-airline' " vim/plug/vim-airline.vim
+Plug 'vim-airline/vim-airline-themes' " ステータスラインのテーマ
+
+Plug 'tyru/caw.vim', {'on': '<Plug>(caw:'} " vim/plug/caw.vim.vim
+Plug 'tyru/open-browser.vim', 
+  \ {'on': ['<Plug>(openbrowser-smart-search)', 'OpenBrowser']} " vim/plug/open-browser.vim.vim
+
+Plug 'thinca/vim-quickrun' " vim/plug/vim-quickrun.vim
+Plug 'lambdalisue/vim-quickrun-neovim-job' " quickrunをNeovimで使う
+
+Plug 'mattn/vim-sonictemplate', {'on': ['Tem', 'Template']} " vim/plug/vim-sonictemplate.vim
+Plug 'junegunn/vim-easy-align', {'on': '<Plug>(LiveEasyAlign)'} " vim/plug/vim-easy-align.vim
+Plug 'bkad/CamelCaseMotion', {'on': '<Plug>CamelCaseMotion'} " vim/plug/CamelCaseMotion.vim
+Plug 'delphinus/vim-auto-cursorline' " vim/plug/vim-auto-cursorline.vim
+Plug 'kshenoy/vim-signature' " マーク位置の表示
+Plug 'vim-jp/vimdoc-ja', {'for': 'help'} " 日本語ヘルプ
+Plug 'simeji/winresizer' " vim/plug/winresizer.vim
+
+Plug 'cespare/vim-toml', {'for': 'toml'} " TOMLのシンタックスハイライト
+Plug 'mechatroner/rainbow_csv', {'for': 'csv'} " vim/plug/rainbow_csv.vim
+" Plug 'leafOfTree/vim-vue-plugin', {'for': 'vue'} " 
+
+" vim/plug/emmet-vim.vim
+Plug 'mattn/emmet-vim',
+    \ {'for': ['html', 'css', 'php', 'xml', 'javascript', 'vue', 'typescriptreact', 'react']}
+
+Plug 'ap/vim-css-color', {'for': ['css']} " CSSの色付け
+
+" vim/plug/vim-markdown.vim
+Plug 'plasticboy/vim-markdown',
+  \ {'for': ['markdown','md','mdwn','mkd','mkdn','mark']}
+
+" テーブルの生成を補助?
+Plug 'godlygeek/tabular',
+  \ {'for': ['markdown','md','mdwn','mkd','mkdn','mark']}
+" vim/plug/vim-table-mode.vim
+Plug 'dhruvasagar/vim-table-mode',
+  \ {'for': ['markdown','md','mdwn','mkd','mkdn','mark']}
+
+" List ends here. Plugins become visible to Vim after this call.
+call plug#end()
+
+" Load plugin settings
+let s:plugs = get(s:, 'plugs', get(g:, 'plugs', {}))
+function! FindPlugin(name) abort
+  return has_key(s:plugs, a:name) ? isdirectory(s:plugs[a:name].dir) : 0
+endfunction
+command! -nargs=1 UsePlugin if !FindPlugin(<args>) | finish | endif
+command! PU PlugUpdate | PlugUpgrade
+
+let s:base_dir = expand('~/dotfiles/vim/')
+execute 'set runtimepath+=' . fnamemodify(s:base_dir, ':p')
+runtime! plug/*.vim
