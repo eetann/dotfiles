@@ -78,7 +78,9 @@ set list "空白文字の可視化
 " ウィンドウ幅狭いときの省略での文字表示*2、不可視のスペースを表す
 set listchars=tab:\|\ ,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 set display=lastline
-set termguicolors
+if has('termguicolors')
+  set termguicolors
+endif
 set background=dark
 
 " ----折りたたみやカーソル位置を保存------------------------------
@@ -151,7 +153,7 @@ Plug 'Shougo/neosnippet-snippets' " スニペット集
 Plug 'Shougo/neosnippet.vim' " vim/plug/neosnippet.vim.vim
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " vim/plug/coc.nvim.vim
 
-Plug 'morhetz/gruvbox' " color scheme
+Plug 'sainnhe/gruvbox-material' " vim/plug/gruvbox-material.vim
 Plug 'nathanaelkane/vim-indent-guides' " vim/plug/vim-indent-guides.vim
 Plug 'vim-airline/vim-airline' " vim/plug/vim-airline.vim
 Plug 'vim-airline/vim-airline-themes' " ステータスラインのテーマ

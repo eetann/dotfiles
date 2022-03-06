@@ -1,3 +1,0 @@
-UsePlugin 'gruvbox'
-
-colorscheme gruvbox
