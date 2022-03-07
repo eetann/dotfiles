@@ -31,14 +31,30 @@ Plug 'machakann/vim-sandwich' " 括弧関連便利になる
 
 Plug 'roxma/nvim-yarp', Cond(!has('nvim')) " nvim系に必要
 Plug 'roxma/vim-hug-neovim-rpc', Cond(!has('nvim')) " nvim系に必要
+Plug 'nvim-lua/plenary.nvim', Cond(has('nvim')) " nvim
+Plug 'nvim-telescope/telescope.nvim', Cond(has('nvim')) " vim/plug/telescope.nvim.vim
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " Plug 'honza/vim-snippets' " スニペット集
-Plug 'Shougo/neosnippet-snippets' " スニペット集
-Plug 'Shougo/neosnippet.vim' " vim/plug/neosnippet.vim.vim
-Plug 'neoclide/coc.nvim', {'branch': 'release'} " vim/plug/coc.nvim.vim
+" Plug 'Shougo/neosnippet-snippets' " スニペット集
+" Plug 'Shougo/neosnippet.vim' " vim/plug/neosnippet.vim.vim
+" Plug 'neoclide/coc.nvim', {'branch': 'release'} " vim/plug/coc.nvim.vim
+
+" vim/plug/nvim-lspconfig.vim
+Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/nvim-lsp-installer' 
+Plug 'ray-x/lsp_signature.nvim'
+
+" vim/plug/nvim-cmp.vim
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip' " vim/plug/vim-vsnip.vim
 
 Plug 'sainnhe/gruvbox-material' " vim/plug/gruvbox-material.vim
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
