@@ -4,6 +4,7 @@ UsePlugin 'nvim-cmp'
 lua <<EOF
 -- Setup nvim-cmp.
 local cmp = require('cmp')
+local lspkind = require('lspkind')
 
 cmp.setup({
 snippet = {
@@ -27,8 +28,12 @@ sources = cmp.config.sources({
   { name = 'nvim_lsp' },
   { name = 'vsnip' },
 }, {
+  { name = 'path' },
   { name = 'buffer' },
-})
+}),
+formatting = {
+  format = lspkind.cmp_format({ mode = 'text' })
+},
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
