@@ -33,7 +33,7 @@ mapping = {
     c = cmp.mapping.close(),
   }),
   ['<CR>'] = cmp.mapping.confirm({ select = true }),
-  ["<C-k>"] = cmp.mapping(function(fallback)
+  ['<C-k>'] = cmp.mapping(function(fallback)
     if vim.fn["vsnip#available"](1) == 1 then
       feedkey("<Plug>(vsnip-expand-or-jump)", "")
     elseif cmp.visible() then
