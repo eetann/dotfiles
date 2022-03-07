@@ -12,9 +12,11 @@ let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#wordcount#enabled = 0
 
 " tabline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline#extensions#tabline#alt_sep = 1
+if !has('nvim')
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#formatter = 'unique_tail'
+  let g:airline#extensions#tabline#alt_sep = 1
+endif
 
 let g:airline#extensions#default#layout = [
 \ [ 'a', 'b', 'c' ],
