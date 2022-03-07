@@ -46,9 +46,11 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
+Plug 'onsails/lspkind-nvim'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip' " vim/plug/vim-vsnip.vim
-Plug 'onsails/lspkind-nvim'
+Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'rafamadriz/friendly-snippets'
 
 Plug 'sainnhe/gruvbox-material' " vim/plug/gruvbox-material.vim
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}

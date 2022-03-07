@@ -156,7 +156,6 @@ local on_attach = function(client, bufnr)
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
   vim.api.nvim_buf_add_user_command(bufnr, 'Format', function()
       vim.lsp.buf.formatting()
   end, {})
@@ -174,6 +173,7 @@ lsp_installer.on_server_ready(function(server)
   local opts = {}
   opts.on_attach = on_attach
   opts.capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  opts.capabilities.textDocument.completion.completionItem.snippetSupport = true
 
   if server.name == 'tsserver' or server.name == 'eslint' then
     local root_dir = nvim_lsp.util.root_pattern('package.json', 'node_modules')
