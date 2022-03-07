@@ -1,0 +1,14 @@
+{
+  "fname-base": {
+    "prefix": "fname-base",
+    "body": "$TM_FILENAME_BASE"
+  },
+  "fname": {
+    "prefix": "fname",
+    "body": "$TM_FILENAME"
+  },
+  "fpath": {
+    "prefix": "fpath",
+    "body": "$TM_FILEPATH"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "zenn-details": {
+    "prefix": "zenn-details",
+    "body": [
+      ":::details \\$1",
+      "\\$2",
+      ":::",
+    ],
+    "description": ""
+  },
+  "details-summary": {
+    "prefix": "details-summary",
+    "body": [
+      "<details>",
+      "<summary>\\$1</summary>",
+      "",
+      "\\$2",
+      "",
+      "</details>",
+    ],
+  }
+  "link": {
+    "prefix": "link",
+    "body": "[${1:$TM_SELECTED_TEXT}]($2)"
+  }
+}

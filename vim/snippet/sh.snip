@@ -1,9 +1,0 @@
-snippet     yesno
-abbr        ask yes no
-options     head
-    read -p "ok? (y/n) :" YN
-    if [ "${YN}" = "y" ]; then
-        echo "do something"
-    else
-        exit 1;
-    fi
