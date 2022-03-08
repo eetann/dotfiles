@@ -58,6 +58,8 @@ Plug 'nathanaelkane/vim-indent-guides' " vim/plug/vim-indent-guides.vim
 Plug 'vim-airline/vim-airline' " vim/plug/vim-airline.vim
 Plug 'vim-airline/vim-airline-themes' " ステータスラインのテーマ
 Plug 'romgrk/barbar.nvim' " vim/plug/barbar.vim
+Plug 'kevinhwang91/nvim-hlslens' " vim/plug/nvim-hlslens.vim
+Plug 'petertriho/nvim-scrollbar' " vim/plug/nvim-scrollbar.vim
 
 Plug 'tyru/caw.vim', {'on': '<Plug>(caw:'} " vim/plug/caw.vim.vim
 Plug 'tyru/open-browser.vim', 
