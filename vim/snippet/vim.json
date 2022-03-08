@@ -1,0 +1,10 @@
+{
+  "lua": {
+    "prefix": "lua",
+    "body": [
+      "lua << EOF",
+      "$1",
+      "EOF",
+    ],
+  },
+}
