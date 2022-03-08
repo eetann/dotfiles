@@ -31,26 +31,29 @@ Plug 'machakann/vim-sandwich' " 括弧関連便利になる
 
 Plug 'roxma/nvim-yarp', Cond(!has('nvim')) " nvim系に必要
 Plug 'roxma/vim-hug-neovim-rpc', Cond(!has('nvim')) " nvim系に必要
-Plug 'nvim-lua/plenary.nvim', Cond(has('nvim')) " nvim
-Plug 'nvim-telescope/telescope.nvim', Cond(has('nvim')) " vim/plug/telescope.nvim.vim
 
-" vim/plug/nvim-lspconfig.vim
-Plug 'neovim/nvim-lspconfig'
-Plug 'williamboman/nvim-lsp-installer' 
-Plug 'ray-x/lsp_signature.nvim' " signature help for insert mode
-Plug 'tami5/lspsaga.nvim'
+if has('nvim')
+  Plug 'nvim-lua/plenary.nvim' " nvim
+  Plug 'nvim-telescope/telescope.nvim' " vim/plug/telescope.nvim.vim
+  " vim/plug/nvim-lspconfig.vim
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'williamboman/nvim-lsp-installer'
+  Plug 'ray-x/lsp_signature.nvim' " signature help for insert mode
+  Plug 'tami5/lspsaga.nvim'
+  Plug 'jose-elias-alvarez/null-ls.nvim'
 
-" vim/plug/nvim-cmp.vim
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'onsails/lspkind-nvim'
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip' " vim/plug/vim-vsnip.vim
-Plug 'hrsh7th/vim-vsnip-integ'
-Plug 'rafamadriz/friendly-snippets'
+  " vim/plug/nvim-cmp.vim
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
+  Plug 'hrsh7th/cmp-cmdline'
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'onsails/lspkind-nvim'
+  Plug 'hrsh7th/cmp-vsnip'
+  Plug 'hrsh7th/vim-vsnip' " vim/plug/vim-vsnip.vim
+  Plug 'hrsh7th/vim-vsnip-integ'
+  Plug 'rafamadriz/friendly-snippets'
+endif
 
 Plug 'sainnhe/gruvbox-material' " vim/plug/gruvbox-material.vim
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}

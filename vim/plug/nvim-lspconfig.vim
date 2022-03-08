@@ -161,6 +161,11 @@ local on_attach = function(client, bufnr)
   end, {})
 end
 
+local function on_attach_disable_format(client, buffer)
+  client.resolved_capabilities.document_formatting = false
+  on_attach(client, buffer)
+end
+
 local nvim_lsp = require('lspconfig')
 local lsp_installer = require('nvim-lsp-installer')
 function detected_root_dir(root_dir)
@@ -179,6 +184,7 @@ lsp_installer.on_server_ready(function(server)
     local root_dir = nvim_lsp.util.root_pattern('package.json', 'node_modules')
     opts.root_dir = root_dir
     opts.autostart = detected_root_dir(root_dir)
+    opts.on_attach = on_attach_disable_format
   elseif server.name == 'denols' then
     local root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc', 'deps.ts')
     opts.root_dir = root_dir
@@ -189,4 +195,29 @@ lsp_installer.on_server_ready(function(server)
   server:setup(opts)
   vim.cmd [[ do User LspAttachBuffers ]]
 end)
+
+local null_ls = require("null-ls")
+local command_resolver = require("null-ls.helpers.command_resolver")
+local sources = {
+  null_ls.builtins.formatting.prettier.with({
+    dynamic_command = function(params)
+      return command_resolver.from_node_modules(params)
+        or command_resolver.from_yarn_pnp(params)
+        or vim.fn.executable(params.command) == 1 and params.command
+    end,
+  }),
+}
+null_ls.setup({
+  sources = sources,
+  on_attach = function(client)
+    if client.resolved_capabilities.document_formatting then
+      vim.cmd([[
+      augroup LspFormatting
+        autocmd! * <buffer>
+        autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+      augroup END
+      ]])
+    end
+  end,
+})
 EOF
