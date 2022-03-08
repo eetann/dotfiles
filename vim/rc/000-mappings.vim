@@ -20,8 +20,13 @@ nnoremap ss :<C-u>sp<CR>
 nnoremap sv :<C-u>vs<CR>
 " ウィンドウを閉じる
 nnoremap sc <C-w>c
-" ウィンドウを閉じずにバッファを閉じる
 if !has('nvim')
+  nnoremap [b :<C-u>bprevious<CR>
+  nnoremap ]b :<C-u>bnext<CR>
+
+  " ターミナル設定
+  tnoremap <C-q> <C-w><C-c>:close!<CR>
+  " ウィンドウを閉じずにバッファを閉じる
   nnoremap sq :<C-u>call <SID>my_buffer_delete()<CR>
   function! s:my_buffer_delete()
     let s:now_bn = bufnr("%")
@@ -47,14 +52,7 @@ nnoremap [q :cprevious<CR>
 nnoremap ]q :cnext<CR>
 nnoremap [Q :<C-u>cfirst<CR>
 nnoremap ]Q :<C-u>clast<CR>
-" バッファの移動 ahkとの組み合わせで、ctrl + (shift) + tabで切替可能
-nnoremap <space><S-Tab> :<C-u>bprevious<CR>
-nnoremap <space><Tab> :<C-u>bnext<CR>
-
-" ターミナル設定
-tnoremap <space><S-Tab> <C-w>:bprevious!<CR>
-tnoremap <space><Tab> <C-w>:bnext!<CR>
-tnoremap <C-q> <C-w><C-c>:close!<CR>
+"
 " カーソル前方の数字に対してインクリメント&デクリメント
 nnoremap s<C-a> :call search("[0-9]",'b', line("."))<CR><C-a>
 nnoremap s<C-x> :call search("[0-9]",'b', line("."))<CR><C-x>
@@ -144,10 +142,7 @@ nnoremap <Plug>(my-switch) <Nop>
 nmap <Leader>s <Plug>(my-switch)
 nnoremap <silent> <Plug>(my-switch)w :<C-u>setl wrap! wrap?<CR>
 nnoremap <silent> <Plug>(my-switch)p :<C-u>setl paste! paste?<CR>
-nnoremap <silent> <Plug>(my-switch)b :<C-u>setl scrollbind! scrollbind?<CR>
-nnoremap <silent> <Plug>(my-switch)h :<C-u>set nohlsearch! hlsearch?<CR>
-
-nnoremap <Leader>, :<C-u>%s/、/，/ge<CR>:<C-u>%s/。/．/ge<CR>
+nnoremap <silent> <ESC><ESC> :<C-u>set nohlsearch! hlsearch?<CR>
 
 " vimrcの適用
 nnoremap <F5> :<C-u>source $MYVIMRC<CR>
