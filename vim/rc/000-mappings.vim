@@ -105,6 +105,9 @@ function! s:set_vsearch()
     silent normal gv"zy
     let @/ = '\V' . substitute(escape(@z, '/\'), '\n', '\\n', 'g')
 endfunction
+if !has('nvim')
+  nnoremap <silent> <ESC><ESC> :<C-u>set nohlsearch! hlsearch?<CR>
+endif
 
 " digraph f<C-k>xxで対応文字に飛べる
 " カッコ
@@ -142,7 +145,6 @@ nnoremap <Plug>(my-switch) <Nop>
 nmap <Leader>s <Plug>(my-switch)
 nnoremap <silent> <Plug>(my-switch)w :<C-u>setl wrap! wrap?<CR>
 nnoremap <silent> <Plug>(my-switch)p :<C-u>setl paste! paste?<CR>
-nnoremap <silent> <ESC><ESC> :<C-u>set nohlsearch! hlsearch?<CR>
 
 " vimrcの適用
 nnoremap <F5> :<C-u>source $MYVIMRC<CR>
