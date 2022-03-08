@@ -21,15 +21,14 @@ nnoremap sv :<C-u>vs<CR>
 " ウィンドウを閉じる
 nnoremap sc <C-w>c
 " ウィンドウを閉じずにバッファを閉じる
-nnoremap sq :<C-u>call <SID>my_buffer_delete()<CR>
-function! s:my_buffer_delete()
+if !has('nvim')
+  nnoremap sq :<C-u>call <SID>my_buffer_delete()<CR>
+  function! s:my_buffer_delete()
     let s:now_bn = bufnr("%")
     bnext
     execute 'bdelete' . s:now_bn
-endfunction
-" バッファもウィンドウも閉じる
-nnoremap sQ :<C-u>bd!<CR>
-nnoremap sC :<C-u>bd!<CR>
+  endfunction
+endif
 " InsertModeでカーソル移動
 inoremap <C-b> <left>
 inoremap <C-f> <right>
