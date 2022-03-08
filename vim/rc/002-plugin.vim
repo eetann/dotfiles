@@ -53,23 +53,25 @@ if has('nvim')
   Plug 'hrsh7th/vim-vsnip' " vim/plug/vim-vsnip.vim
   Plug 'hrsh7th/vim-vsnip-integ'
   Plug 'rafamadriz/friendly-snippets'
+
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'romgrk/barbar.nvim' " vim/plug/barbar.vim
+  Plug 'kevinhwang91/nvim-hlslens' " vim/plug/nvim-hlslens.vim
+  Plug 'petertriho/nvim-scrollbar' " vim/plug/nvim-scrollbar.vim
+  Plug 'lambdalisue/vim-quickrun-neovim-job' " quickrunをNeovimで使う
+  Plug 'norcalli/nvim-colorizer.lua'
 endif
 
+Plug 'thinca/vim-quickrun' " vim/plug/vim-quickrun.vim
+
 Plug 'sainnhe/gruvbox-material' " vim/plug/gruvbox-material.vim
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nathanaelkane/vim-indent-guides' " vim/plug/vim-indent-guides.vim
 Plug 'vim-airline/vim-airline' " vim/plug/vim-airline.vim
 Plug 'vim-airline/vim-airline-themes' " ステータスラインのテーマ
-Plug 'romgrk/barbar.nvim' " vim/plug/barbar.vim
-Plug 'kevinhwang91/nvim-hlslens' " vim/plug/nvim-hlslens.vim
-Plug 'petertriho/nvim-scrollbar' " vim/plug/nvim-scrollbar.vim
 
 Plug 'tyru/caw.vim', {'on': '<Plug>(caw:'} " vim/plug/caw.vim.vim
 Plug 'tyru/open-browser.vim', 
   \ {'on': ['<Plug>(openbrowser-smart-search)', 'OpenBrowser']} " vim/plug/open-browser.vim.vim
-
-Plug 'thinca/vim-quickrun' " vim/plug/vim-quickrun.vim
-Plug 'lambdalisue/vim-quickrun-neovim-job' " quickrunをNeovimで使う
 
 Plug 'mattn/vim-sonictemplate', {'on': ['Tem', 'Template']} " vim/plug/vim-sonictemplate.vim
 Plug 'junegunn/vim-easy-align', {'on': '<Plug>(LiveEasyAlign)'} " vim/plug/vim-easy-align.vim
@@ -86,8 +88,6 @@ Plug 'mechatroner/rainbow_csv', {'for': 'csv'} " vim/plug/rainbow_csv.vim
 " vim/plug/emmet-vim.vim
 Plug 'mattn/emmet-vim',
     \ {'for': ['html', 'css', 'php', 'xml', 'javascript', 'vue', 'typescriptreact', 'react']}
-
-Plug 'ap/vim-css-color', {'for': ['css']} " CSSの色付け
 
 " vim/plug/vim-markdown.vim
 Plug 'plasticboy/vim-markdown',
