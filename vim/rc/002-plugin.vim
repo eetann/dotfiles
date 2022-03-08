@@ -49,10 +49,9 @@ if has('nvim')
   Plug 'hrsh7th/cmp-cmdline'
   Plug 'hrsh7th/nvim-cmp'
   Plug 'onsails/lspkind-nvim'
-  Plug 'hrsh7th/cmp-vsnip'
-  Plug 'hrsh7th/vim-vsnip' " vim/plug/vim-vsnip.vim
-  Plug 'hrsh7th/vim-vsnip-integ'
-  Plug 'rafamadriz/friendly-snippets'
+  Plug 'SirVer/ultisnips'
+  Plug 'honza/vim-snippets'
+  Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'romgrk/barbar.nvim' " vim/plug/barbar.vim
