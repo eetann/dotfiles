@@ -107,7 +107,7 @@ _download() {
       elif is_exists "wget"; then
         wget -O - "$zip_url"
       fi | tar xvz
-      
+
       if [ ! -d dotfiles-master ]; then
         error "dotfiles-master: not found"
         exit 1
