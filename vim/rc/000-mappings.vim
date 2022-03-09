@@ -105,9 +105,7 @@ function! s:set_vsearch()
     silent normal gv"zy
     let @/ = '\V' . substitute(escape(@z, '/\'), '\n', '\\n', 'g')
 endfunction
-if !has('nvim')
-  nnoremap <silent> <ESC><ESC> :<C-u>set nohlsearch! hlsearch?<CR>
-endif
+nnoremap <silent> <ESC><ESC> :<C-u>set nohlsearch! hlsearch?<CR>
 
 " digraph f<C-k>xxで対応文字に飛べる
 " カッコ

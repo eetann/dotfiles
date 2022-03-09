@@ -55,8 +55,6 @@ if has('nvim')
 
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'romgrk/barbar.nvim' " vim/plug/barbar.vim
-  Plug 'kevinhwang91/nvim-hlslens' " vim/plug/nvim-hlslens.vim
-  Plug 'petertriho/nvim-scrollbar' " vim/plug/nvim-scrollbar.vim
   Plug 'lambdalisue/vim-quickrun-neovim-job' " quickrunをNeovimで使う
   Plug 'norcalli/nvim-colorizer.lua'
 endif
