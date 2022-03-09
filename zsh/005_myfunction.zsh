@@ -1,7 +1,13 @@
 # プラグインによる関数--------------------------------------------
 # z ×fzf
 function fz() {
-    local res=$(z | sort -rn | cut -c 12- | fzf)
+    local fzf_command="fzf"
+    if type fzf-tmux > /dev/null; then
+        fzf_command="fzf-tmux -p 80%"
+    fi
+    fzf_command+=" --preview '$FZF_PREVIEW'"
+    # zの出力の先頭12文字の頻度情報を使ってソートし、fzfに渡すときは削る
+    local res=$(z | sort -rn | cut -c 12- | eval $fzf_command)
     if [ -n "$res" ]; then
         BUFFER+="cd $res"
         zle accept-line
@@ -13,7 +19,14 @@ zle -N fz
 bindkey '^xz' fz
 
 function fghq() {
-    local res=$(ghq list |fzf --preview "bat --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
+    local fzf_command="fzf"
+    if type fzf-tmux > /dev/null; then
+        fzf_command="fzf-tmux -p 80%"
+    fi
+    local preview="bat --color=always --style=header,grid --line-range :100 $(ghq root)/{}/README.*"
+    fzf_command+=" --preview '$preview'"
+
+    local res=$(ghq list | eval $fzf_command)
     if [ -n "$res" ]; then
         BUFFER+="cd $(ghq root)/$res"
         zle accept-line
@@ -61,7 +74,12 @@ function my_fzf_completion() {
     # fzfでファイルを選択
     # テキストファイル以外をプレビュー
     # ASCIIは変換して表示
-    selected=$(eval $find_file | sed "s/^\.\///" | fzf --query "${query}" --preview $preview)
+    local fzf_command="fzf"
+    if type fzf-tmux > /dev/null; then
+        fzf_command="fzf-tmux -p 80%"
+    fi
+    fzf_command+=" --query '$query' --preview '$FZF_PREVIEW'"
+    selected=$(eval $FZF_FIND_FILE | sed "s/^\.\///" | eval $fzf_command)
     # ファイルを選択した場合のみバッファを更新
     if [[ -n "$selected" ]]; then
         # 改行をスペースに置換
