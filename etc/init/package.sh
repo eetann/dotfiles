@@ -10,7 +10,8 @@ fi
 # load useful functions
 . "$DOTPATH"/etc/scripts/header.sh
 
-PKG_DEFAULT="git tree nkf curl manpages-ja manpages-ja-dev"
+PKG_DEFAULT="git tree nkf curl"
+PKG_UBUNTU="manpages-ja manpages-ja-dev wamerica"
 
 ubuntu() {
   log "Installing packages ..."
@@ -18,6 +19,7 @@ ubuntu() {
   sudo apt update -qq -y
   sudo apt upgrade -qq -y
   sudo apt install -qq -y $PKG_DEFAULT
+  sudo apt install -qq -y $PKG_UBUNTU
   sudo apt install -qq -y software-properties-common
   info "Installed packages."
 }

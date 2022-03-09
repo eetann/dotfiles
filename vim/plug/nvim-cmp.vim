@@ -19,6 +19,7 @@ end
 
 local cmp = require('cmp')
 local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
+
 cmp.setup({
   documentation = {
     border = "single",
@@ -54,10 +55,12 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'ultisnips' },
     { name = 'nvim_lsp' },
-  }, {
+    }, {
     { name = 'path' },
     { name = 'buffer' },
-  }),
+    { name = "dictionary", keyword_length = 3, },
+    }
+  ),
   formatting = {
     format = lspkind.cmp_format({ mode = 'text' })
   },
@@ -65,20 +68,30 @@ cmp.setup({
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {
-sources = {
-  { name = 'buffer' }
-}
+  sources = {
+    { name = 'buffer' }
+  }
 })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
-sources = cmp.config.sources({
-  { name = 'path' }
-}, {
-  { name = 'cmdline' }
-})
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  })
 })
 
--- Setup lspconfig.
---@: vim/plug/nvim-lspconfig.vim
+require("cmp_dictionary").setup({
+  dic = {
+    ["*"] = { "/usr/share/dict/words" },
+  },
+  exact = 2,
+  first_case_insensitive = false,
+  document = false,
+  document_command = "wn %s -over",
+  async = false, 
+  capacity = 5,
+  debug = false,
+})
 EOF
