@@ -1,3 +1,39 @@
+# 展開------------------------------------------------------------
+# Gスペース のように入力したら、勝手に | grep に置き換えてくれる
+setopt extended_glob
+typeset -A abbreviations
+abbreviations=(
+    "G"    "| grep"
+    "X"    "| xargs"
+    "T"    "| tail"
+    "C"    "| cat"
+    "W"    "| wc"
+    "A"    "| awk"
+    "S"    "| sed"
+    "E"    "2>&1 > /dev/null"
+    "N"    "> /dev/null"
+    "DC"   "docker-compose"
+    "CD"   "&& cd \$_"
+    "CL"   "| clip.exe"
+    "TREE" "tree -a -I '.git|node_modules'"
+)
+
+magic-abbrev-expand() {
+    local MATCH
+    LBUFFER=${LBUFFER%%(#m)[-_a-zA-Z0-9]#}
+    LBUFFER+=${abbreviations[$MATCH]:-$MATCH}
+    zle self-insert
+}
+
+no-magic-abbrev-expand() {
+    LBUFFER+=' '
+}
+
+zle -N magic-abbrev-expand
+zle -N no-magic-abbrev-expand
+bindkey " " magic-abbrev-expand
+bindkey "^x " no-magic-abbrev-expand
+
 # プラグインによる関数--------------------------------------------
 # z ×fzf
 function fz() {
