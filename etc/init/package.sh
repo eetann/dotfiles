@@ -10,7 +10,7 @@ fi
 # load useful functions
 . "$DOTPATH"/etc/scripts/header.sh
 
-PKG_DEFAULT="git tree nkf curl"
+PKG_DEFAULT="git tree nkf curl manpages-ja manpages-ja-dev"
 
 ubuntu() {
   log "Installing packages ..."
