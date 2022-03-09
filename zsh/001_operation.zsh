@@ -19,39 +19,3 @@ setopt share_history
 HISTFILE=$HOME/.zsh-history
 HISTSIZE=10000
 SAVEHIST=10000
-
-# 色--------------------------------------------------------------
-autoload -Uz colors
-colors
-if [[ -f ~/.dircolors && -x `which dircolors` ]]; then
-    eval `dircolors ~/.dircolors`
-    zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-fi
-
-# プロンプト------------------------------------------------------
-setopt prompt_cr # 改行のない出力をプロンプトで上書きするのを防ぐ
-setopt prompt_sp
-setopt transient_rprompt
-local my_char=039
-local my_sep="%F{007} >%f"
-# BackgroundJob数
-local prompt_job="%(1j.%U(%j)%u$my_sep .)"
-# command返り値
-local my_check="%(?..%F{red}x $my_sep )"
-# pwd
-local prompt_dir="$my_check%F{$my_char}%B %~%b$my_sep"
-# git
-autoload -Uz vcs_info
-setopt prompt_subst # 表示するたびに変数展開
-zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git:*' check-for-changes true
-zstyle ':vcs_info:git:*' stagedstr '%F{yellow}'
-zstyle ':vcs_info:git:*' unstagedstr '%F{red}'
-zstyle ':vcs_info:git:*' formats '%F{255}G:%r'$my_sep' %F{green}%c%u%b%f'
-zstyle ':vcs_info:git:*' actionformats '%F{255}G: %r'$my_sep' %F{004}%b%f'
-# プロンプト表示前にversion管理から情報を取ってくる
-precmd () { vcs_info }
-
-local prompt_git=' %B$vcs_info_msg_0_%b'
-local prompt_end="$"
-PROMPT="$prompt_job$prompt_dir$prompt_git"$'\n'"$prompt_end"
