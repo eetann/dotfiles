@@ -86,13 +86,6 @@ Plug 'mechatroner/rainbow_csv', {'for': 'csv'} " vim/plug/rainbow_csv.vim
 Plug 'mattn/emmet-vim',
     \ {'for': ['html', 'css', 'php', 'xml', 'javascript', 'vue', 'typescriptreact', 'react']}
 
-" vim/plug/vim-markdown.vim
-Plug 'plasticboy/vim-markdown',
-  \ {'for': ['markdown','md','mdwn','mkd','mkdn','mark']}
-
-" テーブルの生成を補助?
-Plug 'godlygeek/tabular',
-  \ {'for': ['markdown','md','mdwn','mkd','mkdn','mark']}
 " vim/plug/vim-table-mode.vim
 Plug 'dhruvasagar/vim-table-mode',
   \ {'for': ['markdown','md','mdwn','mkd','mkdn','mark']}
