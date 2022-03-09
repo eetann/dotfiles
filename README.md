@@ -5,9 +5,11 @@ WSL2のUbuntuがメインですが、純Ubuntuでも動作するように少し�
 **TODO: このREADMEをもう少しシェルスクリプトに移す**
 
 # Installation
-## 最初にやっておくこと
-1. download [白源](https://github.com/yuru7/HackGen/releases) or 
-[Cica](https://github.com/miiton/Cica)
+## Font
+1. download font
+    + [白源](https://github.com/yuru7/HackGen/releases) or 
+    + [Cica](https://github.com/miiton/Cica/releases)
+    + [PlemolJP_NF](https://github.com/yuru7/PlemolJP/releases)]
 2. Install to OS
 3. Set to terminal
 
@@ -35,12 +37,15 @@ yes | sudo sed -i -e 's%http://.*.ubuntu.com%http://ftp.jaist.ac.jp/pub/Linux%g'
 sudo apt install git build-essential curl
 ```
 
+<details>
+<summary>gitの設定</summary>
+
 ```sh
 git config --global user.name "eetann"
 git config --global user.email "eetann's mail adress"
 ssh-keygen -t rsa -b 4096 -C "eetann's mail adress"
 ```
-数回 `<CR>`
+several times `<CR>`
 
 WSL:
 ```sh
@@ -60,10 +65,11 @@ ssh -T git@github.com
 eval `ssh-agent`
 ssh-add ~/.ssh/id_rsa
 ```
+</details>
 
 ## Execute the command
 ```sh
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/eetann/dotfiles/master/install.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/eetann/dotfiles/master/etc/setup)"
 ```
 
 ## zsh
@@ -71,14 +77,6 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/eetann/dotfiles/master/i
 chsh -s /usr/bin/zsh
 zsh
 ```
-
-```sh
-zinit self-update
-# For change the commandline theme
-fast-theme clean
-# https://github.com/zdharma/zinit#manual-installation
-```
-
 
 ## Install tmux
 
@@ -90,13 +88,11 @@ fast-theme clean
 # for autohotkey
 Windowsのキーボード操作変更のためのスクリプト`likevim.ahk`を使うには、ファイルをスタートアップに登録する必要がある。
 
-1. `likevim.ahk`のショートカットを作成
+1. `likevim.ahk`のコピーまたはショートカットを作成
 2. `Win + r`を入力
 3. `shell:startup`を入力すると、スタートアップのフォルダが開く
 4. 1で作成したショートカットをスタートアップのフォルダに移動
 
-
-**Don't sudo the first time you start vim, or delete the viminfo later**
 
 # Ubuntu
 ## Super-pの入力でディスプレイ設定が戻ってしまう問題
@@ -115,52 +111,3 @@ dconf-editor の
 参考
 [gnome - How to disable global Super-p shortcut? - Ask Ubuntu](https://askubuntu.com/questions/68463/how-to-disable-global-super-p-shortcut)
 
-
-<details>
-<summary>Install latex</summary>
-```sh
-yes | sudo apt install texlive-lang-cjk latexmk unzip
-cd ~
-mkdir ~/work
-cd ~/work
-curl -OL https://github.com/h-kitagawa/plistings/archive/master.zip
-unzip master.zip
-cd plistings-master
-sudo mkdir -p /usr/share/texlive/texmf-dist/tex/latex/plistings
-cd /usr/share/texlive/texmf-dist/tex/latex/plistings
-sudo mv ~/work/plistings-master/plistings.sty .
-mktexlsr
-```
-
-[jlisting](https://osdn.net/projects/mytexpert/downloads/26068/jlisting.sty.bz2/)
-[dirtree](https://ctan.org/tex-archive/macros/generic/dirtree)
-[matlab-prettifier](https://www.ctan.org/pkg/matlab-prettifier)
-
-
-```sh
-cd ~/work
-bunzip2 jlisting.sty.bz2
-sudo mv jlisting.sty /usr/share/texlive/texmf-dist/tex/latex/listings/.
-cd /usr/share/texlive/texmf-dist/tex/latex/listings
-chmod 644 jlisting.sty
-sudo mktexlsr
-cd ~/work
-unzip dirtree.zip
-cd dirtree
-latex dirtree.ins
-sudo mkdir -p /usr/share/texlive/texmf-dist/tex/latex/dirtree
-sudo cp * /usr/share/texlive/texmf-dist/tex/latex/dirtree/.
-cd /usr/share/texlive/texmf-dist/tex/latex/dirtree
-chmod 644 dirtree.sty
-sudo mktexlsr
-cd ~/work
-unzip matlab-prettifier.zip
-cd matlab-prettifier
-latex matlab-prettifier.ins
-sudo mkdir -p /usr/share/texlive/texmf-dist/tex/latex/matlab-prettifier
-sudo mv matlab-prettifier.sty /usr/share/texlive/texmf-dist/tex/latex/matlab-prettifier/.
-cd /usr/share/texlive/texmf-dist/tex/latex/matlab-prettifier
-chmod 644 matlab-prettifier.sty
-sudo mktexlsr
-```
-</details>
