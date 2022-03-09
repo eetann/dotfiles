@@ -32,13 +32,13 @@ fi
 
 if ! has "jvgrep"; then
   log "Installing jvgrep ..."
-  go get github.com/mattn/jvgrep
+  go install github.com/mattn/jvgrep
   info "Installed jvgrep."
 fi
 
 if ! has "mmv"; then
   log "Installing mmv ..."
-  go get github.com/itchyny/mmv/cmd/mmv
+  go install github.com/itchyny/mmv/cmd/mmv
   info "Installed mmv."
 fi
 
