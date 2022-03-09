@@ -11,7 +11,15 @@ fi
 . "$DOTPATH"/etc/scripts/header.sh
 
 PKG_DEFAULT="git tree nkf curl"
-PKG_UBUNTU="manpages-ja manpages-ja-dev wamerica"
+PKG_UBUNTU="neovim manpages-ja manpages-ja-dev wamerica"
+PKG_BREW="bat ripgrep lazygit tmux ghq zsh"
+
+brewinstall() {
+  log "Installing packages ..."
+  brew install $PKG_BREW
+  brew doctor
+  info "Installed Homebrew."
+}
 
 ubuntu() {
   log "Installing packages ..."
@@ -19,8 +27,33 @@ ubuntu() {
   sudo apt update -qq -y
   sudo apt upgrade -qq -y
   sudo apt install -qq -y $PKG_DEFAULT
-  sudo apt install -qq -y $PKG_UBUNTU
   sudo apt install -qq -y software-properties-common
+
+  sudo add-apt-repository ppa:neovim-ppa/unstable
+  sudo apt update -qq -y
+  sudo apt upgrade -qq -y
+  sudo apt install -qq -y $PKG_UBUNTU
+
+  # https://docs.brew.sh/Homebrew-on-Linux
+  log "Installing Homebrew ..."
+  if ! has "brew"; then
+    BUILD_PKG_UBUNTU="build-essential procps curl file git"
+    sudo apt update -q -y
+    sudo apt upgrade -q -y
+    sudo apt install -q -y $BUILD_PKG_UBUNTU
+
+    # Homebrew
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    # test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
+    # test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+    # test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
+    # echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
+    echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >> ~/.bash_profile
+    echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >> ~/.zprofile
+    eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+  fi
+  brewinstall
+
   info "Installed packages."
 }
 

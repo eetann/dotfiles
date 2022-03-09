@@ -10,6 +10,7 @@ fi
 # load useful functions
 . "$DOTPATH"/etc/scripts/header.sh
 
+# check `npm ls -g`
 PKG_DEFAULT="textlint textlint-rule-preset-ja-technical-writing"
 
 all_env() {
