@@ -77,6 +77,10 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/eetann/dotfiles/master/e
 chsh -s /usr/bin/zsh
 zsh
 ```
+Linux,
+```sh
+bash ~/dotfiles/etc/init/oh-my-zsh.sh
+```
 
 ## Install tmux
 
