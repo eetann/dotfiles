@@ -38,7 +38,7 @@ fi
 
 if [ ! -d $HOME/.fzf ]; then
   git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
-  ~/.fzf/install --key-bindings oocompletion --no-update-rc
+  ~/.fzf/install --key-bindings --completion --no-update-rc
 fi
 
 if [ ! -d $ZSH_CUSTOM/themes/powerlevel10k ]; then
