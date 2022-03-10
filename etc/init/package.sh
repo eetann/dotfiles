@@ -11,7 +11,7 @@ fi
 . "$DOTPATH"/etc/scripts/header.sh
 
 PKG_DEFAULT="git tree nkf curl"
-PKG_UBUNTU="neovim manpages-ja manpages-ja-dev wamerica"
+PKG_UBUNTU="neovim manpages-ja manpages-ja-dev wamerican"
 PKG_BREW="bat ripgrep lazygit tmux ghq zsh"
 
 brewinstall() {
@@ -29,7 +29,9 @@ ubuntu() {
   sudo apt install -qq -y $PKG_DEFAULT
   sudo apt install -qq -y software-properties-common
 
-  sudo add-apt-repository ppa:neovim-ppa/unstable
+  if ! has "neovim"; then
+    sudo add-apt-repository ppa:neovim-ppa/unstable
+  fi
   sudo apt update -qq -y
   sudo apt upgrade -qq -y
   sudo apt install -qq -y $PKG_UBUNTU

@@ -69,7 +69,7 @@ ssh-add ~/.ssh/id_rsa
 
 ## Execute the command
 ```sh
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/eetann/dotfiles/master/etc/setup)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/eetann/dotfiles/master/etc/setup) --init"
 ```
 
 ## zsh
