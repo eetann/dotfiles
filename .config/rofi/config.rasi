@@ -1,0 +1,16 @@
+configuration {
+    font: "PlemolJP Medium 14";
+    show-icons: true;
+    modi: [combi,drun,run,window];
+    combi-modi: [drun,run,window];
+}
+@theme "gruvbox-dark-soft"
+/* * {                                                        */
+/*     mypink:                         rgba(255, 42, 109, 1); */
+/*     normal-background:            rgba(1, 1, 43, 1);       */
+/*     normal-hightlight-background: rgba(1, 1, 43, 0.7);     */
+/*     active-background:            rgba(0, 86, 120, 1);     */
+/*     active-hightlight-background: rgba(0, 86, 120, 0.7);   */
+/*     normal-foreground:            rgba(209, 247, 255, 1);  */
+/*     active-foreground:            rgba(5, 217, 232, 1);    */
+/* }                                                          */
