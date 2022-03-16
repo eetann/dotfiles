@@ -64,6 +64,8 @@ You need to resist the key.
 ssh -T git@github.com
 eval `ssh-agent`
 ssh-add ~/.ssh/id_rsa
+cd ~/dotfiles
+git remote set-url origin git@github.com:eetann/dotfiles.git
 ```
 </details>
 
