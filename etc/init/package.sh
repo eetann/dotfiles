@@ -11,9 +11,13 @@ fi
 . "$DOTPATH"/etc/scripts/header.sh
 
 PKG_DEFAULT="git tree nkf curl"
+
 PKG_UBUNTU="neovim manpages-ja manpages-ja-dev wamerican"
+
 PKG_BREW="bat ripgrep lazygit tmux ghq zsh"
-PKG_ARCH="neovim alacritty tmux words lazygit fcitx5-im fcitx5-mozc xdg-user-dirs-gtk vivaldi powertop tlp"
+
+PKG_ARCH="neovim alacritty tmux words lazygit fcitx5-im fcitx5-mozc xdg-user-dirs-gtk"
+PKG_ARCH+=" vivaldi powertop tlp rofi bat ghq ripgrep"
 
 brewinstall() {
   log "Installing packages ..."
