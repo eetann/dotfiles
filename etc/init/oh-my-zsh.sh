@@ -11,9 +11,9 @@ fi
 . "$DOTPATH"/etc/scripts/header.sh
 
 
-notlinux() {
+install_omz_plug() {
   if [ ! -d $HOME/.oh-my-zsh ]; then
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
   fi
 
   ZSH_CUSTOM=$HOME/.oh-my-zsh/custom
@@ -47,13 +47,6 @@ notlinux() {
   fi
 }
 
-linux() {
-  info "Please run 'bash ~/dotfiles/etc/init/oh-my-zsh.sh'"
-}
-
-case $(detect_os) in
-  ubuntu)
-    linux ;;
-esac
+install_omz_plug
 
 echo ""

@@ -17,6 +17,5 @@ bash $DOTPATH/etc/init/package.sh
 bash $DOTPATH/etc/init/golang.sh
 bash $DOTPATH/etc/init/python.sh
 bash $DOTPATH/etc/init/node.sh
-bash $DOTPATH/etc/init/oh-my-zsh.sh
 
 echo ""

@@ -9,7 +9,7 @@ WSL2のUbuntuがメインですが、純Ubuntuでも動作するように少し�
 1. download font
     + [白源](https://github.com/yuru7/HackGen/releases) or 
     + [Cica](https://github.com/miiton/Cica/releases)
-    + [PlemolJP_NF](https://github.com/yuru7/PlemolJP/releases)]
+    + [PlemolJP Console NF](https://github.com/yuru7/PlemolJP/releases)
 2. Install to OS
 3. Set to terminal
 
@@ -77,7 +77,6 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/eetann/dotfiles/master/e
 chsh -s /usr/bin/zsh
 zsh
 ```
-Linux,
 ```sh
 bash ~/dotfiles/etc/init/oh-my-zsh.sh
 ```
