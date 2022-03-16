@@ -17,6 +17,11 @@ ubuntu() {
   # https://github.com/golang/go/wiki/Ubuntu
 }
 
+
+archlinux() {
+  sudo pacman -S go
+}
+
 mkdir -p $HOME/go
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH:$GOPATH/bin
@@ -26,6 +31,8 @@ if ! has "go"; then
   case $(detect_os) in
     ubuntu)
       ubuntu ;;
+    archlinux)
+      archlinux;;
   esac
   info "Installed golang."
 fi

@@ -18,10 +18,15 @@ ubuntu() {
   # https://www.python.jp/install/ubuntu/pip.html#2XQ9V7
 }
 
+archlinux() {
+  sudo pacman -S python python-pip
+}
 
 case $(detect_os) in
   ubuntu)
     ubuntu ;;
+  archlinux)
+    archlinux;;
 esac
 
 pip3 install --user pynvim numpy matplotlib pandas opencv-python pysimplegui

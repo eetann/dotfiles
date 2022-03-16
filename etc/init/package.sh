@@ -13,6 +13,7 @@ fi
 PKG_DEFAULT="git tree nkf curl"
 PKG_UBUNTU="neovim manpages-ja manpages-ja-dev wamerican"
 PKG_BREW="bat ripgrep lazygit tmux ghq zsh"
+PKG_ARCH="neovim alacritty tmux words lazygit fcitx5-im fcitx5-mozc xdg-user-dirs-gtk vivaldi powertop tlp"
 
 brewinstall() {
   log "Installing packages ..."
@@ -59,9 +60,19 @@ ubuntu() {
   info "Installed packages."
 }
 
+archlinux () {
+  log "Installing packages ..."
+
+  sudo pacman -S $PKG_ARCH
+
+  info "Installed packages."
+}
+
 case $(detect_os) in
   ubuntu)
     ubuntu ;;
+  archlinux)
+    archlinux;;
 esac
 
 if [ ! -d ~/.tmux/plugins/tpm ]; then
