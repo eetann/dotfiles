@@ -33,4 +33,7 @@ ln -fs ${DOTPATH}/.config/alacritty/alacritty.yml ${HOME}/.config/alacritty/alac
 mkdir -p ${HOME}/.config/rofi
 ln -fs ${DOTPATH}/.config/rofi/config.rasi ${HOME}/.config/rofi/config.rasi
 
+mkdir -p ${HOME}/.config/i3
+ln -fs ~/dotfiles/.config/i3/config ~/.config/i3/config
+
 echo ""
