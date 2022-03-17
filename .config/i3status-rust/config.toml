@@ -1,10 +1,8 @@
-icons_format = " <span font_family='PlemolJP Console NF'>{icon}</span> "
-
 [theme]
 name = "bad-wolf"
 
 [icons]
-name = "material-nf"
+name = "awesome5"
 
 [[block]]
 block = "disk_space"
@@ -32,18 +30,16 @@ full = "{mem_used}/{mem_total}({mem_used_percents})"
 short = "{mem_used_percents}"
 
 [[block]]
-block = "cpu"
-interval = 5
-[block.format]
-full = "{barchart} {utilization} {frequency}"
-short = "{utilization}"
-
-[[block]]
 block = "battery"
 interval = 30
 [block.format]
 full = "{percentage:5#100} {percentage} {time}"
 short = "{percentage}"
+
+[[block]]
+block = "music"
+player = "spotify"
+on_collapsed_click = "spotify"
 
 [[block]]
 block = "sound"
