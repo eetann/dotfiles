@@ -1,0 +1,64 @@
+icons_format = " <span font_family='PlemolJP Console NF'>{icon}</span> "
+
+[theme]
+name = "bad-wolf"
+
+[icons]
+name = "material-nf"
+
+[[block]]
+block = "disk_space"
+path = "/"
+alias = "/"
+info_type = "available"
+unit = "GB"
+interval = 20
+warning = 20.0
+alert = 10.0
+[block.format]
+full = "{icon} {used}/{total} ({available} free)"
+short = "{icon} {available} free"
+
+[[block]]
+block = "memory"
+display_type = "memory"
+clickable = false
+icons = true
+interval = 60
+warning_mem = 80
+critical_mem = 95
+[block.format_mem]
+full = "{mem_used}/{mem_total}({mem_used_percents})"
+short = "{mem_used_percents}"
+
+[[block]]
+block = "cpu"
+interval = 5
+[block.format]
+full = "{barchart} {utilization} {frequency}"
+short = "{utilization}"
+
+[[block]]
+block = "battery"
+interval = 30
+[block.format]
+full = "{percentage:5#100} {percentage} {time}"
+short = "{percentage}"
+
+[[block]]
+block = "sound"
+[block.format]
+full = "{volume:5#110} {volume:3}"
+short = "{volume:03}"
+
+[[block]]
+block = "backlight"
+
+[[block]]
+block = "time"
+interval = 10
+timezone = "Asia/Tokyo"
+locale = "ja_JP"
+[block.format]
+full = "%m/%d %a %R"
+short = "%R"
