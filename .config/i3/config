@@ -55,27 +55,16 @@ bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
 bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
-# to operate from the keyboard from Windows using Barrier,
-# key bindings like `Win + L` are not set as much as possible.
-bindsym $mod+f mode "$mode_focus"
-set $mode_focus [h: left] [j: down] [k: up] [l: right] [p: parent]
-mode "$mode_focus" {
-    bindsym h focus left
-    bindsym j focus down
-    bindsym k focus up
-    bindsym l focus right
-    bindsym p focus parent
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+bindsym $mod+p focus parent
 
-    bindsym Left focus left
-    bindsym Down focus down
-    bindsym Up focus up
-    bindsym Right focus right
-
-    # exit mode
-    bindsym $mod+f mode "default"
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+f mode "$mode_move"
@@ -332,7 +321,7 @@ bar {
 }
 
 # hide/unhide i3status bar
-bindsym $mod+m bar mode toggle
+bindsym $mod+comma bar mode toggle
 
 # Theme colors
 # class                 border  backgr. text    indicator child_border
