@@ -1,0 +1,53 @@
+{
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "tabbed",
+    "marks": [],
+    "percent": null,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 3,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 600,
+               "width": 800,
+               "x": 0,
+               "y": 0
+            },
+            "marks": [],
+            "name": "Alacritty",
+            "percent": 0.5,
+            "swallows": [
+               {
+                "class": "^Alacritty$",
+                "instance": "^Alacritty$"
+               }
+            ],
+            "type": "con"
+        },
+        {
+            "border": "pixel",
+            "current_border_width": 3,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 1060,
+               "width": 1134,
+               "x": 1090,
+               "y": 850
+            },
+            "marks": [],
+            "name": "TweetDeck",
+            "percent": 0.5,
+            "swallows": [
+               {
+                "title": "TweetDeck",
+                "class": "^Vivaldi\\-stable$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+
