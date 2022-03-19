@@ -202,6 +202,9 @@ local sources = {
         or vim.fn.executable(params.command) == 1 and params.command
     end,
   }),
+  null_ls.builtins.diagnostics.textlint.with({
+    filetypes = { "markdown" },
+  })
 }
 null_ls.setup({
   sources = sources,
