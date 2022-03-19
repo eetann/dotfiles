@@ -18,7 +18,7 @@ PKG_BREW="bat ripgrep lazygit tmux ghq zsh"
 
 PKG_ARCH="neovim alacritty tmux words lazygit fcitx5-im fcitx5-mozc xdg-user-dirs-gtk"
 PKG_ARCH+=" vivaldi powertop tlp rofi bat ghq ripgrep"
-PKG_ARCH+=" playerctl light ttf-font-awesome spotify"
+PKG_ARCH+=" playerctl light ttf-font-awesome noto-fonts noto-fonts-cjk noto-fonts-emoji spotify"
 
 brewinstall() {
   log "Installing packages ..."
