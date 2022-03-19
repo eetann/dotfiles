@@ -67,7 +67,7 @@ Plug 'nathanaelkane/vim-indent-guides' " vim/plug/vim-indent-guides.vim
 Plug 'vim-airline/vim-airline' " vim/plug/vim-airline.vim
 Plug 'vim-airline/vim-airline-themes' " ステータスラインのテーマ
 
-Plug 'tyru/caw.vim', {'on': '<Plug>(caw:'} " vim/plug/caw.vim.vim
+Plug 'tyru/caw.vim' " vim/plug/caw.vim.vim
 Plug 'tyru/open-browser.vim', 
   \ {'on': ['<Plug>(openbrowser-smart-search)', 'OpenBrowser']} " vim/plug/open-browser.vim.vim
 
