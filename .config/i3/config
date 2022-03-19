@@ -38,7 +38,7 @@ bindsym $mod+Shift+q kill
 bindsym Mod1+F4 kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id "rofi -modi combi -show combi -sidebar-mode"
+bindsym $mod+space exec --no-startup-id "rofi -modi combi -show combi -sidebar-mode"
 bindsym $mod+Tab exec --no-startup-id "rofi -show window -sidebar-mode"
 
 # launch categorized menu
@@ -67,7 +67,7 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+f mode "$mode_move"
+bindsym $mod+m mode "$mode_move"
 set $mode_move [h: left] [j: down] [k: up] [l: right]
 mode "$mode_move" {
     bindsym h move left
@@ -81,7 +81,7 @@ mode "$mode_move" {
     bindsym Right move right
 
     # exit mode
-    bindsym $mod+Shift+f mode "default"
+    bindsym $mod+m mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
