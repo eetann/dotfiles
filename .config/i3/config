@@ -90,6 +90,8 @@ mode "$mode_move" {
 bindsym $mod+minus split h;exec notify-send 'tile horizontally'
 bindsym $mod+backslash split v;exec notify-send 'tile vertically'
 
+
+workspace_layout tabbed
 # change container layout
 bindsym $mod+c mode "$mode_change_container"
 set $mode_change_container [s: stack] [t: tab] [r: toggle split] [Space: float] [f: fullscreen]
@@ -182,7 +184,6 @@ for_window [class="Skype"] floating enable
 for_window [class="Timeset-gui"] floating enable
 for_window [class="(?i)virtualbox"] floating enable
 for_window [class="Xfburn"] floating enable
-for_window [class="1Password"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="dialog"] floating enable
 for_window [window_role="menu"] floating enable
