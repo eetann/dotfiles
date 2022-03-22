@@ -1,0 +1,13 @@
+/*
+  https://pomodoro-tracker.com
+*/
+
+#navbar-collapse a[href*="stats"],
+#navbar-collapse a[href*="feedback"],
+web-menu,
+pomodoro-todo,
+pomodoro-history,
+#slides,
+#footer {
+  display: none;
+}

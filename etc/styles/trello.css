@@ -1,0 +1,13 @@
+/*
+  https://trello.com/
+*/
+
+/* for toggl integration */
+#toggl-button-edit-form {
+  left: 100px !important;
+  top: 100px !important;
+}
+
+#toggl-button-edit-form .TB__Popdown__content {
+  max-height: auto !important;
+}
