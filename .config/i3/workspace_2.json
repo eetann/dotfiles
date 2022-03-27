@@ -1,7 +1,7 @@
 {
     "border": "pixel",
     "floating": "auto_off",
-    "layout": "splith",
+    "layout": "tabbed",
     "marks": [],
     "percent": null,
     "type": "con",
