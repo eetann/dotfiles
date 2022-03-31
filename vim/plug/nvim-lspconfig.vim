@@ -192,6 +192,12 @@ lsp_installer.on_server_ready(function(server)
   vim.cmd [[ do User LspAttachBuffers ]]
 end)
 
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    update_in_insert = false,
+  }
+)
+
 local null_ls = require("null-ls")
 local command_resolver = require("null-ls.helpers.command_resolver")
 local sources = {
