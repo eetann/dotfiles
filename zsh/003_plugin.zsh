@@ -23,7 +23,7 @@ nosearch+=('.git')
 nosearch+=('RECYCLER')
 nosearch+=('.metadata')
 nosearch+=('node_modules')
-local find_dir="find ./ -type d \("
+local find_dir="find . -type d \("
 for d in $nosearch; do
     find_dir="$find_dir -name '$d' -o"
 done
