@@ -22,11 +22,18 @@ function telescope_custom_actions._multiopen(prompt_bufnr, open_cmd)
   if not num_selections or num_selections <= 1 then
     actions.add_selection(prompt_bufnr)
   end
+
   actions.send_selected_to_qflist(prompt_bufnr)
 
-  -- Only ONE split and don't change previous window's buffer
+  local results = vim.fn.getqflist()
+
   vim.cmd(open_cmd)
-  vim.cmd("cfdo edit")
+  for _, result in ipairs(results) do
+    local next_file = vim.fn.bufname(result.bufnr)
+    vim.api.nvim_command("edit" .. " " .. next_file)
+  end
+
+  vim.api.nvim_command("cd .")
 end
 
 function telescope_custom_actions.multi_selection_open_vsplit(prompt_bufnr)
