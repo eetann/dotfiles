@@ -210,6 +210,9 @@ local sources = {
   }),
   null_ls.builtins.diagnostics.textlint.with({
     filetypes = { "markdown" },
+    condition = function(utils)
+      return utils.root_has_file({ ".textlintrc" })
+    end,
   })
 }
 null_ls.setup({
