@@ -27,7 +27,7 @@ function telescope_custom_actions._multiopen(prompt_bufnr, open_cmd)
 
   local results = vim.fn.getqflist()
 
-  vim.cmd(open_cmd)
+  vim.api.nvim_command(open_cmd)
   for _, result in ipairs(results) do
     local next_file = vim.fn.bufname(result.bufnr)
     vim.api.nvim_command("edit" .. " " .. next_file)
