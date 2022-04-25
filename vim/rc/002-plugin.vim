@@ -85,7 +85,7 @@ Plug 'mechatroner/rainbow_csv', {'for': 'csv'} " vim/plug/rainbow_csv.vim
 
 " vim/plug/emmet-vim.vim
 Plug 'mattn/emmet-vim',
-    \ {'for': ['html', 'css', 'php', 'xml', 'javascript', 'vue', 'typescriptreact', 'react', 'javascriptreact']}
+    \ {'for': ['html', 'css', 'php', 'xml', 'javascript', 'vue', 'typescriptreact', 'react', 'javascriptreact', 'markdown']}
 
 " vim/plug/vim-table-mode.vim
 Plug 'dhruvasagar/vim-table-mode',
