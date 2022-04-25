@@ -202,6 +202,7 @@ local null_ls = require("null-ls")
 local command_resolver = require("null-ls.helpers.command_resolver")
 local sources = {
   null_ls.builtins.formatting.prettier.with({
+    filetypes= { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "css", "scss", "less", "html", "json", "jsonc", "yaml", "graphql", "handlebars" },
     dynamic_command = function(params)
       return command_resolver.from_node_modules(params)
         or command_resolver.from_yarn_pnp(params)
