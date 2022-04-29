@@ -36,7 +36,7 @@ lspsaga.setup { -- defaults ...
   infor_sign = "i",
   diagnostic_header_icon = "d",
   -- code action title icon
-  code_action_icon = "A",
+  code_action_icon = "@",
   code_action_prompt = {
     enable = true,
     sign = true,
@@ -82,7 +82,7 @@ cfg = {
   -- default is  ~/.cache/nvim/lsp_signature.log
   verbose = false, -- show debug line number
 
-  bind = true, -- This is mandatory, otherwise border config won't get registered.
+  bind = false, -- This is mandatory, otherwise border config won't get registered.
                -- If you want to hook lspsaga or other signature handler, pls set to false
   doc_lines = 10, -- will show two lines of comment/doc(if there are more than two lines in doc, will be truncated);
                  -- set to 0 if you DO NOT want any API comments be shown
