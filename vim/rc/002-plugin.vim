@@ -45,7 +45,8 @@ if has('nvim')
   " vim/plug/nvim-cmp.vim
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'hrsh7th/cmp-buffer'
-  Plug 'hrsh7th/cmp-path'
+  " Plug '~/ghq/github.com/eetann/cmp-path'
+  Plug 'eetann/cmp-path'
   Plug 'hrsh7th/cmp-cmdline'
   Plug 'uga-rosa/cmp-dictionary'
   Plug 'hrsh7th/nvim-cmp'
