@@ -40,6 +40,8 @@ sudo apt install git build-essential curl
 <details>
 <summary>gitの設定</summary>
 
++ [新しい SSH キーを生成して ssh-agent に追加する - GitHub Docs](https://docs.github.com/ja/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+
 ```sh
 git config --global user.name "eetann"
 git config --global user.email "eetann's mail adress"
@@ -67,9 +69,12 @@ ssh-add ~/.ssh/id_rsa
 cd ~/dotfiles
 git remote set-url origin git@github.com:eetann/dotfiles.git
 ```
+
 </details>
 
 ## Execute the command
+Mac: [macOS（またはLinux）用パッケージマネージャー — Homebrew](https://brew.sh/index_ja)
+
 ```sh
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/eetann/dotfiles/master/etc/setup) --init"
 ```

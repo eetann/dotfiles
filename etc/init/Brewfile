@@ -1,0 +1,22 @@
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/core"
+tap "wez/wezterm"
+brew "bat"
+brew "ghq"
+brew "lazygit"
+brew "ripgrep"
+brew "tmux"
+cask "wezterm"
+if OS.mac?
+    brew "go"
+    brew "ncurses"
+    brew "neovim"
+    brew "reattach-to-user-namespace"
+    brew "tree"
+    cask "clipy"
+    cask "keycastr"
+    cask "rectangle"
+elsif OS.linux?
+    brew "zsh"
+end

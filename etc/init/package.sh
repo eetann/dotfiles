@@ -14,18 +14,9 @@ PKG_DEFAULT="git tree nkf curl"
 
 PKG_UBUNTU="neovim manpages-ja manpages-ja-dev wamerican"
 
-PKG_BREW="bat ripgrep lazygit tmux ghq zsh"
-
 PKG_ARCH="neovim alacritty tmux words lazygit fcitx5-im fcitx5-mozc xdg-user-dirs-gtk"
 PKG_ARCH+=" vivaldi powertop tlp rofi bat ghq ripgrep"
 PKG_ARCH+=" playerctl light ttf-font-awesome noto-fonts noto-fonts-cjk noto-fonts-emoji spotify"
-
-brewinstall() {
-  log "Installing packages ..."
-  brew install $PKG_BREW
-  brew doctor
-  info "Installed Homebrew."
-}
 
 ubuntu() {
   log "Installing packages ..."
@@ -60,12 +51,12 @@ ubuntu() {
     echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >> ~/.zprofile
     eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
   fi
-  brewinstall
+  brew bundle --file '~/dotfiles/etc/init/Brewfile'
 
   info "Installed packages."
 }
 
-archlinux () {
+archlinux() {
   log "Installing packages ..."
 
   sudo pacman -S $PKG_ARCH
@@ -73,11 +64,19 @@ archlinux () {
   info "Installed packages."
 }
 
+# Mac
+darwin() {
+  brew bundle --file '~/dotfiles/etc/init/Brewfile'
+}
+
+
 case $(detect_os) in
   ubuntu)
     ubuntu ;;
   archlinux)
     archlinux;;
+  darwin)
+    darwin;;
 esac
 
 if [ ! -d ~/.tmux/plugins/tpm ]; then
