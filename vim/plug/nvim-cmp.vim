@@ -22,6 +22,8 @@ local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
 
 cmp.setup({
   window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
   },
   snippet = {
     -- REQUIRED - you must specify a snippet engine
@@ -81,6 +83,7 @@ cmp.setup({
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {
+  mapping = cmp.mapping.preset.cmdline(),
   sources = {
     { name = 'buffer' }
   }
@@ -88,6 +91,7 @@ cmp.setup.cmdline('/', {
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
     { name = 'path' }
   }, {
