@@ -15,7 +15,7 @@ abbreviations=(
     "DC"   "docker-compose"
     "CD"   "&& cd \$_"
     "CL"   "| clip.exe"
-    "TREE" "tree -a -I '.git|node_modules'"
+    "TREE" "tree -a -I '.git|node_modules' --charset unicode"
 )
 
 magic-abbrev-expand() {
