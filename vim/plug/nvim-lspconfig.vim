@@ -162,35 +162,41 @@ local function on_attach_disable_format(client, buffer)
   on_attach(client, buffer)
 end
 
-local nvim_lsp = require('lspconfig')
-local lsp_installer = require('nvim-lsp-installer')
+require('nvim-lsp-installer').setup()
+local lspconfig = require('lspconfig')
+
 function detected_root_dir(root_dir)
   return not(not(root_dir(vim.api.nvim_buf_get_name(0), vim.api.nvim_get_current_buf())))
 end
 
--- Register a handler that will be called for each installed server when it's ready (i.e. when installation is finished
--- or if the server is already installed).
-lsp_installer.on_server_ready(function(server)
+local installed_servers = {}
+local installer_avail, lsp_installer = pcall(require, "nvim-lsp-installer")
+if installer_avail then
+  for _, server in ipairs(lsp_installer.get_installed_servers()) do
+    table.insert(installed_servers, server.name)
+  end
+end
+
+for _, server in pairs(installed_servers) do
   local opts = {}
   opts.on_attach = on_attach
   opts.capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   opts.capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-  if server.name == 'tsserver' or server.name == 'eslint' then
-    local root_dir = nvim_lsp.util.root_pattern('package.json', 'node_modules')
+  if server == 'tsserver' or server == 'eslint' then
+    local root_dir = lspconfig.util.root_pattern('package.json', 'node_modules')
     opts.root_dir = root_dir
     opts.autostart = detected_root_dir(root_dir)
     opts.on_attach = on_attach_disable_format
-  elseif server.name == 'denols' then
-    local root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc', 'deps.ts')
+  elseif server == 'denols' then
+    local root_dir = lspconfig.util.root_pattern('deno.json', 'deno.jsonc', 'deps.ts')
     opts.root_dir = root_dir
     opts.autostart = detected_root_dir(root_dir)
     opts.init_options = { lint = true, unstable = true, }
   end
 
-  server:setup(opts)
-  vim.cmd [[ do User LspAttachBuffers ]]
-end)
+  lspconfig[server].setup(opts)
+end
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
