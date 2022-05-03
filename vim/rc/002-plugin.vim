@@ -56,6 +56,7 @@ if has('nvim')
   Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'kyazdani42/nvim-web-devicons'
   Plug 'romgrk/barbar.nvim' " vim/plug/barbar.vim
   Plug 'lambdalisue/vim-quickrun-neovim-job' " quickrunをNeovimで使う
   Plug 'norcalli/nvim-colorizer.lua' " vim/plug/nvim-colorizer.vim

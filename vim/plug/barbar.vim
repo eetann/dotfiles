@@ -59,11 +59,11 @@ let bufferline.closable = v:true
 let bufferline.clickable = v:true
 
 " Enable/disable icons
-let bufferline.icons = v:false
+let bufferline.icons = v:true
 
 " Sets the icon's highlight group.
 " If false, will use nvim-web-devicons colors
-let bufferline.icon_custom_colors = v:true
+let bufferline.icon_custom_colors = v:false
 
 " Configure icons on the bufferline.
 let bufferline.icon_separator_active = '#'
