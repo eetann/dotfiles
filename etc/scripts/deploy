@@ -36,4 +36,7 @@ ln -fs ${DOTPATH}/.config/rofi/config.rasi ${HOME}/.config/rofi/config.rasi
 mkdir -p ${HOME}/.config/i3
 ln -fs ~/dotfiles/.config/i3/config ~/.config/i3/config
 
+mkdir -p ${HOME}/.config/wezterm
+ln -fs ~/dotfiles/.config/wezterm/wezterm.lua ~/.config/wezterm/wezterm.lua
+
 echo ""
