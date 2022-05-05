@@ -20,21 +20,24 @@ call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 
 " Declare the list of plugins.
 Plug 'machakann/vim-highlightedyank' " vim/plug/vim-highlightedyank.vim
-Plug 'kana/vim-textobj-user' " add textobj
+" vim/plug/vim-textobj.vim
+Plug 'kana/vim-textobj-user'
+  Plug 'kana/vim-textobj-jabraces',
+  \ {'on': ['<Plug>(textobj-jabraces-']}
   Plug 'osyo-manga/vim-textobj-multiblock',
-  \ {'on': ['<Plug>(textobj-multiblock-']} " vim/plug/vim-textobj-multiblock.vim
+  \ {'on': ['<Plug>(textobj-multiblock-']}
 
 Plug 'machakann/vim-swap', {'on': ['<Plug>(swap-']} " vim/plug/vim-swap.vim
 Plug 'jiangmiao/auto-pairs' " vim/plug/auto-pairs.vim
 Plug 'andymass/vim-matchup' " %を拡張
-Plug 'machakann/vim-sandwich' " 括弧関連便利になる
+Plug 'machakann/vim-sandwich' " vim/plug/vim-sandwich.vim
 
 Plug 'roxma/nvim-yarp', Cond(!has('nvim')) " nvim系に必要
 Plug 'roxma/vim-hug-neovim-rpc', Cond(!has('nvim')) " nvim系に必要
 
 if has('nvim')
   Plug 'nvim-lua/plenary.nvim' " nvim
-  Plug 'nvim-telescope/telescope.nvim' " vim/plug/telescope.nvim.vim
+  Plug 'nvim-telescope/telescope.nvim' " vim/plug/telescope.vim
   " vim/plug/nvim-lspconfig.vim
   Plug 'neovim/nvim-lspconfig'
   Plug 'williamboman/nvim-lsp-installer'
@@ -69,9 +72,9 @@ Plug 'nathanaelkane/vim-indent-guides' " vim/plug/vim-indent-guides.vim
 Plug 'vim-airline/vim-airline' " vim/plug/vim-airline.vim
 Plug 'vim-airline/vim-airline-themes' " ステータスラインのテーマ
 
-Plug 'tyru/caw.vim' " vim/plug/caw.vim.vim
+Plug 'tyru/caw.vim' " vim/plug/caw.vim
 Plug 'tyru/open-browser.vim', 
-  \ {'on': ['<Plug>(openbrowser-smart-search)', 'OpenBrowser']} " vim/plug/open-browser.vim.vim
+  \ {'on': ['<Plug>(openbrowser-smart-search)', 'OpenBrowser']} " vim/plug/open-browser.vim
 
 Plug 'mattn/vim-sonictemplate', {'on': ['Tem', 'Template']} " vim/plug/vim-sonictemplate.vim
 Plug 'junegunn/vim-easy-align', {'on': '<Plug>(LiveEasyAlign)'} " vim/plug/vim-easy-align.vim
