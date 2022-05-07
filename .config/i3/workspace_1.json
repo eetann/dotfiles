@@ -10,19 +10,12 @@
             "border": "pixel",
             "current_border_width": 3,
             "floating": "auto_off",
-            "geometry": {
-               "height": 600,
-               "width": 800,
-               "x": 0,
-               "y": 0
-            },
             "marks": [],
-            "name": "Alacritty",
+            "name": "wezterm",
             "percent": 0.5,
             "swallows": [
                {
-                "class": "^Alacritty$",
-                "instance": "^Alacritty$"
+               "class": "^org\\.wezfurlong\\.wezterm$"
                }
             ],
             "type": "con"
@@ -31,23 +24,15 @@
             "border": "pixel",
             "current_border_width": 3,
             "floating": "auto_off",
-            "geometry": {
-               "height": 1060,
-               "width": 1134,
-               "x": 1090,
-               "y": 850
-            },
             "marks": [],
             "name": "TweetDeck",
             "percent": 0.5,
             "swallows": [
                {
-                "title": "TweetDeck",
-                "class": "^Vivaldi\\-stable$"
+                "title": "TweetDeck"
                }
             ],
             "type": "con"
         }
     ]
 }
-

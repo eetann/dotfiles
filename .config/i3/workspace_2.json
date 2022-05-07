@@ -10,19 +10,11 @@
             "border": "pixel",
             "current_border_width": 3,
             "floating": "auto_off",
-            "geometry": {
-               "height": 1891,
-               "width": 1080,
-               "x": 0,
-               "y": 0
-            },
             "marks": [],
             "name": "Vivaldi 1",
             "percent": 0.5,
             "swallows": [
                {
-                "class": "^Vivaldi\\-stable$",
-                "instance": "^vivaldi\\-stable$",
                 "window_role": "^browser$"
                }
             ],

@@ -1,7 +1,9 @@
 # i3 config file (v4)
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 # include ~/dotfiles/.config/i3/autostart.conf
-
+workspace_layout tabbed
+workspace 1 output primary
+workspace 2 output HDMI1
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
 
@@ -31,7 +33,7 @@ font xft:PlemolJPConsoleNF 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec wezterm
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -91,7 +93,6 @@ bindsym $mod+minus split h;exec notify-send 'tile horizontally'
 bindsym $mod+backslash split v;exec notify-send 'tile vertically'
 
 
-workspace_layout tabbed
 # change container layout
 bindsym $mod+c mode "$mode_change_container"
 set $mode_change_container [s: stack] [t: tab] [r: toggle split] [Space: float] [f: fullscreen]
