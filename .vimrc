@@ -4,8 +4,9 @@ set fileencodings=utf-8
 " set fileencodings=utf-8,sjis " この順番でMATLABとそれ以外がうまくいった
 scriptencoding utf-8
 set ambiwidth=single
-set nrformats= "数増減は10進数で扱う(<C-a>や<C-x>)
 set backspace=indent,eol,start
+"数増減は10進数でハイフンを無視する
+set nrformats=unsigned
 
 " ----reset augroup-----------------------------------------------
 " 再読込時に2度設定しないように、初期化
