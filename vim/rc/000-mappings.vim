@@ -1,5 +1,10 @@
 let mapleader = "\<Space>" " leaderキーの割当を変える
 
+nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
+xnoremap <expr> j (v:count == 0 && mode() ==# 'v') ? 'gj' : 'j'
+nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
+xnoremap <expr> k (v:count == 0 && mode() ==# 'v') ? 'gk' : 'k'
+
 " 誤爆防止のためにremapping
 imap <C-@> <C-[>
 nnoremap q <NOP>
