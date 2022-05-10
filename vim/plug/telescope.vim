@@ -33,7 +33,7 @@ function telescope_custom_actions._multiopen(prompt_bufnr, open_cmd)
     vim.api.nvim_command("edit" .. " " .. next_file)
   end
 
-  vim.api.nvim_command("cd .")
+  vim.api.nvim_command("lcd .")
 end
 
 function telescope_custom_actions.multi_selection_open_vsplit(prompt_bufnr)
