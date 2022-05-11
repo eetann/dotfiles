@@ -218,7 +218,7 @@ local sources = {
   null_ls.builtins.diagnostics.textlint.with({
     filetypes = { "markdown" },
     condition = function(utils)
-      return utils.root_has_file({ ".textlintrc" })
+      return utils.root_has_file({ ".textlintrc", ".textlintrc.js", ".textlintrc.json", ".textlintrc.yml", ".textlintrc.yaml" })
     end,
   })
 }
