@@ -44,6 +44,7 @@ if has('nvim')
   Plug 'ray-x/lsp_signature.nvim' " signature help for insert mode
   Plug 'tami5/lspsaga.nvim'
   Plug 'jose-elias-alvarez/null-ls.nvim'
+  Plug 'simrat39/symbols-outline.nvim'
 
   " vim/plug/nvim-cmp.vim
   Plug 'hrsh7th/cmp-nvim-lsp'

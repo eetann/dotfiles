@@ -26,6 +26,8 @@ nnoremap <silent> ]d :Lspsaga diagnostic_jump_prev<CR>
 
 lua << EOF
 vim.g.Illuminate_delay = 50
+vim.api.nvim_set_keymap("n", "<leader>o", "<CMD>SymbolsOutline<CR>", { noremap = true })
+
 local lspsaga = require 'lspsaga'
 lspsaga.setup { -- defaults ...
   debug = false,
