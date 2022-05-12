@@ -31,7 +31,7 @@ short = "{mem_used_percents}"
 
 [[block]]
 block = "battery"
-interval = 30
+interval = 10
 [block.format]
 full = "{percentage:5#100} {percentage} {time}"
 short = "{percentage}"
