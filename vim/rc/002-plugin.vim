@@ -66,12 +66,13 @@ if has('nvim')
   Plug 'norcalli/nvim-colorizer.lua' " vim/plug/nvim-colorizer.vim
   Plug 'folke/lsp-colors.nvim'
   Plug 'RRethy/vim-illuminate'
+  Plug 'lukas-reineke/indent-blankline.nvim' " vim/plug/indent-blankline.vim
 endif
 
 Plug 'thinca/vim-quickrun' " vim/plug/vim-quickrun.vim
 
 Plug 'sainnhe/gruvbox-material' " vim/plug/gruvbox-material.vim
-Plug 'nathanaelkane/vim-indent-guides' " vim/plug/vim-indent-guides.vim
+
 Plug 'vim-airline/vim-airline' " vim/plug/vim-airline.vim
 Plug 'vim-airline/vim-airline-themes' " ステータスラインのテーマ
 
