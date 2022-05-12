@@ -35,15 +35,11 @@ cmp.setup({
     ['<C-n>'] = function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      else
-        fallback()
       end
     end,
     ['<C-p>'] = function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      else
-        fallback()
       end
     end,
     ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
@@ -72,8 +68,15 @@ cmp.setup({
     { name = 'nvim_lsp' },
     }, {
     { name = 'path' },
-    { name = 'buffer' },
-    { name = "dictionary", keyword_length = 3, },
+    {
+      name = 'buffer',
+      option = {
+        get_bufnrs = function()
+          return vim.api.nvim_list_bufs()
+        end
+      },
+    },
+    { name = "dictionary" },
     }
   ),
   formatting = {
@@ -85,7 +88,15 @@ cmp.setup({
 cmp.setup.cmdline('/', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
-    { name = 'buffer' }
+    { name = 'path' },
+    {
+      name = 'buffer',
+      option = {
+        get_bufnrs = function()
+          return vim.api.nvim_list_bufs()
+        end
+      },
+    },
   }
 })
 
