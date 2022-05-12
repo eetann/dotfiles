@@ -25,6 +25,7 @@ nnoremap <silent> [d :Lspsaga diagnostic_jump_next<CR>
 nnoremap <silent> ]d :Lspsaga diagnostic_jump_prev<CR>
 
 lua << EOF
+vim.g.Illuminate_delay = 50
 local lspsaga = require 'lspsaga'
 lspsaga.setup { -- defaults ...
   debug = false,
@@ -155,6 +156,7 @@ local on_attach = function(client, bufnr)
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  require("illuminate").on_attach(client)
 end
 
 local function on_attach_disable_format(client, buffer)
