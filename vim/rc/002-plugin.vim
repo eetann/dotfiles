@@ -74,8 +74,7 @@ Plug 'thinca/vim-quickrun' " vim/plug/vim-quickrun.vim
 
 Plug 'sainnhe/gruvbox-material' " vim/plug/gruvbox-material.vim
 
-Plug 'vim-airline/vim-airline' " vim/plug/vim-airline.vim
-Plug 'vim-airline/vim-airline-themes' " ステータスラインのテーマ
+Plug 'nvim-lualine/lualine.nvim' " vim/plug/lualine.vim
 
 Plug 'tyru/caw.vim' " vim/plug/caw.vim
 Plug 'tyru/open-browser.vim', 
