@@ -85,6 +85,7 @@ Plug 'junegunn/vim-easy-align', {'on': '<Plug>(LiveEasyAlign)'} " vim/plug/vim-e
 Plug 'bkad/CamelCaseMotion', {'on': '<Plug>CamelCaseMotion'} " vim/plug/CamelCaseMotion.vim
 Plug 'delphinus/vim-auto-cursorline' " vim/plug/vim-auto-cursorline.vim
 Plug 'kshenoy/vim-signature' " マーク位置の表示
+Plug 'lewis6991/gitsigns.nvim' " vim/plug/gitsigns.vim
 Plug 'vim-jp/vimdoc-ja', {'for': 'help'} " 日本語ヘルプ
 Plug 'simeji/winresizer' " vim/plug/winresizer.vim
 
