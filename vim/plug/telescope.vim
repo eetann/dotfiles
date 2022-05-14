@@ -51,7 +51,6 @@ local telescope = require('telescope')
 telescope.setup{
   defaults = {
     file_ignore_patterns = { "node_modules", ".git" },
-    borderchars = { ".", ":", ".", ":", ".", ".", ".", "." },
     mappings = {
       i = {
         ["<esc>"] = actions.close,
