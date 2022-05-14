@@ -75,6 +75,7 @@ Plug 'thinca/vim-quickrun' " vim/plug/vim-quickrun.vim
 Plug 'sainnhe/gruvbox-material' " vim/plug/gruvbox-material.vim
 
 Plug 'nvim-lualine/lualine.nvim' " vim/plug/lualine.vim
+Plug 'b0o/incline.nvim' " vim/plug/incline.vim
 
 Plug 'tyru/caw.vim' " vim/plug/caw.vim
 Plug 'tyru/open-browser.vim', 
