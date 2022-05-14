@@ -47,6 +47,8 @@ inoremap <C-e> <C-o>$
 " コマンド履歴のフィルタリングを<C-p>と<C-n>にも追加
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
+cnoremap <C-k> <Up>
+cnoremap <C-j> <Down>
 " コマンドライン内でのカーソル移動をInsertModeと同じに
 cnoremap <C-b> <Left>
 cnoremap <C-f> <Right>
