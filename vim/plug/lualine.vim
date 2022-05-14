@@ -26,7 +26,7 @@ require('lualine').setup {
         path = 1, -- Relative path
         shorting_target = 40,
         symbols = {
-          modified = ' ',
+          modified = ' ●',
           readonly = ' ',
           unnamed = '[No Name]',
           }
