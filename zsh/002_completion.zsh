@@ -1,8 +1,8 @@
 # 補完------------------------------------------------------------
 # 補完を有効化
 fpath=(/usr/local/share/zsh-completions $fpath)
-autoload -Uz compinit
-compinit -u
+autoload bashcompinit && bashcompinit
+autoload -Uz compinit && compinit
 setopt correct # コマンドのスペルチェックをする
 setopt mark_dirs # file名の展開でdirectoryにマッチした場合末尾に/付加
 setopt auto_param_keys # カッコの対応などを自動的に補完する
@@ -37,3 +37,7 @@ setopt chase_links # 移動先がシンボリックリンクならば実際の�
 autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^O" edit-command-line
+
+if [ -e /usr/local/bin/aws_completer ]; then
+  complete -C '/usr/local/bin/aws_completer' aws
+fi
