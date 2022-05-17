@@ -27,7 +27,7 @@ Conversion	Ctrl Enter	Commit
 Composition	Ctrl f	MoveCursorRight
 Conversion	Ctrl f	SegmentFocusRight
 Composition	Ctrl h	Backspace
-Conversion	Ctrl h	Backspace
+Conversion	Ctrl h	Cancel
 Composition	Ctrl k	Commit
 Conversion	Ctrl k	Commit
 Composition	Ctrl Left	MoveCursorToBeginning
@@ -58,12 +58,6 @@ Conversion	Delete	Cancel
 Composition	Down	MoveCursorToEnd
 Conversion	Down	ConvertNext
 Suggestion	Down	PredictAndConvert
-DirectInput	Muhenkan	IMEOff
-Precomposition	Muhenkan	IMEOff
-Composition	Muhenkan	IMEOff
-Conversion	Muhenkan	IMEOff
-DirectInput	Henkan	IMEOn
-Precomposition	Henkan	IMEOn
 Composition	Henkan	Convert
 Conversion	Henkan	Commit
 Composition	End	MoveCursorToEnd
@@ -75,7 +69,6 @@ Conversion	ESC	Cancel
 Precomposition	Escape	CancelAndIMEOff
 Composition	F10	ConvertToHalfAlphanumeric
 Conversion	F10	ConvertToHalfAlphanumeric
-DirectInput	F13	IMEOn
 Composition	F2	ConvertWithoutHistory
 Composition	F6	ConvertToHiragana
 Conversion	F6	ConvertToHiragana
@@ -117,6 +110,13 @@ Conversion	Tab	PredictAndConvert
 Conversion	Up	ConvertPrev
 Composition	Shift Henkan	CommitOnlyFirstSegment
 Conversion	Shift Henkan	CommitOnlyFirstSegment
+DirectInput	Muhenkan	IMEOff
+Precomposition	Muhenkan	IMEOff
+Composition	Muhenkan	IMEOff
+Conversion	Muhenkan	IMEOff
+DirectInput	Henkan	IMEOn
+Precomposition	Henkan	IMEOn
+DirectInput	F13	IMEOn
 Composition	ASCII	InsertCharacter
 Composition	Kanji	IMEOff
 Composition	OFF	IMEOff
