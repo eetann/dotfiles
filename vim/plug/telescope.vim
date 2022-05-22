@@ -23,17 +23,14 @@ function telescope_custom_actions._multiopen(prompt_bufnr, open_cmd)
     actions.add_selection(prompt_bufnr)
   end
 
-  actions.send_selected_to_qflist(prompt_bufnr)
-
-  local results = vim.fn.getqflist()
-
+  vim.api.nvim_command('stopinsert')
+  actions.close(prompt_bufnr)
   vim.api.nvim_command(open_cmd)
-  for _, result in ipairs(results) do
-    local next_file = vim.fn.bufname(result.bufnr)
-    vim.api.nvim_command("edit" .. " " .. next_file)
+  for _, selection in ipairs(picker:get_multi_selection()) do
+    local file_name = selection.value
+    vim.api.nvim_command('edit' .. ' ' .. file_name)
   end
 
-  vim.api.nvim_command("lcd .")
 end
 
 function telescope_custom_actions.multi_selection_open_vsplit(prompt_bufnr)
