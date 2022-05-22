@@ -10,4 +10,4 @@ autocmd vimrc BufEnter *.tex setlocal indentexpr=""
 autocmd vimrc BufNewFile,BufRead *.csv set filetype=csv
 autocmd vimrc BufNewFile,BufRead *.m set filetype=matlab
 let g:tex_flavor = "latex"
-autocmd vimrc FileType gitcommit startinsert
+autocmd vimrc FileType gitcommit call feedkeys('I', 'n')
