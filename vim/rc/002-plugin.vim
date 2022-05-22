@@ -102,6 +102,9 @@ Plug 'mattn/emmet-vim',
 Plug 'dhruvasagar/vim-table-mode',
   \ {'for': ['markdown','md','mdwn','mkd','mkdn','mark']}
 
+Plug 'iamcco/markdown-preview.nvim',
+  \ {'do': 'cd app && yarn install', 'for': ['markdown','md','mdwn','mkd','mkdn','mark']}
+
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
