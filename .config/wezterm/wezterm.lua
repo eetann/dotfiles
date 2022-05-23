@@ -30,7 +30,7 @@ if mac then
 end
 
 return {
-  font = wezterm.font("PlemolJP Console NF"),
+  font = wezterm.font("HackGenNerd Console"),
   use_ime = true,
   font_size = 16,
   color_scheme = "Gruvbox Dark",
