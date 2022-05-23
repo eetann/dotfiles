@@ -26,9 +26,15 @@ function telescope_custom_actions._multiopen(prompt_bufnr, open_cmd)
   vim.api.nvim_command('stopinsert')
   actions.close(prompt_bufnr)
   vim.api.nvim_command(open_cmd)
+  local cwd = picker.cwd
+  if cwd == vim.fn.getcwd() then
+    cwd = ''
+  else
+    cwd = cwd .. '/'
+  end
   for _, selection in ipairs(picker:get_multi_selection()) do
     local file_name = selection.value
-    vim.api.nvim_command('edit' .. ' ' .. file_name)
+    vim.api.nvim_command('edit' .. ' ' .. cwd .. file_name)
   end
 
 end
