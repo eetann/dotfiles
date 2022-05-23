@@ -152,7 +152,7 @@ nnoremap <silent> <Plug>(my-switch)w :<C-u>setl wrap! wrap?<CR>
 nnoremap <silent> <Plug>(my-switch)p :<C-u>setl paste! paste?<CR>
 
 " vimrcの適用
-nnoremap <F5> :<C-u>source $MYVIMRC<CR>
+" nnoremap <F5> :<C-u>source $MYVIMRC<CR>
 
 " InsertModeでccc を入力し、エスケープでコメント線
 inoreabbrev <expr> ccc repeat('-', 70 - virtcol('.'))
