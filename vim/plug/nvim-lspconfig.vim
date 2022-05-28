@@ -229,6 +229,16 @@ for _, server in pairs(installed_servers) do
         telemetry = {
           enable = false,
         },
+        format = {
+          enable = true,
+          -- Put format options here
+          -- NOTE: the value should be STRING!!
+          defaultConfig = {
+            indent_style = "space",
+            indent_size = "2",
+            quote_style = "single",
+          }
+        },
       },
     }
   end
