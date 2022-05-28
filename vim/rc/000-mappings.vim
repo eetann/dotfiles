@@ -101,6 +101,9 @@ endfunction
 " 直前の検索をヤンク get 検索/
 nnoremap sg/ :let @+ = histget("search",-1)<CR>:echo 'Clipboard << ' . @+<CR>
 
+" 検索でエスケープ減らすために very magic
+nnoremap / /\v
+
 " 一気に置換するときは以下ではなく、/or?検索->cgn->n.n.nnn.
 " cursor下の単語をハイライトと置換
 nnoremap * "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
