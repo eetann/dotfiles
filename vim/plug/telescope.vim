@@ -55,20 +55,35 @@ end
 local telescope = require('telescope')
 telescope.setup{
   defaults = {
-    file_ignore_patterns = { "node_modules/", ".git/" },
-    mappings = {
-      i = {
-        ["<esc>"] = actions.close,
-        ["<CR>"] = telescope_custom_actions.multi_selection_open,
-        ["<C-v>"] = telescope_custom_actions.multi_selection_open_vsplit,
-        ["<C-x>"] = telescope_custom_actions.multi_selection_open_split,
-      },
-    },
     sorting_strategy = "ascending",
     layout_strategy = 'horizontal',
     layout_config = {
       prompt_position = 'top',
+      preview_width = 0.5
     }
+  },
+  pickers = {
+    find_files = {
+      mappings = {
+        i = {
+          ["<esc>"] = actions.close,
+          ["<CR>"] = telescope_custom_actions.multi_selection_open,
+          ["<C-v>"] = telescope_custom_actions.multi_selection_open_vsplit,
+          ["<C-x>"] = telescope_custom_actions.multi_selection_open_split,
+        },
+      },
+    },
+    git_files = {
+      file_ignore_patterns = { "node_modules/", ".git/" },
+      mappings = {
+        i = {
+          ["<esc>"] = actions.close,
+          ["<CR>"] = telescope_custom_actions.multi_selection_open,
+          ["<C-v>"] = telescope_custom_actions.multi_selection_open_vsplit,
+          ["<C-x>"] = telescope_custom_actions.multi_selection_open_split,
+        },
+      },
+    },
   },
 }
 
