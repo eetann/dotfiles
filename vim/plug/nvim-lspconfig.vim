@@ -159,6 +159,14 @@ local on_attach = function(client, bufnr)
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   require("illuminate").on_attach(client)
+  if client.resolved_capabilities.document_formatting then
+    vim.cmd([[
+    augroup LspFormatting
+      autocmd! * <buffer>
+      autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+    augroup END
+    ]])
+  end
 end
 
 local function on_attach_disable_format(client, buffer)
@@ -208,19 +216,19 @@ for _, server in pairs(installed_servers) do
           version = 'LuaJIT',
           -- Setup your lua path
           path = LUA_PATH,
-          },
+        },
         diagnostics = {
           -- Get the language server to recognize the `vim` global
           globals = {'vim'},
-          },
+        },
         workspace = {
           -- Make the server aware of Neovim runtime files
           library = vim.api.nvim_get_runtime_file("", true),
-          },
+        },
         -- Do not send telemetry data containing a randomized but unique identifier
         telemetry = {
           enable = false,
-          },
+        },
       },
     }
   end
@@ -250,7 +258,7 @@ local sources = {
     condition = function(utils)
       return utils.root_has_file({ ".textlintrc", ".textlintrc.js", ".textlintrc.json", ".textlintrc.yml", ".textlintrc.yaml" })
     end,
-  })
+  }),
 }
 null_ls.setup({
   sources = sources,
