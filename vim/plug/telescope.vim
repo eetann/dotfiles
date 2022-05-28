@@ -23,9 +23,10 @@ function telescope_custom_actions._multiopen(prompt_bufnr, open_cmd)
     actions.add_selection(prompt_bufnr)
   end
 
-  vim.api.nvim_command('stopinsert')
   actions.close(prompt_bufnr)
-  vim.api.nvim_command(open_cmd)
+  if open_cmd ~= 'edit' then
+    vim.api.nvim_command(open_cmd)
+  end
   local cwd = picker.cwd
   if cwd == vim.fn.getcwd() then
     cwd = ''
