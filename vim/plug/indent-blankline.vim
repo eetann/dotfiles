@@ -1,16 +1,20 @@
 UsePlugin 'indent-blankline.nvim'
 
 lua << EOF
-vim.opt.list = true
-vim.opt.listchars:append("eol:↲")
-vim.opt.listchars:append("trail:-")
-vim.opt.listchars:append("nbsp:%")
-vim.opt.listchars:append("extends:»") -- wrapの末尾
-vim.opt.listchars:append("precedes:«") -- wrapの先頭
+vim.opt.termguicolors = true
+vim.cmd [[highlight IndentBlanklineIndent1 guibg=#1f1f1f gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent2 guibg=#161616 gui=nocombine]]
 
 require("indent_blankline").setup {
-  space_char_blankline = " ",
-  show_current_context = true,
-  show_current_context_start = true,
+    char = "",
+    char_highlight_list = {
+        "IndentBlanklineIndent1",
+        "IndentBlanklineIndent2",
+    },
+    space_char_highlight_list = {
+        "IndentBlanklineIndent1",
+        "IndentBlanklineIndent2",
+    },
+    show_trailing_blankline_indent = false,
 }
 EOF
