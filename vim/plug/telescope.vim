@@ -29,6 +29,8 @@ function telescope_custom_actions._multiopen(prompt_bufnr, open_cmd)
   local cwd = picker.cwd
   if cwd == vim.fn.getcwd() then
     cwd = ''
+  elseif cwd == nil then
+    cwd = ''
   else
     cwd = cwd .. '/'
   end
