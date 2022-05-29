@@ -45,6 +45,7 @@ if has('nvim')
   Plug 'tami5/lspsaga.nvim'
   Plug 'jose-elias-alvarez/null-ls.nvim'
   Plug 'simrat39/symbols-outline.nvim'
+  Plug 'weilbith/nvim-code-action-menu'
 
   " vim/plug/nvim-cmp.vim
   Plug 'hrsh7th/cmp-nvim-lsp'
