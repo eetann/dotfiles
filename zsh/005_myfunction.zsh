@@ -129,3 +129,21 @@ function my_fzf_completion() {
 
 zle -N my_fzf_completion
 bindkey "^k" my_fzf_completion
+
+function fzf_npm_scripts() {
+    if [ ! -e package.json ]; then
+        echo "There is no package.json"
+    fi
+    if ! type jq > /dev/null; then
+        echo "jq command is required"
+    fi
+
+    # jq -r '.scripts | keys | .[]' package.json \
+    #     | fzf --preview "jq -r '.scripts | .{}' package.json"
+    local scripts=`jq -r '.scripts | to_entries | .[] | .key + " = " + .value' package.json`
+    local selected=`echo $scripts| fzf | sed -e 's/\s=\s.*//'`
+    BUFFER="npm run $selected"
+    zle accept-line
+}
+zle -N fzf_npm_scripts
+bindkey "^Xn" fzf_npm_scripts
