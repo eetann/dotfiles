@@ -132,16 +132,32 @@ bindkey "^k" my_fzf_completion
 
 function fzf_npm_scripts() {
     if [ ! -e package.json ]; then
-        echo "There is no package.json"
+        echo 'fzf_npm_scripts'
+        echo 'There is no package.json'
+        zle send-break
+        return 1
     fi
     if ! type jq > /dev/null; then
-        echo "jq command is required"
+        echo 'fzf_npm_scripts'
+        echo 'jq command is required'
+        zle send-break
+        return 1
     fi
 
-    # jq -r '.scripts | keys | .[]' package.json \
-    #     | fzf --preview "jq -r '.scripts | .{}' package.json"
-    local scripts=`jq -r '.scripts | to_entries | .[] | .key + " = " + .value' package.json`
-    local selected=`echo $scripts| fzf | sed -e 's/\s=\s.*//'`
+    # jq -r '.scripts | keys | .[]' package.json | fzf --preview "jq -r '.scripts | .{}' package.json"
+    local scripts=`jq -r '.scripts | to_entries | .[] | .key + " = " + .value' package.json 2>/dev/null || echo ''`
+    if [[ -z $scripts ]]; then
+        echo 'fzf_npm_scripts'
+        echo 'There is no scripts in package.json'
+        zle send-break
+        return 1
+    fi
+    local selected=`echo $scripts| FZF_DEFAULT_OPTS='' fzf --reverse --exit-0 | sed -e 's/\s=\s.*//'`
+
+    zle reset-prompt
+    if [[ -z $selected ]]; then
+        return 0
+    fi
     BUFFER="npm run $selected"
     zle accept-line
 }
