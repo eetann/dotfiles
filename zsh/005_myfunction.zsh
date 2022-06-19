@@ -144,22 +144,21 @@ function fzf_npm_scripts() {
     return 1
   fi
 
-    # jq -r '.scripts | keys | .[]' package.json | fzf --preview "jq -r '.scripts | .{}' package.json"
-    local scripts=`jq -r '.scripts | to_entries | .[] | .key + " = " + .value' package.json 2>/dev/null || echo ''`
-    if [[ -z $scripts ]]; then
-      echo 'fzf_npm_scripts'
-      echo 'There is no scripts in package.json'
-      zle send-break
-      return 1
-    fi
-    local selected=`echo $scripts| FZF_DEFAULT_OPTS='' fzf --reverse --exit-0 | awk -F ' = ' '{ print $1}'`
+  local scripts=`jq -r '.scripts | to_entries | .[] | .key + " = " + .value' package.json 2>/dev/null || echo ''`
+  if [[ -z $scripts ]]; then
+    echo 'fzf_npm_scripts'
+    echo 'There is no scripts in package.json'
+    zle send-break
+    return 1
+  fi
+  local selected=`echo $scripts| FZF_DEFAULT_OPTS='' fzf --reverse --exit-0 | awk -F ' = ' '{ print $1}'`
 
-    zle reset-prompt
-    if [[ -z $selected ]]; then
-      return 0
-    fi
-    BUFFER="npm run $selected"
-    zle accept-line
-  }
-  zle -N fzf_npm_scripts
-  bindkey "^Xn" fzf_npm_scripts
+  zle reset-prompt
+  if [[ -z $selected ]]; then
+    return 0
+  fi
+  BUFFER="npm run $selected"
+  zle accept-line
+}
+zle -N fzf_npm_scripts
+bindkey "^Xn" fzf_npm_scripts
