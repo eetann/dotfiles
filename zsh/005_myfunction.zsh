@@ -151,7 +151,7 @@ function fzf_npm_scripts() {
     zle send-break
     return 1
   fi
-  local selected=`echo $scripts | FZF_DEFAULT_OPTS='' fzf --reverse --exit-0 | awk -F ' = ' '{ print $1}'`
+  local selected=`echo $scripts | FZF_DEFAULT_OPTS='' fzf --height=50% --reverse --exit-0 | awk -F ' = ' '{ print $1}'`
 
   zle reset-prompt
   if [[ -z $selected ]]; then
