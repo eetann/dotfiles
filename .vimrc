@@ -24,11 +24,11 @@ set clipboard-=autoselect
 
 " ----タブ設定----------------------------------------------------
 set expandtab " インデントをタブの代わりにスペース
-set tabstop=4 "タブ幅をスペース4つ分にする
-set softtabstop=4 " 連続空白に対してTabやBackSpaceでcursorが動く幅
+set tabstop=2 "タブ幅をスペース4つ分にする
+set softtabstop=2 " 連続空白に対してTabやBackSpaceでcursorが動く幅
 set autoindent    " 改行時に前の行のintentを継続する
 set smartindent   " 改行時に入力された行の末尾に合わせて次行のintentを増減
-set shiftwidth=4  " smartindentでずれる幅
+set shiftwidth=2  " smartindentでずれる幅
 " \入力時自動インデント阻止
 let g:vim_indent_cont = 0
 
