@@ -89,7 +89,7 @@ require('incline').setup {
         Search = "None"
       }
     },
-    zindex = 60,
+    zindex = 30,
   },
 }
 EOF
