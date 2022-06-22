@@ -71,6 +71,7 @@ telescope.setup{
           ["<CR>"] = telescope_custom_actions.multi_selection_open,
           ["<C-v>"] = telescope_custom_actions.multi_selection_open_vsplit,
           ["<C-x>"] = telescope_custom_actions.multi_selection_open_split,
+          ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
         },
       },
     },
