@@ -14,6 +14,7 @@ lua << EOF
 
 local actions = require("telescope.actions")
 local action_state = require('telescope.actions.state')
+local action_set = require('telescope.actions.set')
 local telescope_custom_actions = {}
 
 function telescope_custom_actions._multiopen(prompt_bufnr, open_cmd)
@@ -35,9 +36,32 @@ function telescope_custom_actions._multiopen(prompt_bufnr, open_cmd)
   else
     cwd = cwd .. '/'
   end
-  for _, selection in ipairs(picker:get_multi_selection()) do
-    local file_name = selection.value
-    vim.api.nvim_command('edit' .. ' ' .. cwd .. file_name)
+  for _, entry in ipairs(picker:get_multi_selection()) do
+    local filename, row, col
+
+    if entry.path or entry.filename then
+      filename = entry.path or entry.filename
+      row = entry.row or entry.lnum
+      col = entry.col
+    elseif not entry.bufnr then
+      local value = entry.value
+      if not value then
+        return
+      end
+      if type(value) == "table" then
+        value = entry.display
+      end
+
+      local sections = vim.split(value, ":")
+      filename = sections[1]
+      row = tonumber(sections[2])
+      col = tonumber(sections[3])
+    end
+
+    vim.api.nvim_command('edit' .. ' ' .. cwd .. filename)
+    if row and col then
+      vim.api.nvim_win_set_cursor(0, {row, col})
+    end
   end
 
 end
@@ -77,6 +101,16 @@ telescope.setup{
     },
     git_files = {
       file_ignore_patterns = { "node_modules/", ".git/" },
+      mappings = {
+        i = {
+          ["<esc>"] = actions.close,
+          ["<CR>"] = telescope_custom_actions.multi_selection_open,
+          ["<C-v>"] = telescope_custom_actions.multi_selection_open_vsplit,
+          ["<C-x>"] = telescope_custom_actions.multi_selection_open_split,
+        },
+      },
+    },
+    live_grep = {
       mappings = {
         i = {
           ["<esc>"] = actions.close,
