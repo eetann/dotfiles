@@ -7,6 +7,8 @@ brew "ghq"
 brew "lazygit"
 brew "ripgrep"
 brew "tmux"
+brew "shellcheck"
+brew "shfmt"
 cask "wezterm"
 if OS.mac?
     brew "go"
