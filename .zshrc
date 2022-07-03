@@ -13,4 +13,4 @@ source $ZDIR/002_completion.zsh
 source $ZDIR/003_plugin.zsh
 source $ZDIR/004_alias.zsh
 source $ZDIR/005_myfunction.zsh
-source $ZDIR/p10k.zsh
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
