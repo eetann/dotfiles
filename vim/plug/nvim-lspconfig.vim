@@ -263,6 +263,9 @@ local sources = {
       return utils.root_has_file({ ".textlintrc", ".textlintrc.js", ".textlintrc.json", ".textlintrc.yml", ".textlintrc.yaml" })
     end,
   }),
+  null_ls.builtins.diagnostics.shellcheck,
+  null_ls.builtins.code_actions.shellcheck,
+  null_ls.builtins.formatting.shfmt,
 }
 null_ls.setup({
   sources = sources,
