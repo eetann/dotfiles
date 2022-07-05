@@ -1,8 +1,5 @@
 -- 文字関連の設定
-vim.o.encoding = 'utf-8'
-vim.o.fileencodings = 'utf-8'
 vim.o.ambiwidth = 'single'
-vim.o.backspace = 'indent,eol,start'
 -- 数増減は10進数でハイフンを無視する
 vim.o.nrformats = 'unsigned'
 
@@ -27,11 +24,8 @@ vim.o.smartindent = true -- 次の行のintentを末尾に合わせて増減
 vim.o.shiftwidth = 2 -- smartindentでずれる幅
 
 -- 文字列検索-----------------------------------------------------
-vim.o.incsearch = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
--- 検索時に検索件数メッセージを表示
-vim.opt.shortmess:remove({ 'S' })
 -- html記述に合わせてファイルの相対パスが/始まりでも認識
 -- vim.cmd([[set includeexpr=substitute(v:fname,'^\\/','','')]])
 vim.opt.includeexpr = string.gsub(vim.v.fname, '^\\/', '')
@@ -46,11 +40,9 @@ if vim.fn.executable('jvgrep') then
   vim.o.grepprg = 'jvprep'
 end
 vim.opt.noswapfile = true
-vim.opt.hidden = true
-vim.opt.wildmenu = true
 vim.opt.history = 1000
 vim.opt.completeopt = { 'menuone', 'popup' }
-vim.opt.mouse = a
+vim.opt.mouse = 'a'
 vim.opt.ttimeoutlen = 100 -- ESCしてから挿入モード出るまでの時間を短縮
 vim.opt.helplang = { 'ja', 'en' }
 vim.opt.keywordprg = ':help'
@@ -98,7 +90,3 @@ vim.opt.splitright = true
 vim.opt.winwidth = 30
 vim.opt.winminwidth = 30
 vim.opt.noequalalways = true
-vim.opt.belloff = 'all'
-
-vim.cmd('filetype plugin indent on')
-vim.cmd('syntax enable')
