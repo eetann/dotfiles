@@ -39,8 +39,8 @@ function telescope_custom_actions._multiopen(prompt_bufnr, open_cmd)
   for _, entry in ipairs(picker:get_multi_selection()) do
     local filename, row, col
 
-    if entry.path or entry.filename then
-      filename = entry.path or entry.filename
+    if entry.filename then
+      filename = entry.filename
       row = entry.row or entry.lnum
       col = entry.col
     elseif not entry.bufnr then
