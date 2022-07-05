@@ -73,7 +73,8 @@ endif
 
 Plug 'thinca/vim-quickrun' " vim/plug/vim-quickrun.vim
 
-Plug 'sainnhe/gruvbox-material' " vim/plug/gruvbox-material.vim
+" color scheme
+Plug 'sainnhe/everforest' " vim/plug/color-scheme.vim
 
 Plug 'nvim-lualine/lualine.nvim' " vim/plug/lualine.vim
 Plug 'b0o/incline.nvim' " vim/plug/incline.vim
