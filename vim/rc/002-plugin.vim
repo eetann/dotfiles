@@ -54,7 +54,7 @@ if has('nvim')
   Plug 'hrsh7th/cmp-cmdline'
   Plug 'uga-rosa/cmp-dictionary'
   Plug 'hrsh7th/nvim-cmp'
-  Plug 'hrsh7th/cmp-nvim-lua'
+  Plug 'folke/lua-dev.nvim'
   Plug 'onsails/lspkind-nvim'
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'

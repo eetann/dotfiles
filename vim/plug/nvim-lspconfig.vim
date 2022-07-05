@@ -200,33 +200,11 @@ for _, server in pairs(installed_servers) do
     opts.autostart = detected_root_dir(root_dir)
     opts.init_options = { lint = true, unstable = true, }
   elseif server == 'sumneko_lua' then
-    local LUA_PATH = vim.split(package.path, ';')
-    table.insert(LUA_PATH, "lua/?.lua")
-    table.insert(LUA_PATH, "lua/?/init.lua")
+		local has_lua_dev, lua_dev = pcall(require, "lua-dev")
     opts.settings = {
       Lua = {
-        runtime = {
-          -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-          version = 'LuaJIT',
-          -- Setup your lua path
-          path = LUA_PATH,
-        },
-        diagnostics = {
-          -- Get the language server to recognize the `vim` global
-          globals = {'vim'},
-        },
-        workspace = {
-          -- Make the server aware of Neovim runtime files
-          library = vim.api.nvim_get_runtime_file("", true),
-        },
-        -- Do not send telemetry data containing a randomized but unique identifier
-        telemetry = {
-          enable = false,
-        },
         format = {
           enable = true,
-          -- Put format options here
-          -- NOTE: the value should be STRING!!
           defaultConfig = {
             indent_style = "space",
             indent_size = "2",
@@ -235,6 +213,20 @@ for _, server in pairs(installed_servers) do
         },
       },
     }
+		if has_lua_dev then
+			opts = lua_dev.setup({
+				library = {
+					vimruntime = true, -- runtime path
+					types = true, -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
+					-- plugins = false, -- installed opt or start plugins in packpath
+					-- you can also specify the list of plugins to make available as a workspace library
+					-- plugins = { "nvim-treesitter", "plenary.nvim", "telescope.nvim" },
+					plugins = { "nvim-treesitter", "plenary.nvim" },
+				},
+				runtime_path = false,
+				lspconfig = opts,
+			})
+		end
   end
 
   lspconfig[server].setup(opts)
