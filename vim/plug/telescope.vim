@@ -5,7 +5,6 @@ nmap <Leader>f [fzf-p]
 xmap <Leader>f [fzf-p]
 
 " Find files using Telescope command-line sugar.
-nnoremap [fzf-p]g <cmd>Telescope live_grep<cr>
 nnoremap [fzf-p]b <cmd>Telescope buffers<cr>
 nnoremap [fzf-p]h <cmd>Telescope help_tags<cr>
 nnoremap <F6> <cmd>Telescope git_files cwd=~/dotfiles<cr>
@@ -76,6 +75,18 @@ function telescope_custom_actions.multi_selection_open(prompt_bufnr)
   telescope_custom_actions._multiopen(prompt_bufnr, "edit")
 end
 
+function getVisualSelection()
+	vim.cmd('noau normal! "vy')
+	local text = vim.fn.getreg('v')
+	vim.fn.setreg('v', {})
+
+	text = string.gsub(text, "\n", "")
+	if #text > 0 then
+		return text
+	else
+		return ''
+	end
+end
 
 local telescope = require('telescope')
 telescope.setup{
@@ -123,12 +134,25 @@ telescope.setup{
   },
 }
 
-telescope.custom = {
-  project_files = function()
-    local ok = pcall(require"telescope.builtin".git_files, {})
-    if not ok then require"telescope.builtin".find_files({hidden=true}) end
+telescope_custom = {
+  project_files = function(text)
+    local ok = pcall(require"telescope.builtin".git_files, {default_text=text})
+    if not ok then require"telescope.builtin".find_files({default_text=text, hidden=true}) end
   end
 }
 
-vim.api.nvim_set_keymap("n", "[fzf-p]f", "<CMD>lua require'telescope'.custom.project_files()<CR>", {noremap = true, silent = true})
+vim.keymap.set("n", "[fzf-p]f", function()
+  telescope_custom.project_files('')
+end, {noremap = true, silent = true})
+
+vim.keymap.set("v", "[fzf-p]f", function()
+  local text = getVisualSelection()
+  telescope_custom.project_files(text)
+end, {noremap = true, silent = true})
+
+vim.keymap.set("v", "[fzf-p]g", function()
+  local text = getVisualSelection()
+  require"telescope.builtin".live_grep({default_text=text})
+end, {noremap = true, silent = true})
+
 EOF
