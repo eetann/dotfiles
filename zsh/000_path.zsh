@@ -5,7 +5,7 @@ if [[ -z "$TMUX" ]] && [[ -z "$VIM" ]] ; then
   export PATH=$PATH:$GOPATH:$GOPATH/bin
   export PATH=$HOME/.local/bin:$PATH
   export VOLTA_HOME=$HOME/.volta
-  export PATH=$PATH:$VOLTA_HOME/bin
+  export PATH=$PATH:$VOLTA_HOME/bin:$HOME/.cargo/bin
 
   tmux -u has-session -t e 2>/dev/null || tmux -u new-session -ds e \
     && tmux -u attach-session -t e

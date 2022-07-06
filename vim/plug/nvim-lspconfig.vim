@@ -200,19 +200,8 @@ for _, server in pairs(installed_servers) do
     opts.autostart = detected_root_dir(root_dir)
     opts.init_options = { lint = true, unstable = true, }
   elseif server == 'sumneko_lua' then
+    opts.on_attach = on_attach_disable_format
 		local has_lua_dev, lua_dev = pcall(require, "lua-dev")
-    opts.settings = {
-      Lua = {
-        format = {
-          enable = true,
-          defaultConfig = {
-            indent_style = "space",
-            indent_size = "2",
-            quote_style = "single",
-          }
-        },
-      },
-    }
 		if has_lua_dev then
 			opts = lua_dev.setup({
 				library = {
@@ -258,6 +247,7 @@ local sources = {
   null_ls.builtins.diagnostics.shellcheck,
   null_ls.builtins.code_actions.shellcheck,
   null_ls.builtins.formatting.shfmt,
+  null_ls.builtins.formatting.stylua,
 }
 null_ls.setup({
   sources = sources,
