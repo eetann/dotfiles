@@ -14,7 +14,12 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 return require("packer").startup(function(use)
-	use({ "machakann/vim-highlightedyank" }) -- vim/plug/vim-highlightedyank.vim
+	use({
+		"machakann/vim-highlightedyank",
+		config = function()
+			require("plug/vim-highlightedyank.lua")
+		end,
+	})
 
 	-- vim/plug/vim-textobj.vim
 	use({ "kana/vim-textobj-user", event = "VimEnter" })
