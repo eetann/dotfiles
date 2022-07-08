@@ -9,6 +9,7 @@ brew "ripgrep"
 brew "tmux"
 brew "shellcheck"
 brew "shfmt"
+brew "direnv"
 cask "wezterm"
 if OS.mac?
     brew "go"

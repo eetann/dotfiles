@@ -18,7 +18,7 @@ PKG_UBUNTU="neovim manpages-ja manpages-ja-dev wamerican"
 PKG_ARCH="neovim alacritty tmux words lazygit fcitx5-im fcitx5-mozc xdg-user-dirs-gtk"
 PKG_ARCH+=" vivaldi powertop tlp rofi bat ghq ripgrep"
 PKG_ARCH+=" playerctl light ttf-font-awesome noto-fonts noto-fonts-cjk noto-fonts-emoji spotify"
-PKG_ARCH+=" shellcheck shfmt"
+PKG_ARCH+=" shellcheck shfmt direnv"
 
 ubuntu() {
 	log "Installing packages ..."

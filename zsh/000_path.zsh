@@ -26,3 +26,7 @@ if type nvim > /dev/null; then
 else
   export EDITOR=vim
 fi
+
+if type direnv > /dev/null; then
+  eval "$(direnv hook zsh)"
+fi

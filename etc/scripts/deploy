@@ -4,7 +4,8 @@ trap 'echo Error: $0:$LINENO stopped; exit 1' ERR INT
 set -euo pipefail
 
 if [ -z "${DOTPATH:-}" ]; then
-  DOTPATH=$HOME/dotfiles; export DOTPATH
+	DOTPATH=$HOME/dotfiles
+	export DOTPATH
 fi
 
 # load useful functions
@@ -13,30 +14,33 @@ fi
 echo ""
 info "Start creating symbolic links."
 
-ln -fs ${DOTPATH}/.clang-format ${HOME}/.clang-format
-ln -fs ${DOTPATH}/.latexmkrc ${HOME}/.latexmkrc
-ln -fs ${DOTPATH}/.tmux.conf ${HOME}/.tmux.conf
-ln -fs ${DOTPATH}/.vimrc ${HOME}/.vimrc
-ln -fs ${DOTPATH}/.zshrc ${HOME}/.zshrc
+ln -fs "${DOTPATH}/.clang-format" "${HOME}/.clang-format"
+ln -fs "${DOTPATH}/.latexmkrc" "${HOME}/.latexmkrc"
+ln -fs "${DOTPATH}/.tmux.conf" "${HOME}/.tmux.conf"
+ln -fs "${DOTPATH}/.vimrc" "${HOME}/.vimrc"
+ln -fs "${DOTPATH}/.zshrc" "${HOME}/.zshrc"
 
-mkdir -p ${HOME}/.config
-ln -fs ${DOTPATH}/.flake8 ${HOME}/.config/flake8
-mkdir -p ${HOME}/.config/efm-langserver
-ln -fs ${DOTPATH}/.config/efm-langserver/config.yaml ${HOME}/.config/efm-langserver/config.yaml
+mkdir -p "${HOME}/.config"
+ln -fs "${DOTPATH}/.flake8" "${HOME}/.config/flake8"
+mkdir -p "${HOME}/.config/efm-langserver"
+ln -fs "${DOTPATH}/.config/efm-langserver/config.yaml" "${HOME}/.config/efm-langserver/config.yaml"
 
-mkdir -p ${HOME}/.config/nvim
-ln -fs ${DOTPATH}/.vimrc ${HOME}/.config/nvim/init.vim
+mkdir -p "${HOME}/.config/nvim"
+ln -fs "${DOTPATH}/.vimrc" "${HOME}/.config/nvim/init.vim"
 
-mkdir -p ${HOME}/.config/alacritty
-ln -fs ${DOTPATH}/.config/alacritty/alacritty.yml ${HOME}/.config/alacritty/alacritty.yml
+mkdir -p "${HOME}/.config/alacritty"
+ln -fs "${DOTPATH}/.config/alacritty/alacritty.yml" "${HOME}/.config/alacritty/alacritty.yml"
 
-mkdir -p ${HOME}/.config/rofi
-ln -fs ${DOTPATH}/.config/rofi/config.rasi ${HOME}/.config/rofi/config.rasi
+mkdir -p "${HOME}/.config/rofi"
+ln -fs "${DOTPATH}/.config/rofi/config.rasi" "${HOME}/.config/rofi/config.rasi"
 
-mkdir -p ${HOME}/.config/i3
-ln -fs ~/dotfiles/.config/i3/config ~/.config/i3/config
+mkdir -p "${HOME}/.config/i3"
+ln -fs "${DOTPATH}/.config/i3/config" "${HOME}/.config/i3/config"
 
-mkdir -p ${HOME}/.config/wezterm
-ln -fs ~/dotfiles/.config/wezterm/wezterm.lua ~/.config/wezterm/wezterm.lua
+mkdir -p "${HOME}/.config/wezterm"
+ln -fs "${DOTPATH}/.config/wezterm/wezterm.lua" "${HOME}/.config/wezterm/wezterm.lua"
+
+mkdir -p "${HOME}/.config/git"
+ln -fs "${DOTPATH}/.config/git" "${HOME}/.config/git"
 
 echo ""
