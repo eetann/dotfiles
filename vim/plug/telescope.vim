@@ -150,6 +150,10 @@ vim.keymap.set("v", "[fzf-p]f", function()
   telescope_custom.project_files(text)
 end, {noremap = true, silent = true})
 
+vim.keymap.set("n", "[fzf-p]g", function()
+  require"telescope.builtin".live_grep()
+end, {noremap = true, silent = true})
+
 vim.keymap.set("v", "[fzf-p]g", function()
   local text = getVisualSelection()
   require"telescope.builtin".live_grep({default_text=text})
