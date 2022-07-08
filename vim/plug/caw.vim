@@ -19,4 +19,3 @@ nmap gco    <Plug>(caw:jump:comment-next)
 nmap gcO    <Plug>(caw:jump:comment-prev)
 nmap gct    <Plug>(caw:jump:comment-next)TODO:<Space>
 nmap gcT    <Plug>(caw:jump:comment-prev)TODO:<Space>
-nnoremap gcl :vimgrep /TODO:/j %<CR>

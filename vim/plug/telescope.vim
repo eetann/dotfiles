@@ -159,4 +159,7 @@ vim.keymap.set("v", "[fzf-p]g", function()
   require"telescope.builtin".live_grep({default_text=text})
 end, {noremap = true, silent = true})
 
+vim.keymap.set("n", "[fzf-p]t", function()
+  require"telescope.builtin".live_grep({default_text="todo:"})
+end, {noremap = true, silent = true})
 EOF
