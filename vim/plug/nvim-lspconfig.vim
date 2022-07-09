@@ -16,8 +16,8 @@ nnoremap <silent><leader>cd :Lspsaga show_line_diagnostics<CR>
 nnoremap <silent><leader>cc <cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>
 
 " jump diagnostic
-nnoremap <silent> [d :Lspsaga diagnostic_jump_next<CR>
-nnoremap <silent> ]d :Lspsaga diagnostic_jump_prev<CR>
+nnoremap <silent> [d :Lspsaga diagnostic_jump_prev<CR>
+nnoremap <silent> ]d :Lspsaga diagnostic_jump_next<CR>
 
 lua << EOF
 vim.g.Illuminate_delay = 50
