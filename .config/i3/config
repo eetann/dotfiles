@@ -192,6 +192,7 @@ for_window [window_role="dialog"] floating enable
 for_window [window_role="menu"] floating enable
 for_window [window_role="Preferences"] floating enable
 for_window [title="TweetDeck"] floating disable
+# for_window [class="^(?!.*wezterm).*$"] xmodmap -e ""
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
