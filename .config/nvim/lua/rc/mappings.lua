@@ -113,7 +113,7 @@ vim.keymap.set(
 	{ desc = "現在のファイル名をyank" }
 )
 vim.keymap.set("n", "sge", function()
-		vim.cmd([[
+	vim.cmd([[
       let s:echo_hist = histget('cmd', -1)
       if s:echo_hist =~ '^echo '
           let @z = substitute(s:echo_hist, '^echo\s','echomsg ', '')
@@ -121,8 +121,8 @@ vim.keymap.set("n", "sge", function()
           let @+ = execute('1messages')
       endif
     ]])
-		vim.cmd([[<Cmd>echo 'Clipboard << ' . @+<CR>]])
-	end, {
+	vim.cmd([[echo 'Clipboard << ' . @+]])
+end, {
 	desc = "直前のechoをyank",
 })
 vim.keymap.set(
@@ -132,16 +132,32 @@ vim.keymap.set(
 	{ desc = "直前の検索をヤンク" }
 )
 vim.keymap.set("n", "/", "/\\v", { desc = "検索でエスケープ減らすために very magic" })
+
+local function set_vsearch()
+	vim.cmd([[
+    silent normal gv"zy
+    let @/ = '\V' . substitute(escape(@z, '/\'), '\n', '\\n', 'g')
+  ]])
+end
+vim.keymap.set("x", "*", function()
+	set_vsearch()
+	vim.cmd([[mz/<C-r>/<CR>`zdmz]])
+end, { noremap = true, silent = true, desc = "選択した文字列を検索" })
+vim.keymap.set("x", "#", function()
+	set_vsearch()
+	vim.cmd([[/<C-r>/<CR>:%s/<C-r>///g<Left><Left>]])
+end, { noremap = true, silent = true, desc = "選択した文字列を検索" })
+
 vim.cmd([[
 " cursor下の単語をハイライトと置換
 nnoremap * "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
 nnoremap # "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
-function! s:set_vsearch() abort
-    silent normal gv"zy
-    let @/ = '\V' . substitute(escape(@z, '/\'), '\n', '\\n', 'g')
-endfunction
-xnoremap * <Cmd>call set_vsearch()<CR>mz/<C-r>/<CR>`zdmz
-xnoremap # <Cmd>call set_vsearch()<CR>/<C-r>/<CR>:%s/<C-r>///g<Left><Left>
+" function! s:set_vsearch() abort
+"     silent normal gv"zy
+"     let @/ = '\V' . substitute(escape(@z, '/\'), '\n', '\\n', 'g')
+" endfunction
+" xnoremap * <Cmd>call set_vsearch()<CR>mz/<C-r>/<CR>`zdmz
+" xnoremap # <Cmd>call set_vsearch()<CR>/<C-r>/<CR>:%s/<C-r>///g<Left><Left>
 ]])
 
 vim.keymap.set("n", "<ESC><ESC>", "<Cmd>set nohlsearch! hlsearch?<CR>", { silent = true })
@@ -180,7 +196,7 @@ vim.keymap.set("n", "Tj", "T<C-k>")
 
 -- 切り替え
 vim.keymap.set("n", "[my-switch]", "<Nop>", { noremap = true })
-vim.keymap.set("n", "<Leader>s", "[my-switch]", { noremap=false })
+vim.keymap.set("n", "<Leader>s", "[my-switch]", { noremap = false })
 vim.keymap.set("n", "[my-switch]w", "<Cmd>setl wrap! wrap?<CR>")
 vim.keymap.set("n", "[my-switch]p", "<Cmd>setl paste! paste?<CR>")
 

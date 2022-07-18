@@ -40,7 +40,7 @@ if vim.fn.executable("jvgrep") then
 end
 vim.opt.swapfile = false
 vim.opt.history = 1000
-vim.opt.completeopt = { "menuone", "preview" }
+vim.opt.completeopt = { "menu", "menuone", "preview" }
 vim.opt.mouse = "a"
 vim.opt.ttimeoutlen = 100 -- ESCしてから挿入モード出るまでの時間を短縮
 vim.opt.helplang = { "ja", "en" }

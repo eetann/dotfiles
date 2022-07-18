@@ -60,7 +60,7 @@ function telescope_custom_actions.multi_selection_open(prompt_bufnr)
 	telescope_custom_actions._multiopen(prompt_bufnr, "edit")
 end
 
-function getVisualSelection()
+local function getVisualSelection()
 	vim.cmd('noau normal! "vy')
 	local text = vim.fn.getreg("v")
 	vim.fn.setreg("v", {})
@@ -128,7 +128,7 @@ telescope_custom = {
 	end,
 }
 
-vim.keymap.set({ "n", "x" }, "<Leader>f", "[fzf-p]", { noremap = true, silent = true })
+vim.keymap.set({ "n", "x" }, "<Leader>f", "[fzf-p]", { noremap = false, silent = true })
 
 vim.keymap.set("n", "[fzf-p]b", "<Cmd>Telescope buffers<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "[fzf-p]h", "<Cmd>Telescope help_tags<CR>", { noremap = true, silent = true })

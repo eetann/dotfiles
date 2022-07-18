@@ -50,8 +50,8 @@ require("lspsaga").setup({
 	diagnostic_message_format = "%m %c",
 	highlight_prefix = false,
 })
-vim.keymap.set("n", "<C-d>", require("lspsaga.action").smart_scroll_with_saga(1), mopt)
-vim.keymap.set("n", "<C-u>", require("lspsaga.action").smart_scroll_with_saga(-1), mopt)
+vim.keymap.set("n", "<C-d>", function() require("lspsaga.action").smart_scroll_with_saga(1) end, mopt)
+vim.keymap.set("n", "<C-u>", function() require("lspsaga.action").smart_scroll_with_saga(-1) end, mopt)
 
 require("lsp_signature").setup({
 	debug = false, -- set to true to enable debug logging
