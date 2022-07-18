@@ -42,7 +42,7 @@ return require("packer").startup({
 		use({ "andymass/vim-matchup" }) -- %を拡張
 		use({ "machakann/vim-sandwich", config = conf("vim-sandwich") })
 
-		use({ "nvim-lua/plenary.nvim" }) -- nvim
+		use({ "nvim-lua/plenary.nvim" })
 		use({ "nvim-telescope/telescope.nvim", config = conf("telescope") })
 
 		-- .config/nvim/lua/plug/lsp.lua

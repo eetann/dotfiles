@@ -62,6 +62,7 @@ end
 
 local function getVisualSelection()
 	vim.cmd('noau normal! "vy')
+	---@diagnostic disable-next-line: missing-parameter
 	local text = vim.fn.getreg("v")
 	vim.fn.setreg("v", {})
 
@@ -119,7 +120,7 @@ telescope.setup({
 	},
 })
 
-telescope_custom = {
+local telescope_custom = {
 	project_files = function(text)
 		local ok = pcall(require("telescope.builtin").git_files, { default_text = text })
 		if not ok then
@@ -128,30 +129,31 @@ telescope_custom = {
 	end,
 }
 
-vim.keymap.set({ "n", "x" }, "<Leader>f", "[fzf-p]", { noremap = false, silent = true })
+vim.keymap.set({ "n", "x" }, "[fzf-p]", "<Nop>")
+vim.keymap.set({ "n", "x" }, "<Leader>f", "[fzf-p]")
 
-vim.keymap.set("n", "[fzf-p]b", "<Cmd>Telescope buffers<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "[fzf-p]h", "<Cmd>Telescope help_tags<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<F6>", "<Cmd>Telescope git_files cwd=~/dotfiles<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "[fzf-p]b", "<Cmd>Telescope buffers<CR>")
+vim.keymap.set("n", "[fzf-p]h", "<Cmd>Telescope help_tags<CR>")
+vim.keymap.set("n", "<F6>", "<Cmd>Telescope git_files cwd=~/dotfiles<CR>")
 
 vim.keymap.set("n", "[fzf-p]f", function()
 	telescope_custom.project_files("")
-end, { noremap = true, silent = true })
+end)
 
 vim.keymap.set("v", "[fzf-p]f", function()
 	local text = getVisualSelection()
 	telescope_custom.project_files(text)
-end, { noremap = true, silent = true })
+end)
 
 vim.keymap.set("n", "[fzf-p]g", function()
 	require("telescope.builtin").live_grep()
-end, { noremap = true, silent = true })
+end)
 
 vim.keymap.set("v", "[fzf-p]g", function()
 	local text = getVisualSelection()
 	require("telescope.builtin").live_grep({ default_text = text })
-end, { noremap = true, silent = true })
+end)
 
 vim.keymap.set("n", "[fzf-p]t", function()
 	require("telescope.builtin").live_grep({ default_text = "todo:" })
-end, { noremap = true, silent = true })
+end)

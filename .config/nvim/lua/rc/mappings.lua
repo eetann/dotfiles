@@ -141,11 +141,11 @@ local function set_vsearch()
 end
 vim.keymap.set("x", "*", function()
 	set_vsearch()
-	vim.cmd([[mz/<C-r>/<CR>`zdmz]])
+	vim.cmd([[normal! mz/<C-r>/<CR>`zdmz]])
 end, { noremap = true, silent = true, desc = "選択した文字列を検索" })
 vim.keymap.set("x", "#", function()
 	set_vsearch()
-	vim.cmd([[/<C-r>/<CR>:%s/<C-r>///g<Left><Left>]])
+	vim.cmd([[normal! /<C-r>/<CR>:%s/<C-r>///g<Left><Left>]])
 end, { noremap = true, silent = true, desc = "選択した文字列を検索" })
 
 vim.cmd([[
@@ -195,8 +195,8 @@ vim.keymap.set("n", "tj", "t<C-k>")
 vim.keymap.set("n", "Tj", "T<C-k>")
 
 -- 切り替え
-vim.keymap.set("n", "[my-switch]", "<Nop>", { noremap = true })
-vim.keymap.set("n", "<Leader>s", "[my-switch]", { noremap = false })
+vim.keymap.set("n", "[my-switch]", "<Nop>")
+vim.keymap.set("n", "<Leader>s", "[my-switch]")
 vim.keymap.set("n", "[my-switch]w", "<Cmd>setl wrap! wrap?<CR>")
 vim.keymap.set("n", "[my-switch]p", "<Cmd>setl paste! paste?<CR>")
 
