@@ -1,0 +1,5 @@
+vim.keymap.set({ "o", "x" }, "i,", "<Plug>(swap-textobject-i)")
+vim.keymap.set({ "o", "x" }, "a,", "<Plug>(swap-textobject-a)")
+vim.keymap.set("n", "g<", "<Plug>(swap-prev)")
+vim.keymap.set("n", "g>", "<Plug>(swap-next)")
+vim.keymap.set("n", "gs", "<Plug>(swap-interactive)")
