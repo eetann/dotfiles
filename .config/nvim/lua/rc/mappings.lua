@@ -131,33 +131,18 @@ vim.keymap.set(
 	"<Cmd>let @+ = histget('search',-1)<CR>:echo 'Clipboard << ' . @+<CR>",
 	{ desc = "直前の検索をヤンク" }
 )
-vim.keymap.set("n", "/", "/\\v", { desc = "検索でエスケープ減らすために very magic" })
-
-local function set_vsearch()
-	vim.cmd([[
-    silent normal gv"zy
-    let @/ = '\V' . substitute(escape(@z, '/\'), '\n', '\\n', 'g')
-  ]])
-end
-vim.keymap.set("x", "*", function()
-	set_vsearch()
-	vim.cmd([[normal! mz/<C-r>/<CR>`zdmz]])
-end, { noremap = true, silent = true, desc = "選択した文字列を検索" })
-vim.keymap.set("x", "#", function()
-	set_vsearch()
-	vim.cmd([[normal! /<C-r>/<CR>:%s/<C-r>///g<Left><Left>]])
-end, { noremap = true, silent = true, desc = "選択した文字列を検索" })
+vim.keymap.set("n", "/", [[/\v]], { desc = "検索でエスケープ減らすために very magic" })
 
 vim.cmd([[
 " cursor下の単語をハイライトと置換
 nnoremap * "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
 nnoremap # "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
-" function! s:set_vsearch() abort
-"     silent normal gv"zy
-"     let @/ = '\V' . substitute(escape(@z, '/\'), '\n', '\\n', 'g')
-" endfunction
-" xnoremap * <Cmd>call set_vsearch()<CR>mz/<C-r>/<CR>`zdmz
-" xnoremap # <Cmd>call set_vsearch()<CR>/<C-r>/<CR>:%s/<C-r>///g<Left><Left>
+function! g:VSetSearch() abort
+    silent normal! "zy
+    let @/ = '\V' . substitute(escape(@z, '/\'), '\n', '\\n', 'g')
+endfunction
+xnoremap * <Cmd>call g:VSetSearch()<CR>mz/<C-r>/<CR>`zdmz
+xnoremap # <Cmd>call g:VSetSearch()<CR>/<C-r>/<CR>:%s/<C-r>///g<Left><Left>
 ]])
 
 vim.keymap.set("n", "<ESC><ESC>", "<Cmd>set nohlsearch! hlsearch?<CR>", { silent = true })
