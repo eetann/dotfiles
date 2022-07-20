@@ -14,7 +14,7 @@ require("lualine").setup({
 		globalstatus = true,
 	},
 	sections = {
-		lualine_a = { "mode" },
+		lualine_a = { "mode", [[vim.o.paste and 'PASTE' or '']] },
 		lualine_b = { "branch", "diff", "diagnostics" },
 		lualine_c = {
 			{
