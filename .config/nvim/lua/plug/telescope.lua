@@ -129,31 +129,28 @@ local telescope_custom = {
 	end,
 }
 
-vim.keymap.set({ "n", "x" }, "[fzf-p]", "<Nop>")
-vim.keymap.set({ "n", "x" }, "<Leader>f", "[fzf-p]")
-
-vim.keymap.set("n", "[fzf-p]b", "<Cmd>Telescope buffers<CR>")
-vim.keymap.set("n", "[fzf-p]h", "<Cmd>Telescope help_tags<CR>")
+vim.keymap.set("n", "<Leader>fb", "<Cmd>Telescope buffers<CR>")
+vim.keymap.set("n", "<Leader>fh", "<Cmd>Telescope help_tags<CR>")
 vim.keymap.set("n", "<F6>", "<Cmd>Telescope git_files cwd=~/dotfiles<CR>")
 
-vim.keymap.set("n", "[fzf-p]f", function()
+vim.keymap.set("n", "<Leader>ff", function()
 	telescope_custom.project_files("")
 end)
 
-vim.keymap.set("v", "[fzf-p]f", function()
+vim.keymap.set("v", "<Leader>ff", function()
 	local text = getVisualSelection()
 	telescope_custom.project_files(text)
 end)
 
-vim.keymap.set("n", "[fzf-p]g", function()
+vim.keymap.set("n", "<Leader>fg", function()
 	require("telescope.builtin").live_grep()
 end)
 
-vim.keymap.set("v", "[fzf-p]g", function()
+vim.keymap.set("v", "<Leader>fg", function()
 	local text = getVisualSelection()
 	require("telescope.builtin").live_grep({ default_text = text })
 end)
 
-vim.keymap.set("n", "[fzf-p]t", function()
+vim.keymap.set("n", "<Leader>ft", function()
 	require("telescope.builtin").live_grep({ default_text = "todo:" })
 end)

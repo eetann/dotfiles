@@ -23,7 +23,7 @@ vim.cmd([[packadd packer.nvim]])
 
 vim.api.nvim_create_autocmd("BufWritePost", {
 	pattern = "plugin.lua",
-	command = "PackerCompile",
+	command = "source <afile> | PackerCompile",
 	group = "my_nvim_rc",
 })
 

@@ -180,10 +180,8 @@ vim.keymap.set("n", "tj", "t<C-k>")
 vim.keymap.set("n", "Tj", "T<C-k>")
 
 -- 切り替え
-vim.keymap.set("n", "[my-switch]", "<Nop>")
-vim.keymap.set("n", "<Leader>s", "[my-switch]")
-vim.keymap.set("n", "[my-switch]w", "<Cmd>setl wrap! wrap?<CR>")
-vim.keymap.set("n", "[my-switch]p", "<Cmd>setl paste! paste?<CR>")
+vim.keymap.set("n", "<Leader>sw", "<Cmd>setl wrap! wrap?<CR>")
+vim.keymap.set("n", "<Leader>sp", "<Cmd>setl paste! paste?<CR>")
 
 -- InsertModeでccc を入力し、エスケープでコメント線
 vim.cmd([[inoreabbrev <expr> ccc repeat('-', 70 - virtcol('.'))]])
