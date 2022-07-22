@@ -3,6 +3,14 @@ vim.o.showmode = false
 vim.o.showcmd = true
 vim.o.ruler = true
 
+local function is_table_mode()
+	local ok, is_active = pcall(vim.fn["tablemode#IsActive"])
+	if not ok or is_active ~= 1 then
+		return ""
+	end
+	return "TABLE"
+end
+
 require("lualine").setup({
 	options = {
 		icons_enabled = true,
@@ -14,7 +22,11 @@ require("lualine").setup({
 		globalstatus = true,
 	},
 	sections = {
-		lualine_a = { "mode", [[vim.o.paste and 'PASTE' or '']] },
+		lualine_a = {
+			"mode",
+			[[vim.o.paste and 'PASTE' or '']],
+			is_table_mode,
+		},
 		lualine_b = { "branch", "diff", "diagnostics" },
 		lualine_c = {
 			{
