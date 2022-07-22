@@ -50,8 +50,12 @@ require("lspsaga").setup({
 	diagnostic_message_format = "%m %c",
 	highlight_prefix = false,
 })
-vim.keymap.set("n", "<C-d>", function() require("lspsaga.action").smart_scroll_with_saga(1) end, mopt)
-vim.keymap.set("n", "<C-u>", function() require("lspsaga.action").smart_scroll_with_saga(-1) end, mopt)
+vim.keymap.set("n", "<C-d>", function()
+	require("lspsaga.action").smart_scroll_with_saga(1)
+end, mopt)
+vim.keymap.set("n", "<C-u>", function()
+	require("lspsaga.action").smart_scroll_with_saga(-1)
+end, mopt)
 
 require("lsp_signature").setup({
 	debug = false, -- set to true to enable debug logging
@@ -242,12 +246,13 @@ null_ls.setup({
 	sources = sources,
 	on_attach = function(client)
 		if client.resolved_capabilities.document_formatting then
-			vim.cmd([[
-      augroup LspFormatting
-        autocmd! * <buffer>
-        autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
-      augroup END
-      ]])
+			vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+				group = "my_nvim_rc",
+				pattern = "<buffer>",
+				callback = function()
+					vim.lsp.buf.formatting_sync({}, 3000)
+				end,
+			})
 		end
 	end,
 })
