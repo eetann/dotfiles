@@ -107,8 +107,6 @@ return require("packer").startup({
 		use({ "vim-jp/vimdoc-ja" })
 		use({ "simeji/winresizer", config = conf("winresizer") })
 
-		use({ "APZelos/blamer.nvim", opt = true, event = "VimEnter", config = conf("blamer") })
-
 		use({ "mechatroner/rainbow_csv", opt = true, ft = { "csv" }, config = conf("rainbow_csv") })
 
 		use({
