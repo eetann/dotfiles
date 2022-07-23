@@ -1,4 +1,4 @@
-vim.g["sandwich#recipes"] = vim.tbl_extend("force", vim.deepcopy(vim.g["sandwich#default_recipes"]), {
+vim.g["sandwich#recipes"] = vim.list_extend(vim.deepcopy(vim.g["sandwich#default_recipes"]), {
 	{ buns = { "（", "）" }, input = { "jb" } },
 	{ buns = { "（", "）" }, input = { "j(" } },
 	{ buns = { "（", "）" }, input = { "j)" } },
