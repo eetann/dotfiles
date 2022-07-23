@@ -19,8 +19,6 @@ local function conf(name)
 	return string.format('require("plug/%s")', name)
 end
 
-vim.cmd([[packadd packer.nvim]])
-
 vim.api.nvim_create_autocmd("BufWritePost", {
 	pattern = "plugin.lua",
 	command = "source <afile> | PackerCompile",
@@ -29,7 +27,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 
 return require("packer").startup({
 	function(use)
-		use({ "wbthomason/packer.nvim", opt = true })
+		use({ "wbthomason/packer.nvim" })
 		use({ "machakann/vim-highlightedyank", config = conf("vim-highlightedyank") })
 
 		-- .config/nvim/lua/plug/vim-textobj.lua
