@@ -21,11 +21,3 @@ vim.g["sandwich#recipes"] = vim.list_extend(vim.deepcopy(vim.g["sandwich#default
 	{ buns = { "【", "】" }, input = { "js" } },
 	{ buns = { "〔", "〕" }, input = { "jt" } },
 })
-
-vim.g["sandwich_no_default_key_mappings"] = 1
-
-vim.keymap.set({ "n", "o", "x" }, "sa", "<Plug>(sandwich-add)")
-vim.keymap.set({ "n", "o", "x" }, "sd", "<Plug>(sandwich-delete)")
-vim.keymap.set({ "n", "o", "x" }, "sr", "<Plug>(sandwich-replace)")
-vim.keymap.set({ "o", "x" }, "is", "<Plug>(textobj-sandwich-query-i)")
-vim.keymap.set({ "o", "x" }, "as", "<Plug>(textobj-sandwich-query-a)")
