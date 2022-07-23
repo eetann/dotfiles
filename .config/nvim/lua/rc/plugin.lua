@@ -91,21 +91,29 @@ return require("packer").startup({
 		use({ "b0o/incline.nvim", config = conf("incline") })
 
 		use({ "tyru/caw.vim", config = conf("caw") })
-		use({ "tyru/open-browser.vim", event = "VimEnter", config = conf("open-browser") })
+		use({ "tyru/open-browser.vim", opt = true, event = "VimEnter", config = conf("open-browser") })
 
-		use({ "mattn/vim-sonictemplate", cmd = { "Tem", "Template" }, config = conf("vim-sonictemplate") })
-		use({ "junegunn/vim-easy-align", cmd = { "<Plug>(LiveEasyAlign)" }, config = conf("vim-easy-align") })
-		use({ "bkad/CamelCaseMotion", cmd = { "<Plug>CamelCaseMotion" }, config = conf("CamelCaseMotion") })
-		use({ "delphinus/vim-auto-cursorline", config = conf("vim-auto-cursorline") })
+		use({ "mattn/vim-sonictemplate", opt = true, cmd = { "Tem", "Template" }, config = conf("vim-sonictemplate") })
+		use({
+			"junegunn/vim-easy-align",
+			opt = true,
+			event = "VimEnter",
+			config = conf("vim-easy-align"),
+		})
+		use({ "bkad/CamelCaseMotion", opt = true, event = "VimEnter", config = conf("CamelCaseMotion") })
+		use({ "delphinus/vim-auto-cursorline", opt = true, event = "VimEnter", config = conf("vim-auto-cursorline") })
 		use({ "kshenoy/vim-signature" }) -- マーク位置の表示
 		use({ "lewis6991/gitsigns.nvim", config = conf("gitsigns") })
-		use({ "vim-jp/vimdoc-ja", ft = { "help" } }) -- 日本語ヘルプ
+		use({ "vim-jp/vimdoc-ja" })
 		use({ "simeji/winresizer", config = conf("winresizer") })
 
-		use({ "mechatroner/rainbow_csv", ft = { "csv" }, config = conf("rainbow_csv") })
+		use({ "APZelos/blamer.nvim", opt = true, event = "VimEnter", config = conf("blamer") })
+
+		use({ "mechatroner/rainbow_csv", opt = true, ft = { "csv" }, config = conf("rainbow_csv") })
 
 		use({
 			"mattn/emmet-vim",
+			opt = true,
 			ft = {
 				"html",
 				"css",
@@ -123,12 +131,14 @@ return require("packer").startup({
 
 		use({
 			"dhruvasagar/vim-table-mode",
+			opt = true,
 			ft = { "markdown", "md", "mdwn", "mkd", "mkdn", "mark" },
 			config = conf("vim-table-mode"),
 		})
 
 		use({
 			"iamcco/markdown-preview.nvim",
+			opt = true,
 			run = "cd app && yarn install",
 			cmd = "MarkdownPreview",
 		})
