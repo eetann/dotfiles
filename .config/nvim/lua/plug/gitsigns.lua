@@ -1,4 +1,3 @@
-vim.keymap.set("n", "<Leader>sb", "<Cmd>Gitsigns toggle_current_line_blame<CR>")
 require("gitsigns").setup({
 	signs = {
 		add = { hl = "GitSignsAdd", text = "│", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
@@ -39,4 +38,19 @@ require("gitsigns").setup({
 	yadm = {
 		enable = false,
 	},
+	on_attach = function()
+		local gs = package.loaded.gitsigns
+
+		vim.keymap.set("n", "]c", "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", { expr = true })
+		vim.keymap.set("n", "[c", "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", { expr = true })
+		vim.keymap.set("n", "<Leader>sb", gs.toggle_current_line_blame)
+		vim.keymap.set("n", "<Leader>gb", gs.toggle_current_line_blame)
+		vim.keymap.set("n", "<Leader>gB", function()
+			gs.blame_line({ full = true })
+		end)
+		vim.keymap.set("n", "<Leader>gd", gs.diffthis)
+		vim.keymap.set("n", "<Leader>gD", function()
+			gs.diffthis("~")
+		end)
+	end,
 })
