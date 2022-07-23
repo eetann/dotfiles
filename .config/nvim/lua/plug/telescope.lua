@@ -83,6 +83,21 @@ telescope.setup({
 			prompt_position = "top",
 			preview_width = 0.5,
 		},
+		file_ignore_patterns = {
+			"git/",
+			"node_modules/",
+			"dist/",
+			"dst/",
+			".DS_Store",
+			"%.jpg",
+			"%.jpeg",
+			"%.png",
+			"%.svg",
+			"%.gif",
+			"%.zip",
+			"%.o",
+			"%.out",
+		},
 	},
 	pickers = {
 		find_files = {
@@ -108,6 +123,9 @@ telescope.setup({
 			},
 		},
 		live_grep = {
+			additional_args = function()
+				return { "--hidden" }
+			end,
 			mappings = {
 				i = {
 					["<esc>"] = actions.close,
