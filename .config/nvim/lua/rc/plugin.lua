@@ -106,6 +106,13 @@ return require("packer").startup({
 		use({ "lewis6991/gitsigns.nvim", config = conf("gitsigns") })
 		use({ "vim-jp/vimdoc-ja" })
 		use({ "simeji/winresizer", config = conf("winresizer") })
+		use({
+			"folke/todo-comments.nvim",
+			requires = "nvim-lua/plenary.nvim",
+			config = function()
+				require("todo-comments").setup({})
+			end,
+		})
 
 		use({ "mechatroner/rainbow_csv", opt = true, ft = { "csv" }, config = conf("rainbow_csv") })
 
