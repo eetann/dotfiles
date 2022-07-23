@@ -45,8 +45,9 @@ vim.keymap.set("n", "sl", "<C-w>l")
 vim.keymap.set("n", "sh", "<C-w>h")
 vim.keymap.set("n", "sc", "<C-w>c")
 
-vim.keymap.set("n", "ss", "<Cmd>sp<CR>", { desc = "水平分割" })
-vim.keymap.set("n", "sv", "<Cmd>vs<CR>", { desc = "垂直分割" })
+vim.keymap.set("n", "-", "<Cmd>split<CR>", { desc = "水平分割" })
+vim.keymap.set("n", "<Bar>", "<Cmd>vsplit<CR>", { desc = "垂直分割" })
+vim.keymap.set("n", "<Bslash>", "<Cmd>vsplit<CR>", { desc = "垂直分割" })
 
 -- カーソル移動
 vim.keymap.set("i", "<C-b>", "<left>")
@@ -143,33 +144,42 @@ xnoremap * <Cmd>call g:VSetSearch()<CR>mz/<C-r>/<CR>`zdmz
 xnoremap # <Cmd>call g:VSetSearch()<CR>/<C-r>/<CR>:%s/<C-r>///g<Left><Left>
 ]])
 
+-- 履歴をバッファとして開くやつ
+vim.keymap.set("n", "s:", "q:")
+vim.keymap.set("n", "s?", "q?")
+vim.keymap.set("n", "s/", "q/")
+
 vim.keymap.set("n", "<ESC><ESC>", "<Cmd>set nohlsearch! hlsearch?<CR>", { silent = true })
 
+local function register_digraph(key_pair, char)
+	vim.cmd(("digraphs %s %s"):format(key_pair, vim.fn.char2nr(char, nil)))
+end
+
 -- digraph f<C-k>xxで対応文字に飛べる
-vim.cmd([[
-" カッコ
-digraphs j( 65288  " （
-digraphs j) 65289  " ）
-digraphs j[ 12300  " 「
-digraphs j] 12301  " 」
-digraphs j{ 12302  " 『
-digraphs j} 12303  " 』
+-- 括弧
+register_digraph("j(", "（")
+register_digraph("j8", "（")
+register_digraph("j)", "）")
+register_digraph("j9", "）")
+register_digraph("j[", "「")
+register_digraph("j]", "」")
+register_digraph("j{", "『")
+register_digraph("j}", "』")
 
-" 句読点
-digraphs j, 12289  " 、
-digraphs j. 12290  " 。
-digraphs j< 65292  " ，
-digraphs j> 65294  " ．
-digraphs j! 65281  " ！
-digraphs j? 65311  " ？
-digraphs j: 65306  " ：
+-- 句読点
+register_digraph("j,", "、")
+register_digraph("j.", "。")
+register_digraph("j<", "，")
+register_digraph("j>", "．")
+register_digraph("j!", "！")
+register_digraph("j?", "？")
+register_digraph("j:", "：")
 
-" その他
-digraphs j~ 12316  " 〜
-digraphs j/ 12539  " ・
-digraphs js 12288  " 　
-digraphs jj 106  " 潰されるjのために
-]])
+-- その他
+register_digraph("j~", "〜")
+register_digraph("j/", "・")
+register_digraph("js", "　")
+register_digraph("jj", "j") --潰されるjのために
 
 -- fjde で 'で'に飛べる
 vim.keymap.set("n", "fj", "f<C-k>")
