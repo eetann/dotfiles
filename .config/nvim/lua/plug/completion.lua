@@ -33,10 +33,10 @@ cmp.setup({
 				cmp.select_prev_item()
 			end
 		end,
-		["<CR>"] = cmp.mapping.confirm({ select = true }),
+		["<CR>"] = cmp.mapping.confirm({ select = false }),
 		["<C-k>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
-				cmp.confirm({ select = false })
+				cmp.confirm({ select = true })
 			elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
 				cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
 			elseif has_words_before() then
@@ -68,6 +68,7 @@ cmp.setup({
 cmp.setup.cmdline("/", {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
+		{ name = "path" },
 		{
 			name = "buffer",
 			option = {
@@ -80,7 +81,19 @@ cmp.setup.cmdline("/", {
 })
 
 cmp.setup.cmdline(":", {
-	mapping = cmp.mapping.preset.cmdline(),
+	mapping = cmp.mapping.preset.cmdline({
+		["<C-k>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<BS>", true, false, true) .. "", "m", true)
+				cmp.close()
+				vim.cmd("sleep 100m")
+				local last_char = string.sub(vim.fn.getcmdline(), -1)
+				vim.api.nvim_feedkeys(last_char, "i", false)
+			else
+				fallback()
+			end
+		end, { "c" }),
+	}),
 	sources = cmp.config.sources({
 		{ name = "path" },
 	}, {
