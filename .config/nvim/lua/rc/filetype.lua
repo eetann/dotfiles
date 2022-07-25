@@ -22,7 +22,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
 	group = group_name,
-	pattern = { "cpp,python" },
+	pattern = { "cpp", "python" },
 	callback = function()
 		vim.cmd([[
     setlocal sw=4 sts=4 ts=4
@@ -32,7 +32,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
 	group = group_name,
-	pattern = { "css,help" },
+	pattern = { "css", "help" },
 	callback = function()
 		vim.cmd([[
     setlocal iskeyword+=-
@@ -42,7 +42,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
 	group = group_name,
-	pattern = { "text,qf,quickrun,markdown,tex" },
+	pattern = { "text", "qf", "quickrun", "markdown", "tex" },
 	callback = function()
 		vim.opt_local.wrap = true
 	end,
@@ -81,5 +81,13 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 		vim.cmd([[
     call feedkeys('I', 'n')
     ]])
+	end,
+})
+
+vim.api.nvim_create_autocmd({ "BufRead" }, {
+	group = group_name,
+	pattern = { "/tmp/*" },
+	callback = function()
+		vim.opt_local.wrap = true
 	end,
 })
