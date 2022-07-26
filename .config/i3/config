@@ -42,6 +42,7 @@ bindsym Mod1+F4 kill
 # start program launcher
 bindsym $mod+space exec --no-startup-id "rofi -modi combi -show combi -sidebar-mode"
 bindsym $mod+Tab exec --no-startup-id "rofi -show window -sidebar-mode"
+bindsym $mod+period exec --no-startup-id "rofi -modi emoji -show emoji"
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
