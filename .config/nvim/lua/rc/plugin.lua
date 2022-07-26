@@ -144,8 +144,8 @@ return require("packer").startup({
 		use({
 			"iamcco/markdown-preview.nvim",
 			opt = true,
+			ft = { "markdown", "md", "mdwn", "mkd", "mkdn", "mark" },
 			run = "cd app && yarn install",
-			cmd = "MarkdownPreview",
 		})
 
 		if packer_bootstrap then
