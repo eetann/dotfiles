@@ -140,7 +140,7 @@ telescope.setup({
 
 local telescope_custom = {
 	project_files = function(text)
-		local ok = pcall(require("telescope.builtin").git_files, { default_text = text })
+		local ok = pcall(require("telescope.builtin").git_files, { default_text = text, show_untracked = true })
 		if not ok then
 			require("telescope.builtin").find_files({ default_text = text, hidden = true })
 		end
