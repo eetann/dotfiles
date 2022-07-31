@@ -1,0 +1,34 @@
+modmap:
+  - name: Except Wezterm
+    application:
+      not: org.wezfurlong.wezterm
+    remap:
+      ALT_L: SUPER_R
+      CTRL_L: ALT_L
+      CapsLock: SUPER_L
+      SUPER_L: CTRL_L
+  - name: Only Wezterm
+    application:
+      only: org.wezfurlong.wezterm
+    remap:
+      ALT_L: SUPER_R
+      CTRL_L: ALT_L
+      CapsLock: CTRL_L
+      SUPER_L: CTRL_L
+keymap:
+  - name: Except Wezterm
+    application:
+      not: org.wezfurlong.wezterm
+    remap:
+      SUPER_L-a: home
+      SUPER_L-e: end
+      SUPER_L-h: backspace
+      SUPER_L-d: delete
+      SUPER_L-f: right
+      SUPER_L-b: left
+      SUPER_L-p: up
+      SUPER_L-n: down
+      SUPER_L-k: [Shift-end, backspace]
+      SUPER_L-Tab: CTRL-Tab
+      SUPER_L-Shift-Tab: CTRL-Shift-Tab
+      SUPER_L-KEY_ZENKAKUHANKAKU: CTRL-Shift-Tab
