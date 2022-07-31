@@ -31,4 +31,3 @@ keymap:
       SUPER_L-k: [Shift-end, backspace]
       SUPER_L-Tab: CTRL-Tab
       SUPER_L-Shift-Tab: CTRL-Shift-Tab
-      SUPER_L-KEY_ZENKAKUHANKAKU: CTRL-Shift-Tab

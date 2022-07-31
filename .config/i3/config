@@ -1,10 +1,10 @@
-# i3 config file (v4)
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
-# include ~/dotfiles/.config/i3/autostart.conf
 workspace_layout tabbed
 workspace 1 output primary
 workspace 2 output HDMI1
-# Set mod key (Mod1=<Alt>, Mod4=<Super>)
+
+# The following command are called by systemctl xremap ~/dotfiles/etc/xremap.yaml
+# Mod1=physical:Ctrl, role:Alt
+# Mod4=physical:Alt,  role:Super_L
 set $mod Mod4
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
@@ -31,9 +31,6 @@ font xft:PlemolJPConsoleNF 10
 
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
-
-# start a terminal
-bindsym $mod+Return exec wezterm
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -64,7 +61,8 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-bindsym $mod+p focus parent
+bindsym $mod+Shift+p focus parent
+# $mod+p, $mod+n are used in wezterm
 
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
