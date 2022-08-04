@@ -182,10 +182,10 @@ register_digraph("js", "　")
 register_digraph("jj", "j") --潰されるjのために
 
 -- fjde で 'で'に飛べる
-vim.keymap.set("n", "fj", "f<C-k>")
-vim.keymap.set("n", "Fj", "F<C-k>")
-vim.keymap.set("n", "tj", "t<C-k>")
-vim.keymap.set("n", "Tj", "T<C-k>")
+vim.keymap.set({ "n", "x" }, "fj", "f<C-k>")
+vim.keymap.set({ "n", "x" }, "Fj", "F<C-k>")
+vim.keymap.set({ "n", "x" }, "tj", "t<C-k>")
+vim.keymap.set({ "n", "x" }, "Tj", "T<C-k>")
 
 -- 切り替え
 vim.keymap.set("n", "<Leader>sw", "<Cmd>setl wrap! wrap?<CR>")
