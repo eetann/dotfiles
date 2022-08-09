@@ -42,8 +42,13 @@ F13 & b::send {Left}
 F13 & p::send {Up}
 F13 & n::send {Down}
 F13 & k::send +{End}{Del}
-F13 Tab::send ^Tab
-F13 +Tab::send ^+Tab
+F13 & {Tab}::
+  if GetKeyState("Shift") {
+    Send ^+{Tab}
+    return
+  }
+  Send ^{Tab}
+  return
 
 ;-----------------------------------------------------------
 ; ターミナルでvimのためのIME
