@@ -28,7 +28,7 @@ vk1D::Send, {Blind}{vk1D}
 vk1D & r::Reload
 
 ; ChangeKey
-; CapsLock - > F13
+; CapsLock - > F13 （キー割当画面右上のScan Codeより"0x0064"を割り当てる）
 ; CTRL_L -> ALT
 ; WIN -> CTRL_L
 ; ALT -> WIN
@@ -42,7 +42,7 @@ F13 & b::send {Left}
 F13 & p::send {Up}
 F13 & n::send {Down}
 F13 & k::send +{End}{Del}
-F13 & {Tab}::
+F13 & Tab::
   if GetKeyState("Shift") {
     Send ^+{Tab}
     return
