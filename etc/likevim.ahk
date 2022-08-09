@@ -27,6 +27,24 @@ IsOpenChrome() {
 vk1D::Send, {Blind}{vk1D}
 vk1D & r::Reload
 
+; ChangeKey
+; CapsLock - > F13
+; CTRL_L -> ALT
+; WIN -> CTRL_L
+; ALT -> WIN
+; CapsLock + a,e,h,d,f,b,b,p,n,k,tab,shift-tab
+F13 & a::send {Home}
+F13 & e::send {End}
+F13 & d::send {Del}
+F13 & h::send {BS}
+F13 & f::send {Right}
+F13 & b::send {Left}
+F13 & p::send {Up}
+F13 & n::send {Down}
+F13 & k::send +{End}{Del}
+F13 Tab::send ^Tab
+F13 +Tab::send ^+Tab
+
 ;-----------------------------------------------------------
 ; ターミナルでvimのためのIME
 #IfWinActive, ahk_exe mintty.exe
