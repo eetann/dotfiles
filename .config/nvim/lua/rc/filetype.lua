@@ -66,11 +66,19 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 	end,
 })
 
-vim.api.nvim_create_autocmd({ "BufNewFile,BufRead" }, {
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 	group = group_name,
 	pattern = { "*.csv" },
 	callback = function()
 		vim.opt_local.filetype = "csv"
+	end,
+})
+
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+	group = group_name,
+	pattern = { ".envrc" },
+	callback = function()
+		vim.opt_local.filetype = "sh"
 	end,
 })
 

@@ -225,7 +225,11 @@ local sources = {
 			})
 		end,
 	}),
-	null_ls.builtins.diagnostics.shellcheck,
+	null_ls.builtins.diagnostics.shellcheck.with({
+		condition = function()
+			return vim.fn.expand("%:t") ~= ".envrc"
+		end,
+	}),
 	null_ls.builtins.code_actions.shellcheck,
 	null_ls.builtins.formatting.shfmt,
 	null_ls.builtins.formatting.stylua,
