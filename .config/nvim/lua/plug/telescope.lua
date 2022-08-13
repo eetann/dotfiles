@@ -125,6 +125,7 @@ telescope.setup({
 					["<CR>"] = telescope_custom_actions.multi_selection_open,
 					["<C-v>"] = telescope_custom_actions.multi_selection_open_vsplit,
 					["<C-x>"] = telescope_custom_actions.multi_selection_open_split,
+					["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
 				},
 			},
 		},
@@ -138,6 +139,7 @@ telescope.setup({
 					["<CR>"] = telescope_custom_actions.multi_selection_open,
 					["<C-v>"] = telescope_custom_actions.multi_selection_open_vsplit,
 					["<C-x>"] = telescope_custom_actions.multi_selection_open_split,
+					["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
 				},
 			},
 		},
@@ -173,6 +175,26 @@ end)
 vim.keymap.set("v", "<Leader>fg", function()
 	local text = getVisualSelection()
 	require("telescope.builtin").live_grep({ default_text = text })
+end)
+
+vim.keymap.set("n", "<Leader>fG", function()
+	require("telescope.builtin").live_grep({
+		prompt_title = "Live Grep(no regexp)",
+		additional_args = function()
+			return { "--hidden", "--fixed-strings" }
+		end,
+	})
+end)
+
+vim.keymap.set("v", "<Leader>fG", function()
+	local text = getVisualSelection()
+	require("telescope.builtin").live_grep({
+		prompt_title = "Live Grep(no regexp)",
+		default_text = text,
+		additional_args = function()
+			return { "--hidden", "--fixed-strings" }
+		end,
+	})
 end)
 
 vim.keymap.set("n", "<Leader>ft", function()
