@@ -5,3 +5,5 @@ alias reload="source ~/.zshrc"
 alias echopath="echo $PATH | sed -e 's/:/\n/g'"
 alias manja="man -L ja"
 alias manen="man -L en"
+alias lg='lazygit --use-config-dir="$HOME/.config/lazygit"'
+alias zd='cd ~/dotfiles'
