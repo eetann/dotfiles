@@ -1,0 +1,65 @@
+/*------------------------
+参考: https://www.naporitansushi.com/stylus-deepl/
+-------------------------*/
+
+/*ヘッダー非表示*/
+header.dl_header.dl_header--sticky {
+  display: none;
+}
+
+/*テキストの翻訳＆ファイルの翻訳ボタン非表示*/
+.lmt__docTrans-tab-container {
+  display: none !important;
+}
+
+/*テキストエリア内の「翻訳するにはテキストを入力してください～～」の文章非表示*/
+span.lmt__textarea_placeholder_text {
+  display: none !important;
+}
+
+/*テキストエリア下の「DeepL Proの無料体験で、DeepLを最大限に活用しましょう」非表示*/
+div#lmt_pro_ad_container {
+  display: none !important;
+}
+
+/*「毎日、何百万もの人々がDeepLで翻訳していま」文章非表示*/
+.dl_body--redesign.dl_top_element--wide.dl_visible_desktop_only.eSEOtericText {
+  display: none;
+}
+
+/*「〜ドイツ企業のDeepL、Google翻訳を超える〜」文章非表示*/
+.dl_top_element.dl_top_element--wide {
+  display: none;
+}
+
+/*フッター非表示*/
+.dl_footerV2_container {
+  display: none;
+}
+
+/*------------------------
+色々な部分を非表示
+-------------------------*/
+
+
+/*横配置から縦配置に変更*/
+@media screen and (max-width: 700px) {
+  .lmt__sides_container {
+    flex-flow: column !important;
+  }
+
+  /*横幅を画面いっぱいに広げる*/
+  .lmt__side_container.lmt__side_container--source,
+  .lmt__side_container.lmt__side_container--target {
+    width: 100% !important;
+  }
+
+  /*入力欄とテキスト欄の隙間調整*/
+  .lmt--web .lmt__textarea_separator--has-top-toolbar {
+    margin-top: 5px !important;
+  }
+  
+  body {
+    zoom: 80%;
+  }
+}
