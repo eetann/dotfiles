@@ -39,6 +39,8 @@ autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^O" edit-command-line
 
+bindkey "^Q" forward-word
+
 if [ -e /usr/local/bin/aws_completer ]; then
   complete -C '/usr/local/bin/aws_completer' aws
 fi
