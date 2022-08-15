@@ -20,24 +20,25 @@ zstyle ':completion::complete:*' use-cache true
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
   /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin \
   /usr/local/git/bin
-  # pwdを補完候補から除外
-  zstyle ':completion:*' ignore-parents parent pwd ..
-  #入力途中の履歴補完を有効化する
-  autoload history-search-end
-  zle -N history-beginning-search-backward-end history-search-end
-  zle -N history-beginning-search-forward-end history-search-end
-  # 入力途中の履歴補完
-  bindkey "^P" history-beginning-search-backward-end
-  bindkey "^N" history-beginning-search-forward-end
 
-  setopt interactive_comments # 対話中にもコメント可
-  setopt AUTO_MENU # タブキーの連打で自動的にメニュー補完
-  setopt chase_links # 移動先がシンボリックリンクならば実際のディレクトリに移動する
+# pwdを補完候補から除外
+zstyle ':completion:*' ignore-parents parent pwd ..
+#入力途中の履歴補完を有効化する
+autoload history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+# 入力途中の履歴補完
+bindkey "^P" history-beginning-search-backward-end
+bindkey "^N" history-beginning-search-forward-end
 
-  autoload -z edit-command-line
-  zle -N edit-command-line
-  bindkey "^O" edit-command-line
+setopt interactive_comments # 対話中にもコメント可
+setopt AUTO_MENU # タブキーの連打で自動的にメニュー補完
+setopt chase_links # 移動先がシンボリックリンクならば実際のディレクトリに移動する
 
-  if [ -e /usr/local/bin/aws_completer ]; then
-    complete -C '/usr/local/bin/aws_completer' aws
-  fi
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^O" edit-command-line
+
+if [ -e /usr/local/bin/aws_completer ]; then
+  complete -C '/usr/local/bin/aws_completer' aws
+fi

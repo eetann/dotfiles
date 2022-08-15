@@ -37,10 +37,11 @@ FZF_PREVIEW='[[ -d {} ]] && tree -aC -L 1 {}
 [[ -f {} ]] && [[ $(file --mime {}) =~ binary ]] && echo {} is a binary file
 ((type bat > /dev/null) && bat --color=always --style=header,grid --line-range :100 {} ||
   cat {}) 2> /dev/null | head -100'
-  export FZF_CTRL_T_OPTS="--preview \"$FZF_PREVIEW\""
-  export FZF_ALT_C_OPTS="--preview \"$FZF_PREVIEW\""
-  export FZF_COMPLETION_OPTS="--preview \"$FZF_PREVIEW\""
-  export FZF_COMPLETION_TRIGGER='**'
-  export FZF_TMUX=1
-  export FZF_TMUX_OPTS="-p 80%"
-  export FZF_BASE=$HOME/.fzf
+
+export FZF_CTRL_T_OPTS="--preview \"$FZF_PREVIEW\""
+export FZF_ALT_C_OPTS="--preview \"$FZF_PREVIEW\""
+export FZF_COMPLETION_OPTS="--preview \"$FZF_PREVIEW\""
+export FZF_COMPLETION_TRIGGER='**'
+export FZF_TMUX=1
+export FZF_TMUX_OPTS="-p 80%"
+export FZF_BASE=$HOME/.fzf
