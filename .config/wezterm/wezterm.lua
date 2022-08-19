@@ -36,7 +36,7 @@ elseif target:find("linux") then
 end
 
 return {
-	font = wezterm.font("HackGenNerd Console"),
+	font = wezterm.font("HackGen Console NFJ"),
 	use_ime = true,
 	font_size = 14,
 	color_scheme = "Gruvbox Dark",
