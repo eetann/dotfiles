@@ -120,7 +120,7 @@ local on_attach = function(client, bufnr)
 	if client.resolved_capabilities.document_formatting then
 		vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 			group = "my_nvim_rc",
-			pattern = "<buffer>",
+			buffer = bufnr,
 			callback = function()
 				vim.lsp.buf.formatting_sync({}, 2500)
 			end,
