@@ -274,6 +274,7 @@ exec --no-startup-id ~/.screenlayout/dual.sh
 exec --no-startup-id ~/load_layout.sh
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
+exec --no-startup-id redshift -l 36:140
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
