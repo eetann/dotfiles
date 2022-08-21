@@ -85,6 +85,8 @@ return require("packer").startup({
 			requires = "nvim-treesitter/nvim-treesitter",
 		})
 
+		use({ "petertriho/nvim-scrollbar", config = conf("nvim-scrollbar") })
+
 		use({ "lambdalisue/vim-quickrun-neovim-job" })
 		use({ "thinca/vim-quickrun", config = conf("vim-quickrun") })
 
