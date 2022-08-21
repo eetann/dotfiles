@@ -133,55 +133,50 @@ local function on_attach_disable_format(client, buffer)
 	on_attach(client, buffer)
 end
 
-require("nvim-lsp-installer").setup()
-local lspconfig = require("lspconfig")
+require("mason").setup()
+local nvim_lsp = require("lspconfig")
 
 local function detected_root_dir(root_dir)
 	return not not (root_dir(vim.api.nvim_buf_get_name(0), vim.api.nvim_get_current_buf()))
 end
 
-local installed_servers = {}
-local installer_avail, lsp_installer = pcall(require, "nvim-lsp-installer")
-if installer_avail then
-	for _, server in ipairs(lsp_installer.get_installed_servers()) do
-		table.insert(installed_servers, server.name)
-	end
-end
+local mason_lspconfig = require("mason-lspconfig")
+mason_lspconfig.setup_handlers({
+	function(server_name)
+		local opts = {}
+		opts.on_attach = on_attach
+		opts.capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+		opts.capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-for _, server in pairs(installed_servers) do
-	local opts = {}
-	opts.on_attach = on_attach
-	opts.capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
-	opts.capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-	if server == "tsserver" or server == "eslint" then
-		local root_dir = lspconfig.util.root_pattern("package.json", "node_modules")
-		opts.root_dir = root_dir
-		opts.autostart = detected_root_dir(root_dir)
-		opts.on_attach = on_attach_disable_format
-	elseif server == "denols" then
-		local root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc", "deps.ts")
-		opts.root_dir = root_dir
-		opts.autostart = detected_root_dir(root_dir)
-		opts.init_options = { lint = true, unstable = true }
-	elseif server == "sumneko_lua" then
-		opts.on_attach = on_attach_disable_format
-		local has_lua_dev, lua_dev = pcall(require, "lua-dev")
-		if has_lua_dev then
-			opts = lua_dev.setup({
-				library = {
-					vimruntime = true,
-					types = true,
-					plugins = { "nvim-treesitter", "plenary.nvim" },
-				},
-				runtime_path = false,
-				lspconfig = opts,
-			})
+		if server_name == "tsserver" or server_name == "eslint" then
+			local root_dir = nvim_lsp.util.root_pattern("package.json", "node_modules")
+			opts.root_dir = root_dir
+			opts.autostart = detected_root_dir(root_dir)
+			opts.on_attach = on_attach_disable_format
+		elseif server_name == "denols" then
+			local root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc", "deps.ts")
+			opts.root_dir = root_dir
+			opts.autostart = detected_root_dir(root_dir)
+			opts.init_options = { lint = true, unstable = true }
+		elseif server_name == "sumneko_lua" then
+			opts.on_attach = on_attach_disable_format
+			local has_lua_dev, lua_dev = pcall(require, "lua-dev")
+			if has_lua_dev then
+				opts = lua_dev.setup({
+					library = {
+						vimruntime = true,
+						types = true,
+						plugins = { "nvim-treesitter", "plenary.nvim" },
+					},
+					runtime_path = false,
+					lspconfig = opts,
+				})
+			end
 		end
-	end
 
-	lspconfig[server].setup(opts)
-end
+		nvim_lsp[server_name].setup(opts)
+	end,
+})
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 	update_in_insert = false,
@@ -227,6 +222,7 @@ local sources = {
 	}),
 	null_ls.builtins.diagnostics.shellcheck.with({
 		condition = function()
+			---@diagnostic disable-next-line: missing-parameter
 			return vim.fn.expand("%:t") ~= ".envrc"
 		end,
 	}),

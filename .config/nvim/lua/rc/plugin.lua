@@ -45,7 +45,8 @@ return require("packer").startup({
 
 		-- .config/nvim/lua/plug/lsp.lua
 		use({ "neovim/nvim-lspconfig", config = conf("lsp") })
-		use({ "williamboman/nvim-lsp-installer" })
+		use({ "williamboman/mason.nvim" })
+		use({ "williamboman/mason-lspconfig.nvim" })
 		use({ "ray-x/lsp_signature.nvim" })
 		use({ "kkharji/lspsaga.nvim" })
 		use({ "jose-elias-alvarez/null-ls.nvim" })
