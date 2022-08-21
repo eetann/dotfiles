@@ -43,5 +43,6 @@ return {
 	hide_tab_bar_if_only_one_tab = true,
 	adjust_window_size_when_changing_font_size = false,
 	keys = key_table,
+	-- NOTE: 最小構成を作れておらず未調査だけど、hyperlinkがオンになるとマルチバイトで崩れるっぽいのでオフにする
 	hyperlink_rules = {},
 }
