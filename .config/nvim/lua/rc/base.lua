@@ -57,12 +57,14 @@ vim.wo.colorcolumn = "88" -- カラムラインを引く
 vim.opt.whichwrap = "b,s,h,l,[,],<,>,~"
 vim.opt.signcolumn = "yes"
 vim.opt.list = true -- 空白文字の可視化
-vim.opt.listchars:append("tab:| ") -- Tab
-vim.opt.listchars:append("trail:-") -- 行末スペース
-vim.opt.listchars:append("eol:↲") -- 改行
-vim.opt.listchars:append("extends:»") -- ウィンドウ幅狭い時の後方省略
-vim.opt.listchars:append("precedes:«") -- ウィンドウ幅狭い時の前方省略
-vim.opt.listchars:append("nbsp:%") -- 不可視のスペース
+vim.opt.listchars = {
+	tab = "| ", -- Tab
+	trail = "-", -- 行末スペース
+	eol = "↲", -- 改行
+	extends = "»", -- ウィンドウ幅狭い時の後方省略
+	precedes = "«", -- ウィンドウ幅狭い時の前方省略
+	nbsp = "%", -- 不可視のスペース
+}
 
 vim.opt.display = "lastline"
 if vim.fn.has("termguicolors") == 1 then
