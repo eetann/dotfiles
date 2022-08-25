@@ -15,7 +15,7 @@ source $HOME/rupaz/z.sh
 source $ZSH/oh-my-zsh.sh
 
 FZF_DEFAULT_OPTS="--multi --height=60% --select-1 --exit-0 --reverse"
-FZF_DEFAULT_OPTS+=" --bind ctrl-f:preview-page-down,ctrl-b:preview-page-up"
+FZF_DEFAULT_OPTS+=" --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up"
 export FZF_DEFAULT_OPTS
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 local nosearch=('\$RECYCLE.BIN')
