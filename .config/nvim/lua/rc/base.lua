@@ -75,6 +75,12 @@ vim.opt.background = "dark"
 -- カーソル位置を復帰
 vim.api.nvim_create_autocmd("BufReadPost", {
 	callback = function()
+		if vim.bo.filetype == "Outline" then
+			-- symbols-outlineなら早期リターン
+			do
+				return
+			end
+		end
 		local row, col = unpack(vim.api.nvim_buf_get_mark(0, '"'))
 		if { row, col } ~= { 0, 0 } then
 			vim.api.nvim_win_set_cursor(0, { row, 0 })

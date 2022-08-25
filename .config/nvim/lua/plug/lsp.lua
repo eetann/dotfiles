@@ -1,5 +1,6 @@
 local mopt = { noremap = true, silent = true }
 vim.g.Illuminate_delay = 50
+require("symbols-outline").setup()
 vim.keymap.set("n", "<Leader>o", "<Cmd>SymbolsOutline<CR>", { noremap = true })
 
 require("lspsaga").setup({
