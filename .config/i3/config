@@ -40,6 +40,7 @@ bindsym Mod1+F4 kill
 bindsym $mod+space exec --no-startup-id "rofi -modi combi -show combi -sidebar-mode"
 bindsym $mod+Tab exec --no-startup-id "rofi -show window -sidebar-mode"
 bindsym $mod+period exec --no-startup-id "rofi -modi emoji -show emoji"
+bindsym Mod1+v exec --no-startup-id "rofi -modi 'clipboard:greenclip print' -show clipboard"
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
