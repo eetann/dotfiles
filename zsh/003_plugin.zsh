@@ -17,30 +17,17 @@ source $ZSH/oh-my-zsh.sh
 FZF_DEFAULT_OPTS="--multi --height=60% --select-1 --exit-0 --reverse"
 FZF_DEFAULT_OPTS+=" --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up"
 export FZF_DEFAULT_OPTS
-export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
-local nosearch=('\$RECYCLE.BIN')
-nosearch+=('.git')
-nosearch+=('RECYCLER')
-nosearch+=('.metadata')
-nosearch+=('node_modules')
-nosearch+=('dist')
-local find_dir="find . -type d \("
-for d in $nosearch; do
-  find_dir="$find_dir -name '$d' -o"
-done
-find_dir=${find_dir:0:-3}
-FZF_FIND_FILE="$find_dir \) -prune -o -type f -print"
-find_dir="$find_dir \) -prune -o -type d -print"
-export FZF_ALT_C_COMMAND="$find_dir"
-export FZF_CTRL_T_COMMAND="$FZF_FIND_FILE"
-FZF_PREVIEW='[[ -d {} ]] && tree -aC -L 1 {}
-[[ -f {} ]] && [[ $(file --mime {}) =~ binary ]] && echo {} is a binary file
-((type bat > /dev/null) && bat --color=always --style=header,grid --line-range :100 {} ||
-  cat {}) 2> /dev/null | head -100'
 
-export FZF_CTRL_T_OPTS="--preview \"$FZF_PREVIEW\""
-export FZF_ALT_C_OPTS="--preview \"$FZF_PREVIEW\""
-export FZF_COMPLETION_OPTS="--preview \"$FZF_PREVIEW\""
+export FZF_CTRL_R_OPTS="--preview 'echo {} | bat --color=always --language=sh --style=plain' --preview-window 'down'"
+
+local find_ignore="find ./ -type d \( -name '.git' -o -name 'node_modules' \) -prune -o -type"
+export FZF_CTRL_T_COMMAND="( (type fd > /dev/null) && fd --type f --strip-cwd-prefix --hidden --exclude '{.git,node_modules}/**' ) || $find_ignore f -print 2> /dev/null"
+export FZF_ALT_C_COMMAND="( (type fd > /dev/null) && fd --type d --strip-cwd-prefix --hidden --exclude '{.git,node_modules}/**' ) || $find_ignore d -print 2> /dev/null"
+
+fzf_preview='( (type bat > /dev/null) && bat --color=always --theme="Nord" --line-range :200 {} || cat {}) 2> /dev/null | head -100'
+
+export FZF_ALT_C_OPTS="--preview 'tree -aC -L 1 {}'"
+export FZF_CTRL_T_OPTS="--preview \"$fzf_preview\" --preview-window 'down,+{2}+3/2,~3'"
 export FZF_COMPLETION_TRIGGER='**'
 export FZF_TMUX=1
 export FZF_TMUX_OPTS="-p 80%"
