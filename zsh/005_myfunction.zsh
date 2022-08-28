@@ -18,15 +18,15 @@ abbreviations=(
   "TREE" "tree -a -I '.git|node_modules|dist' --charset unicode"
 )
 
-magic-abbrev-expand() {
-local MATCH
-LBUFFER=${LBUFFER%%(#m)[-_a-zA-Z0-9]#}
-LBUFFER+=${abbreviations[$MATCH]:-$MATCH}
-zle self-insert
+function magic-abbrev-expand() {
+  local MATCH
+  LBUFFER=${LBUFFER%%(#m)[-_a-zA-Z0-9]#}
+  LBUFFER+=${abbreviations[$MATCH]:-$MATCH}
+  zle self-insert
 }
 
-no-magic-abbrev-expand() {
-LBUFFER+=' '
+function no-magic-abbrev-expand() {
+  LBUFFER+=' '
 }
 
 zle -N magic-abbrev-expand
@@ -176,6 +176,8 @@ function fzf_npm_scripts() {
   if [[ -z $selected ]]; then
     return 0
   fi
+
+  # 再実行したくなるときのために履歴に残して実行
   BUFFER="npm run $selected"
   zle accept-line
 }
@@ -183,13 +185,13 @@ zle -N fzf_npm_scripts
 bindkey "^Xn" fzf_npm_scripts
 
 function fman() {
-  # hoge (1) → 1 hoge
-  man -k . \
-  | fzf-tmux -p 80% \
-    -q "$1" \
-    --prompt='man> ' \
-    --preview-window 'down,70%,~1' \
-    --preview "$(cat << "EOF"
+  # hoge (1) → 1 hoge のように置換
+  local query=$(man -k . \
+    | fzf-tmux -p 80% \
+      -q "$1" \
+      --prompt='man> ' \
+      --preview-window 'down,70%,~1' \
+      --preview "$(cat << "EOF"
 echo {} \
 | tr -d '()' \
 | awk '{printf "%s ", $2} {print $1}' \
@@ -198,16 +200,31 @@ echo {} \
 | bat --language=man --plain --color always
 EOF
 )" \
-  | tr -d '()' \
-  | awk '{printf "%s ", $2} {print $1}' \
-  | xargs -r man
+    | tr -d '()' \
+    | awk '{printf "%s ", $2} {print $1}')
+
+  # 再実行したくなるときのために履歴に残して実行
+  BUFFER="man $query"
+  zle accept-line
+
 }
+zle -N fman
+bindkey '^xf' fman
 
 export MANPAGER="sh -c 'col -bx | bat --language=man --plain --paging always'"
 
 function frg() {
   local initial_query=""
-  local rg_prefix="rg --line-number --no-heading --hidden -g '!{.git,node_modules}' --smart-case --color=always"
+  local rg_prefix=$(cat << "EOF"
+rg --line-number \
+  --no-heading \
+  --hidden \
+  -g '!{.git,node_modules}' \
+  --smart-case \
+  --color=always
+EOF
+)
+  # select-all
   FZF_DEFAULT_COMMAND="$rg_prefix '$initial_query'" \
     fzf-tmux -p 80% --bind "change:reload:$rg_prefix {q} || true" \
         --ansi --disabled --query "$initial_query" \
