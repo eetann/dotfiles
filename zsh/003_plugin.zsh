@@ -37,7 +37,7 @@ EOF
 
 local find_ignore="find ./ -type d \( -name '.git' -o -name 'node_modules' \) -prune -o -type"
 
-export FZF_CTRL_T_COMMAND=$(cat <<EOF
+export FZF_CTRL_T_COMMAND=$(cat <<"EOF"
 ( (type fd > /dev/null) &&
   fd --type f \
     --strip-cwd-prefix \
@@ -46,11 +46,11 @@ export FZF_CTRL_T_COMMAND=$(cat <<EOF
   || $find_ignore f -print 2> /dev/null
 EOF
 )
-export FZF_CTRL_T_OPTS=$(cat << EOF
+export FZF_CTRL_T_OPTS=$(cat << "EOF"
 --preview '
   ( (type bat > /dev/null) &&
     bat --color=always \
-      --theme="Nord" \
+      --theme="gruvbox-dark" \
       --line-range :200 {} \
     || (cat {} | head -200) ) 2> /dev/null
 '
@@ -58,7 +58,7 @@ export FZF_CTRL_T_OPTS=$(cat << EOF
 EOF
 )
 
-export FZF_ALT_C_COMMAND=$(cat <<EOF
+export FZF_ALT_C_COMMAND=$(cat <<"EOF"
 ( (type fd > /dev/null) &&
   fd --type d \
     --strip-cwd-prefix \
