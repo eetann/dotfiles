@@ -187,3 +187,21 @@ function fman() {
 }
 
 export MANPAGER="sh -c 'col -bx | bat --language=man --plain --paging always'"
+
+function frg() {
+  local initial_query=""
+  local rg_prefix="rg --line-number --no-heading --hidden -g '!{.git,node_modules}' --smart-case --color=always"
+  FZF_DEFAULT_COMMAND="$rg_prefix '$initial_query'" \
+    fzf-tmux -p 80% --bind "change:reload:$rg_prefix {q} || true" \
+        --ansi --disabled --query "$initial_query" \
+        --delimiter : \
+        --preview '
+          ( (type bat > /dev/null) &&
+            bat --color=always \
+              --theme="gruvbox-dark" \
+              --line-range :200 {1} \
+              --highlight-line {2} \
+            || (cat {} | head -200) ) 2> /dev/null
+        ' \
+        --preview-window 'down,60%,wrap,+{2}+3/2,~3'
+}
