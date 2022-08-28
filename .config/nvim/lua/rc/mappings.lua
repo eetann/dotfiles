@@ -191,6 +191,14 @@ vim.keymap.set({ "n", "x" }, "Tj", "T<C-k>")
 vim.keymap.set("n", "<Leader>sw", "<Cmd>setl wrap! wrap?<CR>")
 vim.keymap.set("n", "<Leader>sp", "<Cmd>setl paste! paste?<CR>")
 
+-- terminal
+vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], { desc = "out of Term" })
+vim.keymap.set("t", "<C-w>k", [[<Cmd>wincmd k<CR>]], { desc = "go to upper win" })
+vim.keymap.set("t", "<C-w>j", [[<Cmd>wincmd j<CR>]], { desc = "go to bottom win" })
+vim.keymap.set("t", "<C-w>h", [[<Cmd>wincmd h<CR>]], { desc = "go to left win" })
+vim.keymap.set("t", "<C-w>l", [[<Cmd>wincmd l<CR>]], { desc = "go to right win" })
+vim.keymap.set("t", "<C-w>c", [[<Cmd>wincmd c<CR>]], { desc = "close win" })
+
 -- InsertModeでccc を入力し、エスケープでコメント線
 vim.cmd([[inoreabbrev <expr> ccc repeat('-', 70 - virtcol('.'))]])
 

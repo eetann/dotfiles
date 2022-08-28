@@ -99,3 +99,8 @@ vim.api.nvim_create_autocmd({ "BufRead" }, {
 		vim.opt_local.wrap = true
 	end,
 })
+
+vim.api.nvim_create_autocmd({ "TermOpen" }, {
+	group = group_name,
+	command = "startinsert",
+})
