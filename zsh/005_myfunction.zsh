@@ -41,7 +41,8 @@ function fz() {
   if type fzf-tmux > /dev/null; then
     fzf_command="fzf-tmux -p 80%"
   fi
-  fzf_command+=" --preview '$FZF_PREVIEW'"
+  fzf_command+=" "
+  fzf_command+="--preview 'tree -aC -L 1 {} | head -200'"
   # zの出力の先頭12文字の頻度情報を使ってソートし、fzfに渡すときは削る
   local res=$(z | sort -rn | cut -c 12- | eval $fzf_command)
   if [ -n "$res" ]; then
@@ -59,8 +60,18 @@ function fghq() {
   if type fzf-tmux > /dev/null; then
     fzf_command="fzf-tmux -p 80%"
   fi
-  local preview="bat --color=always --style=header,grid --line-range :100 $(ghq root)/{}/README.*"
-  fzf_command+=" --preview '$preview'"
+  fzf_command+=" "
+  fzf_command+=$(cat << "EOF"
+--preview '
+  ( (type bat > /dev/null) &&
+    bat --color=always \
+      --theme="gruvbox-dark" \
+      --line-range :200 $(ghq root)/{}/README.* \
+    || (cat {} | head -200) ) 2> /dev/null
+' \
+--preview-window 'down,60%,wrap,+{2}+3/2,~3'
+EOF
+)
 
   local res=$(ghq list | eval $fzf_command)
   if [ -n "$res" ]; then
@@ -114,8 +125,21 @@ function my_fzf_completion() {
   if type fzf-tmux > /dev/null; then
     fzf_command="fzf-tmux -p 80%"
   fi
-  fzf_command+=" --query '$query' --preview '$FZF_PREVIEW'"
-  selected=$(eval $FZF_FIND_FILE | sed "s/^\.\///" | eval $fzf_command)
+  fzf_command+=" "
+  fzf_command+=$(cat << EOF
+--query '$query' \
+--preview '
+  ( (type bat > /dev/null) &&
+    bat --color=always \
+      --theme="gruvbox-dark" \
+      --line-range :200 {} \
+    || (cat {} | head -200) ) 2> /dev/null
+' \
+--preview-window 'down,60%,wrap,+{2}+3/2,~3'
+EOF
+)
+
+  selected=$(eval $FZF_CTRL_T_COMMAND | eval $fzf_command)
   # ファイルを選択した場合のみバッファを更新
   if [[ -n "$selected" ]]; then
     # 改行をスペースに置換
