@@ -69,11 +69,13 @@ return require("packer").startup({
 		-- .config/nvim/lua/plug/color-scheme.lua
 		use({ "EdenEast/nightfox.nvim", config = conf("color-scheme") })
 
+		-- .config/nvim/lua/plug/treesitter.lua
 		use({
 			"nvim-treesitter/nvim-treesitter",
 			run = function()
 				require("nvim-treesitter.install").update({ with_sync = true })
 			end,
+			config = conf("treesitter"),
 		})
 		use({ "nvim-treesitter/nvim-treesitter-context", requires = "nvim-treesitter/nvim-treesitter" })
 		use({ "kyazdani42/nvim-web-devicons" })
