@@ -112,15 +112,12 @@ function my_fzf_completion() {
   # 単語を入力途中ならそれをクエリにする
   if [[ "${LBUFFER: -1}" == " " ]]; then
     query=""
-    # 最後のスペースは削除するので配列の方
     prebuffer=$ary
   else
     query=${ary[-1]}
     prebuffer=${ary[1,-2]}
   fi
-  # fzfでファイルを選択
-  # テキストファイル以外をプレビュー
-  # ASCIIは変換して表示
+
   local fzf_command="fzf"
   if type fzf-tmux > /dev/null; then
     fzf_command="fzf-tmux -p 80%"
