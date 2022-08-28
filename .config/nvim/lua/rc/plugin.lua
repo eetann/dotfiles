@@ -153,6 +153,8 @@ return require("packer").startup({
 			run = "cd app && yarn install",
 		})
 
+		use({ "akinsho/toggleterm.nvim", tag = "v2.*", config = conf("toggleterm") })
+
 		if packer_bootstrap then
 			require("packer").sync()
 		end
