@@ -49,7 +49,21 @@ cmp.setup({
 	sources = cmp.config.sources({
 		{ name = "ultisnips" },
 		{ name = "nvim_lsp" },
-		{ name = "path" },
+		{
+			name = "path",
+			option = {
+				get_cwd = function(params)
+					-- NOTE: ZLEのedit-command-lineで使いやすいようにcwdを変更
+					---@diagnostic disable-next-line: missing-parameter
+					local dir_name = vim.fn.expand(("#%d:p:h"):format(params.context.bufnr))
+					if dir_name == "/tmp" then
+						-- body
+						return vim.fn.getcwd()
+					end
+					return dir_name
+				end,
+			},
+		},
 		{
 			name = "buffer",
 			option = {
@@ -68,7 +82,21 @@ cmp.setup({
 cmp.setup.cmdline("/", {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
-		{ name = "path" },
+		{
+			name = "path",
+			option = {
+				get_cwd = function(params)
+					-- NOTE: ZLEのedit-command-lineで使いやすいようにcwdを変更
+					---@diagnostic disable-next-line: missing-parameter
+					local dir_name = vim.fn.expand(("#%d:p:h"):format(params.context.bufnr))
+					if dir_name == "/tmp" then
+						-- body
+						return vim.fn.getcwd()
+					end
+					return dir_name
+				end,
+			},
+		},
 		{
 			name = "buffer",
 			option = {
@@ -95,7 +123,21 @@ cmp.setup.cmdline(":", {
 		end, { "c" }),
 	}),
 	sources = cmp.config.sources({
-		{ name = "path" },
+		{
+			name = "path",
+			option = {
+				get_cwd = function(params)
+					-- NOTE: ZLEのedit-command-lineで使いやすいようにcwdを変更
+					---@diagnostic disable-next-line: missing-parameter
+					local dir_name = vim.fn.expand(("#%d:p:h"):format(params.context.bufnr))
+					if dir_name == "/tmp" then
+						-- body
+						return vim.fn.getcwd()
+					end
+					return dir_name
+				end,
+			},
+		},
 	}, {
 		{ name = "cmdline" },
 	}),
