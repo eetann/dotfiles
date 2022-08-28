@@ -188,6 +188,7 @@ function fman() {
   | fzf-tmux -p 80% \
     -q "$1" \
     --prompt='man> ' \
+    --preview-window 'down,70%,~1' \
     --preview "$(cat << "EOF"
 echo {} \
 | tr -d '()' \
