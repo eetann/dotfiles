@@ -1,7 +1,11 @@
 local mopt = { noremap = true, silent = true }
-vim.g.Illuminate_delay = 50
 require("symbols-outline").setup()
 vim.keymap.set("n", "<Leader>o", "<Cmd>SymbolsOutline<CR>", { noremap = true })
+
+require("illuminate").configure({
+	modes_allowlist = { "n" },
+	delay = 100,
+})
 
 require("lspsaga").setup({
 	debug = false,
@@ -117,7 +121,6 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", bufopts)
 	vim.keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", bufopts)
 
-	require("illuminate").on_attach(client)
 	if client.resolved_capabilities.document_formatting then
 		vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 			group = "my_nvim_rc",
