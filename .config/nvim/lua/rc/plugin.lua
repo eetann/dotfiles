@@ -67,7 +67,7 @@ return require("packer").startup({
 		use({ "onsails/lspkind-nvim", requires = "hrsh7th/nvim-cmp" })
 
 		-- .config/nvim/lua/plug/color-scheme.lua
-		use({ "sainnhe/everforest", config = conf("color-scheme") })
+		use({ "EdenEast/nightfox.nvim", config = conf("color-scheme") })
 
 		use({
 			"nvim-treesitter/nvim-treesitter",
