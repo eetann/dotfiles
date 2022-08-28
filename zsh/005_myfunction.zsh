@@ -186,7 +186,7 @@ bindkey "^Xn" fzf_npm_scripts
 
 function fman() {
   # hoge (1) → 1 hoge のように置換
-  local query=$(man -k . \
+  local selected=$(man -k . \
     | fzf-tmux -p 80% \
       -q "$1" \
       --prompt='man> ' \
@@ -203,8 +203,14 @@ EOF
     | tr -d '()' \
     | awk '{printf "%s ", $2} {print $1}')
 
+  zle reset-prompt
+  if [[ -z $selected ]]; then
+    return 0
+  fi
+
+
   # 再実行したくなるときのために履歴に残して実行
-  BUFFER="man $query"
+  BUFFER="man $selected"
   zle accept-line
 
 }
@@ -224,18 +230,25 @@ rg --line-number \
   --color=always
 EOF
 )
-  # select-all
-  FZF_DEFAULT_COMMAND="$rg_prefix '$initial_query'" \
-    fzf-tmux -p 80% --bind "change:reload:$rg_prefix {q} || true" \
-        --ansi --disabled --query "$initial_query" \
-        --delimiter : \
-        --preview '
-          ( (type bat > /dev/null) &&
-            bat --color=always \
-              --theme="gruvbox-dark" \
-              --line-range :200 {1} \
-              --highlight-line {2} \
-            || (cat {} | head -200) ) 2> /dev/null
-        ' \
-        --preview-window 'down,60%,wrap,+{2}+3/2,~3'
+  local result=$(
+    FZF_DEFAULT_COMMAND="$rg_prefix '$initial_query'" \
+      fzf-tmux -p 80% --bind "change:reload:$rg_prefix {q} || true" \
+          --ansi --disabled --query "$initial_query" \
+          --delimiter : \
+          --preview '
+            ( (type bat > /dev/null) &&
+              bat --color=always \
+                --theme="gruvbox-dark" \
+                --line-range :200 {1} \
+                --highlight-line {2} \
+              || (cat {} | head -200) ) 2> /dev/null
+          ' \
+          --preview-window 'down,60%,wrap,+{2}+3/2,~3' \
+          --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up,ctrl-q:select-all+accept \
+          --print-query
+  )
+  echo $result | awk 'NR!=1'
+  echo '------------------------'
+  local final_query=$(echo $result | awk 'NR==1')
+  echo "$rg_prefix '$final_query'" | bat --color=always --language=sh --style=plain 
 }
