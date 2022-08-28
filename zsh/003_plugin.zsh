@@ -54,7 +54,7 @@ export FZF_CTRL_T_OPTS=$(cat << "EOF"
       --line-range :200 {} \
     || (cat {} | head -200) ) 2> /dev/null
 '
---preview-window 'down,60%,wrap,+{2}+3/2,~3'
+--preview-window 'down,60%,wrap,+3/2,~3'
 EOF
 )
 
