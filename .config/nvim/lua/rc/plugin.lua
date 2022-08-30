@@ -106,7 +106,7 @@ return require("packer").startup({
 			config = conf("vim-easy-align"),
 		})
 		use({ "bkad/CamelCaseMotion", opt = true, event = "VimEnter", config = conf("CamelCaseMotion") })
-		use({ "delphinus/vim-auto-cursorline", opt = true, event = "VimEnter", config = conf("vim-auto-cursorline") })
+		use({ "delphinus/auto-cursorline.nvim", opt = true, event = "VimEnter", config = conf("auto-cursorline") })
 		use({ "kshenoy/vim-signature" }) -- マーク位置の表示
 		use({ "lewis6991/gitsigns.nvim", config = conf("gitsigns") })
 		use({ "vim-jp/vimdoc-ja" })

@@ -158,6 +158,7 @@ local telescope_custom = {
 vim.keymap.set("n", "<Leader>fb", "<Cmd>Telescope buffers<CR>")
 vim.keymap.set("n", "<Leader>fh", "<Cmd>Telescope help_tags<CR>")
 vim.keymap.set("n", "<F6>", "<Cmd>Telescope git_files cwd=~/dotfiles<CR>")
+vim.keymap.set("n", "<Leader>fl", "<Cmd>Telescope highlights<CR>")
 
 vim.keymap.set("n", "<Leader>ff", function()
 	telescope_custom.project_files("")
