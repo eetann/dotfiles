@@ -111,6 +111,7 @@ telescope.setup({
 			mappings = {
 				i = {
 					["<esc>"] = actions.close,
+					["<C-c>"] = actions.close,
 					["<CR>"] = telescope_custom_actions.multi_selection_open,
 					["<C-v>"] = telescope_custom_actions.multi_selection_open_vsplit,
 					["<C-x>"] = telescope_custom_actions.multi_selection_open_split,
@@ -123,6 +124,7 @@ telescope.setup({
 			mappings = {
 				i = {
 					["<esc>"] = actions.close,
+					["<C-c>"] = actions.close,
 					["<CR>"] = telescope_custom_actions.multi_selection_open,
 					["<C-v>"] = telescope_custom_actions.multi_selection_open_vsplit,
 					["<C-x>"] = telescope_custom_actions.multi_selection_open_split,
@@ -137,6 +139,7 @@ telescope.setup({
 			mappings = {
 				i = {
 					["<esc>"] = actions.close,
+					["<C-c>"] = actions.close,
 					["<CR>"] = telescope_custom_actions.multi_selection_open,
 					["<C-v>"] = telescope_custom_actions.multi_selection_open_vsplit,
 					["<C-x>"] = telescope_custom_actions.multi_selection_open_split,
