@@ -7,3 +7,4 @@ alias manja="man -L ja"
 alias manen="man -L en"
 alias lg='lazygit --use-config-dir="$HOME/.config/lazygit"'
 alias zd='cd ~/dotfiles'
+alias dupdate="git pull && nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'"
