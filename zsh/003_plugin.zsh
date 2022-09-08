@@ -14,6 +14,8 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
 source $HOME/rupaz/z.sh
 source $ZSH/oh-my-zsh.sh
 
+export BAT_THEME="gruvbox-dark"
+
 export FZF_DEFAULT_OPTS=$(cat <<"EOF"
 --multi
 --height=60%
@@ -29,7 +31,7 @@ export FZF_CTRL_R_OPTS=$(cat <<"EOF"
 --preview '
   echo {} \
   | awk "{ sub(/\s*[0-9]*?\s*/, \"\"); gsub(/\\\\n/, \"\\n\"); print }" \
-  | bat --color=always --language=sh --style=plain --theme="Monokai Extended Bright"
+  | bat --color=always --language=sh --style=plain --theme=gruvbox-dark
 ' 
 --preview-window 'down,40%,wrap'
 EOF
@@ -50,7 +52,7 @@ export FZF_CTRL_T_OPTS=$(cat << "EOF"
 --preview '
   ( (type bat > /dev/null) &&
     bat --color=always \
-      --theme="gruvbox-dark" \
+      --theme=gruvbox-dark \
       --line-range :200 {} \
     || (cat {} | head -200) ) 2> /dev/null
 '

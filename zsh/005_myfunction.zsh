@@ -71,7 +71,7 @@ function fghq() {
 --preview '
   ( (type bat > /dev/null) &&
     bat --color=always \
-      --theme="gruvbox-dark" \
+      --theme=gruvbox-dark \
       --line-range :200 $(ghq root)/{}/README.* \
     || (cat {} | head -200) ) 2> /dev/null
 ' \
@@ -132,7 +132,7 @@ function my_fzf_completion() {
 --preview '
   ( (type bat > /dev/null) &&
     bat --color=always \
-      --theme="gruvbox-dark" \
+      --theme=gruvbox-dark \
       --line-range :200 {} \
     || (cat {} | head -200) ) 2> /dev/null
 ' \
@@ -207,11 +207,14 @@ echo {} \
 ' \
 | xargs -r man \
 | col -bx \
-| bat --language=man --plain --theme="Monokai Extended Bright" --color always
+| bat --language=man --plain --color always --theme=gruvbox-dark
 EOF
 )" \
-    | tr -d '()' \
-    | awk '{printf "%s ", $2} {print $1}')
+    | awk ' \
+      { $0 = gensub(/\s?\(([1-9])\)/, " \\1", 1) }
+      { printf "%s ", $2 }
+      { print $1 }
+    ')
 
   zle reset-prompt
   if [[ -z $selected ]]; then
@@ -227,7 +230,7 @@ EOF
 zle -N fman
 bindkey '^xf' fman
 
-export MANPAGER="sh -c 'col -bx | bat --language=man --plain --theme=\"Monokai Extended Bright\" --paging always'"
+export MANPAGER="sh -c 'col -bx | bat --language=man --plain --paging always --theme=gruvbox-dark'"
 
 function frg() {
   local initial_query=""
@@ -248,7 +251,7 @@ EOF
           --preview '
             ( (type bat > /dev/null) &&
               bat --color=always \
-                --theme="gruvbox-dark" \
+                --theme=gruvbox-dark \
                 --line-range :200 {1} \
                 --highlight-line {2} \
               || (cat {} | head -200) ) 2> /dev/null
@@ -260,5 +263,5 @@ EOF
   echo $result | awk 'NR!=1'
   echo '------------------------'
   local final_query=$(echo $result | awk 'NR==1')
-  echo "$rg_prefix '$final_query'" | bat --color=always --language=sh --style=plain 
+  echo "$rg_prefix '$final_query'" | bat --color=always --language=sh --style=plain --theme=gruvbox-dark
 }
