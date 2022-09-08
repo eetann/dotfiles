@@ -30,3 +30,4 @@ fi
 if type direnv > /dev/null; then
   eval "$(direnv hook zsh)"
 fi
+export LG_CONFIG_FILE="$HOME/dotfiles/.config/lazygit/config.yml"
