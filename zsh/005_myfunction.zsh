@@ -203,7 +203,7 @@ echo {} \
 | awk '{printf "%s ", $2} {print $1}' \
 | xargs -r man \
 | col -bx \
-| bat --language=man --plain --color always
+| bat --language=man --plain --theme="Monokai Extended Bright" --color always
 EOF
 )" \
     | tr -d '()' \
@@ -223,7 +223,7 @@ EOF
 zle -N fman
 bindkey '^xf' fman
 
-export MANPAGER="sh -c 'col -bx | bat --language=man --plain --paging always'"
+export MANPAGER="sh -c 'col -bx | bat --language=man --plain --theme=\"Monokai Extended Bright\" --paging always'"
 
 function frg() {
   local initial_query=""

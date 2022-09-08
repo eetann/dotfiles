@@ -29,7 +29,7 @@ export FZF_CTRL_R_OPTS=$(cat <<"EOF"
 --preview '
   echo {} \
   | awk "{ sub(/\s*[0-9]*?\s*/, \"\"); gsub(/\\\\n/, \"\\n\"); print }" \
-  | bat --color=always --language=sh --style=plain
+  | bat --color=always --language=sh --style=plain --theme="Monokai Extended Bright"
 ' 
 --preview-window 'down,40%,wrap'
 EOF
