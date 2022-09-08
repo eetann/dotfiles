@@ -191,7 +191,8 @@ zle -N fzf_npm_scripts
 bindkey "^Xn" fzf_npm_scripts
 
 function fman() {
-  # hoge (1) → 1 hoge のように置換
+  # Mac以外: hoge (1) → 1 hoge
+  # MAC:     hoge(1) → 1 hoge
   local selected=$(man -k . \
     | fzf-tmux -p 80% \
       -q "$1" \
@@ -199,8 +200,11 @@ function fman() {
       --preview-window 'down,70%,~1' \
       --preview "$(cat << "EOF"
 echo {} \
-| tr -d '()' \
-| awk '{printf "%s ", $2} {print $1}' \
+| awk ' \
+  { $0 = gensub(/\s?\(([1-9])\)/, " \\1", 1) }
+  { printf "%s ", $2 }
+  { print $1 }
+' \
 | xargs -r man \
 | col -bx \
 | bat --language=man --plain --theme="Monokai Extended Bright" --color always
