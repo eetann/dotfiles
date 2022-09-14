@@ -1,0 +1,46 @@
+filters:
+  # <!-- textlint-disable -->
+  # <!-- textlint-enable -->
+  comments: true
+  allowlist:
+    allow:
+    # シンタックスハイライト [text],[/text]に囲まれた部分をスキップ
+    # Tree 表示の `^.$`は文末だと判断されてしまうため、`^./$`に書き換える。
+    - /^\[.+\]$[^]*?^\[\/.+\]$/m
+    - 分報
+    - おすすめ
+    - 参考
+    - アイスブレイク
+rules:
+  preset-ja-technical-writing:
+    max-kanji-continuous-len:
+      allow:
+        - 倍精度浮動小数点数
+        - 自己署名証明書
+        - 証明書署名要求
+    ja-no-successive-word:
+      # オノマトペを許可する
+      # 制限: オノマトペを判定する方法がないため、同じカタカナの語が連続したものをオノマトペとして扱う
+      allowOnomatopee: true
+      # 許可する単語
+      # RegExp-like Stringを使用可能
+      allow:
+        - 〇
+        - …
+        - など
+    ja-no-mixed-period:
+      # 句点文字として許可する文字列の配列
+      allowPeriodMarks:
+        - ":"
+        - "]"
+        - "："
+    ja-no-weak-phrase: false
+    no-exclamation-question-mark: false
+    no-doubled-joshi:
+      allow:
+        - "も"
+        - "に"
+  preset-jtf-style: true
+  prh: 
+    rulePaths: 
+      - ./prh.yaml

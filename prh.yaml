@@ -1,0 +1,68 @@
+version: 1
+imports:
+  - path: ./node_modules/prh/prh-rules/files/markdown.yml
+  - path: ./node_modules/prh/prh-rules/media/WEB+DB_PRESS.yml
+    disableImports: true
+    ignoreRules:
+      - expected: $1ほか$2
+      - expected: お勧め
+      - expected: のぶん$1
+      - expected: 進め
+      - expected: まったく
+      - expected: たいへん
+      - expected: コピー&ペースト
+      - pattern: /([^有])無([かくいけし])/gmu
+      - expected: いきま
+      - expected: $1Word
+      - expected: やめ
+      - expected: サーバ
+      - expected: オブザーバ
+      - expected: クライアント／サーバ
+      - expected: そのうえ
+      - expected: 気付
+      - expected: 近付
+      - expected: 見当が付
+      - expected: 思い付く
+      - expected: 結び付
+      - expected: おもしろ
+rules:
+  - expected: 、
+    pattern:  ，
+    prh: カンマとコンマではなく句点読点を使います。
+  - expected: 。
+    pattern:  ．
+    prh: カンマとコンマではなく句点読点を使います。
+  - expected: コード補完
+    pattern:  コード保管
+    prh: コード補完の間違いと思われます。
+  # 半角括弧を全角括弧に
+  - expected: （$1）
+    pattern:  /\((.+?)\)/
+    specs:
+      - from: そうですね(笑)
+        to:   そうですね（笑）
+      - from: (@<fn>{test})
+        to:   （@<fn>{test}）
+      - from: "(ほげ)ほげ)"
+        to:   "（ほげ）ほげ)"
+    prh: 半角カッコの代わりに全角カッコを使うこと。文字のバランスが崩れるためです
+  - expected: リポジトリ
+    pattern:  レポジトリ
+    prh: リリリリリリリリリリリリ！！！
+  - expected: Proflly
+    pattern:  profly
+  - expected: クライアント／サーバー
+    pattern:
+      - クライアント/サーバー
+      - クライアント/サーバ
+      - クライアント・サーバー
+      - クライアント・サーバ
+      - クライアントサーバー
+      - クライアントサーバ
+    specs:
+      - from: クライアント/サーバ
+        to:   クライアント／サーバー
+  - expected: サーバー
+    pattern:  /サーバ([^ー])/
+  - expected: オブザーバー
+    pattern:  /オブザーバ|オブサーバ([^ー])/
