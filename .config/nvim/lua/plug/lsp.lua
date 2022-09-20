@@ -206,11 +206,6 @@ local sources = {
 			"graphql",
 			"handlebars",
 		},
-		dynamic_command = function(params)
-			return command_resolver.from_node_modules(params)
-				or command_resolver.from_yarn_pnp(params)
-				or vim.fn.executable(params.command) == 1 and params.command
-		end,
 	}),
 	null_ls.builtins.diagnostics.textlint.with({
 		filetypes = { "markdown" },
