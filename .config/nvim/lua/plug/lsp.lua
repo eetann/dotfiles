@@ -189,6 +189,8 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 local null_ls = require("null-ls")
 local command_resolver = require("null-ls.helpers.command_resolver")
 local sources = {
+	null_ls.builtins.code_actions.eslint,
+	null_ls.builtins.diagnostics.eslint,
 	null_ls.builtins.formatting.prettier.with({
 		filetypes = {
 			"javascript",
