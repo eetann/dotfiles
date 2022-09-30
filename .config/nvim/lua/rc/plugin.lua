@@ -79,7 +79,12 @@ return require("packer").startup({
 		})
 		use({ "nvim-treesitter/nvim-treesitter-context", requires = "nvim-treesitter/nvim-treesitter" })
 		use({ "kyazdani42/nvim-web-devicons" })
-		use({ "romgrk/barbar.nvim", config = conf("barbar") })
+		use({
+			"akinsho/bufferline.nvim",
+			tag = "v2.*",
+			requires = "kyazdani42/nvim-web-devicons",
+			config = conf("bufferline"),
+		})
 		use({ "norcalli/nvim-colorizer.lua", config = conf("nvim-colorizer") })
 		use({
 			"lukas-reineke/indent-blankline.nvim",
