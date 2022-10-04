@@ -121,19 +121,19 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", bufopts)
 	vim.keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", bufopts)
 
-	if client.resolved_capabilities.document_formatting then
+	if client.server_capabilities.documentFormattingProvider then
 		vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 			group = "my_nvim_rc",
 			buffer = bufnr,
 			callback = function()
-				vim.lsp.buf.formatting_sync({}, 2500)
+				vim.lsp.buf.format()
 			end,
 		})
 	end
 end
 
 local function on_attach_disable_format(client, buffer)
-	client.resolved_capabilities.document_formatting = false
+	client.server_capabilities.documentFormattingProvider = false
 	on_attach(client, buffer)
 end
 
