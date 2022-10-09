@@ -126,7 +126,7 @@ local on_attach = function(client, bufnr)
 			group = "my_nvim_rc",
 			buffer = bufnr,
 			callback = function()
-				vim.lsp.buf.format()
+				vim.lsp.buf.format({ timeout_ms = 2000 })
 			end,
 		})
 	end
