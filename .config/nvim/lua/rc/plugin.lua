@@ -94,6 +94,20 @@ return require("packer").startup({
 
 		use({ "petertriho/nvim-scrollbar", config = conf("nvim-scrollbar") })
 
+		use({ "MunifTanjim/nui.nvim" })
+		use({ "rcarriga/nvim-notify" })
+		use({
+			"folke/noice.nvim",
+			event = "VimEnter",
+			config = function()
+				require("noice").setup()
+			end,
+			requires = {
+				"MunifTanjim/nui.nvim",
+				"rcarriga/nvim-notify",
+			},
+		})
+
 		use({ "lambdalisue/vim-quickrun-neovim-job" })
 		use({ "thinca/vim-quickrun", config = conf("vim-quickrun") })
 
