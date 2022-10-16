@@ -6,7 +6,7 @@ require("bufferline").setup({
 })
 
 local map = vim.keymap.set
-local opts = {}
+local opts = { silent = true }
 
 -- Move to previous/next
 map("n", "[b", ":BufferLineCyclePrev<CR>", opts)
