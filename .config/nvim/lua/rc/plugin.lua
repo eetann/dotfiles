@@ -99,9 +99,7 @@ return require("packer").startup({
 		use({
 			"folke/noice.nvim",
 			event = "VimEnter",
-			config = function()
-				require("noice").setup()
-			end,
+			config = conf("noice"),
 			requires = {
 				"MunifTanjim/nui.nvim",
 				"rcarriga/nvim-notify",
