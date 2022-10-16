@@ -52,7 +52,7 @@ return require("packer").startup({
 		use({ "jose-elias-alvarez/null-ls.nvim" })
 		use({ "simrat39/symbols-outline.nvim" })
 		use({ "weilbith/nvim-code-action-menu" })
-		use({ "folke/lua-dev.nvim" })
+		use({ "folke/neodev.nvim" })
 		use({ "folke/lsp-colors.nvim" })
 		use({ "RRethy/vim-illuminate" })
 
