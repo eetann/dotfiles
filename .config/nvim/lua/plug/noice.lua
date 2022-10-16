@@ -38,6 +38,22 @@ noice.setup({
 			},
 		},
 		{
+			view = "mini",
+			filter = {
+				event = "msg_show",
+				kind = "",
+				find = "change; before",
+			},
+		},
+		{
+			view = "mini",
+			filter = {
+				event = "msg_show",
+				kind = "",
+				find = "change; after",
+			},
+		},
+		{
 			view = "notify",
 			filter = {
 				event = "msg_show",
