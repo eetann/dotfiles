@@ -1,4 +1,16 @@
 local noice = require("noice")
+
+local function myMiniView(pattern)
+	return {
+		view = "mini",
+		filter = {
+			event = "msg_show",
+			kind = "",
+			find = pattern,
+		},
+	}
+end
+
 noice.setup({
 	-- cmdline = {
 	-- 	view = "cmdline",
@@ -14,54 +26,6 @@ noice.setup({
 		{
 			view = "notify",
 			filter = { event = "msg_showmode" },
-		},
-		{
-			view = "mini",
-			filter = {
-				event = "msg_show",
-				kind = "",
-				find = "written",
-			},
-		},
-		{
-			view = "mini",
-			filter = {
-				event = "msg_show",
-				kind = "",
-				find = "yanked",
-			},
-		},
-		{
-			view = "mini",
-			filter = {
-				event = "msg_show",
-				kind = "",
-				find = "more lines",
-			},
-		},
-		{
-			view = "mini",
-			filter = {
-				event = "msg_show",
-				kind = "",
-				find = "fewer lines",
-			},
-		},
-		{
-			view = "mini",
-			filter = {
-				event = "msg_show",
-				kind = "",
-				find = "change; before",
-			},
-		},
-		{
-			view = "mini",
-			filter = {
-				event = "msg_show",
-				kind = "",
-				find = "change; after",
-			},
 		},
 		{
 			view = "notify",
@@ -82,5 +46,12 @@ noice.setup({
 				kind = "search_count",
 			},
 		},
+		myMiniView("Already at .* change"),
+		myMiniView("written"),
+		myMiniView("yanked"),
+		myMiniView("more lines"),
+		myMiniView("fewer lines"),
+		myMiniView("change; before"),
+		myMiniView("change; after"),
 	},
 })
