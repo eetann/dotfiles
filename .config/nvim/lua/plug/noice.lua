@@ -53,5 +53,8 @@ noice.setup({
 		myMiniView("fewer lines"),
 		myMiniView("change; before"),
 		myMiniView("change; after"),
+		myMiniView("line less"),
+		myMiniView("search hit .*, continuing at"),
+		myMiniView("E486: Pattern not found"),
 	},
 })
