@@ -12,17 +12,13 @@ local function myMiniView(pattern)
 end
 
 noice.setup({
-	-- cmdline = {
-	-- 	view = "cmdline",
-	-- },
+	cmdline = {
+		view_search = "cmdline",
+	},
+	messages = {
+		view_search = "mini",
+	},
 	routes = {
-		{
-			filter = {
-				event = "cmdline",
-				find = "^%s*[/?]",
-			},
-			view = "cmdline",
-		},
 		{
 			view = "notify",
 			filter = { event = "msg_showmode" },
@@ -37,13 +33,6 @@ noice.setup({
 			opts = {
 				replace = true,
 				merge = false,
-			},
-		},
-		{
-			view = "mini",
-			filter = {
-				event = "msg_show",
-				kind = "search_count",
 			},
 		},
 		myMiniView("Already at .* change"),
