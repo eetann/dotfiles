@@ -144,6 +144,7 @@ local function detected_root_dir(root_dir)
 	return not not (root_dir(vim.api.nvim_buf_get_name(0), vim.api.nvim_get_current_buf()))
 end
 
+require("neodev").setup({})
 local mason_lspconfig = require("mason-lspconfig")
 mason_lspconfig.setup_handlers({
 	function(server_name)
@@ -164,18 +165,13 @@ mason_lspconfig.setup_handlers({
 			opts.init_options = { lint = true, unstable = true }
 		elseif server_name == "sumneko_lua" then
 			opts.on_attach = on_attach_disable_format
-			local has_neodev, neodev = pcall(require, "neodev")
-			if has_neodev then
-				opts = neodev.setup({
-					library = {
-						vimruntime = true,
-						types = true,
-						plugins = { "nvim-treesitter", "plenary.nvim" },
+			opts.settings = {
+				Lua = {
+					completion = {
+						callSnippet = "Replace",
 					},
-					runtime_path = false,
-					lspconfig = opts,
-				})
-			end
+				},
+			}
 		end
 
 		nvim_lsp[server_name].setup(opts)

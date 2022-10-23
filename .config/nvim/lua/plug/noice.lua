@@ -35,6 +35,14 @@ noice.setup({
 				merge = false,
 			},
 		},
+		{
+			filter = {
+				event = "notify",
+				warning = true,
+				find = "failed to run generator.*is not executable",
+			},
+			opts = { skip = true },
+		},
 		myMiniView("Already at .* change"),
 		myMiniView("written"),
 		myMiniView("yanked"),
