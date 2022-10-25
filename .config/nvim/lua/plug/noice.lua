@@ -51,6 +51,7 @@ noice.setup({
 		myMiniView("change; before"),
 		myMiniView("change; after"),
 		myMiniView("line less"),
+		myMiniView("lines indented"),
 		myMiniView("search hit .*, continuing at"),
 		myMiniView("E486: Pattern not found"),
 		myMiniView("No lines in buffer"),
