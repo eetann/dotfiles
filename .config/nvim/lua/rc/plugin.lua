@@ -72,9 +72,7 @@ return require("packer").startup({
 		-- .config/nvim/lua/plug/treesitter.lua
 		use({
 			"nvim-treesitter/nvim-treesitter",
-			run = function()
-				require("nvim-treesitter.install").update({ with_sync = true })
-			end,
+			run = ":TSUpdate",
 			config = conf("treesitter"),
 		})
 		use({ "nvim-treesitter/nvim-treesitter-context", requires = "nvim-treesitter/nvim-treesitter" })
