@@ -1,11 +1,12 @@
 local noice = require("noice")
 
-local function myMiniView(pattern)
+local function myMiniView(pattern, kind)
+	kind = kind or ""
 	return {
 		view = "mini",
 		filter = {
 			event = "msg_show",
-			kind = "",
+			kind = kind,
 			find = pattern,
 		},
 	}
@@ -48,12 +49,13 @@ noice.setup({
 		myMiniView("yanked"),
 		myMiniView("more lines?"),
 		myMiniView("fewer lines?"),
+		myMiniView("fewer lines?", "lua_error"),
 		myMiniView("change; before"),
 		myMiniView("change; after"),
 		myMiniView("line less"),
 		myMiniView("lines indented"),
-		myMiniView("search hit .*, continuing at"),
-		myMiniView("E486: Pattern not found"),
 		myMiniView("No lines in buffer"),
+		myMiniView("search hit .*, continuing at", "wmsg"),
+		myMiniView("E486: Pattern not found", "emsg"),
 	},
 })
