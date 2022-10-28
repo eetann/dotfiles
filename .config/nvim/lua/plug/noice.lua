@@ -25,18 +25,6 @@ noice.setup({
 			filter = { event = "msg_showmode" },
 		},
 		{
-			view = "notify",
-			filter = {
-				event = "msg_show",
-				kind = "echo",
-				find = "window resize mode",
-			},
-			opts = {
-				replace = true,
-				merge = false,
-			},
-		},
-		{
 			filter = {
 				event = "notify",
 				warning = true,
