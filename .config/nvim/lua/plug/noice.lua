@@ -13,9 +13,6 @@ local function myMiniView(pattern, kind)
 end
 
 noice.setup({
-	cmdline = {
-		view_search = "cmdline",
-	},
 	messages = {
 		view_search = "mini",
 	},
