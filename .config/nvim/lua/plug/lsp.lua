@@ -183,6 +183,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 })
 
 local null_ls = require("null-ls")
+local cmd_resolver = require("null-ls.helpers.command_resolver")
 local sources = {
 	null_ls.builtins.code_actions.eslint,
 	null_ls.builtins.diagnostics.eslint,
@@ -207,13 +208,28 @@ local sources = {
 	null_ls.builtins.diagnostics.textlint.with({
 		filetypes = { "markdown" },
 		condition = function(utils)
-			return utils.root_has_file({
-				".textlintrc",
-				".textlintrc.js",
-				".textlintrc.json",
-				".textlintrc.yml",
-				".textlintrc.yaml",
-			})
+			local is_mdn = utils.root_matches("translated%-content")
+			return is_mdn
+				or utils.root_has_file({
+					".textlintrc",
+					".textlintrc.js",
+					".textlintrc.json",
+					".textlintrc.yml",
+					".textlintrc.yaml",
+				})
+		end,
+		dynamic_command = function(params)
+			local is_mdn = require("null-ls.utils").make_conditional_utils().root_matches("translated%-content")
+			if is_mdn then
+				local mdn_textlint =
+					vim.fn.expand("~/ghq/github.com/mongolyy/mdn-textlint-ja/node_modules/.bin/textlint")
+				if vim.fn.filereadable(mdn_textlint) == 1 then
+					return mdn_textlint
+				else
+					print(mdn_textlint .. "is not executable")
+				end
+			end
+			return cmd_resolver.from_node_modules()(params)
 		end,
 	}),
 	null_ls.builtins.diagnostics.shellcheck.with({
