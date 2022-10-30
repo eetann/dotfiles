@@ -231,6 +231,15 @@ local sources = {
 			end
 			return cmd_resolver.from_node_modules()(params)
 		end,
+		args = function()
+			local args = { "-f", "json", "--stdin", "--stdin-filename", "$FILENAME" }
+			local is_mdn = require("null-ls.utils").make_conditional_utils().root_matches("translated%-content")
+			if is_mdn then
+				table.insert(args, 1, "--config")
+				table.insert(args, 2, vim.fn.expand("~/ghq/github.com/mongolyy/mdn-textlint-ja/.textlintrc"))
+			end
+			return args
+		end,
 	}),
 	null_ls.builtins.diagnostics.shellcheck.with({
 		condition = function()
