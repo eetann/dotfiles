@@ -182,6 +182,10 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 	update_in_insert = false,
 })
 
+local function isMdn(params)
+	return params.root:find("translated%-content") ~= nil
+end
+
 local null_ls = require("null-ls")
 local cmd_resolver = require("null-ls.helpers.command_resolver")
 local sources = {
@@ -219,8 +223,7 @@ local sources = {
 				})
 		end,
 		dynamic_command = function(params)
-			local is_mdn = require("null-ls.utils").make_conditional_utils().root_matches("translated%-content")
-			if is_mdn then
+			if isMdn(params) then
 				local mdn_textlint =
 					vim.fn.expand("~/ghq/github.com/mongolyy/mdn-textlint-ja/node_modules/.bin/textlint")
 				if vim.fn.filereadable(mdn_textlint) == 1 then
@@ -231,10 +234,9 @@ local sources = {
 			end
 			return cmd_resolver.from_node_modules()(params)
 		end,
-		args = function()
+		args = function(params)
 			local args = { "-f", "json", "--stdin", "--stdin-filename", "$FILENAME" }
-			local is_mdn = require("null-ls.utils").make_conditional_utils().root_matches("translated%-content")
-			if is_mdn then
+			if isMdn(params) then
 				table.insert(args, 1, "--config")
 				table.insert(args, 2, vim.fn.expand("~/ghq/github.com/mongolyy/mdn-textlint-ja/.textlintrc"))
 			end
