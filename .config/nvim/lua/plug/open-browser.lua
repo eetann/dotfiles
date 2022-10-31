@@ -5,3 +5,9 @@ function! My_opens()
     execute 'OpenBrowser ' . substitute(expand('%:p'), '\v/mnt/(.)', '\1:/', 'c')
 endfunction
 ]])
+vim.keymap.set(
+	{ "n", "v" },
+	"<Leader>gh",
+	":OpenGithubFile<CR>",
+	{ noremap = true, silent = true, desc = "現在のファイルをGitHubで開く" }
+)

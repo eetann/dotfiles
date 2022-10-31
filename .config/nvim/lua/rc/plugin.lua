@@ -112,6 +112,7 @@ return require("packer").startup({
 
 		use({ "tyru/caw.vim", config = conf("caw") })
 		use({ "tyru/open-browser.vim", opt = true, event = "VimEnter", config = conf("open-browser") })
+		use({ "tyru/open-browser-github.vim", opt = true, event = "VimEnter", requires = "tyru/open-browser.vim" })
 
 		use({ "mattn/vim-sonictemplate", opt = true, cmd = { "Tem", "Template" }, config = conf("vim-sonictemplate") })
 		use({
