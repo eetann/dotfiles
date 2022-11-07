@@ -41,7 +41,16 @@ require("lualine").setup({
 				},
 			},
 		},
-		lualine_x = { "encoding", "fileformat", "filetype" },
+		lualine_x = {
+			{
+				require("noice").api.status.mode.get,
+				cond = require("noice").api.status.mode.has,
+				color = { fg = "#ff9e64" },
+			},
+			"encoding",
+			"fileformat",
+			"filetype",
+		},
 		lualine_y = {
 			{
 				"diagnostics",

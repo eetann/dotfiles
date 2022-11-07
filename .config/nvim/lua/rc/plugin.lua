@@ -96,7 +96,6 @@ return require("packer").startup({
 		use({ "rcarriga/nvim-notify" })
 		use({
 			"folke/noice.nvim",
-			event = "VimEnter",
 			config = conf("noice"),
 			requires = {
 				"MunifTanjim/nui.nvim",
@@ -107,12 +106,15 @@ return require("packer").startup({
 		use({ "lambdalisue/vim-quickrun-neovim-job" })
 		use({ "thinca/vim-quickrun", config = conf("vim-quickrun") })
 
-		use({ "nvim-lualine/lualine.nvim", config = conf("lualine") })
+		use({ "nvim-lualine/lualine.nvim", config = conf("lualine"), requires = "folke/noice.nvim" })
 		use({ "b0o/incline.nvim", config = conf("incline") })
 
 		use({ "tyru/caw.vim", config = conf("caw") })
-		use({ "tyru/open-browser.vim", opt = true, event = "VimEnter", config = conf("open-browser") })
-		use({ "tyru/open-browser-github.vim", opt = true, event = "VimEnter", requires = "tyru/open-browser.vim" })
+		use({
+			"tyru/open-browser.vim",
+			config = conf("open-browser"),
+		})
+		use({ "tyru/open-browser-github.vim", requires = "tyru/open-browser.vim" })
 
 		use({ "mattn/vim-sonictemplate", opt = true, cmd = { "Tem", "Template" }, config = conf("vim-sonictemplate") })
 		use({

@@ -18,10 +18,6 @@ noice.setup({
 	},
 	routes = {
 		{
-			view = "notify",
-			filter = { event = "msg_showmode" },
-		},
-		{
 			filter = {
 				event = "notify",
 				warning = true,
