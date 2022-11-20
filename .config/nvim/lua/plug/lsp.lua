@@ -199,6 +199,7 @@ local sources = {
 			"html",
 			"json",
 			"jsonc",
+			"json5",
 			"yaml",
 			"graphql",
 			"handlebars",
