@@ -38,7 +38,7 @@ end
 return {
 	font = wezterm.font("HackGen Console NFJ"),
 	use_ime = true,
-	font_size = 14,
+	font_size = 13.0,
 	color_scheme = "Gruvbox Dark",
 	hide_tab_bar_if_only_one_tab = true,
 	adjust_window_size_when_changing_font_size = false,
