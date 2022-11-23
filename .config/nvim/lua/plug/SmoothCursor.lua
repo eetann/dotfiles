@@ -14,5 +14,5 @@ require("smoothcursor").setup({
 		},
 		tail = { cursor = nil, texthl = "SmoothCursor" },
 	},
-	disabled_filetypes = { "TelescopePrompt", "TelescopeResults", "gitblame", "css" },
+	disabled_filetypes = { "TelescopePrompt", "TelescopeResults", "gitblame", "css", "noice", "LspsagaHover" },
 })
