@@ -7,99 +7,113 @@ require("illuminate").configure({
 	delay = 100,
 })
 
-require("lspsaga").setup({
-	debug = false,
-	use_saga_diagnostic_sign = true,
-	-- diagnostic sign
-	-- error_sign = "E",
-	-- warn_sign = "w",
-	-- hint_sign = "H",
-	-- infor_sign = "i",
-	-- diagnostic_header_icon = "d",
-	-- code action title icon
-	-- code_action_icon = "@",
-	code_action_prompt = {
+local saga = require("lspsaga")
+
+saga.init_lsp_saga({
+	-- Options with default value
+	-- "single" | "double" | "rounded" | "bold" | "plus"
+	border_style = "single",
+	--the range of 0 for fully opaque window (disabled) to 100 for fully
+	--transparent background. Values between 0-30 are typically most useful.
+	saga_winblend = 0,
+	-- when cursor in saga window you config these to move
+	move_in_saga = { prev = "<C-u>", next = "<C-d>" },
+	-- Error, Warn, Info, Hint
+	-- use emoji like
+	-- { "🙀", "😿", "😾", "😺" }
+	-- or
+	-- { "😡", "😥", "😤", "😐" }
+	-- and diagnostic_header can be a function type
+	-- must return a string and when diagnostic_header
+	-- is function type it will have a param `entry`
+	-- entry is a table type has these filed
+	-- { bufnr, code, col, end_col, end_lnum, lnum, message, severity, source }
+	diagnostic_header = { " ", " ", " ", "ﴞ " },
+	-- preview lines above of lsp_finder
+	preview_lines_above = 0,
+	-- preview lines of lsp_finder and definition preview
+	max_preview_lines = 10,
+	-- use emoji lightbulb in default
+	code_action_icon = "💡",
+	-- if true can press number to execute the codeaction in codeaction window
+	code_action_num_shortcut = true,
+	-- same as nvim-lightbulb but async
+	code_action_lightbulb = {
 		enable = true,
+		enable_in_insert = true,
+		cache_code_action = true,
 		sign = true,
-		sign_priority = 40,
+		update_time = 150,
+		sign_priority = 20,
 		virtual_text = true,
 	},
-	-- finder_definition_icon = "Def ",
-	-- finder_reference_icon = "Ref ",
-	max_preview_lines = 10,
+	-- finder icons
+	finder_icons = {
+		def = "  ",
+		ref = "諭 ",
+		link = "  ",
+	},
+	-- finder do lsp request timeout
+	-- if your project big enough or your server very slow
+	-- you may need to increase this value
+	finder_request_timeout = 1500,
 	finder_action_keys = {
-		open = "o",
-		vsplit = "v",
-		split = "s",
-		quit = "q",
-		scroll_down = "<C-d>",
-		scroll_up = "<C-u>",
+		open = { "o", "<CR>" },
+		vsplit = "s",
+		split = "i",
+		tabe = "t",
+		quit = { "q", "<ESC>" },
 	},
 	code_action_keys = {
 		quit = "q",
 		exec = "<CR>",
 	},
-	rename_action_keys = {
-		quit = "<C-c>",
-		exec = "<CR>",
+	definition_action_keys = {
+		edit = "<C-c>o",
+		vsplit = "<C-c>v",
+		split = "<C-c>x",
+		tabe = "<C-c>t",
+		quit = "q",
 	},
-	definition_preview_icon = "Def ",
-	border_style = "single",
-	rename_prompt_prefix = ">",
-	rename_output_qflist = {
-		enable = false,
-		auto_open_qflist = false,
+	rename_action_quit = "<C-c>",
+	rename_in_select = true,
+	-- show symbols in winbar must nightly
+	-- in_custom mean use lspsaga api to get symbols
+	-- and set it to your custom winbar or some winbar plugins.
+	-- if in_cusomt = true you must set in_enable to false
+	symbol_in_winbar = {
+		in_custom = false,
+		enable = true,
+		separator = " ",
+		show_file = true,
+		-- define how to customize filename, eg: %:., %
+		-- if not set, use default value `%:t`
+		-- more information see `vim.fn.expand` or `expand`
+		-- ## only valid after set `show_file = true`
+		file_formatter = "",
+		click_support = false,
 	},
+	-- show outline
+	show_outline = {
+		win_position = "right",
+		--set special filetype win that outline window split.like NvimTree neotree
+		-- defx, db_ui
+		win_with = "",
+		win_width = 30,
+		auto_enter = true,
+		auto_preview = true,
+		virt_text = "┃",
+		jump_key = "o",
+		-- auto refresh when change buffer
+		auto_refresh = true,
+	},
+	-- custom lsp kind
+	-- usage { Field = 'color code'} or {Field = {your icon, your color code}}
+	custom_kind = {},
+	-- if you don't use nvim-lspconfig you must pass your server name and
+	-- the related filetypes into this table
+	-- like server_filetype_map = { metals = { "sbt", "scala" } }
 	server_filetype_map = {},
-	diagnostic_prefix_format = "%d. ",
-	diagnostic_message_format = "%m %c",
-	highlight_prefix = false,
-})
-vim.keymap.set("n", "<C-d>", function()
-	require("lspsaga.action").smart_scroll_with_saga(1)
-end, mopt)
-vim.keymap.set("n", "<C-u>", function()
-	require("lspsaga.action").smart_scroll_with_saga(-1)
-end, mopt)
-
-require("lsp_signature").setup({
-	debug = false,
-	log_path = vim.fn.stdpath("cache") .. "/lsp_signature.log",
-	-- default is  ~/.cache/nvim/lsp_signature.log
-	verbose = false,
-
-	bind = false,
-	doc_lines = 10,
-
-	floating_window = true,
-	floating_window_above_cur_line = false,
-	floating_window_off_x = 1,
-	floating_window_off_y = 0,
-
-	fix_pos = false,
-	hint_enable = true,
-	hint_prefix = "🐼 ",
-	hint_scheme = "String",
-	hi_parameter = "LspSignatureActiveParameter",
-	max_height = 12,
-	max_width = 80,
-	handler_opts = {
-		border = "single",
-	},
-
-	always_trigger = false,
-
-	auto_close_after = nil,
-	extra_trigger_chars = {},
-	zindex = 200,
-
-	padding = "",
-
-	transparency = nil,
-	shadow_blend = 36,
-	shadow_guibg = "Black",
-	timer_interval = 200,
-	toggle_key = nil,
 })
 
 local on_attach = function(client, bufnr)
@@ -117,7 +131,7 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set("n", "<leader>cr", "<cmd>Lspsaga rename<CR>", bufopts)
 	vim.keymap.set("n", "<space>ca", "<cmd>CodeActionMenu<CR>", bufopts)
 	vim.keymap.set("n", "<leader>cd", "<cmd>Lspsaga show_line_diagnostics<CR>", bufopts)
-	vim.keymap.set("n", "<leader>cc", "<cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>", bufopts)
+	vim.keymap.set("n", "<leader>cc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", bufopts)
 	vim.keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", bufopts)
 	vim.keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", bufopts)
 
@@ -180,6 +194,11 @@ mason_lspconfig.setup_handlers({
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 	update_in_insert = false,
+	virtual_text = {
+		format = function(diagnostic)
+			return string.format("%s (%s: %s)", diagnostic.message, diagnostic.source, diagnostic.code)
+		end,
+	},
 })
 
 local null_ls = require("null-ls")
@@ -253,6 +272,7 @@ local sources = {
 }
 null_ls.setup({
 	sources = sources,
+	diagnostics_format = "#{m} (#{s}: #{c})",
 	on_attach = function(client, buffer)
 		on_attach(client, buffer)
 	end,
