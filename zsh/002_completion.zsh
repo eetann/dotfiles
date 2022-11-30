@@ -35,7 +35,7 @@ setopt interactive_comments # 対話中にもコメント可
 setopt AUTO_MENU # タブキーの連打で自動的にメニュー補完
 setopt chase_links # 移動先がシンボリックリンクならば実際のディレクトリに移動する
 
-autoload -z edit-command-line
+autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey "^O" edit-command-line
 
