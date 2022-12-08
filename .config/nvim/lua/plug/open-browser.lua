@@ -46,7 +46,7 @@ local function open_preview_mdn_web_docs(select_language)
 		end
 	else
 		-- パスから言語を取得
-		language = string.match(fullPath, "^.*files/(.-)/")
+		language = string.match(fullPath, ".*files/(.-)/")
 		if language == nil then
 			language = "en"
 		end
