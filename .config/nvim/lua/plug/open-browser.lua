@@ -30,7 +30,7 @@ local function open_preview_mdn_web_docs(select_language)
 			prompt = "Select language:",
 		}, function(choice)
 			if choice == "English" then
-				language = "en"
+				language = "en-US"
 			elseif choice == "Japanese" then
 				language = "ja"
 			elseif choice == "French" then
@@ -48,7 +48,7 @@ local function open_preview_mdn_web_docs(select_language)
 		-- パスから言語を取得
 		language = string.match(fullPath, ".*files/(.-)/")
 		if language == nil then
-			language = "en"
+			language = "en-US"
 		end
 	end
 
