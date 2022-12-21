@@ -25,6 +25,13 @@ noice.setup({
 			},
 			opts = { skip = true },
 		},
+		{
+			filter = {
+				event = "notify",
+				find = "no matching language servers",
+			},
+			opts = { skip = true },
+		},
 		myMiniView("Already at .* change"),
 		myMiniView("written"),
 		myMiniView("yanked"),
