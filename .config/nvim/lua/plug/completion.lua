@@ -11,7 +11,6 @@ local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
 
 cmp.setup({
 	window = {
-		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
 	},
 	snippet = {
@@ -75,7 +74,7 @@ cmp.setup({
 		{ name = "dictionary" },
 	}),
 	formatting = {
-		format = lspkind.cmp_format({ mode = "text" }),
+		format = lspkind.cmp_format(),
 	},
 })
 
