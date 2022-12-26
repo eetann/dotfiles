@@ -1,186 +1,166 @@
-local fn = vim.fn
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-local packer_bootstrap
----@diagnostic disable-next-line: missing-parameter
-if fn.empty(fn.glob(install_path)) > 0 then
-	packer_bootstrap = fn.system({
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
 		"git",
 		"clone",
-		"--depth",
-		"1",
-		"https://github.com/wbthomason/packer.nvim",
-		install_path,
+		"--filter=blob:none",
+		"--single-branch",
+		"https://github.com/folke/lazy.nvim.git",
+		lazypath,
 	})
-	print("Installed packer!")
 end
+vim.opt.runtimepath:prepend(lazypath)
 
--- packerのconfigでは文字列を返すと評価
 local function conf(name)
-	return string.format('require("plug/%s")', name)
+	return function()
+    require("plug/" .. name)
+  end
 end
 
-vim.api.nvim_create_autocmd("BufWritePost", {
-	pattern = "plugin.lua",
-	command = "source <afile> | PackerCompile",
-	group = "my_nvim_rc",
-})
+require("lazy").setup({
+	{ "machakann/vim-highlightedyank", config = conf("vim-highlightedyank") },
 
-return require("packer").startup({
-	function(use)
-		use({ "wbthomason/packer.nvim" })
-		use({ "machakann/vim-highlightedyank", config = conf("vim-highlightedyank") })
+	-- .config/nvim/lua/plug/vim-textobj.lua
+	{ "kana/vim-textobj-user", config = conf("vim-textobj") },
+	{ "kana/vim-textobj-jabraces", dependencies = "kana/vim-textobj-user" },
+	{ "osyo-manga/vim-textobj-multiblock", dependencies = "kana/vim-textobj-user" },
 
-		-- .config/nvim/lua/plug/vim-textobj.lua
-		use({ "kana/vim-textobj-user", config = conf("vim-textobj") })
-		use({ "kana/vim-textobj-jabraces", requires = "kana/vim-textobj-user" })
-		use({ "osyo-manga/vim-textobj-multiblock", requires = "kana/vim-textobj-user" })
+	{ "machakann/vim-swap", config = conf("vim-swap") },
+	{ "jiangmiao/auto-pairs", config = conf("auto-pairs") },
+	{ "andymass/vim-matchup" }, -- %を拡張
+	{ "machakann/vim-sandwich", config = conf("vim-sandwich") },
 
-		use({ "machakann/vim-swap", config = conf("vim-swap") })
-		use({ "jiangmiao/auto-pairs", config = conf("auto-pairs") })
-		use({ "andymass/vim-matchup" }) -- %を拡張
-		use({ "machakann/vim-sandwich", config = conf("vim-sandwich") })
+	{ "nvim-lua/plenary.nvim" },
+	{ "nvim-telescope/telescope.nvim", config = conf("telescope") },
 
-		use({ "nvim-lua/plenary.nvim" })
-		use({ "nvim-telescope/telescope.nvim", config = conf("telescope") })
+	-- .config/nvim/lua/plug/lsp.lua
+	{ "neovim/nvim-lspconfig", config = conf("lsp") },
+	{ "williamboman/mason.nvim" },
+	{ "williamboman/mason-lspconfig.nvim" },
+	-- { "ray-x/lsp_signature.nvim" },
+	{ "glepnir/lspsaga.nvim" },
+	{ "jose-elias-alvarez/null-ls.nvim" },
+	{ "simrat39/symbols-outline.nvim" },
+	{ "weilbith/nvim-code-action-menu" },
+	{ "folke/neodev.nvim" },
+	{ "folke/lsp-colors.nvim" },
+	{ "RRethy/vim-illuminate" },
 
-		-- .config/nvim/lua/plug/lsp.lua
-		use({ "neovim/nvim-lspconfig", config = conf("lsp") })
-		use({ "williamboman/mason.nvim" })
-		use({ "williamboman/mason-lspconfig.nvim" })
-		-- use({ "ray-x/lsp_signature.nvim" })
-		use({ "glepnir/lspsaga.nvim" })
-		use({ "jose-elias-alvarez/null-ls.nvim" })
-		use({ "simrat39/symbols-outline.nvim" })
-		use({ "weilbith/nvim-code-action-menu" })
-		use({ "folke/neodev.nvim" })
-		use({ "folke/lsp-colors.nvim" })
-		use({ "RRethy/vim-illuminate" })
+	-- .config/nvim/lua/plug/completion.lua
+	{ "SirVer/ultisnips", dependencies = { "honza/vim-snippets", "quangnguyen30192/cmp-nvim-ultisnips" } },
+	{ "hrsh7th/nvim-cmp", config = conf("completion") },
+	{ "hrsh7th/cmp-nvim-lsp", dependencies = "hrsh7th/nvim-cmp" },
+	{ "hrsh7th/cmp-buffer", dependencies = "hrsh7th/nvim-cmp" },
+	{ "hrsh7th/cmp-path", dependencies = "hrsh7th/nvim-cmp" },
+	{ "hrsh7th/cmp-cmdline", dependencies = "hrsh7th/nvim-cmp" },
+	{ "uga-rosa/cmp-dictionary", dependencies = "hrsh7th/nvim-cmp" },
+	{ "onsails/lspkind-nvim", dependencies = "hrsh7th/nvim-cmp" },
 
-		-- .config/nvim/lua/plug/completion.lua
-		use({ "SirVer/ultisnips", requires = { "honza/vim-snippets", "quangnguyen30192/cmp-nvim-ultisnips" } })
-		use({ "hrsh7th/nvim-cmp", config = conf("completion") })
-		use({ "hrsh7th/cmp-nvim-lsp", requires = "hrsh7th/nvim-cmp" })
-		use({ "hrsh7th/cmp-buffer", requires = "hrsh7th/nvim-cmp" })
-		use({ "hrsh7th/cmp-path", requires = "hrsh7th/nvim-cmp" })
-		use({ "hrsh7th/cmp-cmdline", requires = "hrsh7th/nvim-cmp" })
-		use({ "uga-rosa/cmp-dictionary", requires = "hrsh7th/nvim-cmp" })
-		use({ "onsails/lspkind-nvim", requires = "hrsh7th/nvim-cmp" })
+	-- .config/nvim/lua/plug/color-scheme.lua
+	{ "EdenEast/nightfox.nvim", config = conf("color-scheme") },
 
-		-- .config/nvim/lua/plug/color-scheme.lua
-		use({ "EdenEast/nightfox.nvim", config = conf("color-scheme") })
+	-- .config/nvim/lua/plug/treesitter.lua
+	{
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+		config = conf("treesitter"),
+	},
+	{ "nvim-treesitter/nvim-treesitter-context", dependencies = "nvim-treesitter/nvim-treesitter" },
+	{ "kyazdani42/nvim-web-devicons" },
+	{
+		"akinsho/bufferline.nvim",
+		version = "v2.*",
+		dependencies = "kyazdani42/nvim-web-devicons",
+		config = conf("bufferline"),
+	},
+	{ "norcalli/nvim-colorizer.lua", config = conf("nvim-colorizer") },
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		config = conf("indent-blankline"),
+		dependencies = "nvim-treesitter/nvim-treesitter",
+	},
 
-		-- .config/nvim/lua/plug/treesitter.lua
-		use({
-			"nvim-treesitter/nvim-treesitter",
-			run = ":TSUpdate",
-			config = conf("treesitter"),
-		})
-		use({ "nvim-treesitter/nvim-treesitter-context", requires = "nvim-treesitter/nvim-treesitter" })
-		use({ "kyazdani42/nvim-web-devicons" })
-		use({
-			"akinsho/bufferline.nvim",
-			tag = "v2.*",
-			requires = "kyazdani42/nvim-web-devicons",
-			config = conf("bufferline"),
-		})
-		use({ "norcalli/nvim-colorizer.lua", config = conf("nvim-colorizer") })
-		use({
-			"lukas-reineke/indent-blankline.nvim",
-			config = conf("indent-blankline"),
-			requires = "nvim-treesitter/nvim-treesitter",
-		})
+	{ "petertriho/nvim-scrollbar", config = conf("nvim-scrollbar") },
 
-		use({ "petertriho/nvim-scrollbar", config = conf("nvim-scrollbar") })
-
-		use({ "MunifTanjim/nui.nvim" })
-		use({ "rcarriga/nvim-notify" })
-		use({
-			"folke/noice.nvim",
-			config = conf("noice"),
-			requires = {
-				"MunifTanjim/nui.nvim",
-				"rcarriga/nvim-notify",
-			},
-		})
-
-		use({ "lambdalisue/vim-quickrun-neovim-job" })
-		use({ "thinca/vim-quickrun", config = conf("vim-quickrun") })
-
-		use({ "nvim-lualine/lualine.nvim", config = conf("lualine"), requires = "folke/noice.nvim" })
-		use({ "b0o/incline.nvim", config = conf("incline") })
-
-		use({ "tyru/caw.vim", config = conf("caw") })
-		use({
-			"tyru/open-browser.vim",
-			config = conf("open-browser"),
-		})
-		use({ "tyru/open-browser-github.vim", requires = "tyru/open-browser.vim" })
-
-		use({ "mattn/vim-sonictemplate", opt = true, cmd = { "Tem", "Template" }, config = conf("vim-sonictemplate") })
-		use({
-			"junegunn/vim-easy-align",
-			opt = true,
-			event = "VimEnter",
-			config = conf("vim-easy-align"),
-		})
-		use({ "bkad/CamelCaseMotion", opt = true, event = "VimEnter", config = conf("CamelCaseMotion") })
-		use({ "delphinus/auto-cursorline.nvim", opt = true, event = "VimEnter", config = conf("auto-cursorline") })
-		use({ "gen740/SmoothCursor.nvim", config = conf("SmoothCursor") })
-		use({ "kshenoy/vim-signature" }) -- マーク位置の表示
-		use({ "lewis6991/gitsigns.nvim", config = conf("gitsigns") })
-		use({ "vim-jp/vimdoc-ja" })
-		use({ "simeji/winresizer", config = conf("winresizer") })
-		use({
-			"folke/todo-comments.nvim",
-			requires = "nvim-lua/plenary.nvim",
-			config = function()
-				require("todo-comments").setup({})
-			end,
-		})
-
-		use({ "mechatroner/rainbow_csv", opt = true, ft = { "csv" }, config = conf("rainbow_csv") })
-
-		use({
-			"mattn/emmet-vim",
-			opt = true,
-			ft = {
-				"html",
-				"css",
-				"php",
-				"xml",
-				"javascript",
-				"vue",
-				"typescriptreact",
-				"react",
-				"javascriptreact",
-				"markdown",
-			},
-			config = conf("emmet-vim"),
-		})
-
-		use({
-			"dhruvasagar/vim-table-mode",
-			opt = true,
-			ft = { "markdown", "md", "mdwn", "mkd", "mkdn", "mark" },
-			config = conf("vim-table-mode"),
-		})
-
-		use({
-			"iamcco/markdown-preview.nvim",
-			opt = true,
-			ft = { "markdown", "md", "mdwn", "mkd", "mkdn", "mark" },
-			run = "cd app && yarn install",
-		})
-
-		use({ "akinsho/toggleterm.nvim", tag = "v2.*", config = conf("toggleterm") })
-
-		if packer_bootstrap then
-			require("packer").sync()
-		end
-	end,
-	config = {
-		display = {
-			open_fn = require("packer.util").float,
+	{ "MunifTanjim/nui.nvim" },
+	{ "rcarriga/nvim-notify" },
+	{
+		"folke/noice.nvim",
+		config = conf("noice"),
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"rcarriga/nvim-notify",
 		},
 	},
+
+	{ "lambdalisue/vim-quickrun-neovim-job" },
+	{ "thinca/vim-quickrun", config = conf("vim-quickrun") },
+
+	{ "nvim-lualine/lualine.nvim", config = conf("lualine"), dependencies = "folke/noice.nvim" },
+	{ "b0o/incline.nvim", config = conf("incline") },
+
+	{ "tyru/caw.vim", config = conf("caw") },
+	{
+		"tyru/open-browser.vim",
+		config = conf("open-browser"),
+	},
+	{ "tyru/open-browser-github.vim", dependencies = "tyru/open-browser.vim" },
+
+	{ "mattn/vim-sonictemplate", lazy = true, cmd = { "Tem", "Template" }, config = conf("vim-sonictemplate") },
+	{
+		"junegunn/vim-easy-align",
+		lazy = true,
+		event = "VimEnter",
+		config = conf("vim-easy-align"),
+	},
+	{ "bkad/CamelCaseMotion", lazy = true, event = "VimEnter", config = conf("CamelCaseMotion") },
+	{ "delphinus/auto-cursorline.nvim", lazy = true, event = "VimEnter", config = conf("auto-cursorline") },
+	{ "gen740/SmoothCursor.nvim", config = conf("SmoothCursor") },
+	{ "kshenoy/vim-signature" }, -- マーク位置の表示
+	{ "lewis6991/gitsigns.nvim", config = conf("gitsigns") },
+	{ "vim-jp/vimdoc-ja" },
+	{ "simeji/winresizer", config = conf("winresizer") },
+	{
+		"folke/todo-comments.nvim",
+		dependencies = "nvim-lua/plenary.nvim",
+		config = function()
+			require("todo-comments").setup({})
+		end,
+	},
+
+	{ "mechatroner/rainbow_csv", lazy = true, ft = { "csv" }, config = conf("rainbow_csv") },
+
+	{
+		"mattn/emmet-vim",
+		lazy = true,
+		ft = {
+			"html",
+			"css",
+			"php",
+			"xml",
+			"javascript",
+			"vue",
+			"typescriptreact",
+			"react",
+			"javascriptreact",
+			"markdown",
+		},
+		config = conf("emmet-vim"),
+	},
+
+	{
+		"dhruvasagar/vim-table-mode",
+		lazy = true,
+		ft = { "markdown", "md", "mdwn", "mkd", "mkdn", "mark" },
+		config = conf("vim-table-mode"),
+	},
+
+	{
+		"iamcco/markdown-preview.nvim",
+		lazy = true,
+		ft = { "markdown", "md", "mdwn", "mkd", "mkdn", "mark" },
+		build = "cd app && yarn install",
+	},
+
+	{ "akinsho/toggleterm.nvim", version = "v2.*", config = conf("toggleterm") },
 })
