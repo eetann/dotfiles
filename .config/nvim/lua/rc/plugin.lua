@@ -13,8 +13,8 @@ vim.opt.runtimepath:prepend(lazypath)
 
 local function conf(name)
 	return function()
-    require("plug/" .. name)
-  end
+		require("plug/" .. name)
+	end
 end
 
 require("lazy").setup({
@@ -77,7 +77,6 @@ require("lazy").setup({
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		config = conf("indent-blankline"),
-		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
 
 	{ "petertriho/nvim-scrollbar", config = conf("nvim-scrollbar") },
