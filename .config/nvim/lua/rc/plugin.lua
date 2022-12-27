@@ -17,13 +17,18 @@ local function conf(name)
 	end
 end
 
+local colorscheme = "nightfox.nvim"
+
 require("lazy").setup({
+	-- .config/nvim/lua/plug/color-scheme.lua
+	{ "EdenEast/nightfox.nvim", config = conf("color-scheme") },
+
 	{ "machakann/vim-highlightedyank", config = conf("vim-highlightedyank") },
 
 	-- .config/nvim/lua/plug/vim-textobj.lua
 	{ "kana/vim-textobj-user", config = conf("vim-textobj") },
-	{ "kana/vim-textobj-jabraces", dependencies = "kana/vim-textobj-user" },
-	{ "osyo-manga/vim-textobj-multiblock", dependencies = "kana/vim-textobj-user" },
+	{ "kana/vim-textobj-jabraces", dependencies = { "kana/vim-textobj-user" } },
+	{ "osyo-manga/vim-textobj-multiblock", dependencies = { "kana/vim-textobj-user" } },
 
 	{ "machakann/vim-swap", config = conf("vim-swap") },
 	{ "jiangmiao/auto-pairs", config = conf("auto-pairs") },
@@ -48,35 +53,39 @@ require("lazy").setup({
 
 	-- .config/nvim/lua/plug/completion.lua
 	{ "SirVer/ultisnips", dependencies = { "honza/vim-snippets", "quangnguyen30192/cmp-nvim-ultisnips" } },
-	{ "hrsh7th/nvim-cmp", config = conf("completion") },
-	{ "hrsh7th/cmp-nvim-lsp", dependencies = "hrsh7th/nvim-cmp" },
-	{ "hrsh7th/cmp-buffer", dependencies = "hrsh7th/nvim-cmp" },
-	{ "hrsh7th/cmp-path", dependencies = "hrsh7th/nvim-cmp" },
-	{ "hrsh7th/cmp-cmdline", dependencies = "hrsh7th/nvim-cmp" },
-	{ "uga-rosa/cmp-dictionary", dependencies = "hrsh7th/nvim-cmp" },
-	{ "onsails/lspkind-nvim", dependencies = "hrsh7th/nvim-cmp" },
-
-	-- .config/nvim/lua/plug/color-scheme.lua
-	{ "EdenEast/nightfox.nvim", config = conf("color-scheme") },
+	{
+		"hrsh7th/nvim-cmp",
+		config = conf("completion"),
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-cmdline",
+			"uga-rosa/cmp-dictionary",
+			"onsails/lspkind-nvim",
+		},
+	},
 
 	-- .config/nvim/lua/plug/treesitter.lua
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		config = conf("treesitter"),
+		dependencies = { colorscheme },
 	},
-	{ "nvim-treesitter/nvim-treesitter-context", dependencies = "nvim-treesitter/nvim-treesitter" },
+	{ "nvim-treesitter/nvim-treesitter-context", dependencies = { "nvim-treesitter/nvim-treesitter" } },
 	{ "kyazdani42/nvim-web-devicons" },
 	{
 		"akinsho/bufferline.nvim",
 		version = "v2.*",
-		dependencies = "kyazdani42/nvim-web-devicons",
+		dependencies = { "kyazdani42/nvim-web-devicons" },
 		config = conf("bufferline"),
 	},
 	{ "norcalli/nvim-colorizer.lua", config = conf("nvim-colorizer") },
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		config = conf("indent-blankline"),
+		dependencies = { "nvim-treesitter/nvim-treesitter", colorscheme },
 	},
 
 	{ "petertriho/nvim-scrollbar", config = conf("nvim-scrollbar") },
@@ -95,7 +104,7 @@ require("lazy").setup({
 	{ "lambdalisue/vim-quickrun-neovim-job" },
 	{ "thinca/vim-quickrun", config = conf("vim-quickrun") },
 
-	{ "nvim-lualine/lualine.nvim", config = conf("lualine"), dependencies = "folke/noice.nvim" },
+	{ "nvim-lualine/lualine.nvim", config = conf("lualine"), dependencies = { "folke/noice.nvim" } },
 	{ "b0o/incline.nvim", config = conf("incline") },
 
 	{ "tyru/caw.vim", config = conf("caw") },
@@ -103,7 +112,7 @@ require("lazy").setup({
 		"tyru/open-browser.vim",
 		config = conf("open-browser"),
 	},
-	{ "tyru/open-browser-github.vim", dependencies = "tyru/open-browser.vim" },
+	{ "tyru/open-browser-github.vim", dependencies = { "tyru/open-browser.vim" } },
 
 	{ "mattn/vim-sonictemplate", lazy = true, cmd = { "Tem", "Template" }, config = conf("vim-sonictemplate") },
 	{
@@ -121,7 +130,7 @@ require("lazy").setup({
 	{ "simeji/winresizer", config = conf("winresizer") },
 	{
 		"folke/todo-comments.nvim",
-		dependencies = "nvim-lua/plenary.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
 			require("todo-comments").setup({})
 		end,
