@@ -1,4 +1,3 @@
-local mopt = { noremap = true, silent = true }
 require("symbols-outline").setup()
 vim.keymap.set("n", "<Leader>o", "<Cmd>SymbolsOutline<CR>", { noremap = true })
 
@@ -9,7 +8,7 @@ require("illuminate").configure({
 
 local saga = require("lspsaga")
 
-saga.init_lsp_saga({
+saga.setup({
 	-- Options with default value
 	-- "single" | "double" | "rounded" | "bold" | "plus"
 	border_style = "single",
