@@ -260,7 +260,7 @@ local sources = {
 		end,
 		cwd = function(params)
 			local is_mdn = params.root:find("translated%-content")
-			return is_mdn and vim.fn.expand("~/ghq/github.com/mongolyy/mdn-textlint-ja")
+			return is_mdn and vim.fn.expand("~/ghq/github.com/mozilla-japan/translation/MDN/textlint")
 		end,
 	}),
 	null_ls.builtins.diagnostics.shellcheck.with({
