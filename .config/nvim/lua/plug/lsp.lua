@@ -205,41 +205,41 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 })
 
 local null_ls = require("null-ls")
+
+local eslint_condition = function(utils)
+	return utils.root_has_file({
+		".eslintrc.js",
+		".eslintrc.cjs",
+		".eslintrc.yaml",
+		".eslintrc.yml",
+		".eslintrc.json",
+	})
+end
+
+local prettier_condition = function(utils)
+	return utils.root_has_file({
+		".prettierrc",
+		".prettierrc.json",
+		".prettierrc.yml",
+		".prettierrc.yaml",
+		".prettierrc.json5",
+		".prettierrc.js",
+		".prettierrc.cjs",
+		"prettier.config.js",
+		"prettier.config.cjs",
+		".prettierrc.toml",
+	})
+end
+
 local sources = {
-	null_ls.builtins.code_actions.eslint,
+	null_ls.builtins.code_actions.eslint.with({
+		condition = eslint_condition,
+	}),
 	null_ls.builtins.diagnostics.eslint.with({
-		filetypes = {
-			"javascript",
-			"javascriptreact",
-			"typescript",
-			"typescriptreact",
-			"vue",
-			"css",
-			"html",
-			"json",
-			"jsonc",
-			"json5",
-			"yaml",
-		},
+		condition = eslint_condition,
 	}),
 	null_ls.builtins.formatting.prettier.with({
-		filetypes = {
-			"javascript",
-			"javascriptreact",
-			"typescript",
-			"typescriptreact",
-			"vue",
-			"css",
-			"scss",
-			"less",
-			"html",
-			"json",
-			"jsonc",
-			"json5",
-			"yaml",
-			"graphql",
-			"handlebars",
-		},
+		condition = prettier_condition,
 	}),
 	null_ls.builtins.diagnostics.textlint.with({
 		filetypes = { "markdown" },
