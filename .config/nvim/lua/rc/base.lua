@@ -9,6 +9,7 @@ vim.api.nvim_create_augroup(group_name, { clear = true })
 
 -- 移動系---------------------------------------------------------
 vim.opt.scrolloff = 3
+vim.opt.sidescrolloff = 3
 
 -- コピペ関連-----------------------------------------------------
 vim.opt.clipboard = { "unnamedplus", "unnamed" }
