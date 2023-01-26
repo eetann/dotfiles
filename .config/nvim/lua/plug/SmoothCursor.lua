@@ -1,5 +1,5 @@
 require("smoothcursor").setup({
-	priority = 1,
+	priority = 10,
 	fancy = {
 		enable = true,
 		head = { cursor = "", texthl = "SmoothCursor", linehl = nil },
