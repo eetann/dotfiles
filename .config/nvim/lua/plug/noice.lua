@@ -54,3 +54,5 @@ noice.setup({
 		myMiniView("E486: Pattern not found", "emsg"),
 	},
 })
+
+vim.cmd("highlight! link LspSignatureActiveParameter @text.warning")
