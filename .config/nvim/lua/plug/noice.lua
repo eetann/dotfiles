@@ -53,6 +53,29 @@ noice.setup({
 		myMiniView("search hit .*, continuing at", "wmsg"),
 		myMiniView("E486: Pattern not found", "emsg"),
 	},
+	lsp = {
+		signature = {
+			enabled = true,
+			auto_open = {
+				enabled = true,
+				trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
+				luasnip = true, -- Will open signature help when jumping to Luasnip insert nodes
+				throttle = 50, -- Debounce lsp signature help request by 50ms
+			},
+			view = "hover",
+			---@type NoiceViewOptions
+			opts = {
+				size = {
+					max_width = 80,
+					max_height = 15,
+				},
+			},
+		},
+	},
 })
 
 vim.cmd("highlight! link LspSignatureActiveParameter @text.warning")
+
+vim.keymap.set("i", "<C-g><C-g>", function()
+	require("noice.lsp.docs").get("signature"):focus()
+end, { desc = "Focus noice docs" })
