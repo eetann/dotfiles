@@ -38,34 +38,6 @@ require("lazy").setup({
 	{ "nvim-lua/plenary.nvim" },
 	{ "nvim-telescope/telescope.nvim", config = conf("telescope") },
 
-	-- .config/nvim/lua/plug/lsp.lua
-	{ "neovim/nvim-lspconfig", config = conf("lsp") },
-	{ "williamboman/mason.nvim" },
-	{ "williamboman/mason-lspconfig.nvim" },
-	-- { "ray-x/lsp_signature.nvim" },
-	{ "glepnir/lspsaga.nvim" },
-	{ "jose-elias-alvarez/null-ls.nvim" },
-	{ "simrat39/symbols-outline.nvim" },
-	{ "weilbith/nvim-code-action-menu" },
-	{ "folke/neodev.nvim" },
-	{ "folke/lsp-colors.nvim" },
-	{ "RRethy/vim-illuminate" },
-
-	-- .config/nvim/lua/plug/completion.lua
-	{ "SirVer/ultisnips", dependencies = { "honza/vim-snippets", "quangnguyen30192/cmp-nvim-ultisnips" } },
-	{
-		"hrsh7th/nvim-cmp",
-		config = conf("completion"),
-		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-cmdline",
-			"uga-rosa/cmp-dictionary",
-			"onsails/lspkind-nvim",
-		},
-	},
-
 	-- .config/nvim/lua/plug/treesitter.lua
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -86,6 +58,34 @@ require("lazy").setup({
 		"lukas-reineke/indent-blankline.nvim",
 		config = conf("indent-blankline"),
 		dependencies = { "nvim-treesitter/nvim-treesitter", colorscheme },
+	},
+
+	-- .config/nvim/lua/plug/lsp.lua
+	{ "neovim/nvim-lspconfig", config = conf("lsp") },
+	{ "williamboman/mason.nvim" },
+	{ "williamboman/mason-lspconfig.nvim" },
+	-- { "ray-x/lsp_signature.nvim" },
+	{ "glepnir/lspsaga.nvim", dependencies = { "nvim-treesitter/nvim-treesitter" } },
+	{ "jose-elias-alvarez/null-ls.nvim" },
+	{ "simrat39/symbols-outline.nvim" },
+	{ "weilbith/nvim-code-action-menu" },
+	{ "folke/neodev.nvim" },
+	{ "folke/lsp-colors.nvim" },
+	{ "RRethy/vim-illuminate" },
+
+	-- .config/nvim/lua/plug/completion.lua
+	{ "SirVer/ultisnips", dependencies = { "honza/vim-snippets", "quangnguyen30192/cmp-nvim-ultisnips" } },
+	{
+		"hrsh7th/nvim-cmp",
+		config = conf("completion"),
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-cmdline",
+			"uga-rosa/cmp-dictionary",
+			"onsails/lspkind-nvim",
+		},
 	},
 
 	{ "petertriho/nvim-scrollbar", config = conf("nvim-scrollbar") },
