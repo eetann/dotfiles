@@ -37,6 +37,7 @@ require("lazy").setup({
 
 	{ "nvim-lua/plenary.nvim" },
 	{ "nvim-telescope/telescope.nvim", config = conf("telescope") },
+	{ "johmsalas/text-case.nvim", dependencies = { "nvim-telescope/telescope.nvim" }, config = conf("text-case") },
 
 	-- .config/nvim/lua/plug/treesitter.lua
 	{
