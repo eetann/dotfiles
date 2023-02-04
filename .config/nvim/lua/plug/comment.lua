@@ -45,11 +45,11 @@ require("Comment").setup({
 local api = require("Comment.api")
 local config = require("Comment.config"):get()
 local mopt = { noremap = true, silent = true }
-vim.keymap.set("n", "gct", function()
+vim.keymap.set("n", "gcT", function()
 	api.insert.linewise.above(config)
 	vim.api.nvim_feedkeys("TODO: ", "n", false)
 end, mopt)
-vim.keymap.set("n", "gcT", function()
+vim.keymap.set("n", "gct", function()
 	api.insert.linewise.below(config)
 	vim.api.nvim_feedkeys("TODO: ", "n", false)
 end, mopt)
