@@ -108,7 +108,12 @@ require("lazy").setup({
 	{ "nvim-lualine/lualine.nvim", config = conf("lualine"), dependencies = { "folke/noice.nvim" } },
 	{ "b0o/incline.nvim", config = conf("incline") },
 
-	{ "tyru/caw.vim", config = conf("caw") },
+	{ "JoosepAlviste/nvim-ts-context-commentstring", dependencies = { "nvim-treesitter/nvim-treesitter" } },
+	{
+		"numToStr/Comment.nvim",
+		dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
+		config = conf("comment"),
+	},
 	{
 		"tyru/open-browser.vim",
 		config = conf("open-browser"),
