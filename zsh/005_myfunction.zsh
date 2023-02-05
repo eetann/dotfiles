@@ -230,7 +230,7 @@ EOF
 zle -N fman
 bindkey '^xf' fman
 
-export MANPAGER="sh -c 'col -bx | bat --language=man --plain --paging always --theme=gruvbox-dark'"
+export MANPAGER='nvim +Man!'
 
 function frg() {
   local initial_query=""
