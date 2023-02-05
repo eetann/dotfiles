@@ -47,11 +47,11 @@ require("lazy").setup({
 		dependencies = { colorscheme },
 	},
 	{ "nvim-treesitter/nvim-treesitter-context", dependencies = { "nvim-treesitter/nvim-treesitter" } },
-	{ "kyazdani42/nvim-web-devicons" },
+	{ "nvim-tree/nvim-web-devicons" },
 	{
 		"akinsho/bufferline.nvim",
 		version = "v2.*",
-		dependencies = { "kyazdani42/nvim-web-devicons" },
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = conf("bufferline"),
 	},
 	{ "norcalli/nvim-colorizer.lua", config = conf("nvim-colorizer") },
