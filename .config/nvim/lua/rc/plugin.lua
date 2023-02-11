@@ -23,19 +23,17 @@ require("lazy").setup({
 	-- .config/nvim/lua/plug/color-scheme.lua
 	{ "EdenEast/nightfox.nvim", config = conf("color-scheme") },
 
+	{ "nvim-lua/plenary.nvim" },
+
 	{ "machakann/vim-highlightedyank", config = conf("vim-highlightedyank") },
 
-	-- .config/nvim/lua/plug/vim-textobj.lua
-	{ "kana/vim-textobj-user", config = conf("vim-textobj") },
-	{ "kana/vim-textobj-jabraces", dependencies = { "kana/vim-textobj-user" } },
-	{ "osyo-manga/vim-textobj-multiblock", dependencies = { "kana/vim-textobj-user" } },
+	{ "echasnovski/mini.ai", version = "*", config = conf("mini-ai") },
+	{ "echasnovski/mini.surround", version = "*", config = conf("mini-surround") },
 
 	{ "machakann/vim-swap", config = conf("vim-swap") },
 	{ "jiangmiao/auto-pairs", config = conf("auto-pairs") },
 	{ "andymass/vim-matchup" }, -- %を拡張
-	{ "machakann/vim-sandwich", config = conf("vim-sandwich") },
 
-	{ "nvim-lua/plenary.nvim" },
 	{ "nvim-telescope/telescope.nvim", config = conf("telescope") },
 	{ "johmsalas/text-case.nvim", dependencies = { "nvim-telescope/telescope.nvim" }, config = conf("text-case") },
 
