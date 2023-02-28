@@ -165,6 +165,7 @@ local sources = {
 	}),
 	null_ls.builtins.formatting.prettier.with({
 		condition = prettier_condition,
+		extra_filetypes = { "json5" },
 	}),
 	null_ls.builtins.diagnostics.textlint.with({
 		filetypes = { "markdown" },
