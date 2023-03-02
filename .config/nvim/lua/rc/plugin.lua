@@ -156,6 +156,7 @@ require("lazy").setup({
 			"react",
 			"javascriptreact",
 			"markdown",
+			"astro",
 		},
 		config = conf("emmet-vim"),
 	},

@@ -36,6 +36,9 @@ saga.setup({
 	lightbulb = {
 		enable_in_insert = false,
 	},
+	diagnostic = {
+		jump_num_shortcut = false,
+	},
 })
 
 local on_attach = function(client, bufnr)
