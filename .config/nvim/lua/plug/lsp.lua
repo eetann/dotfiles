@@ -162,9 +162,11 @@ end
 local sources = {
 	null_ls.builtins.code_actions.eslint.with({
 		condition = eslint_condition,
+		extra_filetypes = { "json5" },
 	}),
 	null_ls.builtins.diagnostics.eslint.with({
 		condition = eslint_condition,
+		extra_filetypes = { "json5" },
 	}),
 	null_ls.builtins.formatting.prettier.with({
 		condition = prettier_condition,
