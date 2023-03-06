@@ -1,5 +1,5 @@
 configuration {
-    font: "PlemolJP Medium 14";
+    font: "HackGen Console NFJ 14";
     show-icons: true;
     modi: [combi,drun,run,window];
     combi-modi: [drun,run,window];
