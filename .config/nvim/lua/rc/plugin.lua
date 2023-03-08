@@ -32,7 +32,6 @@ require("lazy").setup({
 
 	{ "machakann/vim-swap", config = conf("vim-swap") },
 	{ "jiangmiao/auto-pairs", config = conf("auto-pairs") },
-	{ "andymass/vim-matchup" }, -- %を拡張
 
 	{ "nvim-telescope/telescope.nvim", config = conf("telescope") },
 	{ "johmsalas/text-case.nvim", dependencies = { "nvim-telescope/telescope.nvim" }, config = conf("text-case") },
@@ -58,6 +57,7 @@ require("lazy").setup({
 		config = conf("indent-blankline"),
 		dependencies = { "nvim-treesitter/nvim-treesitter", colorscheme },
 	},
+	{ "andymass/vim-matchup", dependencies = { "nvim-treesitter/nvim-treesitter" } }, -- %を拡張
 
 	-- .config/nvim/lua/plug/lsp.lua
 	{ "neovim/nvim-lspconfig", config = conf("lsp") },
