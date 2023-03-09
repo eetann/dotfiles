@@ -1,0 +1,12 @@
+.octicon-lock {
+  color: yellow !important;
+}
+.octicon-repo:not(.js-jump-to-octicon-repo) {
+  color: red !important;
+}
+.octicon-repo ~ .Label--secondary {
+  border-color: red !important;
+}
+.octicon-lock ~ .Label--secondary {
+  border-color: yellow !important;
+}
