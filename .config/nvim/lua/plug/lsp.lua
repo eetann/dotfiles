@@ -94,7 +94,7 @@ mason_lspconfig.setup_handlers({
 		opts.capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 		opts.capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-		if server_name == "tsserver" or server_name == "eslint" then
+		if server_name == "tsserver" then
 			local root_dir = nvim_lsp.util.root_pattern("package.json", "node_modules")
 			opts.root_dir = root_dir
 			opts.autostart = detected_root_dir(root_dir)
@@ -160,11 +160,11 @@ local prettier_condition = function(utils)
 end
 
 local sources = {
-	null_ls.builtins.code_actions.eslint.with({
+	null_ls.builtins.code_actions.eslint_d.with({
 		condition = eslint_condition,
 		extra_filetypes = { "json5", "astro" },
 	}),
-	null_ls.builtins.diagnostics.eslint.with({
+	null_ls.builtins.diagnostics.eslint_d.with({
 		condition = eslint_condition,
 		extra_filetypes = { "json5", "astro" },
 	}),
