@@ -19,20 +19,6 @@
                }
             ],
             "type": "con"
-        },
-        {
-            "border": "pixel",
-            "current_border_width": 3,
-            "floating": "auto_off",
-            "marks": [],
-            "name": "TweetDeck",
-            "percent": 0.5,
-            "swallows": [
-               {
-                "title": "TweetDeck"
-               }
-            ],
-            "type": "con"
         }
     ]
 }
