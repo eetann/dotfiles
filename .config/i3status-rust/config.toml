@@ -1,51 +1,57 @@
 [theme]
-name = "bad-wolf"
+theme = "bad-wolf"
 
 [icons]
-name = "awesome5"
+icons = "awesome6"
 
 [[block]]
 block = "disk_space"
 path = "/"
-alias = "/"
 info_type = "available"
-unit = "GB"
+alert_unit = "GB"
 interval = 20
 warning = 20.0
 alert = 10.0
 [block.format]
-full = "{icon} {used}/{total} ({available} free)"
-short = "{icon} {available} free"
+full = "$icon $used/$total ($available free)"
+short = "$icon $available free"
 
 [[block]]
 block = "memory"
-display_type = "memory"
-clickable = false
-icons = true
 interval = 60
 warning_mem = 80
 critical_mem = 95
-[block.format_mem]
-full = "{mem_used}/{mem_total}({mem_used_percents})"
-short = "{mem_used_percents}"
+[block.format]
+full = " $icon $mem_used/$mem_total($mem_used_percents)"
+short = "$mem_used_percents"
 
 [[block]]
 block = "battery"
 interval = 10
 [block.format]
-full = "{percentage:5#100} {percentage} {time}"
-short = "{percentage}"
+full = " $icon $percentage $time "
+short = "$percentage"
 
 [[block]]
 block = "music"
-player = "spotify"
-on_collapsed_click = "spotify"
+format = " $icon $volume_icon $combo $play $next| "
+seek_step_secs = 10
+[[block.click]]
+button = "up"
+action = "volume_up"
+[[block.click]]
+button = "down"
+action = "volume_down"
+[[block.click]]
+button = "forward"
+action = "seek_forward"
+[[block.click]]
+button = "back"
+action = "seek_backward"
 
 [[block]]
 block = "sound"
-[block.format]
-full = "{volume:5#110} {volume:3}"
-short = "{volume:03}"
+step_width = 3
 
 [[block]]
 block = "backlight"
@@ -54,7 +60,6 @@ block = "backlight"
 block = "time"
 interval = 10
 timezone = "Asia/Tokyo"
-locale = "ja_JP"
 [block.format]
-full = "%m/%d %a %R"
-short = "%R"
+full = "$timestamp.datetime(f:'%m/%d %a %R', l:ja_JP)"
+short = "$timestamp.datetime(f:'%R', l:ja_JP)"
