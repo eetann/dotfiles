@@ -1,4 +1,8 @@
-local wezterm = require("wezterm")
+local wezterm = require 'wezterm'
+local config = {}
+if wezterm.config_builder then
+  config = wezterm.config_builder()
+end
 
 local function append_table(table, other)
 	for k, v in pairs(other) do
@@ -33,16 +37,18 @@ elseif target:find("linux") then
 		{ key = "p", mods = "SUPER", action = { SendKey = { key = "p", mods = "ALT" } } },
 	}
 	append_array(key_table, linux_key_table)
+else
+	config.default_domain = 'WSL:Ubuntu' -- wsl -l -v
 end
 
-return {
-	font = wezterm.font("HackGen Console NFJ"),
-	use_ime = true,
-	font_size = 13.0,
-	color_scheme = "Gruvbox Dark",
-	hide_tab_bar_if_only_one_tab = true,
-	adjust_window_size_when_changing_font_size = false,
-	keys = key_table,
-	-- NOTE: 最小構成を作れておらず未調査だけど、hyperlinkがオンになるとマルチバイトで崩れるっぽいのでオフにする
-	hyperlink_rules = {},
-}
+config.font = wezterm.font("HackGen Console NF")
+config.use_ime = true
+config.font_size = 13.0
+config.color_scheme = 'Gruvbox Dark (Gogh)'
+config.hide_tab_bar_if_only_one_tab = true
+config.adjust_window_size_when_changing_font_size = false
+config.keys = key_table
+-- NOTE: 最小構成を作れておらず未調査だけど、hyperlinkがオンになるとマルチバイトで崩れるっぽいのでオフにする
+config.hyperlink_rules = {}
+
+return config
