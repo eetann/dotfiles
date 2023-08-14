@@ -21,7 +21,7 @@ all_env() {
 	export VOLTA_HOME=$HOME/.volta
 	export PATH=$PATH:$VOLTA_HOME/bin
 	volta install node
-	npm install -g "$PKG_DEFAULT"
+	npm install -g $PKG_DEFAULT
 	info "Installed packages."
 }
 

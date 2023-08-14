@@ -14,3 +14,5 @@ source $ZDIR/003_plugin.zsh
 source $ZDIR/004_alias.zsh
 source $ZDIR/005_myfunction.zsh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"

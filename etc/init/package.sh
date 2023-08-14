@@ -25,7 +25,7 @@ ubuntu() {
 
 	sudo apt update -qq -y
 	sudo apt upgrade -qq -y
-	sudo apt install -qq -y "$PKG_DEFAULT"
+	sudo apt install -qq -y ${PKG_DEFAULT}
 	sudo apt install -qq -y software-properties-common
 
 	if ! has "neovim"; then
@@ -33,7 +33,7 @@ ubuntu() {
 	fi
 	sudo apt update -qq -y
 	sudo apt upgrade -qq -y
-	sudo apt install -qq -y "$PKG_UBUNTU"
+	sudo apt install -qq -y ${PKG_UBUNTU}
 
 	# https://docs.brew.sh/Homebrew-on-Linux
 	log "Installing Homebrew ..."
@@ -41,7 +41,7 @@ ubuntu() {
 		BUILD_PKG_UBUNTU="build-essential procps curl file git"
 		sudo apt update -q -y
 		sudo apt upgrade -q -y
-		sudo apt install -q -y "$BUILD_PKG_UBUNTU"
+		sudo apt install -q -y ${BUILD_PKG_UBUNTU}
 
 		# Homebrew
 		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
@@ -51,7 +51,7 @@ ubuntu() {
 		echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >>~/.zprofile
 		eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 	fi
-	brew bundle --file "$HOMW/dotfiles/etc/init/Brewfile"
+	brew bundle --file "$HOME/dotfiles/etc/init/Brewfile"
 
 	info "Installed packages."
 }
@@ -66,7 +66,7 @@ archlinux() {
 
 # Mac
 darwin() {
-	brew bundle --file "$HOMW/dotfiles/etc/init/Brewfile"
+	brew bundle --file "$HOME/dotfiles/etc/init/Brewfile"
 }
 
 case $(detect_os) in
