@@ -20,11 +20,15 @@ WSLならこれをやること。
 この設定をオフにするためには、
 以下のコマンドで `/etc/wsl.conf` を変更
 ```sh
-echo -e "[interop]\nappendWindowsPath = false" | sudo tee /etc/wsl.conf
+echo -e "[interop]\nappendWindowsPath = false\n[boot]\nsystemd=true" | sudo tee /etc/wsl.conf
 exec $SHELL -l
 # change Japan's repository from overseas for speed
 yes | sudo dpkg-reconfigure tzdata
 yes | sudo sed -i -e 's%http://.*.ubuntu.com%http://ftp.jaist.ac.jp/pub/Linux%g' /etc/apt/sources.list
+```
+
+```powershell
+wsl --shutdown
 ```
 
 <details>
@@ -93,8 +97,9 @@ bash ~/dotfiles/etc/init/oh-my-zsh.sh
 
 1. install tmux plugins with the above command
 2. launch tmux = `tmux`
-3. enter `prefix(maybe ctrl + s or ctrl + b) + U` to install tmux plugins.
+3. enter `prefix(maybe ctrl + s or ctrl + b) + U` to install tmux manager.
 4. enter `all`
+5. enter `prefix(maybe ctrl + s or ctrl + b) + I` to install tmux plugins.
 
 # for autohotkey
 Windowsのキーボード操作変更のためのスクリプト`likevim.ahk`を使うには、ファイルをスタートアップに登録する必要がある。

@@ -13,7 +13,7 @@ fi
 
 PKG_DEFAULT="git tree nkf curl"
 
-PKG_UBUNTU="neovim manpages-ja manpages-ja-dev wamerican"
+PKG_UBUNTU="manpages-ja manpages-ja-dev wamerican"
 
 PKG_ARCH="neovim alacritty tmux words lazygit fcitx5-im fcitx5-mozc xdg-user-dirs-gtk"
 PKG_ARCH+=" vivaldi powertop tlp rofi bat ghq ripgrep"
@@ -42,6 +42,7 @@ ubuntu() {
 		sudo apt update -q -y
 		sudo apt upgrade -q -y
 		sudo apt install -q -y ${BUILD_PKG_UBUNTU}
+		sudo snap install --beta nvim --classic
 
 		# Homebrew
 		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"

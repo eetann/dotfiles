@@ -21,6 +21,12 @@ if [[ "$(uname -r)" == *microsoft* ]]; then
   export PATH=$PATH:/mnt/c/Windows/System32
 fi
 
+snap_bin_path="/snap/bin"
+if [ -n "${PATH##*${snap_bin_path}}" -a -n "${PATH##*${snap_bin_path}:*}" ]; then
+  export PATH=$PATH:${snap_bin_path}
+fi
+
+
 if type nvim > /dev/null; then
   export EDITOR=nvim
 else
