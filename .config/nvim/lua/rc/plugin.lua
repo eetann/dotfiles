@@ -45,6 +45,7 @@ require("lazy").setup({
 	},
 	{ "nvim-treesitter/nvim-treesitter-context", dependencies = { "nvim-treesitter/nvim-treesitter" } },
 	{ "nvim-tree/nvim-web-devicons" },
+  { "neovim/tree-sitter-vimdoc" },
 	{
 		"akinsho/bufferline.nvim",
 		version = "v2.*",
