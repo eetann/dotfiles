@@ -43,23 +43,28 @@ div#lmt_pro_ad_container {
 
 
 /*横配置から縦配置に変更*/
-@media screen and (max-width: 700px) {
-  .lmt__sides_container {
-    flex-flow: column !important;
-  }
+.lmt--web .lmt__sides_container .lmt__sides_wrapper {
+  flex-flow: column !important;
+}
 
-  /*横幅を画面いっぱいに広げる*/
-  .lmt__side_container.lmt__side_container--source,
-  .lmt__side_container.lmt__side_container--target {
-    width: 100% !important;
-  }
+/*テキストエリアの余白*/
+.lmt__textarea_container {
+  padding-bottom: 40px !important;
+  padding-top: 10px !important;
+  min-height: 20vh !important;
+}
 
-  /*入力欄とテキスト欄の隙間調整*/
-  .lmt--web .lmt__textarea_separator--has-top-toolbar {
-    margin-top: 5px !important;
-  }
-  
-  body {
-    zoom: 80%;
-  }
+/*翻訳欄の横幅*/
+.lmt--web .lmt__side_container {
+  width: calc(94vw);
+}
+
+/*ページ下の余白削除*/
+.dl_translator_page_container {
+  height: 100vh !important;
+}
+
+/*翻訳ボタン（矢印）削除*/
+.lmt__language_container_switch {
+  display: none !important;
 }
