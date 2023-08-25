@@ -1,5 +1,5 @@
 # tmuxが起動していない&vimの中でなければ、tmux起動
-if [[ -z "$TMUX" ]] && [[ -z "$VIM" ]] ; then
+if [[ -z "$TMUX" && -z "$VIM" && $- == *l* ]] ; then
   # golang tmuxに必要なので読み込む
   export GOPATH=$HOME/go
   export PATH=$PATH:$GOPATH:$GOPATH/bin
@@ -7,8 +7,21 @@ if [[ -z "$TMUX" ]] && [[ -z "$VIM" ]] ; then
   export VOLTA_HOME=$HOME/.volta
   export PATH=$PATH:$VOLTA_HOME/bin:$HOME/.cargo/bin
 
-  tmux -u has-session -t e 2>/dev/null || tmux -u new-session -ds e \
-    && tmux -u attach-session -t e
+  # get the IDs
+  ID="`tmux list-sessions`"
+  if [[ -z "$ID" ]]; then
+    tmux new-session
+  fi
+  create_new_session="Create New Session"
+  ID="$ID\n${create_new_session}:"
+  ID="`echo $ID | fzf | cut -d: -f1`"
+  if [[ "$ID" = "${create_new_session}" ]]; then
+    tmux new-session
+  elif [[ -n "$ID" ]]; then
+    tmux attach-session -t "$ID"
+  else
+    :  # Start terminal normally
+  fi
 fi
 
 # =では空白入れないこと!!!
