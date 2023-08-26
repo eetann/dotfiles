@@ -58,6 +58,8 @@ sudo apt install git build-essential curl
 ```sh
 git config --global user.name "eetann"
 git config --global user.email "eetann's mail adress"
+git config --global github.user eetann
+git config --global init.defaultBranch main
 ssh-keygen -t rsa -b 4096 -C "eetann's mail adress"
 ```
 several times `<CR>`
