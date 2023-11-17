@@ -55,6 +55,7 @@ require("lazy").setup({
 	{ "norcalli/nvim-colorizer.lua", config = conf("nvim-colorizer") },
 	{
 		"lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
 		config = conf("indent-blankline"),
 		dependencies = { "nvim-treesitter/nvim-treesitter", colorscheme },
 	},

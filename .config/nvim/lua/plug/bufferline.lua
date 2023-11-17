@@ -2,6 +2,7 @@ require("bufferline").setup({
 	options = {
 		right_mouse_command = nil,
 		max_name_length = 40,
+    buffer_close_icon = '',
 	},
 })
 
