@@ -67,7 +67,7 @@ require("lazy").setup({
 	{ "williamboman/mason-lspconfig.nvim" },
 	-- { "ray-x/lsp_signature.nvim" },
 	{ "glepnir/lspsaga.nvim", dependencies = { "nvim-treesitter/nvim-treesitter" } },
-	{ "jose-elias-alvarez/null-ls.nvim" },
+	{ "nvimtools/none-ls.nvim" },
 	{ "simrat39/symbols-outline.nvim" },
 	{ "weilbith/nvim-code-action-menu" },
 	{ "folke/neodev.nvim" },
