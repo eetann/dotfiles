@@ -30,7 +30,6 @@
     "workbench.colorTheme": "Solarized Dark",
     "editor.fontFamily": "HackGen Console NF,Consolas, 'Courier New', monospace",
     "editor.fontLigatures": false,
-    "terminal.integrated.cwd": "//wsl$/Ubuntu/home/eetann",
     "terminal.integrated.profiles.linux": {
         "bash": {
             "path": "bash",
@@ -50,5 +49,8 @@
             "path": "pwsh",
             "icon": "terminal-powershell"
         }
-    }
+    },
+    "security.allowedUNCHosts": [
+        "wsl.localhost"
+    ]
 }
