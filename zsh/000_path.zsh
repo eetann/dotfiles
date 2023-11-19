@@ -31,7 +31,7 @@ typeset -U path PATH
 if [[ "$(uname -r)" == *microsoft* ]]; then
   LOCAL_IP=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}')
   export DISPLAY=$LOCAL_IP:0.0
-  export PATH=$PATH:/mnt/c/Windows/System32:/mnt/c/Windows/System32/WindowsPowerShell/v1.0
+  export PATH=$PATH:/mnt/c/Windows/System32
 fi
 
 snap_bin_path="/snap/bin"
