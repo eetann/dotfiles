@@ -1,7 +1,7 @@
 gui:
   language: 'en'
   timeFormat: '2006-01-02 15:04' # https://pkg.go.dev/time#Time.Format
-  showIcons: true
+  nerdFontsVersion: "3"
 os:
   Edit: 'nvim'
 customCommands:
