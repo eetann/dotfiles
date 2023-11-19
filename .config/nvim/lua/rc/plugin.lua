@@ -43,7 +43,8 @@ require("lazy").setup({
     config = conf("treesitter"),
     dependencies = { colorscheme },
   },
-  { "nvim-treesitter/nvim-treesitter-context", dependencies = { "nvim-treesitter/nvim-treesitter" } },
+  -- https://github.com/nvim-treesitter/nvim-treesitter-context/issues/367
+  { "nvim-treesitter/nvim-treesitter-context", dependencies = { "nvim-treesitter/nvim-treesitter" }, commit = "c03f8aab1e6649036d69ba7e3af4d09cb7e4d977" },
   { "nvim-tree/nvim-web-devicons" },
   { "neovim/tree-sitter-vimdoc" },
   {
@@ -103,12 +104,12 @@ require("lazy").setup({
   },
 
   { "lambdalisue/vim-quickrun-neovim-job" },
-  { "thinca/vim-quickrun",                         config = conf("vim-quickrun") },
+  { "thinca/vim-quickrun",                        config = conf("vim-quickrun") },
 
-  { "nvim-lualine/lualine.nvim",                   config = conf("lualine"),                            dependencies = { "folke/noice.nvim" } },
-  { "b0o/incline.nvim",                            config = conf("incline") },
+  { "nvim-lualine/lualine.nvim",                  config = conf("lualine"),     dependencies = { "folke/noice.nvim" } },
+  { "b0o/incline.nvim",                           config = conf("incline") },
 
-  { "JoosepAlviste/nvim-ts-context-commentstring", dependencies = { "nvim-treesitter/nvim-treesitter" } },
+  { "JoosepAlviste/nvim-ts-context-commentstring" },
   {
     "numToStr/Comment.nvim",
     dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
