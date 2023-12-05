@@ -138,3 +138,15 @@ dconf-editor の
 参考
 [gnome - How to disable global Super-p shortcut? - Ask Ubuntu](https://askubuntu.com/questions/68463/how-to-disable-global-super-p-shortcut)
 
+## ターミナルでコピペする時に謎文字列"^[[200~"が挿入されちゃう問題
+```sh
+nvim ~/.inputrc
+```
+
+```
+set enable-bracketed-paste Off
+```
+
+```sh
+source ~/.inputrc
+```
