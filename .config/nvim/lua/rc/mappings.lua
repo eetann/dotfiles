@@ -1,35 +1,35 @@
 vim.g.mapleader = " "
 
 vim.keymap.set("n", "j", function()
-	if vim.v.count == 0 then
-		return "gj"
-	else
-		return "j"
-	end
+  if vim.v.count == 0 then
+    return "gj"
+  else
+    return "j"
+  end
 end, { expr = true })
 
 vim.keymap.set("n", "k", function()
-	if vim.v.count == 0 then
-		return "gk"
-	else
-		return "k"
-	end
+  if vim.v.count == 0 then
+    return "gk"
+  else
+    return "k"
+  end
 end, { expr = true })
 
 vim.keymap.set("x", "j", function()
-	if vim.v.count == 0 and vim.fn.mode(0) == "v" then
-		return "gj"
-	else
-		return "j"
-	end
+  if vim.v.count == 0 and vim.fn.mode(0) == "v" then
+    return "gj"
+  else
+    return "j"
+  end
 end, { expr = true })
 
 vim.keymap.set("x", "k", function()
-	if vim.v.count == 0 and vim.fn.mode(0) == "v" then
-		return "gk"
-	else
-		return "k"
-	end
+  if vim.v.count == 0 and vim.fn.mode(0) == "v" then
+    return "gk"
+  else
+    return "k"
+  end
 end, { expr = true })
 
 -- 誤爆防止
@@ -74,45 +74,51 @@ vim.keymap.set("n", "Y", "mz0vg$y`z:delmarks z<CR>", { desc = "現在行を改�
 vim.keymap.set("x", "gy", "y`>", { desc = "選択範囲をヤンクしたら選択範囲の末尾へ移動" })
 -- TODO: もっと賢そうな書き方あるかも
 vim.keymap.set(
-	"x",
-	"p",
-	[['pgv"'.v:register.'ygv<esc>']],
-	{ expr = true, desc = "VisualModeで置換対象ペースト時のヤンク入れ替えを防ぐ" }
+  "x",
+  "p",
+  [['pgv"'.v:register.'ygv<esc>']],
+  { expr = true, desc = "VisualModeで置換対象ペースト時のヤンク入れ替えを防ぐ" }
 )
 vim.keymap.set("n", "sgv", "`[v`]", { desc = "ペーストした範囲をvisualModeで選択" })
 vim.keymap.set(
-	"n",
-	"sP",
-	"mz:put!<CR>`[v`]=`zdmz",
-	{ desc = "上の行に貼り付けてカーソル位置はそのまま" }
+  "n",
+  "sP",
+  "mz:put!<CR>`[v`]=`zdmz",
+  { desc = "上の行に貼り付けてカーソル位置はそのまま" }
 )
 vim.keymap.set(
-	"n",
-	"sp",
-	"mz:put<CR>`[v`]=`zdmz",
-	{ desc = "下の行に貼り付けてカーソル位置はそのまま" }
+  "n",
+  "sp",
+  "mz:put<CR>`[v`]=`zdmz",
+  { desc = "下の行に貼り付けてカーソル位置はそのまま" }
 )
 vim.keymap.set(
-	"n",
-	"sgP",
-	"<Cmd>put!<CR>`[v`]=`<^",
-	{ desc = "下の行に貼り付けたら貼り付けの末尾へ" }
+  "n",
+  "sgP",
+  "<Cmd>put!<CR>`[v`]=`<^",
+  { desc = "下の行に貼り付けたら貼り付けの末尾へ" }
 )
 vim.keymap.set(
-	"n",
-	"sgp",
-	"<Cmd>put<CR>`[v`]=`>$",
-	{ desc = "上の行へ貼り付けたら貼り付けの先頭(インデントじゃない)へ" }
+  "n",
+  "sgp",
+  "<Cmd>put<CR>`[v`]=`>$",
+  { desc = "上の行へ貼り付けたら貼り付けの先頭(インデントじゃない)へ" }
 )
 vim.keymap.set("n", "sy", "<Cmd>%y<CR>", { desc = "全選択してyank" })
 vim.keymap.set(
-	"n",
-	"sgf",
-	"<Cmd>let @+=expand('%')<CR>:echo 'Clipboard << ' . @+<CR>",
-	{ desc = "現在のファイル名をyank" }
+  "n",
+  "sgf",
+  "<Cmd>let @+=expand('%:t:r')<CR>:echo 'Clipboard << ' . @+<CR>",
+  { desc = "現在のファイル名をyank" }
+)
+vim.keymap.set(
+  "n",
+  "sgF",
+  "<Cmd>let @+=expand('%')<CR>:echo 'Clipboard << ' . @+<CR>",
+  { desc = "現在のファイル名をyank" }
 )
 vim.keymap.set("n", "sge", function()
-	vim.cmd([[
+  vim.cmd([[
       let s:echo_hist = histget('cmd', -1)
       if s:echo_hist =~ '^echo '
           let @z = substitute(s:echo_hist, '^echo\s','echomsg ', '')
@@ -120,15 +126,15 @@ vim.keymap.set("n", "sge", function()
           let @+ = execute('1messages')
       endif
     ]])
-	vim.cmd([[echo 'Clipboard << ' . @+]])
+  vim.cmd([[echo 'Clipboard << ' . @+]])
 end, {
-	desc = "直前のechoをyank",
+  desc = "直前のechoをyank",
 })
 vim.keymap.set(
-	"n",
-	"sg/",
-	"<Cmd>let @+ = histget('search',-1)<CR>:echo 'Clipboard << ' . @+<CR>",
-	{ desc = "直前の検索をヤンク" }
+  "n",
+  "sg/",
+  "<Cmd>let @+ = histget('search',-1)<CR>:echo 'Clipboard << ' . @+<CR>",
+  { desc = "直前の検索をヤンク" }
 )
 vim.keymap.set("n", "/", [[/\v]], { desc = "検索でエスケープ減らすために very magic" })
 
@@ -152,7 +158,7 @@ vim.keymap.set("n", "s/", "q/")
 vim.keymap.set("n", "<ESC><ESC>", "<Cmd>set nohlsearch! hlsearch?<CR>", { silent = true })
 
 local function register_digraph(key_pair, char)
-	vim.cmd(("digraphs %s %s"):format(key_pair, vim.fn.char2nr(char, nil)))
+  vim.cmd(("digraphs %s %s"):format(key_pair, vim.fn.char2nr(char, nil)))
 end
 
 -- digraph f<C-k>xxで対応文字に飛べる
