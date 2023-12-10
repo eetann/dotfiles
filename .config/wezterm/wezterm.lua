@@ -39,6 +39,7 @@ elseif target:find("linux") then
   }
   append_array(key_table, linux_key_table)
 else
+  config.default_domain = 'WSL:Ubuntu' -- wsl -l -v
   local wsl_key_table = {
     { key = "v", mods = "CTRL|SHIFT", action = act.PasteFrom 'Clipboard' },
   }
