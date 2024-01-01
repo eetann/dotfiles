@@ -144,6 +144,7 @@ nvim ~/.inputrc
 ```
 
 ```
+"\e[200~":
 set enable-bracketed-paste Off
 ```
 
