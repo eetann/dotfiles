@@ -45,8 +45,8 @@ Conversion	Ctrl Shift Space	InsertFullSpace
 Precomposition	Ctrl Shift Space	InsertFullSpace
 Composition	Ctrl Space	InsertHalfSpace
 Conversion	Ctrl Space	InsertHalfSpace
-Composition	Ctrl t	SegmentWidthExpand
-Conversion	Ctrl t	SegmentWidthExpand
+Composition	Ctrl y	SegmentWidthExpand
+Conversion	Ctrl y	SegmentWidthExpand
 Composition	Ctrl u	Cancel
 Conversion	Ctrl u	Cancel
 Composition	Ctrl Up	MoveCursorToBeginning
@@ -117,6 +117,14 @@ Conversion	Muhenkan	IMEOff
 DirectInput	Henkan	IMEOn
 Precomposition	Henkan	IMEOn
 DirectInput	F13	IMEOn
+Composition	F7	ConvertToFullKatakana
+Conversion	F7	ConvertToFullKatakana
+Suggestion	F7	ConvertToFullKatakana
+Prediction	F7	ConvertToFullKatakana
+Composition	F8	ConvertToHalfKatakana
+Conversion	F8	ConvertToHalfKatakana
+Suggestion	F8	ConvertToHalfKatakana
+Prediction	F8	ConvertToHalfKatakana
 Composition	ASCII	InsertCharacter
 Composition	Kanji	IMEOff
 Composition	OFF	IMEOff
