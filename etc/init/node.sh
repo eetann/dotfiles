@@ -12,7 +12,7 @@ fi
 . "$DOTPATH"/etc/scripts/header.sh
 
 # check `npm ls -g`
-PKG_DEFAULT="textlint textlint-rule-preset-ja-technical-writing"
+PKG_DEFAULT="textlint textlint-rule-preset-ja-technical-writing eslint_d"
 
 all_env() {
 	log "Installing packages ..."
