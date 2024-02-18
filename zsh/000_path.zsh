@@ -4,8 +4,7 @@ if [[ -z "$TMUX" && -z "$VIM" && $- == *l* ]] ; then
   export GOPATH=$HOME/go
   export PATH=$PATH:$GOPATH:$GOPATH/bin
   export PATH=$HOME/.local/bin:$PATH
-  export VOLTA_HOME=$HOME/.volta
-  export PATH=$PATH:$VOLTA_HOME/bin:$HOME/.cargo/bin
+  export PATH=$PATH:$HOME/.cargo/bin
 
   # get the IDs
   ID="`tmux list-sessions`"

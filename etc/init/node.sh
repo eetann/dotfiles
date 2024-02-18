@@ -14,17 +14,30 @@ fi
 # check `npm ls -g`
 PKG_DEFAULT="textlint textlint-rule-preset-ja-technical-writing eslint_d"
 
-all_env() {
-	log "Installing packages ..."
-
-	curl https://get.volta.sh | bash
-	export VOLTA_HOME=$HOME/.volta
-	export PATH=$PATH:$VOLTA_HOME/bin
-	volta install node
-	npm install -g $PKG_DEFAULT
-	info "Installed packages."
+ubuntu() {
+	# https://nodejs.org/en/download/package-manager
+	curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash - && \ sudo apt-get install -y nodejs
+}
+archlinux() {
+	sudo pacman -S nodejs npm
+}
+darwin() {
+	brew install node
 }
 
-all_env
+log "Installing packages ..."
+case $(detect_os) in
+ubuntu)
+	ubuntu
+	;;
+archlinux)
+	archlinux
+	;;
+darwin)
+	darwin
+	;;
+esac
+npm install -g $PKG_DEFAULT
+info "Installed packages."
 
 echo ""
