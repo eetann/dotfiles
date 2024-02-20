@@ -31,15 +31,6 @@ yes | sudo sed -i -e 's%http://.*.ubuntu.com%http://ftp.jaist.ac.jp/pub/Linux%g'
 wsl --shutdown
 ```
 
-WSLではクリップボードの設定をする。
-
-```bash
-wget https://github.com/equalsraf/win32yank/releases/download/v0.1.1/win32yank-x64.zip
-sudo apt install unzip
-unzip win32yank-x64.zip
-mv win32yank.exe ~/.local/bin
-```
-
 <details>
 <summary>Q. `tee`とは?</summary>
 標準入力で受け取った内容をファイルに出力するコマンド。
@@ -137,17 +128,3 @@ dconf-editor の
 
 参考
 [gnome - How to disable global Super-p shortcut? - Ask Ubuntu](https://askubuntu.com/questions/68463/how-to-disable-global-super-p-shortcut)
-
-## ターミナルでコピペする時に謎文字列"^[[200~"が挿入されちゃう問題
-```sh
-nvim ~/.inputrc
-```
-
-```
-"\e[200~":
-set enable-bracketed-paste Off
-```
-
-```sh
-source ~/.inputrc
-```
