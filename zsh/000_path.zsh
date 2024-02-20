@@ -26,13 +26,6 @@ fi
 # =では空白入れないこと!!!
 # pathなどの設定--------------------------------------------------
 typeset -U path PATH
-# WSL用
-if [[ "$(uname -r)" == *microsoft* ]]; then
-  LOCAL_IP=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}')
-  export DISPLAY=$LOCAL_IP:0.0
-  export PATH=$PATH:/mnt/c/Windows/System32
-fi
-
 snap_bin_path="/snap/bin"
 if [ -n "${PATH##*${snap_bin_path}}" -a -n "${PATH##*${snap_bin_path}:*}" ]; then
   export PATH=$PATH:${snap_bin_path}
