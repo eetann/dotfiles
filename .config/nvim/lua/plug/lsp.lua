@@ -110,6 +110,13 @@ mason_lspconfig.setup_handlers({
       opts.root_dir = root_dir
       opts.autostart = detected_root_dir(root_dir)
       opts.init_options = { lint = true, unstable = true }
+    elseif server_name == "bashls" then
+      opts.settings = {
+        bashIde = {
+          globPattern = "*@(.sh|.inc|.bash|.command|.envrc)"
+        }
+      }
+      opts.init_options = { lint = true, unstable = true }
     elseif server_name == "sumneko_lua" then
       opts.on_attach = on_attach_disable_format
       opts.settings = {
@@ -166,14 +173,6 @@ local prettier_condition = function(utils)
 end
 
 local sources = {
-  null_ls.builtins.code_actions.eslint_d.with({
-    condition = eslint_condition,
-    extra_filetypes = { "json5", "astro" },
-  }),
-  null_ls.builtins.diagnostics.eslint_d.with({
-    condition = eslint_condition,
-    extra_filetypes = { "json5", "astro" },
-  }),
   null_ls.builtins.formatting.prettier.with({
     condition = prettier_condition,
     extra_filetypes = { "json5", "astro" },
@@ -200,16 +199,11 @@ local sources = {
       return is_mdn and vim.fn.expand("~/ghq/github.com/mozilla-japan/translation/MDN/textlint")
     end,
   }),
-  null_ls.builtins.diagnostics.shellcheck.with({
-    condition = function()
-      ---@diagnostic disable-next-line: missing-parameter
-      return vim.fn.expand("%:t") ~= ".envrc"
-    end,
-  }),
-  null_ls.builtins.code_actions.shellcheck,
   null_ls.builtins.formatting.shfmt,
   null_ls.builtins.formatting.stylua,
 }
+require("null-ls").register(require("none-ls-shellcheck.diagnostics"))
+require("null-ls").register(require("none-ls-shellcheck.code_actions"))
 null_ls.setup({
   sources = sources,
   diagnostics_format = "#{m} (#{s}: #{c})",
