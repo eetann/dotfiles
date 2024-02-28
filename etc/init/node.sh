@@ -12,7 +12,7 @@ fi
 . "$DOTPATH"/etc/scripts/header.sh
 
 # check `npm ls -g`
-PKG_DEFAULT="textlint textlint-rule-preset-ja-technical-writing eslint_d"
+PKG_DEFAULT="textlint textlint-rule-preset-ja-technical-writing textlint-filter-rule-comments textlint-filter-rule-allowlist textlint-rule-prh"
 
 ubuntu() {
 	# https://nodejs.org/en/download/package-manager
@@ -37,7 +37,8 @@ darwin)
 	darwin
 	;;
 esac
-npm install -g $PKG_DEFAULT
+pnpm setup
+pnpm add -g $PKG_DEFAULT
 info "Installed packages."
 
 echo ""

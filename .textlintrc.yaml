@@ -1,17 +1,24 @@
+plugins:
+  "@textlint/markdown":
+    extensions:
+    - ".mdx"
 filters:
+  # NEED: textlint-filter-rule-comments
   # <!-- textlint-disable -->
   # <!-- textlint-enable -->
   comments: true
+  # NEED: textlint-filter-rule-allowlist
   allowlist:
     allow:
     # シンタックスハイライト [text],[/text]に囲まれた部分をスキップ
     # Tree 表示の `^.$`は文末だと判断されてしまうため、`^./$`に書き換える。
-    - /^\[.+\]$[^]*?^\[\/.+\]$/m
+    # - /^\[.+\]$[^]*?^\[\/.+\]$/m
     - 分報
     - おすすめ
     - 参考
     - アイスブレイク
 rules:
+  # NEED: textlint-rule-preset-ja-technical-writing
   preset-ja-technical-writing:
     max-kanji-continuous-len:
       allow:
@@ -43,4 +50,4 @@ rules:
   preset-jtf-style: true
   prh: 
     rulePaths: 
-      - ./prh.yaml
+      - ~/dotfiles/etc/textlint/prh.yaml
