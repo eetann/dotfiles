@@ -1,5 +1,6 @@
 vim.g.tex_flavor = "latex"
 local group_name = "my_nvim_rc"
+
 vim.filetype.add({
 	extension = {
 		mdx = "mdx",
@@ -67,9 +68,8 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 	group = group_name,
 	pattern = { "mdx" },
 	callback = function()
-		vim.cmd([[
-    setlocal commentstring=<!--\ %s\ -->
-    ]])
+		vim.bo.commentstring = [[{/* %s */}]]
+		vim.opt_local.wrap = true
 	end,
 })
 
