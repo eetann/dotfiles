@@ -66,6 +66,14 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
 	group = group_name,
+	pattern = { "json5" },
+	callback = function()
+		vim.bo.commentstring = [[// %s]]
+	end,
+})
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	group = group_name,
 	pattern = { "mdx" },
 	callback = function()
 		vim.bo.commentstring = [[{/* %s */}]]
