@@ -143,9 +143,14 @@ EOF
   selected=$(eval $FZF_CTRL_T_COMMAND | eval $fzf_command)
   # ファイルを選択した場合のみバッファを更新
   if [[ -n "$selected" ]]; then
-    # 改行をスペースに置換
-    selected=$(tr '\n' ' ' <<< "$selected")
-    BUFFER="${prebuffer} ${selected}"
+    # 改行で区切った配列へ 変数展開フラグfを使う
+    select_arr=(${(f)selected})
+    escaped=""
+    for val in $select_arr; do
+      escaped+=" "
+      escaped+=$(printf "%q" "$val")
+    done
+    BUFFER="${prebuffer}${escaped}"
   fi
   # カーソル位置を行末にして更新
   CURSOR=$#BUFFER
