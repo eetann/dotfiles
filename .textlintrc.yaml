@@ -1,7 +1,7 @@
 plugins:
   "@textlint/markdown":
     extensions:
-    - ".mdx"
+      - ".mdx"
 filters:
   # NEED: textlint-filter-rule-comments
   # <!-- textlint-disable -->
@@ -10,15 +10,15 @@ filters:
   # NEED: textlint-filter-rule-allowlist
   allowlist:
     allow:
-    # シンタックスハイライト [text],[/text]に囲まれた部分をスキップ
-    # Tree 表示の `^.$`は文末だと判断されてしまうため、`^./$`に書き換える。
-    # - /^\[.+\]$[^]*?^\[\/.+\]$/m
-    - 分報
-    - おすすめ
-    - 参考
-    - アイスブレイク
-    # mdx用 {/* textlint-disable */} ～ {/* textlint-enable */}を無視
-    - /\{/\* textlint-disable \*/\}[^]*?\{/\* textlint-enable \*/\}/m
+      # シンタックスハイライト [text],[/text]に囲まれた部分をスキップ
+      # Tree 表示の `^.$`は文末だと判断されてしまうため、`^./$`に書き換える。
+      # - /^\[.+\]$[^]*?^\[\/.+\]$/m
+      - 分報
+      - おすすめ
+      - 参考
+      - アイスブレイク
+      # mdx用 {/* textlint-disable */} ～ {/* textlint-enable */}を無視
+      - /\{/\* textlint-disable \*/\}[^]*?\{/\* textlint-enable \*/\}/m
 rules:
   # NEED: textlint-rule-preset-ja-technical-writing
   preset-ja-technical-writing:
@@ -27,6 +27,9 @@ rules:
         - 倍精度浮動小数点数
         - 自己署名証明書
         - 証明書署名要求
+        - 第三者配信広告
+        - 広告配信事業者
+        - 引用許可範囲
     ja-no-successive-word:
       # オノマトペを許可する
       # 制限: オノマトペを判定する方法がないため、同じカタカナの語が連続したものをオノマトペとして扱う
@@ -50,6 +53,6 @@ rules:
         - "も"
         - "に"
   preset-jtf-style: true
-  prh: 
-    rulePaths: 
+  prh:
+    rulePaths:
       - ~/dotfiles/etc/textlint/prh.yaml
