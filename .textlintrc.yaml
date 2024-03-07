@@ -19,6 +19,8 @@ filters:
       - アイスブレイク
       # mdx用 {/* textlint-disable */} ～ {/* textlint-enable */}を無視
       - /\{/\* textlint-disable \*/\}[^]*?\{/\* textlint-enable \*/\}/m
+      # mdx用 {/* hoge */}を無視
+      - /\{/\*[^]*?\*/\}/
 rules:
   # NEED: textlint-rule-preset-ja-technical-writing
   preset-ja-technical-writing:
