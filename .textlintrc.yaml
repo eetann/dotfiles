@@ -1,7 +1,7 @@
 plugins:
-  "@textlint/markdown":
+  '@textlint/markdown':
     extensions:
-      - ".mdx"
+      - '.mdx'
 filters:
   # NEED: textlint-filter-rule-comments
   # <!-- textlint-disable -->
@@ -45,16 +45,17 @@ rules:
     ja-no-mixed-period:
       # 句点文字として許可する文字列の配列
       allowPeriodMarks:
-        - ":"
-        - "]"
-        - "："
+        - ':'
+        - ']'
+        - '：'
     ja-no-weak-phrase: false
     no-exclamation-question-mark: false
     no-doubled-joshi:
       allow:
-        - "も"
-        - "に"
-  preset-jtf-style: true
+        - 'も'
+        - 'に'
+  preset-jtf-style:
+    '4.3.7.山かっこ<>': false
   prh:
     rulePaths:
       - ~/dotfiles/etc/textlint/prh.yaml
