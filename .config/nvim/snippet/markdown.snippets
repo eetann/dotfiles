@@ -12,7 +12,7 @@ $1
 endsnippet
 
 snippet qimg "img for blog"
-![$1](~/assets/images/`v! expand("%:h")`/$2)$3
+![$1](~/assets/images/`!v expand('%:t:r')`/$2)$3
 endsnippet
 
 snippet qdis "textlint disable" m
@@ -21,4 +21,11 @@ snippet qdis "textlint disable" m
 $1
 
 {/* textlint-enable */}
+endsnippet
+
+snippet image "astro"
+<Image width="500"
+  src="~/assets/images/`!v expand('%:t:r')`/$1"
+  alt=""
+/>
 endsnippet
