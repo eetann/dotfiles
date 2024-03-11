@@ -1,4 +1,4 @@
-snippet img "img for blog"
+snippet image "img for blog"
 <!-- TODO:$1  -->
 ![画像](../images/$2)$3
 endsnippet
@@ -11,10 +11,6 @@ $1
 <!-- textlint-enable -->
 endsnippet
 
-snippet qimg "img for blog"
-![$1](~/assets/images/`!v expand('%:t:r')`/$2)$3
-endsnippet
-
 snippet qdis "textlint disable" m
 {/* textlint-disable */}
 
@@ -23,7 +19,7 @@ $1
 {/* textlint-enable */}
 endsnippet
 
-snippet image "astro"
+snippet img "astro"
 <Image width="500"
   src="~/assets/images/`!v expand('%:t:r')`/$1"
   alt=""

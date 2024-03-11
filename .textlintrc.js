@@ -30,6 +30,7 @@ module.exports = {
     "preset-ja-technical-writing": {
       "max-kanji-continuous-len": {
         "allow": [
+          "人類補完計画",
           "倍精度浮動小数点数",
           "自己署名証明書",
           "証明書署名要求",
