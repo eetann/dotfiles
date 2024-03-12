@@ -28,6 +28,12 @@ module.exports = {
   "rules": {
     // NEED: textlint-rule-preset-ja-technical-writing
     "preset-ja-technical-writing": {
+      "sentence-length": {
+        "skipPatterns": [
+          // mdx用 {/* hoge */}を無視
+          "/\\{/\\*[^]*?\\*/\\}/m"
+        ]
+      },
       "max-kanji-continuous-len": {
         "allow": [
           "人類補完計画",

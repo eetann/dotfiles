@@ -37,7 +37,14 @@ require("Comment").setup({
 		extra = true,
 	},
 	---Function to call before (un)comment
-	pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+	---@param ctx CommentCtx
+	---@return string|nil
+	pre_hook = function(ctx)
+		if vim.bo.filetype == "mdx" then
+			return "{/* %s */}"
+		end
+		return require("ts_context_commentstring.internal").calculate_commentstring()
+	end,
 	---Function to call after (un)comment
 	post_hook = nil,
 })
