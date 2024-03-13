@@ -197,7 +197,7 @@ require("lazy").setup({
 	{
 		"dhruvasagar/vim-table-mode",
 		lazy = true,
-		ft = { "markdown", "md", "mdwn", "mkd", "mkdn", "mark" },
+		ft = { "markdown", "md", "mdwn", "mkd", "mkdn", "mark", "mdx" },
 		config = conf("vim-table-mode"),
 	},
 

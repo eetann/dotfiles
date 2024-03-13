@@ -76,7 +76,8 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 	group = group_name,
 	pattern = { "mdx" },
 	callback = function()
-		vim.bo.commentstring = [[{/* %s */}]]
+		-- comment.luaで設定している
+		-- vim.bo.commentstring = [[{/* %s */}]]
 		vim.opt_local.wrap = true
 	end,
 })
