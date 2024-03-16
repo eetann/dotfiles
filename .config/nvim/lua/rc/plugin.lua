@@ -190,6 +190,7 @@ require("lazy").setup({
 			"javascriptreact",
 			"markdown",
 			"astro",
+			"mdx",
 		},
 		config = conf("emmet-vim"),
 	},

@@ -31,7 +31,8 @@ module.exports = {
       "sentence-length": {
         "skipPatterns": [
           // mdx用 {/* hoge */}を無視
-          "/\\{/\\*[^]*?\\*/\\}/m"
+          "/\\{/\\*[^]*?\\*/\\}/m",
+          "/import.*/",
         ]
       },
       "max-kanji-continuous-len": {
