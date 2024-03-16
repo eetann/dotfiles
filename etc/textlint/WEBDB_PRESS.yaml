@@ -260,13 +260,13 @@ rules:
     expected: ヵ所
   - pattern: 個所
     expected: 箇所
-  - pattern:
-      - いちから
-      - 1から
-      - 一から
-      - イチから
-      - 0から
-    expected: ゼロから
+  # - pattern:
+  #     - いちから
+  #     - 1から
+  #     - 一から
+  #     - イチから
+  #     - 0から
+  #   expected: ゼロから
   - pattern: 曖昧
     expected: あいまい
   - pattern: 敢えて
