@@ -2142,14 +2142,6 @@ rules:
     pattern:  /リポジトリー|レポジトリ|レポジトリー/
   - expected: ルータ
     pattern:  /ルーター/
-  - expected: レイヤ
-    pattern:  /(プ)?レイヤー/
-    regexpMustEmpty: $1
-    specs:
-      - from: レイヤー
-        to:   レイヤ
-      - from: プレイヤー
-        to:   プレイヤー
   - expected: レジスタ
     pattern:  /レジスター/
   - expected: レジストリ
@@ -2186,8 +2178,6 @@ rules:
     pattern:  /ディスクリプタ/
   - expected: 属性
     pattern:  /アトリビュート/
-  - expected: 要素
-    pattern:  /エレメント/
   - expected: アニメーター
     pattern:  /アニメータ(?!ー)/
   - expected: キャラクタ$1
