@@ -24,6 +24,14 @@ local surround = require("mini.surround")
 surround.setup({
 	custom_surroundings = {
 		["j"] = {
+			input = function()
+				local char = surround.user_input("enter for KAKKO: ")
+				local pair = jpKakkoTable[char]
+				if pair == nil then
+					error("j" .. char .. " is unsupported :(")
+				end
+				return { pair.left .. "().-()" .. pair.right }
+			end,
 			output = function()
 				local char = surround.user_input("enter for KAKKO: ")
 				local pair = jpKakkoTable[char]
@@ -32,6 +40,10 @@ surround.setup({
 				end
 				return pair
 			end,
+		},
+		["B"] = {
+			input = { "%*%*().-()%*%*" },
+			output = { left = "**", right = "**" },
 		},
 	},
 	mappings = {
