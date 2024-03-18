@@ -25,3 +25,11 @@ snippet img "astro"
   alt=""
 />
 endsnippet
+
+snippet video "astro"
+<Video width="800"
+  src="~/assets/images/`!v expand('%:t:r')`/$1"
+  alt=""
+  muted={true}
+/>
+endsnippet
