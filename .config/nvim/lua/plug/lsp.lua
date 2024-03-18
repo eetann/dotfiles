@@ -3,8 +3,51 @@ vim.fn.sign_define("DiagnosticSignWarn", { text = "", texthl = "DiagnosticSig
 vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl = "DiagnosticSignInfo" })
 vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticSignHint" })
 
-require("symbols-outline").setup()
-vim.keymap.set("n", "<Leader>o", "<Cmd>SymbolsOutline<CR>", { noremap = true })
+require("outline").setup({
+	providers = {
+		markdown = {
+			filetypes = { "markdown", "mdx" },
+		},
+	},
+	symbols = {
+		icons = {
+			File = { icon = "󰈔", hl = "Identifier" },
+			Module = { icon = "󰆧", hl = "Include" },
+			Namespace = { icon = "󰅪", hl = "Include" },
+			Package = { icon = "󰏗", hl = "Include" },
+			Class = { icon = "C", hl = "Type" },
+			Method = { icon = "ƒ", hl = "Function" },
+			Property = { icon = "", hl = "Identifier" },
+			Field = { icon = "󰆨", hl = "Identifier" },
+			Constructor = { icon = "", hl = "Special" },
+			Enum = { icon = "ℰ", hl = "Type" },
+			Interface = { icon = "󰜰", hl = "Type" },
+			Function = { icon = "", hl = "Function" },
+			Variable = { icon = "", hl = "Constant" },
+			Constant = { icon = "", hl = "Constant" },
+			String = { icon = "Aa", hl = "String" },
+			Number = { icon = "#", hl = "Number" },
+			Boolean = { icon = "⊨", hl = "Boolean" },
+			Array = { icon = "󰅪", hl = "Constant" },
+			Object = { icon = "⦿", hl = "Type" },
+			Key = { icon = "🔐", hl = "Type" },
+			Null = { icon = "NULL", hl = "Type" },
+			EnumMember = { icon = "", hl = "Identifier" },
+			Struct = { icon = "{}", hl = "Structure" },
+			Event = { icon = "E", hl = "Type" },
+			Operator = { icon = "+", hl = "Identifier" },
+			TypeParameter = { icon = "T", hl = "Identifier" },
+			Component = { icon = "󰅴", hl = "Function" },
+			Fragment = { icon = "󰅴", hl = "Constant" },
+			TypeAlias = { icon = " ", hl = "Type" },
+			Parameter = { icon = " ", hl = "Identifier" },
+			StaticMethod = { icon = " ", hl = "Function" },
+			Macro = { icon = " ", hl = "Function" },
+		},
+	},
+})
+
+vim.keymap.set("n", "<Leader>o", "<Cmd>Outline<CR>", { noremap = true })
 
 require("illuminate").configure({
 	modes_allowlist = { "n" },
