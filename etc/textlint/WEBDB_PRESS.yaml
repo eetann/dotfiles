@@ -1059,8 +1059,6 @@ rules:
     expected: $1および
   - pattern: した上
     expected: したうえ
-  - pattern: その上
-    expected: そのうえ
   - pattern: 始めとする
     expected: はじめとする
   - pattern: 始めとした
@@ -1751,8 +1749,6 @@ rules:
       - エンティティー
   - expected: エントリ
     pattern:  /エントリー/
-  - expected: オブザーバ
-    pattern:  /オブザーバー|オブサーバー|オブサーバ/
   - expected: オプション
     pattern:  /オブション/
   - expected: オン／オフ
@@ -1787,17 +1783,6 @@ rules:
     pattern:  /クォート|クオーテーション|クォーテーション/
   - expected: クオリティ
     pattern:  /クオリティー|クォリティ|クォリティー/
-  - expected: クライアント／サーバ
-    pattern:
-      - クライアント/サーバー
-      - クライアント/サーバ
-      - クライアント・サーバー
-      - クライアント・サーバ
-      - クライアントサーバー
-      - クライアントサーバ
-    specs:
-      - from: クライアント/サーバー
-        to:   クライアント／サーバ
   - expected: クラスタ
     pattern:  /クラスター/
   - expected: グラウンド
@@ -1834,8 +1819,6 @@ rules:
     pattern:  /コンポネント/
   - expected: コントローラ
     pattern:  /コントローラー/
-  - expected: サーバ
-    pattern:  /サーバー/
   - expected: サーブレット
     pattern:
       - Servlet
@@ -2168,8 +2151,6 @@ rules:
     pattern:  /\bDual Core CPU\b/
   - expected: デュアルコア
     pattern:  /\bDual Core\b|デュアルCore|Dualコア/
-  - expected: マスタ／スレーブ
-    pattern:  /マスタ・スレーブ|マスタスレーブ/
   - expected: バックアップ$1
     pattern:  /\bBackup\b([^.])/
   - expected: スレーブ$1
@@ -2211,12 +2192,6 @@ rules:
     pattern:  /プロデューサ([^ー])/
   - expected: プランナー$1
     pattern:  /プランナ([^ー])/
-  - expected: $1マスタ$2
-    pattern:  /(?:([^ム])マスター)|(?:マスター([^.]))/
-  - expected: $1マスタ$2
-    pattern:  /(?:([^ム])\bMaster)|(?:Master\b([^.]))/
-  - expected: $1マスタ$2
-    pattern:  /(?:([^ム])\bmaster)|(?:master\b([^.]))/
   - expected: マネージャー$1
     pattern:  /マネージャ([^ー])/
   - expected: メンテナー$1
@@ -2818,8 +2793,6 @@ rules:
     pattern:  /\bSocket.IO\b/i
   - expected: $1SourceForge
     pattern:  /([^/.])\bsourceforge\b/
-  - expected: Sorryサーバ
-    pattern:  /ソーリーサーバ/
   - expected: SPDY indicator
     pattern:  /\bSPDY indicator\b/i
   - expected: Spdycat

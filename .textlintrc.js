@@ -21,7 +21,8 @@ module.exports = {
         // mdx用 {/* textlint-disable */} ～ {/* textlint-enable */}を無視
         "/\\{/\\* textlint-disable \\*/\\}[^]*?\\{/\\* textlint-enable \\*/\\}/m",
         // mdx用 {/* hoge */}を無視
-        "/\\{/\\*[^]*?\\*/\\}/"
+        "/\\{/\\*[^]*?\\*/\\}/",
+        "/<Icon.*/"
       ]
     }
   },
@@ -59,6 +60,7 @@ module.exports = {
         ]
       },
       "ja-no-mixed-period": {
+        "allowEmojiAtEnd": true,
         // 句点文字として許可する文字列の配列
         "allowPeriodMarks": [
           ":",

@@ -15,9 +15,6 @@ imports:
       - expected: いきま
       - expected: $1Word
       - expected: やめ
-      - expected: サーバ
-      - expected: オブザーバ
-      - expected: クライアント／サーバ
       - expected: そのうえ
       - expected: 気付
       - expected: 近付
