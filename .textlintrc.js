@@ -54,6 +54,7 @@ module.exports = {
         // 許可する単語
         // RegExp-like Stringを使用可能
         "allow": [
+          "一つ",
           "〇",
           "…",
           "など"

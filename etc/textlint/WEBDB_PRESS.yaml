@@ -55,14 +55,14 @@ rules:
     expected: 思い付く
   - pattern:
       - 1つ1つ
-      - 一つひとつ
+      - 一つ一つ
       - ひとつひとつ
-    expected: 一つ一つ
+    expected: 一つひとつ
   - pattern:
-      - 一人ひとり
+      - 一人一人
       - ひとりひとり
       - 1人1人
-    expected: 一人一人
+    expected: 一人ひとり
   - pattern:
       - 一つめ
       - ひとつめ
@@ -698,22 +698,12 @@ rules:
     expected: ひとりよがり
   - pattern: 一塊
     expected: ひとかたまり
-  - pattern:
-      - 雛型
-      - 雛形
-      - ひな形
-      - ひながた
-    expected: ひな型
   - pattern: /閃([かきくけこい])/
     expected: ひらめ$1
   - pattern: ふだん
     expected: 普段
   - pattern: 相応し
     expected: ふさわし
-  - pattern:
-      - 付箋
-      - 付せん
-    expected: ふせん
   - pattern: 殆ど
     expected: ほとんど
   - pattern: 正に
@@ -1732,8 +1722,8 @@ rules:
     spec:
       - from: ハードウエア
         to:   ハードウェア
-  - expected: エディタ
-    pattern:  /エディター/
+  # - expected: エディタ
+  #   pattern:  /エディター/
   - expected: エミッタ
     pattern:  /エミッター/
   - expected: エンコーダ
@@ -1787,8 +1777,8 @@ rules:
     pattern:  /クラスター/
   - expected: グラウンド
     pattern:  /グランド/
-  - expected: グリッド
-    pattern:  /\bGrid\b/
+  # - expected: グリッド
+  #   pattern:  /\bGrid\b/
   - expected: クロージャ
     pattern:  /クロージャー/
   - expected: クローラ
@@ -2562,8 +2552,6 @@ rules:
     pattern:  /\bKyotoTycoon\b|Tokyo *Tycoon/
   - expected: LESS
     pattern:  /\bLESS\b/i
-  - expected: LINE
-    pattern:  /\bLINE\b/i
   - expected: LinkedIn
     pattern:  /\bLinked In\b/
   - expected: LL
