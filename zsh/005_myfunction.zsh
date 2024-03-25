@@ -10,7 +10,7 @@ abbreviations=(
   "W"    "| wc"
   "A"    "| awk"
   "S"    "| sed"
-  "E"    "2>&1 > /dev/null"
+  "E"    "/mnt/c/windows/explorer.exe ."
   "N"    "> /dev/null"
   "DC"   "docker-compose"
   "CD"   "&& cd \$_"
@@ -270,3 +270,17 @@ EOF
   local final_query=$(echo $result | awk 'NR==1')
   echo "$rg_prefix '$final_query'" | bat --color=always --language=sh --style=plain --theme=gruvbox-dark
 }
+
+if [[ "$(uname -r)" == *microsoft* ]]; then
+  function open() {
+    if [ $# != 1 ]; then
+      /mnt/c/windows/explorer.exe .
+    else
+      if [ -e $1 ]; then
+        /mnt/c/windows/explorer.exe $(wslpath -w $1)
+      else
+        echo "open: $1 : No such file or directory" 
+      fi
+    fi
+  }
+fi
