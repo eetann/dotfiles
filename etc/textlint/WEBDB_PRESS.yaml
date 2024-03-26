@@ -31,7 +31,7 @@ rules:
       - つけ加
       - つけくわ
     expected: 付け加
-  - pattern: つけた
+  - pattern: /[^見]つけた/
     expected: 付け足
   - pattern: 関連づけ
     expected: 関連付け
@@ -1680,13 +1680,6 @@ rules:
     pattern:  /アノーテーション/
   - expected: アプレット
     pattern:  /\bApplet\b/
-  - expected: アプリケーション
-    pattern: /アプリ(?!ケ)/
-    specs:
-      - from: アプリケーション
-        to:   アプリケーション
-      - from: アプリ
-        to:   アプリケーション
   - expected: アンダースコア
     pattern:  /アンダーバー/
   - expected: イシュア
@@ -2005,8 +1998,8 @@ rules:
     pattern:  /ファイアーウォール|ファイヤーウォール|ファイヤウォール|ファイヤーウオール/
   - expected: ファイバチャネル
     pattern:  /ファイバチャンネル|ファイバチャネル|ファイバーチャンネル/
-  - expected: フィルタ
-    pattern:  /フィルター/
+  # - expected: フィルタ
+  #   pattern:  /フィルター/
   - expected: フィクスチャ
     pattern:  /フィクスチャー/
   - expected: フェイルオーバー
