@@ -5,18 +5,3 @@ $1
 
 <!-- textlint-enable -->
 endsnippet
-
-snippet "img|qimg|image|Image" "astro" r
-<Image width="500"
-  src="~/assets/images/`!v expand('%:t:r')`/$1"
-  alt="$2"
-/>
-endsnippet
-
-snippet "video|qvideo|Video" "astro" r
-<Video width="800"
-  src="~/assets/images/`!v expand('%:t:r')`/$1"
-  alt="$2"
-  muted={true}
-/>
-endsnippet

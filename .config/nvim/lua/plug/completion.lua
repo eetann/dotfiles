@@ -8,6 +8,9 @@ end
 
 local cmp = require("cmp")
 local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
+require("cmp_nvim_ultisnips").setup({
+	filetype_source = "ultisnips_default",
+})
 
 -- gitcommitのprefix補完
 local git_source = {}

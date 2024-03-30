@@ -234,18 +234,18 @@ rules:
   - pattern: 3重
     expected: 三重
   - pattern: /([何数\\d一二三四五六七八九十０-９])箇所/
-    expected: $1ヵ所
+    expected: $1か所
   - pattern: /([何数\\d一二三四五六七八九十０-９])個所/
-    expected: $1ヵ所
+    expected: $1か所
   - pattern: ヶ
     expected: ヵ
   - pattern:
       - 箇月
-      - か月
+      - ヵ月
       - 個月
       - ケ月
       - カ月
-    expected: ヵ月
+    expected: か月
   - pattern:
       - 箇国
       - か国
@@ -2027,14 +2027,6 @@ rules:
     pattern:  /ペアプロ([^グ])/
   - expected: ベンダー
     pattern:  /ベンダ(?!ー)/
-  - expected: ヘッダ
-    pattern:  /ヘッダー|ヘッタ|ヘッター/
-  - expected: ベクタ
-    pattern:  /ベクター/
-  - expected: ページャ
-    pattern:  /ページャー/
-  - expected: ポインタ
-    pattern:  /ポインター/
   - expected: ポッドキャスト
     pattern:  /\bPodCast\b|\bpodcast\b|\bPodcast\b/
   - expected: ポリモフィズム
@@ -2959,8 +2951,6 @@ rules:
   - expected: て
     pattern:  /(当)?てて/
     regexpMustEmpty: $1
-  - expected: で
-    pattern:  /でで/
   - expected: $1の
     pattern:  /([^も])のの/
   - expected: は
