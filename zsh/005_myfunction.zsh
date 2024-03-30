@@ -284,3 +284,41 @@ if [[ "$(uname -r)" == *microsoft* ]]; then
     fi
   }
 fi
+
+function ftmux_resurrect() {
+  if [ -e "$HOME/.tmux/resurrect" ]; then
+    cd ~/.tmux/resurrect
+  elif [ -e "$HOME/.local/share/tmux/resurrect" ]; then
+    cd ~/.local/share/tmux/resurrect
+  else
+    echo "resurrect directory not found"
+    return 1
+  fi
+  local fzf_command="fzf"
+  if type fzf-tmux > /dev/null; then
+    fzf_command="fzf-tmux -p 80%"
+  fi
+  fzf_command+=" "
+  # previewコマンドを追加
+  fzf_command+=$(cat << "EOF"
+--preview '
+  ( (type bat > /dev/null) &&
+    bat --color=always \
+      --theme=gruvbox-dark \
+      --line-range :200 $(ghq root)/{}/README.* \
+    || (cat {} | head -200) ) 2> /dev/null
+' \
+--preview-window 'down,60%,wrap,+3/2,~3'
+EOF
+)
+
+  local res="$(find . -name 'tmux_resurrect_[0-9]*.txt' | sort -r | eval $fzf_command)"
+  if [ -n "$res" ]; then
+    BUFFER+="ln -sf $res last"
+    zle accept-line
+  else
+    return 1
+  fi
+}
+zle -N ftmux_resurrect
+bindkey '^xt' ftmux_resurrect
