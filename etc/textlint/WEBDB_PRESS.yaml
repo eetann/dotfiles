@@ -956,7 +956,7 @@ rules:
     expected: 言われる
   - pattern:
       - 未だ
-      - 今だ
+      - /今だ[^け]/
     expected: いまだ
   - pattern:
       - 今ひとつ
