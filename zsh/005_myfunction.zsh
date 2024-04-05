@@ -16,6 +16,7 @@ abbreviations=(
   "CD"   "&& cd \$_"
   "CL"   "| clip.exe"
   "TREE" "tree -a -I '.git|node_modules|dist' --charset unicode"
+  "BLOG" "npm run blog -slug="
 )
 
 function magic-abbrev-expand() {
@@ -322,3 +323,43 @@ EOF
 }
 zle -N ftmux_resurrect
 bindkey '^xt' ftmux_resurrect
+
+function fdir() {
+  local fzf_command="fzf"
+  if type fzf-tmux > /dev/null; then
+    fzf_command="fzf-tmux -p 80%"
+  fi
+  fzf_command+=" "
+  fzf_command+=$(cat << "EOF"
+--preview '
+  ( (type bat > /dev/null) &&
+    bat --color=always \
+      --theme=gruvbox-dark \
+      --line-range :200 $(ghq root)/{}/README.* \
+    || (cat {} | head -200) ) 2> /dev/null
+' \
+--preview-window 'down,60%,wrap,+3/2,~3'
+EOF
+)
+
+  local find_directory=$(cat <<"EOF"
+( (type fd > /dev/null) &&
+  fd --type d \
+    --strip-cwd-prefix \
+    --hidden \
+    --exclude '{.git,node_modules}/**' ) \
+  || $find_ignore d -print 2> /dev/null
+EOF
+)
+  local res=$(eval $find_directory | eval $fzf_command)
+  if [ -n "$res" ]; then
+    BUFFER+="$res"
+  else
+    return 1
+  fi
+  # カーソル位置を行末にして更新
+  CURSOR=$#BUFFER
+  zle reset-prompt
+}
+zle -N fdir
+bindkey '^xd' fdir
