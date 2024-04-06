@@ -13,6 +13,24 @@ vim.opt.sidescrolloff = 3
 
 -- コピペ関連-----------------------------------------------------
 vim.opt.clipboard = { "unnamedplus", "unnamed" }
+if vim.fn.has("wsl") == 1 then
+	vim.g.clipboard = {
+		name = "WslClipboard",
+		copy = {
+			["+"] = "xsel -bi",
+			["*"] = "xsel -bi",
+		},
+		paste = {
+			["+"] = function()
+				return vim.fn.systemlist('xsel -bo | cat | tr -d "\r"', { "" }, 1) -- '1' keeps empty lines
+			end,
+			["*"] = function()
+				return vim.fn.systemlist('xsel -bo | cat | tr -d "\r"', { "" }, 1) -- '1' keeps empty lines
+			end,
+		},
+		cache_enabled = 1,
+	}
+end
 
 -- タブ設定-------------------------------------------------------
 vim.opt.expandtab = true -- インデントはスペース
