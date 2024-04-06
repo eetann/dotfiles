@@ -162,6 +162,10 @@ zle -N my_fzf_completion
 bindkey "^k" my_fzf_completion
 
 function fzf_npm_scripts() {
+  local prefix="npm"
+  if [ -e pnpm-lock.yaml ]; then
+    prefix="pnpm"
+  fi
   if [ ! -e package.json ]; then
     echo 'fzf_npm_scripts'
     echo 'There is no package.json'
@@ -190,7 +194,7 @@ function fzf_npm_scripts() {
   fi
 
   # 再実行したくなるときのために履歴に残して実行
-  BUFFER="npm run $selected"
+  BUFFER="$prefix run $selected"
   zle accept-line
 }
 zle -N fzf_npm_scripts
