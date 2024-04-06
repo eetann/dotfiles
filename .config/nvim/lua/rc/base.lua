@@ -21,6 +21,7 @@ if vim.fn.has("wsl") == 1 then
 			["*"] = "xsel -bi",
 		},
 		paste = {
+			-- https://stackoverflow.com/questions/75548458/copy-into-system-clipboard-from-neovim
 			["+"] = function()
 				return vim.fn.systemlist('xsel -bo | cat | tr -d "\r"', { "" }, 1) -- '1' keeps empty lines
 			end,
