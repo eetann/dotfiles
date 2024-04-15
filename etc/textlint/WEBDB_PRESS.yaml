@@ -403,8 +403,6 @@ rules:
     expected: カタカナ
   - pattern: 且つ
     expected: かつ
-  - pattern: /叶([わいうえおっ])/
-    expected: かな$1
   - pattern: 仮名
     expected: かな
   - pattern: /構([いうわっ])/
