@@ -28,6 +28,7 @@ vk1D & r::Reload()
 
 ; ChangeKey
 ; CapsLock - > F13 （キー割当画面右上のScan Codeより"0x0064"を割り当てる）
+; Kanji - > F14 （キー割当画面右上のScan Codeより"0x0065"を割り当てる）
 ; CTRL_L -> WIN
 ; WIN -> CTRL_L
 

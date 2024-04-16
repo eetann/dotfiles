@@ -54,6 +54,11 @@ ubuntu() {
 	fi
 	brew bundle --file "$HOME/dotfiles/etc/init/Brewfile"
 
+	# wslu
+	sudo add-apt-repository ppa:wslutilities/wslu
+	sudo apt update
+	sudo apt install wslu
+
 	info "Installed packages."
 }
 

@@ -4,6 +4,9 @@ WSL2のUbuntuがメインですが、純Ubuntuでも動作するように少し�
 
 **TODO: このREADMEをもう少しシェルスクリプトに移す**
 
+# Windows
+[アプリ インストーラー - Microsoft Apps](https://apps.microsoft.com/detail/9nblggh4nns1?rtc=1&hl=ja-jp&gl=JP)
+
 # Installation
 ## Font
 1. download font
