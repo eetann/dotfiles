@@ -1653,7 +1653,7 @@ rules:
   - expected: WebSocket
     pattern:  /\bWeb Socket\b/
   - expected: $1Web$2
-    pattern:  /(?:([^/])ウェブ)|(?:ウェブ([^/\+]))/
+    pattern:  /(?:([^/])ウェブ(?!パネル))|(?:ウェブ(?!パネル)([^/\+]))/
   - expected: $1Web$2
     pattern:  /(?:([^/])ウェッブ)|(?:ウェッブ([^/\+]))/
   - expected: O/Rマッ
@@ -2867,9 +2867,8 @@ rules:
   - expected: WARファイル
     pattern:  /\bWARファイル\b/i
   - expected: Web
-  - expected: Web
     pattern:
-      - ウェブ
+      - /ウェブ(?!パネル)/
       - ウェッブ
   - expected: Web API
     pattern:  /\bWebAPI\b|\bWEBAPI\b|\bWEB API\b/
