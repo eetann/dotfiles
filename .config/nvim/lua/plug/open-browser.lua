@@ -12,6 +12,15 @@ vim.keymap.set(
 	{ noremap = true, silent = true, desc = "現在のファイルをGitHubで開く" }
 )
 
+local function openBlog()
+	local basename = vim.fn.expand("%:t:r")
+	vim.cmd("OpenBrowser " .. "http://localhost:4321/blog/" .. basename)
+end
+
+vim.api.nvim_create_user_command("OpenBlog", function()
+	openBlog()
+end, {})
+
 local function open_preview_mdn_web_docs(select_language)
 	local port = 5042
 	local language = nil
