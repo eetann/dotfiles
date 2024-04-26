@@ -1811,10 +1811,6 @@ rules:
       - サーブレット&JSP
   - expected: サンフランシスコ
     pattern:  /\bSan Francisco\b/
-  - expected: シェア
-    pattern:  /シェア率/
-  - expected: ジェスチャ
-    pattern:  /ジェスチャー/
   - expected: ジェネレータ
     pattern:  /ジェネレーター/
   - expected: ジェネレーティブ
@@ -1839,8 +1835,6 @@ rules:
     pattern:  /ストアード/
   - expected: ストレージ
     pattern:  /ストレッジ|ストレジ/
-  - expected: スマートフォン
-    pattern:  /スマフォ|スマホ/
   - expected: スムーズ
     pattern:  /スムース/
   - expected: セキュリティ
