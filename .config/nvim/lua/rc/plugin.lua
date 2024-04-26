@@ -115,6 +115,11 @@ require("lazy").setup({
 		},
 	},
 
+	{
+		"tyru/open-browser.vim",
+		config = conf("open-browser"),
+	},
+	{ "tyru/open-browser-github.vim", dependencies = { "tyru/open-browser.vim" } },
 	{ "lambdalisue/vim-quickrun-neovim-job" },
 	{ "thinca/vim-quickrun", config = conf("vim-quickrun") },
 
@@ -131,11 +136,6 @@ require("lazy").setup({
 		dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
 		config = conf("comment"),
 	},
-	{
-		"tyru/open-browser.vim",
-		config = conf("open-browser"),
-	},
-	{ "tyru/open-browser-github.vim", dependencies = { "tyru/open-browser.vim" } },
 
 	{
 		"mattn/vim-sonictemplate",
