@@ -732,8 +732,8 @@ rules:
     expected: む$1
   - pattern: 寧ろ
     expected: むしろ
-  - pattern: 滅多
-    expected: めった
+  # - pattern: 滅多
+  #   expected: めった
   - pattern:
       - めんどくさ
       - めんどうくさ

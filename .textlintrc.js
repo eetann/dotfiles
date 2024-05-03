@@ -14,6 +14,7 @@ module.exports = {
     // NEED: textlint-filter-rule-allowlist
     "allowlist": {
       "allow": [
+        "ってるよ。",
         "分報",
         "おすすめ",
         "参考",
@@ -65,7 +66,7 @@ module.exports = {
         "allowEmojiAtEnd": true,
         // 句点文字として許可する文字列の配列
         "allowPeriodMarks": [
-          ":",
+          "w",
           "]",
           "："
         ]
