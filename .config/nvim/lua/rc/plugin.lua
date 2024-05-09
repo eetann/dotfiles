@@ -69,6 +69,7 @@ require("lazy").setup({
 		dependencies = { "nvim-treesitter/nvim-treesitter", colorscheme },
 	},
 	{ "andymass/vim-matchup", dependencies = { "nvim-treesitter/nvim-treesitter" } }, -- %を拡張
+	{ "kevinhwang91/nvim-hlslens", config = conf("nvim-hlslens") },
 
 	-- .config/nvim/lua/plug/lsp.lua
 	{ "neovim/nvim-lspconfig", config = conf("lsp") },

@@ -138,18 +138,6 @@ vim.keymap.set(
 )
 vim.keymap.set("n", "/", [[/\v]], { desc = "検索でエスケープ減らすために very magic" })
 
-vim.cmd([[
-" cursor下の単語をハイライトと置換
-nnoremap * "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
-nnoremap # "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
-function! g:VSetSearch() abort
-    silent normal! "zy
-    let @/ = '\V' . substitute(escape(@z, '/\'), '\n', '\\n', 'g')
-endfunction
-xnoremap * <Cmd>call g:VSetSearch()<CR>mz/<C-r>/<CR>`zdmz
-xnoremap # <Cmd>call g:VSetSearch()<CR>/<C-r>/<CR>:%s/<C-r>///g<Left><Left>
-]])
-
 -- 履歴をバッファとして開くやつ
 vim.keymap.set("n", "s:", "q:")
 vim.keymap.set("n", "s?", "q?")
