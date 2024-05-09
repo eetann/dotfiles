@@ -63,10 +63,11 @@ require("lazy").setup({
 	},
 	{ "norcalli/nvim-colorizer.lua", config = conf("nvim-colorizer") },
 	{
-		"lukas-reineke/indent-blankline.nvim",
-		main = "ibl",
-		config = conf("indent-blankline"),
-		dependencies = { "nvim-treesitter/nvim-treesitter", colorscheme },
+		"shellRaining/hlchunk.nvim",
+		event = { "UIEnter" },
+		config = function()
+			require("hlchunk").setup({})
+		end,
 	},
 	{ "andymass/vim-matchup", dependencies = { "nvim-treesitter/nvim-treesitter" } }, -- %を拡張
 	{ "kevinhwang91/nvim-hlslens", config = conf("nvim-hlslens") },
