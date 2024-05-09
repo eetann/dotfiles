@@ -119,6 +119,9 @@ local on_attach = function(client, bufnr)
 				vim.lsp.buf.format({ timeout_ms = 2000 })
 			end,
 		})
+		vim.api.nvim_create_user_command("Format", function()
+			vim.lsp.buf.format({ timeout_ms = 2000 })
+		end, {})
 	end
 end
 
@@ -129,6 +132,19 @@ end
 
 require("mason").setup()
 local nvim_lsp = require("lspconfig")
+nvim_lsp.biome.setup({
+	capabilities = require("cmp_nvim_lsp").default_capabilities(),
+	on_attach = on_attach,
+	cmd = { "biome", "lsp-proxy" },
+	on_new_config = function(new_config)
+		local pnpm = nvim_lsp.util.root_pattern("pnpm-lock.yml", "pnpm-lock.yaml")(vim.api.nvim_buf_get_name(0))
+		local cmd = { "npm", "biome", "lsp-proxy" }
+		if pnpm then
+			cmd = { "pnpm", "biome", "lsp-proxy" }
+		end
+		new_config.cmd = cmd
+	end,
+})
 
 local function detected_root_dir(root_dir)
 	return not not (root_dir(vim.api.nvim_buf_get_name(0), vim.api.nvim_get_current_buf()))
@@ -244,6 +260,7 @@ local sources = {
 	}),
 	null_ls.builtins.formatting.shfmt,
 	null_ls.builtins.formatting.stylua,
+	null_ls.builtins.formatting.biome,
 }
 require("null-ls").register(require("none-ls-shellcheck.diagnostics"))
 require("null-ls").register(require("none-ls-shellcheck.code_actions"))
