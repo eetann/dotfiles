@@ -59,9 +59,11 @@ end
 function telescope_custom_actions.multi_selection_open_vsplit(prompt_bufnr)
 	telescope_custom_actions._multiopen(prompt_bufnr, "vsplit")
 end
+
 function telescope_custom_actions.multi_selection_open_split(prompt_bufnr)
 	telescope_custom_actions._multiopen(prompt_bufnr, "split")
 end
+
 function telescope_custom_actions.multi_selection_open(prompt_bufnr)
 	telescope_custom_actions._multiopen(prompt_bufnr, "edit")
 end
@@ -88,7 +90,9 @@ telescope.setup({
 		layout_config = {
 			prompt_position = "top",
 			width = 0.95,
-			preview_width = 0.5,
+			horizontal = {
+				preview_width = 0.5,
+			},
 		},
 		file_ignore_patterns = {
 			"git/",
