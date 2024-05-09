@@ -1,3 +1,28 @@
+vim.diagnostic.config({
+	update_in_insert = false,
+	severity_sort = true,
+	virtual_text = {
+		prefix = "●",
+		format = function(diagnostic)
+			return string.format("%s (%s: %s)", diagnostic.message, diagnostic.source, diagnostic.code)
+		end,
+	},
+	-- NOTE: 未対応のプラグインがあるため
+	-- signs = {
+	-- 	text = {
+	-- 		[vim.diagnostic.severity.ERROR] = "",
+	-- 		[vim.diagnostic.severity.WARN] = "",
+	-- 		[vim.diagnostic.severity.INFO] = "",
+	-- 		[vim.diagnostic.severity.HINT] = "",
+	-- 	},
+	-- 	numhl = {
+	-- 		[vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+	-- 		[vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+	-- 		[vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+	-- 		[vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+	-- 	},
+	-- },
+})
 vim.fn.sign_define("DiagnosticSignError", { text = "", texthl = "DiagnosticSignError" })
 vim.fn.sign_define("DiagnosticSignWarn", { text = "", texthl = "DiagnosticSignWarn" })
 vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl = "DiagnosticSignInfo" })
@@ -77,7 +102,7 @@ saga.setup({
 		close = "<Esc>",
 	},
 	lightbulb = {
-		enable_in_insert = false,
+		enable = false,
 	},
 	diagnostic = {
 		jump_num_shortcut = false,
@@ -86,6 +111,22 @@ saga.setup({
 			quit = "q",
 			toggle_or_jump = "<CR>",
 			quit_in_show = { "q", "<Esc>" },
+		},
+	},
+})
+
+require("actions-preview").setup({
+	telescope = {
+		sorting_strategy = "ascending",
+		layout_strategy = "vertical",
+		layout_config = {
+			width = 0.8,
+			height = 0.9,
+			prompt_position = "top",
+			preview_cutoff = 20,
+			preview_height = function(_, _, max_lines)
+				return max_lines - 15
+			end,
 		},
 	},
 })
@@ -105,7 +146,7 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set("n", "gf", "<cmd>Lspsaga lsp_finder<CR>", bufopts)
 	vim.keymap.set("n", "gh", "<cmd>Lspsaga hover_doc<CR>", bufopts)
 	vim.keymap.set("n", "<leader>cr", "<cmd>Lspsaga rename<CR>", bufopts)
-	vim.keymap.set("n", "<space>ca", "<cmd>CodeActionMenu<CR>", bufopts)
+	vim.keymap.set({ "n", "v" }, "<space>ca", require("actions-preview").code_actions, bufopts)
 	vim.keymap.set("n", "<leader>cd", "<cmd>Lspsaga show_line_diagnostics<CR>", bufopts)
 	vim.keymap.set("n", "<leader>cc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", bufopts)
 	vim.keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", bufopts)
@@ -193,15 +234,6 @@ mason_lspconfig.setup_handlers({
 
 		nvim_lsp[server_name].setup(opts)
 	end,
-})
-
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-	update_in_insert = false,
-	virtual_text = {
-		format = function(diagnostic)
-			return string.format("%s (%s: %s)", diagnostic.message, diagnostic.source, diagnostic.code)
-		end,
-	},
 })
 
 local null_ls = require("null-ls")
