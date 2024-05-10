@@ -16,7 +16,7 @@ abbreviations=(
   "CD"   "&& cd \$_"
   "CL"   "| clip.exe"
   "TREE" "tree -a -I '.git|node_modules|dist' --charset unicode"
-  "BLOG" "npm run blog -slug="
+  "BLOG" "node bin/new.mjs --slug "
 )
 
 function magic-abbrev-expand() {
@@ -333,13 +333,27 @@ function fdir() {
   if type fzf-tmux > /dev/null; then
     fzf_command="fzf-tmux -p 80%"
   fi
+
+  local ary=(`echo $LBUFFER`)
+  local query
+  local prebuffer
+  # 単語を入力途中ならそれをクエリにする
+  if [[ "${LBUFFER: -1}" == " " ]]; then
+    query=""
+    prebuffer=$ary
+  else
+    query=${ary[-1]}
+    prebuffer=${ary[1,-2]}
+  fi
+
   fzf_command+=" "
-  fzf_command+=$(cat << "EOF"
+  fzf_command+=$(cat << EOF
+--query '$query' \
 --preview '
   ( (type bat > /dev/null) &&
     bat --color=always \
       --theme=gruvbox-dark \
-      --line-range :200 $(ghq root)/{}/README.* \
+      --line-range :200 \$(ghq root)/{}/README.* \
     || (cat {} | head -200) ) 2> /dev/null
 ' \
 --preview-window 'down,60%,wrap,+3/2,~3'
@@ -357,7 +371,7 @@ EOF
 )
   local res=$(eval $find_directory | eval $fzf_command)
   if [ -n "$res" ]; then
-    BUFFER+="$res"
+    BUFFER="${prebuffer} ${res}"
   else
     return 1
   fi
