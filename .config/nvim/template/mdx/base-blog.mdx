@@ -1,5 +1,5 @@
 ---
-publishDate: {{_expr_:strftime('%Y-%m-%d')}}
+publishDate: {{_expr_:strftime('%Y-%m-%d', localtime() + (60 * 60 * 24))}}
 title: ""
 emoji: "twemoji:japanese-symbol-for-beginner"
 category: ""
@@ -8,8 +8,8 @@ tags:
   - 
 ---
 {/* import Video from '~/components/common/Video.astro'; */}
-{/* import Kbd from '~/components/ui/Kbd.astro'; */}
 {/* import { Icon } from 'astro-icon/components'; */}
+{/* import Kbd from '~/components/ui/Kbd.astro'; */}
 
 import Image from '~/components/common/Image.astro';
 
