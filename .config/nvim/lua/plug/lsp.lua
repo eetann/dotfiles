@@ -172,14 +172,13 @@ local function on_attach_disable_format(client, buffer)
 end
 
 require("mason").setup()
-local nvim_lsp = require("lspconfig")
-nvim_lsp.biome.setup({
-	capabilities = require("cmp_nvim_lsp").default_capabilities(),
+local lspconfig = require("lspconfig")
+lspconfig.biome.setup({
 	on_attach = on_attach,
 	cmd = { "biome", "lsp-proxy" },
 	on_new_config = function(new_config)
-		local pnpm = nvim_lsp.util.root_pattern("pnpm-lock.yml", "pnpm-lock.yaml")(vim.api.nvim_buf_get_name(0))
-		local cmd = { "npm", "biome", "lsp-proxy" }
+		local pnpm = lspconfig.util.root_pattern("pnpm-lock.yml", "pnpm-lock.yaml")(vim.api.nvim_buf_get_name(0))
+		local cmd = { "npx", "biome", "lsp-proxy" }
 		if pnpm then
 			cmd = { "pnpm", "biome", "lsp-proxy" }
 		end
@@ -201,12 +200,12 @@ mason_lspconfig.setup_handlers({
 		opts.capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 		if server_name == "tsserver" then
-			local root_dir = nvim_lsp.util.root_pattern("package.json", "node_modules")
+			local root_dir = lspconfig.util.root_pattern("package.json", "node_modules")
 			opts.root_dir = root_dir
 			opts.autostart = detected_root_dir(root_dir)
 			opts.on_attach = on_attach_disable_format
 		elseif server_name == "denols" then
-			local root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc", "deps.ts")
+			local root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc", "deps.ts")
 			opts.root_dir = root_dir
 			opts.autostart = detected_root_dir(root_dir)
 			opts.init_options = { lint = true, unstable = true }
@@ -232,7 +231,7 @@ mason_lspconfig.setup_handlers({
 			}
 		end
 
-		nvim_lsp[server_name].setup(opts)
+		lspconfig[server_name].setup(opts)
 	end,
 })
 
