@@ -16,7 +16,7 @@ abbreviations=(
   "CD"   "&& cd \$_"
   "CL"   "| clip.exe"
   "TREE" "tree -a -I '.git|node_modules|dist' --charset unicode"
-  "BLOG" "node bin/new.mjs --slug "
+  "BLOG" "node bin/new.mjs --slug"
 )
 
 function magic-abbrev-expand() {
@@ -284,46 +284,44 @@ if [[ "$(uname -r)" == *microsoft* ]]; then
       if [ -e $1 ]; then
         /mnt/c/windows/explorer.exe $(wslpath -w $1)
       else
-        echo "open: $1 : No such file or directory" 
+        echo "open: $1 : No such file or directory"
       fi
     fi
   }
 fi
 
 function ftmux_resurrect() {
+  local pre_dir=$(pwd);
   if [ -e "$HOME/.tmux/resurrect" ]; then
     cd ~/.tmux/resurrect
   elif [ -e "$HOME/.local/share/tmux/resurrect" ]; then
     cd ~/.local/share/tmux/resurrect
   else
     echo "resurrect directory not found"
-    return 1
-  fi
-  local fzf_command="fzf"
-  if type fzf-tmux > /dev/null; then
-    fzf_command="fzf-tmux -p 80%"
-  fi
-  fzf_command+=" "
-  # previewコマンドを追加
-  fzf_command+=$(cat << "EOF"
---preview '
-  ( (type bat > /dev/null) &&
-    bat --color=always \
-      --theme=gruvbox-dark \
-      --line-range :200 $(ghq root)/{}/README.* \
-    || (cat {} | head -200) ) 2> /dev/null
-' \
---preview-window 'down,60%,wrap,+3/2,~3'
-EOF
-)
-
-  local res="$(find . -name 'tmux_resurrect_[0-9]*.txt' | sort -r | eval $fzf_command)"
-  if [ -n "$res" ]; then
-    BUFFER+="ln -sf $res last"
     zle accept-line
-  else
     return 1
   fi
+  local can_bat='type bat > /dev/null'
+  local bat_command='bat \
+    --color=always \
+    --theme=gruvbox-dark {}'
+  local alt_command='cat {} | head -200'
+  local fzf_command="fzf-tmux -p 80% \
+    --preview '( ($can_bat) && $bat_command || ($alt_command) ) 2> /dev/null' \
+    --preview-window 'down,60%,wrap,+3/2,~3'"
+  local result=$(
+    find . -name 'tmux_resurrect_[0-9]*.txt' \
+    | sort -r \
+    | eval $fzf_command
+  )
+  if [ -n "$result" ]; then
+    ln -sf $result last
+    echo "link!"
+  else
+    echo "No link..."
+  fi
+  cd $pre_dir
+  zle accept-line
 }
 zle -N ftmux_resurrect
 bindkey '^xt' ftmux_resurrect
