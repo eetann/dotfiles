@@ -42,7 +42,7 @@ ubuntu() {
 		sudo apt update -q -y
 		sudo apt upgrade -q -y
 		sudo apt install -q -y ${BUILD_PKG_UBUNTU}
-		sudo snap install --beta nvim --classic
+		# sudo snap install --beta nvim --classic
 
 		# Homebrew
 		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"

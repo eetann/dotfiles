@@ -47,17 +47,16 @@ require("lazy").setup({
 		config = conf("treesitter"),
 		dependencies = { colorscheme },
 	},
-	-- https://github.com/nvim-treesitter/nvim-treesitter-context/issues/367
 	{
 		"nvim-treesitter/nvim-treesitter-context",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		commit = "c03f8aab1e6649036d69ba7e3af4d09cb7e4d977",
 	},
 	{ "nvim-tree/nvim-web-devicons" },
 	{ "neovim/tree-sitter-vimdoc" },
 	{
 		"akinsho/bufferline.nvim",
-		version = "*",
+		-- https://github.com/akinsho/bufferline.nvim/issues/903
+		-- version = "*",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = conf("bufferline"),
 	},
