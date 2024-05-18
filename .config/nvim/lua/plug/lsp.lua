@@ -119,50 +119,54 @@ require("actions-preview").setup({
 	},
 })
 
-local on_attach = function(client, bufnr)
-	local bufopts = { noremap = true, silent = true, buffer = bufnr }
-	vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
-	vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", bufopts)
-	vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", bufopts)
-	vim.keymap.set("n", "gd", "<cmd>Lspsaga goto_definition<CR>", bufopts)
-	vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", bufopts)
-	vim.keymap.set("n", "gp", "<cmd>Lspsaga peek_definition<CR>", bufopts)
-	vim.keymap.set("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", bufopts)
-	vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", bufopts)
-	vim.keymap.set("n", "<C-g>", "<cmd>Lspsaga hover_doc<CR>", bufopts)
-	vim.keymap.set("i", "<C-g>h", "<cmd>Lspsaga hover_doc<CR>", bufopts)
-	vim.keymap.set("n", "gf", "<cmd>Lspsaga lsp_finder<CR>", bufopts)
-	vim.keymap.set("n", "gh", "<cmd>Lspsaga hover_doc<CR>", bufopts)
-	vim.keymap.set("n", "<leader>cr", "<cmd>Lspsaga rename<CR>", bufopts)
-	vim.keymap.set({ "n", "v" }, "<space>ca", require("actions-preview").code_actions, bufopts)
-	vim.keymap.set("n", "<leader>cd", "<cmd>Lspsaga show_line_diagnostics<CR>", bufopts)
-	vim.keymap.set("n", "<leader>cc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", bufopts)
-	vim.keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", bufopts)
-	vim.keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", bufopts)
-
-	if client.server_capabilities.documentFormattingProvider then
-		vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-			group = "my_nvim_rc",
-			buffer = bufnr,
-			callback = function()
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = "my_nvim_rc",
+	callback = function(ev)
+		local bufopts = { noremap = true, silent = true, buffer = ev.buf }
+		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+		vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", bufopts)
+		vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", bufopts)
+		vim.keymap.set("n", "gd", "<cmd>Lspsaga goto_definition<CR>", bufopts)
+		vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", bufopts)
+		vim.keymap.set("n", "gp", "<cmd>Lspsaga peek_definition<CR>", bufopts)
+		vim.keymap.set("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", bufopts)
+		vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", bufopts)
+		vim.keymap.set("n", "<C-g>", "<cmd>Lspsaga hover_doc<CR>", bufopts)
+		vim.keymap.set("i", "<C-g>h", "<cmd>Lspsaga hover_doc<CR>", bufopts)
+		vim.keymap.set("n", "gf", "<cmd>Lspsaga lsp_finder<CR>", bufopts)
+		vim.keymap.set("n", "gh", "<cmd>Lspsaga hover_doc<CR>", bufopts)
+		vim.keymap.set("n", "<leader>cr", "<cmd>Lspsaga rename<CR>", bufopts)
+		vim.keymap.set({ "n", "v" }, "<space>ca", require("actions-preview").code_actions, bufopts)
+		vim.keymap.set("n", "<leader>cd", "<cmd>Lspsaga show_line_diagnostics<CR>", bufopts)
+		vim.keymap.set("n", "<leader>cc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", bufopts)
+		vim.keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", bufopts)
+		vim.keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", bufopts)
+		local client = vim.lsp.get_client_by_id(ev.data.client_id)
+		if client == nil then
+			return
+		end
+		if client.supports_method("textDocument/formatting") then
+			vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+				group = "my_nvim_rc",
+				buffer = ev.bufnr,
+				callback = function()
+					vim.lsp.buf.format({ timeout_ms = 2000 })
+				end,
+			})
+			vim.api.nvim_create_user_command("Format", function()
 				vim.lsp.buf.format({ timeout_ms = 2000 })
-			end,
-		})
-		vim.api.nvim_create_user_command("Format", function()
-			vim.lsp.buf.format({ timeout_ms = 2000 })
-		end, {})
-	end
-end
+			end, {})
+		end
+	end,
+})
 
 local function on_attach_disable_format(client, buffer)
 	client.server_capabilities.documentFormattingProvider = false
-	on_attach(client, buffer)
 end
 
 require("mason").setup()
 local lspconfig = require("lspconfig")
 lspconfig.biome.setup({
-	on_attach = on_attach,
 	cmd = { "biome", "lsp-proxy" },
 	on_new_config = function(new_config)
 		local pnpm = lspconfig.util.root_pattern("pnpm-lock.yml", "pnpm-lock.yaml")(vim.api.nvim_buf_get_name(0))
@@ -173,6 +177,7 @@ lspconfig.biome.setup({
 		new_config.cmd = cmd
 	end,
 })
+require("lspconfig").eslint.setup({})
 
 local function detected_root_dir(root_dir)
 	return not not (root_dir(vim.api.nvim_buf_get_name(0), vim.api.nvim_get_current_buf()))
@@ -183,7 +188,6 @@ local mason_lspconfig = require("mason-lspconfig")
 mason_lspconfig.setup_handlers({
 	function(server_name)
 		local opts = {}
-		opts.on_attach = on_attach
 		opts.capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 		opts.capabilities.textDocument.completion.completionItem.snippetSupport = true
 
@@ -224,16 +228,6 @@ mason_lspconfig.setup_handlers({
 })
 
 local null_ls = require("null-ls")
-
-local eslint_condition = function(utils)
-	return utils.root_has_file({
-		".eslintrc.js",
-		".eslintrc.cjs",
-		".eslintrc.yaml",
-		".eslintrc.yml",
-		".eslintrc.json",
-	})
-end
 
 local prettier_condition = function(utils)
 	return utils.root_has_file({
@@ -279,13 +273,9 @@ local sources = {
 	}),
 	null_ls.builtins.formatting.shfmt,
 	null_ls.builtins.formatting.stylua,
-	null_ls.builtins.formatting.biome,
 }
 require("null-ls").register(require("none-ls-shellcheck.diagnostics"))
 require("null-ls").register(require("none-ls-shellcheck.code_actions"))
 null_ls.setup({
 	sources = sources,
-	on_attach = function(client, buffer)
-		on_attach(client, buffer)
-	end,
 })
