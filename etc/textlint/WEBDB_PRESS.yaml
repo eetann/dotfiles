@@ -453,8 +453,6 @@ rules:
     expected: さら$1
   - pattern: 仕掛け
     expected: しかけ
-  - pattern: 仕方
-    expected: しかた
   - pattern: /([^正率垂安素愚])直に/
     expected: $1じかに
   - pattern: /仕組([^み])/
