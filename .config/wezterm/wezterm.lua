@@ -46,7 +46,11 @@ else
 	append_array(key_table, wsl_key_table)
 end
 
-config.font = wezterm.font("HackGen Console NF")
+-- /mnt/c/Program\ Files/WezTerm/wezterm.exe ls-fonts
+config.font = wezterm.font_with_fallback({
+	{ family = "HackGen Console NF" },
+	{ family = "SauceCodePro Nerd Font Mono" },
+})
 config.use_ime = true
 config.font_size = 12.0
 config.color_scheme = "Gruvbox Dark (Gogh)"
