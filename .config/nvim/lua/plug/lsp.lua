@@ -119,6 +119,15 @@ require("actions-preview").setup({
 	},
 })
 
+local function my_format()
+	vim.lsp.buf.format({
+		timeout_ms = 2000,
+		filter = function(client)
+			return client.name ~= "tsserver" or client.name ~= "sumneko_lua"
+		end,
+	})
+end
+
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = "my_nvim_rc",
 	callback = function(ev)
@@ -150,19 +159,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				group = "my_nvim_rc",
 				buffer = ev.bufnr,
 				callback = function()
-					vim.lsp.buf.format({ timeout_ms = 2000 })
+					my_format()
 				end,
 			})
 			vim.api.nvim_create_user_command("Format", function()
-				vim.lsp.buf.format({ timeout_ms = 2000 })
+				my_format()
 			end, {})
 		end
 	end,
 })
-
-local function on_attach_disable_format(client, buffer)
-	client.server_capabilities.documentFormattingProvider = false
-end
 
 require("mason").setup()
 local lspconfig = require("lspconfig")
@@ -195,7 +200,6 @@ mason_lspconfig.setup_handlers({
 			local root_dir = lspconfig.util.root_pattern("package.json", "node_modules")
 			opts.root_dir = root_dir
 			opts.autostart = detected_root_dir(root_dir)
-			opts.on_attach = on_attach_disable_format
 		elseif server_name == "denols" then
 			local root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc", "deps.ts")
 			opts.root_dir = root_dir
@@ -209,7 +213,6 @@ mason_lspconfig.setup_handlers({
 			}
 			opts.init_options = { lint = true, unstable = true }
 		elseif server_name == "sumneko_lua" then
-			opts.on_attach = on_attach_disable_format
 			opts.settings = {
 				Lua = {
 					completion = {
