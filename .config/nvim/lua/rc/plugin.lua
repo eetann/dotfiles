@@ -52,7 +52,8 @@ require("lazy").setup({
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 	},
 	{ "nvim-tree/nvim-web-devicons" },
-	{ "neovim/tree-sitter-vimdoc" },
+	-- TODO: conceallevelをいじってくるので、設定変えるか消すか
+	-- { "neovim/tree-sitter-vimdoc" },
 	{
 		"akinsho/bufferline.nvim",
 		-- https://github.com/akinsho/bufferline.nvim/issues/903
@@ -76,7 +77,6 @@ require("lazy").setup({
 	{ "williamboman/mason.nvim" },
 	{ "williamboman/mason-lspconfig.nvim" },
 	{ "aznhe21/actions-preview.nvim" },
-	-- { "ray-x/lsp_signature.nvim" },
 	{ "nvimdev/lspsaga.nvim", dependencies = { "nvim-treesitter/nvim-treesitter" } },
 	{ "nvimtools/none-ls.nvim", dependencies = { "gbprod/none-ls-shellcheck.nvim" } },
 	{ "hedyhli/outline.nvim" },
