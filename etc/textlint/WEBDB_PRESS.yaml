@@ -1585,8 +1585,8 @@ rules:
       - ムダづかい
       - ムダずかい
     expected: 無駄遣い
-  - pattern: 発火
-    expected: 発行
+  # - pattern: 発火
+  #   expected: 発行
   - pattern:
       - 至難のわざ
       - 至難の技
