@@ -4,7 +4,7 @@ vim.keymap.set("n", "j", function()
 	if vim.v.count == 0 then
 		return "gj"
 	else
-		return "j"
+		return "m'" .. vim.v.count .. "j"
 	end
 end, { expr = true })
 
@@ -12,7 +12,7 @@ vim.keymap.set("n", "k", function()
 	if vim.v.count == 0 then
 		return "gk"
 	else
-		return "k"
+		return "m'" .. vim.v.count .. "k"
 	end
 end, { expr = true })
 
