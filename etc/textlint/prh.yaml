@@ -37,6 +37,8 @@ rules:
   - expected: リポジトリ
     pattern:  レポジトリ
     prh: リリリリリリリリリリリリ！！！
+  - expected: "Tailwind CSS"
+    pattern: "TailwindCSS"
   - expected: Proflly
     pattern:  profly
   - expected: クライアント／サーバー
@@ -167,7 +169,7 @@ rules:
     pattern:  /(の)様に/
     prh: 漢字で書かず、ひらがなで書くと読みやすくなります
   - expected: 次$1
-    pattern:  /(?:以下|下記)(の|に)/
+    pattern:  /(?!ディレクトリ)(?:以下|下記)(の|に)/
     specs:
       - from: 以下の
         to:   次の
@@ -227,9 +229,6 @@ rules:
     prh: 漢字で書かず、ひらがなで書くと読みやすくなります。
   - expected: あるいは
     pattern:  或いは
-    prh: 漢字で書かず、ひらがなで書くと読みやすくなります。
-  - expected: はじめて
-    pattern:  初めて
     prh: 漢字で書かず、ひらがなで書くと読みやすくなります。
   - expected: どういうとき
     pattern:  どういう時

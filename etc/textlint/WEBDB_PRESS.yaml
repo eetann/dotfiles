@@ -757,14 +757,14 @@ rules:
     expected: やさし
   - pattern: 易々
     expected: やすやす
-  - pattern: 厄介
-    expected: やっかい
-  - pattern: やっぱり
-    expected: やはり
+  # - pattern: 厄介
+  #   expected: やっかい
+  # - pattern: やっぱり
+  #   expected: やはり
   - pattern: 闇雲
     expected: やみくも
-  - pattern: 止め
-    expected: やめ
+  # - pattern: 止め
+  #   expected: やめ
   - pattern: やり取り
     expected: やりとり
   - pattern: 他所
