@@ -119,14 +119,50 @@ require("actions-preview").setup({
 	},
 })
 
-local function my_format()
-	vim.lsp.buf.format({
+vim.api.nvim_create_user_command("FormatDisable", function(args)
+	if args.bang then
+		-- FormatDisable! will disable formatting just for this buffer
+		vim.b.disable_autoformat = true
+	else
+		vim.g.disable_autoformat = true
+	end
+end, {
+	desc = "Disable autoformat-on-save",
+	bang = true,
+})
+vim.api.nvim_create_user_command("FormatEnable", function()
+	vim.b.disable_autoformat = false
+	vim.g.disable_autoformat = false
+end, {
+	desc = "Re-enable autoformat-on-save",
+})
+
+local js_formatters = { { "biome", "prettierd", "prettier" } }
+require("conform").setup({
+	format_on_save = {
 		timeout_ms = 2000,
-		filter = function(client)
-			return client.name ~= "tsserver" or client.name ~= "sumneko_lua"
-		end,
-	})
-end
+		lsp_fallback = true,
+		quiet = false,
+	},
+	formatters_by_ft = {
+		lua = { "stylua" },
+		python = { "isort", "black" },
+		json = js_formatters,
+		javascript = js_formatters,
+		javascriptreact = js_formatters,
+		typescript = js_formatters,
+		typescriptreact = js_formatters,
+		astro = js_formatters,
+		-- NOTE: svelteのformatはsvelteserverのやつを使う。
+		-- LSPのFormatterは`lsp_fallback=true`をしたのでOK
+		-- svelte = { { "svelteserver" } },
+	},
+	formatters = {
+		shfmt = {
+			prepend_args = { "-i", "2" },
+		},
+	},
+})
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = "my_nvim_rc",
@@ -153,18 +189,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local client = vim.lsp.get_client_by_id(ev.data.client_id)
 		if client == nil then
 			return
-		end
-		if client.supports_method("textDocument/formatting") then
-			vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-				group = "my_nvim_rc",
-				buffer = ev.bufnr,
-				callback = function()
-					my_format()
-				end,
-			})
-			vim.api.nvim_create_user_command("Format", function()
-				my_format()
-			end, {})
 		end
 	end,
 })
@@ -232,26 +256,7 @@ mason_lspconfig.setup_handlers({
 
 local null_ls = require("null-ls")
 
-local prettier_condition = function(utils)
-	return utils.root_has_file({
-		".prettierrc",
-		".prettierrc.json",
-		".prettierrc.yml",
-		".prettierrc.yaml",
-		".prettierrc.json5",
-		".prettierrc.js",
-		".prettierrc.cjs",
-		"prettier.config.js",
-		"prettier.config.cjs",
-		".prettierrc.toml",
-	})
-end
-
 local sources = {
-	null_ls.builtins.formatting.prettier.with({
-		condition = prettier_condition,
-		extra_filetypes = { "json5", "astro" },
-	}),
 	null_ls.builtins.diagnostics.textlint.with({
 		filetypes = { "markdown", "mdx" },
 		condition = function(utils)
@@ -274,7 +279,6 @@ local sources = {
 			return is_mdn and vim.fn.expand("~/ghq/github.com/mozilla-japan/translation/MDN/textlint")
 		end,
 	}),
-	null_ls.builtins.formatting.shfmt,
 	null_ls.builtins.formatting.stylua,
 }
 require("null-ls").register(require("none-ls-shellcheck.diagnostics"))

@@ -83,6 +83,7 @@ require("lazy").setup({
 	{ "folke/neodev.nvim" },
 	{ "folke/lsp-colors.nvim" },
 	{ "RRethy/vim-illuminate" },
+	{ "stevearc/conform.nvim", event = { "BufWritePre" }, cmd = { "ConformInfo" } },
 
 	-- .config/nvim/lua/plug/completion.lua
 	{
