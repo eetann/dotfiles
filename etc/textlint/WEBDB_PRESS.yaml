@@ -1726,8 +1726,6 @@ rules:
       - Entity
       - entity
       - エンティティー
-  - expected: エントリ
-    pattern:  /エントリー/
   - expected: オプション
     pattern:  /オブション/
   - expected: オン／オフ

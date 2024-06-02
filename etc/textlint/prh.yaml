@@ -39,6 +39,8 @@ rules:
     prh: リリリリリリリリリリリリ！！！
   - expected: "Tailwind CSS"
     pattern: "TailwindCSS"
+  - expected: ファイル
+    pattern: フィアル
   - expected: Proflly
     pattern:  profly
   - expected: クライアント／サーバー
