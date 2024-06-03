@@ -207,10 +207,12 @@ require("lazy").setup({
 	},
 
 	{
-		"iamcco/markdown-preview.nvim",
+		"previm/previm",
 		lazy = true,
 		ft = { "markdown", "md", "mdwn", "mkd", "mkdn", "mark" },
-		build = "cd app && yarn install",
+		config = function()
+			vim.g.previm_wsl_mode = 1
+		end,
 	},
 
 	{ "akinsho/toggleterm.nvim", version = "v2.*", config = conf("toggleterm") },
