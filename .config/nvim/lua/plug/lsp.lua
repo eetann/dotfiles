@@ -139,11 +139,17 @@ end, {
 
 local js_formatters = { { "biome", "prettierd", "prettier" } }
 require("conform").setup({
-	format_on_save = {
-		timeout_ms = 2000,
-		lsp_fallback = true,
-		quiet = false,
-	},
+	format_on_save = function(bufnr)
+		if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+			---@diagnostic disable-next-line: missing-return-value
+			return
+		end
+		return {
+			timeout_ms = 2000,
+			lsp_fallback = true,
+			quiet = false,
+		}
+	end,
 	formatters_by_ft = {
 		lua = { "stylua" },
 		python = { "isort", "black" },
