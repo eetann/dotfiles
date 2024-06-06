@@ -88,6 +88,8 @@ end
 ---Register your source to nvim-cmp.
 require("cmp").register_source("gitcommit", git_source)
 
+vim.g.UltiSnipsJumpForwardTrigger = "<Plug>(ultisnips_jump_forward)"
+
 cmp.setup({
 	window = {
 		documentation = cmp.config.window.bordered(),
@@ -115,8 +117,15 @@ cmp.setup({
 		["<C-k>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.confirm({ select = true })
+			-- なぜか <Plug>(cmpu-jump-forwards) が展開されてしまうので手動でマッピング
 			elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-				cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
+				vim.api.nvim_feedkeys(
+					vim.api.nvim_replace_termcodes("<Plug>(ultisnips_jump_forward)", true, true, true),
+					"m",
+					true
+				)
+			-- elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
+			-- 	cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
 			elseif has_words_before() then
 				cmp.complete()
 			else

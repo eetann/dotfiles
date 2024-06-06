@@ -88,7 +88,7 @@ require("lazy").setup({
 	-- .config/nvim/lua/plug/completion.lua
 	{
 		"SirVer/ultisnips",
-		dependencies = { "honza/vim-snippets", "quangnguyen30192/cmp-nvim-ultisnips" },
+		dependencies = { "honza/vim-snippets" },
 	},
 	{
 		"hrsh7th/nvim-cmp",
@@ -98,6 +98,7 @@ require("lazy").setup({
 			"hrsh7th/cmp-buffer",
 			-- "hrsh7th/cmp-path",
 			{ dir = "~/ghq/github.com/eetann/cmp-eetannpath" },
+			"quangnguyen30192/cmp-nvim-ultisnips",
 			"hrsh7th/cmp-cmdline",
 			"uga-rosa/cmp-dictionary",
 			"onsails/lspkind-nvim",
