@@ -64,10 +64,12 @@ require("lazy").setup({
 	{ "norcalli/nvim-colorizer.lua", config = conf("nvim-colorizer") },
 	{
 		"shellRaining/hlchunk.nvim",
-		event = { "UIEnter" },
-		config = function()
-			require("hlchunk").setup({})
-		end,
+		event = { "BufReadPre", "BufNewFile" },
+		config = conf("hlchunk"),
+		-- 1.2.1以降だとhlslensと干渉する？ので一旦オフ
+		--  wrong number of arguments for function call
+		--  cFunc.lua:47 ml_get_buf
+		version = "1.2.0",
 	},
 	{ "andymass/vim-matchup", dependencies = { "nvim-treesitter/nvim-treesitter" } }, -- %を拡張
 	{ "kevinhwang91/nvim-hlslens", config = conf("nvim-hlslens") },
