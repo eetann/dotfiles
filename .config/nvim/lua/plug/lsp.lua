@@ -254,6 +254,16 @@ mason_lspconfig.setup_handlers({
 					},
 				},
 			}
+		elseif server_name == "tailwindcss" then
+			opts.settings = {
+				tailwindCSS = {
+					experimental = {
+						classRegex = {
+							{ "tv\\((([^()]*|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+						},
+					},
+				},
+			}
 		end
 
 		lspconfig[server_name].setup(opts)
