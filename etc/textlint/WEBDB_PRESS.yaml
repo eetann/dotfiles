@@ -528,8 +528,8 @@ rules:
       - 高高
       - 高だか
     expected: たかだか
-  - pattern: /叩([かきくけこ])/
-    expected: たた$1
+  # - pattern: /叩([かきくけこ])/
+  #   expected: たた$1
   - pattern: 但し
     expected: ただし
   - pattern: 直ち
@@ -2069,8 +2069,6 @@ rules:
     pattern:  /ライブラリー/
   - expected: ラスタ
     pattern:  /ラスター/
-  - expected: ラッパ
-    pattern:  /ラッパー/
   - expected: リガチャ
     pattern:  /リガチャー/
   - expected: リグレッション
