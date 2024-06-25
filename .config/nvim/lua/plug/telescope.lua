@@ -86,12 +86,13 @@ local telescope = require("telescope")
 telescope.setup({
 	defaults = {
 		sorting_strategy = "ascending",
-		layout_strategy = "horizontal",
+		layout_strategy = "vertical",
 		layout_config = {
 			prompt_position = "top",
 			width = 0.95,
-			horizontal = {
-				preview_width = 0.5,
+			vertical = {
+				mirror = true,
+				preview_cutoff = 10,
 			},
 		},
 		file_ignore_patterns = {
