@@ -52,7 +52,7 @@ module.exports = {
         allowOnomatopee: true,
         // 許可する単語
         // RegExp-like Stringを使用可能
-        allow: ["ほど", "一つ", "〇", "…", "など"],
+        allow: ["ほど", "一つ", "〇", "…", "など", "ある"],
       },
       "ja-no-mixed-period": {
         allowEmojiAtEnd: true,

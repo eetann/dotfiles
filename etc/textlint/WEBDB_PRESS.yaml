@@ -2100,8 +2100,6 @@ rules:
     pattern:  /ローダー/
   - expected: ロングテール
     pattern:  /ロングテイル/
-  - expected: ワーカ
-    pattern:  /ワーカー|\bworker\b/
   - expected: ワンタイムURL
     pattern:  /\bOnetime URL\b/
   - expected: クアッドコアCPU
