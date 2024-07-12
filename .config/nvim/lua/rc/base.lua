@@ -85,7 +85,9 @@ vim.opt.listchars = {
 	precedes = "«", -- ウィンドウ幅狭い時の前方省略
 	nbsp = "%", -- 不可視のスペース
 }
-
+-- minifyされたファイルを開いてしまったりプレビューに出てきたとき用に、
+-- シンタックスの制限
+vim.opt.synmaxcol = 150
 vim.opt.display = "lastline"
 if vim.fn.has("termguicolors") == 1 then
 	vim.opt.termguicolors = true
