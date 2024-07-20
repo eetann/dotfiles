@@ -1,0 +1,22 @@
+@-moz-document url-prefix("https://developer.chrome.com/docs/extensions/reference/api") {
+  .devsite-sidebar {
+    --devsite-js-sidebar-max-width: 220px;
+  }
+
+  body[ready] devsite-book-nav,
+  .devsite-book-nav-bg {
+    width: 160px;
+  }
+
+  body[layout=docs] .devsite-main-content[has-book-nav][has-sidebar] {
+    grid-template-columns: minmax(160px, 1fr) minmax(752px, 936px) minmax(220px, 1fr);
+  }
+
+  .devsite-nav {
+    --devsite-nav-font-size: 14px;
+  }
+
+  .devsite-nav-list a {
+    padding: 4px;
+  }
+}
