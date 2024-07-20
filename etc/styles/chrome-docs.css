@@ -1,4 +1,4 @@
-@-moz-document url-prefix("https://developer.chrome.com/docs/extensions/reference/api") {
+@-moz-document url-prefix("https://developer.chrome.com/docs/extensions") {
   .devsite-sidebar {
     --devsite-js-sidebar-max-width: 220px;
   }
