@@ -137,7 +137,8 @@ end, {
 	desc = "Re-enable autoformat-on-save",
 })
 
-local js_formatters = { { "biome", "prettierd", "prettier" } }
+-- TODO: ブログに書く
+local js_formatters = { "biome", "prettierd", "prettier", stop_after_first = true }
 require("conform").setup({
 	format_on_save = function(bufnr)
 		if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
