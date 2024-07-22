@@ -20,6 +20,11 @@ end
 local colorscheme = "nightfox.nvim"
 
 require("lazy").setup({
+	{
+		"delphinus/cellwidths.nvim",
+		build = ":CellWidthsRemove",
+		config = conf("cellwidths"),
+	},
 	-- .config/nvim/lua/plug/color-scheme.lua
 	{ "EdenEast/nightfox.nvim", config = conf("color-scheme") },
 
@@ -81,7 +86,6 @@ require("lazy").setup({
 	-- TODO: https://github.com/folke/lazydev.nvim に書き換え
 	{ "folke/neodev.nvim" },
 	{ "folke/lsp-colors.nvim" },
-	{ "RRethy/vim-illuminate" },
 	{ "stevearc/conform.nvim", event = { "BufWritePre" }, cmd = { "ConformInfo" } },
 
 	-- .config/nvim/lua/plug/completion.lua
@@ -210,8 +214,10 @@ require("lazy").setup({
 		"previm/previm",
 		lazy = true,
 		ft = { "markdown", "md", "mdwn", "mkd", "mkdn", "mark" },
+		dependencies = { "open-browser.vim" },
 		config = function()
-			vim.g.previm_wsl_mode = 1
+			vim.g.previm_open_cmd = "wslview"
+			-- vim.g.previm_wsl_mode = 1
 		end,
 	},
 

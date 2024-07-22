@@ -62,11 +62,6 @@ require("outline").setup({
 
 vim.keymap.set("n", "<Leader>o", "<Cmd>Outline<CR>", { noremap = true })
 
-require("illuminate").configure({
-	modes_allowlist = { "n" },
-	delay = 100,
-})
-
 local saga = require("lspsaga")
 
 saga.setup({
