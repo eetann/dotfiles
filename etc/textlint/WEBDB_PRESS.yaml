@@ -89,9 +89,9 @@ rules:
     expected: 4つ目
   - pattern:
       - 五つめ
-      - いつつめ
+      - /[^言]いつつめ/
       - 五つ目
-      - いつつ目
+      - /[^言]いつつ目/
     expected: 5つ目
   - pattern:
       - 六つめ
@@ -170,7 +170,7 @@ rules:
       - 四つ
     expected: 4つ
   - pattern:
-      - いつつ
+      - /[^言]いつつ/
       - 五つ
     expected: 5つ
   - pattern:
