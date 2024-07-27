@@ -13,3 +13,9 @@ customCommands:
       - type: 'input'
         title: 'Stash Message'
         initialValue: 'WIP'
+  - key: "<C-e>"
+    # https://minerva.mamansoft.net/Notes/%F0%9F%93%9C2024-07-21+Lazygit%E3%81%A7%E5%B7%AE%E5%88%86%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AB%E5%AF%BE%E3%81%97%E3%81%A6%E5%A4%89%E6%9B%B4%E5%89%8D%E3%81%AE%E5%86%85%E5%AE%B9%E3%82%92Neovim%E3%81%A7%E8%A1%A8%E7%A4%BA%E3%81%95%E3%81%9B%E3%81%A6%E3%81%BF%E3%82%8B
+    context: commitFiles
+    description: Open the previous version of the file in Neovim
+    command: "git show {{.SelectedLocalCommit.Sha}}^1:{{.SelectedCommitFile.Name}} > /tmp/$(basename {{.SelectedCommitFile.Name}}) && nvim /tmp/$(basename {{.SelectedCommitFile.Name}}) && rm /tmp/$(basename {{.SelectedCommitFile.Name}})"
+    subprocess: true
