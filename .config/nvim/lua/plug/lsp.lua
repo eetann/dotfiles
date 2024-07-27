@@ -96,6 +96,9 @@ saga.setup({
 			quit_in_show = { "q", "<Esc>" },
 		},
 	},
+	symbol_in_winbar = {
+		enable = false,
+	},
 })
 
 require("actions-preview").setup({

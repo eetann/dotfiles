@@ -134,7 +134,6 @@ require("lazy").setup({
 		config = conf("lualine"),
 		dependencies = { "folke/noice.nvim" },
 	},
-	{ "b0o/incline.nvim", config = conf("incline") },
 
 	{ "JoosepAlviste/nvim-ts-context-commentstring" },
 	{
