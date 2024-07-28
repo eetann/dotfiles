@@ -4,7 +4,6 @@ setopt extended_glob
 typeset -A abbreviations
 abbreviations=(
   "G"    "| grep"
-  "X"    "| xargs"
   "T"    "| tail"
   "C"    "| cat"
   "W"    "| wc"
@@ -15,6 +14,7 @@ abbreviations=(
   "DC"   "docker-compose"
   "CD"   "&& cd \$_"
   "CL"   "| clip.exe"
+  "X"    "| xsel -ib"
   "TREE" "tree -a -I '.git|node_modules|dist' --charset unicode"
   "BLOG" "node bin/new.mjs --slug"
 )
