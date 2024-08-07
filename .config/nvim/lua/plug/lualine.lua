@@ -77,8 +77,6 @@ require("lualine").setup({
 		},
 		lualine_x = {
 			selectionCount,
-		},
-		lualine_y = {
 			{
 				require("noice").api.status.message.get_hl,
 				cond = require("noice").api.status.message.has,
@@ -100,11 +98,12 @@ require("lualine").setup({
 			},
 			"location",
 		},
-		lualine_z = {
+		lualine_y = {
 			"encoding",
 			"fileformat",
 			"filetype",
 		},
+		lualine_z = {},
 	},
 	inactive_sections = {
 		lualine_a = {},
@@ -115,15 +114,14 @@ require("lualine").setup({
 		lualine_z = {},
 	},
 	winbar = {
-		lualine_a = { { "diagnostics", sources = { "nvim_lsp" } } },
 		-- lspsagaのwinbarは被って見づらくなる & そもそも活用していないので非表示へ
-		lualine_b = {},
+		lualine_a = {},
+		lualine_b = { { "diagnostics", sources = { "nvim_lsp" } } },
 		lualine_c = {},
 		lualine_x = {},
-		lualine_y = {
-			{ "filetype", icon_only = true },
-		},
+		lualine_y = {},
 		lualine_z = {
+			{ "filetype", icon_only = true },
 			{
 				"filename",
 				path = 1,
