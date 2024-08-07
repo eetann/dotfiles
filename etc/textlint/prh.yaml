@@ -131,7 +131,7 @@ rules:
       - from: 当事
         to:   当事
   - expected: $1とき
-    pattern:  /(の)時(?!点|代|々|間)/
+    pattern:  /(の)時(?!点|代|々|間|短)/
     specs:
       - from: その時
         to:   そのとき

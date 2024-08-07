@@ -233,7 +233,7 @@ rules:
     expected: 二重
   - pattern: 3重
     expected: 三重
-  - pattern: /([何数\\d一二三四五六七八九十０-９])箇所/
+  - pattern: /[^複]([何数\\d一二三四五六七八九十０-９])箇所/
     expected: $1か所
   - pattern: /([何数\\d一二三四五六七八九十０-９])個所/
     expected: $1か所
@@ -1518,7 +1518,7 @@ rules:
     expected: 逃$1
   - pattern: /濡れ手[でに][泡粟]/
     expected: 濡れ手で粟
-  - pattern: /もど([^ち])/
+  - pattern: /[^いつ]もど([^ち])/
     expected: 戻$1
   - pattern: 携帯キャリア
     expected: 携帯電話キャリア
@@ -1692,8 +1692,8 @@ rules:
     pattern:  /インスパイヤ/
   - expected: インスペクタ
     pattern:  /インスペクター/
-  - expected: インタフェース
-    pattern:  /インタフェイス|インターフェイス|インターフェース|インターフェィス/
+  - expected: インターフェース
+    pattern:  /インタフェイス|インターフェイス|インタフェース|インターフェィス/
   - expected: インタプリタ
     pattern:  /インタープリタ|インタプリター|インタープリター/
   - expected: インデックス

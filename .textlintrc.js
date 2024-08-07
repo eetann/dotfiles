@@ -37,6 +37,8 @@ module.exports = {
       },
       "max-kanji-continuous-len": {
         allow: [
+          "高解像度画像検索機",
+          "自動背景除去",
           "人類補完計画",
           "倍精度浮動小数点数",
           "自己署名証明書",
