@@ -220,5 +220,7 @@ require("lazy").setup({
 		end,
 	},
 
+	{ "David-Kunz/gen.nvim", config = conf("gen") },
+
 	{ "akinsho/toggleterm.nvim", version = "v2.*", config = conf("toggleterm") },
 })
