@@ -300,4 +300,7 @@ require("null-ls").register(require("none-ls-shellcheck.diagnostics"))
 require("null-ls").register(require("none-ls-shellcheck.code_actions"))
 null_ls.setup({
 	sources = sources,
+	should_attach = function(bufnr)
+		return not vim.api.nvim_buf_get_name(bufnr):match("gen%.nvim")
+	end,
 })

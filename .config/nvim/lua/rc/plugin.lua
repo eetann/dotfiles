@@ -131,7 +131,7 @@ require("lazy").setup({
 
 	{
 		"nvim-lualine/lualine.nvim",
-		config = conf("lualine"),
+		config = conf("lualine/index"),
 		dependencies = { "folke/noice.nvim" },
 	},
 
@@ -221,6 +221,19 @@ require("lazy").setup({
 	},
 
 	{ "David-Kunz/gen.nvim", config = conf("gen") },
+	{
+		"olimorris/codecompanion.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-telescope/telescope.nvim", -- Optional
+			{
+				"stevearc/dressing.nvim", -- Optional: Improves the default Neovim UI
+				opts = {},
+			},
+		},
+		config = conf("codecompanion"),
+	},
 
 	{ "akinsho/toggleterm.nvim", version = "v2.*", config = conf("toggleterm") },
 })

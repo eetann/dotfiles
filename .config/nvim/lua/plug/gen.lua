@@ -1,5 +1,5 @@
 require("gen").setup({
-	model = "elyza:jp8b", -- The default model to use.
+	model = "codellama:13b", -- The default model to use.
 	quit_map = "q", -- set keymap for close the response window
 	retry_map = "<c-r>", -- set keymap to re-send the current prompt
 	accept_map = "<c-cr>", -- set keymap to replace the previous selection with the last result
@@ -31,29 +31,32 @@ require("gen").setup({
 })
 
 -- https://github.com/David-Kunz/gen.nvim/blob/main/lua/gen/prompts.lua
-require("gen").prompts["Summarize"] = {
-	prompt = "以下を要約してください:\n$text",
-	replace = true,
-}
-require("gen").prompts["Ask"] = { prompt = "以下の文章について、$input:\n$text" }
-require("gen").prompts["Make_List"] = {
-	prompt = "文章をマークダウンリストに変換してください:\n$text",
-	replace = true,
-}
-require("gen").prompts["Make_Table"] = {
-	prompt = "文章をマークダウンテーブルに変換してください:\n$text",
-	replace = true,
-}
-require("gen").prompts["Review_Code"] = {
-	prompt = "以下のコードをレビューし、簡潔な提案を行ってください:\n```$filetype\n$text\n```",
-}
-require("gen").prompts["Enhance_Code"] = {
-	prompt = "以下のコードを改良し、結果は```$filetype\n...\n```という形式で出力してください:\n```$filetype\n$text\n```",
-	replace = true,
-	extract = "```$filetype\n(.-)```",
-}
-require("gen").prompts["Change_Code"] = {
-	prompt = "以下のコードについて、$input、結果は```$filetype\n...\n```という形式で出力してください:\n```$filetype\n$text\n```",
-	replace = true,
-	extract = "```$filetype\n(.-)```",
-}
+-- require("gen").prompts["Summarize"] = {
+-- 	prompt = "以下を要約してください:\n$text",
+-- 	replace = true,
+-- }
+-- require("gen").prompts["Ask"] = { prompt = "以下の文章について、$input:\n$text" }
+-- require("gen").prompts["Make_List"] = {
+-- 	prompt = "文章をマークダウンリストに変換してください:\n$text",
+-- 	replace = true,
+-- }
+-- require("gen").prompts["Make_Table"] = {
+-- 	prompt = "文章をマークダウンテーブルに変換してください:\n$text",
+-- 	replace = true,
+-- }
+-- require("gen").prompts["Review_Code"] = {
+-- 	prompt = "以下のコードをレビューし、簡潔な提案を行ってください:\n```$filetype\n$text\n```",
+-- }
+-- require("gen").prompts["Enhance_Code"] = {
+-- 	prompt = "以下のコードを改良し、結果は```$filetype\n...\n```という形式で出力してください:\n```$filetype\n$text\n```",
+-- 	replace = true,
+-- 	extract = "```$filetype\n(.-)```",
+-- }
+-- require("gen").prompts["Change_Code"] = {
+-- 	prompt = "以下のコードについて、$input、結果は```$filetype\n...\n```という形式で出力してください:\n```$filetype\n$text\n```",
+-- 	replace = true,
+-- 	extract = "```$filetype\n(.-)```",
+-- }
+-- require("gen").prompts["Tailwind"] = {
+-- 	prompt = "$input をTailwindCSSで実現する方法を教えていただけないでしょうか？",
+-- }

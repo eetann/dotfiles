@@ -78,22 +78,10 @@ require("lualine").setup({
 		lualine_x = {
 			selectionCount,
 			{
-				require("noice").api.status.message.get_hl,
-				cond = require("noice").api.status.message.has,
-			},
-			{
-				require("noice").api.status.command.get,
-				cond = require("noice").api.status.command.has,
-				color = { fg = "#ff9e64" },
-			},
-			{
+				---@diagnostic disable-next-line: undefined-field
 				require("noice").api.status.mode.get,
+				---@diagnostic disable-next-line: undefined-field
 				cond = require("noice").api.status.mode.has,
-				color = { fg = "#ff9e64" },
-			},
-			{
-				require("noice").api.status.search.get,
-				cond = require("noice").api.status.search.has,
 				color = { fg = "#ff9e64" },
 			},
 			"location",
@@ -103,7 +91,9 @@ require("lualine").setup({
 			"fileformat",
 			"filetype",
 		},
-		lualine_z = {},
+		lualine_z = {
+			{ require("plug/lualine/cc-component") },
+		},
 	},
 	inactive_sections = {
 		lualine_a = {},
