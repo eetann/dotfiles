@@ -219,6 +219,12 @@ require("lazy").setup({
 			-- vim.g.previm_wsl_mode = 1
 		end,
 	},
+	{
+		"stevearc/oil.nvim",
+		-- dependencies = { { "echasnovski/mini.icons", opts = {} } },
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = conf("oil"),
+	},
 
 	{ "David-Kunz/gen.nvim", config = conf("gen") },
 	{
