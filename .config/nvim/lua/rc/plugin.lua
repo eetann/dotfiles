@@ -210,15 +210,29 @@ require("lazy").setup({
 	},
 
 	{
-		"previm/previm",
-		lazy = true,
-		ft = { "markdown", "md", "mdwn", "mkd", "mkdn", "mark" },
-		dependencies = { "open-browser.vim" },
+		"iamcco/markdown-preview.nvim",
+		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+		build = "cd app && yarn install",
+		init = function()
+			vim.g.mkdp_filetypes = { "markdown", "plantuml", "pu" }
+		end,
+		ft = { "markdown", "pu", "plantuml" },
 		config = function()
-			vim.g.previm_open_cmd = "wslview"
-			-- vim.g.previm_wsl_mode = 1
+			-- WSL対応のため
+			vim.g.mkdp_browserfunc = "g:OpenBrowser"
 		end,
 	},
+
+	-- {
+	-- 	"previm/previm",
+	-- 	lazy = true,
+	-- 	ft = { "markdown", "md", "mdwn", "mkd", "mkdn", "mark" },
+	-- 	dependencies = { "open-browser.vim" },
+	-- 	config = function()
+	-- 		vim.g.previm_open_cmd = "wslview"
+	-- 		-- vim.g.previm_wsl_mode = 1
+	-- 	end,
+	-- },
 	{
 		"stevearc/oil.nvim",
 		-- dependencies = { { "echasnovski/mini.icons", opts = {} } },
