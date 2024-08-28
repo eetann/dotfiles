@@ -249,7 +249,11 @@ require("lazy").setup({
 			"nvim-telescope/telescope.nvim", -- Optional
 			{
 				"stevearc/dressing.nvim", -- Optional: Improves the default Neovim UI
-				opts = {},
+				opts = {
+					input = {
+						enabled = false,
+					},
+				},
 			},
 		},
 		config = conf("codecompanion"),
