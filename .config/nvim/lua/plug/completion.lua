@@ -1,13 +1,11 @@
 vim.g.UltiSnipsSnippetDirectories = { "~/dotfiles/.config/nvim/snippet" }
 local lspkind = require("lspkind")
 
-local has_words_before = function()
-	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+local t = function(str)
+	return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
 local cmp = require("cmp")
-local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
 require("cmp_nvim_ultisnips").setup({
 	filetype_source = "ultisnips_default",
 })
@@ -100,37 +98,117 @@ cmp.setup({
 		end,
 	},
 	mapping = {
+		["<Tab>"] = cmp.mapping({
+			c = function()
+				if cmp.visible() then
+					cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+				else
+					cmp.complete()
+				end
+			end,
+			i = function(fallback)
+				if cmp.visible() then
+					cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+				elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
+					vim.api.nvim_feedkeys(t("<Plug>(ultisnips_jump_forward)"), "m", true)
+				else
+					fallback()
+				end
+			end,
+			s = function(fallback)
+				if vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
+					vim.api.nvim_feedkeys(t("<Plug>(ultisnips_jump_forward)"), "m", true)
+				else
+					fallback()
+				end
+			end,
+		}),
+		["<S-Tab>"] = cmp.mapping({
+			c = function()
+				if cmp.visible() then
+					cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
+				else
+					cmp.complete()
+				end
+			end,
+			i = function(fallback)
+				if cmp.visible() then
+					cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
+				elseif vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
+					return vim.api.nvim_feedkeys(t("<Plug>(ultisnips_jump_backward)"), "m", true)
+				else
+					fallback()
+				end
+			end,
+			s = function(fallback)
+				if vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
+					return vim.api.nvim_feedkeys(t("<Plug>(ultisnips_jump_backward)"), "m", true)
+				else
+					fallback()
+				end
+			end,
+		}),
+		["<Down>"] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), { "i" }),
+		["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), { "i" }),
+		["<C-n>"] = cmp.mapping({
+			c = function()
+				if cmp.visible() then
+					cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+				else
+					vim.api.nvim_feedkeys(t("<Down>"), "n", true)
+				end
+			end,
+			i = function(fallback)
+				if cmp.visible() then
+					cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+				else
+					fallback()
+				end
+			end,
+		}),
+		["<C-p>"] = cmp.mapping({
+			c = function()
+				if cmp.visible() then
+					cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+				else
+					vim.api.nvim_feedkeys(t("<Up>"), "n", true)
+				end
+			end,
+			i = function(fallback)
+				if cmp.visible() then
+					cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+				else
+					fallback()
+				end
+			end,
+		}),
 		["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
 		["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-		["<C-e>"] = cmp.mapping.abort(),
-		["<C-n>"] = function()
-			if cmp.visible() then
-				cmp.select_next_item()
-			end
-		end,
-		["<C-p>"] = function()
-			if cmp.visible() then
-				cmp.select_prev_item()
-			end
-		end,
-		["<CR>"] = cmp.mapping.confirm({ select = false }),
-		["<C-k>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.confirm({ select = true })
-			-- なぜか <Plug>(cmpu-jump-forwards) が展開されてしまうので手動でマッピング
-			elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-				vim.api.nvim_feedkeys(
-					vim.api.nvim_replace_termcodes("<Plug>(ultisnips_jump_forward)", true, true, true),
-					"m",
-					true
-				)
-			-- elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-			-- 	cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
-			elseif has_words_before() then
-				cmp.complete()
-			else
-				fallback()
-			end
+		["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c", "s" }), -- 補完を終了する
+		["<C-e>"] = cmp.mapping.abort(), -- 補完を終了して戻す
+		["<CR>"] = cmp.mapping.confirm({ select = true }),
+		-- setState, defaultDate のような set default の後に続く所を書く時に使う
+		["<C-k>"] = cmp.mapping(function()
+			cmp.close()
+			vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(" ", true, false, true), "in", false)
+			-- -- TODO: ゴースト？で表示
+			cmp.complete()
+			local delete_event
+			delete_event = cmp.event:on("complete_done", function(event)
+				-- if not event.entry or not event.entry.confirmed then
+				-- 	-- cmp.abort()
+				-- 	delete_event()
+				-- 	return
+				-- end
+				vim.defer_fn(function()
+					vim.api.nvim_feedkeys(
+						vim.api.nvim_replace_termcodes('<Esc>mzBvgU"_X`zi', true, false, true),
+						"in",
+						false
+					)
+				end, 10)
+				delete_event()
+			end)
 		end, { "i", "s" }),
 	},
 	sources = cmp.config.sources({
