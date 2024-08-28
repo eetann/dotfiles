@@ -1,12 +1,14 @@
 require("codecompanion").setup({
 	adapters = {
-		ollama = require("codecompanion.adapters").use("ollama", {
-			schema = {
-				model = {
-					default = "codellama:7b",
+		ollama = function()
+			return require("codecompanion.adapters").extend("ollama", {
+				schema = {
+					model = {
+						default = "codellama:7b",
+					},
 				},
-			},
-		}),
+			})
+		end,
 	},
 	strategies = {
 		chat = {
