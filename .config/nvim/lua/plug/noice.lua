@@ -70,6 +70,22 @@ noice.setup({
 			},
 		},
 	},
+	commands = {
+		history = {
+			-- options for the message history that you get with `:Noice`
+			view = "split",
+			opts = { enter = true, format = "notify" },
+			filter = {
+				any = {
+					{ event = "notify" },
+					{ error = true },
+					{ warning = true },
+					{ event = "msg_show", kind = { "" } },
+					{ event = "lsp", kind = "message" },
+				},
+			},
+		},
+	},
 })
 
 vim.cmd("highlight! link LspSignatureActiveParameter @text.warning")
