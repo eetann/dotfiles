@@ -12,11 +12,11 @@ local function myMiniView(pattern, kind)
 	}
 end
 
-local function skipMessage(pattern)
+local function skipMessage(pattern, kind)
 	return {
 		filter = {
 			event = "notify",
-			warning = true,
+			kind = kind,
 			find = pattern,
 		},
 		opts = { skip = true },
@@ -32,6 +32,7 @@ noice.setup({
 		skipMessage("no matching language servers"),
 		skipMessage("is not supported by any of the servers registered for the current buffer"),
 		skipMessage("query: invalid node type"),
+		skipMessage("No code actions available", "info"),
 		myMiniView("Already at .* change"),
 		myMiniView("written"),
 		myMiniView("yanked"),
@@ -74,7 +75,9 @@ noice.setup({
 		history = {
 			-- options for the message history that you get with `:Noice`
 			view = "split",
-			opts = { enter = true, format = "notify" },
+			-- opts = { enter = true, format = "notify" },
+			-- to debug skipMessage
+			-- opts = { enter = true, format = { "{kind} ", "{event}", "{title} ", "{message}" } },
 			filter = {
 				any = {
 					{ event = "notify" },

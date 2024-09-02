@@ -101,8 +101,7 @@ saga.setup({
 	},
 })
 
----@diagnostic disable: lowercase-global
-function run_code_action_only(only)
+_G.run_code_action_only = function(only)
 	vim.lsp.buf.code_action({
 		context = {
 			only = { only },
