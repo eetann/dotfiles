@@ -45,6 +45,15 @@ surround.setup({
 			input = { "%*%*().-()%*%*" },
 			output = { left = "**", right = "**" },
 		},
+		-- instead of <CR>
+		["\r"] = {
+			input = { "\n().-()\n" },
+			output = { left = "\n", right = "\n" },
+		},
+		["M"] = {
+			input = { "\n().-()\n" },
+			output = { left = "\n", right = "\n" },
+		},
 	},
 	mappings = {
 		highlight = "sH", -- Highlight surrounding
