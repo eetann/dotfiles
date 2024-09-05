@@ -22,6 +22,7 @@ local jpKakkoTable = {
 	["A"] = gen_spec.pair("≪", "≫", { type = "non-balanced" }),
 }
 require("mini.ai").setup({
+	search_method = "cover",
 	custom_textobjects = {
 		["j"] = function()
 			local char = vim.fn.input("enter for KAKKO: ")
