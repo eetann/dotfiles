@@ -16,52 +16,6 @@ vim.diagnostic.config({
 	},
 })
 
-require("outline").setup({
-	providers = {
-		markdown = {
-			filetypes = { "markdown", "mdx" },
-		},
-	},
-	symbols = {
-		icons = {
-			File = { icon = "󰈔", hl = "Identifier" },
-			Module = { icon = "󰆧", hl = "Include" },
-			Namespace = { icon = "󰅪", hl = "Include" },
-			Package = { icon = "󰏗", hl = "Include" },
-			Class = { icon = "C", hl = "Type" },
-			Method = { icon = "ƒ", hl = "Function" },
-			Property = { icon = "", hl = "Identifier" },
-			Field = { icon = "󰆨", hl = "Identifier" },
-			Constructor = { icon = "", hl = "Special" },
-			Enum = { icon = "ℰ", hl = "Type" },
-			Interface = { icon = "󰜰", hl = "Type" },
-			Function = { icon = "", hl = "Function" },
-			Variable = { icon = "", hl = "Constant" },
-			Constant = { icon = "", hl = "Constant" },
-			String = { icon = "Aa", hl = "String" },
-			Number = { icon = "#", hl = "Number" },
-			Boolean = { icon = "⊨", hl = "Boolean" },
-			Array = { icon = "󰅪", hl = "Constant" },
-			Object = { icon = "⦿", hl = "Type" },
-			Key = { icon = "🔐", hl = "Type" },
-			Null = { icon = "NULL", hl = "Type" },
-			EnumMember = { icon = "", hl = "Identifier" },
-			Struct = { icon = "{}", hl = "Structure" },
-			Event = { icon = "E", hl = "Type" },
-			Operator = { icon = "+", hl = "Identifier" },
-			TypeParameter = { icon = "T", hl = "Identifier" },
-			Component = { icon = "󰅴", hl = "Function" },
-			Fragment = { icon = "󰅴", hl = "Constant" },
-			TypeAlias = { icon = " ", hl = "Type" },
-			Parameter = { icon = " ", hl = "Identifier" },
-			StaticMethod = { icon = " ", hl = "Function" },
-			Macro = { icon = " ", hl = "Function" },
-		},
-	},
-})
-
-vim.keymap.set("n", "<Leader>o", "<Cmd>Outline<CR>", { noremap = true })
-
 local saga = require("lspsaga")
 
 saga.setup({
@@ -178,20 +132,8 @@ end, {
 	desc = "Re-enable autoformat-on-save",
 })
 
--- TODO: ブログに書く
 local js_formatters = { "biome", "prettierd", "prettier", stop_after_first = true }
 require("conform").setup({
-	format_on_save = function(bufnr)
-		if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-			---@diagnostic disable-next-line: missing-return-value
-			return
-		end
-		return {
-			timeout_ms = 2000,
-			lsp_fallback = true,
-			quiet = false,
-		}
-	end,
 	formatters_by_ft = {
 		lua = { "stylua" },
 		python = { "isort", "black" },
