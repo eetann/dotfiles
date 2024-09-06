@@ -1,21 +1,83 @@
 {
-  "settingsVersion": "1.64.6",
-  "exclusionRules": [],
-  "filterLinkHints": false,
-  "waitForEnterForFilteredHints": true,
-  "hideHud": false,
-  "keyMappings": "# Insert your preferred key mappings here.",
-  "linkHintCharacters": "sadfjklewcmpgh",
-  "linkHintNumbers": "0123456789",
-  "newTabUrl": "about:newtab",
+  "keyMappings": "# Insert your preferred key mappings here.\nunmap t\nunmap T\nunmap <a-p>\nunmap <a-m>\nunmap w\nunmap W\nunmap m\n# unmap K\nunmap p\nunmap P\nmap <C-j> Vomnibar.activateInNewTab",
   "nextPatterns": "次へ,進む,もっと見る,もっとみる,次のページ,next,more,newer,>,›,→,»,≫,>>",
   "previousPatterns": "prev,previous,back,older,<,‹,←,«,≪,<<,前へ,戻る,前のページ",
-  "regexFindMode": false,
-  "ignoreKeyboardLayout": false,
-  "scrollStepSize": 100,
-  "smoothScroll": true,
+  "scrollStepSize": 80,
   "grabBackFocus": true,
-  "searchEngines": "w: https://www.wikipedia.org/w/index.php?title=Special:Search&search=%s Wikipedia\nt: https://twitter.com/search?q=%s Twitter\nq: https://qiita.com/search?q=%s Qiita\n\n# More examples.\n#\n# (Vimium supports search completion Wikipedia, as\n# above, and for these.)\n#\n# g: https://www.google.com/search?q=%s Google\n# l: https://www.google.com/search?q=%s&btnI I'm feeling lucky...\n# y: https://www.youtube.com/results?search_query=%s Youtube\n# gm: https://www.google.com/maps?q=%s Google maps\n# b: https://www.bing.com/search?q=%s Bing\n# d: https://duckduckgo.com/?q=%s DuckDuckGo\n# az: https://www.amazon.com/s/?field-keywords=%s Amazon\n# qw: https://www.qwant.com/?q=%s Qwant",
-  "searchUrl": "https://www.google.com/search?q=",
-  "userDefinedLinkHintCss": "div > .vimiumHintMarker {\n/* linkhint boxes */\nbackground: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFF785),\n  color-stop(100%,#FFC542));\nborder: 1px solid #E3BE23;\n}\n\ndiv > .vimiumHintMarker span {\n/* linkhint text */\ncolor: black;\nfont-weight: bold;\nfont-size: 12px;\n}\n\ndiv > .vimiumHintMarker > .matchingCharacter {\n}"
+  "searchEngines": "t: https://twitter.com/search?q=%s Twitter\ngh: https://github.com/search?q=%s&type=Code&utf8=✓\nsite: javascript:location='http://www.google.com/search?q=site:'+escape(location.hostname)+'+%s'\nrn: https://renso-ruigo.com/word/%s\nyy: https://www.youtube.com/results?search_query=%s\nya: https://www.youtube.com/results?search_query=asmr+%s&sp=CAM%253D\n\n# More examples.\n#\n# (Vimium supports search completion Wikipedia, as\n# above, and for these.)\n#\n# g: https://www.google.com/search?q=%s Google\n# l: https://www.google.com/search?q=%s&btnI I'm feeling lucky...\n# y: https://www.youtube.com/results?search_query=%s Youtube\n# gm: https://www.google.com/maps?q=%s Google maps\n# b: https://www.bing.com/search?q=%s Bing\n# d: https://duckduckgo.com/?q=%s DuckDuckGo\n# az: https://www.amazon.com/s/?field-keywords=%s Amazon\n# qw: https://www.qwant.com/?q=%s Qwant",
+  "settingsVersion": "2.1.2",
+  "exclusionRules": [
+    {
+      "passKeys": "",
+      "pattern": "https?://docs.google.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://drive.google.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://www.notion.so/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://localhost:8888/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://typingx0.net/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://open.spotify.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://app.clickup.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://www.gallup.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://mail.google.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://chat.openai.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://sushida.net/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://jp.store.asus.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://calendar.cron.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://works.sagooo.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://app.gather.town/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://bezier.method.ac/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://www.e-typing.ne.jp/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://calendar.google.com/*"
+    }
+  ]
 }
