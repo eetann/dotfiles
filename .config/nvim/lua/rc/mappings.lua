@@ -181,6 +181,46 @@ vim.keymap.set({ "n", "x" }, "Fj", "F<C-k>")
 vim.keymap.set({ "n", "x" }, "tj", "t<C-k>")
 vim.keymap.set({ "n", "x" }, "Tj", "T<C-k>")
 
+-- テスト/テスト元のファイル探して開く
+local function open_test_or_src_file()
+	-- 現在開いているファイルのパスを取得
+	local current_file = vim.fn.expand("%")
+	local dir = vim.fn.fnamemodify(current_file, ":h")
+	local file_name = vim.fn.fnamemodify(current_file, ":t:r")
+	local ext = vim.fn.fnamemodify(current_file, ":e")
+
+	local candidates = {}
+	if current_file:match("test") or current_file:match("spec") then
+		local target_file_name = file_name:gsub("%.test$", ""):gsub("%.spec$", "")
+
+		candidates = {
+			dir .. "/" .. target_file_name .. "." .. ext,
+			dir:gsub("/test$", "") .. "/" .. target_file_name .. "." .. ext,
+			string.gsub(dir, "^test", "src") .. "/" .. target_file_name .. "." .. ext,
+		}
+	else
+		candidates = {
+			dir .. "/" .. file_name .. ".test." .. ext,
+			dir .. "/" .. file_name .. ".spec." .. ext,
+			dir .. "/test/" .. file_name .. "." .. ext,
+			string.gsub(dir, "^src", "test") .. "/" .. file_name .. "." .. ext,
+		}
+	end
+
+	-- ファイルが存在するか確認して開く
+	for _, test_file in ipairs(candidates) do
+		if vim.fn.filereadable(test_file) then
+			vim.cmd("edit " .. test_file)
+			return
+		end
+	end
+
+	-- ファイルが見つからなかった場合
+	print("There is no test file.")
+end
+
+vim.keymap.set("n", "<Space>gt", open_test_or_src_file, { desc = "Open test file" })
+
 -- 切り替え
 vim.keymap.set("n", "<Leader>sw", "<Cmd>setl wrap! wrap?<CR>")
 vim.keymap.set("n", "<Leader>sp", "<Cmd>setl paste! paste?<CR>")
