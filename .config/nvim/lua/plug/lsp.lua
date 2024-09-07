@@ -221,7 +221,7 @@ mason_lspconfig.setup_handlers({
 		opts.capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 		opts.capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-		if server_name == "tsserver" then
+		if server_name == "ts_ls" then
 			local root_dir = lspconfig.util.root_pattern("package.json", "node_modules")
 			opts.root_dir = root_dir
 			opts.autostart = detected_root_dir(root_dir)
