@@ -10,6 +10,9 @@ vim.api.nvim_create_autocmd("BufLeave", {
 		vim.cmd("cd .")
 	end,
 })
-vim.keymap.set("n", "<Space>E", function()
-	require("oil").open(vim.fn.expand("%:h"))
-end, { desc = "Open Oil at the directory with current buffer" })
+vim.keymap.set("n", "<Space>go", function()
+	require("oil").open()
+end, { desc = "Oil current buffer's directory" })
+vim.keymap.set("n", "<Space>gO", function()
+	require("oil").open(".")
+end, { desc = "Oil ." })
