@@ -94,8 +94,9 @@ end
 
 vim.api.nvim_create_user_command("MyQuickfix", function()
 	vim.diagnostic.setloclist()
-	vim.cmd("sleep 100ms")
+	vim.cmd("sleep 500ms")
 	vim.cmd("ldo call v:lua.my_code_actions()")
+	vim.cmd("lclose")
 end, {})
 
 require("actions-preview").setup({
