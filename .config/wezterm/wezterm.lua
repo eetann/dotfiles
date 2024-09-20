@@ -32,6 +32,7 @@ if target:find("darwin") then
 		{ key = "p", mods = "CMD", action = { SendKey = { key = "p", mods = "ALT" } } },
 	}
 	append_array(key_table, mac_key_table)
+  config.font_size = 14.0
 elseif target:find("linux") then
 	local linux_key_table = {
 		{ key = "n", mods = "SUPER", action = { SendKey = { key = "n", mods = "ALT" } } },
@@ -44,6 +45,7 @@ else
 		{ key = "v", mods = "CTRL|SHIFT", action = act.PasteFrom("Clipboard") },
 	}
 	append_array(key_table, wsl_key_table)
+  config.font_size = 12.0
 end
 
 -- /mnt/c/Program\ Files/WezTerm/wezterm.exe ls-fonts
@@ -52,7 +54,6 @@ config.font = wezterm.font_with_fallback({
 	{ family = "SauceCodePro Nerd Font Mono" },
 })
 config.use_ime = true
-config.font_size = 12.0
 config.color_scheme = "Gruvbox Dark (Gogh)"
 config.hide_tab_bar_if_only_one_tab = true
 config.adjust_window_size_when_changing_font_size = false
