@@ -16,6 +16,9 @@ WSL2のUbuntuがメインですが、純Ubuntuでも動作するように少し�
 2. Install to OS
 3. Set to terminal
 
+# Google日本語入力
+[Google日本語入力](https://www.google.co.jp/ime/)
+
 ## Write /etc/wsl.conf
 WSLならこれをやること。
 
@@ -131,3 +134,7 @@ dconf-editor の
 
 参考
 [gnome - How to disable global Super-p shortcut? - Ask Ubuntu](https://askubuntu.com/questions/68463/how-to-disable-global-super-p-shortcut)
+
+# Mac
+KarabinerでESCのときにIMEをオフにする
+[Karabiner-ElementsでESCやCtrl+括弧キー押下時に日本語入力を解除できるようになっていた - 絶品ゆどうふのタレ](https://yudoufu.hatenablog.jp/entry/2018/01/14/215152)

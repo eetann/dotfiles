@@ -1,2 +1,3 @@
 .envrc
 .ignore_debug.*
+.DS_Store
