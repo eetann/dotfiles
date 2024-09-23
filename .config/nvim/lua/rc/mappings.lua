@@ -236,6 +236,19 @@ vim.keymap.set("t", "<C-w>c", [[<Cmd>wincmd c<CR>]], { desc = "close win" })
 -- InsertModeでccc を入力し、エスケープでコメント線
 vim.cmd([[inoreabbrev <expr> ccc repeat('-', 70 - virtcol('.'))]])
 
+-- テキストオブジェクト
+vim.keymap.set({ "o", "x" }, "i<space>", "iW")
+
+-- 空行のときインデントを揃える
+vim.keymap.set("n", "i", function()
+	return vim.fn.empty(vim.fn.getline(".")) == 1 and '"_cc' or "i"
+end, { expr = true })
+vim.keymap.set("n", "A", function()
+	return vim.fn.empty(vim.fn.getline(".")) == 1 and '"_cc' or "A"
+end, { expr = true })
+
+vim.keymap.set("n", "U", "<c-r>")
+
 -- ----cursorの形をモードで変化(ターミナルによる)-----------------
 vim.cmd([[
 if has('vim_starting') " reloadableにするため
