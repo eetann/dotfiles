@@ -15,3 +15,6 @@ case ${OSTYPE} in
     alias awk="gawk"
     ;;
 esac
+
+# nocorrect
+alias ionic='nocorrect ionic'
