@@ -188,7 +188,7 @@ cmp.setup({
 		["<C-e>"] = cmp.mapping.abort(), -- 補完を終了して戻す
 		["<CR>"] = cmp.mapping.confirm({ select = true }),
 		-- setState, defaultDate のような set default の後に続く所を書く時に使う
-		["<C-y>"] = cmp.mapping(function()
+		["<C-g>"] = cmp.mapping(function()
 			cmp.close()
 			vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(" ", true, false, true), "in", false)
 			-- -- TODO: ゴースト？で表示

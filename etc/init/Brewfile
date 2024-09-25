@@ -22,6 +22,7 @@ if OS.mac?
     brew "findutils"
     brew "reattach-to-user-namespace"
     brew "tree"
+    brew "libyaml" # Rubyのインストールで必要
     cask "karabiner-elements"
     cask "keycastr"
     cask "rectangle"
