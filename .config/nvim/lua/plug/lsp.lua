@@ -261,6 +261,7 @@ mason_lspconfig.setup_handlers({
 				},
 			}
 		elseif server_name == "angularls" then
+			-- ref: https://www.reddit.com/r/neovim/comments/18ywqvp/angular_lsp_configuration_errors/
 			local angularls_path = require("mason-registry").get_package("angular-language-server"):get_install_path()
 
 			local cmd = {
