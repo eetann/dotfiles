@@ -18,3 +18,5 @@ esac
 
 # nocorrect
 alias ionic='nocorrect ionic'
+alias pod='nocorrect pod'
+alias ng='nocorrect ng'

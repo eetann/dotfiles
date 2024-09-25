@@ -260,6 +260,28 @@ mason_lspconfig.setup_handlers({
 					},
 				},
 			}
+		elseif server_name == "angularls" then
+			local angularls_path = require("mason-registry").get_package("angular-language-server"):get_install_path()
+
+			local cmd = {
+				"ngserver",
+				"--stdio",
+				"--tsProbeLocations",
+				table.concat({
+					angularls_path,
+					vim.uv.cwd(),
+				}, ","),
+				"--ngProbeLocations",
+				table.concat({
+					angularls_path .. "/node_modules/@angular/language-server",
+					vim.uv.cwd(),
+				}, ","),
+			}
+
+			opts.cmd = cmd
+			opts.on_new_config = function(new_config, new_root_dir)
+				new_config.cmd = cmd
+			end
 		end
 
 		lspconfig[server_name].setup(opts)

@@ -194,6 +194,7 @@ require("lazy").setup({
 			"mdx",
 			"php",
 			"react",
+			"typescript",
 			"typescriptreact",
 			"vue",
 			"xml",
