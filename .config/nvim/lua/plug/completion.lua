@@ -187,11 +187,21 @@ cmp.setup({
 		["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c", "s" }), -- 補完を終了する
 		["<C-e>"] = cmp.mapping.abort(), -- 補完を終了して戻す
 		["<CR>"] = cmp.mapping.confirm({ select = true }),
-		-- setState, defaultDate のような set default の後に続く所を書く時に使う
+		-- TODO: macで動かない？
+		-- setState, defaultDate のような prefixの後に続く所を書く時に使う
 		["<C-g>"] = cmp.mapping(function()
 			cmp.close()
+			-- TODO: inputで補完できれば使えそう
+			-- vim.ui.input({ prompt = "Enter keyword: " }, function(input)
+			-- 	vim.api.nvim_feedkeys(
+			-- 		vim.api.nvim_replace_termcodes(i .. input .. "<Esc>mzBvg~`za", true, false, true),
+			-- 		"in",
+			-- 		false
+			-- 	)
+			-- end)
+			-- カーソル前を空白にすることでキーワードを最初から始める
 			vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(" ", true, false, true), "in", false)
-			-- -- TODO: ゴースト？で表示
+			-- -- TODO: ゴースト？で表示 あるいは inputで入力させる
 			cmp.complete()
 			local delete_event
 			delete_event = cmp.event:on("complete_done", function(event)
@@ -202,13 +212,26 @@ cmp.setup({
 				-- end
 				vim.defer_fn(function()
 					vim.api.nvim_feedkeys(
-						vim.api.nvim_replace_termcodes('<Esc>mzBvgU"_X`zi', true, false, true),
+						vim.api.nvim_replace_termcodes('<Esc>mzBvgU"_X`za', true, false, true),
 						"in",
 						false
 					)
 				end, 10)
 				delete_event()
 			end)
+		end, { "i", "s" }),
+		-- 先頭の大文字小文字を切り替える
+		["<C-v>"] = cmp.mapping(function()
+			if cmp.visible() then
+				cmp.confirm()
+				vim.defer_fn(function()
+					vim.api.nvim_feedkeys(
+						vim.api.nvim_replace_termcodes("<Esc>mzBvg~`za", true, false, true),
+						"in",
+						false
+					)
+				end, 10)
+			end
 		end, { "i", "s" }),
 	},
 	sources = cmp.config.sources({
