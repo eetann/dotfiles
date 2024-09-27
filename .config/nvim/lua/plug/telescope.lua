@@ -211,3 +211,8 @@ end)
 vim.keymap.set("n", "<Leader>ft", function()
 	require("telescope.builtin").live_grep({ default_text = "todo:" })
 end)
+
+vim.keymap.set("n", "<Leader>gc", function()
+	require("telescope.builtin").find_files({ cwd = require("telescope.utils").buffer_dir() })
+	-- TODO: 下の階層は検索させない
+end, { desc = "同階層にあるファイル一覧を開く" })
