@@ -6,6 +6,16 @@ if [[ -z "$TMUX" && -z "$VIM" && $- == *l* ]] ; then
   export PATH=$HOME/.local/bin:$PATH
   export PATH=$PATH:$HOME/.cargo/bin
 
+  if [ -e $HOME/Library/Android/sdk ]; then
+    export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
+    # avdmanager, sdkmanager
+    export PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin
+    # adb, logcat
+    export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+    # emulator
+    export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
+  fi
+
   # get the IDs
   ID="`tmux list-sessions`"
   if [[ -z "$ID" ]]; then
