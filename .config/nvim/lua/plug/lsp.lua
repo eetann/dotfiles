@@ -226,6 +226,20 @@ mason_lspconfig.setup_handlers({
 			local root_dir = lspconfig.util.root_pattern("package.json", "node_modules")
 			opts.root_dir = root_dir
 			opts.autostart = detected_root_dir(root_dir)
+			opts.on_new_config = function(new_config)
+				-- プロジェクトのTypeScriptが古すぎてLSPが動かないとき、グローバルな方を優先させる
+				-- 環境変数TS_LS_GLOBAL=1のときのみ実行
+				-- miseの場合は以下
+				-- mise set TS_LS_GLOBAL=1
+				-- mise trust
+				if os.getenv("TS_LS_GLOBAL") == "1" then
+					new_config.init_options = {
+						tsserver = {
+							path = vim.fn.expand("~/.local/share/pnpm/global/5/node_modules/typescript/lib"),
+						},
+					}
+				end
+			end
 		elseif server_name == "denols" then
 			local root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc", "deps.ts")
 			opts.root_dir = root_dir
@@ -261,26 +275,32 @@ mason_lspconfig.setup_handlers({
 				},
 			}
 		elseif server_name == "angularls" then
+			-- TODO:
+			opts.root_dir = require("lspconfig.util").root_pattern("angular.json", "package.json")
 			-- ref: https://www.reddit.com/r/neovim/comments/18ywqvp/angular_lsp_configuration_errors/
-			local angularls_path = require("mason-registry").get_package("angular-language-server"):get_install_path()
+			local angularls_path = vim.fn.expand("~/.local/share/pnpm/global/5/node_modules/@angular/language-server")
+			local server_path = vim.fn.expand("~/.local/share/pnpm/global/5")
 
+			-- TODO: 補完がまだ動かない
 			local cmd = {
 				"ngserver",
 				"--stdio",
 				"--tsProbeLocations",
 				table.concat({
-					angularls_path,
+					server_path,
 					vim.uv.cwd(),
 				}, ","),
 				"--ngProbeLocations",
 				table.concat({
-					angularls_path .. "/node_modules/@angular/language-server",
+					server_path,
 					vim.uv.cwd(),
 				}, ","),
+				"--includeCompletionsWithSnippetText",
+				"--includeAutomaticOptionalChainCompletions",
 			}
 
 			opts.cmd = cmd
-			opts.on_new_config = function(new_config, new_root_dir)
+			opts.on_new_config = function(new_config)
 				new_config.cmd = cmd
 			end
 		end
