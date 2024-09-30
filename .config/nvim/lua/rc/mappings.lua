@@ -209,7 +209,7 @@ local function open_test_or_src_file()
 
 	-- ファイルが存在するか確認して開く
 	for _, test_file in ipairs(candidates) do
-		if vim.fn.filereadable(test_file) then
+		if vim.fn.filereadable(test_file) == 1 then
 			vim.cmd("edit " .. test_file)
 			return
 		end
