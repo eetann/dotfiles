@@ -248,7 +248,17 @@ require("lazy").setup({
 			"nvim-tree/nvim-web-devicons",
 		},
 		config = function()
-			require("nvim-tree").setup({})
+			local function my_on_attach(bufnr)
+				local api = require("nvim-tree.api")
+				api.config.mappings.default_on_attach(bufnr)
+				vim.keymap.del("n", "s", { buffer = bufnr })
+			end
+			require("nvim-tree").setup({
+				on_attach = my_on_attach,
+			})
+			vim.keymap.set("n", "<Leader>T", function()
+				vim.cmd("NvimTreeToggle")
+			end, { desc = "ファイルツリー" })
 		end,
 	},
 
