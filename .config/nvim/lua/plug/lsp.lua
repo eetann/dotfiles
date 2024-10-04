@@ -143,6 +143,7 @@ require("conform").setup({
 		javascriptreact = js_formatters,
 		typescript = js_formatters,
 		typescriptreact = js_formatters,
+		php = { "php_cs_fixer" },
 		astro = js_formatters,
 		-- NOTE: svelteのformatはsvelteserverのやつを使う。
 		-- LSPのFormatterは`lsp_fallback=true`をしたのでOK
