@@ -196,6 +196,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 require("mason").setup()
+-- php-cs-fixer
+-- angular-language-server
+-- css-lsp
+-- nil
+-- phpactor
+-- stylua
+-- typescript-language-server
 local lspconfig = require("lspconfig")
 lspconfig.biome.setup({
 	cmd = { "biome", "lsp-proxy" },
