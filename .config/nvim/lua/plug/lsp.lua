@@ -196,126 +196,41 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
-require("mason").setup()
--- php-cs-fixer
+-- local function detected_root_dir(root_dir)
+-- 	return not not (root_dir(vim.api.nvim_buf_get_name(0), vim.api.nvim_get_current_buf()))
+-- end
+local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+require("neodev").setup({})
+
+local lspconfig = require("lspconfig")
+local function server_register(server_name)
+	local opts = {}
+	local success, req_opts = pcall(require, "lsp." .. server_name)
+	if success then
+		opts = req_opts
+	end
+	opts.capabilities = vim.tbl_deep_extend("force", {}, capabilities, opts.capabilities or {})
+	-- .config/nvim/lua/lsp/[server_name].lua
+	lspconfig[server_name].setup(opts)
+end
+
 -- angular-language-server
 -- css-lsp
 -- nil
 -- phpactor
+-- php-cs-fixer
 -- stylua
 -- typescript-language-server
-local lspconfig = require("lspconfig")
-lspconfig.biome.setup({
-	cmd = { "biome", "lsp-proxy" },
-	on_new_config = function(new_config)
-		local pnpm = lspconfig.util.root_pattern("pnpm-lock.yml", "pnpm-lock.yaml")(vim.api.nvim_buf_get_name(0))
-		local cmd = { "npx", "biome", "lsp-proxy" }
-		if pnpm then
-			cmd = { "pnpm", "biome", "lsp-proxy" }
-		end
-		new_config.cmd = cmd
-	end,
-})
-require("lspconfig").eslint.setup({})
-
-local function detected_root_dir(root_dir)
-	return not not (root_dir(vim.api.nvim_buf_get_name(0), vim.api.nvim_get_current_buf()))
-end
-
-require("neodev").setup({})
+require("mason").setup()
 local mason_lspconfig = require("mason-lspconfig")
-mason_lspconfig.setup_handlers({
-	function(server_name)
-		local opts = {}
-		opts.capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-		opts.capabilities.textDocument.completion.completionItem.snippetSupport = true
+mason_lspconfig.setup_handlers({ server_register })
 
-		if server_name == "ts_ls" then
-			local root_dir = lspconfig.util.root_pattern("package.json", "node_modules")
-			opts.root_dir = root_dir
-			opts.autostart = detected_root_dir(root_dir)
-			opts.on_new_config = function(new_config)
-				-- プロジェクトのTypeScriptが古すぎてLSPが動かないとき、グローバルな方を優先させる
-				-- 環境変数TS_LS_GLOBAL=1のときのみ実行
-				-- miseの場合は以下
-				-- mise set TS_LS_GLOBAL=1
-				-- mise trust
-				if os.getenv("TS_LS_GLOBAL") == "1" then
-					new_config.init_options = {
-						tsserver = {
-							path = vim.fn.expand("~/.local/share/pnpm/global/5/node_modules/typescript/lib"),
-						},
-					}
-				end
-			end
-		elseif server_name == "denols" then
-			local root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc", "deps.ts")
-			opts.root_dir = root_dir
-			opts.autostart = detected_root_dir(root_dir)
-			opts.init_options = { lint = true, unstable = true }
-		elseif server_name == "bashls" then
-			opts.settings = {
-				bashIde = {
-					globPattern = "*@(.sh|.inc|.bash|.command|.envrc)",
-				},
-			}
-			opts.init_options = { lint = true, unstable = true }
-		elseif server_name == "sumneko_lua" then
-			opts.settings = {
-				Lua = {
-					completion = {
-						callSnippet = "Replace",
-					},
-					workspace = {
-						library = vim.api.nvim_get_runtime_file("", true),
-						checkThirdParty = false,
-					},
-				},
-			}
-		elseif server_name == "tailwindcss" then
-			opts.settings = {
-				tailwindCSS = {
-					experimental = {
-						classRegex = {
-							{ "tv\\((([^()]*|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
-						},
-					},
-				},
-			}
-		elseif server_name == "angularls" then
-			-- TODO:
-			opts.root_dir = require("lspconfig.util").root_pattern("angular.json", "package.json")
-			-- ref: https://www.reddit.com/r/neovim/comments/18ywqvp/angular_lsp_configuration_errors/
-			local angularls_path = vim.fn.expand("~/.local/share/pnpm/global/5/node_modules/@angular/language-server")
-			local server_path = vim.fn.expand("~/.local/share/pnpm/global/5")
-
-			-- TODO: 補完がまだ動かない
-			local cmd = {
-				"ngserver",
-				"--stdio",
-				"--tsProbeLocations",
-				table.concat({
-					server_path,
-					vim.uv.cwd(),
-				}, ","),
-				"--ngProbeLocations",
-				table.concat({
-					server_path,
-					vim.uv.cwd(),
-				}, ","),
-				"--includeCompletionsWithSnippetText",
-				"--includeAutomaticOptionalChainCompletions",
-			}
-
-			opts.cmd = cmd
-			opts.on_new_config = function(new_config)
-				new_config.cmd = cmd
-			end
-		end
-
-		lspconfig[server_name].setup(opts)
-	end,
-})
+local other_lsp = { "biome", "eslint" }
+for _, server_name in pairs(other_lsp) do
+	server_register(server_name)
+end
 
 local null_ls = require("null-ls")
 
