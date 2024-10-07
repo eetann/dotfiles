@@ -143,7 +143,7 @@ require("conform").setup({
 		javascriptreact = js_formatters,
 		typescript = js_formatters,
 		typescriptreact = js_formatters,
-		php = { "pint", "php_cs_fixer" },
+		php = { "pint", "php_cs_fixer", stop_after_first = true },
 		blade = { "blade-formatter" },
 		-- まだpintではサポートされてないっぽい: https://github.com/laravel/pint/pull/256
 		-- blade = { "pint","blade-formatter" },
