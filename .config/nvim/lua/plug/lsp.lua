@@ -143,7 +143,10 @@ require("conform").setup({
 		javascriptreact = js_formatters,
 		typescript = js_formatters,
 		typescriptreact = js_formatters,
-		php = { "php_cs_fixer" },
+		php = { "pint", "php_cs_fixer" },
+		blade = { "blade-formatter" },
+		-- まだpintではサポートされてないっぽい: https://github.com/laravel/pint/pull/256
+		-- blade = { "pint","blade-formatter" },
 		astro = js_formatters,
 		-- NOTE: svelteのformatはsvelteserverのやつを使う。
 		-- LSPのFormatterは`lsp_fallback=true`をしたのでOK

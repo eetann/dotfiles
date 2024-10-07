@@ -15,6 +15,8 @@ abbreviations=(
   "CD"   "&& cd \$_"
   "CL"   "| clip.exe"
   "X"    "| xsel -ib"
+  "PA"   "php artisan"
+  "V"    "vagrant"
   "TREE" "tree -a -I '.git|node_modules|dist' --charset unicode"
   "BLOG" "node bin/new.mjs --slug"
 )

@@ -135,11 +135,16 @@ require("lazy").setup({
 		dependencies = { "folke/noice.nvim" },
 	},
 
-	{ "JoosepAlviste/nvim-ts-context-commentstring" },
 	{
 		"numToStr/Comment.nvim",
 		dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
 		config = conf("comment"),
+	},
+	{
+		"folke/ts-comments.nvim",
+		opts = {},
+		event = "VeryLazy",
+		enabled = vim.fn.has("nvim-0.10.0") == 1,
 	},
 
 	{
