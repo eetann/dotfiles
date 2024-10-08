@@ -13,6 +13,7 @@ brew "direnv"
 brew "fd"
 cask "wezterm"
 brew "jq"
+brew "yq"
 if OS.mac?
     brew "go"
     brew "ncurses"
