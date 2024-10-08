@@ -34,7 +34,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
 	group = group_name,
-	pattern = { "cpp", "python" },
+	pattern = { "cpp", "python", "php" },
 	callback = function()
 		vim.cmd([[
     setlocal sw=4 sts=4 ts=4

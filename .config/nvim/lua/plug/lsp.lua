@@ -188,6 +188,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.api.nvim_create_autocmd("BufWritePre", {
 			pattern = "*",
 			callback = function(args)
+				if os.getenv("FORMATTER_DISABLE") == "1" then
+					return
+				end
 				if client.name == "biome" then
 					run_code_action_only("source.organizeImports.biome")
 				elseif client.name == "gopls" then
