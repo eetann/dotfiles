@@ -188,7 +188,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.api.nvim_create_autocmd("BufWritePre", {
 			pattern = "*",
 			callback = function(args)
-				if os.getenv("FORMATTER_DISABLE") == "1" then
+				if
+					vim.g.disable_autoformat
+					or vim.b[args.buf].disable_autoformat
+					or os.getenv("FORMATTER_DISABLE") == "1"
+				then
 					return
 				end
 				if client.name == "biome" then
