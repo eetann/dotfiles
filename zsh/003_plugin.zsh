@@ -22,7 +22,7 @@ export FZF_DEFAULT_OPTS=$(cat <<"EOF"
 --select-1
 --exit-0
 --reverse
---bind ctrl-d:preview-page-down,ctrl-u:preview-page-up
+--bind ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up
 EOF
 )
 
