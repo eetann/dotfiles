@@ -68,6 +68,14 @@ function telescope_custom_actions.multi_selection_open(prompt_bufnr)
 	telescope_custom_actions._multiopen(prompt_bufnr, "edit")
 end
 
+local function insert_text_at_cursor(text)
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+	local current_line = vim.api.nvim_get_current_line()
+	local new_line = current_line:sub(1, col) .. text .. current_line:sub(col + 1)
+	vim.api.nvim_set_current_line(new_line)
+	vim.api.nvim_win_set_cursor(0, { row, col + #text })
+end
+
 local function getVisualSelection()
 	vim.cmd('noau normal! "vy')
 	---@diagnostic disable-next-line: missing-parameter
@@ -216,3 +224,61 @@ vim.keymap.set("n", "<Leader>gc", function()
 	require("telescope.builtin").find_files({ cwd = require("telescope.utils").buffer_dir() })
 	-- TODO: 下の階層は検索させない
 end, { desc = "同階層にあるファイル一覧を開く" })
+
+vim.keymap.set("n", "<Leader>fw", function()
+	require("telescope.builtin").live_grep({
+		file_ignore_patterns = { ".index", ".pindex", ".git" },
+		attach_mappings = function(prompt_bufnr, map)
+			map("i", "<CR>", function()
+				local picker = action_state.get_current_picker(prompt_bufnr)
+				if picker.manager:num_results() == 0 then
+					actions.close(prompt_bufnr)
+					do
+						return
+					end
+				end
+				if not num_selections or num_selections <= 1 then
+					actions.add_selection(prompt_bufnr)
+				end
+
+				actions.close(prompt_bufnr)
+
+				for _, entry in ipairs(picker:get_multi_selection()) do
+					local filename
+
+					if entry.filename then
+						filename = entry.filename
+					elseif not entry.bufnr then
+						local value = entry.value
+						if not value then
+							return
+						end
+						if type(value) == "table" then
+							value = entry.display
+						end
+
+						local sections = vim.split(value, ":")
+						filename = sections[1]
+					end
+					if filename:match("%.md$") then
+						local file = io.open(filename, "r")
+
+						if not file then
+							return
+						end
+						local first_line = file:read("*l")
+						file:close()
+						-- Markdownの見出し（# 見出し）のパターンにマッチするかチェック
+						local heading = first_line:match("^#%s+(.+)")
+
+						if heading then
+							local wikilink = "[[" .. filename .. "|" .. heading .. "]]"
+							insert_text_at_cursor(wikilink)
+						end
+					end
+				end
+			end)
+			return true
+		end,
+	})
+end, { desc = "grepしてwikilinkで書く(nb用)" })
