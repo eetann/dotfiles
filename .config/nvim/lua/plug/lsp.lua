@@ -159,6 +159,11 @@ require("conform").setup({
 	},
 })
 
+local function go_to_definition_relative() end
+
+-- コマンドやキーマッピングに設定
+vim.api.nvim_set_keymap("n", "gd", "<cmd>lua go_to_definition()<CR>", { noremap = true, silent = true })
+
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = "my_nvim_rc",
 	callback = function(ev)
@@ -166,7 +171,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 		vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", bufopts)
 		vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", bufopts)
-		vim.keymap.set("n", "gd", "<cmd>Lspsaga goto_definition<CR>", bufopts)
+		vim.keymap.set("n", "gd", function()
+			vim.cmd("Lspsaga goto_definition")
+			vim.cmd("sleep 100ms")
+			local bufnr = vim.api.nvim_get_current_buf()
+			local absolute_path = vim.api.nvim_buf_get_name(bufnr)
+			local relative_path = vim.fn.fnamemodify(absolute_path, ":.")
+			vim.api.nvim_buf_set_name(bufnr, relative_path)
+		end, bufopts)
 		vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", bufopts)
 		vim.keymap.set("n", "gp", "<cmd>Lspsaga peek_definition<CR>", bufopts)
 		vim.keymap.set("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", bufopts)
