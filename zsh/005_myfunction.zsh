@@ -467,16 +467,23 @@ function rg_fzf_nvim() {
 EOF
 )
 
-  # 入力途中の文字列をrgにわたす
+  # 入力途中の文字列をrgに渡す
   selected=$(rg --column --line-number --no-heading --color=always --smart-case -- $query | eval $fzf_command)
   # ファイルを選択した場合のみバッファを更新
   if [[ -n "$selected" ]]; then
     # 改行で区切った配列へ 変数展開フラグfを使う
     select_arr=(${(f)selected})
     escaped=""
+    count=0
     for val in $select_arr; do
       escaped+=" "
-      escaped+=$(printf "%q" "$val" | cut -d':' -f1)
+      # 最初のファイルだけ指定行で開いてあげる
+      if [[ $count -eq 0 ]]; then
+        escaped+=$(printf "%q" "$val" | awk -F: '{print $1 " -c " $2}')
+      else
+        escaped+=$(printf "%q" "$val" | awk -F: '{print $1}')
+      fi
+      count+=1
     done
     BUFFER="nvim${escaped}"
   fi
