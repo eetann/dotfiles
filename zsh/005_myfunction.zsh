@@ -243,14 +243,14 @@ function fzf_mise_tasks() {
     return 1
   fi
 
-  local tasks=`yq -oy '.tasks | to_entries | .[] | .key + " = " + .value.run' .mise.toml 2>/dev/null || echo ''`
+  local tasks="yq -oj '.tasks | to_entries | .[] | .key + \" = \" + .value.run' .mise.toml 2>/dev/null || echo ''"
   if [[ -z $tasks ]]; then
     echo 'fzf_mise_tasks'
     echo 'There is no tasks in .mise.toml'
     zle send-break
     return 1
   fi
-  local selected=`echo $tasks | FZF_DEFAULT_OPTS='' fzf --height=50% --reverse --exit-0 | awk -F ' = ' '{ print $1}'`
+  local selected=`eval $tasks | sed 's/^"//;s/"$//' | FZF_DEFAULT_OPTS='' fzf --height=50% --reverse --exit-0 | awk -F ' = ' '{ print $1}'`
 
   zle reset-prompt
   if [[ -z $selected ]]; then
