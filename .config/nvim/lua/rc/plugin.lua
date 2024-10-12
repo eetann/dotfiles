@@ -40,7 +40,11 @@ require("lazy").setup({
 	},
 
 	{ "machakann/vim-swap", config = conf("vim-swap") },
-	{ "jiangmiao/auto-pairs", config = conf("auto-pairs") },
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		config = conf("nvim-autopairs"),
+	},
 
 	{ "nvim-telescope/telescope.nvim", config = conf("telescope") },
 	{ "johmsalas/text-case.nvim", dependencies = { "nvim-telescope/telescope.nvim" }, config = conf("text-case") },
