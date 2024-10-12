@@ -12,7 +12,11 @@ fi
 source $ZDIR/002_completion.zsh
 source $ZDIR/003_plugin.zsh
 source $ZDIR/004_alias.zsh
-source $ZDIR/005_myfunction.zsh
+
+foreach script ($ZDIR/myfunction/*.zsh) {
+  source $script
+}
+
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # pnpm
