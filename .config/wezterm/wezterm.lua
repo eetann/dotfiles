@@ -61,5 +61,9 @@ config.hide_tab_bar_if_only_one_tab = true
 config.adjust_window_size_when_changing_font_size = false
 config.keys = key_table
 config.hyperlink_rules = wezterm.default_hyperlink_rules()
+table.insert(config.hyperlink_rules, {
+	regex = "\\b\\w+://(?:[\\w.-]+):\\d+\\S*\\b",
+	format = "$0",
+})
 
 return config
