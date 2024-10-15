@@ -130,9 +130,10 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 		vim.api.nvim_buf_create_user_command(0, "MarkdownCheckbox", function(opts)
 			markdown_checkbox(opts.line1, opts.line2)
 		end, { range = true })
+		-- Macだとcontrol + Enterに割当ができないので妥協
 		vim.keymap.set(
 			{ "n", "x" },
-			"<NL>",
+			"<C-x>",
 			"<Cmd>MarkdownCheckbox<CR>",
 			{ buffer = true, desc = "Markdownのチェックボックスのトグル" }
 		)
