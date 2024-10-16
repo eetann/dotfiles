@@ -200,6 +200,12 @@ require("lazy").setup({
 
 	{ "mechatroner/rainbow_csv", lazy = true, ft = { "csv" }, config = conf("rainbow_csv") },
 
+	-- bladeのインデント用
+	{
+		"jwalton512/vim-blade",
+		ft = "blade",
+	},
+
 	{
 		"mattn/emmet-vim",
 		lazy = true,
