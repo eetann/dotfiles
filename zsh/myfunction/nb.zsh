@@ -6,24 +6,34 @@ function fzf_nb_edit() {
     return 1
   fi
   # pinを優先表示したいのでnb ls
-  local selected=`nb ls -a --no-id --filenames \
-    | fzf-tmux -p 80% \
+  local selected=`nb ls -a --no-header --no-footer --no-color home:\
+    | awk '{gsub(/^\[|\]/, ""); print}'\
+    | fzf --tmux 80% \
       --ansi \
-      --preview 'bat --color=always --language=md --style=plain {-1}'`
-  # 今後のパフォーマンスによっては
-  #   普通にmarkdown取ってきて、最後に nb edit ファイルパス の方がいいかも
-  # selected=$(eval $FZF_CTRL_T_COMMAND | eval $fzf_command)
+      --preview 'bat --color=always --language=md --style=plain $(nb show {1} --relative-path)'`
 
   if [[ -z $selected ]]; then
     return 0
   fi
 
   zle reset-prompt
-  # https://zsh.sourceforge.io/Doc/Release/Expansion.html#Parameter-Expansion:~:text=array%20element%20separately.-,%24%7Bname%23pattern%7D,-%24%7Bname%23%23
+  # 末尾削除: https://zsh.sourceforge.io/Doc/Release/Expansion.html#Filename-Generation:~:text=%25pattern%7D-,%24%7Bname%25%25pattern%7D,-If%20the%20pattern
+  # zshのpettern: https://zsh.sourceforge.io/Doc/Release/Expansion.html#Glob-Operators
   # 再実行したくなるときのために履歴に残して実行
-  BUFFER="nb edit ${selected#$'\U1F4CC '}"
+  BUFFER="nb edit ${selected%%[[:space:]]?#}"
   zle accept-line
 }
 
 zle -N fzf_nb_edit
 bindkey "^Xe" fzf_nb_edit
+
+# こっちのほうがパフォーマンス的に良い
+function nbe() {
+  nb
+  zle reset-prompt
+  BUFFER="nb e "
+  zle end-of-line
+}
+
+zle -N nbe
+bindkey "^X^X" nbe
