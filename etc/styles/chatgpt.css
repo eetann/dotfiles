@@ -1,0 +1,7 @@
+/* ref: https://zenn.dev/saip/articles/5f310826b1bf0a */
+html {
+  /* 括弧のような一部の記号が重なるため、フォントを指定する */
+  font-family: "Noto Sans JP", sans-serif;
+  font-feature-settings: "palt";
+  word-break: auto-phrase;
+}
