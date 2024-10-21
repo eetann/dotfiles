@@ -249,6 +249,12 @@ require("lazy").setup({
 			vim.g.mkdp_browserfunc = "g:OpenBrowser"
 		end,
 	},
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		ft = { "markdown", "md", "mdwn", "mkd", "mkdn", "mark", "mdx" },
+		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
+		config = conf("render-markdown"),
+	},
 
 	-- {
 	-- 	"previm/previm",

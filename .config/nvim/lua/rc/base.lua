@@ -97,8 +97,8 @@ vim.opt.background = "dark"
 -- カーソル位置を復帰
 vim.api.nvim_create_autocmd("BufReadPost", {
 	callback = function()
-		if vim.bo.filetype == "Outline" then
-			-- symbols-outlineなら早期リターン
+		if vim.bo.filetype == "Outline" or vim.bo.filetype == "gitcommit" then
+			-- 早期リターン
 			do
 				return
 			end
