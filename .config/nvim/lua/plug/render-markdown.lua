@@ -1,4 +1,5 @@
 require("render-markdown").setup({
+	render_modes = true,
 	heading = {
 		width = "block",
 		left_pad = 0,
