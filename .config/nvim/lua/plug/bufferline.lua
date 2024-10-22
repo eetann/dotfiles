@@ -1,8 +1,27 @@
 require("bufferline").setup({
 	options = {
+		close_command = "bdelete %d",
 		right_mouse_command = nil,
 		max_name_length = 40,
-    buffer_close_icon = '',
+		buffer_close_icon = "",
+		name_formatter = function(buf)
+			if buf.path:match("%.nb/home/.*.md") then
+				-- TODO: ここだけ telescopeと一致するので共通化したいかも
+				local file = io.open(buf.path, "r")
+
+				if not file then
+					return
+				end
+				local first_line = file:read("*l")
+				file:close()
+				-- Markdownの見出し（# 見出し）のパターンにマッチするかチェック
+				local heading = first_line:match("^#%s+(.+)")
+
+				if heading then
+					return heading
+				end
+			end
+		end,
 	},
 })
 
