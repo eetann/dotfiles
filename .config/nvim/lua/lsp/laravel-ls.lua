@@ -5,7 +5,7 @@ local server_path = vim.fn.expand("~/ghq/github.com/eetann/laravel-ls/")
 
 configs["laravel-ls"] = {
 	default_config = {
-		cmd = { "node", server_path .. "dist/server.js", "--stdio" },
+		cmd = { "node", server_path .. "packages/language-server/bin/laravel-language-server.js", "--stdio" },
 		filetypes = { "blade", "php" },
 		root_dir = util.root_pattern("composer.json"),
 		settings = {},
