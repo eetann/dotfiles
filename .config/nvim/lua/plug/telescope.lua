@@ -164,8 +164,11 @@ telescope.setup({
 })
 
 local telescope_custom = {
-	project_files = function(text)
-		local ok = pcall(require("telescope.builtin").git_files, { default_text = text, show_untracked = true })
+	project_files = function(text, use_git_root)
+		local ok = pcall(
+			require("telescope.builtin").git_files,
+			{ default_text = text, show_untracked = true, use_git_root = use_git_root }
+		)
 		if not ok then
 			require("telescope.builtin").find_files({ default_text = text, hidden = true })
 		end
@@ -178,13 +181,24 @@ vim.keymap.set("n", "<F6>", "<Cmd>Telescope git_files cwd=~/dotfiles<CR>")
 vim.keymap.set("n", "<Leader>fl", "<Cmd>Telescope highlights<CR>")
 vim.keymap.set("n", "<Leader>fd", "<Cmd>Telescope diagnostics<CR>")
 
+-- モノレポでプロジェクトごとに見るときはこっち
 vim.keymap.set("n", "<Leader>ff", function()
-	telescope_custom.project_files("")
+	telescope_custom.project_files("", false)
 end)
 
 vim.keymap.set("v", "<Leader>ff", function()
 	local text = getVisualSelection()
-	telescope_custom.project_files(text)
+	telescope_custom.project_files(text, false)
+end)
+
+-- モノレポで全体見たい時などはこっち
+vim.keymap.set("n", "<Leader>fF", function()
+	telescope_custom.project_files("", true)
+end)
+
+vim.keymap.set("v", "<Leader>fF", function()
+	local text = getVisualSelection()
+	telescope_custom.project_files(text, true)
 end)
 
 vim.keymap.set("n", "<Leader>fg", function()
