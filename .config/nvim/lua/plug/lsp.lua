@@ -212,6 +212,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				elseif client.name == "gopls" then
 					run_code_action_only("source.organizeImports.gopls")
 				end
+				vim.api.nvim_command("sleep 100ms")
 				require("conform").format({ bufnr = args.buf, lsp_fallback = true })
 			end,
 		})

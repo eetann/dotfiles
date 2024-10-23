@@ -212,6 +212,7 @@ require("lazy").setup({
 		lazy = true,
 		ft = {
 			"astro",
+			"blade",
 			"css",
 			"html",
 			"javascript",
