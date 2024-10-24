@@ -250,7 +250,7 @@ require("mason").setup()
 local mason_lspconfig = require("mason-lspconfig")
 mason_lspconfig.setup_handlers({ server_register })
 
-local other_lsp = { "biome", "eslint", "laravel-ls" }
+local other_lsp = { "biome", "eslint", "laravel-language-server" }
 for _, server_name in pairs(other_lsp) do
 	server_register(server_name)
 end
