@@ -5,6 +5,9 @@ if [[ -z "$TMUX" && -z "$VIM" && $- == *l* ]] ; then
   export PATH=$PATH:$GOPATH:$GOPATH/bin
   export PATH=$HOME/.local/bin:$PATH
   export PATH=$PATH:$HOME/.cargo/bin
+  if [ -e $HOME/.rd/bin ]; then
+    export PATH=$HOME/.rd/bin:$PATH
+  fi
 
   if [ -e $HOME/Library/Android/sdk ]; then
     export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
