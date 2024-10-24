@@ -9,5 +9,15 @@ require("render-markdown").setup({
 	code = {
 		width = "block",
 	},
+	checkbox = {
+		checked = { scope_highlight = "@markup.strikethrough" },
+		custom = {
+			canceled = {
+				raw = "[-]",
+				rendered = "󱘹",
+				scope_highlight = "@markup.strikethrough",
+			},
+		},
+	},
 })
 vim.keymap.set("n", "<Space>sm", ":RenderMarkdown toggle<CR>")

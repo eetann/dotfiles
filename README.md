@@ -138,3 +138,7 @@ dconf-editor の
 # Mac
 KarabinerでESCのときにIMEをオフにする
 [Karabiner-ElementsでESCやCtrl+括弧キー押下時に日本語入力を解除できるようになっていた - 絶品ゆどうふのタレ](https://yudoufu.hatenablog.jp/entry/2018/01/14/215152)
+
+# 取り消し線が有効にならない
+
+解決方法をあとでブログ書く
