@@ -1,9 +1,10 @@
 function fzf_npm_scripts() {
   local prefix="npm"
-  if [ -e pnpm-lock.yaml ]; then
+  local git_root=$(git rev-parse --show-superproject-working-tree --show-toplevel 2>/dev/null | head -1)
+  if [[ -f pnpm-lock.yaml || ( -n "$git_root" && -f "$git_root/pnpm-lock.yaml" ) ]]; then
     prefix="pnpm"
   fi
-  if [ ! -e package.json ]; then
+  if [[ ! -f package.json ]]; then
     echo 'fzf_npm_scripts'
     echo 'There is no package.json'
     zle send-break
