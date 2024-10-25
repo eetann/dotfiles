@@ -209,12 +209,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				for _, client in pairs(vim.lsp.get_clients({ bufnr = bufnr })) do
 					local actions = server_actions[client.name] or {}
 					for _, action in pairs(actions or {}) do
+						run_code_action_only(action)
 						if shouldSleep then
-							vim.api.nvim_command("sleep 10ms")
+							vim.api.nvim_command("sleep 20ms")
 						else
 							shouldSleep = true
 						end
-						run_code_action_only(action)
 					end
 				end
 				require("conform").format({ bufnr = args.buf, lsp_fallback = true })
