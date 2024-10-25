@@ -202,12 +202,21 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				then
 					return
 				end
-				if client.name == "biome" then
-					run_code_action_only("source.organizeImports.biome")
-				elseif client.name == "gopls" then
-					run_code_action_only("source.organizeImports.gopls")
+				local server_actions = {
+					biome = { "source.organizeImports.biome" },
+					gopls = { "source.organizeImports.gopls" },
+				}
+				for _, client in pairs(vim.lsp.get_clients({ bufnr = bufnr })) do
+					local actions = server_actions[client.name] or {}
+					for _, action in pairs(actions or {}) do
+						if shouldSleep then
+							vim.api.nvim_command("sleep 10ms")
+						else
+							shouldSleep = true
+						end
+						run_code_action_only(action)
+					end
 				end
-				vim.api.nvim_command("sleep 100ms")
 				require("conform").format({ bufnr = args.buf, lsp_fallback = true })
 			end,
 		})
