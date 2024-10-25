@@ -1,4 +1,8 @@
-require("oil").setup()
+require("oil").setup({
+	view_options = {
+		show_hidden = true,
+	},
+})
 
 -- oil fix relative path
 -- https://github.com/stevearc/oil.nvim/issues/234
