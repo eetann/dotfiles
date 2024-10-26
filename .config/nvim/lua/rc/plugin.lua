@@ -198,6 +198,7 @@ require("lazy").setup({
 			require("todo-comments").setup({})
 		end,
 	},
+	{ "monaqa/dial.nvim", config = conf("dial") },
 
 	{ "mechatroner/rainbow_csv", lazy = true, ft = { "csv" }, config = conf("rainbow_csv") },
 
