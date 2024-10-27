@@ -32,8 +32,12 @@ vk1D & r::Reload()
 ; ChangeKey
 ; CapsLock - > F13 （キー割当画面右上のScan Codeより"0x0064"を割り当てる）
 ; Kanji - > F14 （キー割当画面右上のScan Codeより"0x0065"を割り当てる）
+; Macに合わせる
+; ALT -> CTRL_L
+; WIN -> ALT
+; FN -> FNのまま！
 ; CTRL_L -> WIN
-; WIN -> CTRL_L
+; 
 ; ref: https://github.com/matatabi3/autohotkey/blob/5b4948fdc0e7bf5aebb87780446efa24dc7167d3/AutoHotkey.ahk
 F13 & Enter::Send "{Blind}^{Enter}"
 F13 & Space::Send "{Blind}^{Space}"
