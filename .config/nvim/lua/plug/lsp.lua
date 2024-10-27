@@ -167,12 +167,22 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", bufopts)
 		vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", bufopts)
 		vim.keymap.set("n", "gd", function()
+			vim.api.nvim_create_autocmd("CursorMoved", {
+				once = true,
+				callback = function()
+					local bufnr = vim.api.nvim_get_current_buf()
+					local absolute_path = vim.api.nvim_buf_get_name(bufnr)
+					local relative_path = vim.fn.fnamemodify(absolute_path, ":.")
+					vim.api.nvim_buf_set_name(bufnr, relative_path)
+					-- `E13: File exists`が出てしまうので、サイレントで書き込み
+					--   書き込み時のフォーマットは一時的に止めておく
+					local buf_disable_autoformat = vim.b.disable_autoformat
+					vim.b.disable_autoformat = false
+					vim.cmd("silent! write!")
+					vim.b.disable_autoformat = buf_disable_autoformat
+				end,
+			})
 			vim.lsp.buf.definition()
-			vim.cmd("sleep 100ms")
-			local bufnr = vim.api.nvim_get_current_buf()
-			local absolute_path = vim.api.nvim_buf_get_name(bufnr)
-			local relative_path = vim.fn.fnamemodify(absolute_path, ":.")
-			vim.api.nvim_buf_set_name(bufnr, relative_path)
 		end, bufopts)
 		vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", bufopts)
 		vim.keymap.set("n", "gp", "<cmd>Lspsaga peek_definition<CR>", bufopts)
