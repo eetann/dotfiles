@@ -296,6 +296,15 @@ require("lazy").setup({
 		end,
 	},
 
+	{
+		"voldikss/vim-translator",
+		config = conf("vim-translator"),
+		keys = {
+			{ "<Space>tt", "<Plug>TranslateW", mode = "n" },
+			{ "<Space>tt", "<Plug>TranslateWV", mode = "v" },
+		},
+	},
+
 	{ "David-Kunz/gen.nvim", config = conf("gen") },
 	{
 		"olimorris/codecompanion.nvim",
@@ -314,6 +323,4 @@ require("lazy").setup({
 		},
 		config = conf("codecompanion"),
 	},
-
-	{ "akinsho/toggleterm.nvim", version = "v2.*", config = conf("toggleterm") },
 })
