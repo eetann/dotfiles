@@ -5,6 +5,7 @@ if [[ -z "$TMUX" && -z "$VIM" && $- == *l* ]] ; then
   export PATH=$PATH:$GOPATH:$GOPATH/bin
   export PATH=$HOME/.local/bin:$PATH
   export PATH=$PATH:$HOME/.cargo/bin
+  # Rancher Desktop > Preferences > Application > Environment > Manual を設定
   if [ -e $HOME/.rd/bin ]; then
     export PATH=$HOME/.rd/bin:$PATH
   fi
