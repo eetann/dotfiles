@@ -126,7 +126,7 @@ require("lazy").setup({
 	{ "petertriho/nvim-scrollbar", config = conf("nvim-scrollbar") },
 
 	{ "MunifTanjim/nui.nvim" },
-	{ "rcarriga/nvim-notify", opts = { top_down = false } },
+	{ "rcarriga/nvim-notify", opts = { top_down = false, stages = "static" } },
 	{
 		"folke/noice.nvim",
 		config = conf("noice"),
