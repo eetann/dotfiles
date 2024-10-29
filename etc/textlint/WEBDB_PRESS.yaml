@@ -1924,8 +1924,8 @@ rules:
     pattern:  /ハイパー・リンク/
   - expected: ハイパーバイザ
     pattern:  /ハイパーバイザー/
-  - expected: パーサ
-    pattern:  /パーサー|パーザー|パーザ/
+  - expected: パーサー
+    pattern:  /パーサ[^ー]/
   - expected: パーマリンク
     pattern:  /\bPermalink\b|\bpermalink\b|\bpermanent link\b|パーマネントリンク/
   - expected: バッファ
