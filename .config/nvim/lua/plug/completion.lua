@@ -263,8 +263,11 @@ cmp.setup({
 		},
 		{ name = "dictionary" },
 	}),
+	---@diagnostic disable-next-line: missing-fields
 	formatting = {
-		format = lspkind.cmp_format(),
+		format = lspkind.cmp_format({
+			maxwidth = 35,
+		}),
 	},
 })
 
