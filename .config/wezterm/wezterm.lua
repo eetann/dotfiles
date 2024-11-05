@@ -28,10 +28,10 @@ local target = wezterm.target_triple
 
 if target:find("darwin") then
 	local mac_key_table = {
-		{ key = "h", mods = "CMD", action = { SendKey = { key = "h", mods = "ALT" } } },
-		{ key = "l", mods = "CMD", action = { SendKey = { key = "l", mods = "ALT" } } },
-		{ key = "n", mods = "CMD", action = { SendKey = { key = "n", mods = "ALT" } } },
-		{ key = "p", mods = "CMD", action = { SendKey = { key = "p", mods = "ALT" } } },
+		{ key = "h", mods = "OPT", action = { SendKey = { key = "h", mods = "ALT" } } },
+		{ key = "l", mods = "OPT", action = { SendKey = { key = "l", mods = "ALT" } } },
+		{ key = "n", mods = "OPT", action = { SendKey = { key = "n", mods = "ALT" } } },
+		{ key = "p", mods = "OPT", action = { SendKey = { key = "p", mods = "ALT" } } },
 		{ key = "¥", action = wezterm.action.SendKey({ key = "\\" }) },
 	}
 	append_array(key_table, mac_key_table)
