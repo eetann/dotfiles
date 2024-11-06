@@ -28,6 +28,8 @@ local target = wezterm.target_triple
 
 if target:find("darwin") then
 	local mac_key_table = {
+		{ key = "n", mods = "CMD", action = wezterm.action.Nop },
+		{ key = "p", mods = "CMD", action = wezterm.action.Nop },
 		{ key = "h", mods = "OPT", action = { SendKey = { key = "h", mods = "ALT" } } },
 		{ key = "l", mods = "OPT", action = { SendKey = { key = "l", mods = "ALT" } } },
 		{ key = "n", mods = "OPT", action = { SendKey = { key = "n", mods = "ALT" } } },
