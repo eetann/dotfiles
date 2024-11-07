@@ -214,7 +214,7 @@ vim.keymap.set("n", "<Leader>fG", function()
 	require("telescope.builtin").live_grep({
 		prompt_title = "Live Grep(no regexp)",
 		additional_args = function()
-			return { "--hidden", "--fixed-strings" }
+			return { "--hidden", "--fixed-strings", "--glob='!public/*'" }
 		end,
 	})
 end)
@@ -225,7 +225,7 @@ vim.keymap.set("v", "<Leader>fG", function()
 		prompt_title = "Live Grep(no regexp)",
 		default_text = text,
 		additional_args = function()
-			return { "--hidden", "--fixed-strings" }
+			return { "--hidden", "--fixed-strings", "--glob='!public/*'" }
 		end,
 	})
 end)

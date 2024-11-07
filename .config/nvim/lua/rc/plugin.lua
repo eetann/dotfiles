@@ -91,6 +91,11 @@ require("lazy").setup({
 	{ "folke/neodev.nvim" },
 	{ "folke/lsp-colors.nvim" },
 	{ "stevearc/conform.nvim", event = { "BufWritePre" }, cmd = { "ConformInfo" } },
+	{
+		"folke/trouble.nvim",
+		opts = {}, -- for default options, refer to the configuration section for custom setup.
+		cmd = "Trouble",
+	},
 
 	-- .config/nvim/lua/plug/completion.lua
 	{
@@ -134,6 +139,13 @@ require("lazy").setup({
 			"MunifTanjim/nui.nvim",
 			"rcarriga/nvim-notify",
 		},
+	},
+	{
+		"stevearc/quicker.nvim",
+		event = "FileType qf",
+		---@module "quicker"
+		---@type quicker.SetupOptions
+		opts = {},
 	},
 
 	{
