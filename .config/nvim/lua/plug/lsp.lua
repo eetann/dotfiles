@@ -228,7 +228,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 						end
 					end
 				end
-				require("conform").format({ bufnr = args.buf, lsp_fallback = true })
+				require("conform").format({
+					bufnr = args.buf,
+					lsp_fallback = true,
+					filter = function(c)
+						return c.name ~= "ts_ls"
+					end,
+				})
 			end,
 		})
 	end,
