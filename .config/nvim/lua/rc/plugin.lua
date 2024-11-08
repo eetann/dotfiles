@@ -93,8 +93,8 @@ require("lazy").setup({
 	{ "stevearc/conform.nvim", event = { "BufWritePre" }, cmd = { "ConformInfo" } },
 	{
 		"folke/trouble.nvim",
-		opts = {}, -- for default options, refer to the configuration section for custom setup.
 		cmd = "Trouble",
+		config = conf("trouble"),
 	},
 
 	-- .config/nvim/lua/plug/completion.lua
@@ -143,9 +143,7 @@ require("lazy").setup({
 	{
 		"stevearc/quicker.nvim",
 		event = "FileType qf",
-		---@module "quicker"
-		---@type quicker.SetupOptions
-		opts = {},
+		config = conf("quicker"),
 	},
 
 	{
