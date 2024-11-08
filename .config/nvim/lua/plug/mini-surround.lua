@@ -45,6 +45,14 @@ surround.setup({
 			input = { "%*%*().-()%*%*" },
 			output = { left = "**", right = "**" },
 		},
+		["^"] = {
+			input = { "~~().-()~~" },
+			output = { left = "~~", right = "~~" },
+		},
+		["~"] = {
+			input = { "~~().-()~~" },
+			output = { left = "~~", right = "~~" },
+		},
 		-- instead of <CR>
 		["\r"] = {
 			input = { "\n().-()\n" },
