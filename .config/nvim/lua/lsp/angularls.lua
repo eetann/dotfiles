@@ -21,8 +21,15 @@ local cmd = {
 
 ---@type lspconfig.Config
 return {
-	-- TODO:angular.jsonが無いプロジェクトはどうなっている???調査
-	root_dir = util.root_pattern("angular.json", "package.json"),
+	-- 古すぎてangularのLSPのバージョンと合わない？のもあるっぽいので環境変数で抑制
+	root_dir = function(fname)
+		if os.getenv("ANGULAR_LS_DISABLE") == "1" then
+			---@diagnostic disable-next-line: redundant-return-value
+			return nil
+		end
+		---@diagnostic disable-next-line: redundant-return-value
+		return util.root_pattern("angular.json")(fname)
+	end,
 	cmd = cmd,
 	on_new_config = function(new_config)
 		new_config.cmd = cmd
