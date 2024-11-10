@@ -308,6 +308,7 @@ require("lazy").setup({
 	{
 		"voldikss/vim-translator",
 		config = conf("vim-translator"),
+		cmd = { "TranslateW", "TranslateWV" },
 		keys = {
 			{ "<Space>tt", "<Plug>TranslateW", mode = "n" },
 			{ "<Space>tt", "<Plug>TranslateWV", mode = "v" },
@@ -333,3 +334,6 @@ require("lazy").setup({
 		config = conf("codecompanion"),
 	},
 })
+
+-- 自分の設定(長め)を読み込む
+conf("my-blog")()
