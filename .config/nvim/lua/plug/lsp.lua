@@ -261,7 +261,7 @@ local function server_register(server_name)
 end
 
 -- angular-language-server
--- css-lsp
+-- cssls
 -- nil
 -- phpactor
 -- php-cs-fixer
