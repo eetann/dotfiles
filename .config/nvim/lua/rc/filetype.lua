@@ -62,7 +62,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
 	group = group_name,
-	pattern = { "text", "qf", "quickrun", "markdown", "tex" },
+	pattern = { "text", "qf", "quickrun", "tex" },
 	callback = function()
 		vim.opt_local.wrap = true
 	end,
