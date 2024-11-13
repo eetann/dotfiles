@@ -71,11 +71,12 @@ require("lazy").setup({
 		config = conf("bufferline"),
 	},
 	{ "norcalli/nvim-colorizer.lua", config = conf("nvim-colorizer") },
-	{
-		"shellRaining/hlchunk.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		config = conf("hlchunk"),
-	},
+	-- TODO: 2024年11月13日時点でなぜかinsertモードでフリーズするので要確認
+	-- {
+	-- 	"shellRaining/hlchunk.nvim",
+	-- 	event = { "BufReadPre", "BufNewFile" },
+	-- 	config = conf("hlchunk"),
+	-- },
 	{ "andymass/vim-matchup", dependencies = { "nvim-treesitter/nvim-treesitter" } }, -- %を拡張
 	{ "kevinhwang91/nvim-hlslens", config = conf("nvim-hlslens") },
 
