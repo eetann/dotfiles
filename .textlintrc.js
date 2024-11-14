@@ -73,5 +73,7 @@ module.exports = {
     prh: {
       rulePaths: ["~/dotfiles/etc/textlint/prh.yaml"],
     },
+    // https://github.com/eetann/textlint-rule-my-blog
+    "my-blog": true,
   },
 };
