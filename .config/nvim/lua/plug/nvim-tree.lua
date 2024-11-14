@@ -5,6 +5,7 @@ local function my_on_attach(bufnr)
 	end
 	api.config.mappings.default_on_attach(bufnr)
 	vim.keymap.del("n", "s", { buffer = bufnr })
+	vim.keymap.del("n", "<C-e>", { buffer = bufnr })
 
 	vim.keymap.set("n", "?", api.tree.toggle_help, opts("Help"))
 end

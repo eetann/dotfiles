@@ -58,3 +58,9 @@ parser_config.blade = {
 	},
 	filetype = "blade",
 }
+require("treesitter-context").setup({
+	on_attach = function(bufnr)
+		-- quickerではオフにする
+		return vim.bo[bufnr].filetype ~= "qf"
+	end,
+})
