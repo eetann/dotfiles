@@ -1,3 +1,4 @@
+---@diagnostic disable-next-line: missing-fields
 require("nvim-treesitter.configs").setup({
 	ensure_installed = {
 		"astro",
@@ -59,6 +60,7 @@ parser_config.blade = {
 	filetype = "blade",
 }
 require("treesitter-context").setup({
+	max_lines = 3, -- How many lines the window should span. Values <= 0 mean no limit.
 	on_attach = function(bufnr)
 		-- quickerではオフにする
 		return vim.bo[bufnr].filetype ~= "qf"
