@@ -262,6 +262,10 @@ cmp.setup({
 			},
 		},
 		{ name = "dictionary" },
+		{
+			name = "lazydev",
+			group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+		},
 	}),
 	---@diagnostic disable-next-line: missing-fields
 	formatting = {

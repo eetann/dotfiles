@@ -1,3 +1,14 @@
+local function validate_r2_backup_path()
+	local path = os.getenv("R2_BACKUP_PATH")
+	if not path or path == "" then
+		return nil, "環境変数R2_BACKUP_PATHが設定されていません"
+	end
+	if not vim.uv.fs_stat(path) then
+		return nil, "R2_BACKUP_PATHが存在しないディレクトリを指しています: " .. path
+	end
+	return path
+end
+
 local function get_file_size(file_path)
 	-- ffprobeコマンドで画像や動画の幅と高さを取得
 	local handle =
@@ -14,56 +25,89 @@ local function get_file_size(file_path)
 	return tonumber(width), tonumber(height)
 end
 
-_G.set_aspect_ratio = function()
-	-- カーソル位置の行を取得
-	local line_num = vim.api.nvim_win_get_cursor(0)[1]
-	local line_content = vim.api.nvim_get_current_line()
-
-	-- src属性の値を抽出
-	local src = line_content:match('src="([^"]+)"')
-	if not src then
-		print("src属性が見つかりませんでした")
+_G.process_mdx_file = function()
+	vim.print("画像・動画の処理を開始")
+	local R2_BACKUP_PATH, err = validate_r2_backup_path()
+	if not R2_BACKUP_PATH then
+		vim.print(err)
 		return
 	end
 
-	-- @をsrc/assets/imagesに置換し、拡張子を除去してfilePrefixを生成
-	local file_prefix = src:gsub("@", "src/assets/images"):gsub("%.%w+$", "")
+	local filename = vim.fn.expand("%:t")
+	local slug = vim.fn.fnamemodify(filename, ":t:r")
 
-	-- 対応するファイル拡張子のリスト
-	local extensions = { "jpg", "png", "webp", "mp4" }
-	local target_file = nil
+	local content = vim.api.nvim_buf_get_lines(0, 0, vim.api.nvim_buf_line_count(0), false)
 
-	-- ファイルが存在するか確認
-	for _, ext in ipairs(extensions) do
-		local file_path = file_prefix .. "." .. ext
-		if vim.loop.fs_stat(file_path) then
-			target_file = file_path
-			break
+	-- 画像と動画のファイル名リストを作成
+	local file_list = {}
+	for _, line in ipairs(content) do
+		local media_filename = line:match("src=[\"']@:([%w-_%.]+)")
+		if media_filename then
+			table.insert(file_list, media_filename)
 		end
 	end
 
-	-- ファイルが見つからない場合のエラーハンドリング
-	if not target_file then
-		print("対応するファイルが見つかりませんでした")
-		return
+	-- ディレクトリの作成
+	local dst_dir = string.format("%s/%s/", R2_BACKUP_PATH, slug)
+	if not vim.uv.fs_stat(dst_dir) then
+		-- 493はパーミッション（8進数0755に対応）
+		local _, err = vim.uv.fs_mkdir(dst_dir, 493)
+		if err then
+			vim.print("ディレクトリの作成に失敗しました。")
+			return
+		end
 	end
 
-	-- ffprobeで幅と高さを取得してaspectRatioを計算
-	local width, height = get_file_size(target_file)
-	if not width or not height then
-		print("画像または動画のサイズが取得できませんでした")
-		return
+	vim.cmd("sleep 100m")
+	vim.print("変換中")
+	-- aspectRatioListを作成
+	local aspectRatioList = {}
+	for _, media_filename in ipairs(file_list) do
+		local src_path = string.format("%s/src/assets/images/_ignore/%s", vim.fn.getcwd(), media_filename)
+		local file_ext = media_filename:match("^.+(%..+)$")
+
+		if file_ext ~= ".mp4" then
+			local dst_file = string.format("%s/%s/%s.avif", R2_BACKUP_PATH, slug, media_filename:match("(.+)%..+$"))
+			vim.print("dst_file" .. dst_file)
+			vim.fn.system({ "ffmpeg", "-i", src_path, dst_file })
+		else
+			local dst_file = string.format("%s/%s/%s", R2_BACKUP_PATH, slug, media_filename)
+			vim.print("dst_file" .. dst_file)
+			vim.fn.system({ "cp", src_path, dst_file })
+		end
+
+		-- アスペクト比を計算
+		local width, height = get_file_size(src_path)
+		if not width or not height then
+			print("画像または動画のサイズが取得できませんでした")
+			return
+		end
+		local aspect_ratio = width / height
+		aspectRatioList[media_filename] = aspect_ratio
 	end
-	local aspect_ratio = string.format("%.2f", width / height)
+	vim.print("変換終了")
 
-	-- 新しい行内容を生成
-	vim.cmd("normal! k")
-	line_content = vim.api.nvim_get_current_line()
-	local new_line = line_content .. ' aspectRatio="' .. aspect_ratio .. '"'
+	-- mdxファイルを更新
+	for key, aspect_ratio in pairs(aspectRatioList) do
+		vim.fn.setreg("/", "src=[\"']@:" .. key .. "[\"']")
+		vim.cmd("normal! n")
 
-	-- 行を置き換え
-	-- line-rangeは0ベースインデックスで、startとstart同じなら新規行、別なら入れ替えとなる
-	vim.api.nvim_buf_set_lines(0, line_num - 2, line_num - 1, false, { new_line })
+		-- srcのパスの置換
+		local new_filename = "@/" .. slug .. "/" .. key:match("^(.-)%.")
+		if key:match("mp4") then
+			new_filename = new_filename .. ".mp4"
+		else
+			new_filename = new_filename .. ".avif"
+		end
+		vim.cmd("substitute=@:" .. key .. "=" .. new_filename)
+
+		-- アスペクト比の追記
+		vim.cmd("normal! k")
+		local line_content = vim.api.nvim_get_current_line()
+		local new_line = line_content .. ' aspectRatio="' .. string.format("%.2f", aspect_ratio) .. '"'
+		vim.api.nvim_set_current_line(new_line)
+	end
+	vim.print("処理が終わりました！")
 end
 
-vim.api.nvim_set_keymap("n", "<Space>gi", ":lua set_aspect_ratio()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Space>gi", ":lua process_mdx_file()<CR>", { noremap = true, silent = true })
