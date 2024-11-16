@@ -2,3 +2,4 @@
 .ignore_debug.*
 .DS_Store
 .php-cs-fixer.cache
+mise.local.toml
