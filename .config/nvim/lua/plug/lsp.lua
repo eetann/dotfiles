@@ -222,7 +222,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 					for _, action in pairs(actions or {}) do
 						run_code_action_only(action)
 						if shouldSleep then
-							vim.api.nvim_command("sleep 20ms")
+							vim.api.nvim_command("sleep 50ms")
 						else
 							shouldSleep = true
 						end

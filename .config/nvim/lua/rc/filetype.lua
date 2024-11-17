@@ -258,6 +258,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 	pattern = { "gitcommit" },
 	callback = function()
 		vim.cmd("startinsert")
+		vim.cmd("sleep 100ms")
 		vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-R>=v:lua.complete_git_commit()<CR>", true, true, true))
 	end,
 })
