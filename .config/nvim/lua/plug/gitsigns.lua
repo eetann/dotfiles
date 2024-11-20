@@ -56,9 +56,7 @@ require("gitsigns").setup({
 			end)
 			return "<Ignore>"
 		end, { expr = true })
-		vim.keymap.set("n", "<Leader>sb", gs.toggle_current_line_blame)
-		vim.keymap.set("n", "<Leader>gb", gs.toggle_current_line_blame)
-		vim.keymap.set("n", "<Leader>gB", function()
+		vim.keymap.set("n", "<Leader>gb", function()
 			gs.blame_line({ full = true })
 		end)
 		vim.keymap.set("n", "<Leader>gd", gs.diffthis)
