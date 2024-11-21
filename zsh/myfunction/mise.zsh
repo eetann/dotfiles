@@ -1,4 +1,5 @@
 function fzf_mise_tasks() {
+  # TODO: .mise以外にも対応させる: https://mise.jdx.dev/configuration.html
   # mise settings set experimental true
   if [ ! -e .mise.toml ]; then
     echo 'fzf_mise_tasks'
