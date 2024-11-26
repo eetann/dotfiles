@@ -55,9 +55,6 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 	command = "cwindow",
 })
 
-if vim.fn.executable("jvgrep") then
-	vim.opt.grepprg = "jvprep"
-end
 vim.opt.swapfile = false
 vim.opt.history = 1000
 vim.opt.completeopt = { "menu", "menuone", "preview" }
