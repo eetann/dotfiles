@@ -4,6 +4,10 @@ gui:
   nerdFontsVersion: "3"
 os:
   Edit: 'nvim'
+keybinding:
+  universal:
+    # <c-s>に割り当てたくないため、上書き
+    filteringMenu: '<f1>'
 customCommands:
   - key: 'u'
     context: 'files'
