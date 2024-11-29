@@ -5,11 +5,15 @@ end
 local function is_minified_file(bufnr)
 	-- is likely minified if one of the first 5 lines is longer than 1000 characters
 	for i = 0, 5 do
-		local line = vim.api.nvim_buf_get_lines(bufnr, i, i + 1, false)[1]
-		if #line > 1000 then
+		local lines = vim.api.nvim_buf_get_lines(bufnr, i, i + 1, false)
+		if #lines == 0 then
+			return false
+		end
+		if #lines[1] > 300 then
 			return true
 		end
 	end
+	return false
 end
 
 ---@diagnostic disable-next-line: missing-fields
@@ -48,7 +52,7 @@ require("nvim-treesitter.configs").setup({
 		-- `false` will disable the whole extension
 		enable = true,
 		disable = function(_, bufnr)
-			return is_file_too_large(bufnr) or is_minified_file(bufnr)
+			return is_minified_file(bufnr) or is_file_too_large(bufnr)
 		end,
 	},
 	indent = {
