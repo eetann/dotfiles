@@ -15,7 +15,7 @@ vim.filetype.add({
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
 	group = group_name,
-	pattern = { "qf", "help", "man" },
+	pattern = { "help", "man" },
 	callback = function()
 		vim.cmd([[
       nnoremap <silent><buffer> q <Cmd>:quit<CR>
@@ -62,7 +62,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
 	group = group_name,
-	pattern = { "text", "qf", "quickrun", "tex" },
+	pattern = { "text", "quickrun", "tex" },
 	callback = function()
 		vim.opt_local.wrap = true
 	end,
