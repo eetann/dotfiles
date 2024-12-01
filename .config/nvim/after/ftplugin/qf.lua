@@ -1,3 +1,8 @@
+if vim.b.my_plugin_qf ~= nil then
+	return
+end
+vim.b.my_plugin_qf = true
+
 vim.bo.buflisted = false
 
 vim.keymap.set("n", "q", "<CMD>quit<CR>", { silent = true, buffer = true })
