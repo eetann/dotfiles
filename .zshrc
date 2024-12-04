@@ -29,3 +29,4 @@ esac
 if type mise > /dev/null; then
   eval "$(mise activate zsh)"
 fi
+export SKIP_FIREBASE_FIRESTORE_SWIFT=1
