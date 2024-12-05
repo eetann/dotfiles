@@ -3,20 +3,6 @@ if vim.b.my_plugin_markdown ~= nil then
 end
 vim.b.my_plugin_markdown = true
 
--- ref: https://zenn.dev/vim_jp/articles/4564e6e5c2866d
-vim.opt_local.comments = {
-	"b:- [ ]",
-	"b:- [x]",
-	-- "b:1.",
-	"b:*",
-	"b:-",
-	"b:+",
-}
-
-local fmt = vim.opt_local.formatoptions
-fmt:remove("c")
-fmt:append("jro")
-
 local function markdown_checkbox(from, to)
 	local another = vim.fn.line("v")
 	if from == to and from ~= another then

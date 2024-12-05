@@ -79,6 +79,24 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 })
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
+	pattern = { "markdown", "mdx" },
+	callback = function()
+		-- ref: https://zenn.dev/vim_jp/articles/4564e6e5c2866d
+		vim.opt_local.comments = {
+			"b:- [ ]",
+			"b:- [x]",
+			-- "b:1.",
+			"b:*",
+			"b:-",
+			"b:+",
+		}
+		local fmt = vim.opt_local.formatoptions
+		fmt:remove("c")
+		fmt:append("jro")
+	end,
+})
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
 	group = group_name,
 	pattern = { "json5" },
 	callback = function()
