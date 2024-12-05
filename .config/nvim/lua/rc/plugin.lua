@@ -91,6 +91,7 @@ require("lazy").setup({
 	{ "aznhe21/actions-preview.nvim" },
 	{ "nvimdev/lspsaga.nvim", dependencies = { "nvim-treesitter/nvim-treesitter" } },
 	{ "nvimtools/none-ls.nvim", dependencies = { "gbprod/none-ls-shellcheck.nvim" } },
+	{ "b0o/schemastore.nvim" },
 	{ "hedyhli/outline.nvim", config = conf("outline") },
 	{
 		"folke/lazydev.nvim",
