@@ -25,6 +25,7 @@ if OS.mac?
     brew "reattach-to-user-namespace"
     brew "tree"
     brew "libyaml" # Rubyのインストールで必要
+    brew "terminal-notifier"
     cask "karabiner-elements"
     cask "keycastr"
     cask "rectangle"
