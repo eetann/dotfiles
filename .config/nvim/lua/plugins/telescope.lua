@@ -1,6 +1,7 @@
 return {
 	"nvim-telescope/telescope.nvim",
 	event = { "VeryLazy" },
+	cmd = { "Telescope" },
 	dependencies = { "nvim-lua/plenary.nvim" },
 	config = function()
 		-- TODO: ファイルが長いので分けたい

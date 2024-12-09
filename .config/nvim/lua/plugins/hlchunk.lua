@@ -1,4 +1,8 @@
-require("hlchunk").setup({
+return {
+  "shellRaining/hlchunk.nvim",
+    	event = { "BufReadPre", "BufNewFile" },
+  opts = 
+{
 	chunk = {
 		enable = true,
 	},
@@ -11,4 +15,6 @@ require("hlchunk").setup({
 	blank = {
 		enable = true,
 	},
-})
+}
+,
+}
