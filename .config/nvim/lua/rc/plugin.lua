@@ -19,7 +19,6 @@ require("lazy").setup({
 	spec = {
 		-- bisectで問題のあったときに特定しやすいようにするため、一括では読み込まない
 		-- 無効化したくなったらimportの行をコメントアウトするだけ
-		-- { import = "plugins" },
 		-- base
 		{ "nvim-lua/plenary.nvim", lazy = true },
 		{ import = "plugins.cellwidths" },

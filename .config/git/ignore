@@ -3,3 +3,4 @@
 .DS_Store
 .php-cs-fixer.cache
 mise.local.toml
+.memo.local.md
