@@ -68,7 +68,12 @@ require("lazy").setup({
 
 		-- 移動
 		{ import = "plugins.CamelCaseMotion" },
-		{ "andymass/vim-matchup", dependencies = { "nvim-treesitter/nvim-treesitter" } }, -- %を拡張
+		-- %を拡張
+		{
+			"andymass/vim-matchup",
+			dependencies = { "nvim-treesitter/nvim-treesitter" },
+			event = { "BufReadPre", "BufNewFile" },
+		},
 
 		-- ファイルタイプ固有
 		{ import = "plugins.emmet-vim" },

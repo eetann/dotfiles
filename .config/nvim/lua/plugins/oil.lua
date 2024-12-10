@@ -8,9 +8,9 @@ return {
 			view_options = {
 				show_hidden = true,
 			},
-      keymaps = {
-        ["q"] = { "actions.close", mode = "n" },
-      },
+			keymaps = {
+				["q"] = { "actions.close", mode = "n" },
+			},
 		})
 
 		-- oil fix relative path

@@ -28,7 +28,6 @@ return {
 					return is_mdn and vim.fn.expand("~/ghq/github.com/mozilla-japan/translation/MDN/textlint")
 				end,
 			}),
-			null_ls.builtins.formatting.stylua,
 		}
 		require("null-ls").register(require("none-ls-shellcheck.diagnostics"))
 		require("null-ls").register(require("none-ls-shellcheck.code_actions"))

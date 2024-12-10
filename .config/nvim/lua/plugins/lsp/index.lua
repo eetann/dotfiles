@@ -10,7 +10,6 @@ return {
 			{ "hrsh7th/cmp-nvim-lsp" },
 		},
 		config = function()
-			-- require("lspconfig")
 			require("plugins.lsp.diagnostic")
 			require("plugins.lsp.format")
 			require("plugins.lsp.attach")

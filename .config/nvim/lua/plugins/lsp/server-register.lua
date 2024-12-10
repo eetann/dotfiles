@@ -4,7 +4,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 local lspconfig = require("lspconfig")
 local function server_register(server_name)
 	local opts = {}
-	local success, req_opts = pcall(require, "servers." .. server_name)
+	local success, req_opts = pcall(require, "plugins.lsp.servers." .. server_name)
 	if success then
 		opts = req_opts
 	end

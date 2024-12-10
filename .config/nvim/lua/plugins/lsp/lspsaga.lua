@@ -1,6 +1,6 @@
 return {
 	"nvimdev/lspsaga.nvim",
-  cmd = {"Lspsaga"},
+	cmd = { "Lspsaga" },
 	lazy = true,
 	dependencies = { "nvim-treesitter/nvim-treesitter" },
 	-- キーマップは ./attach.lua
