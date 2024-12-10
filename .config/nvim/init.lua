@@ -1,5 +1,5 @@
 -- WIP
-require("rc/base") -- .config/nvim/lua/rc/base.lua
-require("rc/mappings") -- .config/nvim/lua/rc/mappings.lua
-require("rc/filetype") -- .config/nvim/lua/rc/filetype.lua
-require("rc/plugin") -- .config/nvim/lua/rc/plugin.lua
+require("config.base") -- .config/nvim/lua/config/base.lua
+require("config.mappings") -- .config/nvim/lua/config/mappings.lua
+require("config.filetype") -- .config/nvim/lua/config/filetype.lua
+require("config.plugin") -- .config/nvim/lua/config/plugin.lua

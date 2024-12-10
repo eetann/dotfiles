@@ -97,7 +97,7 @@ return {
 					"filetype",
 				},
 				lualine_z = {
-					{ require("plugins/lualine/cc-component") },
+					{ require("plugins.lualine.cc-component") },
 				},
 			},
 			inactive_sections = {
