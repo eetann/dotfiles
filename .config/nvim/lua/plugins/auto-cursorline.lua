@@ -1,7 +1,6 @@
 return {
 	"delphinus/auto-cursorline.nvim",
 	event = { "VeryLazy" },
-	opts = {},
 	config = function()
 		require("auto-cursorline").setup()
 		vim.api.nvim_create_autocmd("FileType", {

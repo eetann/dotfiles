@@ -2,10 +2,8 @@ return {
 	"hrsh7th/nvim-cmp",
 	event = { "InsertEnter", "CmdLineEnter" },
 	dependencies = {
-		{
-			"SirVer/ultisnips",
-			dependencies = { "honza/vim-snippets" },
-		},
+		-- TODO: luasnipに移行する
+		{ import = "plugins.completion.ultisnips" },
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-buffer",
 		-- "hrsh7th/cmp-path",

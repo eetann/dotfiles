@@ -1,7 +1,10 @@
 return {
 	"MeanderingProgrammer/render-markdown.nvim",
-	ft = { "markdown", "md", "mdwn", "mkd", "mkdn", "mark", "mdx" },
 	dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+	ft = { "markdown", "md", "mdwn", "mkd", "mkdn", "mark", "mdx" },
+	keys = {
+		{ "<Space>sm", ":RenderMarkdown toggle<CR>" },
+	},
 	opts = {
 		render_modes = true,
 		heading = {
@@ -23,8 +26,5 @@ return {
 				},
 			},
 		},
-	},
-	keys = {
-		{ "<Space>sm", ":RenderMarkdown toggle<CR>" },
 	},
 }

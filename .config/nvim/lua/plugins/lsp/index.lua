@@ -22,7 +22,7 @@ return {
 	{ import = "plugins.lsp.none-ls" },
 	{ import = "plugins.lsp.actions-preview" },
 
-	-- Neovimの設定をでluaを書きやすくなる
+	-- Neovimの設定をluaを書きやすくなる
 	{
 		"folke/lazydev.nvim",
 		ft = "lua",
