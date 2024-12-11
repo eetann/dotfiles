@@ -2,19 +2,12 @@ return {
 	"hrsh7th/nvim-cmp",
 	event = { "InsertEnter", "CmdLineEnter" },
 	dependencies = {
-		-- TODO: luasnipに移行する
-		{ import = "plugins.completion.ultisnips" },
+		{ import = "plugins.completion.luasnip" },
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-buffer",
 		-- "hrsh7th/cmp-path",
 		-- { dir = "eetann/cmp-eetannpath" },
 		"eetann/cmp-eetannpath",
-		{
-			"quangnguyen30192/cmp-nvim-ultisnips",
-			opts = {
-				filetype_source = "ultisnips_default",
-			},
-		},
 		"hrsh7th/cmp-cmdline",
 		"uga-rosa/cmp-dictionary",
 		"onsails/lspkind-nvim",
@@ -28,12 +21,12 @@ return {
 			},
 			snippet = {
 				expand = function(args)
-					vim.fn["UltiSnips#Anon"](args.body)
+					require("luasnip").lsp_expand(args.body)
 				end,
 			},
 			mapping = require("plugins.completion.cmp-mapping"),
 			sources = cmp.config.sources({
-				{ name = "ultisnips" },
+				{ name = "luasnip" },
 				{ name = "nvim_lsp" },
 				{
 					name = "path",
