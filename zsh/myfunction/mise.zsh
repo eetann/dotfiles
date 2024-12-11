@@ -1,14 +1,17 @@
 function fzf_mise_tasks() {
-  # .mise.local.toml
-  # mise.local.toml
-  # .mise.toml
-  # mise.toml
-  # mise/config.toml
-  # TODO: .mise以外にも対応させる: https://mise.jdx.dev/configuration.html
   # mise settings set experimental true
-  if [ ! -e .mise.toml ]; then
+  # 検索対象のファイルリスト
+  local files=( ".mise.local.toml" "mise.local.toml" ".mise.toml" "mise.toml" "mise/config.toml" )
+  local found_files=()
+  for file in "${files[@]}"; do
+    if [[ -e $file ]]; then
+      found_files+=("$file")
+    fi
+  done
+
+  if [[ ${#found_files[@]} -eq 0 ]]; then
     echo 'fzf_mise_tasks'
-    echo 'There is no .mise.toml'
+    echo 'No target mise file found'
     zle send-break
     return 1
   fi
@@ -19,14 +22,22 @@ function fzf_mise_tasks() {
     return 1
   fi
 
-  local tasks="yq -oj '.tasks | to_entries | .[] | .key + \" = \" + .value.run' .mise.toml 2>/dev/null || echo ''"
+  local tasks_list=()
+  for file in "${found_files[@]}"; do
+    local file_tasks=$(yq -oj '.tasks | to_entries | .[] | .key + " = " + .value.run' "$file" 2>/dev/null || echo '')
+    if [[ ${file_tasks:-null} != null ]]; then
+      tasks_list+=("$file_tasks")
+    fi
+  done
+  local tasks=$(printf "%s\n" "${tasks_list[@]}")
+
   if [[ -z $tasks ]]; then
     echo 'fzf_mise_tasks'
     echo 'There is no tasks in .mise.toml'
     zle send-break
     return 1
   fi
-  local selected=`eval $tasks | sed 's/^"//;s/"$//' | FZF_DEFAULT_OPTS='' fzf --height=50% --reverse --exit-0 | awk -F ' = ' '{ print $1}'`
+  local selected=`echo "$tasks" | sed 's/^"//;s/"$//' | FZF_DEFAULT_OPTS='' fzf --height=50% --reverse --exit-0 | awk -F ' = ' '{ print $1}'`
 
   zle reset-prompt
   if [[ -z $selected ]]; then
