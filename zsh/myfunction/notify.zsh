@@ -2,6 +2,7 @@
 
 # スキップ対象のコマンドリスト
 SKIP_NOTIFY_COMMANDS=(
+  fg
   bat
   cat
   lazygit
