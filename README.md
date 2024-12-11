@@ -57,6 +57,14 @@ git config --global user.name "eetann"
 git config --global user.email "eetann's mail adress"
 git config --global github.user eetann
 git config --global init.defaultBranch main
+git config --global core.pager delta
+git config --global interactive.diffFilter 'delta --color-only'
+git config --global merge.conflictStyle zdiff3
+git config --global delta.navigate true
+git config --global delta.diff-so-fancy true
+git config --global delta.keep-plus-minus-markers true
+git config --global delta.line-numbers true
+git config --global delta.hunk-header-style "omit"
 ssh-keygen -t rsa -b 4096 -C "eetann's mail adress"
 ```
 several times `<CR>`

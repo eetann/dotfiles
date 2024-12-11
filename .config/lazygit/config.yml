@@ -4,6 +4,10 @@ gui:
   nerdFontsVersion: "3"
 os:
   Edit: 'nvim'
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
 keybinding:
   universal:
     # <c-s>に割り当てたくないため、上書き
