@@ -14,7 +14,7 @@ return {
 		end,
 		i = function(fallback)
 			if cmp.visible() then
-				cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+				cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
 			elseif ls.expand_or_jumpable() then
 				ls.expand_or_jump()
 			else
@@ -39,7 +39,7 @@ return {
 		end,
 		i = function(fallback)
 			if cmp.visible() then
-				cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+				cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
 			elseif ls.jumpable(-1) then
 				ls.jump(-1)
 			else

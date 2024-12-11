@@ -5,12 +5,12 @@ local fmt = require("luasnip.extras.fmt").fmt
 
 return {
 	s(
-		"ret",
+		"const",
 		fmt(
-			[=[
-        return {};
-      ]=],
-			{ i(1, "value") }
+			[[
+        const {} = {};
+      ]],
+			{ i(1, "name"), i(2, "value") }
 		)
 	),
 }
