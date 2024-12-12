@@ -13,4 +13,13 @@ return {
 			{ i(1, "name"), i(2, "value") }
 		)
 	),
+	s(
+		"ret",
+		fmt(
+			[[
+        return {};
+      ]],
+			{ i(1) }
+		)
+	),
 }
