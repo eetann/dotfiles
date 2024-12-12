@@ -24,7 +24,10 @@ function fzf_mise_tasks() {
 
   local tasks_list=()
   for file in "${found_files[@]}"; do
-    local file_tasks=$(yq -oj '.tasks | to_entries | .[] | .key + " = " + .value.run' "$file" 2>/dev/null || echo '')
+    local file_tasks=$(yq -oj '.tasks | to_entries | .[] | .key + " = " + (
+  select(.value.run| type == "!!str") .value.run,
+  select(.value.run| type == "!!seq") .value.run | join(" && ")
+)' "$file" 2>/dev/null || echo '')
     if [[ ${file_tasks:-null} != null ]]; then
       tasks_list+=("$file_tasks")
     fi
