@@ -84,7 +84,7 @@ function before-command() {
 }
 
 function after-command() {
-  local command_complete_timeout=5
+  local command_complete_timeout=30
 
   local last_status=$?
   local time_elapsed=$((EPOCHSECONDS - my_notify_start_time))
