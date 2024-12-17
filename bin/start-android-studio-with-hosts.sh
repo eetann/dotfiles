@@ -6,6 +6,7 @@
 # emulator -avd "${AVD}" -writable-system 1>/dev/null &
 # sleep 5
 
+# TODO: fzfを使って選べるようにする
 # デバイスIDを引数から取得
 DEVICE_ID=$1
 
