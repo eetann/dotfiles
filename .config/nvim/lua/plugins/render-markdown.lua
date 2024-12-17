@@ -19,6 +19,8 @@ return {
 		checkbox = {
 			checked = { scope_highlight = "@markup.strikethrough" },
 			custom = {
+				-- デフォルトの`[-]`であるtodoは削除
+				todo = { raw = "", rendered = "", highlight = "" },
 				canceled = {
 					raw = "[-]",
 					rendered = "󱘹",
