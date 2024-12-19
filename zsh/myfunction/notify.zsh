@@ -44,11 +44,12 @@ function is_skip_command() {
   return 1
 }
 
-function windows-notify() {
+function windows_notify() {
 # Powershellでの通知: https://qiita.com/relu/items/b7121487a1d5756dfcf9
 # WSL内での実行方法: https://zenn.dev/kaityo256/articles/make_shortcut_from_wls
-  temp_ps1=`mktemp`.ps1
-  cat <<'EOD' > $temp_ps1
+  local temp_ps1
+  temp_ps1=$(mktemp).ps1
+  cat <<'EOD' > "$temp_ps1"
 param (
     [string]$message = "Command completed!"
 )
@@ -73,17 +74,29 @@ $AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershe
 [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
 EOD
 
-  ps1file=$(wslpath -w $temp_ps1)
-  /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy Bypass $ps1file -message "$1"
-  rm -f $temp_ps1
+  local ps1file
+  ps1file=$(wslpath -w "$temp_ps1")
+  /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy Bypass "$ps1file" -message "$1"
+  rm -f "$temp_ps1"
 }
 
-function before-command() {
+# sleep 10;notify のように書くと、短いやつでも通知できる
+# 普通にnotifyでも実行できる
+function notify() {
+  local message="${1:-Finish}"
+  if [[ "$(uname -s)" == "Darwin" ]]; then
+    terminal-notifier -message "$message" -sound default > /dev/null 2>&1
+  elif [[ "$(uname -r)" == *microsoft* ]]; then
+    windows_notify "$message"
+  fi
+}
+
+function before_command() {
   declare -g my_notify_last_command="$1"
   declare -g my_notify_start_time=$EPOCHSECONDS
 }
 
-function after-command() {
+function after_command() {
   local command_complete_timeout=30
 
   local last_status=$?
@@ -106,25 +119,11 @@ function after-command() {
     return
   fi
 
-  if [[ "$(uname -s)" == "Darwin" ]]; then
-    terminal-notifier -title "$my_notify_last_command" -message "Finish" -sound default > /dev/null 2>&1
-  elif [[ "$(uname -r)" == *microsoft* ]]; then
-    windows-notify "$my_notify_last_command"
-  fi
+  notify "$my_notify_last_command"
   unset my_notify_last_command my_notify_start_time
-}
-
-# sleep 10;notify のように書くと、短いやつでも通知できる
-# 普通にnotifyでも実行できる
-function notify() {
-  if [[ "$(uname -s)" == "Darwin" ]]; then
-    terminal-notifier -message "Finish" -sound default > /dev/null 2>&1
-  elif [[ "$(uname -r)" == *microsoft* ]]; then
-    windows-notify "Finish!!!!"
-  fi
 }
 
 zmodload zsh/datetime
 autoload -U add-zsh-hook
-add-zsh-hook preexec before-command
-add-zsh-hook precmd after-command
+add-zsh-hook preexec before_command
+add-zsh-hook precmd after_command
