@@ -1,8 +1,6 @@
 # 30秒以上のコマンドは実行終了時にデスクトップ通知
 # ref: https://github.com/marzocchi/zsh-notify/blob/9c1dac81a48ec85d742ebf236172b4d92aab2f3f/notify.plugin.zsh#L84
 
-# TODO: 重複をまとめる
-
 # スキップ対象のコマンドリスト
 SKIP_NOTIFY_COMMANDS=(
   fg
