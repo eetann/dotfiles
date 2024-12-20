@@ -97,8 +97,8 @@ function before_command() {
 function after_command() {
   local command_complete_timeout=30
 
-  local last_status=$?
   local time_elapsed=$((EPOCHSECONDS - my_notify_start_time))
+  # local last_status=$?
   # echo "Command: $my_notify_last_command"
   # echo "Start Time: $my_notify_start_time"
   # echo "Time Elapsed: $time_elapsed"
