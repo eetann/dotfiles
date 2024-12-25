@@ -1,7 +1,6 @@
 # 30秒以上のコマンドは実行終了時にデスクトップ通知
 # ref: https://github.com/marzocchi/zsh-notify/blob/9c1dac81a48ec85d742ebf236172b4d92aab2f3f/notify.plugin.zsh#L84
 
-# スキップ対象のコマンドリスト
 SKIP_NOTIFY_COMMANDS=(
   fg
   bat
@@ -31,7 +30,6 @@ SKIP_NOTIFY_COMMANDS=(
   "yarn run start"
 )
 
-# コマンドがスキップ対象かチェックする関数
 function is_skip_command() {
   local cmd="$1"
   for skip_cmd in "${SKIP_NOTIFY_COMMANDS[@]}"; do
@@ -43,8 +41,8 @@ function is_skip_command() {
 }
 
 function windows_notify() {
-# Powershellでの通知: https://qiita.com/relu/items/b7121487a1d5756dfcf9
-# WSL内での実行方法: https://zenn.dev/kaityo256/articles/make_shortcut_from_wls
+  # Powershellでの通知: https://qiita.com/relu/items/b7121487a1d5756dfcf9
+  # WSL内での実行方法: https://zenn.dev/kaityo256/articles/make_shortcut_from_wls
   local temp_ps1
   temp_ps1=$(mktemp).ps1
   cat <<'EOD' > "$temp_ps1"
@@ -54,7 +52,7 @@ param (
 
 $xml = @"
 <toast>
-  
+
   <visual>
     <binding template="ToastGeneric">
       <text>$($message)</text>
@@ -63,7 +61,7 @@ $xml = @"
   </visual>
 
   <audio src="ms-winsoundevent:Notification.Reminder"/>
-  
+
 </toast>
 "@
 $XmlDocument = [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]::New()
@@ -72,10 +70,10 @@ $AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershe
 [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
 EOD
 
-  local ps1file
-  ps1file=$(wslpath -w "$temp_ps1")
-  /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy Bypass "$ps1file" -message "$1"
-  rm -f "$temp_ps1"
+local ps1file
+ps1file=$(wslpath -w "$temp_ps1")
+/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy Bypass "$ps1file" -message "$1"
+rm -f "$temp_ps1"
 }
 
 # sleep 10;notify のように書くと、短いやつでも通知できる
@@ -94,31 +92,29 @@ function before_command() {
   declare -g my_notify_start_time=$EPOCHSECONDS
 }
 
+function unset_my_notify() {
+  unset my_notify_last_command my_notify_start_time
+}
+
 function after_command() {
   local command_complete_timeout=30
-
-  local time_elapsed=$((EPOCHSECONDS - my_notify_start_time))
-  # local last_status=$?
-  # echo "Command: $my_notify_last_command"
-  # echo "Start Time: $my_notify_start_time"
-  # echo "Time Elapsed: $time_elapsed"
-  # echo "Last Status: $last_status"
 
   if [ -z $my_notify_start_time ]; then
     return
   fi
   if is_skip_command "$my_notify_last_command"; then
-    unset my_notify_last_command my_notify_start_time
+    unset_my_notify
     return
   fi
 
+  local time_elapsed=$((EPOCHSECONDS - my_notify_start_time))
   if (( time_elapsed < command_complete_timeout )); then
-    unset my_notify_last_command my_notify_start_time
+    unset_my_notify
     return
   fi
 
   notify "$my_notify_last_command"
-  unset my_notify_last_command my_notify_start_time
+  unset_my_notify
 }
 
 zmodload zsh/datetime
