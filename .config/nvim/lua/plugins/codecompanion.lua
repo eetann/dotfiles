@@ -4,9 +4,10 @@ return {
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-treesitter/nvim-treesitter",
-		"nvim-telescope/telescope.nvim", -- Optional
+		"nvim-telescope/telescope.nvim",
+		{ "zbirenbaum/copilot.lua", opts = {} },
 		{
-			"stevearc/dressing.nvim", -- Optional: Improves the default Neovim UI
+			"stevearc/dressing.nvim",
 			opts = {
 				input = {
 					enabled = false,
@@ -16,26 +17,15 @@ return {
 	},
 	config = function()
 		require("codecompanion").setup({
-			adapters = {
-				ollama = function()
-					return require("codecompanion.adapters").extend("ollama", {
-						schema = {
-							model = {
-								default = "codellama:7b",
-							},
-						},
-					})
-				end,
-			},
 			strategies = {
 				chat = {
-					adapter = "ollama",
+					adapter = "copilot",
 				},
 				inline = {
-					adapter = "ollama",
+					adapter = "copilot",
 				},
 				agent = {
-					adapter = "ollama",
+					adapter = "copilot",
 				},
 			},
 			actions = {
