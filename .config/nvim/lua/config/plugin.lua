@@ -44,7 +44,6 @@ require("lazy").setup({
 		{ import = "plugins.nvim-tree" },
 		{ import = "plugins.outline" },
 		{ import = "plugins.trouble" },
-		{ import = "plugins.vim-translator" },
 
 		-- 編集
 		{ import = "plugins.mini-ai" },
@@ -89,6 +88,7 @@ require("lazy").setup({
 		-- 外部連携など
 		{ import = "plugins.open-browser" },
 		{ import = "plugins.vim-quickrun" },
+		{ import = "plugins.pantran" },
 
 		-- AI系
 		{ import = "plugins.gen" },
