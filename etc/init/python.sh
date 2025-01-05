@@ -33,5 +33,7 @@ archlinux)
 esac
 
 pip3 install --user pynvim numpy matplotlib pandas opencv-python pysimplegui
+pip install --user pipx 
+pipx install online-judge-tools
 
 echo ""
