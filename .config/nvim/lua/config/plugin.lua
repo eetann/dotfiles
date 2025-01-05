@@ -87,8 +87,8 @@ require("lazy").setup({
 
 		-- 外部連携など
 		{ import = "plugins.open-browser" },
-		{ import = "plugins.vim-quickrun" },
 		{ import = "plugins.pantran" },
+		{ import = "plugins.overseer" },
 
 		-- AI系
 		{ import = "plugins.gen" },

@@ -18,14 +18,6 @@ return {
       execute 'OpenBrowser ' . substitute(expand('%:p'), '\v/mnt/(.)', '\1:/', 'c')
       endfunction
 ]])
-			_G.open_blog = function()
-				local basename = vim.fn.expand("%:t:r")
-				vim.cmd("OpenBrowser " .. "http://localhost:4321/blog/" .. basename)
-			end
-
-			vim.api.nvim_create_user_command("OpenBlog", function()
-				open_blog()
-			end, {})
 
 			local function open_preview_mdn_web_docs(select_language)
 				local port = 5042
