@@ -16,7 +16,7 @@ return {
 	},
 	config = function()
 		require("overseer").setup({
-			templates = { "builtin", "blog.open-preview" },
+			templates = { "builtin", "blog.open-preview", "cpp.gpp-build-run" },
 		})
 	end,
 }
