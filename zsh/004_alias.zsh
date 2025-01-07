@@ -14,7 +14,7 @@ case ${OSTYPE} in
     alias awk="gawk"
     ;;
 esac
-alias idea='nb e idea'
+alias idea='nb e idea.md'
 
 # nocorrect
 alias ionic='nocorrect ionic'

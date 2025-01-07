@@ -258,6 +258,7 @@ return {
 								return
 							end
 						end
+						local num_selections = #picker:get_multi_selection()
 						if not num_selections or num_selections <= 1 then
 							actions.add_selection(prompt_bufnr)
 						end
