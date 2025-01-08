@@ -3,7 +3,15 @@ return {
 	cmd = "Pantran",
 	keys = {
 		{ "<space>tr", "<CMD>Pantran<CR>" },
-		-- TODO: visualモードで定義
+		{
+			"<space>tr",
+			function()
+				return require("pantran").motion_translate()
+			end,
+			mode = { "v" },
+			expr = true,
+			desc = "translate",
+		},
 	},
 	opts = {
 		default_engine = "google",
