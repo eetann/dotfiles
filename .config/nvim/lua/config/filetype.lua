@@ -7,11 +7,11 @@ vim.filetype.add({
 	},
 })
 
-vim.filetype.add({
-	pattern = {
-		[".*%.blade%.php"] = "blade",
-	},
-})
+-- vim.filetype.add({
+-- 	pattern = {
+-- 		[".*%.blade%.php"] = "blade",
+-- 	},
+-- })
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
 	group = group_name,
