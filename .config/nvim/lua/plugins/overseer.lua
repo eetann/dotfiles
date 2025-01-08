@@ -16,7 +16,13 @@ return {
 	},
 	config = function()
 		require("overseer").setup({
-			templates = { "builtin", "blog.open-preview", "cpp.gpp-build-run", "atcoder.submit" },
+			templates = {
+				"builtin",
+				"blog.open-preview",
+				"blog.convert-image",
+				"cpp.gpp-build-run",
+				"atcoder.submit",
+			},
 		})
 	end,
 }

@@ -1,3 +1,4 @@
+---@type overseer.TemplateDefinition
 return {
 	name = "atcoder submit",
 	builder = function()

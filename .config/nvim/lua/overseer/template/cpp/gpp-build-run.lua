@@ -1,8 +1,10 @@
+---@type overseer.TemplateDefinition
 return {
 	name = "g++ build and run",
 	builder = function()
 		local file = vim.fn.expand("%:p")
 		local outfile = vim.fn.expand("%:p:r") .. ".out"
+		---@type overseer.TaskDefinition
 		return {
 			cmd = { outfile },
 			components = {
