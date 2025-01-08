@@ -111,7 +111,7 @@ vim.keymap.set("n", "<space>mw", function()
 			local escaped_heading = heading:gsub("[][%s^$*(){}|]", "-")
 			return hashes .. escaped_heading
 		end)
-		-- 一行目に移動
+		-- 1行目に移動
 		vim.api.nvim_win_set_cursor(0, { 1, 0 })
 	end
 
@@ -126,5 +126,5 @@ vim.keymap.set("n", "<space>mw", function()
 	vim.print("yank '" .. link .. "'")
 
 	-- 元の位置に戻る
-	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("`z", true, false, true), "in", false)
+	vim.cmd("normal `z")
 end, { desc = "現在行のwikilinkを取得", buffer = true })
