@@ -61,7 +61,7 @@ require("lazy").setup({
 		{ import = "plugins.dial" },
 
 		-- fuzzy finder
-		{ import = "plugins.telescope" },
+		{ import = "plugins.telescope.index" },
 		{ import = "plugins.text-case" },
 
 		-- 移動
