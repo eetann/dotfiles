@@ -20,6 +20,7 @@ return {
 				-- まだpintではサポートされてないっぽい: https://github.com/laravel/pint/pull/256
 				-- blade = { "pint","blade-formatter" },
 				astro = js_formatters,
+				cpp = { "clang-format" },
 				-- NOTE: svelteのformatはsvelteserverのやつを使う。
 				-- LSPのFormatterは`lsp_fallback=true`をしたのでOK
 				-- svelte = { { "svelteserver" } },
