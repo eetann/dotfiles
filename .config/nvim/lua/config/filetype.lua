@@ -136,7 +136,7 @@ vim.api.nvim_create_autocmd({ "BufRead" }, {
 	end,
 })
 
-vim.api.nvim_create_autocmd({ "TermOpen" }, {
-	group = group_name,
-	command = "startinsert",
-})
+-- vim.api.nvim_create_autocmd({ "TermOpen" }, {
+-- 	group = group_name,
+-- 	command = "startinsert",
+-- })

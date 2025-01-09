@@ -114,9 +114,7 @@ end
 return {
 	name = "convert blog images",
 	builder = function()
-		vim.defer_fn(function()
-			process_mdx_file()
-		end, 10)
+		process_mdx_file()
 		---@type overseer.TaskDefinition
 		return {
 			cmd = "",
