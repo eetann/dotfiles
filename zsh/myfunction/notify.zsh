@@ -20,14 +20,17 @@ SKIP_NOTIFY_COMMANDS=(
   "npm run preview"
   "npm run server"
   "npm run start"
+  "npm run watch"
   "pnpm run dev"
   "pnpm run preview"
   "pnpm run server"
   "pnpm run start"
+  "pnpm run watch"
   "yarn run dev"
   "yarn run preview"
   "yarn run server"
   "yarn run start"
+  "yarn run watch"
 )
 
 function is_skip_command() {
