@@ -26,7 +26,6 @@ return {
 			},
 		}
 	end,
-	priority = 10,
 	condition = {
 		filetype = { "cpp" },
 	},

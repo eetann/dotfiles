@@ -21,6 +21,9 @@ return {
 				"blog.open-preview",
 				"blog.convert-image",
 				"cpp.gpp-build-run",
+				"cpp.gpp-build-only",
+				"atcoder.test-submit",
+				"atcoder.test",
 				"atcoder.submit",
 			},
 		})
