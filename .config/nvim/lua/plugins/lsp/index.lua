@@ -21,15 +21,5 @@ return {
 	{ import = "plugins.lsp.conform" },
 	{ import = "plugins.lsp.none-ls" },
 	{ import = "plugins.lsp.actions-preview" },
-
-	-- Neovimの設定をluaを書きやすくなる
-	{
-		"folke/lazydev.nvim",
-		ft = "lua",
-		opts = {
-			library = {
-				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
-			},
-		},
-	},
+	{ import = "plugins.lsp.lazydev" },
 }
