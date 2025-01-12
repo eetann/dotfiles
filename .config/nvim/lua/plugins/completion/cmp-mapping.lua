@@ -92,7 +92,21 @@ return {
 	["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
 	["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c", "s" }), -- 補完を終了する
 	["<C-e>"] = cmp.mapping.abort(), -- 補完を終了して戻す
-	["<CR>"] = cmp.mapping.confirm({ select = true }),
+	["<CR>"] = cmp.mapping(function(fallback)
+		if cmp.visible() then
+			if cmp.get_active_entry() then
+				cmp.confirm({
+					select = true,
+				})
+			elseif ls.expandable() then
+				ls.expand()
+			else
+				fallback()
+			end
+		else
+			fallback()
+		end
+	end),
 	-- 先頭の大文字小文字を切り替える
 	["<C-v>"] = cmp.mapping(function()
 		if cmp.visible() then

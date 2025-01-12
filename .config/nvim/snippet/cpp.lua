@@ -22,4 +22,13 @@ return {
 			{ i(0) }
 		)
 	),
+	s(
+		"getline",
+		fmt(
+			[[
+        getline(cin, {});
+		  ]],
+			{ i(0, "var_name") }
+		)
+	),
 }
