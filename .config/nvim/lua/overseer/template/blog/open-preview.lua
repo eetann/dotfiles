@@ -5,10 +5,10 @@ return {
 		local basename = vim.fn.expand("%:t:r")
 		vim.ui.open("http://localhost:4321/blog/" .. basename)
 		return {
-			cmd = "",
+			cmd = "echo 'open blog preview'",
 		}
 	end,
-	priority = 10,
+	priority = 1,
 	condition = {
 		dir = "~/ghq/github.com/eetann/cyber-blog",
 	},

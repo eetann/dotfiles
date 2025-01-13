@@ -19,6 +19,7 @@ return {
 			templates = {
 				"builtin",
 				"blog.open-preview",
+				"blog._update-mdx",
 				"blog.convert-image",
 				"cpp.gpp-build-run",
 				"cpp.gpp-build-only",

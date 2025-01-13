@@ -81,6 +81,7 @@ return {
 					},
 				},
 				lualine_x = {
+					"overseer",
 					selectionCount,
 					{
 						---@diagnostic disable-next-line: undefined-field

@@ -9,27 +9,15 @@ local function validate_r2_backup_path()
 	return path
 end
 
-local function get_file_size(file_path)
-	-- ffprobeコマンドで画像や動画の幅と高さを取得
-	local handle =
-		io.popen("ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0 " .. file_path)
-	if not handle then
-		print("ffprobeコマンドの実行に失敗しました")
-		return nil, nil
-	end
-	local result = handle:read("*a")
-	handle:close()
-
-	-- 幅と高さを分割して返す
-	local width, height = result:match("(%d+)x(%d+)")
-	return tonumber(width), tonumber(height)
-end
-
-local function process_mdx_file()
+---@return table
+---@return string
+---@return table
+local function create_tasks_convert_images()
 	vim.print("画像・動画の処理を開始")
-	local R2_BACKUP_PATH, err = validate_r2_backup_path()
+	local R2_BACKUP_PATH, err_msg = validate_r2_backup_path()
 	if not R2_BACKUP_PATH then
-		vim.print(err)
+		vim.print(err_msg)
+		---@diagnostic disable-next-line: missing-return-value
 		return
 	end
 
@@ -54,70 +42,59 @@ local function process_mdx_file()
 		local _, err = vim.uv.fs_mkdir(dst_dir, 493)
 		if err then
 			vim.print("ディレクトリの作成に失敗しました。")
+			---@diagnostic disable-next-line: missing-return-value
 			return
 		end
 	end
 
-	vim.cmd("sleep 100m")
-	vim.print("変換中")
-	-- aspectRatioListを作成
-	local aspectRatioList = {}
+	local dependencies = {}
 	for _, media_filename in ipairs(file_list) do
 		local src_path = string.format("%s/src/assets/images/_ignore/%s", vim.fn.getcwd(), media_filename)
 		local file_ext = media_filename:match("^.+(%..+)$")
 
 		if file_ext ~= ".mp4" then
 			local dst_file = string.format("%s/%s/%s.avif", R2_BACKUP_PATH, slug, media_filename:match("(.+)%..+$"))
-			vim.print("dst_file" .. dst_file)
-			vim.fn.system({ "ffmpeg", "-i", src_path, dst_file })
+			table.insert(dependencies, {
+				cmd = "ffmpeg",
+				args = { "-i", src_path, dst_file },
+				components = {
+					{ "on_exit_set_status", success_codes = { 0 } },
+					{ "on_output_quickfix", open_on_exit = "failure" },
+				},
+			})
 		else
 			local dst_file = string.format("%s/%s/%s", R2_BACKUP_PATH, slug, media_filename)
-			vim.print("dst_file" .. dst_file)
-			vim.fn.system({ "cp", src_path, dst_file })
+			table.insert(dependencies, {
+				cmd = "cp",
+				args = { src_path, dst_file },
+				components = {
+					{ "on_exit_set_status", success_codes = { 0 } },
+					{ "on_output_quickfix", open_on_exit = "failure" },
+				},
+			})
 		end
-
-		-- アスペクト比を計算
-		local width, height = get_file_size(src_path)
-		if not width or not height then
-			print("画像または動画のサイズが取得できませんでした")
-			return
-		end
-		local aspect_ratio = width / height
-		aspectRatioList[media_filename] = aspect_ratio
 	end
-	vim.print("変換終了")
 
-	-- mdxファイルを更新
-	for key, aspect_ratio in pairs(aspectRatioList) do
-		vim.fn.setreg("/", "src=[\"']@:" .. key .. "[\"']")
-		vim.cmd("normal! n")
-
-		-- srcのパスの置換
-		local new_filename = "@/" .. slug .. "/" .. key:match("^(.-)%.")
-		if key:match("mp4") then
-			new_filename = new_filename .. ".mp4"
-		else
-			new_filename = new_filename .. ".avif"
-		end
-		vim.cmd("substitute=@:" .. key .. "=" .. new_filename)
-
-		-- アスペクト比の追記
-		vim.cmd("normal! k")
-		local line_content = vim.api.nvim_get_current_line()
-		local new_line = line_content .. ' aspectRatio="' .. string.format("%.2f", aspect_ratio) .. '"'
-		vim.api.nvim_set_current_line(new_line)
-	end
-	vim.print("処理が終わりました！")
+	return dependencies, slug, file_list
 end
 
 ---@type overseer.TemplateDefinition
 return {
 	name = "convert blog images",
 	builder = function()
-		process_mdx_file()
+		local dependencies, slug, file_list = create_tasks_convert_images()
+		table.insert(dependencies, { "(internal) update mdx", slug = slug, file_list = file_list })
 		---@type overseer.TaskDefinition
 		return {
-			cmd = "",
+			cmd = "echo 'convert blog images'",
+			components = {
+				{
+					"dependencies",
+					task_names = dependencies,
+					sequential = true,
+				},
+				"default",
+			},
 		}
 	end,
 	condition = {
