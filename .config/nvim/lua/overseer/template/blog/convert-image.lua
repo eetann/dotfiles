@@ -1,10 +1,13 @@
+---@return string|nil
 local function validate_r2_backup_path()
 	local path = os.getenv("R2_BACKUP_PATH")
 	if not path or path == "" then
-		return nil, "環境変数R2_BACKUP_PATHが設定されていません"
+		vim.print("環境変数R2_BACKUP_PATHが設定されていません")
+		return nil
 	end
 	if not vim.uv.fs_stat(path) then
-		return nil, "R2_BACKUP_PATHが存在しないディレクトリを指しています: " .. path
+		vim.print("R2_BACKUP_PATHが存在しないディレクトリを指しています: " .. path)
+		return nil
 	end
 	return path
 end
@@ -14,11 +17,9 @@ end
 ---@return table
 local function create_tasks_convert_images()
 	vim.print("画像・動画の処理を開始")
-	local R2_BACKUP_PATH, err_msg = validate_r2_backup_path()
+	local R2_BACKUP_PATH = validate_r2_backup_path()
 	if not R2_BACKUP_PATH then
-		vim.print(err_msg)
-		---@diagnostic disable-next-line: missing-return-value
-		return
+		return {}, "", {}
 	end
 
 	local filename = vim.fn.expand("%:t")
@@ -42,8 +43,7 @@ local function create_tasks_convert_images()
 		local _, err = vim.uv.fs_mkdir(dst_dir, 493)
 		if err then
 			vim.print("ディレクトリの作成に失敗しました。")
-			---@diagnostic disable-next-line: missing-return-value
-			return
+			return {}, "", {}
 		end
 	end
 
@@ -83,6 +83,11 @@ return {
 	name = "convert blog images",
 	builder = function()
 		local dependencies, slug, file_list = create_tasks_convert_images()
+		if next(dependencies) == nil then
+			return {
+				cmd = "echo 'FAILED: convert blog images' && false",
+			}
+		end
 		table.insert(dependencies, { "(internal) update mdx", slug = slug, file_list = file_list })
 		---@type overseer.TaskDefinition
 		return {
