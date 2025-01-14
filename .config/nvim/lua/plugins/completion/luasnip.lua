@@ -17,7 +17,7 @@ return {
 				-- },
 			})
 			---@type LuaSnip.Loaders.LoadOpts
-			require("luasnip.loaders.from_lua").lazy_load({
+			require("luasnip.loaders.from_lua").load({
 				paths = { "~/dotfiles/.config/nvim/snippet" },
 				override_priority = 2000,
 			})
