@@ -10,7 +10,7 @@ return {
 			-- nvim-cmpで優先度はcom_luasnip側で実装されていそうだけど反映されてない？
 			-- <CR>のマッピングにexpandable・expandを追加することで優先度を反映できる
 			---@type LuaSnip.Loaders.LoadOpts
-			require("luasnip.loaders.from_vscode").lazy_load({
+			require("luasnip.loaders.from_vscode").load({
 				override_priority = 1000,
 				-- exclude = {
 				-- 	-- "blade",
