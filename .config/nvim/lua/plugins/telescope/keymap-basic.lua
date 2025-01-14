@@ -5,6 +5,7 @@ vim.keymap.set("n", "<space>fh", "<Cmd>Telescope help_tags<CR>")
 vim.keymap.set("n", "<F6>", "<Cmd>Telescope git_files cwd=~/dotfiles<CR>")
 vim.keymap.set("n", "<space>fl", "<Cmd>Telescope highlights<CR>")
 vim.keymap.set("n", "<space>fd", "<Cmd>Telescope diagnostics<CR>")
+vim.keymap.set("n", "<space>fr", "<Cmd>Telescope resume<CR>")
 
 -- ファイル検索---------------------------------------------------
 local function project_files(text, use_git_root)
