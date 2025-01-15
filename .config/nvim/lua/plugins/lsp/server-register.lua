@@ -30,7 +30,7 @@ local other_lsp = {
 	"biome",
 	"eslint",
 	"jsonls",
-	"laravel-language-server",
+	-- "laravel-language-server",
 	"markdown-language-server",
 }
 for _, server_name in pairs(other_lsp) do
