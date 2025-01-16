@@ -108,14 +108,14 @@ vim.keymap.set("n", "sy", "<Cmd>%y<CR>", { desc = "全選択してyank" })
 vim.keymap.set(
 	"n",
 	"sgf",
-	"<Cmd>let @+=expand('%:t:r')<CR>:echo 'Clipboard << ' . @+<CR>",
-	{ desc = "現在のファイル名(拡張子無し)をyank" }
+	"<Cmd>let @+=expand('%')<CR>:echo 'Clipboard << ' . @+<CR>",
+	{ desc = "現在のファイル名(相対パス)をyank" }
 )
 vim.keymap.set(
 	"n",
 	"sgF",
-	"<Cmd>let @+=expand('%')<CR>:echo 'Clipboard << ' . @+<CR>",
-	{ desc = "現在のファイル名(相対パス)をyank" }
+	"<Cmd>let @+=expand('%:t:r')<CR>:echo 'Clipboard << ' . @+<CR>",
+	{ desc = "現在のファイル名(拡張子無し)をyank" }
 )
 vim.keymap.set("n", "sge", function()
 	vim.cmd([[
