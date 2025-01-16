@@ -31,4 +31,13 @@ return {
 			{ i(0, "var_name") }
 		)
 	),
+	s(
+		{ trig = "fixed", desc = "出力する小数点以下の桁数の指定" },
+		fmt(
+			[[
+        cout << fixed << setprecision({});
+		  ]],
+			{ i(0, "10") }
+		)
+	),
 }
