@@ -18,6 +18,8 @@ return {
 	opts = {
 		templates = {
 			"builtin",
+			"first-template",
+			"cmd-table-no-pipe",
 			"blog.open-preview",
 			"blog._update-mdx",
 			"blog.convert-image",
