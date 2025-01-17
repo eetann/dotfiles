@@ -54,6 +54,11 @@ return {
 				myMiniView("No lines in buffer"),
 				myMiniView("search hit .*, continuing at", "wmsg"),
 				myMiniView("E486: Pattern not found", "emsg"),
+				{
+					view = "mini",
+					filter = { event = "msg_show", kind = "echo", find = "%(mini%.align%)" },
+					opts = { title = "mini.align", replace = true, timeout = 10 * 1000 },
+				},
 			},
 			lsp = {
 				override = {

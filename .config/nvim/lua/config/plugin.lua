@@ -57,7 +57,7 @@ require("lazy").setup({
 		{ import = "plugins.oil" },
 		{ import = "plugins.comment" },
 		{ import = "plugins.vim-sonictemplate" },
-		{ import = "plugins.vim-easy-align" },
+		{ import = "plugins.mini-align" },
 		{ import = "plugins.dial" },
 
 		-- fuzzy finder

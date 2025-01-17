@@ -14,6 +14,15 @@ return {
 		)
 	),
 	s(
+		"let",
+		fmt(
+			[[
+        let {}: {} = {};
+      ]],
+			{ i(1, "name"), i(2, "type"), i(3, "value") }
+		)
+	),
+	s(
 		"ret",
 		fmt(
 			[[
