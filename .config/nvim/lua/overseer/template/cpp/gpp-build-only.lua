@@ -6,7 +6,7 @@ return {
 		local outfile = vim.fn.expand("%:p:r") .. ".out"
 		---@type overseer.TaskDefinition
 		return {
-			cmd = "g++",
+			cmd = { "g++" },
 			args = { file, "-o", outfile },
 			components = {
 				{ "on_output_quickfix", open_on_exit = "failure" },
