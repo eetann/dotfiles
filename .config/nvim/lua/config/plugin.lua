@@ -31,7 +31,6 @@ require("lazy").setup({
 		{ import = "plugins.nvim-treesitter" },
 		{ import = "plugins.bufferline" },
 		{ import = "plugins.nvim-colorizer" },
-		{ import = "plugins.vim-highlightedyank" },
 		{ import = "plugins.nvim-hlslens" },
 		{ import = "plugins.nvim-scrollbar" },
 		{ import = "plugins.hlchunk" },

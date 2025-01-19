@@ -5,6 +5,15 @@ local fmt = require("luasnip.extras.fmt").fmt
 
 return {
 	s(
+		"ret",
+		fmt(
+			[[
+        return {};
+		  ]],
+			{ i(0) }
+		)
+	),
+	s(
 		"cout",
 		fmt(
 			[[

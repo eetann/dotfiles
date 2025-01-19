@@ -136,7 +136,10 @@ vim.api.nvim_create_autocmd({ "BufRead" }, {
 	end,
 })
 
--- vim.api.nvim_create_autocmd({ "TermOpen" }, {
--- 	group = group_name,
--- 	command = "startinsert",
--- })
+vim.api.nvim_create_autocmd("TextYankPost", {
+	group = group_name,
+	pattern = "*",
+	callback = function()
+		vim.highlight.on_yank({ timeout = 300 })
+	end,
+})
