@@ -13,28 +13,16 @@ local function validate_r2_backup_path()
 end
 
 ---@return table
----@return string
----@return table
 local function create_tasks_convert_images()
 	vim.print("画像・動画の処理を開始")
 	local R2_BACKUP_PATH = validate_r2_backup_path()
 	if not R2_BACKUP_PATH then
-		return {}, "", {}
+		return {}
 	end
 
-	local filename = vim.fn.expand("%:t")
-	local slug = vim.fn.fnamemodify(filename, ":t:r")
-
-	local content = vim.api.nvim_buf_get_lines(0, 0, vim.api.nvim_buf_line_count(0), false)
-
-	-- 画像と動画のファイル名リストを作成
-	local file_list = {}
-	for _, line in ipairs(content) do
-		local media_filename = line:match("src=[\"']@:([%w-_%.]+)")
-		if media_filename then
-			table.insert(file_list, media_filename)
-		end
-	end
+	local util = require("overseer.template.blog._utils")
+	local slug = util.get_slug()
+	local file_list = util.get_file_list()
 
 	-- ディレクトリの作成
 	local dst_dir = string.format("%s/%s/", R2_BACKUP_PATH, slug)
@@ -43,7 +31,7 @@ local function create_tasks_convert_images()
 		local _, err = vim.uv.fs_mkdir(dst_dir, 493)
 		if err then
 			vim.print("ディレクトリの作成に失敗しました。")
-			return {}, "", {}
+			return {}
 		end
 	end
 
@@ -58,7 +46,7 @@ local function create_tasks_convert_images()
 				cmd = "ffmpeg",
 				args = { "-y", "-i", src_path, dst_file },
 				components = {
-					{ "on_exit_set_status", success_codes = { 0 } },
+					{ "on_exit_set_status" },
 					{ "on_output_quickfix", open_on_exit = "failure" },
 				},
 			})
@@ -68,27 +56,27 @@ local function create_tasks_convert_images()
 				cmd = "cp",
 				args = { src_path, dst_file },
 				components = {
-					{ "on_exit_set_status", success_codes = { 0 } },
+					{ "on_exit_set_status" },
 					{ "on_output_quickfix", open_on_exit = "failure" },
 				},
 			})
 		end
 	end
 
-	return dependencies, slug, file_list
+	return dependencies
 end
 
 ---@type overseer.TemplateDefinition
 return {
 	name = "convert blog images",
 	builder = function()
-		local dependencies, slug, file_list = create_tasks_convert_images()
+		local dependencies = create_tasks_convert_images()
 		if next(dependencies) == nil then
 			return {
 				cmd = "echo 'FAILED: convert blog images' && false",
 			}
 		end
-		table.insert(dependencies, { "(internal) update mdx", slug = slug, file_list = file_list })
+		table.insert(dependencies, { "update mdx for blog images" })
 		---@type overseer.TaskDefinition
 		return {
 			cmd = "echo 'convert blog images'",

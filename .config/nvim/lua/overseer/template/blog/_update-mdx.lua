@@ -17,9 +17,11 @@ local function get_file_size(file_path)
 	return tonumber(width), tonumber(height)
 end
 
----@param slug string
----@param file_list string[]
-local function update_mdx(slug, file_list)
+local function update_mdx()
+	local util = require("overseer.template.blog._utils")
+	local slug = util.get_slug()
+	local file_list = util.get_file_list()
+
 	local aspectRatioList = {}
 	for _, media_filename in ipairs(file_list) do
 		local src_path = string.format("%s/src/assets/images/_ignore/%s", vim.fn.getcwd(), media_filename)
@@ -57,12 +59,12 @@ end
 
 ---@type overseer.TemplateDefinition
 return {
-	name = "(internal) update mdx",
-	builder = function(params)
-		update_mdx(params.slug, params.file_list)
+	name = "update mdx for blog images",
+	builder = function()
+		update_mdx()
 		---@type overseer.TaskDefinition
 		return {
-			cmd = "echo '(internal) update mdx'",
+			cmd = "echo 'update mdx for blog images'",
 		}
 	end,
 	priority = 100,
