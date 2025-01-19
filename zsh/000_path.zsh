@@ -1,25 +1,29 @@
+export GOPATH=$HOME/go
+path+=(
+  $GOPATH(N-/)
+  $GOPATH/bin(N-/)
+  $HOME/.local/bin(N-/)
+  $HOME/.cargo/bin(N-/)
+  /snap/bin(N-/)
+)
+
+# Rancher Desktop > Preferences > Application > Environment > Manual を設定
+path+=($HOME/.rd/bin(N-/))
+
+if [ -e $HOME/Library/Android/sdk ]; then
+  export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
+  path+=(
+    # avdmanager, sdkmanager
+    $ANDROID_SDK_ROOT/tools/bin(N-/)
+    # adb, logcat
+    $ANDROID_SDK_ROOT/platform-tools(N-/)
+    # emulator
+    $ANDROID_SDK_ROOT/emulator(N-/)
+  )
+fi
+
 # tmuxが起動していない&vimの中でなければ、tmux起動
 if [[ -z "$TMUX" && -z "$VIM" && $- == *l* ]] ; then
-  # golang tmuxに必要なので読み込む
-  export GOPATH=$HOME/go
-  export PATH=$PATH:$GOPATH:$GOPATH/bin
-  export PATH=$HOME/.local/bin:$PATH
-  export PATH=$PATH:$HOME/.cargo/bin
-  # Rancher Desktop > Preferences > Application > Environment > Manual を設定
-  if [ -e $HOME/.rd/bin ]; then
-    export PATH=$HOME/.rd/bin:$PATH
-  fi
-
-  if [ -e $HOME/Library/Android/sdk ]; then
-    export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
-    # avdmanager, sdkmanager
-    export PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin
-    # adb, logcat
-    export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
-    # emulator
-    export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
-  fi
-
   if [[ $TERM_PROGRAM != "vscode" ]] ; then
     # get the IDs
     ID="`tmux list-sessions`"
@@ -39,14 +43,8 @@ if [[ -z "$TMUX" && -z "$VIM" && $- == *l* ]] ; then
   fi
 fi
 
-# =では空白入れないこと!!!
-# pathなどの設定--------------------------------------------------
+# 重複排除とパスの順序維持
 typeset -U path PATH
-snap_bin_path="/snap/bin"
-if [ -n "${PATH##*${snap_bin_path}}" -a -n "${PATH##*${snap_bin_path}:*}" ]; then
-  export PATH=$PATH:${snap_bin_path}
-fi
-
 
 if type nvim > /dev/null; then
   export EDITOR=nvim
