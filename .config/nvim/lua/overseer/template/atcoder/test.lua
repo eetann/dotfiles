@@ -8,7 +8,7 @@ return {
 			args = { "test", "-d", "tests", "-c", "./main.out" },
 			components = {
 				{ "on_exit_set_status", success_codes = { 0 } },
-				{ "on_output_quickfix", open = true },
+				{ "open_output", direction = "vertical", on_complete = "failure", on_start = "never", focus = true },
 			},
 		}
 	end,

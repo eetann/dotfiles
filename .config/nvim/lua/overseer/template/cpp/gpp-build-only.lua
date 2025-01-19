@@ -9,8 +9,8 @@ return {
 			cmd = "g++",
 			args = { file, "-o", outfile },
 			components = {
-				{ "on_exit_set_status", success_codes = { 0 } },
 				{ "on_output_quickfix", open_on_exit = "failure" },
+				"default",
 			},
 		}
 	end,

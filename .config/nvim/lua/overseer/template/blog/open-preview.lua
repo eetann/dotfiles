@@ -5,7 +5,8 @@ return {
 		local basename = vim.fn.expand("%:t:r")
 		vim.ui.open("http://localhost:4321/blog/" .. basename)
 		return {
-			cmd = "echo 'open blog preview'",
+			cmd = { "echo" },
+			args = { basename },
 		}
 	end,
 	priority = 1,

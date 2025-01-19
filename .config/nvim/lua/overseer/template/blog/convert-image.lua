@@ -56,7 +56,7 @@ local function create_tasks_convert_images()
 			local dst_file = string.format("%s/%s/%s.avif", R2_BACKUP_PATH, slug, media_filename:match("(.+)%..+$"))
 			table.insert(dependencies, {
 				cmd = "ffmpeg",
-				args = { "-i", src_path, dst_file },
+				args = { "-y", "-i", src_path, dst_file },
 				components = {
 					{ "on_exit_set_status", success_codes = { 0 } },
 					{ "on_output_quickfix", open_on_exit = "failure" },

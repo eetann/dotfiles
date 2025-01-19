@@ -9,7 +9,7 @@ return {
 			cwd = vim.fn.expand("%:p:h"),
 			components = {
 				{ "on_exit_set_status" },
-				{ "on_output_quickfix", open = true },
+				{ "open_output", direction = "vertical", on_complete = "failure", on_start = "never", focus = true },
 			},
 		}
 	end,

@@ -11,7 +11,7 @@ return {
 					task_names = { "g++ build only", "atcoder test", "atcoder submit" },
 					sequential = true,
 				},
-				{ "on_exit_set_status", success_codes = { 0 } },
+				"default",
 			},
 		}
 	end,

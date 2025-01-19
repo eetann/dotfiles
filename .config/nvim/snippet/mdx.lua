@@ -5,7 +5,7 @@ local fmt = require("luasnip.extras.fmt").fmt
 
 return {
 	s(
-		{ trig = "(tdis|qdis)", name = "textlint disable", trigEngine = "vim" },
+		{ trig = "qdis", name = "textlint disable" },
 		fmt(
 			[[
 
@@ -21,7 +21,7 @@ return {
 		)
 	),
 	s(
-		{ trig = "(img|qimg|image|Image)", name = "blog Image component", trigEngine = "vim" },
+		{ trig = "qimg", name = "blog Image component" },
 		fmt(
 			[[
         <Image width="500"
@@ -34,7 +34,7 @@ return {
 		)
 	),
 	s(
-		{ trig = "(video|qvideo|Video)", name = "blog Video component", trigEngine = "vim" },
+		{ trig = "qvideo", name = "blog Video component" },
 		fmt(
 			[[
         <Video width="800"
