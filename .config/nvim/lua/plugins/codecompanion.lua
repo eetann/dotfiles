@@ -136,16 +136,16 @@ return {
 				t_builtin.find_files({
 					prompt_title = "Saved CodeCompanion Chats | <c-d>: delete",
 					cwd = save_folder:absolute(),
-					attach_mappings = function(_, map)
-						map("i", "<c-d>", function(prompt_bufnr)
-							local selection = t_action_state.get_selected_entry()
-							local filepath = selection.path or selection.filename
-							os.remove(filepath)
-							t_actions.close(prompt_bufnr)
-							start_picker()
-						end)
-						return true
-					end,
+					-- attach_mappings = function(_, map)
+					-- 	map("i", "<c-d>", function(prompt_bufnr)
+					-- 		local selection = t_action_state.get_selected_entry()
+					-- 		local filepath = selection.path or selection.filename
+					-- 		os.remove(filepath)
+					-- 		t_actions.close(prompt_bufnr)
+					-- 		start_picker()
+					-- 	end)
+					-- 	return true
+					-- end,
 				})
 			end
 			start_picker()
