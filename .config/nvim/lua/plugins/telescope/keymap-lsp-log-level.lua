@@ -37,4 +37,5 @@ local function set_lsp_log_level()
 		:find()
 end
 
-vim.api.nvim_create_user_command("SetLSPLogLevel", set_lsp_log_level, {})
+-- Lsp〇〇で統一する
+vim.api.nvim_create_user_command("LspSetLogLevel", set_lsp_log_level, {})
