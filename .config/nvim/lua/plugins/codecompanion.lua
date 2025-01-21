@@ -17,6 +17,7 @@ return {
 	},
 	init = function()
 		vim.cmd([[cab cc CodeCompanion]])
+		vim.cmd([[cab ccc CodeCompanionChat]])
 	end,
 	config = function()
 		require("codecompanion").setup({
