@@ -32,6 +32,15 @@ return {
 		end
 
 		noice.setup({
+			cmdline = {
+				format = {
+					myhelp = {
+						pattern = "^:%s*belowright vertical help%s+",
+						icon = "",
+						title = "help (open to the right)",
+					},
+				},
+			},
 			messages = {
 				view_search = "mini",
 			},
