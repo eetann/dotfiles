@@ -26,6 +26,7 @@ return {
 			"atcoder.test-submit",
 			"atcoder.test",
 			"atcoder.submit",
+			"lsp.show-log",
 		},
 	},
 }

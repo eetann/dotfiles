@@ -40,3 +40,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", bufopts)
 	end,
 })
+
+-- TODO: 改行を削除する
+-- vim.lsp.log.set_format_func(function(item)
+-- 	return (vim.inspect(item))
+-- end)
+
+vim.api.nvim_create_user_command("LspLog", function()
+	vim.cmd(string.format("edit %s", vim.lsp.get_log_path()))
+end, {
+	desc = "Opens the Nvim LSP client log.",
+})
