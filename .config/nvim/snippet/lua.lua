@@ -61,8 +61,32 @@ end
 
 function classname:execute()
   --
-end]]):gsub("classname", class_name):gsub("pluginname", plugin_name)
+end
+
+return classname]]):gsub("classname", class_name):gsub("pluginname", plugin_name)
 			return vim.split(text, "\n")
 		end, {}, {})
+	),
+	s(
+		"desc",
+		fmt(
+			[[
+        describe("{}", function ()
+          {}
+        end)
+    ]],
+			{ i(1), i(2) }
+		)
+	),
+	s(
+		"it",
+		fmt(
+			[[
+        it("{}", function ()
+          {}
+        end)
+    ]],
+			{ i(1), i(2) }
+		)
 	),
 }

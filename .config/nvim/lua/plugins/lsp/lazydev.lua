@@ -5,7 +5,7 @@ return {
 		library = {
 			{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
 			{ path = "overseer.nvim", words = { "overseer" } },
-			{ path = "busted/library", words = { "it%(", "describe%(" } },
+			{ path = "${3rd}/busted/library", words = { "it%(", "describe%(" } },
 		},
 	},
 }
