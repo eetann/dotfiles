@@ -41,9 +41,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
--- TODO: 改行を削除する
 -- vim.lsp.log.set_format_func(function(item)
--- 	return (vim.inspect(item))
+-- 	return (vim.inspect(item):gsub("[\r\n]+", ""))
 -- end)
 
 vim.api.nvim_create_user_command("LspLog", function()

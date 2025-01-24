@@ -18,6 +18,7 @@ cask "wezterm"
 brew "jq"
 brew "yq"
 brew "mise"
+brew "luarocks"
 if OS.mac?
     brew "go"
     brew "ncurses"

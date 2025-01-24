@@ -4,6 +4,7 @@ path+=(
   $GOPATH/bin(N-/)
   $HOME/.local/bin(N-/)
   $HOME/.cargo/bin(N-/)
+  $HOME/.luarocks/bin(N-/)
   /snap/bin(N-/)
 )
 

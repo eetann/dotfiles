@@ -92,5 +92,8 @@ require("lazy").setup({
 		-- AI系
 		{ import = "plugins.gen" },
 		{ import = "plugins.codecompanion" },
+
+		-- 開発中
+		{ import = "plugins.log-viewer" },
 	},
 })
