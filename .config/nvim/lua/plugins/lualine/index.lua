@@ -99,6 +99,20 @@ return {
 				},
 				lualine_z = {
 					{ require("plugins.lualine.cc-component") },
+					{
+						-- https://www.reddit.com/r/neovim/comments/1aseug5/comment/kqq026j
+						function()
+							return require("dap").status()
+						end,
+						icon = { "" }, -- nerd icon.
+						cond = function()
+							if not package.loaded.dap then
+								return false
+							end
+							local session = require("dap").session()
+							return session ~= nil
+						end,
+					},
 				},
 			},
 			inactive_sections = {

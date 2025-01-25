@@ -50,6 +50,7 @@ require("lazy").setup({
 		{ import = "plugins.auto-cursorline" },
 		{ import = "plugins.nvim-autopairs" },
 		{ import = "plugins.lsp.index" },
+		{ import = "plugins.dap.index" },
 		{ import = "plugins.completion.index" },
 		{ import = "plugins.vim-swap" },
 		{ import = "plugins.quicker" },

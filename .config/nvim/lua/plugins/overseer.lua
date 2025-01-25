@@ -23,6 +23,7 @@ return {
 			"blog.convert-image",
 			"cpp.gpp-build-run",
 			"cpp.gpp-build-only",
+			"cpp.gpp-debug-build",
 			"atcoder.test-submit",
 			"atcoder.test",
 			"atcoder.submit",
