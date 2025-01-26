@@ -3,6 +3,12 @@ local dap = require("dap")
 dap.adapters.codelldb = {
 	type = "executable",
 	command = "codelldb",
+	args = {
+		"--settings",
+		vim.json.encode({
+			showDisassembly = "never",
+		}),
+	},
 }
 -- ファイルタイプ・アダプタ・設定の紐づけ
 dap.configurations.cpp = {

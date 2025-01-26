@@ -7,10 +7,12 @@ return {
 		---@type overseer.TaskDefinition
 		return {
 			cmd = { "g++" },
-			-- デバッグフラグgをつける
-			args = { "-g", file, "-o", outfile },
+			-- デバッグフラグ-g、最適化無効-O0
+			args = { "-g", "-O0", file, "-o", outfile },
 			components = {
 				{ "on_output_quickfix", open_on_exit = "failure" },
+				-- 通知しない
+				{ "on_complete_notify", statuses = {} },
 				"default",
 			},
 		}

@@ -56,7 +56,16 @@ return {
 				theme = "powerline",
 				component_separators = { left = "", right = "" },
 				section_separators = { left = "", right = "" },
-				disabled_filetypes = {},
+				disabled_filetypes = {
+					winbar = {
+						"dap-repl",
+						"dapui_breakpoints",
+						"dapui_console",
+						"dapui_scopes",
+						"dapui_watches",
+						"dapui_stacks",
+					},
+				},
 				always_divide_middle = true,
 				globalstatus = true,
 			},
@@ -81,6 +90,20 @@ return {
 					},
 				},
 				lualine_x = {
+					{
+						-- https://www.reddit.com/r/neovim/comments/1aseug5/comment/kqq026j
+						function()
+							return require("dap").status()
+						end,
+						icon = { "", color = { fg = "#afdf00" } },
+						cond = function()
+							if not package.loaded.dap then
+								return false
+							end
+							local session = require("dap").session()
+							return session ~= nil
+						end,
+					},
 					"overseer",
 					selectionCount,
 					{
@@ -99,20 +122,6 @@ return {
 				},
 				lualine_z = {
 					{ require("plugins.lualine.cc-component") },
-					{
-						-- https://www.reddit.com/r/neovim/comments/1aseug5/comment/kqq026j
-						function()
-							return require("dap").status()
-						end,
-						icon = { "" }, -- nerd icon.
-						cond = function()
-							if not package.loaded.dap then
-								return false
-							end
-							local session = require("dap").session()
-							return session ~= nil
-						end,
-					},
 				},
 			},
 			inactive_sections = {
