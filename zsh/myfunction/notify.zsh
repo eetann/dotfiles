@@ -17,6 +17,7 @@ SKIP_NOTIFY_COMMANDS=(
   lm
   "vagrant ssh"
   "mise run emulate"
+  "mise w"
   "npm run dev"
   "npm run preview"
   "npm run server"

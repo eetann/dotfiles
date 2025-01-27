@@ -52,10 +52,10 @@ return {
 			local class_name = table.concat(parts, "")
 			local text = ([[
 ---@class pluginname.classname
-classname = {}
+local classname = {}
 classname.__index = classname
 
-function classname.new()
+function classname:new()
   return setmetatable({}, classname)
 end
 
