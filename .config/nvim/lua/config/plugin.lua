@@ -95,6 +95,6 @@ require("lazy").setup({
 		{ import = "plugins.codecompanion" },
 
 		-- 開発中
-		{ import = "plugins.log-viewer" },
+		{ import = "plugins.lsp-dev" },
 	},
 })

@@ -4,6 +4,16 @@ local i = ls.insert_node
 local f = ls.function_node
 local fmt = require("luasnip.extras.fmt").fmt
 
+---@param text string
+---@return string
+local function dashsnake_to_pascal(text)
+	local parts = vim.split(text, "[_-]", { plain = false })
+	for j, part in ipairs(parts) do
+		parts[j] = part:sub(1, 1):upper() .. part:sub(2)
+	end
+	return table.concat(parts, "")
+end
+
 return {
 	s(
 		"snippet",
@@ -43,13 +53,8 @@ return {
 	s(
 		"class",
 		f(function(_, _, _)
-			local plugin_name = vim.fn.expand("%"):match("^lua/([^/]+)/")
-			local filename = vim.fn.expand("%:t:r")
-			local parts = vim.split(filename, "_")
-			for j, part in ipairs(parts) do
-				parts[j] = part:sub(1, 1):upper() .. part:sub(2)
-			end
-			local class_name = table.concat(parts, "")
+			local plugin_name = dashsnake_to_pascal(vim.fn.expand("%"):match("^lua/([^/]+)/"))
+			local class_name = dashsnake_to_pascal(vim.fn.expand("%:t:r"))
 			local text = ([[
 ---@class pluginname.classname
 local classname = {}
