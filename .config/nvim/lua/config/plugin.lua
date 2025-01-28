@@ -34,7 +34,6 @@ require("lazy").setup({
 		{ import = "plugins.nvim-hlslens" },
 		{ import = "plugins.nvim-scrollbar" },
 		{ import = "plugins.hlchunk" },
-		{ import = "plugins.SmoothCursor" },
 		{ "kshenoy/vim-signature", event = "VeryLazy" },
 		{ import = "plugins.gitsigns" },
 
@@ -94,7 +93,8 @@ require("lazy").setup({
 		{ import = "plugins.gen" },
 		{ import = "plugins.codecompanion" },
 
-		-- 開発中
+		-- プラグイン開発
 		{ import = "plugins.lsp-dev" },
+		{ import = "plugins.mini-doc" },
 	},
 })
