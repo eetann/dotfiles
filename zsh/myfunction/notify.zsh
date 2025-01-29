@@ -14,7 +14,7 @@ SKIP_NOTIFY_COMMANDS=(
   vim
   watch
   idea
-  lm
+  ml
   "vagrant ssh"
   "mise run emulate"
   "mise w"
