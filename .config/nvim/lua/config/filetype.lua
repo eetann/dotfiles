@@ -143,3 +143,12 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank({ timeout = 300 })
 	end,
 })
+
+vim.api.nvim_create_autocmd("BufWinEnter", {
+	pattern = {
+		"term://*",
+	},
+	callback = function()
+		vim.keymap.set("n", "q", "<Cmd>:quit<CR>", { buffer = true, silent = true })
+	end,
+})
