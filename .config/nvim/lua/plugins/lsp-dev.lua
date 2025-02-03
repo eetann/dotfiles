@@ -3,6 +3,9 @@ return {
 	dependencies = {
 		"MunifTanjim/nui.nvim",
 	},
-	event = { "VeryLazy" },
+	keys = {
+		{ "<space>ls", ":LspDev showLog<CR>" },
+		{ "<space>lc", ":LspDev changeLogLevel<CR>" },
+	},
 	opts = {},
 }
