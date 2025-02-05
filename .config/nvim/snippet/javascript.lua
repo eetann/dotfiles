@@ -41,4 +41,16 @@ return {
 			{ delimiters = "[]" }
 		)
 	),
+	s(
+		"fun",
+		fmt(
+			[[
+        function []([]:[]) {
+          []
+        }
+      ]],
+			{ i(1, "name"), i(2, "param"), i(3, "type"), i(0) },
+			{ delimiters = "[]" }
+		)
+	),
 }
