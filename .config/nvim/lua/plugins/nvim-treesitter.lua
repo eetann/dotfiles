@@ -85,8 +85,12 @@ return {
 		"nvim-treesitter/nvim-treesitter-context",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		event = { "BufNewFile", "BufRead" },
+		keys = {
+			{ "<space>tc", ":TSContextToggle<CR>" },
+		},
 		opts = {
 			max_lines = 3, -- How many lines the window should span. Values <= 0 mean no limit.
+			min_window_height = 30,
 			on_attach = function(bufnr)
 				-- quickerではオフにする
 				return vim.bo[bufnr].filetype ~= "qf"
