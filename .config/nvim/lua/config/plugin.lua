@@ -62,6 +62,7 @@ require("lazy").setup({
 		-- fuzzy finder
 		{ import = "plugins.telescope.index" },
 		{ import = "plugins.text-case" },
+		{ import = "plugins.snacks.index" },
 
 		-- 移動
 		{ import = "plugins.CamelCaseMotion" },
