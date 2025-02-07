@@ -7,7 +7,9 @@ return {
 		-- keys = {unpack(keys), foo.keys}
 		return keys
 	end,
-	config = function()
-		-- ...
+	opts = function()
+		return {
+			picker = require("plugins.snacks.picker").config,
+		}
 	end,
 }

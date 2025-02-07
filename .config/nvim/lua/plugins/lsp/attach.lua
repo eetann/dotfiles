@@ -3,7 +3,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)
 		local bufopts = { noremap = true, silent = true, buffer = ev.buf }
 		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-		vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", bufopts)
 		vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", bufopts)
 		vim.keymap.set("n", "gd", function()
 			-- 書き込みが走るとlivereloadなどで面倒なので一旦止める

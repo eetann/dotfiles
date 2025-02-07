@@ -82,11 +82,30 @@ M.keys = {
   -- vim固有
   { "<space>fh", function() picker.help() end, desc = "Picker: help pages" },
   { "<space>fH", function() picker.highlights() end, desc = "Picker: highlights" },
+  { "<space>fk", function() picker.keymaps() end, desc = "Picker: keymaps" },
+  { "<space>fm", function() picker.marks() end, desc = "Picker: marks" },
+
+  -- LSP
+  { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
 
   -- pickerそのもの
   { "<space>fR", function() picker.resume() end, desc = "Picker: resume" },
 	{ "<space>fA", function() picker.pickers() end, desc = "Picker: All sources" },
 	-- stylua: ignore end
+}
+
+---@type snacks.picker.Config
+M.config = {
+	layouts = {
+		default = {
+			layout = {
+				width = 0.95,
+			},
+		},
+	},
+	-- formatters = {
+	-- 	file = { truncate = 100 },
+	-- },
 }
 
 return M

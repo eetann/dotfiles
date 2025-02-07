@@ -3,6 +3,7 @@ local finders = require("telescope.finders")
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
 
+-- TODO: プラグインへ移行
 local function show_codelens()
 	vim.lsp.codelens.refresh({ bufnr = 0 })
 	vim.cmd("sleep 1000m")

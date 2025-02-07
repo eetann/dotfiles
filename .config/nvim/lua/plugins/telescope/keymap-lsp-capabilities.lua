@@ -4,6 +4,7 @@ local conf = require("telescope.config").values
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
 
+-- TODO: プラグインへ移行
 local function show_lsp_capabilities()
 	local clients = vim.lsp.get_clients()
 	if #clients == 0 then
