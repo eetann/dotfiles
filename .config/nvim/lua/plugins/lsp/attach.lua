@@ -49,3 +49,7 @@ vim.api.nvim_create_user_command("LspLog", function()
 end, {
 	desc = "Opens the Nvim LSP client log.",
 })
+
+vim.api.nvim_create_user_command("LspInfo", function()
+	vim.cmd("vertical checkhealth lspconfig")
+end, {})
