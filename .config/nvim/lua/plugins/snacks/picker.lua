@@ -70,8 +70,8 @@ M.keys = {
   { "<space>fr", function() picker.recent({ filter = { cwd = true } }) end, desc = "Picker: recent" },
 
   -- grep
-  { "<space>fg", function() picker.grep({ pattern = getText() }) end, mode = { "n", "x" }, desc = "Picker: grep" },
-  { "<space>fg", function() picker.grep({ pattern = getText(), regex = false }) end, mode = { "n", "x" }, desc = "Picker: grep" },
+  { "<space>fg", function() picker.grep({ hidden = true, pattern = getText() }) end, mode = { "n", "x" }, desc = "Picker: grep" },
+  { "<space>fg", function() picker.grep({ hidden = true, pattern = getText(), regex = false }) end, mode = { "n", "x" }, desc = "Picker: grep" },
 
   -- TODO検索
   ---@diagnostic disable-next-line: undefined-field
@@ -86,7 +86,7 @@ M.keys = {
   { "<space>fm", function() picker.marks() end, desc = "Picker: marks" },
 
   -- LSP
-  { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
+  { "gr", function() picker.lsp_references() end, nowait = true, desc = "References" },
 
   -- pickerそのもの
   { "<space>fR", function() picker.resume() end, desc = "Picker: resume" },
