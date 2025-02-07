@@ -80,6 +80,7 @@ M.keys = {
 				on_show = function()
 					vim.api.nvim_put({ text }, "c", true, true)
 				end,
+				layout = { preset = "vertical", layout = { width = 0.9 } },
 			})
 		end,
 		mode = { "n", "x" },
