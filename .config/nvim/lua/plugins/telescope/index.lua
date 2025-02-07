@@ -78,7 +78,6 @@ return {
 				},
 			},
 		})
-		require("plugins.telescope.keymap-basic")
 		require("plugins.telescope.keymap-nb")
 		require("plugins.telescope.keymap-lsp-log-level")
 		require("plugins.telescope.keymap-lsp-capabilities")
