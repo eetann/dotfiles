@@ -16,9 +16,9 @@ local function project_files(use_git_root)
 		return
 	end
 	if use_git_root then
-		picker.git_files({ pattern = text })
+		picker.git_files({ untracked = true, pattern = text })
 	else
-		picker.git_files({ pattern = text, cwd = vim.uv.cwd() })
+		picker.git_files({ untracked = true, pattern = text, cwd = vim.uv.cwd() })
 	end
 end
 
