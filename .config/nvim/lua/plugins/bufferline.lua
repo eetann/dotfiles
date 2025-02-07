@@ -11,7 +11,6 @@ return {
 				buffer_close_icon = "",
 				name_formatter = function(buf)
 					if buf.path:match("%.nb/home/.*.md") then
-						-- TODO: ここだけ telescopeと一致するので共通化したいかも
 						local file = io.open(buf.path, "r")
 
 						if not file then

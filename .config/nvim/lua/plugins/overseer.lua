@@ -9,7 +9,6 @@ return {
 				},
 			},
 		},
-		{ "nvim-telescope/telescope.nvim" },
 	},
 	keys = {
 		{ "<space>r", "<CMD>OverseerRun<CR>" },

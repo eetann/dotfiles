@@ -20,6 +20,5 @@ return {
 	{ import = "plugins.lsp.lspsaga" },
 	{ import = "plugins.lsp.conform" },
 	{ import = "plugins.lsp.none-ls" },
-	{ import = "plugins.lsp.actions-preview" },
 	{ import = "plugins.lsp.lazydev" },
 }

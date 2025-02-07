@@ -32,7 +32,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "gf", "<cmd>Lspsaga lsp_finder<CR>", bufopts)
 		vim.keymap.set("n", "gh", "<cmd>Lspsaga hover_doc<CR>", bufopts)
 		vim.keymap.set("n", "<leader>cr", "<cmd>Lspsaga rename<CR>", bufopts)
-		vim.keymap.set({ "n", "v" }, "<space>ca", require("actions-preview").code_actions, bufopts)
+		vim.keymap.set({ "n", "v" }, "<space>ca", "<cmd>Lspsaga code_action<CR>", bufopts)
 		vim.keymap.set("n", "<leader>cd", "<cmd>Lspsaga show_line_diagnostics<CR>", bufopts)
 		vim.keymap.set("n", "<leader>cc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", bufopts)
 		vim.keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", bufopts)
