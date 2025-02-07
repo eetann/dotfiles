@@ -62,8 +62,6 @@ vim.opt.mouse = "a"
 vim.opt.ttimeoutlen = 100 -- ESCしてから挿入モード出るまでの時間を短縮
 vim.opt.helplang = { "ja", "en" }
 vim.opt.keywordprg = ":help"
--- cabによる展開だとnoiceでhelpだと認識できない(Lua Patternの制限)
-vim.cmd([[cab H belowright vertical help]])
 vim.opt.formatoptions:remove({ "r", "o" })
 vim.opt.formatoptions:append({ "M", "j" })
 vim.opt.title = true -- 編集中のファイル名表示
@@ -115,3 +113,6 @@ vim.opt.splitright = true
 vim.opt.winwidth = 30
 vim.opt.winminwidth = 30
 vim.opt.equalalways = false
+
+vim.cmd("cab H belowright vertical help")
+vim.cmd("cab L lua vim.print( )<Left><Left>")
