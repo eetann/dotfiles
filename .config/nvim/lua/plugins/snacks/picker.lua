@@ -69,9 +69,23 @@ M.keys = {
   { "<F6>", function() picker.git_files({ cwd = '~/dotfiles' }) end, desc = "Picker files: dotfiles" },
   { "<space>fr", function() picker.recent({ filter = { cwd = true } }) end, desc = "Picker: recent" },
 
-  -- grep
-  { "<space>fg", function() picker.grep({ hidden = true, pattern = getText() }) end, mode = { "n", "x" }, desc = "Picker: grep" },
-  { "<space>fg", function() picker.grep({ hidden = true, pattern = getText(), regex = false }) end, mode = { "n", "x" }, desc = "Picker: grep" },
+	-- grep
+	-- stylua: ignore end
+	{
+		"<space>fg",
+		function()
+			local text = getText()
+			picker.grep({
+				hidden = true,
+				on_show = function()
+					vim.api.nvim_put({ text }, "c", true, true)
+				end,
+			})
+		end,
+		mode = { "n", "x" },
+		desc = "Picker: grep",
+	},
+	-- stylua: ignore start
 
   -- TODO検索
   ---@diagnostic disable-next-line: undefined-field
