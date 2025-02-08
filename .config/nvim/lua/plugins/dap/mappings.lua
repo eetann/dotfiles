@@ -81,8 +81,8 @@ return {
 	{
 		"<space>dq",
 		function()
-			require("dap").close()
+			require("dap").terminate()
 		end,
-		desc = "Debug: quit session (デバッグの終了)",
+		desc = "Debug: terminate (デバッグの停止)",
 	},
 }
