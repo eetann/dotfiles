@@ -4,6 +4,7 @@ SetWorkingDir(A_ScriptDir)  ; Ensures a consistent starting directory.
 ; Auto execute section is the region before any return/hotkey
 GroupAdd("browser", "ahk_exe chrome.exe")
 GroupAdd("browser", "ahk_exe vivaldi.exe")
+GroupAdd("browser", "ahk_exe zen.exe")
 
 ; Win + r に`shll:startup`を実行して作成されたフォルダに、
 ; このファイルのショートカットを入れる
