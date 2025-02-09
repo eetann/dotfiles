@@ -26,24 +26,15 @@ return {
 			dapui.open()
 		end
 
-		vim.fn.sign_define(
-			"DapBreakpoint",
-			{ text = "", texthl = "DapBreakpoint", linehl = "DapBreakpoint", numhl = "DapBreakpoint" }
-		)
+		vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "", linehl = "", numhl = "" })
 		vim.fn.sign_define("DapBreakpointRejected", {
 			text = "󰉥",
-			texthl = "DapBreakpointRejected",
-			linehl = "DapBreakpointRejected",
-			numhl = "DapBreakpointRejected",
+			texthl = "",
+			linehl = "",
+			numhl = "",
 		})
-		vim.fn.sign_define(
-			"DapLogPoint",
-			{ text = "", texthl = "DapLogPoint", linehl = "DapLogPoint", numhl = "DapLogPoint" }
-		)
-		vim.fn.sign_define(
-			"DapStopped",
-			{ text = "", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped" }
-		)
+		vim.fn.sign_define("DapLogPoint", { text = "", texthl = "", linehl = "", numhl = "" })
+		vim.fn.sign_define("DapStopped", { text = "", texthl = "", linehl = "", numhl = "" })
 
 		-- adapters
 		require("plugins.dap.cpp")
