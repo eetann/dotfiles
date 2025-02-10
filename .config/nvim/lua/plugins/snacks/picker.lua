@@ -5,6 +5,8 @@ local function getText()
 	return visual and visual.text or ""
 end
 
+local my_vertical = { preset = "vertical", layout = { width = 0.9 } }
+
 ---gitを使って無ければfilesでpicker
 ---@param use_git_root boolean git_rootを使うかどうか。モノレポの個別プロジェクトならfalse
 local function project_files(use_git_root)
@@ -12,13 +14,23 @@ local function project_files(use_git_root)
 
 	local root = require("snacks.git").get_root()
 	if root == nil then
-		picker.files({ pattern = text })
+		picker.files({ pattern = text, layout = my_vertical })
 		return
 	end
 	if use_git_root then
-		picker.git_files({ untracked = true, pattern = text })
+		picker.git_files({
+			untracked = true,
+			pattern = text,
+			layout = my_vertical,
+			"",
+		})
 	else
-		picker.git_files({ untracked = true, pattern = text, cwd = vim.uv.cwd() })
+		picker.git_files({
+			untracked = true,
+			pattern = text,
+			cwd = vim.uv.cwd(),
+			layout = my_vertical,
+		})
 	end
 end
 
@@ -80,7 +92,7 @@ M.keys = {
 				on_show = function()
 					vim.api.nvim_put({ text }, "c", true, true)
 				end,
-				layout = { preset = "vertical", layout = { width = 0.9 } },
+				layout = my_vertical,
 			})
 		end,
 		mode = { "n", "x" },
