@@ -118,9 +118,19 @@ M.config = {
 			},
 		},
 	},
-	-- formatters = {
-	-- 	file = { truncate = 100 },
-	-- },
+	win = {
+		-- input window
+		input = {
+			keys = {
+				-- select allを無効化
+				["<c-a>"] = false,
+				["<c-b>"] = false,
+				["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
+				["<c-f>"] = false,
+				["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
+			},
+		},
+	},
 }
 
 return M
