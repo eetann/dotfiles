@@ -123,6 +123,7 @@ M.keys = {
 
 ---@type snacks.picker.Config
 M.config = {
+	formatters = { file = { truncate = 200 } },
 	layouts = {
 		default = {
 			layout = {
