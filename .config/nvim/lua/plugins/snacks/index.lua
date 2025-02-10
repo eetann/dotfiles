@@ -1,6 +1,7 @@
 return {
 	"folke/snacks.nvim",
-	event = { "VeryLazy" },
+	priority = 1000,
+	lazy = false,
 	keys = function()
 		local picker = require("plugins.snacks.picker")
 		local keys = picker.keys
