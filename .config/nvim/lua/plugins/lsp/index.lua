@@ -21,5 +21,6 @@ return {
 	{ import = "plugins.lsp.lspsaga" },
 	{ import = "plugins.lsp.conform" },
 	{ import = "plugins.lsp.none-ls" },
+	-- { import = "plugins.lsp.nvim-lint" },
 	{ import = "plugins.lsp.lazydev" },
 }
