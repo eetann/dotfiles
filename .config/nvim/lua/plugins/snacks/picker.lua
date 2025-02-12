@@ -1,6 +1,6 @@
 local picker = require("snacks.picker")
 
-local function getText()
+local function get_text()
 	local visual = picker.util.visual()
 	return visual and visual.text or ""
 end
@@ -10,7 +10,7 @@ local my_vertical = { preset = "vertical", layout = { width = 0.9 } }
 ---gitを使って無ければfilesでpicker
 ---@param use_git_root boolean git_rootを使うかどうか。モノレポの個別プロジェクトならfalse
 local function project_files(use_git_root)
-	local text = getText()
+	local text = get_text()
 
 	local root = require("snacks.git").get_root()
 	if root == nil then
@@ -22,7 +22,6 @@ local function project_files(use_git_root)
 			untracked = true,
 			pattern = text,
 			layout = my_vertical,
-			"",
 		})
 	else
 		picker.git_files({
@@ -68,6 +67,7 @@ M.keys = {
 				finder = "proc",
 				cmd = "find",
 				args = { vim.fn.expand("%:h"), "-type", "f", "-not", "-name", vim.fn.expand("%:t") },
+				---@param item snacks.picker.finder.Item
 				transform = function(item)
 					item.file = item.text
 				end,
@@ -86,7 +86,7 @@ M.keys = {
 	{
 		"<space>fg",
 		function()
-			local text = getText()
+			local text = get_text()
 			picker.grep({
 				hidden = true,
 				on_show = function()
@@ -119,6 +119,46 @@ M.keys = {
   { "<space>fR", function() picker.resume() end, desc = "Picker: resume" },
 	{ "<space>fA", function() picker.pickers() end, desc = "Picker: All sources" },
 	-- stylua: ignore end
+
+	-- カスタマイズの例
+	{
+		"<space>fz",
+		function()
+			picker({
+				finder = function()
+					local my_list = {
+						{ quote = "選ばれるのは私よ！", thanks = "ありがとうなのだわ！" },
+						{
+							quote = "うるさいんですけどぉ〜",
+							thanks = "別にありがとうとか思ってないんだからね！",
+						},
+						{ quote = "ちっす", thanks = "どうも" },
+					}
+					---@type snacks.picker.Item[]
+					local items = {}
+					for i, person in ipairs(my_list) do
+						---@type snacks.picker.Item
+						local item = {
+							idx = i,
+							score = 0,
+							text = person.quote,
+							thanks = person.thanks,
+						}
+						table.insert(items, item)
+					end
+					return items
+				end,
+				---@type snacks.picker.Action.spec
+				confirm = function(the_picker, item)
+					the_picker:close()
+					vim.notify(item.thanks)
+				end,
+				format = "text",
+				preview = "none",
+				layout = { preset = "vscode" },
+			})
+		end,
+	},
 }
 
 ---@type snacks.picker.Config
