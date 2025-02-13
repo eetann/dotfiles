@@ -94,4 +94,18 @@ return classname]]):gsub("classname", class_name):gsub("pluginname", plugin_name
 			{ i(1), i(2) }
 		)
 	),
+	s(
+		"M",
+		fmt(
+			[[
+        local M = {}
+
+        M.<>
+
+        return M
+    ]],
+			{ i(0) },
+			{ delimiters = "<>" }
+		)
+	),
 }
