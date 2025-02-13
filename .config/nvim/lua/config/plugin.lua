@@ -92,7 +92,7 @@ require("lazy").setup({
 
 		-- AI系
 		{ import = "plugins.gen" },
-		{ import = "plugins.codecompanion" },
+		{ import = "plugins.codecompanion.index" },
 		{ import = "plugins.avante" },
 
 		-- プラグイン開発
