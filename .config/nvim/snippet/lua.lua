@@ -100,7 +100,7 @@ return classname]]):gsub("classname", class_name):gsub("pluginname", plugin_name
 			[[
         local M = {}
 
-        M.<>
+        <>
 
         return M
     ]],
