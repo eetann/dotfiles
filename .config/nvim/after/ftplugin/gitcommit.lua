@@ -31,12 +31,8 @@ vim.keymap.set("n", "<C-g><C-g>", function()
 		pattern = "CodeCompanionInlineFinished",
 		group = "my_nvim_rc",
 		callback = function()
-			-- auto accept
-			vim.api.nvim_feedkeys(
-				vim.api.nvim_replace_termcodes("ga", true, false, true),
-				"n",
-				false -- Should be false, since we already `nvim_replace_termcodes()`
-			)
+			vim.cmd("sleep 500ms")
+			vim.cmd("normal ga")
 		end,
 	})
 	if os.getenv("COMMIT_MESSAGE_ENGLISH") == "1" then
