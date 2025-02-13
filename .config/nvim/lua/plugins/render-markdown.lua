@@ -7,6 +7,7 @@ return {
 	},
 	opts = {
 		render_modes = true,
+		file_types = { "markdown", "Avante" },
 		heading = {
 			width = "block",
 			left_pad = 0,
