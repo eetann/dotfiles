@@ -1,10 +1,10 @@
 ---@type CompanionPrompt
 return {
 	strategy = "inline",
-	description = "Generate a commit message",
+	description = "Generate English commit message",
 	opts = {
 		is_slash_cmd = true,
-		short_name = "conventional-commit",
+		short_name = "english-commit",
 		auto_submit = true,
 		placement = "replace",
 	},

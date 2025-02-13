@@ -17,15 +17,16 @@ local git_commit_prefixs = {
 	{ word = "chore: ", menu = "その他の変更", kind = "pre" },
 }
 
----@diagnostic disable-next-line: undefined-field
-_G.complete_git_commit = function()
+vim.api.nvim_buf_create_user_command(0, "CompleteGitCommit", function()
+	vim.cmd("startinsert")
+	vim.cmd("sleep 500ms")
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	if row == 1 and col == 0 then
 		vim.fn.complete(col + 1, git_commit_prefixs)
 	end
-	return ""
-end
+end, {})
 
-vim.cmd("startinsert")
-vim.cmd("sleep 500ms")
-vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-R>=v:lua.complete_git_commit()<CR>", true, true, true))
+vim.keymap.set("n", "<C-g><C-g>", function()
+	-- vim.cmd("CodeCompanion /english-commit")
+	vim.cmd("CodeCompanion /japanese-commit")
+end, { buffer = true, desc = "コミットメッセージの生成" })

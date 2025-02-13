@@ -39,7 +39,8 @@ return {
 				},
 			},
 			prompt_library = {
-				["Generate a Commit Message"] = require("plugins.codecompanion.prompt.commit-message"),
+				["Generate English Commit Message"] = require("plugins.codecompanion.prompt.commit-message-english"),
+				["Generate Japanese Commit Message"] = require("plugins.codecompanion.prompt.commit-message-japanese"),
 			},
 		})
 		require("plugins.codecompanion.history")
