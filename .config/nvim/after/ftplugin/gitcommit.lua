@@ -27,6 +27,21 @@ vim.api.nvim_buf_create_user_command(0, "CompleteGitCommit", function()
 end, {})
 
 vim.keymap.set("n", "<C-g><C-g>", function()
-	-- vim.cmd("CodeCompanion /english-commit")
-	vim.cmd("CodeCompanion /japanese-commit")
+	vim.api.nvim_create_autocmd("User", {
+		pattern = "CodeCompanionInlineFinished",
+		group = "my_nvim_rc",
+		callback = function()
+			-- auto accept
+			vim.api.nvim_feedkeys(
+				vim.api.nvim_replace_termcodes("ga", true, false, true),
+				"n",
+				false -- Should be false, since we already `nvim_replace_termcodes()`
+			)
+		end,
+	})
+	if os.getenv("COMMIT_MESSAGE_ENGLISH") == "1" then
+		vim.cmd("CodeCompanion /english-commit")
+	else
+		vim.cmd("CodeCompanion /japanese-commit")
+	end
 end, { buffer = true, desc = "コミットメッセージの生成" })
