@@ -7,6 +7,8 @@ alias manja="man -L ja"
 alias manen="man -L en"
 alias lg='lazygit --use-config-dir="$HOME/.config/lazygit"'
 alias zd='cd ~/dotfiles'
+alias ml='nvim .memo.local.md'
+alias mt='mise watch test'
 case ${OSTYPE} in
   darwin*)
     alias xargs="gxargs"
@@ -20,4 +22,3 @@ alias idea='nb e idea.md'
 alias ionic='nocorrect ionic'
 alias pod='nocorrect pod'
 alias ng='nocorrect ng'
-alias ml='nvim .memo.local.md'

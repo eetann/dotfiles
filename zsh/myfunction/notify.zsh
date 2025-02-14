@@ -15,6 +15,7 @@ SKIP_NOTIFY_COMMANDS=(
   watch
   idea
   ml
+  mt
   "vagrant ssh"
   "mise run emulate"
   "mise w"
@@ -23,16 +24,19 @@ SKIP_NOTIFY_COMMANDS=(
   "npm run server"
   "npm run start"
   "npm run watch"
+  "npm run test"
   "pnpm run dev"
   "pnpm run preview"
   "pnpm run server"
   "pnpm run start"
   "pnpm run watch"
+  "pnpm run test"
   "yarn run dev"
   "yarn run preview"
   "yarn run server"
   "yarn run start"
   "yarn run watch"
+  "yarn run test"
 )
 
 function is_skip_command() {
