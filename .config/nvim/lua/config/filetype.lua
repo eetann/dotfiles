@@ -17,10 +17,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 	group = group_name,
 	pattern = { "help", "man" },
 	callback = function()
-		vim.cmd([[
-      nnoremap <silent><buffer> q <Cmd>:quit<CR>
-      set nobuflisted
-    ]])
+		vim.keymap.set("n", "q", "<Cmd>:quit<CR>", { buffer = true, silent = true })
 	end,
 })
 

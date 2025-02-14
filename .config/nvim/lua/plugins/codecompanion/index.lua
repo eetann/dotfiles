@@ -20,6 +20,7 @@ return {
 	end,
 	config = function()
 		require("codecompanion").setup({
+			language = "Japanese",
 			strategies = {
 				chat = {
 					adapter = "copilot",
@@ -44,5 +45,12 @@ return {
 			},
 		})
 		require("plugins.codecompanion.history")
+		vim.api.nvim_create_autocmd({ "FileType" }, {
+			group = "my_nvim_rc",
+			pattern = "codecompanion",
+			callback = function()
+				vim.keymap.set("n", "qq", "<Cmd>:quit<CR>", { buffer = true, silent = true })
+			end,
+		})
 	end,
 }
