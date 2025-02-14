@@ -98,5 +98,6 @@ require("lazy").setup({
 		-- プラグイン開発
 		{ import = "plugins.lsp-dev" },
 		{ import = "plugins.mini-doc" },
+		{ import = "plugins.mini-test" },
 	},
 })

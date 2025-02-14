@@ -108,4 +108,15 @@ return classname]]):gsub("classname", class_name):gsub("pluginname", plugin_name
 			{ delimiters = "<>" }
 		)
 	),
+	s(
+		"fun",
+		fmt(
+			[[
+        function {}({})
+          {}
+        end
+      ]],
+			{ i(1), i(2), i(0) }
+		)
+	),
 }
