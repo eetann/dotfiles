@@ -1,6 +1,3 @@
-local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
 local lspconfig = require("lspconfig")
 local function server_register(server_name)
 	local opts = {}
@@ -8,7 +5,7 @@ local function server_register(server_name)
 	if success then
 		opts = req_opts
 	end
-	opts.capabilities = vim.tbl_deep_extend("force", {}, capabilities, opts.capabilities or {})
+	opts.capabilities = require("blink.cmp").get_lsp_capabilities(opts.capabilities)
 	-- .config/nvim/lua/lsp/[server_name].lua
 	lspconfig[server_name].setup(opts)
 end

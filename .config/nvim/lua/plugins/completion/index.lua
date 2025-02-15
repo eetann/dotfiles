@@ -1,85 +1,36 @@
+---@module "lazy"
+---@type LazyPluginSpec[]
 return {
-	"hrsh7th/nvim-cmp",
-	event = { "InsertEnter", "CmdLineEnter" },
-	dependencies = {
-		{ import = "plugins.completion.luasnip" },
-		"hrsh7th/cmp-nvim-lsp",
-		"hrsh7th/cmp-buffer",
-		-- "hrsh7th/cmp-path",
-		-- { dir = "eetann/cmp-eetannpath" },
-		"eetann/cmp-eetannpath",
-		"hrsh7th/cmp-cmdline",
-		"uga-rosa/cmp-dictionary",
-		"onsails/lspkind-nvim",
+	{
+		"saghen/blink.cmp",
+		event = { "InsertEnter", "CmdLineEnter" },
+		dependencies = {
+			{ import = "plugins.completion.luasnip" },
+			{
+				"Kaiser-Yang/blink-cmp-dictionary",
+				dependencies = { "nvim-lua/plenary.nvim" },
+			},
+		},
+		-- use a release tag to download pre-built binaries
+		version = "*",
+		---@module "blink.cmp"
+		---@type blink.cmp.Config
+		opts = {
+			keymap = require("plugins.completion.mappings"),
+
+			snippets = { preset = "luasnip" },
+			sources = require("plugins.completion.sources"),
+
+			-- 見た目
+			appearance = {
+				use_nvim_cmp_as_default = true,
+				nerd_font_variant = "normal",
+			},
+			completion = {
+				documentation = { auto_show = true, auto_show_delay_ms = 500, window = { border = "single" } },
+			},
+			signature = { window = { border = "single" } },
+		},
+		opts_extend = { "sources.default" },
 	},
-	config = function()
-		local cmp = require("cmp")
-		cmp.setup({
-			window = {
-				completion = cmp.config.window.bordered(),
-				documentation = cmp.config.window.bordered(),
-			},
-			snippet = {
-				expand = function(args)
-					require("luasnip").lsp_expand(args.body)
-				end,
-			},
-			mapping = require("plugins.completion.cmp-mapping"),
-			sources = cmp.config.sources({
-				{ name = "luasnip" },
-				{ name = "nvim_lsp" },
-				{
-					name = "path",
-					option = {
-						get_cwd = function(params)
-							-- NOTE: ZLEのedit-command-lineで使いやすいようにcwdを変更
-							---@diagnostic disable-next-line: missing-parameter
-							local dir_name = vim.fn.expand(("#%d:p:h"):format(params.context.bufnr))
-							if dir_name == "/tmp" then
-								-- body
-								return vim.fn.getcwd()
-							end
-							return dir_name
-						end,
-					},
-				},
-				{
-					name = "buffer",
-					option = {
-						get_bufnrs = function()
-							return vim.api.nvim_list_bufs()
-						end,
-					},
-				},
-				{ name = "dictionary" },
-				{
-					name = "lazydev",
-					group_index = 0, -- set group index to 0 to skip loading LuaLS completions
-				},
-			}),
-			---@diagnostic disable-next-line: missing-fields
-			formatting = {
-				format = require("lspkind").cmp_format({
-					maxwidth = 35,
-				}),
-			},
-		})
-		require("plugins.completion.cmdline")
-		require("cmp_dictionary").setup({
-			paths = { "/usr/share/dict/words" },
-			exact_length = 2,
-			first_case_insensitive = false,
-			document = {
-				enable = false,
-				command = { "wn", "${label}", "-over" },
-			},
-		})
-		vim.api.nvim_create_autocmd({ "FileType" }, {
-			group = "my_nvim_rc",
-			pattern = { "gitcommit" },
-			callback = function()
-				require("plugins.completion.gitcommit")
-			end,
-		})
-	end,
 }
