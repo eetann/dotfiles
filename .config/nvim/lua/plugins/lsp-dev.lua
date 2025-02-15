@@ -1,3 +1,4 @@
+---@module "lazy"
 ---@type LazyPluginSpec
 return {
 	dir = "~/ghq/github.com/eetann/lsp-dev.nvim",
