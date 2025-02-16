@@ -5,9 +5,9 @@ return {
 	-- lsp補完より優先されても、数文字打てば消える
 	default = { "snippets", "lazydev", "lsp", "path", "buffer", "dictionary" },
 	providers = {
-		snippets = {
-			score_offset = 10,
-		},
+		-- snippets = {
+		-- 	score_offset = 10,
+		-- },
 		lazydev = {
 			name = "LazyDev",
 			module = "lazydev.integrations.blink",
