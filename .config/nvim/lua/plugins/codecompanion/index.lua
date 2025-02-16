@@ -5,14 +5,6 @@ return {
 		"nvim-lua/plenary.nvim",
 		"nvim-treesitter/nvim-treesitter",
 		{ "zbirenbaum/copilot.lua", opts = {} },
-		{
-			"stevearc/dressing.nvim",
-			opts = {
-				input = {
-					enabled = false,
-				},
-			},
-		},
 	},
 	init = function()
 		vim.cmd([[cab cc CodeCompanion]])

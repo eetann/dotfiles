@@ -1,15 +1,5 @@
 return {
 	"stevearc/overseer.nvim",
-	dependencies = {
-		{
-			"stevearc/dressing.nvim",
-			opts = {
-				input = {
-					enabled = false,
-				},
-			},
-		},
-	},
 	keys = {
 		{ "<space>r", "<CMD>OverseerRun<CR>" },
 		{ "<space>R", "<CMD>OverseerToggle<CR>" },
