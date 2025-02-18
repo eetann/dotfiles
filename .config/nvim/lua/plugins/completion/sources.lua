@@ -4,6 +4,10 @@ return {
 	-- スニペットはいちいち覚えていない & 短い文字なので優先表示
 	-- lsp補完より優先されても、数文字打てば消える
 	default = { "snippets", "lazydev", "lsp", "path", "buffer", "dictionary" },
+	per_filetype = {
+		codecompanion = { "codecompanion" },
+		markdown = { "snippets", "lsp", "path", "dictionary" },
+	},
 	providers = {
 		-- snippets = {
 		-- 	score_offset = 10,
@@ -46,7 +50,4 @@ return {
 		end
 		return 0
 	end,
-	per_filetype = {
-		codecompanion = { "codecompanion" },
-	},
 }
