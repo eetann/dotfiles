@@ -59,7 +59,8 @@ return {
 		return vim.list_extend(mappings, keys)
 	end,
 	opts = {
-		provider = "copilot",
+		-- 環境変数`OPENAI_API_KEY`にAPIキーをセット
+		provider = vim.env.OPENAI_API_KEY and "openai" or "copilot",
 		mappings = {
 			ask = "<space>aa",
 			edit = "<space>ae",
