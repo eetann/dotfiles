@@ -7,6 +7,7 @@ return {
 	per_filetype = {
 		codecompanion = { "codecompanion" },
 		markdown = { "snippets", "lsp", "path", "dictionary" },
+		mdx = { "snippets", "lsp", "path", "dictionary" },
 	},
 	providers = {
 		-- snippets = {
