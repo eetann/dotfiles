@@ -13,9 +13,19 @@ return {
 	config = function()
 		require("codecompanion").setup({
 			language = "Japanese",
+			adapters = {
+				my_adapter = function()
+					if vim.env.OPENAI_API_KEY then
+						return require("codecompanion.adapters").extend("openai", {
+							env = { api_key = vim.env.OPENAI_API_KEY },
+						})
+					end
+					return require("codecompanion.adapters").extend("copilot", {})
+				end,
+			},
 			strategies = {
 				chat = {
-					adapter = "copilot",
+					adapter = "my_adapter",
 					keymaps = {
 						send = {
 							modes = {
@@ -25,10 +35,10 @@ return {
 					},
 				},
 				inline = {
-					adapter = "copilot",
+					adapter = "my_adapter",
 				},
 				agent = {
-					adapter = "copilot",
+					adapter = "my_adapter",
 				},
 			},
 			prompt_library = {
