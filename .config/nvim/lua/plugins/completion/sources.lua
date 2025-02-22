@@ -3,13 +3,23 @@
 return {
 	-- スニペットはいちいち覚えていない & 短い文字なので優先表示
 	-- lsp補完より優先されても、数文字打てば消える
-	default = { "snippets", "lazydev", "lsp", "path", "buffer", "dictionary" },
+	default = { "conventional_commits", "snippets", "lazydev", "lsp", "path", "buffer", "dictionary" },
 	per_filetype = {
 		codecompanion = { "codecompanion" },
 		markdown = { "snippets", "lsp", "path", "dictionary" },
 		mdx = { "snippets", "lsp", "path", "dictionary" },
 	},
 	providers = {
+		conventional_commits = {
+			name = "Conventional Commits",
+			module = "blink-cmp-conventional-commits",
+			enabled = function()
+				return vim.bo.filetype == "gitcommit"
+			end,
+			---@module 'blink-cmp-conventional-commits'
+			---@type blink-cmp-conventional-commits.Options
+			opts = {}, -- none so far
+		},
 		-- snippets = {
 		-- 	score_offset = 10,
 		-- },

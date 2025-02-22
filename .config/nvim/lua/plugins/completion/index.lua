@@ -5,6 +5,7 @@ return {
 	event = { "InsertEnter", "CmdLineEnter" },
 	dependencies = {
 		{ import = "plugins.completion.luasnip" },
+		"disrupted/blink-cmp-conventional-commits",
 		{
 			"Kaiser-Yang/blink-cmp-dictionary",
 			dependencies = { "nvim-lua/plenary.nvim" },
@@ -16,6 +17,13 @@ return {
 	---@type blink.cmp.Config
 	opts = {
 		keymap = require("plugins.completion.mappings"),
+		cmdline = {
+			keymap = {
+				["<CR>"] = { "accept_and_enter", "fallback" },
+				["<C-e>"] = { "hide", "fallback" },
+				["<C-Space>"] = { "show", "fallback" },
+			},
+		},
 
 		snippets = { preset = "luasnip" },
 		sources = require("plugins.completion.sources"),
@@ -26,7 +34,16 @@ return {
 			nerd_font_variant = "normal",
 		},
 		completion = {
-			documentation = { auto_show = true, auto_show_delay_ms = 500, window = { border = "single" } },
+			documentation = {
+				auto_show = true,
+				auto_show_delay_ms = 500,
+				window = { border = "double" },
+			},
+			menu = {
+				auto_show = function(ctx)
+					return ctx.mode ~= "cmdline" or not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())
+				end,
+			},
 		},
 		signature = { window = { border = "single" } },
 	},
