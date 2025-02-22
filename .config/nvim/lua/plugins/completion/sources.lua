@@ -1,4 +1,4 @@
----@module "blink-cmp"
+---@module "blink.cmp"
 ---@type blink.cmp.SourceConfigPartial
 return {
 	-- スニペットはいちいち覚えていない & 短い文字なので優先表示

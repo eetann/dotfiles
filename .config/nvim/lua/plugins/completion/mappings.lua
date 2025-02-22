@@ -1,4 +1,4 @@
----@module "blink-cmp"
+---@module "blink.cmp"
 ---@type blink.cmp.KeymapConfig
 return {
 	preset = "super-tab",
