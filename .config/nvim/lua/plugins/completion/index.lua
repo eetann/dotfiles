@@ -19,9 +19,8 @@ return {
 		keymap = require("plugins.completion.mappings"),
 		cmdline = {
 			keymap = {
+				preset = "super-tab",
 				["<CR>"] = { "accept_and_enter", "fallback" },
-				["<C-e>"] = { "hide", "fallback" },
-				["<C-Space>"] = { "show", "fallback" },
 			},
 		},
 

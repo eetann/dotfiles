@@ -11,23 +11,19 @@ return {
 		vim.cmd([[cab ccc CodeCompanionChat]])
 	end,
 	config = function()
+		local my_adapter = vim.env.OPENAI_API_KEY and "openai" or "copilot"
 		require("codecompanion").setup({
 			language = "Japanese",
 			adapters = {
-				my_adapter = function()
-					-- 環境変数`OPENAI_API_KEY`にAPIキーをセット
-					-- CodeCompanionChat `ga` で現在のAdapterが一番上に表示される
-					if vim.env.OPENAI_API_KEY then
-						return require("codecompanion.adapters").extend("openai", {
-							env = { api_key = vim.env.OPENAI_API_KEY },
-						})
-					end
-					return require("codecompanion.adapters").extend("copilot", {})
+				openai = function()
+					return require("codecompanion.adapters").extend("openai", {
+						env = { api_key = vim.env.OPENAI_API_KEY },
+					})
 				end,
 			},
 			strategies = {
 				chat = {
-					adapter = "my_adapter",
+					adapter = my_adapter,
 					keymaps = {
 						send = {
 							modes = {
@@ -37,10 +33,10 @@ return {
 					},
 				},
 				inline = {
-					adapter = "my_adapter",
+					adapter = my_adapter,
 				},
 				agent = {
-					adapter = "my_adapter",
+					adapter = my_adapter,
 				},
 			},
 			prompt_library = {
