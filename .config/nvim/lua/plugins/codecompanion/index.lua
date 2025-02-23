@@ -1,5 +1,8 @@
+---@module "lazy"
+---@type LazyPluginSpec
 return {
 	"olimorris/codecompanion.nvim",
+	version = "v12.5.1",
 	cmd = { "CodeCompanion", "CodeCompanionActions", "CodeCompanionChat", "CodeCompanionCmd", "CodeCompanionLoad" },
 	dependencies = {
 		"nvim-lua/plenary.nvim",
