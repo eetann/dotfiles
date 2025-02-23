@@ -3,13 +3,20 @@
 return {
 	-- スニペットはいちいち覚えていない & 短い文字なので優先表示
 	-- lsp補完より優先されても、数文字打てば消える
-	default = { "conventional_commits", "snippets", "lazydev", "lsp", "path", "buffer", "dictionary" },
+	default = { "avante", "conventional_commits", "snippets", "lazydev", "lsp", "path", "buffer", "dictionary" },
 	per_filetype = {
 		codecompanion = { "codecompanion" },
 		markdown = { "snippets", "lsp", "path", "dictionary" },
 		mdx = { "snippets", "lsp", "path", "dictionary" },
 	},
 	providers = {
+		avante = {
+			module = "blink-cmp-avante",
+			name = "Avante",
+			opts = {
+				-- options for blink-cmp-avante
+			},
+		},
 		conventional_commits = {
 			name = "Conventional Commits",
 			module = "blink-cmp-conventional-commits",

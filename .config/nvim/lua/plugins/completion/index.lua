@@ -6,10 +6,8 @@ return {
 	dependencies = {
 		{ import = "plugins.completion.luasnip" },
 		"disrupted/blink-cmp-conventional-commits",
-		{
-			"Kaiser-Yang/blink-cmp-dictionary",
-			dependencies = { "nvim-lua/plenary.nvim" },
-		},
+		"Kaiser-Yang/blink-cmp-avante",
+		"Kaiser-Yang/blink-cmp-dictionary",
 	},
 	-- use a release tag to download pre-built binaries
 	version = "*",
