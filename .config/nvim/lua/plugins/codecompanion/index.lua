@@ -8,6 +8,11 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		{ "zbirenbaum/copilot.lua", opts = {} },
 	},
+	keys = {
+		{ "<Space>CC", "<Cmd>CodeCompanionChat<CR>", mode = { "n", "x" } },
+		{ "<Space>Cc", "<Cmd>CodeCompanionChat<CR>", mode = { "n", "x" } },
+		{ "<Space>Ca", "<Cmd>CodeCompanionActions<CR>", mode = { "n", "x" } },
+	},
 	init = function()
 		vim.cmd([[cab cc CodeCompanion]])
 		vim.cmd([[cab ccc CodeCompanionChat]])
@@ -51,7 +56,7 @@ return {
 			group = "my_nvim_rc",
 			pattern = "codecompanion",
 			callback = function()
-				vim.keymap.set("n", "qq", "<Cmd>:quit<CR>", { buffer = true, silent = true })
+				vim.keymap.set("n", "qq", "<Cmd>quit<CR>", { buffer = true, silent = true })
 			end,
 		})
 	end,

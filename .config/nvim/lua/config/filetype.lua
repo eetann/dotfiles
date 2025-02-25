@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 	group = group_name,
 	pattern = { "help", "man" },
 	callback = function()
-		vim.keymap.set("n", "q", "<Cmd>:quit<CR>", { buffer = true, silent = true })
+		vim.keymap.set("n", "q", "<Cmd>quit<CR>", { buffer = true, silent = true })
 	end,
 })
 
@@ -146,6 +146,6 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 		"term://*",
 	},
 	callback = function()
-		vim.keymap.set("n", "q", "<Cmd>:quit<CR>", { buffer = true, silent = true })
+		vim.keymap.set("n", "q", "<Cmd>quit<CR>", { buffer = true, silent = true })
 	end,
 })
