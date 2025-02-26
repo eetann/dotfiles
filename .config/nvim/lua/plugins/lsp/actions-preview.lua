@@ -11,5 +11,7 @@ return {
 			desc = "Code Actions",
 		},
 	},
-	opts = {},
+	opts = {
+		backend = { "snacks" },
+	},
 }
