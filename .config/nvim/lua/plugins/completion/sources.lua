@@ -63,7 +63,7 @@ return {
 	min_keyword_length = function(ctx)
 		-- :wq, :qa -> menu doesn't popup
 		-- :Lazy, :wqa -> menu popup
-		if ctx.mode == "cmdline" and ctx.line:find("^%u+") == nil then
+		if ctx.mode == "cmdline" and ctx.line:find("^%l+$") ~= nil then
 			return 3
 		end
 		return 0

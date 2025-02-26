@@ -115,4 +115,3 @@ vim.opt.winminwidth = 30
 vim.opt.equalalways = false
 
 vim.cmd("cab H belowright vertical help")
-vim.cmd("cab L lua vim.print( )<Left><Left>")
