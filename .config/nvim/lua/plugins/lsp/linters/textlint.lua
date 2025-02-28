@@ -9,6 +9,8 @@ local severities = {
 local binary_name = "textlint"
 
 lint.linters.textlint = {
+	name = "textlint",
+	---@diagnostic disable-next-line: assign-type-mismatch
 	cmd = function()
 		local local_binary = vim.fn.fnamemodify("./node_modules/.bin/" .. binary_name, ":p")
 		return vim.uv.fs_stat(local_binary) and local_binary or binary_name

@@ -9,6 +9,7 @@ return {
 					enabled = true,
 					always_show = true,
 				},
+				overwrite_events = { "DiagnosticChanged" },
 			},
 		})
 		vim.diagnostic.config({ virtual_text = false })

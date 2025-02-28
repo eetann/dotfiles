@@ -16,6 +16,7 @@ return {
 	init = function()
 		vim.cmd([[cab cc CodeCompanion]])
 		vim.cmd([[cab ccc CodeCompanionChat]])
+		vim.g.codecompanion_auto_tool_mode = true
 	end,
 	config = function()
 		local my_adapter = vim.env.OPENAI_API_KEY and "openai" or "copilot"
