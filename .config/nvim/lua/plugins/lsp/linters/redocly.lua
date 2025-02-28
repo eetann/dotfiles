@@ -15,7 +15,7 @@ lint.linters.redocly = {
 		if output == "" then
 			return {}
 		end
-		local target_filename = vim.fn.expand("%")
+		local target_filename = vim.fn.expand("%:.")
 		local pattern = [[<error line="(%d+)" column="(%d+)" severity="(%w+)" message="(.+)" source="(.+)" />]]
 		local lines = vim.fn.split(output, "\n")
 		local inside_target_file = false
@@ -42,3 +42,53 @@ lint.linters.redocly = {
 		return diagnostics
 	end,
 }
+-- null-ls
+-- local severities = {
+-- 	warning = vim.diagnostic.severity.WARN,
+-- 	error = vim.diagnostic.severity.ERROR,
+-- }
+--
+-- return {
+-- 	method = require("null-ls").methods.DIAGNOSTICS,
+-- 	filetypes = { "yaml" },
+--
+-- 	generator = require("null-ls").generator({
+-- 		ignore_stderr = true,
+-- 		command = "pnpm",
+-- 		args = { "redocly", "lint", "--format", "checkstyle" },
+-- 		format = "raw",
+-- 		multiple_files = true,
+-- 		on_output = function(params, done)
+-- 			local output = params.output
+-- 			if output == nil or output == "" then
+-- 				return done({})
+-- 			end
+-- 			local target_filename = vim.fn.expand("%:.")
+-- 			local pattern = [[<error line="(%d+)" column="(%d+)" severity="(%w+)" message="(.+)" source="(.+)" />]]
+-- 			local lines = vim.fn.split(output, "\n")
+-- 			local inside_target_file = false
+-- 			---@type vim.Diagnostic[]
+-- 			local diagnostics = {}
+-- 			for _, line in ipairs(lines) do
+-- 				if line:find('<file name="') then
+-- 					inside_target_file = line:find(target_filename) ~= nil
+-- 				elseif inside_target_file then
+-- 					if line:find("<error") then
+-- 						local row, col, severity, message, source = string.match(line, pattern)
+-- 						table.insert(diagnostics, {
+-- 							message = message,
+-- 							row = row,
+-- 							col = col,
+-- 							severity = severities[severity],
+-- 							source = "redocly: " .. source,
+-- 							bufnr = 0,
+-- 						})
+-- 					elseif line:find("</file>") then
+-- 						break
+-- 					end
+-- 				end
+-- 			end
+-- 			return done(diagnostics)
+-- 		end,
+-- 	}),
+-- }

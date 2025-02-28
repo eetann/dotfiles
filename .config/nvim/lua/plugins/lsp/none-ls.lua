@@ -4,33 +4,9 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		local null_ls = require("null-ls")
-		local redocly = {
-			method = null_ls.methods.DIAGNOSTICS,
-			filetypes = { "yaml", "json" },
-
-			generator = null_ls.generator({
-				ignore_stderr = true,
-				command = "pnpm",
-				args = { "redocly", "lint", "--format", "checkstyle" },
-				format = "line",
-				on_output = require("null-ls.helpers").diagnostics.from_patterns({
-					{
-						-- Examples:
-						-- <error line="129" column="5" severity="error" message="Operation object should contain `summary` field." source="operation-summary" />
-						-- <error line="20" column="5" severity="error" message="Operation object should contain `summary` field." source="operation-summary" />
-						-- <error line="2" column="1" severity="warning" message="Info object should contain `license` field." source="info-license" />
-						pattern = [[<error line="(%d+)" column="(%d+)" severity="(%w+)" message="(.+)" source="(.+)" />]],
-						groups = { "row", "col", "severity", "message", "source" },
-						overrides = { -- We want to list the errors as redocly as source, so we know where they come from
-							diagnostic = { source = "redocly" },
-						},
-					},
-				}),
-			}),
-		}
 
 		local sources = {
-			redocly,
+			require("plugins.lsp.linters.redocly"),
 			null_ls.builtins.diagnostics.textlint.with({
 				filetypes = { "markdown", "mdx" },
 				condition = function(utils)
