@@ -20,6 +20,9 @@ return {
 				preset = "super-tab",
 				["<CR>"] = { "accept_and_enter", "fallback" },
 			},
+			completion = {
+				ghost_text = { enabled = false },
+			},
 		},
 
 		snippets = { preset = "luasnip" },
@@ -41,6 +44,7 @@ return {
 					return ctx.mode ~= "cmdline" or not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())
 				end,
 			},
+			ghost_text = { enabled = false },
 		},
 		signature = { window = { border = "single" } },
 	},

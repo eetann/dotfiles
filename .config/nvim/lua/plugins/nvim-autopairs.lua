@@ -60,7 +60,7 @@ return {
 		end
 
 		npairs.add_rules({
-			Rule("```", "```", { "mdx" }),
+			Rule("```", "```", { "mdx", "codecompanion", "AvanteInput" }),
 			-- デフォルトだと "not_add_quote_inside_quote" によりクオートの中でautopairできないので
 			-- 自前で定義にする
 			Rule('"', '"'),
