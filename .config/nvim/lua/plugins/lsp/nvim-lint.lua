@@ -5,7 +5,7 @@ return {
 		require("plugins.lsp.linters.textlint")
 		require("plugins.lsp.linters.redocly")
 		require("lint").linters_by_ft = {
-			markdown = { "textlint" },
+			-- markdown = { "textlint" },
 			yaml = { "redocly" },
 			mdx = { "textlint" },
 			sh = { "shellcheck" },
