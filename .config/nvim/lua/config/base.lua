@@ -114,4 +114,4 @@ vim.opt.winwidth = 30
 vim.opt.winminwidth = 30
 vim.opt.equalalways = false
 
-vim.cmd("cab H belowright vertical help")
+vim.cmd("cabbrev H belowright vertical help")

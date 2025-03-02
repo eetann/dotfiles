@@ -106,12 +106,20 @@ M.keys = {
   ---@diagnostic disable-next-line: undefined-field
   { "<space>fT", function () picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } }) end, desc = "Picker: Todo/Fix/Fixme" },
 
-  -- vim固有
-  { "<space>fh", function() picker.help({
-    win = { input = { keys = {
-      ["<CR>"] = {"edit_vsplit", mode = { "i", "n" },},
-    }}},
-  }) end, desc = "Picker: help pages" },
+	-- vim固有
+	-- stylua: ignore end
+	{
+		"<space>fh",
+		function()
+			picker.help({
+				win = { input = { keys = {
+					["<CR>"] = { "edit_vsplit", mode = { "i", "n" } },
+				} } },
+			})
+		end,
+		desc = "Picker: help pages",
+	},
+	-- stylua: ignore start
   { "<space>fH", function() picker.highlights() end, desc = "Picker: highlights" },
   { "<space>fk", function() picker.keymaps() end, desc = "Picker: keymaps" },
   { "<space>fm", function() picker.marks() end, desc = "Picker: marks" },
