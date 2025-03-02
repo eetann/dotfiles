@@ -6,7 +6,7 @@ return {
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-treesitter/nvim-treesitter",
-		{ "zbirenbaum/copilot.lua", opts = {} },
+		{ import = "plugins.copilot" },
 	},
 	keys = {
 		{ "<Space>CC", "<Cmd>CodeCompanionChat<CR>", mode = { "n", "x" } },

@@ -8,6 +8,9 @@ return {
 		"disrupted/blink-cmp-conventional-commits",
 		"Kaiser-Yang/blink-cmp-avante",
 		"Kaiser-Yang/blink-cmp-dictionary",
+		"giuxtaposition/blink-cmp-copilot",
+		{ import = "plugins.completion.minuet-ai" },
+		{ import = "plugins.copilot" },
 	},
 	-- use a release tag to download pre-built binaries
 	version = "*",
@@ -45,6 +48,7 @@ return {
 				end,
 			},
 			ghost_text = { enabled = false },
+			trigger = { prefetch_on_insert = false },
 		},
 		signature = { window = { border = "single" } },
 	},

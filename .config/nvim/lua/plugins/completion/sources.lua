@@ -3,11 +3,20 @@
 return {
 	-- スニペットはいちいち覚えていない & 短い文字なので優先表示
 	-- lsp補完より優先されても、数文字打てば消える
-	default = { "avante", "conventional_commits", "snippets", "lazydev", "lsp", "path", "buffer", "dictionary" },
+	default = {
+		"avante",
+		"conventional_commits",
+		"snippets",
+		"lazydev",
+		"lsp",
+		"path",
+		"buffer",
+		"dictionary",
+		"minuet",
+		"copilot",
+	},
 	per_filetype = {
 		codecompanion = { "codecompanion" },
-		markdown = { "snippets", "lsp", "path", "dictionary" },
-		mdx = { "snippets", "lsp", "path", "dictionary" },
 	},
 	providers = {
 		avante = {
@@ -58,6 +67,29 @@ return {
 					return dir_name
 				end,
 			},
+		},
+		minuet = {
+			name = "minuet",
+			module = "minuet.blink",
+			score_offset = 8, -- Gives minuet higher priority among suggestions
+			enabled = function()
+				if vim.env.OPENAI_API_KEY then
+					return true
+				end
+				return false
+			end,
+		},
+		copilot = {
+			name = "copilot",
+			module = "blink-cmp-copilot",
+			score_offset = 100,
+			async = true,
+			enabled = function()
+				if vim.env.OPENAI_API_KEY then
+					return false
+				end
+				return true
+			end,
 		},
 	},
 	min_keyword_length = function(ctx)

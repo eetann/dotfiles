@@ -46,4 +46,5 @@ return {
 			)
 		end,
 	},
+	-- ["<C-q>"] = require("minuet").make_blink_map(),
 }

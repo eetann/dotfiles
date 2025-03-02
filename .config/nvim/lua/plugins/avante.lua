@@ -8,7 +8,7 @@ return {
 		"MunifTanjim/nui.nvim",
 		"hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
 		"nvim-tree/nvim-web-devicons",
-		"zbirenbaum/copilot.lua", -- for providers='copilot'
+		{ import = "plugins.copilot" },
 		"MeanderingProgrammer/render-markdown.nvim",
 	},
 	cmd = {
