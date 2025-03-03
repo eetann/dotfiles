@@ -7,8 +7,8 @@ return {
 	},
 	cmd = { "LspDev" },
 	keys = {
-		{ "<space>ls", ":LspDev showLog<CR>" },
-		{ "<space>lc", ":LspDev changeLogLevel<CR>" },
+		{ "<space>ll", ":LspDev showLog<CR>" },
+		{ "<space>lL", ":LspDev changeLogLevel<CR>" },
 	},
 	opts = {},
 }
