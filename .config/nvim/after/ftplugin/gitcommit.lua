@@ -28,11 +28,12 @@ end, {})
 
 vim.keymap.set("n", "<C-g><C-g>", function()
 	vim.api.nvim_create_autocmd("User", {
-		pattern = "CodeCompanionInlineFinished",
+		pattern = "CodeCompanionDiffAttached",
 		group = "my_nvim_rc",
 		callback = function()
-			vim.cmd("sleep 500ms")
-			vim.cmd("normal ga")
+			vim.schedule(function()
+				vim.cmd("normal ga")
+			end)
 		end,
 	})
 	if os.getenv("COMMIT_MESSAGE_ENGLISH") == "1" then
