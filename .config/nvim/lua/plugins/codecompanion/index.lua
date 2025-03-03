@@ -39,6 +39,17 @@ return {
 							},
 						},
 					},
+					slash_commands = {
+						["file"] = {
+							-- Location to the slash command in CodeCompanion
+							callback = "strategies.chat.slash_commands.file",
+							description = "Select a file using Snacks",
+							opts = {
+								provider = "snacks",
+								contains_code = true,
+							},
+						},
+					},
 				},
 				inline = {
 					adapter = my_adapter,
