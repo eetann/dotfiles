@@ -21,7 +21,9 @@ return {
 	config = function()
 		local my_adapter = vim.env.OPENAI_API_KEY and "openai" or "copilot"
 		require("codecompanion").setup({
-			language = "Japanese",
+			opts = {
+				language = "Japanese",
+			},
 			adapters = {
 				openai = function()
 					return require("codecompanion.adapters").extend("openai", {
