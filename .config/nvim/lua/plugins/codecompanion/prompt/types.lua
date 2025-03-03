@@ -5,7 +5,7 @@
 ---@field strategy string
 ---@field description string
 ---@field opts CompanionPromptOpts
----@field prompts CompanionPromptMessage[]
+---@field prompts (CompanionPromptMessage[][])|(CompanionPromptMessage[])
 
 ---@class CompanionPromptOpts
 ---@field short_name string

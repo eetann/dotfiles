@@ -16,7 +16,7 @@ return {
 		"copilot",
 	},
 	per_filetype = {
-		codecompanion = { "codecompanion" },
+		codecompanion = { "codecompanion", "snippets", "path", "buffer", "minuet", "copilot" },
 	},
 	providers = {
 		avante = {
