@@ -9,13 +9,22 @@ end
 
 vim.api.nvim_create_user_command("CodeCompanionLoad", function()
 	local function start_picker()
+		local cwd = save_folder:absolute()
 		require("snacks.picker").files({
+			cwd = cwd,
+			transform = function(item)
+				item.cwd = cwd
+				item.file = item.text
+				item.mtime = Path:new(save_folder, item.text):_stat().mtime.sec
+				item.title = item.text .. " | 更新日: " .. os.date("%Y-%m-%d %H:%M", item.mtime)
+			end,
+			matcher = { sort_empty = true },
+			sort = { fields = { "mtime:desc" } },
 			prompt_title = "Saved CodeCompanion Chats",
-			cwd = save_folder:absolute(),
 			win = {
 				input = {
 					keys = {
-						["dd"] = { "delete_file", mode = { "n", "i" } },
+						["dd"] = { "delete_file", mode = { "n" } },
 					},
 				},
 			},

@@ -131,46 +131,6 @@ M.keys = {
   { "<space>fR", function() picker.resume() end, desc = "Picker: resume" },
 	{ "<space>fA", function() picker.pickers() end, desc = "Picker: All sources" },
 	-- stylua: ignore end
-
-	-- カスタマイズの例
-	{
-		"<space>fz",
-		function()
-			picker({
-				finder = function()
-					local my_list = {
-						{ quote = "選ばれるのは私よ！", thanks = "ありがとうなのだわ！" },
-						{
-							quote = "うるさいんですけどぉ〜",
-							thanks = "別にありがとうとか思ってないんだからね！",
-						},
-						{ quote = "ちっす", thanks = "どうも" },
-					}
-					---@type snacks.picker.Item[]
-					local items = {}
-					for i, person in ipairs(my_list) do
-						---@type snacks.picker.Item
-						local item = {
-							idx = i,
-							score = 0,
-							text = person.quote,
-							thanks = person.thanks,
-						}
-						table.insert(items, item)
-					end
-					return items
-				end,
-				---@type snacks.picker.Action.spec
-				confirm = function(the_picker, item)
-					the_picker:close()
-					vim.notify(item.thanks)
-				end,
-				format = "text",
-				preview = "none",
-				layout = { preset = "vscode" },
-			})
-		end,
-	},
 }
 
 ---@type snacks.picker.Config
