@@ -46,7 +46,7 @@ return {
           <>
         }
 		  ]],
-			{ i(0, "snipet") },
+			{ i(0, "snippet") },
 			{ delimiters = "<>" }
 		)
 	),
