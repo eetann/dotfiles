@@ -72,6 +72,7 @@ return {
 			name = "minuet",
 			module = "minuet.blink",
 			score_offset = 8, -- Gives minuet higher priority among suggestions
+			async = true,
 			enabled = function()
 				if vim.env.OPENAI_API_KEY then
 					return true

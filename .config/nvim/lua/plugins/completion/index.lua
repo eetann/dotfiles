@@ -21,7 +21,16 @@ return {
 		cmdline = {
 			keymap = {
 				preset = "super-tab",
-				["<CR>"] = { "accept_and_enter", "fallback" },
+				["<CR>"] = {
+					-- 検索時には<CR>での補完を確定させない
+					function(cmp)
+						if not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype()) then
+							return cmp.accept_and_enter()
+						end
+						return false
+					end,
+					"fallback",
+				},
 			},
 			completion = {
 				ghost_text = { enabled = false },
