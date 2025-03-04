@@ -32,6 +32,13 @@ return {
 		end
 
 		noice.setup({
+			presets = {
+				bottom_search = false, -- use a classic bottom cmdline for search
+				command_palette = false, -- position the cmdline and popupmenu together
+				long_message_to_split = true, -- long messages will be sent to a split
+				inc_rename = false, -- enables an input dialog for inc-rename.nvim
+				lsp_doc_border = false, -- add a border to hover docs and signature help
+			},
 			cmdline = {
 				format = {
 					myhelp = {
@@ -42,7 +49,14 @@ return {
 				},
 			},
 			messages = {
-				view_search = "mini",
+				view_search = false,
+			},
+			lsp = {
+				override = {
+					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+					["vim.lsp.util.stylize_markdown"] = true,
+					["cmp.entry.get_documentation"] = true,
+				},
 			},
 			routes = {
 				skipMessage("failed to run generator.*is not executable"),
@@ -67,48 +81,6 @@ return {
 					view = "notify",
 					filter = { event = "msg_show", kind = "echo", find = "%(mini%.align%)" },
 					opts = { title = "mini.align", replace = true, timeout = 10 * 1000 },
-				},
-			},
-			lsp = {
-				override = {
-					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-					["vim.lsp.util.stylize_markdown"] = true,
-					["cmp.entry.get_documentation"] = true,
-				},
-				signature = {
-					enabled = true,
-					auto_open = {
-						enabled = true,
-						trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
-						luasnip = true, -- Will open signature help when jumping to Luasnip insert nodes
-						throttle = 50, -- Debounce lsp signature help request by 50ms
-					},
-					view = "hover",
-					---@type NoiceViewOptions
-					opts = {
-						size = {
-							max_width = 80,
-							max_height = 15,
-						},
-					},
-				},
-			},
-			commands = {
-				history = {
-					-- options for the message history that you get with `:Noice`
-					view = "split",
-					-- opts = { enter = true, format = "notify" },
-					-- to debug skipMessage
-					-- opts = { enter = true, format = { "{kind} ", "{event}", "{title} ", "{message}" } },
-					filter = {
-						any = {
-							{ event = "notify" },
-							{ error = true },
-							{ warning = true },
-							{ event = "msg_show", kind = { "" } },
-							{ event = "lsp", kind = "message" },
-						},
-					},
 				},
 			},
 		})
