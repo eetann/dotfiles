@@ -5,12 +5,6 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
-local function append_table(table, other)
-	for k, v in pairs(other) do
-		table[k] = v
-	end
-end
-
 local function append_array(array, other)
 	for _, value in ipairs(other) do
 		table.insert(array, value)
@@ -70,5 +64,11 @@ table.insert(config.hyperlink_rules, {
 	regex = "\\b\\w+://(?:[\\w.-]+):\\d+\\S*\\b",
 	format = "$0",
 })
+
+config.window_background_opacity = 0.85
+wezterm.on("gui-startup", function(cmd)
+	local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
+	window:gui_window():toggle_fullscreen()
+end)
 
 return config
