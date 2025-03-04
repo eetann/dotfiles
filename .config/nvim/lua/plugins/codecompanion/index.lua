@@ -42,13 +42,24 @@ return {
 						},
 					},
 					slash_commands = {
-						["file"] = {
-							-- Location to the slash command in CodeCompanion
-							callback = "strategies.chat.slash_commands.file",
-							description = "Select a file using Snacks",
+						["buffer"] = {
 							opts = {
 								provider = "snacks",
-								contains_code = true,
+							},
+						},
+						["file"] = {
+							opts = {
+								provider = "snacks",
+							},
+						},
+						["help"] = {
+							opts = {
+								provider = "snacks",
+							},
+						},
+						["symbols"] = {
+							opts = {
+								provider = "snacks",
 							},
 						},
 					},
