@@ -62,6 +62,11 @@ return {
 								provider = "snacks",
 							},
 						},
+						["workspace"] = {
+							opts = {
+								provider = "snacks",
+							},
+						},
 					},
 				},
 				inline = {
