@@ -39,6 +39,11 @@ if target:find("darwin") then
 	append_array(key_table, mac_key_table)
 	config.font_size = 14.0
 	config.send_composed_key_when_left_alt_is_pressed = true
+	-- フルスクリーン
+	wezterm.on("gui-startup", function(cmd)
+		local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
+		window:gui_window():toggle_fullscreen()
+	end)
 elseif target:find("linux") then
 	local linux_key_table = {
 		{ key = "n", mods = "SUPER", action = { SendKey = { key = "n", mods = "ALT" } } },
@@ -52,6 +57,7 @@ else
 	}
 	append_array(key_table, wsl_key_table)
 	config.font_size = 12.0
+	config.win32_system_backdrop = "Acrylic"
 end
 
 -- /mnt/c/Program\ Files/WezTerm/wezterm.exe ls-fonts
@@ -72,9 +78,5 @@ table.insert(config.hyperlink_rules, {
 })
 
 config.window_background_opacity = 0.85
-wezterm.on("gui-startup", function(cmd)
-	local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
-	window:gui_window():toggle_fullscreen()
-end)
 
 return config
