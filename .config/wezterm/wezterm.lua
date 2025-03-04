@@ -16,6 +16,11 @@ local key_table = {
 	{ key = "+", mods = "CTRL", action = "IncreaseFontSize" },
 	{ key = "-", mods = "CTRL", action = "DecreaseFontSize" },
 	{ key = "0", mods = "CTRL", action = "ResetFontSize" },
+	{
+		key = "f",
+		mods = "SHIFT|META",
+		action = wezterm.action.ToggleFullScreen,
+	},
 }
 
 local target = wezterm.target_triple
@@ -58,6 +63,7 @@ config.use_ime = true
 config.color_scheme = "Gruvbox Dark (Gogh)"
 config.hide_tab_bar_if_only_one_tab = true
 config.adjust_window_size_when_changing_font_size = false
+config.macos_window_background_blur = 20
 config.keys = key_table
 config.hyperlink_rules = wezterm.default_hyperlink_rules()
 table.insert(config.hyperlink_rules, {
