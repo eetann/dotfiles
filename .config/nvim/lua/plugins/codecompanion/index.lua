@@ -78,6 +78,7 @@ return {
 			},
 			prompt_library = {
 				["Add memo tag"] = require("plugins.codecompanion.prompt.memo-tag"),
+				["Blog composition"] = require("plugins.codecompanion.prompt.blog-composition"),
 				["Generate English Commit Message"] = require("plugins.codecompanion.prompt.commit-message-english"),
 				["Generate Japanese Commit Message"] = require("plugins.codecompanion.prompt.commit-message-japanese"),
 			},
