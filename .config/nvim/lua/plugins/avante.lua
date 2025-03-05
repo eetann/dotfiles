@@ -82,6 +82,11 @@ return {
 				repomap = "<space>aR",
 			},
 		},
+		windows = {
+			input = {
+				prefix = "",
+			},
+		},
 		files = {
 			add_current = "<space>aC", -- Add current buffer to selected files
 		},
