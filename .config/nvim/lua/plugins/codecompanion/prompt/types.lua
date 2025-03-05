@@ -10,7 +10,7 @@
 ---@class CompanionPromptOpts
 ---@field short_name string
 ---@field auto_submit boolean
----@field placement string|boolean
+---@field placement? string|boolean
 ---@field mapping? string
 ---@field modes? string[]
 ---@field is_slash_cmd? boolean

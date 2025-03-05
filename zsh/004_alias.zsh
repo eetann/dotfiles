@@ -7,6 +7,7 @@ alias manja="man -L ja"
 alias manen="man -L en"
 alias lg='lazygit --use-config-dir="$HOME/.config/lazygit"'
 alias zd='cd ~/dotfiles'
+alias zdev='cd ~/ghq/dev/'
 alias ml='nvim .memo.local.md'
 alias mt='mise watch test'
 case ${OSTYPE} in

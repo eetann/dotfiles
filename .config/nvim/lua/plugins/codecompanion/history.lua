@@ -8,42 +8,39 @@ if not save_folder:exists() then
 end
 
 vim.api.nvim_create_user_command("CodeCompanionLoad", function()
-	local function start_picker()
-		local cwd = save_folder:absolute()
-		require("snacks.picker").files({
-			cwd = cwd,
-			transform = function(item)
-				item.cwd = cwd
-				item.file = item.text
-				item.mtime = Path:new(save_folder, item.text):_stat().mtime.sec
-				item.title = item.text .. " | 更新日: " .. os.date("%Y-%m-%d %H:%M", item.mtime)
-			end,
-			matcher = { sort_empty = true },
-			sort = { fields = { "mtime:desc" } },
-			prompt_title = "Saved CodeCompanion Chats",
-			win = {
-				input = {
-					keys = {
-						["dd"] = { "delete_file", mode = { "n" } },
-					},
+	local cwd = save_folder:absolute()
+	require("snacks.picker").files({
+		cwd = cwd,
+		transform = function(item)
+			item.cwd = cwd
+			item.file = item.text
+			item.mtime = Path:new(save_folder, item.text):_stat().mtime.sec
+			item.title = item.text .. " | 更新日: " .. os.date("%Y-%m-%d %H:%M", item.mtime)
+		end,
+		matcher = { sort_empty = true },
+		sort = { fields = { "mtime:desc" } },
+		prompt_title = "Saved CodeCompanion Chats",
+		win = {
+			input = {
+				keys = {
+					["dd"] = { "delete_file", mode = { "n" } },
 				},
 			},
-			actions = {
-				delete_file = function(the_picker)
-					the_picker.preview:reset()
-					for _, item in ipairs(the_picker:selected({ fallback = true })) do
-						if item.file then
-							os.remove(item.cwd .. "/" .. item.file)
-						end
+		},
+		actions = {
+			delete_file = function(the_picker)
+				the_picker.preview:reset()
+				for _, item in ipairs(the_picker:selected({ fallback = true })) do
+					if item.file then
+						os.remove(item.cwd .. "/" .. item.file)
 					end
-					the_picker.list:set_selected()
-					the_picker.list:set_target()
-					the_picker:find()
-				end,
-			},
-		})
-	end
-	start_picker()
+				end
+				the_picker.list:set_selected()
+				the_picker.list:set_target()
+				the_picker:find()
+			end,
+		},
+	})
 end, {})
 
 -- save current chat, `CodeCompanionSave foo bar baz` will save as 'foo-bar-baz.md'
