@@ -1,5 +1,6 @@
 return {
 	"echasnovski/mini.ai",
+	dependencies = { "nvim-treesitter/nvim-treesitter" },
 	event = { "VeryLazy" },
 	opts = function()
 		local gen_spec = require("mini.ai").gen_spec
@@ -36,6 +37,10 @@ return {
 					end
 					return pair
 				end,
+				c = gen_spec.treesitter({
+					a = "@block.outer",
+					i = "@block.inner",
+				}),
 			},
 		}
 	end,
