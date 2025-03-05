@@ -79,7 +79,6 @@ require("lazy").setup({
 		{ "vim-jp/vimdoc-ja", event = "VeryLazy" },
 		-- blade
 		{ "jwalton512/vim-blade", ft = "blade" }, -- インデント
-		{ import = "plugins.blade-nav" },
 		-- markdown
 		{ import = "plugins.vim-table-mode" },
 		{ import = "plugins.markdown-preview" },

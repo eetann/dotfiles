@@ -1,12 +1,10 @@
 return {
 	"yetone/avante.nvim",
-	version = false,
 	build = "make",
 	dependencies = {
 		"stevearc/dressing.nvim",
 		"nvim-lua/plenary.nvim",
 		"MunifTanjim/nui.nvim",
-		"hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
 		"nvim-tree/nvim-web-devicons",
 		{ import = "plugins.copilot" },
 		"MeanderingProgrammer/render-markdown.nvim",
