@@ -23,6 +23,7 @@ local key_table = {
 	},
 }
 
+config.window_background_opacity = 0.85
 local target = wezterm.target_triple
 
 if target:find("darwin") then
@@ -58,6 +59,7 @@ else
 	append_array(key_table, wsl_key_table)
 	config.font_size = 12.0
 	config.win32_system_backdrop = "Acrylic"
+	config.window_background_opacity = 0.6
 end
 
 -- /mnt/c/Program\ Files/WezTerm/wezterm.exe ls-fonts
@@ -76,7 +78,5 @@ table.insert(config.hyperlink_rules, {
 	regex = "\\b\\w+://(?:[\\w.-]+):\\d+\\S*\\b",
 	format = "$0",
 })
-
-config.window_background_opacity = 0.85
 
 return config
