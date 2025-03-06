@@ -1,8 +1,10 @@
--- local util = require("lspconfig.util")
+local util = require("lspconfig.util")
 
 ---@type lspconfig.Config
+---@diagnostic disable-next-line: missing-fields
 return {
-	-- root_dir = util.root_pattern("package.json", "node_modules"),
+	root_dir = util.root_pattern("package.json"),
+	single_file_support = false, -- for deno
 	-- opts.autostart = detected_root_dir(root_dir)
 	on_new_config = function(new_config)
 		-- プロジェクトのTypeScriptが古すぎてLSPが動かないとき、グローバルな方を優先させる
