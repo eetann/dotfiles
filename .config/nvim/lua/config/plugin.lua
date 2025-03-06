@@ -98,5 +98,7 @@ require("lazy").setup({
 		{ import = "plugins.lsp-dev" },
 		{ import = "plugins.mini-doc" },
 		{ import = "plugins.mini-test" },
+		{ import = "plugins.denops" },
+		-- { dir = "~/ghq/github.com/eetann/senpai.nvim", dependencies = { "vim-denops/denops.vim" } },
 	},
 })
