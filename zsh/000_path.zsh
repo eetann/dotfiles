@@ -7,6 +7,7 @@ path+=(
   $HOME/.luarocks/bin(N-/)
   /snap/bin(N-/)
 )
+source "$HOME/.deno/env"
 
 # Rancher Desktop > Preferences > Application > Environment > Manual を設定
 path+=($HOME/.rd/bin(N-/))
