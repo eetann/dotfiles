@@ -61,6 +61,11 @@ return {
 			},
 			ghost_text = { enabled = false },
 			trigger = { prefetch_on_insert = false },
+			list = {
+				selection = {
+					auto_insert = false,
+				},
+			},
 		},
 		signature = { window = { border = "single" } },
 	},
