@@ -23,7 +23,6 @@ local key_table = {
 	},
 }
 
-config.window_background_opacity = 0.85
 local target = wezterm.target_triple
 
 if target:find("darwin") then
@@ -45,6 +44,8 @@ if target:find("darwin") then
 		local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
 		window:gui_window():toggle_fullscreen()
 	end)
+	config.window_background_opacity = 0.85
+	config.macos_window_background_blur = 20
 elseif target:find("linux") then
 	local linux_key_table = {
 		{ key = "n", mods = "SUPER", action = { SendKey = { key = "n", mods = "ALT" } } },
@@ -58,8 +59,16 @@ else
 	}
 	append_array(key_table, wsl_key_table)
 	config.font_size = 12.0
+	-- config.window_background_opacity = 0.6
+	config.window_background_gradient = {
+		orientation = { Linear = { angle = -45.0 } },
+		colors = {
+			"#0f3443",
+			"#0f3443",
+			"#182848",
+		},
+	}
 	config.win32_system_backdrop = "Acrylic"
-	config.window_background_opacity = 0.6
 end
 
 -- /mnt/c/Program\ Files/WezTerm/wezterm.exe ls-fonts
@@ -71,7 +80,6 @@ config.use_ime = true
 config.color_scheme = "Gruvbox Dark (Gogh)"
 config.hide_tab_bar_if_only_one_tab = true
 config.adjust_window_size_when_changing_font_size = false
-config.macos_window_background_blur = 20
 config.keys = key_table
 config.hyperlink_rules = wezterm.default_hyperlink_rules()
 table.insert(config.hyperlink_rules, {
