@@ -97,6 +97,7 @@ return {
 		},
 		behaviour = {
 			auto_apply_diff_after_generation = true,
+			use_cwd_as_project_root = true,
 		},
 	},
 }

@@ -12,6 +12,7 @@ return {
 		{ "<Space>cc", "<Cmd>CodeCompanionChat Toggle<CR>", mode = { "n" } },
 		{ "<Space>cc", "<Cmd>CodeCompanionChat<CR>", mode = { "v" } },
 		{ "<Space>ca", "<Cmd>CodeCompanionActions<CR>", mode = { "n", "x" } },
+		{ "<Space>cA", "<Cmd>CodeCompanionChat Add<CR>", mode = { "x" } },
 	},
 	init = function()
 		vim.cmd([[cab cc CodeCompanion]])
