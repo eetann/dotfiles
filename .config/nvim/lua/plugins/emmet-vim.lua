@@ -18,7 +18,7 @@ return {
 		"svelte",
 	},
 	init = function()
-		vim.g.user_emmet_leader_key = "<C-y>"
+		vim.g.user_emmet_leader_key = "<C-g>e"
 		vim.g.user_emmet_settings = {
 			variables = {
 				lang = "ja",
