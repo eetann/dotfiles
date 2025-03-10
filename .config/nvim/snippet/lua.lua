@@ -57,18 +57,18 @@ return {
 			local class_name = dashsnake_to_pascal(vim.fn.expand("%:t:r"))
 			local text = ([[
 ---@class pluginname.classname
-local classname = {}
-classname.__index = classname
+local M = {}
+M.__index = M
 
-function classname:new()
-  return setmetatable({}, classname)
+function M:new()
+  return setmetatable({}, M)
 end
 
-function classname:execute()
+function M:execute()
   --
 end
 
-return classname]]):gsub("classname", class_name):gsub("pluginname", plugin_name)
+return M]]):gsub("classname", class_name):gsub("pluginname", plugin_name)
 			return vim.split(text, "\n")
 		end, {}, {})
 	),

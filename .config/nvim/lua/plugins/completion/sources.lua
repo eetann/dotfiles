@@ -36,9 +36,9 @@ return {
 			---@type blink-cmp-conventional-commits.Options
 			opts = {}, -- none so far
 		},
-		-- snippets = {
-		-- 	score_offset = 10,
-		-- },
+		snippets = {
+			score_offset = 1,
+		},
 		lazydev = {
 			name = "LazyDev",
 			module = "lazydev.integrations.blink",
