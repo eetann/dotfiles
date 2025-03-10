@@ -27,6 +27,14 @@ vim.api.nvim_buf_create_user_command(0, "CompleteGitCommit", function()
 end, {})
 
 vim.keymap.set("n", "<C-g><C-g>", function()
+	if os.getenv("COMMIT_MESSAGE_ENGLISH") == "1" then
+		vim.cmd("Senpai commitMessage English")
+	else
+		vim.cmd("Senpai commitMessage Japanese")
+	end
+end, { buffer = true, desc = "コミットメッセージの生成" })
+
+vim.keymap.set("n", "<C-g><C-c>", function()
 	vim.api.nvim_create_autocmd("User", {
 		pattern = "CodeCompanionDiffAttached",
 		group = "my_nvim_rc",

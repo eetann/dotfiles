@@ -5,6 +5,7 @@ return {
 	dir = "~/ghq/github.com/eetann/senpai.nvim",
 	dependencies = { "vim-denops/denops.vim" },
 	event = { "VeryLazy" },
+	cmd = { "Senpai" },
 	---@module "senpai"
 	---@type senpai.Config
 	opts = {
