@@ -6,8 +6,10 @@ vim.g.markdown_fenced_languages = {
 ---@diagnostic disable-next-line: missing-fields
 return {
 	root_dir = util.root_pattern("deno.jsonc", "deno.json"),
+	single_file_support = false,
 	init_options = {
 		lint = true,
+		unstable = false,
 		suggest = {
 			imports = {
 				hosts = {
