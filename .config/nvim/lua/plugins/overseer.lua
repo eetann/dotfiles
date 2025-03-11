@@ -17,6 +17,7 @@ return {
 			"atcoder.test",
 			"atcoder.submit",
 			"lsp.show-log",
+			"plugin_dev.run_luafile",
 		},
 	},
 }
