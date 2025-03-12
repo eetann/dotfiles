@@ -64,6 +64,7 @@ return {
 				skipMessage("is not supported by any of the servers registered for the current buffer"),
 				skipMessage("query: invalid node type"),
 				skipMessage("No code actions available", "info"),
+				skipMessage("DiagnosticChanged Autocommands for.*Invalid"),
 				myMiniView("Already at .* change"),
 				myMiniView("written"),
 				myMiniView("yanked"),
