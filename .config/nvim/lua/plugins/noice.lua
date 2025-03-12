@@ -20,10 +20,10 @@ return {
 			}
 		end
 
-		local function skipMessage(pattern, kind)
+		local function skipMessage(pattern, event, kind)
 			return {
 				filter = {
-					event = "notify",
+					event = event or "notify",
 					kind = kind,
 					find = pattern,
 				},
@@ -64,7 +64,7 @@ return {
 				skipMessage("is not supported by any of the servers registered for the current buffer"),
 				skipMessage("query: invalid node type"),
 				skipMessage("No code actions available", "info"),
-				skipMessage("DiagnosticChanged Autocommands for.*Invalid"),
+				skipMessage("DiagnosticChanged Autocommands for.*Invalid", "msg_show"),
 				myMiniView("Already at .* change"),
 				myMiniView("written"),
 				myMiniView("yanked"),
