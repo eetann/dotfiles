@@ -3,7 +3,7 @@ gui:
   timeFormat: '2006-01-02 15:04' # https://pkg.go.dev/time#Time.Format
   nerdFontsVersion: "3"
 os:
-  Edit: 'nvim'
+  editPreset: 'nvim'
 git:
   paging:
     colorArg: always
@@ -27,3 +27,12 @@ customCommands:
     description: Open the previous version of the file in Neovim
     command: "git show {{.SelectedLocalCommit.Sha}}^1:{{.SelectedCommitFile.Name}} > /tmp/$(basename {{.SelectedCommitFile.Name}}) && nvim /tmp/$(basename {{.SelectedCommitFile.Name}}) && rm /tmp/$(basename {{.SelectedCommitFile.Name}})"
     subprocess: true
+  - key: '<C-r>'
+    context: 'files'
+    command: 'git rm --cached {{.SelectedFile.Name}}'
+    description: 'Untrack a file'
+    prompts:
+      - type: 'confirm'
+        title: 'Untrack'
+        body: 'Are you sure you want to untrack {{.SelectedFile.Name}}?'
+    loadingText: 'Untracking file'
