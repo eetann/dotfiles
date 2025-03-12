@@ -1,13 +1,13 @@
 return {
 	"MeanderingProgrammer/render-markdown.nvim",
 	dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
-	ft = { "markdown", "md", "mdwn", "mkd", "mkdn", "mark", "mdx", "Avante", "senpai" },
+	ft = { "markdown", "md", "mdwn", "mkd", "mkdn", "mark", "mdx", "Avante", "senpai_chat_log" },
 	keys = {
 		{ "<Space>sm", ":RenderMarkdown toggle<CR>" },
 	},
 	opts = {
 		render_modes = true,
-		file_types = { "markdown", "Avante", "codecompanion" },
+		file_types = { "markdown", "Avante", "codecompanion", "senpai_chat_log" },
 		heading = {
 			width = "block",
 			left_pad = 0,
