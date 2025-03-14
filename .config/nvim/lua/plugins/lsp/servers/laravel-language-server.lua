@@ -12,5 +12,5 @@ configs["laravel-language-server"] = {
 	},
 }
 
----@type lspconfig.Config
+---@type lspconfig.Config|{}
 return {}

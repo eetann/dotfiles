@@ -1,7 +1,6 @@
 local util = require("lspconfig.util")
 
----@type lspconfig.Config
----@diagnostic disable-next-line: missing-fields
+---@type lspconfig.Config|{}
 return {
 	root_dir = util.root_pattern("package.json"),
 	single_file_support = false, -- for deno

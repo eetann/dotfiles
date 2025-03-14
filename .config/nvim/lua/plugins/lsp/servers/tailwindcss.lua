@@ -1,4 +1,4 @@
----@type lspconfig.Config
+---@type lspconfig.Config|{}
 return {
 	settings = {
 		tailwindCSS = {

@@ -13,5 +13,5 @@ configs["markdown-language-server"] = {
 	},
 }
 
----@type lspconfig.Config
+---@type lspconfig.Config|{}
 return {}
