@@ -17,7 +17,9 @@ return {
 			"atcoder.test",
 			"atcoder.submit",
 			"lsp.show-log",
-			"plugin_dev.run_luafile",
+			"lua.run_luafile",
+			"deno.deno_run",
+			"deno.deno_test",
 		},
 	},
 }
