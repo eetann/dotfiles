@@ -34,5 +34,4 @@ customCommands:
     prompts:
       - type: 'confirm'
         title: 'Untrack'
-        body: 'Are you sure you want to untrack {{.SelectedFile.Name}}?'
-    loadingText: 'Untracking file'
+        body: 'untrack {{.SelectedFile.Name}}?'
