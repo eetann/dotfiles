@@ -17,7 +17,7 @@ return {
 			require("plugins.lsp.server-register")
 		end,
 	},
-	{ import = "plugins.lsp.tiny-inline-diagnostic" },
+	-- { import = "plugins.lsp.tiny-inline-diagnostic" },
 	{ import = "plugins.lsp.lspsaga" },
 	{ import = "plugins.lsp.actions-preview" },
 	{ import = "plugins.lsp.conform" },
