@@ -174,5 +174,8 @@ return {
 			tabline = {},
 			extensions = {},
 		})
+		-- transparent
+		vim.cmd("highlight lualine_c_inactive guibg=NONE")
+		vim.cmd("highlight lualine_c_normal guibg=NONE")
 	end,
 }
