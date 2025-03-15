@@ -45,3 +45,4 @@ if [ -e /usr/local/bin/aws_completer ]; then
   complete -C '/usr/local/bin/aws_completer' aws
 fi
 if [[ ":$FPATH:" != *":$HOME/.zsh/completions:"* ]]; then export FPATH="$HOME/.zsh/completions:$FPATH"; fi
+[ -s "${HOME}/.bun/_bun" ] && source "${HOME}/.bun/_bun"

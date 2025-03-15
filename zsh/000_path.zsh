@@ -1,4 +1,5 @@
 export GOPATH=$HOME/go
+export BUN_INSTALL="$HOME/.bun"
 path+=(
   $GOPATH(N-/)
   $GOPATH/bin(N-/)
@@ -6,6 +7,7 @@ path+=(
   $HOME/.cargo/bin(N-/)
   $HOME/.luarocks/bin(N-/)
   /snap/bin(N-/)
+  $BUN_INSTALL/bin(N-/)
 )
 source "$HOME/.deno/env"
 
