@@ -63,7 +63,7 @@ return {
 				skipMessage("no matching language servers"),
 				skipMessage("is not supported by any of the servers registered for the current buffer"),
 				skipMessage("query: invalid node type"),
-				skipMessage("No code actions available", "info"),
+				skipMessage("No code actions available", "notify", "info"),
 				skipMessage("DiagnosticChanged Autocommands for.*Invalid", "msg_show"),
 				myMiniView("Already at .* change"),
 				myMiniView("written"),
