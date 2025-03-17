@@ -20,7 +20,12 @@ return {
 		-- vim.g.codecompanion_auto_tool_mode = true
 	end,
 	config = function()
-		local my_adapter = vim.env.OPENAI_API_KEY and "openai" or "copilot"
+		local my_adapter = "copilot"
+		if vim.env.OPENROUTER_API_KEY then
+			my_adapter = "openrouter_claude"
+		elseif vim.env.OPENAI_API_KEY then
+			my_adapter = "openai"
+		end
 		require("codecompanion").setup({
 			opts = {
 				language = "Japanese",
@@ -29,6 +34,20 @@ return {
 				openai = function()
 					return require("codecompanion.adapters").extend("openai", {
 						env = { api_key = vim.env.OPENAI_API_KEY },
+					})
+				end,
+				openrouter_claude = function()
+					return require("codecompanion.adapters").extend("openai_compatible", {
+						env = {
+							url = "https://openrouter.ai/api",
+							api_key = vim.env.OPENROUTER_API_KEY,
+							chat_url = "/v1/chat/completions",
+						},
+						schema = {
+							model = {
+								default = "anthropic/claude-3.7-sonnet",
+							},
+						},
 					})
 				end,
 			},
