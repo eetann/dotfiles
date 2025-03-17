@@ -20,6 +20,8 @@ return {
 			"lua.run_luafile",
 			"deno.deno_run",
 			"deno.deno_test",
+			"bun.bun_run",
+			"bun.bun_test",
 		},
 	},
 }
