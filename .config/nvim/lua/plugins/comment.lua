@@ -1,3 +1,5 @@
+---@module "lazy"
+---@type LazyPluginSpec[]
 return {
 	{
 		"numToStr/Comment.nvim",
@@ -76,6 +78,23 @@ return {
 	{
 		"folke/todo-comments.nvim",
 		event = "VeryLazy",
+		keys = {
+			{
+				"]t",
+				function()
+					require("todo-comments").jump_next()
+				end,
+				desc = "Next todo comment",
+			},
+
+			{
+				"[t",
+				function()
+					require("todo-comments").jump_prev()
+				end,
+				desc = "Previous todo comment",
+			},
+		},
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {},
 	},
