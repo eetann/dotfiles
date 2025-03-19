@@ -97,6 +97,14 @@ return {
 				},
 				lualine_x = {
 					{
+						-- for `@recording messsages`
+						---@diagnostic disable-next-line: undefined-field
+						require("noice").api.status.mode.get,
+						---@diagnostic disable-next-line: undefined-field
+						cond = require("noice").api.status.mode.has,
+						color = { fg = "#ff9e64" },
+					},
+					{
 						-- https://www.reddit.com/r/neovim/comments/1aseug5/comment/kqq026j
 						function()
 							return require("dap").status()
