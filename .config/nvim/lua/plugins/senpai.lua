@@ -13,5 +13,13 @@ return {
 	---@type senpai.Config
 	opts = {
 		provider = vim.env.OPENROUTER_API_KEY and "openrouter" or "openai",
+		chat = {
+			input_area = {
+				keymaps = {
+					["<CR>"] = false,
+					["<CR><CR>"] = "submit",
+				},
+			},
+		},
 	},
 }
