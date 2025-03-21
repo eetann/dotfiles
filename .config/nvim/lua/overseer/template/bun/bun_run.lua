@@ -16,7 +16,7 @@ return {
 	end,
 	condition = {
 		callback = function()
-			if vim.fn.filereadable("bun.lock") then
+			if vim.fn.filereadable("bun.lock") == 1 then
 				return true
 			end
 			return false
