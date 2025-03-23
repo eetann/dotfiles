@@ -76,6 +76,7 @@ require("lazy").setup({
 		{ import = "plugins.emmet-vim" },
 		{ import = "plugins.rainbow_csv" },
 		{ "vim-jp/vimdoc-ja", event = "VeryLazy" },
+		{ import = "plugins.helpview" },
 		-- blade
 		{ "jwalton512/vim-blade", ft = "blade" }, -- インデント
 		-- markdown
