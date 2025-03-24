@@ -102,6 +102,11 @@ return {
 				["Generate English Commit Message"] = require("plugins.codecompanion.prompt.commit-message-english"),
 				["Generate Japanese Commit Message"] = require("plugins.codecompanion.prompt.commit-message-japanese"),
 			},
+			display = {
+				chat = {
+					show_header_separator = true,
+				},
+			},
 		})
 		require("plugins.codecompanion.history")
 		vim.api.nvim_create_autocmd({ "FileType" }, {
