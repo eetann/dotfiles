@@ -2,11 +2,12 @@
 return {
 	name = "MiniTest run this file",
 	builder = function()
-		vim.cmd("luafile lua MiniTest.run_file()")
+		vim.cmd("lua MiniTest.run_file()")
 		---@type overseer.TaskDefinition
 		return {
 			cmd = { "echo" },
 			args = { "MiniTest" },
+			cwd = vim.fn.expand("%:p:h"),
 			components = {
 				{ "on_output_quickfix", open_on_exit = "failure" },
 				"default",
