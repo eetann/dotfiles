@@ -16,7 +16,7 @@ return {
 	end,
 	condition = {
 		callback = function()
-			if vim.fn.filereadable("bun.lock") == 1 then
+			if vim.fn.filereadable("bun.lock") == 1 and vim.bo.filetype == "typescript" then
 				return true
 			end
 			return false

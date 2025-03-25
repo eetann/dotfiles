@@ -1,22 +1,21 @@
 ---@type overseer.TemplateDefinition
 return {
-	name = "bun run this file",
+	name = "MiniTest run this file",
 	builder = function()
-		local file = vim.fn.expand("%:p")
+		vim.cmd("luafile lua MiniTest.run_file()")
 		---@type overseer.TaskDefinition
 		return {
-			cmd = { "bun" },
-			args = { "run", file },
-			cwd = vim.fn.expand("%:p:h"),
+			cmd = { "echo" },
+			args = { "MiniTest" },
 			components = {
-				"open_output",
+				{ "on_output_quickfix", open_on_exit = "failure" },
 				"default",
 			},
 		}
 	end,
 	condition = {
 		callback = function()
-			if vim.fn.filereadable("bun.lock") == 1 and vim.bo.filetype == "typescript" then
+			if vim.fn.expand("%"):match("test.*.lua") then
 				return true
 			end
 			return false
