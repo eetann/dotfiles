@@ -5,22 +5,14 @@ return {
 		local file = vim.fn.expand("%")
 		---@type overseer.TaskDefinition
 		return {
-			cmd = { "nvim" },
-			args = {
-				"--headless",
-				"--noplugin",
-				"-u",
-				"./scripts/test/minimal_init.lua",
-				"-c",
-				[["lua MiniTest.run_file(']]
-					.. file
-					.. [[', {execute = { reporter = MiniTest.gen_reporter.stdout() }})"]],
-			},
+			cmd = [[nvim --headless --noplugin -u ./scripts/test/minimal_init.lua -c "lua MiniTest.run_file(']]
+				.. file
+				.. [[')"]],
 			cwd = vim.fn.getcwd(),
 			components = {
-				{ "on_exit_set_status", success_codes = { 0 } },
+				"open_output",
 				{ "on_complete_notify", statuses = {} },
-				{ "on_output_quickfix", open_on_exit = "failure" },
+				"restart_on_save",
 				"default",
 			},
 		}
