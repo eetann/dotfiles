@@ -3,7 +3,7 @@ return {
 	lazy = true,
 	keys = {
 		{
-			"<space>la",
+			"gra",
 			function()
 				require("actions-preview").code_actions()
 			end,

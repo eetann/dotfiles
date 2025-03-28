@@ -125,7 +125,7 @@ M.keys = {
   { "<space>fm", function() picker.marks() end, desc = "Picker: marks" },
 
   -- LSP
-  { "gr", function() picker.lsp_references() end, nowait = true, desc = "References" },
+  { "grr", function() picker.lsp_references() end, nowait = true, desc = "References" },
 
   -- pickerそのもの
   { "<space>fR", function() picker.resume() end, desc = "Picker: resume" },
