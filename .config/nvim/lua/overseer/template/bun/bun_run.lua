@@ -7,7 +7,7 @@ return {
 		return {
 			cmd = { "bun" },
 			args = { "run", file },
-			cwd = vim.fn.expand("%:p:h"),
+			cwd = vim.fn.getcwd(),
 			components = {
 				"open_output",
 				"default",

@@ -51,13 +51,6 @@ return {
 			messages = {
 				view_search = false,
 			},
-			lsp = {
-				override = {
-					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-					["vim.lsp.util.stylize_markdown"] = true,
-					["cmp.entry.get_documentation"] = false,
-				},
-			},
 			routes = {
 				skipMessage("failed to run generator.*is not executable"),
 				skipMessage("no matching language servers"),
