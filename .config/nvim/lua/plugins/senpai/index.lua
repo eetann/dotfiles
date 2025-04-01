@@ -22,5 +22,12 @@ return {
 				},
 			},
 		},
+		prompt_launchers = {
+			["Blog composition"] = require("plugins.senpai.launcher_blog_composition"),
+			["test message"] = {
+				user = "test message. Hello!",
+				priority = 90,
+			},
+		},
 	},
 }

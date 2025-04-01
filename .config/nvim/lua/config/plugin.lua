@@ -98,6 +98,6 @@ require("lazy").setup({
 		{ import = "plugins.mini-doc" },
 		{ import = "plugins.mini-test" },
 		{ import = "plugins.denops" },
-		{ import = "plugins.senpai" },
+		{ import = "plugins.senpai.index" },
 	},
 })
