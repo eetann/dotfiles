@@ -27,7 +27,7 @@ vim.api.nvim_buf_create_user_command(0, "CompleteGitCommit", function()
 end, {})
 
 vim.keymap.set("n", "<C-g><C-g>", function()
-	if os.getenv("COMMIT_MESSAGE_ENGLISH") == "1" then
+	if vim.env.COMMIT_MESSAGE_ENGLISH == "1" then
 		vim.cmd("Senpai commitMessage English")
 	else
 		vim.cmd("Senpai commitMessage Japanese")
