@@ -16,6 +16,7 @@ abbreviations=(
   "X"    "| xsel -ib"
   "PA"   "php artisan"
   "V"    "vagrant"
+  "TN"   "tmux popup -E -w 95% -h 95% -d '#{pane_current_path}' 'nvim -c \"\"'"
   "TREE" "tree -a -I '.git|node_modules|dist' --charset unicode"
   "BLOG" "node bin/new.mjs --slug"
 )
