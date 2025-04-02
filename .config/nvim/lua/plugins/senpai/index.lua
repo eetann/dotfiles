@@ -15,6 +15,12 @@ return {
 			default = "openrouter",
 		},
 		chat = {
+			common = {
+				keymaps = {
+					["gM"] = "show_mcp_tools",
+					["gL"] = "show_log",
+				},
+			},
 			input_area = {
 				keymaps = {
 					["<CR>"] = false,
@@ -29,5 +35,11 @@ return {
 				priority = 90,
 			},
 		},
+		mcp = {
+			servers = {
+				mastra = { command = "bunx", args = { "-y", "@mastra/mcp-docs-server" } },
+			},
+		},
+		debug = true,
 	},
 }
