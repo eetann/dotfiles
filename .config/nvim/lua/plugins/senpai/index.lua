@@ -37,7 +37,14 @@ return {
 		},
 		mcp = {
 			servers = {
-				mastra = { command = "bunx", args = { "-y", "@mastra/mcp-docs-server" } },
+				sequential = {
+					command = "bunx",
+					args = { "-y", "@modelcontextprotocol/server-sequential-thinking" },
+				},
+				mastra = {
+					command = "bunx",
+					args = { "-y", "@mastra/mcp-docs-server" },
+				},
 			},
 		},
 		debug = true,
