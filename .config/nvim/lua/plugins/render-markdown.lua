@@ -16,6 +16,7 @@ return {
 		},
 		code = {
 			width = "block",
+			border = "thick",
 		},
 		checkbox = {
 			checked = { scope_highlight = "@markup.strikethrough" },
