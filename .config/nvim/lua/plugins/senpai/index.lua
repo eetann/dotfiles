@@ -3,6 +3,7 @@
 return {
 	-- "eetann/senpai.nvim",
 	dir = "~/ghq/github.com/eetann/senpai.nvim",
+	build = "bun install",
 	keys = {
 		{ "<space>ss", "<Cmd>Senpai toggleChat<CR>" },
 	},
