@@ -6,6 +6,15 @@ return {
 	build = "bun install",
 	keys = {
 		{ "<space>ss", "<Cmd>Senpai toggleChat<CR>" },
+		{ "<space>sl", "<Cmd>Senpai promptLauncher<CR>" },
+		{
+			"<space>sv",
+			function()
+				require("senpai.api").transfer_visual_to_chat()
+			end,
+			mode = "v",
+			desc = "[senpai] transfer_visual_to_chat",
+		},
 	},
 	cmd = { "Senpai" },
 	ft = "gitcommit",
@@ -18,6 +27,7 @@ return {
 		chat = {
 			common = {
 				keymaps = {
+					["gO"] = "open_api_doc",
 					["gM"] = "show_mcp_tools",
 					["gL"] = "show_log",
 				},
