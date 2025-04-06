@@ -7,14 +7,7 @@ return {
 	keys = {
 		{ "<space>ss", "<Cmd>Senpai toggleChat<CR>" },
 		{ "<space>sl", "<Cmd>Senpai promptLauncher<CR>" },
-		{
-			"<space>sv",
-			function()
-				require("senpai.api").transfer_visual_to_chat()
-			end,
-			mode = "v",
-			desc = "[senpai] transfer_visual_to_chat",
-		},
+		{ "<space>sv", "<Cmd>Senpai transferToChat<CR>", mode = "v" },
 	},
 	cmd = { "Senpai" },
 	ft = "gitcommit",
