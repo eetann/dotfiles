@@ -16,6 +16,7 @@ return {
 			components = {
 				"open_output",
 				{ "on_complete_notify", statuses = {} },
+				"restart_on_save",
 				"default",
 			},
 		}
