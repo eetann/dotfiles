@@ -20,8 +20,6 @@ return {
 		chat = {
 			common = {
 				keymaps = {
-					["gO"] = "open_api_doc",
-					["gM"] = "show_mcp_tools",
 					["gL"] = "show_log",
 				},
 			},
