@@ -20,7 +20,7 @@ return {
 		chat = {
 			common = {
 				keymaps = {
-					["gL"] = "show_log",
+					["gL"] = "show_internal_log",
 				},
 			},
 			input_area = {
