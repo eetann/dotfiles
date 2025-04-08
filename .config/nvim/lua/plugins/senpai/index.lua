@@ -47,6 +47,16 @@ return {
 					command = "bunx",
 					args = { "-y", "@mastra/mcp-docs-server" },
 				},
+				-- daisyUi = {
+				-- 	command = "npx",
+				-- 	args = {
+				-- 		"-y",
+				-- 		"sitemcp",
+				-- 		"https://daisyui.com",
+				-- 		"-m",
+				-- 		"/components/**",
+				-- 	},
+				-- },
 			},
 		},
 		debug = true,
