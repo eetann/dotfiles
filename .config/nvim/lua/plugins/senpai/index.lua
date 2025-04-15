@@ -18,6 +18,7 @@ return {
 			default = "openrouter",
 		},
 		chat = {
+			system_prompt = "Always respond in 日本語",
 			common = {
 				keymaps = {
 					["gL"] = "show_internal_log",
