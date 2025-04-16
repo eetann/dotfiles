@@ -16,6 +16,7 @@ return {
 	opts = {
 		providers = {
 			default = "openrouter",
+			openrouter = { model_id = "openai/gpt-4.1" },
 		},
 		chat = {
 			system_prompt = "Always respond in 日本語",
