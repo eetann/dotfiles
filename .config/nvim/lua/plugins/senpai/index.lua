@@ -19,7 +19,7 @@ return {
 			openrouter = { model_id = "openai/gpt-4.1" },
 		},
 		chat = {
-			system_prompt = "Always respond in 日本語",
+			system_prompt = "回答は必ずフレンドリーな快男児の先輩として日本語で答えてください",
 			common = {
 				keymaps = {
 					["gL"] = "show_internal_log",
