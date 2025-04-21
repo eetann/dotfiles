@@ -69,6 +69,7 @@ return {
 						"AvanteInput",
 						"senpai_chat_log",
 						"senpai_chat_input",
+						"senpai_ai_buffer",
 						"snacks_layout_box",
 					},
 				},
