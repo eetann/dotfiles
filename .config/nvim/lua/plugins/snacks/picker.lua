@@ -112,11 +112,13 @@ M.keys = {
 		"<space>fh",
 		function()
 			picker.help({
+				pattern = get_text(),
 				win = { input = { keys = {
 					["<CR>"] = { "edit_vsplit", mode = { "i", "n" } },
 				} } },
 			})
 		end,
+		mode = { "n", "x" },
 		desc = "Picker: help pages",
 	},
 	-- stylua: ignore start
