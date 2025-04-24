@@ -25,7 +25,7 @@ mason_lspconfig.setup_handlers({ server_register })
 local other_lsp = {
 	-- list
 	"biome",
-	"eslint",
+	-- "eslint",
 	"jsonls",
 	-- "laravel-language-server",
 	"markdown-language-server",
