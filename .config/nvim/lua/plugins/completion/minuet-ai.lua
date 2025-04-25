@@ -10,17 +10,11 @@ local target_files = {
 ---@type LazyPluginSpec
 return {
 	"milanglacier/minuet-ai.nvim",
-	init = function()
-		vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-			group = "my_nvim_rc",
-			callback = function()
-				local filename = vim.fn.expand("%:t")
-				if not target_files[filename] then
-					vim.cmd("Minuet virtualtext enable")
-				end
-			end,
-		})
-	end,
+	keys = {
+		"n",
+		"<space>mv",
+		"Minuet virtualtext enable",
+	},
 	opts = {
 		virtualtext = {
 			keymap = {
@@ -38,6 +32,8 @@ return {
 				dismiss = "<C-g>e",
 			},
 		},
+		notify = "warn",
+		-- provider = "openai",
 		provider = "openai_compatible",
 		request_timeout = 2.5,
 		throttle = 1500, -- Increase to reduce costs and avoid rate limits
