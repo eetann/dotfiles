@@ -9,6 +9,7 @@ return {
 			cmd = { "echo" },
 			args = { file },
 			components = {
+				{ "on_complete_notify", statuses = {} },
 				{ "on_output_quickfix", open_on_exit = "failure" },
 				"default",
 			},
