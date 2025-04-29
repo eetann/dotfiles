@@ -3,7 +3,7 @@
 return {
 	-- "eetann/senpai.nvim",
 	dir = "~/ghq/github.com/eetann/senpai.nvim",
-	build = "bun install",
+	build = "bun install --frozen-lockfile",
 	keys = {
 		{ "<space>ss", "<Cmd>Senpai toggleChat<CR>" },
 		{ "<space>sl", "<Cmd>Senpai promptLauncher<CR>" },
