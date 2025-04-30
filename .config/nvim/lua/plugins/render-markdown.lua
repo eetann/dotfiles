@@ -5,6 +5,9 @@ return {
 	keys = {
 		{ "<Space>sm", ":RenderMarkdown toggle<CR>" },
 	},
+	---@module "render-markdown"
+	---@type render.md.UserConfig
+	---
 	opts = {
 		render_modes = true,
 		file_types = { "markdown", "Avante", "codecompanion", "senpai_chat_log", "senpai_chat_input" },
@@ -13,6 +16,11 @@ return {
 			left_pad = 0,
 			right_pad = 4,
 			icons = {},
+		},
+		html = {
+			comment = {
+				conceal = false,
+			},
 		},
 		code = {
 			width = "block",
