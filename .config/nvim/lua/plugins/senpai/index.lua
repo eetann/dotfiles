@@ -16,7 +16,7 @@ return {
 	opts = {
 		providers = {
 			default = "openrouter",
-			openrouter = { model_id = "google/gemini-2.5-pro-preview-03-25" },
+			openrouter = { model_id = "openai/gpt-4.1" },
 		},
 		chat = {
 			system_prompt = "回答は必ずフレンドリーな快男児の先輩として日本語で答えてください",
