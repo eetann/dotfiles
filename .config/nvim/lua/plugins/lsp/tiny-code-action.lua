@@ -2,14 +2,9 @@
 ---@type LazyPluginSpec
 return {
 	"rachartier/tiny-code-action.nvim",
-	depen = {
+	dependencies = {
 		{ "nvim-lua/plenary.nvim" },
-		{
-			"folke/snacks.nvim",
-			opts = {
-				terminal = {},
-			},
-		},
+		{ "folke/snacks.nvim" },
 	},
 	keys = {
 		{

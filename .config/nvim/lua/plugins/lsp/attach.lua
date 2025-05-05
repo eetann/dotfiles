@@ -62,5 +62,5 @@ end, {
 })
 
 vim.api.nvim_create_user_command("LspInfo", function()
-	vim.cmd("vertical checkhealth lspconfig")
+	vim.cmd("vertical checkhealth vim.lsp")
 end, {})
