@@ -3,7 +3,9 @@ return {
 	name = "run this file",
 	builder = function()
 		local file = vim.fn.expand("%:p")
-		vim.cmd("luafile %")
+		vim.schedule(function()
+			vim.cmd("luafile %")
+		end)
 		---@type overseer.TaskDefinition
 		return {
 			cmd = { "echo" },
