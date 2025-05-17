@@ -1,20 +1,21 @@
 function monorepo_cd() {
-  local cwd packages_dir candidates selected
-
-  cwd="$PWD"
+  local packages_dir candidates=()
+  local cwd="$PWD"
 
   # 現在のディレクトリ名に'packages'が含まれているか判定
   if [[ "$cwd" == *"/packages"* ]]; then
     # 'packages' ディレクトリの直下を探す
     packages_dir="${cwd%%/packages*}/packages"
+    if [[ ! -d "$packages_dir" ]]; then
+      return
+    fi
     if [[ -d "$packages_dir" ]]; then
       # candidates: packages直下のディレクトリ（ただし現在のディレクトリは除外）
-      candidates=()
       for d in "${packages_dir}"/*(/); do
         [[ "$d" != "$cwd/" ]] && candidates+=("$d")
       done
       # packagesより上のディレクトリも候補に追加
-      upper_dir="${packages_dir%/packages}"
+      local upper_dir="${packages_dir%/packages}"
       [[ "$upper_dir" != "$cwd" ]] && candidates+=("$upper_dir")
     else
       return
@@ -31,10 +32,20 @@ function monorepo_cd() {
     return
   fi
 
-  # fzfで選択
-  selected=$(printf '%s\n' "${candidates[@]}" | fzf)
+  # fzfで表示名付きで選択
+  local display_list=()
+  for d in "${candidates[@]}"; do
+    if [[ "$d" == "${packages_dir%/packages}" ]]; then
+      display_list+=("<root> | $d")
+    else
+      display_list+=("$(basename "$d") | $d")
+    fi
+  done
+
+  local selected=$(printf '%s\n' "${display_list[@]}" | fzf)
   if [[ -n "$selected" ]]; then
-    BUFFER="cd $selected"
+    local dest="${selected##*$' | '}"
+    BUFFER="cd $dest"
     zle accept-line
   fi
 }
