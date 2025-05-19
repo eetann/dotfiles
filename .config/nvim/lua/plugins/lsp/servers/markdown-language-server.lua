@@ -8,7 +8,7 @@ configs["markdown-language-server"] = {
 	default_config = {
 		cmd = { "node", server_path .. "packages/server/bin/markdown-language-server.cjs", "--stdio" },
 		filetypes = { "markdown" },
-		root_dir = util.root_pattern("mdconfig.json5", ".git"),
+		root_dir = util.root_pattern("mdconfig.json5"),
 		settings = {},
 	},
 }
