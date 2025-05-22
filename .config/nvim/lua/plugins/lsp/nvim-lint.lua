@@ -1,5 +1,6 @@
 return {
 	"mfussenegger/nvim-lint",
+	cond = not vim.g.vscode,
 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		require("plugins.lsp.linters.textlint")

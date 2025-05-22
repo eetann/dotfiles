@@ -3,6 +3,7 @@
 return {
 	"olimorris/codecompanion.nvim",
 	cmd = { "CodeCompanion", "CodeCompanionActions", "CodeCompanionChat", "CodeCompanionCmd", "CodeCompanionLoad" },
+	cond = not vim.g.vscode,
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-treesitter/nvim-treesitter",

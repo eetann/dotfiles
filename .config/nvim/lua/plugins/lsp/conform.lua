@@ -1,5 +1,6 @@
 return {
 	"stevearc/conform.nvim",
+	cond = not vim.g.vscode,
 	-- lazy loadingの推奨設定がある
 	-- https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md#lazy-loading-with-lazynvim
 	event = { "BufWritePre" },

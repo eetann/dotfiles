@@ -1,5 +1,6 @@
 return {
 	"nvimdev/lspsaga.nvim",
+	cond = not vim.g.vscode,
 	cmd = { "Lspsaga" },
 	lazy = true,
 	dependencies = { "nvim-treesitter/nvim-treesitter" },

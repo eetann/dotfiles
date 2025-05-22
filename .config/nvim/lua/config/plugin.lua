@@ -89,7 +89,6 @@ require("lazy").setup({
 		{ import = "plugins.overseer" },
 
 		-- AI系
-		{ import = "plugins.gen" },
 		{ import = "plugins.codecompanion.index" },
 		{ import = "plugins.avante" },
 

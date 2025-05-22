@@ -2,6 +2,7 @@
 ---@type LazyPluginSpec
 return {
 	"rachartier/tiny-code-action.nvim",
+	cond = not vim.g.vscode,
 	dependencies = {
 		{ "nvim-lua/plenary.nvim" },
 		{ "folke/snacks.nvim" },

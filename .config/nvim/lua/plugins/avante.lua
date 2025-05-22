@@ -1,6 +1,7 @@
 return {
 	"yetone/avante.nvim",
 	build = "make",
+	cond = not vim.g.vscode,
 	dependencies = {
 		"stevearc/dressing.nvim",
 		"nvim-lua/plenary.nvim",

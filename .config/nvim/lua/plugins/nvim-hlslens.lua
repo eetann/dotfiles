@@ -1,5 +1,6 @@
 return {
 	"kevinhwang91/nvim-hlslens",
+	cond = not vim.g.vscode,
 	event = { "VeryLazy" },
 	config = function()
 		require("hlslens").setup()

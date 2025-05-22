@@ -3,6 +3,7 @@
 return {
 	"saghen/blink.cmp",
 	event = { "InsertEnter", "CmdLineEnter" },
+	cond = not vim.g.vscode,
 	dependencies = {
 		{ import = "plugins.completion.luasnip" },
 		"disrupted/blink-cmp-conventional-commits",

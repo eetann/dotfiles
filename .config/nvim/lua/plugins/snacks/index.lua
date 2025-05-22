@@ -2,6 +2,7 @@ return {
 	"folke/snacks.nvim",
 	priority = 1000,
 	lazy = false,
+	cond = not vim.g.vscode,
 	keys = function()
 		local picker = require("plugins.snacks.picker")
 		local keys = picker.keys

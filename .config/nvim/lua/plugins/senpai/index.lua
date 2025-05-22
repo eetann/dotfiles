@@ -4,6 +4,7 @@ return {
 	-- "eetann/senpai.nvim",
 	dir = "~/ghq/github.com/eetann/senpai.nvim",
 	build = "bun install --frozen-lockfile",
+	cond = not vim.g.vscode,
 	keys = {
 		{ "<space>ss", "<Cmd>Senpai toggleChat<CR>" },
 		{ "<space>sl", "<Cmd>Senpai promptLauncher<CR>" },
