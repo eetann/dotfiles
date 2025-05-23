@@ -58,7 +58,7 @@ else
 		{ key = "v", mods = "CTRL|SHIFT", action = act.PasteFrom("Clipboard") },
 	}
 	append_array(key_table, wsl_key_table)
-	config.font_size = 12.0
+	config.font_size = 10.0
 	-- config.window_background_opacity = 0.6
 	config.window_background_gradient = {
 		orientation = { Linear = { angle = -45.0 } },

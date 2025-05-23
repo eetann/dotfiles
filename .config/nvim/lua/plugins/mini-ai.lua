@@ -27,6 +27,7 @@ return {
 			["A"] = gen_spec.pair("≪", "≫", { type = "non-balanced" }),
 		}
 		return {
+			n_lines = 250,
 			search_method = "cover",
 			custom_textobjects = {
 				["j"] = function()
