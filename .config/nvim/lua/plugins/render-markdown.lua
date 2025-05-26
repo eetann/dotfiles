@@ -1,6 +1,7 @@
 return {
 	"MeanderingProgrammer/render-markdown.nvim",
 	dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+	cond = not vim.g.vscode,
 	ft = { "markdown", "md", "mdwn", "mkd", "mkdn", "mark", "mdx", "Avante", "senpai_chat_log", "senpai_chat_input" },
 	keys = {
 		{ "<Space>sm", ":RenderMarkdown toggle<CR>" },
