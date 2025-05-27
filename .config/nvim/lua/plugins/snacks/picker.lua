@@ -157,8 +157,18 @@ M.config = {
 				["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
 				["<c-s>"] = false,
 				["<c-x>"] = { "edit_split", mode = { "i", "n" } },
+				["<c-o>"] = { "copy_file_name", mode = { "i", "n" } },
 			},
 		},
+	},
+	actions = {
+		copy_file_name = function(the_picker)
+			local item = the_picker:current()
+			if item and item.file then
+				vim.fn.setreg("+", item.file)
+				vim.notify("Clipboard << " .. item.file)
+			end
+		end,
 	},
 }
 
