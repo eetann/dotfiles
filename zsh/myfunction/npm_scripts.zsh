@@ -3,6 +3,8 @@ function fzf_npm_scripts() {
   local git_root=$(git rev-parse --show-superproject-working-tree --show-toplevel 2>/dev/null | head -1)
   if [[ -f pnpm-lock.yaml || ( -n "$git_root" && -f "$git_root/pnpm-lock.yaml" ) ]]; then
     prefix="pnpm"
+    elif [[ -f bun.lock || ( -n "$git_root" && -f "$git_root/bun.lock" ) ]]; then
+    prefix="bun"
   fi
   if [[ ! -f package.json ]]; then
     echo 'fzf_npm_scripts'
