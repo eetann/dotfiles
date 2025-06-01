@@ -6,3 +6,5 @@ mise.local.toml
 .mise.local.toml
 .memo.local.md
 .phpactor.json
+
+**/.claude/settings.local.json

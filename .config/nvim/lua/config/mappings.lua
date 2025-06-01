@@ -105,18 +105,16 @@ vim.keymap.set(
 	{ desc = "上の行へ貼り付けたら貼り付けの先頭(インデントじゃない)へ" }
 )
 vim.keymap.set("n", "sy", "<Cmd>%y<CR>", { desc = "全選択してyank" })
-vim.keymap.set(
-	"n",
-	"sgf",
-	"<Cmd>let @+=expand('%')<CR>:echo 'Clipboard << ' . @+<CR>",
-	{ desc = "現在のファイル名(相対パス)をyank", silent = true }
-)
-vim.keymap.set(
-	"n",
-	"sgF",
-	"<Cmd>let @+=expand('%:t:r')<CR>:echo 'Clipboard << ' . @+<CR>",
-	{ desc = "現在のファイル名(拡張子無し)をyank", silent = true }
-)
+vim.keymap.set("n", "sgf", function()
+	local relative_path = vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.")
+	vim.fn.setreg("+", relative_path)
+	vim.notify("Clipboard << " .. relative_path)
+end, { desc = "現在のファイル名(相対パス)をyank", silent = true })
+vim.keymap.set("n", "sgF", function()
+	local filename_without_ext = vim.fn.expand("%:t:r")
+	vim.fn.setreg("+", filename_without_ext)
+	vim.notify("Clipboard << " .. filename_without_ext)
+end, { desc = "現在のファイル名(拡張子無し)をyank", silent = true })
 vim.keymap.set("n", "sge", function()
 	vim.cmd([[
       let s:echo_hist = histget('cmd', -1)
