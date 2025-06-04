@@ -1,0 +1,47 @@
+// Place your key bindings in this file to override the defaults
+[
+  {
+    "key": "ctrl+d",
+    "command": "vscode-neovim.send",
+    "args": "<C-d>",
+    "when": "editorTextFocus && neovim.init"
+  },
+  {
+    "key": "ctrl+u",
+    "command": "vscode-neovim.send",
+    "args": "<C-u>",
+    "when": "editorTextFocus && neovim.init"
+  },
+  {
+    "key": "ctrl+f",
+    "command": "vscode-neovim.send",
+    "args": "<C-f>",
+    "when": "editorTextFocus && neovim.init"
+  },
+  {
+    "key": "ctrl+b",
+    "command": "vscode-neovim.send",
+    "args": "<C-b>",
+    "when": "editorTextFocus && neovim.init"
+  },
+  {
+    "key": "s h",
+    "command": "workbench.action.navigateLeft",
+    "when": "editorTextFocus && vim.mode == 'Normal'"
+  },
+  {
+    "key": "s j",
+    "command": "workbench.action.navigateUp",
+    "when": "editorTextFocus && vim.mode == 'Normal'"
+  },
+  {
+    "key": "s k",
+    "command": "workbench.action.navigateDown",
+    "when": "editorTextFocus && vim.mode == 'Normal'"
+  },
+  {
+    "key": "s l",
+    "command": "workbench.action.navigateRight",
+    "when": "editorTextFocus && vim.mode == 'Normal'"
+  }
+]

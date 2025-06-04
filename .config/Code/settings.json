@@ -1,0 +1,132 @@
+{
+  "security.workspace.trust.untrustedFiles": "open",
+  "git.openRepositoryInParentFolders": "never",
+  "zenMode.silentNotifications": false,
+  "vim.useSystemClipboard": true,
+  "vim.normalModeKeyBindings": [
+    {
+      "before": [
+        "<C-x>",
+        "g"
+      ],
+      "commands": [
+        "lazygit-vscode.toggle"
+      ]
+    },
+    {
+      "before": [
+        "<space>",
+        "c",
+        "c"
+      ],
+      "commands": [
+        "workbench.view.extension.claude-dev-ActivityBar"
+      ]
+    },
+    {
+      "before": [
+        "s"
+      ],
+      "after": []
+    },
+  ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": [
+        "p",
+      ],
+      "after": [
+        "\"",
+        "_",
+        "d",
+        "P",
+      ]
+    }
+  ],
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "editor.codeActionsOnSave": {
+    "quickfix.biome": "explicit",
+    "source.organizeImports.biome": "explicit"
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "editor.minimap.enabled": false,
+  "terminal.integrated.fontFamily": "HackGen Console NF",
+  "github.copilot.advanced": {},
+  "github.copilot.nextEditSuggestions.enabled": false,
+  "workbench.tree.indent": 20,
+  "update.showReleaseNotes": false,
+  "lazygit-vscode.autoMaximizeWindow": true,
+  "workbench.colorTheme": "Terafox",
+  "editor.cursorBlinking": "solid",
+  "workbench.activityBar.location": "top",
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  },
+  "editor.accessibilitySupport": "off",
+  "editor.tokenColorCustomizations": {
+    "comments": "#4a9f32"
+  },
+  "kilo-code.allowedCommands": [
+    "npm test",
+    "tsc",
+    "git log",
+    "git diff",
+    "git show"
+  ],
+  "roo-cline.allowedCommands": [
+    "npm test",
+    "tsc",
+    "git log",
+    "git diff",
+    "git show"
+  ],
+  "git.blame.editorDecoration.enabled": false,
+  "vscode-neovim.ctrlKeysForNormalMode": [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "h",
+    "i",
+    "j",
+    "k",
+    "l",
+    "m",
+    "o",
+    "r",
+    "t",
+    "u",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z",
+    "/",
+    "]",
+    "right",
+    "left",
+    "up",
+    "down",
+    "backspace",
+    "delete",
+    "q"
+  ],
+  "oil-code.hasNerdFont": true,
+  "editor.fontFamily": "HackGen Console NF, SauceCodePro Nerd Font Mono,Menlo, Monaco, 'Courier New', monospace"
+}

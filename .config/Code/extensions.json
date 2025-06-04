@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "asvetliakov.vscode-neovim",
+    "haphazarddev.oil-code",
+    "keifererikson.nightfox",
+    "sumneko.lua",
+    "biomejs.biome"
+  ]
+}
