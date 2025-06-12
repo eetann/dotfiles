@@ -26,7 +26,7 @@ customCommands:
     context: commitFiles
     description: Open the previous version of the file in Neovim
     command: "git show {{.SelectedLocalCommit.Sha}}^1:{{.SelectedCommitFile.Name}} > /tmp/$(basename {{.SelectedCommitFile.Name}}) && nvim /tmp/$(basename {{.SelectedCommitFile.Name}}) && rm /tmp/$(basename {{.SelectedCommitFile.Name}})"
-    subprocess: true
+    output: terminal
   - key: '<C-r>'
     context: 'files'
     command: 'git rm --cached {{.SelectedFile.Name}}'
