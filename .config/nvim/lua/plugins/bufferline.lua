@@ -4,8 +4,10 @@ return {
 	event = "VeryLazy",
 	dependencies = "nvim-tree/nvim-web-devicons",
 	config = function()
-		require("bufferline").setup({
+		local bufferline = require("bufferline")
+		bufferline.setup({
 			options = {
+				style_preset = bufferline.style_preset.no_italic,
 				close_command = "bdelete %d",
 				right_mouse_command = nil,
 				max_name_length = 40,
