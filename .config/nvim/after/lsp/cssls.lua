@@ -1,6 +1,4 @@
--- local util = require("lspconfig.util")
-
----@type lspconfig.Config|{}
+---@type vim.lsp.Config
 return {
 	init_options = {
 		provideFormatter = false,

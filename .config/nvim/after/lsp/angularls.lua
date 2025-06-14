@@ -19,7 +19,7 @@ local cmd = {
 	"--includeAutomaticOptionalChainCompletions",
 }
 
----@type lspconfig.Config
+---@type vim.lsp.Config
 return {
 	-- 古すぎてangularのLSPのバージョンと合わない？のもあるっぽいので環境変数で抑制
 	root_dir = function(fname)
@@ -31,7 +31,4 @@ return {
 		return util.root_pattern("angular.json")(fname)
 	end,
 	cmd = cmd,
-	on_new_config = function(new_config)
-		new_config.cmd = cmd
-	end,
 }

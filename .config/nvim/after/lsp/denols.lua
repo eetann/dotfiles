@@ -1,11 +1,10 @@
-local util = require("lspconfig.util")
 vim.g.markdown_fenced_languages = {
 	"ts=typescript",
 }
----@type lspconfig.Config|{}
+---@type vim.lsp.Config
 return {
-	root_dir = util.root_pattern("deno.jsonc", "deno.json"),
-	single_file_support = false,
+	workspace_required = true,
+	root_markers = { "deno.json", "deno.jsonc" },
 	init_options = {
 		lint = true,
 		unstable = false,

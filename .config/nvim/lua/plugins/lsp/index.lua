@@ -7,8 +7,8 @@ return {
 		event = { "BufReadPost", "BufNewFile" },
 		cmd = { "LspInfo", "LspInstall", "LspUninstall" },
 		dependencies = {
-			{ "williamboman/mason.nvim" },
-			{ "williamboman/mason-lspconfig.nvim" },
+			{ "mason-org/mason.nvim" },
+			{ "mason-org/mason-lspconfig.nvim" },
 			{ "b0o/schemastore.nvim" },
 			{ "saghen/blink.cmp" },
 		},
