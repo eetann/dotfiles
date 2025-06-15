@@ -12,9 +12,9 @@ require("mason-lspconfig").setup()
 local other_lsp = {
 	-- list
 	"biome",
-	-- "eslint",
+	-- "eslint", // disable
 	"jsonls",
-	-- "laravel-language-server",
+	-- "laravel-language-server", // disable
 	"markdown-language-server",
 }
 for _, server_name in pairs(other_lsp) do
