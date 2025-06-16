@@ -128,5 +128,6 @@
     "q"
   ],
   "oil-code.hasNerdFont": true,
-  "editor.fontFamily": "HackGen Console NF, SauceCodePro Nerd Font Mono,Menlo, Monaco, 'Courier New', monospace"
+  "editor.fontFamily": "HackGen Console NF, SauceCodePro Nerd Font Mono,Menlo, Monaco, 'Courier New', monospace",
+  "terminal.integrated.defaultProfile.osx": "zsh"
 }
