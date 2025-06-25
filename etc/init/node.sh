@@ -23,7 +23,8 @@ archlinux() {
 	sudo pacman -S nodejs npm
 }
 darwin() {
-	brew install node
+	# brew install node
+  info "node"
 }
 
 log "Installing packages ..."
@@ -38,7 +39,8 @@ darwin)
 	darwin
 	;;
 esac
-pnpm setup
+# TODO: pnpmのインストールを追加
+# pnpm setup
 pnpm add -g $PKG_DEFAULT
 info "Installed packages."
 

@@ -6,10 +6,10 @@ path+=(
   $HOME/.local/bin(N-/)
   $HOME/.cargo/bin(N-/)
   $HOME/.luarocks/bin(N-/)
+  $HOME/.deno/env(N-/)
   /snap/bin(N-/)
   $BUN_INSTALL/bin(N-/)
 )
-source "$HOME/.deno/env"
 
 # Rancher Desktop > Preferences > Application > Environment > Manual を設定
 path+=($HOME/.rd/bin(N-/))

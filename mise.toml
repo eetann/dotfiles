@@ -1,2 +1,4 @@
+[tools]
+node = "latest"
 # [env]
 # COMMIT_MESSAGE_ENGLISH = 1

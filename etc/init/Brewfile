@@ -19,6 +19,8 @@ brew "jq"
 brew "yq"
 brew "mise"
 brew "luarocks"
+tap "xwmx/taps"
+brew "xwmx/taps/nb"
 if OS.mac?
     brew "go"
     brew "ncurses"
