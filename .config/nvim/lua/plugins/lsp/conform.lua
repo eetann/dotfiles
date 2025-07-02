@@ -30,6 +30,9 @@ return {
 				shfmt = {
 					prepend_args = { "-i", "2" },
 				},
+				biome = {
+					args = { "format", "--write", "--stdin-file-path", "$FILENAME" },
+				},
 			},
 		})
 	end,

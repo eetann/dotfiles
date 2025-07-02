@@ -29,6 +29,9 @@ ln -fs "${DOTPATH}/.config/rofi" "${HOME}/.config/rofi"
 ln -fs "${DOTPATH}/.config/git" "${HOME}/.config/git"
 ln -fs "${DOTPATH}/.config/wezterm" "${HOME}/.config/wezterm"
 
+mkdir -p "${HOME}/.claude"
+ln -fs "${DOTPATH}/.claude/commands" "${HOME}/.claude/commands"
+
 # .config/hoge以下にファイルが自動で作成される場合、
 # リンクはディレクトリではなくファイルのみにする
 mkdir -p "${HOME}/.config/i3"

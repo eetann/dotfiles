@@ -88,4 +88,9 @@ table.insert(config.hyperlink_rules, {
 	format = "$0",
 })
 
+wezterm.on('bell', function(window, pane)
+  window:toast_notification('Claude Code', 'Task completed', nil, 4000)
+end)
+config.audible_bell = 'SystemBeep'
+
 return config
