@@ -1,6 +1,6 @@
 ---
 description: "Review"
-allowed-tools: ["Bash(git:add,commit)"]
+allowed-tools: ["Bash(git:log)"]
 ---
 
 # Review

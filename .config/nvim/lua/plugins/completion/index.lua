@@ -10,8 +10,8 @@ return {
 		"Kaiser-Yang/blink-cmp-avante",
 		"Kaiser-Yang/blink-cmp-dictionary",
 		"giuxtaposition/blink-cmp-copilot",
-		{ import = "plugins.completion.minuet-ai" },
-		{ import = "plugins.copilot" },
+		-- { import = "plugins.completion.minuet-ai" },
+		-- { import = "plugins.copilot" },
 	},
 	-- use a release tag to download pre-built binaries
 	version = "*",
