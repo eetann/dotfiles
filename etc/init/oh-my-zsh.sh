@@ -25,8 +25,8 @@ install_omz_plug() {
 		git clone https://github.com/zsh-users/zsh-completions.git "$ZSH_CUSTOM/plugins/zsh-completions"
 	fi
 
-	if [ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]; then
-		git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
+	if [ ! -d "$ZSH_CUSTOM/plugins/fast-syntax-highlighting" ]; then
+		git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git "$ZSH_CUSTOM/plugins/fast-syntax-highlighting"
 	fi
 
 	if [ ! -d "$ZSH_CUSTOM/plugins/zsh-history-substring-search" ]; then
@@ -42,11 +42,16 @@ install_omz_plug() {
 		~/.fzf/install --key-bindings --completion --no-update-rc
 	fi
 
+  if [[ ! -d "$ZSH_CUSTOM/plugins/zeno" ]]; then
+    git clone https://github.com/yuki-yano/zeno.zsh.git "$ZSH_CUSTOM/plugins/zeno"
+  fi
+
 	if [ ! -d "$ZSH_CUSTOM/themes/powerlevel10k" ]; then
 		git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM/themes/powerlevel10k"
 	fi
 }
 
 install_omz_plug
+fast-theme clean
 
 echo ""

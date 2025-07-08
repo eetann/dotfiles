@@ -5,7 +5,7 @@ plugins=(
   colored-man-pages
   zsh-autosuggestions
   zsh-completions
-  zsh-syntax-highlighting
+  fast-syntax-highlighting
   zsh-history-substring-search
   fzf
 )
@@ -13,6 +13,7 @@ plugins=(
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
 source $HOME/rupaz/z.sh
 source $ZSH/oh-my-zsh.sh
+source $ZSH/custom/plugins/zeno/zeno.zsh
 
 export BAT_THEME="gruvbox-dark"
 
@@ -23,17 +24,6 @@ export FZF_DEFAULT_OPTS=$(cat <<"EOF"
 --exit-0
 --reverse
 --bind ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up
-EOF
-)
-
-# NOTE: 現時点では改行が正確ではない
-export FZF_CTRL_R_OPTS=$(cat <<"EOF"
---preview '
-  echo {} \
-  | awk "{ sub(/\s*[0-9]*?\s*/, \"\"); gsub(/\\\\n/, \"\\n\"); print }" \
-  | bat --color=always --language=sh --style=plain --theme=gruvbox-dark
-' 
---preview-window 'down,40%,wrap'
 EOF
 )
 
@@ -75,3 +65,27 @@ export FZF_COMPLETION_TRIGGER='**'
 export FZF_TMUX=1
 export FZF_TMUX_OPTS="-p 80%"
 export FZF_BASE=$HOME/.fzf
+
+export ZENO_HOME=~/.config/zeno
+export ZENO_GIT_CAT="bat --color=always"
+
+if [[ -n $ZENO_LOADED ]]; then
+  bindkey " " zeno-auto-snippet
+
+  # fallback if snippet not matched (default: self-insert)
+  # export ZENO_AUTO_SNIPPET_FALLBACK=self-insert
+
+  # if you use zsh's incremental search
+  # bindkey -M isearch ' ' self-insert
+
+  # bindkey '^r' zeno-history-selection
+  bindkey '^m' zeno-auto-snippet-and-accept-line
+
+  bindkey '^i' zeno-completion
+
+  bindkey '^x ' zeno-insert-space
+  bindkey '^x^m' accept-line
+  bindkey '^x^z' zeno-toggle-auto-snippet
+
+  bindkey '^x^s' zeno-insert-snippet
+fi

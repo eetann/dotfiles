@@ -32,7 +32,7 @@ function no_magic-abbrev-expand() {
   LBUFFER+=' '
 }
 
-zle -N magic_abbrev_expand
-zle -N no_magic_abbrev_expand
-bindkey " " magic_abbrev_expand
-bindkey "^x " no_magic_abbrev_expand
+# zle -N magic_abbrev_expand
+# zle -N no_magic_abbrev_expand
+# bindkey " " magic_abbrev_expand
+# bindkey "^x " no_magic_abbrev_expand

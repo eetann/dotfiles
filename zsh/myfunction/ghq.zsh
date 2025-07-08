@@ -9,10 +9,10 @@ function fghq() {
   ( (type bat > /dev/null) &&
     bat --color=always \
       --theme=gruvbox-dark \
+      --style=numbers \
       --line-range :200 $(ghq root)/{}/README.* \
     || (cat {} | head -200) ) 2> /dev/null
-' \
---preview-window 'down,60%,wrap,+3/2,~3'
+'
 EOF
 )
 

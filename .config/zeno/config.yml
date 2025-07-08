@@ -1,0 +1,103 @@
+snippets:
+  # 長いコマンドの展開
+  - name: "blog new articledocker"
+    keyword: "BLOG"
+    snippet: "node bin/new.mjs --slug"
+  - name: "docker compose"
+    keyword: "DC"
+    snippet: "docker-compose"
+  - name: "explorer"
+    keyword: "E"
+    snippet: "/mnt/c/windows/explorer.exe ."
+  - name: "php artisan"
+    keyword: "PA"
+    snippet: "php artisan"
+  - name: "tmux popup neovim"
+    keyword: "TN"
+    snippet: 
+      tmux popup -E -w 95% -h 95%
+        -d '#{pane_current_path}'
+        'nvim -c "{{command_here)}}"'
+  - name: "tree"
+    keyword: "TREE"
+    snippet: "tree -a -I '.git|node_modules|dist|vendor|platforms' --charset unicode"
+  # パイプ以降の展開
+  - name: "cd there"
+    keyword: "CD"
+    snippet: "&& cd $_"
+    context:
+      lbuffer: '.+\s'
+  - name: "copy"
+    keyword: "CC"
+    snippet: "| pbcopy"
+    context:
+      lbuffer: '.+\s'
+  - name: "grep"
+    keyword: "G"
+    snippet: "| grep"
+    context:
+      lbuffer: '.+\s'
+  - name: "null"
+    keyword: "NULL"
+    snippet: ">/dev/null 2>&1"
+    context:
+      lbuffer: '.+\s'
+
+completions:
+  # simple sourceCommand, no callback
+  - name: kill signal
+    patterns:
+      - "^kill -s $"
+    sourceCommand: "kill -l | tr ' ' '\\n'"
+    options:
+      --prompt: "'Kill Signal> '"
+      --tmux: "80%"
+      --no-select-1: true
+
+  # use excludePatterns and callback
+  - name: kill pid
+    patterns:
+      - "^kill( .*)? $"
+    excludePatterns:
+      # -l, -n or -s is followed by SIGNAL instead of PID
+      - " -[lns] $"
+    sourceCommand: "LANG=C ps -ef | sed 1d"
+    options:
+      --multi: true
+      --prompt: "'Kill Process> '"
+      --tmux: "80%"
+      --no-select-1: true
+    callback: "awk '{print $2}'"
+
+  # Docker
+  - name: docker stop
+    patterns:
+      - "^docker stop $"
+    sourceCommand: "docker ps | sed 1d"
+    options:
+      --tmux: "80%"
+      --prompt: "'Docker Stop> '"
+      --no-select-1: true
+    callback: "awk '{print $1}'"
+
+  - name: docker rm(コンテナ)
+    patterns:
+      - "^docker rm $"
+    sourceCommand: "docker ps -a | sed 1d"
+    options:
+      --tmux: "80%"
+      --multi: true
+      --prompt: "'Docker Remove Container> '"
+      --no-select-1: true
+    callback: "awk '{print $1}'"
+
+  - name: docker rmi(イメージ)
+    patterns:
+      - "^docker rmi $"
+    sourceCommand: "docker images | sed 1d"
+    options:
+      --tmux: "80%"
+      --multi: true
+      --prompt: "'Docker Remove Image> '"
+      --no-select-1: true
+    callback: "awk '{print $3}'"

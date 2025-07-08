@@ -28,6 +28,7 @@ ln -fs "${DOTPATH}/.config/alacritty" "${HOME}/.config/alacritty"
 ln -fs "${DOTPATH}/.config/rofi" "${HOME}/.config/rofi"
 ln -fs "${DOTPATH}/.config/git" "${HOME}/.config/git"
 ln -fs "${DOTPATH}/.config/wezterm" "${HOME}/.config/wezterm"
+ln -fs "${DOTPATH}/.config/zeno" "${HOME}/.config/zeno"
 
 mkdir -p "${HOME}/.claude"
 ln -fs "${DOTPATH}/.claude/commands" "${HOME}/.claude/commands"
