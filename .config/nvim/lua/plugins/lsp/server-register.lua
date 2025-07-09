@@ -1,4 +1,5 @@
 -- angular-language-server
+-- python-lsp-server # pylsp
 -- cssls
 -- nil
 -- phpactor
