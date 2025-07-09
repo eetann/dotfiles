@@ -108,3 +108,22 @@ completions:
       --prompt: "'Docker Remove Image> '"
       --no-select-1: true
     callback: "awk '{print $3}'"
+
+  # zsh/myfunction/mise.zsh から呼び出す
+  - name: mise run
+    patterns:
+      - "^mise run $"
+    sourceCommand: "mise tasks --no-header"
+    options:
+      --no-select-1: true
+    callback: "awk '{print $1}'"
+
+  # zsh/myfunction/npm_scripts.zsh から呼び出す
+  - name: npm scripts
+    patterns:
+      - "^(npm|pnpm|bun) run $"
+    sourceCommand:
+      jq -r '.scripts | to_entries | .[] | .key + " = " + .value' package.json
+    options:
+      --no-select-1: true
+    callback: "awk '{print $1}'"

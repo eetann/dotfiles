@@ -76,7 +76,7 @@ function monorepo_cd() {
     else
       display_name="$base_name"
     fi
-    
+
     display_list+=("$display_name | $d")
   done
 
