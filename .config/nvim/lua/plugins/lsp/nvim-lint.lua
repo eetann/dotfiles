@@ -16,11 +16,14 @@ return {
 			pattern = { "*.mdx" },
 			callback = function()
 				vim.defer_fn(require("lint").try_lint, 1)
-				if vim.fn.getcwd() == vim.fn.expand("~/ghq/github.com/eetann/cyber-blog") then
-					vim.defer_fn(function()
+				vim.defer_fn(function()
+					if
+						vim.fn.getcwd() == vim.fn.expand("~/ghq/github.com/eetann/cyber-blog")
+						and vim.fn.expand("%:h"):match("src/content/post")
+					then
 						require("lint").try_lint("textlint")
-					end, 1)
-				end
+					end
+				end, 1)
 			end,
 		})
 	end,
