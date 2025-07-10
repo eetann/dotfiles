@@ -33,6 +33,7 @@ if target:find("darwin") then
 		{ key = "h", mods = "OPT", action = { SendKey = { key = "h", mods = "ALT" } } },
 		{ key = "l", mods = "OPT", action = { SendKey = { key = "l", mods = "ALT" } } },
 		{ key = "n", mods = "OPT", action = { SendKey = { key = "n", mods = "ALT" } } },
+		{ key = "o", mods = "OPT", action = { SendKey = { key = "o", mods = "ALT" } } },
 		{ key = "p", mods = "OPT", action = { SendKey = { key = "p", mods = "ALT" } } },
 		{ key = "q", mods = "OPT", action = { SendKey = { key = "q", mods = "ALT" } } },
 		{ key = "¥", action = wezterm.action.SendKey({ key = "\\" }) },
@@ -88,9 +89,9 @@ table.insert(config.hyperlink_rules, {
 	format = "$0",
 })
 
-wezterm.on('bell', function(window, pane)
-  window:toast_notification('Claude Code', 'Task completed', nil, 4000)
+wezterm.on("bell", function(window, pane)
+	window:toast_notification("Claude Code", "Task completed", nil, 4000)
 end)
-config.audible_bell = 'SystemBeep'
+config.audible_bell = "SystemBeep"
 
 return config
