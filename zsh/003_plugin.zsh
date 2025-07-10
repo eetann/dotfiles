@@ -9,6 +9,12 @@ plugins=(
   zsh-history-substring-search
   fzf
 )
+if command -v docker &>/dev/null; then
+  plugins+=(
+    docker
+    docker-compose
+  )
+fi
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
 source $HOME/rupaz/z.sh
