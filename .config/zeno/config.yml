@@ -4,6 +4,10 @@ snippets:
     keyword: "BLOG"
     snippet: "node bin/new.mjs --slug"
 
+  - name: "claude code"
+    keyword: "cc"
+    snippet: "claude"
+
   - name: "docker compose"
     keyword: "DC"
     snippet: "docker-compose"
