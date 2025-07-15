@@ -49,6 +49,14 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
 	group = group_name,
+	pattern = { "vhs" },
+	callback = function()
+		vim.bo.commentstring = "# %s"
+	end,
+})
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	group = group_name,
 	pattern = { "css", "help" },
 	callback = function()
 		vim.cmd([[
