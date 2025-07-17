@@ -1,3 +1,4 @@
+alias rm='gomi'
 alias la='ls -F --color -al'
 alias ls='ls -F --color'
 alias reload="source ~/.zshrc"

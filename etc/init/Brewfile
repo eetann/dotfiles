@@ -19,6 +19,7 @@ brew "jq"
 brew "yq"
 brew "mise"
 brew "luarocks"
+brew "gomi"
 tap "xwmx/taps"
 brew "xwmx/taps/nb"
 if OS.mac?
