@@ -11,6 +11,12 @@ path+=(
   $BUN_INSTALL/bin(N-/)
 )
 
+if type nvim > /dev/null; then
+  export EDITOR=nvim
+else
+  export EDITOR=vim
+fi
+
 # Rancher Desktop > Preferences > Application > Environment > Manual を設定
 path+=($HOME/.rd/bin(N-/))
 
@@ -49,12 +55,6 @@ fi
 
 # 重複排除とパスの順序維持
 typeset -U path PATH
-
-if type nvim > /dev/null; then
-  export EDITOR=nvim
-else
-  export EDITOR=vim
-fi
 
 if type direnv > /dev/null; then
   eval "$(direnv hook zsh)"
