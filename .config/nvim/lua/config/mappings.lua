@@ -134,7 +134,28 @@ vim.keymap.set(
 	"<Cmd>let @+ = histget('search',-1)<CR>:echo 'Clipboard << ' . @+<CR>",
 	{ desc = "直前の検索をヤンク" }
 )
-vim.keymap.set("n", "/", [[/\v]], { desc = "検索でエスケープ減らすために very magic" })
+-- 検索モードで<C-v>を押すとvery magicをトグル
+vim.keymap.set("c", "<C-v>", function()
+	local cmdtype = vim.fn.getcmdtype()
+	if cmdtype == "/" or cmdtype == "?" then
+		local cmdline = vim.fn.getcmdline()
+		local pos = vim.fn.getcmdpos()
+
+		-- \vの有無をチェックしてトグル
+		if cmdline:sub(1, 2) == "\\v" then
+			-- \vを削除
+			vim.fn.setcmdline(cmdline:sub(3))
+			vim.fn.setcmdpos(pos - 2)
+		else
+			-- \vを追加
+			vim.fn.setcmdline("\\v" .. cmdline)
+			vim.fn.setcmdpos(pos + 2)
+		end
+		return ""
+	end
+	-- 検索モード以外では通常の<C-v>の動作
+	return "<C-v>"
+end, { expr = true, desc = "検索モードでvery magicをトグル" })
 
 -- 履歴をバッファとして開くやつ
 vim.keymap.set("n", "s:", "q:")
