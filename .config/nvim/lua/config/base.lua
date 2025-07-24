@@ -115,3 +115,7 @@ vim.opt.winminwidth = 30
 vim.opt.equalalways = false
 
 vim.cmd("cabbrev H belowright vertical help")
+
+if vim.env.EDITPROMPT then
+	vim.opt.wrap = true
+end
