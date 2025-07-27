@@ -36,10 +36,9 @@ fi
 # 重複排除とパスの順序維持
 typeset -U path PATH
 
-# tmuxが起動していない&vimの中でなければ、tmux起動
-if [[ -z "$TMUX" && -z "$VIM" && $- == *l* ]] ; then
-  tmux attach -t default || tmux new -s default
-  # exit
+# tmux未起動、vim・VSCodeの中じゃない、ログインシェルなら
+if [[ -z "$TMUX" && -z "$VIM" && "$TERM_PROGRAM" != "vscode" && $- == *l* ]] ; then
+  tmux attach-session -t default || tmux new-session -s default
 fi
 
 if type direnv > /dev/null; then
