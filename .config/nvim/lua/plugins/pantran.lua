@@ -23,5 +23,9 @@ return {
 				},
 			},
 		},
+		ui = {
+			width_percentage = 0.95,
+			height_percentage = 0.4,
+		},
 	},
 }
