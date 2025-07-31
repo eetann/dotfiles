@@ -10,6 +10,7 @@ return {
 			"blog.open-preview",
 			"blog._update-mdx",
 			"blog.convert-image",
+			"blog.vhs-record",
 			"cpp.gpp-build-run",
 			"cpp.gpp-build-only",
 			"cpp.gpp-debug-build",
