@@ -1,5 +1,5 @@
 ---
-description: "Review"
+description: "作業ログ"
 allowed-tools: ["Bash(git:log)"]
 ---
 
