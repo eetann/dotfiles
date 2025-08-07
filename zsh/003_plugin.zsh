@@ -37,11 +37,15 @@ local find_ignore="find ./ -type d \( -name '.git' -o -name 'node_modules' \) -p
 
 export FZF_CTRL_T_COMMAND=$(cat <<"EOF"
 ( (type fd > /dev/null) &&
+  (
   fd --type f \
     --strip-cwd-prefix \
     --hidden \
-    --exclude '{.git,node_modules,vendor,public/vendor}/**' ) \
-  || $find_ignore f -print 2> /dev/null
+    --exclude '{.git,node_modules,vendor,public/vendor}/**'
+
+  fd --type f . .claude/ --hidden --no-ignore
+  )
+) || $find_ignore f -print 2> /dev/null
 EOF
 )
 export FZF_CTRL_T_OPTS=$(cat << "EOF"
