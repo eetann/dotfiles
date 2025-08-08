@@ -13,24 +13,35 @@ local function project_files(use_git_root)
 	local text = get_text()
 
 	local root = require("snacks.git").get_root()
-	if root == nil then
-		picker.files({ pattern = text, layout = my_vertical })
-		return
+	local main_source = { source = "files", pattern = text }
+	if root ~= nil then
+		if use_git_root then
+			main_source = {
+				source = "git_files",
+				untracked = true,
+				pattern = text,
+			}
+		else
+			main_source = {
+				source = "git_files",
+				untracked = true,
+				pattern = text,
+				cwd = vim.uv.cwd(),
+			}
+		end
 	end
-	if use_git_root then
-		picker.git_files({
-			untracked = true,
-			pattern = text,
-			layout = my_vertical,
-		})
-	else
-		picker.git_files({
-			untracked = true,
-			pattern = text,
-			cwd = vim.uv.cwd(),
-			layout = my_vertical,
-		})
-	end
+	picker.pick({
+		multi = {
+			main_source,
+			-- ignoreしてても.claudeは表示
+			{
+				source = "files",
+				dirs = { ".claude" },
+			},
+		},
+		format = "file",
+		layout = my_vertical,
+	})
 end
 
 local M = {}
