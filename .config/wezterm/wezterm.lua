@@ -79,6 +79,12 @@ config.font = wezterm.font_with_fallback({
 	{ family = "HackGen Console NF" },
 	{ family = "SauceCodePro Nerd Font Mono" },
 })
+config.font_rules = {
+	{
+		italic = true,
+		font = wezterm.font_with_fallback({ "PlemolJP Console NF" }),
+	},
+}
 config.use_ime = true
 config.color_scheme = "Gruvbox Dark (Gogh)"
 config.hide_tab_bar_if_only_one_tab = true
