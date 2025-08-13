@@ -31,9 +31,18 @@ snippets:
     keyword: "TREE"
     snippet: "tree -a -I '.git|node_modules|dist|vendor|platforms' --charset unicode"
 
-  - name: "vhs for blog"
-    keyword: "VHS"
-    snippet: "vhs {{tape_path}} && mv ./*.mp4 $VITE_EXTERNAL_FOLDER"
+  # ディレクトリ名の短縮入力
+  - name: "cd media for blog"
+    keyword: "MEDIA"
+    snippet: "$VITE_EXTERNAL_FOLDER"
+    context:
+      lbuffer: '.+\s'
+
+  - name: "input 'download'"
+    keyword: "DL"
+    snippet: "~/Downloads/"
+    context:
+      lbuffer: '.+\s'
 
   # パイプ以降の展開
   - name: "cd there"
