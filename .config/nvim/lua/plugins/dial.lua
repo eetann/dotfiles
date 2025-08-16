@@ -65,6 +65,16 @@ return {
 			function()
 				require("dial.map").manipulate("increment", "normal", "checkbox")
 			end,
+			mode = { "n", "i" },
+			ft = { "markdown", "mdx" },
+			desc = "チェックボックスのトグル",
+		},
+		{
+			"<C-q>",
+			function()
+				require("dial.map").manipulate("increment", "visual", "checkbox")
+			end,
+			mode = "v",
 			ft = { "markdown", "mdx" },
 			desc = "チェックボックスのトグル",
 		},
