@@ -19,13 +19,11 @@ local function project_files(use_git_root)
 			main_source = {
 				source = "git_files",
 				untracked = true,
-				pattern = text,
 			}
 		else
 			main_source = {
 				source = "git_files",
 				untracked = true,
-				pattern = text,
 				cwd = vim.uv.cwd(),
 			}
 		end
@@ -41,6 +39,7 @@ local function project_files(use_git_root)
 		},
 		format = "file",
 		layout = my_vertical,
+		pattern = text,
 	})
 end
 
