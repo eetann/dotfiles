@@ -119,12 +119,12 @@ return {
 							return { from = list_end + 1, to = list_end } --[[@as textrange]]
 						end
 
-						-- リストアイテムじゃない場合（行の先頭を返す）
+						-- リストアイテムじゃない場合（行全体を選択）
 						local first_non_space = line:match("^%s*()")
 						if first_non_space then
-							return { from = first_non_space, to = first_non_space - 1 } --[[@as textrange]]
+							return { from = first_non_space, to = #line } --[[@as textrange]]
 						end
-						return { from = 1, to = 0 } --[[@as textrange]]
+						return { from = 1, to = #line } --[[@as textrange]]
 					end,
 					---@type fun(self: Augend, text: string, addend: integer, cursor?: integer): addresult
 					add = function(text, addend, cursor)
@@ -148,12 +148,9 @@ return {
 							end
 						else
 							-- リストアイテムじゃない場合
-							-- 行頭のインデントを取得
-							local indent = line:match("^(%s*)")
-							-- 元のテキストを取得（インデント以降）
-							local content = line:sub(#indent + 1)
+							-- textは選択範囲の文字列がそのまま入ってる
 							-- チェックボックス付きリストに変換
-							return { text = "- [ ] " .. content, cursor = 6 + #content } --[[@as addresult]]
+							return { text = "- [ ] " .. text, cursor = 6 + #text } --[[@as addresult]]
 						end
 						return {}
 					end,
