@@ -97,5 +97,5 @@ if [[ -n $ZENO_LOADED ]]; then
   bindkey '^x^m' accept-line
   bindkey '^x^z' zeno-toggle-auto-snippet
 
-  bindkey '^x^s' zeno-insert-snippet
+  bindkey '^x^p' zeno-insert-snippet
 fi
