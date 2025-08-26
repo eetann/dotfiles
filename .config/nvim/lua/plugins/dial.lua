@@ -109,7 +109,7 @@ return {
 						-- リストアイテムの場合
 						if list_start ~= nil and list_end ~= nil then
 							-- チェックボックスがある場合
-							local checkbox_start = line:find("%[", list_end)
+							local checkbox_start = line:find("%[[%sx-]", list_end)
 							if checkbox_start and checkbox_start == list_end + 1 then
 								-- チェックボックスの後のスペースも含める
 								local checkbox_end = checkbox_start + 2
