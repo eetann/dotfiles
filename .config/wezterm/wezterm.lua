@@ -45,8 +45,8 @@ if target:find("darwin") then
 	config.send_composed_key_when_left_alt_is_pressed = true
 	-- フルスクリーン
 	wezterm.on("gui-startup", function(cmd)
-		local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
-		window:gui_window():toggle_fullscreen()
+		local _, _, window = wezterm.mux.spawn_window(cmd or {})
+		window:gui_window():maximize()
 	end)
 	config.window_background_opacity = 0.85
 	config.macos_window_background_blur = 20
@@ -77,13 +77,19 @@ end
 
 -- /mnt/c/Program\ Files/WezTerm/wezterm.exe ls-fonts
 config.font = wezterm.font_with_fallback({
-	{ family = "HackGen Console NF" },
+	{ family = "HackGen Console NF", italic = false },
 	{ family = "SauceCodePro Nerd Font Mono" },
 })
+-- italicだとフォントサイズが小さい時に「が」や「証」などがかなり小さくなってしまうため
+-- 別フォントの非italicのLightに変更
+local italic_font = "PlemolJP Console NF"
 config.font_rules = {
 	{
 		italic = true,
-		font = wezterm.font_with_fallback({ "PlemolJP Console NF" }),
+		font = wezterm.font(italic_font, {
+			weight = "Light",
+			style = "Normal",
+		}),
 	},
 }
 config.use_ime = true
