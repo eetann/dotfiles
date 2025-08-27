@@ -85,6 +85,23 @@ config.font = wezterm.font_with_fallback({
 local italic_font = "PlemolJP Console NF"
 config.font_rules = {
 	{
+		intensity = "Normal",
+		italic = true,
+		font = wezterm.font(italic_font, {
+			weight = "DemiLight",
+			style = "Normal",
+		}),
+	},
+	{
+		intensity = "Bold",
+		italic = true,
+		font = wezterm.font(italic_font, {
+			weight = "Bold",
+			style = "Normal",
+		}),
+	},
+	{
+		intensity = "Half",
 		italic = true,
 		font = wezterm.font(italic_font, {
 			weight = "Light",
