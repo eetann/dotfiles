@@ -1,7 +1,13 @@
 ---
 description: "PRの説明文作成"
-allowed-tools: ["Bash(git:diff)","Bash(git:log)","Bash(mkdir:*)"]
+allowed-tools: Bash(git:diff), Bash(git:log), Bash(mkdir -p ./.claude/tmp), Bash(rm -f ./.claude/tmp/pr.md)
 ---
+
+まず自動で古いPR説明文を削除します：
+!`mkdir -p ./.claude/tmp`
+!`rm -f ./.claude/tmp/pr.md`
+
+次にPR説明文を作成します：
 
 ```markdown
 ## 概要
