@@ -34,9 +34,10 @@ local function project_files(use_git_root)
 			-- ignoreしてても.claudeは表示
 			{
 				source = "files",
-				dirs = { ".claude" },
+				args = { ".", ".claude" },
 			},
 		},
+		transform = "unique_file",
 		format = "file",
 		layout = my_vertical,
 		pattern = text,
