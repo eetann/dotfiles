@@ -6,7 +6,7 @@ return {
 	-- lazy loadingの推奨設定がある
 	-- https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md#lazy-loading-with-lazynvim
 	event = { "BufWritePre" },
-	cmd = { "ConformInfo" },
+	cmd = { "ConformInfo", "Format", "FormatPrettierd" },
 	config = function()
 		local js_formatters = { "biome", "prettier", stop_after_first = true }
 		require("conform").setup({
