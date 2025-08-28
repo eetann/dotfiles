@@ -119,3 +119,7 @@ vim.cmd("cabbrev H belowright vertical help")
 if vim.env.EDITPROMPT then
 	vim.opt.wrap = true
 end
+
+vim.api.nvim_create_user_command("EditAsSJIS", function()
+	vim.cmd("edit ++encoding=sjis")
+end, {})
