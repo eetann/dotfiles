@@ -1,13 +1,9 @@
 ---
 description: "PRの説明文作成"
-allowed-tools: Bash(git:diff), Bash(git:log), Bash(mkdir -p ./.claude/tmp), Bash(rm -f ./.claude/tmp/pr.md)
+allowed-tools: Bash(git diff:*), Bash(git log:*), Bash(mkdir:*), Bash(truncate:*), Bash(based-branch), List
 ---
 
-まず自動で古いPR説明文を削除します：
-!`mkdir -p ./.claude/tmp`
-!`rm -f ./.claude/tmp/pr.md`
-
-次にPR説明文を作成します：
+PR説明文を作成します：
 
 ```markdown
 ## 概要
@@ -39,3 +35,13 @@ allowed-tools: Bash(git:diff), Bash(git:log), Bash(mkdir -p ./.claude/tmp), Bash
 上記のテンプレを参考にPull Requestの説明文を `.claude/tmp/pr.md` に出力してください。
 
 引数として`.claude/specs/xxx/yyy.md`のような`.claude/specs/xxx/`のファイルが渡されたら、diffを見る前に`.claude/specs/xxx/`内にあるMarkdownファイルを読み込んでください。タスクの目的などが書いてあり、事前に読めば理解しやすくなります。
+
+
+派生元ブランチ: !`based-branch`
+
+---
+
+## 以前のPR文を空にしておく自動コマンド
+
+!`mkdir -p ./.claude/tmp`
+!`truncate -s 0 ./.claude/tmp/pr.md`
