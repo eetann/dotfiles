@@ -19,6 +19,13 @@ case ${OSTYPE} in
     ;;
 esac
 alias idea='nb e idea.md'
+based-branch() {
+  git show-branch \
+    | grep '*' \
+    | grep -v "$(git rev-parse --abbrev-ref HEAD)" \
+    | head -1 \
+    | awk -F'[]~^[]' '{print $2}'
+}
 
 # nocorrect
 alias ionic='nocorrect ionic'
