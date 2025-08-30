@@ -31,9 +31,9 @@ snippets:
     keyword: "TREE"
     snippet: "tree -a -I '.git|node_modules|dist|vendor|platforms' --charset unicode"
 
-  - name: git switch
-    keyword: gs
-    snippet: git switch
+  - name: "git switch"
+    keyword: "gs"
+    snippet: "git switch"
 
   # ディレクトリ名の短縮入力
   - name: "cd media for blog"
