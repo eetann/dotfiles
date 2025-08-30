@@ -79,14 +79,19 @@ export FZF_BASE=$HOME/.fzf
 export ZENO_HOME=~/.config/zeno
 export ZENO_GIT_CAT="bat --color=always"
 
+# tmuxやwezterm(tmuxなし)の最初のプロンプトでzeno-auto-snippet発動時に
+# カーソルより左(p10kのプロンプトも含む)が消えるので、その応急処置
+# ※zenoのアップデートのタイミングではないのでzenoが原因ではなさそう
+my_zeno_fallback() {
+  zle self-insert
+  zle reset-prompt
+}
+zle -N my_zeno_fallback
+
 if [[ -n $ZENO_LOADED ]]; then
   bindkey " " zeno-auto-snippet
 
-  # fallback if snippet not matched (default: self-insert)
-  # export ZENO_AUTO_SNIPPET_FALLBACK=self-insert
-
-  # if you use zsh's incremental search
-  # bindkey -M isearch ' ' self-insert
+  export ZENO_AUTO_SNIPPET_FALLBACK=my_zeno_fallback
 
   # bindkey '^r' zeno-history-selection
   bindkey '^m' zeno-auto-snippet-and-accept-line
