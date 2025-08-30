@@ -2,7 +2,9 @@ function mise_tasks() {
   BUFFER="mise run "
   zle end-of-line
   zle zeno-completion
-  zle accept-line
+  if [[ "$BUFFER" != "mise run " ]]; then
+    zle accept-line
+  fi
 }
 
 zle -N mise_tasks
