@@ -38,6 +38,7 @@ if target:find("darwin") then
 		{ key = "q", mods = "OPT", action = { SendKey = { key = "q", mods = "ALT" } } },
 		{ key = "s", mods = "OPT", action = { SendKey = { key = "s", mods = "ALT" } } },
 		{ key = "t", mods = "OPT", action = { SendKey = { key = "t", mods = "ALT" } } },
+		{ key = "z", mods = "OPT", action = { SendKey = { key = "z", mods = "ALT" } } },
 		{ key = "¥", action = wezterm.action.SendKey({ key = "\\" }) },
 	}
 	append_array(key_table, mac_key_table)
