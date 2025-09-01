@@ -3,8 +3,6 @@ description: "PRの説明文作成"
 allowed-tools: Bash(git diff:*), Bash(git log:*), Bash(mkdir:*), Bash(rm -f ./.claude/tmp/pr.md), List
 ---
 
-派生元ブランチ: "$1"（未指定なら`development`ブランチ）
-
 PR説明文を作成します：
 
 ```markdown
@@ -35,6 +33,8 @@ PR説明文を作成します：
 ```
 
 上記のテンプレを参考に派生元ブランチとのdiffやコミット履歴を見て、Pull Requestの説明文を `.claude/tmp/pr.md` に出力してください。
+
+派生元ブランチ: `$1`（**空白なら`development`ブランチ**。masterやmainはありえない）
 
 引数として`.claude/specs/xxx/yyy.md`のような`.claude/specs/xxx/`のファイルが渡されたら、diffを見る前に`.claude/specs/xxx/`内にあるMarkdownファイルを読み込んでください。タスクの目的などが書いてあり、事前に読めば理解しやすくなります。
 
