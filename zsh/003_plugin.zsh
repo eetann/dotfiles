@@ -82,13 +82,15 @@ export ZENO_GIT_CAT="bat --color=always"
 # tmuxやwezterm(tmuxなし)の最初のプロンプトでzeno-auto-snippet発動時に
 # カーソルより左(p10kのプロンプトも含む)が消えるので、その応急処置
 # ※zenoのアップデートのタイミングではないのでzenoが原因ではなさそう
-my_zeno_fallback() {
+function my_zeno_fallback() {
   zle self-insert
   zle reset-prompt
 }
 zle -N my_zeno_fallback
 
+
 if [[ -n $ZENO_LOADED ]]; then
+  ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(zeno-auto-snippet-and-accept-line)
   bindkey " " zeno-auto-snippet
 
   export ZENO_AUTO_SNIPPET_FALLBACK=my_zeno_fallback
