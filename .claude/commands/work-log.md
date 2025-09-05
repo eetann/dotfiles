@@ -1,6 +1,6 @@
 ---
-description: "Review"
-allowed-tools: ["Bash(mkdir:*)"]
+description: "作業内容を記録として残す"
+allowed-tools: Bash(mkdir:*), Bash(date "+%F")
 ---
 # 作業ログコマンド
 
@@ -12,10 +12,10 @@ allowed-tools: ["Bash(mkdir:*)"]
 
 ## ファイル命名規則
 ```
-.claude/work-logs/YYYY-MM-DD-{作業タイトル}.md
+.claude/work-logs/{下に書いた今日の日付}-{作業タイトル}.md
 ```
 
-- 日付は作業実施日（例: 2025-08-06）
+- 日付: !`date "+%F"`
 - 作業タイトルは英語のケバブケース（例: mongodb-data-import）
 - 拡張子は`.md`（Markdown形式）
 
@@ -58,7 +58,7 @@ allowed-tools: ["Bash(mkdir:*)"]
 ## テンプレート
 
 ```markdown
-# YYYY-MM-dd [日本語作業タイトル]
+# [今日の日付] [日本語作業タイトル]
 
 ## 概要
 [1-2文で作業内容を説明]
