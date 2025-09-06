@@ -1,5 +1,5 @@
 return {
-	"echasnovski/mini.ai",
+	"nvim-mini/mini.ai",
 	dependencies = { "nvim-treesitter/nvim-treesitter" },
 	event = { "VeryLazy" },
 	opts = function()

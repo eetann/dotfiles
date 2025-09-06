@@ -1,5 +1,5 @@
 return {
-	"echasnovski/mini.doc",
+	"nvim-mini/mini.doc",
 	-- 開発プラグイン側でclone・setupしているが
 	-- ヘルプを見たいのでプラグインマネージャー側でも追加
 	cmd = "MiniDocHelp",

@@ -1,5 +1,5 @@
 return {
-	"echasnovski/mini.align",
+	"nvim-mini/mini.align",
 	version = "*",
 	keys = {
 		{ "ga", mode = { "n", "x" }, desc = "align with preview" },

@@ -1,7 +1,7 @@
 ---@module "lazy"
 ---@type LazyPluginSpec
 return {
-	"echasnovski/mini.surround",
+	"nvim-mini/mini.surround",
 	version = "*",
 	event = { "VeryLazy" },
 	opts = function()
@@ -33,6 +33,9 @@ return {
 				["j"] = {
 					input = function()
 						local char = surround.user_input("enter for KAKKO: ")
+						if char == nil then
+							return
+						end
 						local pair = jpKakkoTable[char]
 						if pair == nil then
 							error("j" .. char .. " is unsupported :(")
@@ -41,6 +44,9 @@ return {
 					end,
 					output = function()
 						local char = surround.user_input("enter for KAKKO: ")
+						if char == nil then
+							return
+						end
 						local pair = jpKakkoTable[char]
 						if pair == nil then
 							error("j" .. char .. " is unsupported :(")
@@ -73,6 +79,7 @@ return {
 			mappings = {
 				highlight = "sH", -- Highlight surrounding
 			},
+			silent = true,
 		}
 	end,
 }
