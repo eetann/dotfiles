@@ -33,6 +33,8 @@ ln -fs "${DOTPATH}/.config/zeno" "${HOME}/.config/zeno"
 mkdir -p "${HOME}/.claude"
 ln -fs "${DOTPATH}/.claude/commands" "${HOME}/.claude/commands"
 ln -fs "${DOTPATH}/.claude/agents" "${HOME}/.claude/agents"
+mkdir -p "${HOME}/.codex"
+ln -fs "${DOTPATH}/.codex/prompts" "${HOME}/.codex/prompts"
 
 # .config/hoge以下にファイルが自動で作成される場合、
 # リンクはディレクトリではなくファイルのみにする

@@ -8,6 +8,10 @@ snippets:
     keyword: "cc"
     snippet: "claude"
 
+  - name: "codex"
+    keyword: "cx"
+    snippet: "codex"
+
   - name: "docker compose"
     keyword: "DC"
     snippet: "docker-compose"
@@ -22,10 +26,9 @@ snippets:
 
   - name: "tmux popup neovim"
     keyword: "TN"
-    snippet:
-      tmux popup -E -w 95% -h 95%
-        -d '#{pane_current_path}'
-        'nvim -c "{{command_here)}}"'
+    snippet: tmux popup -E -w 95% -h 95%
+      -d '#{pane_current_path}'
+      'nvim -c "{{command_here)}}"'
 
   - name: "tree"
     keyword: "TREE"
@@ -147,8 +150,7 @@ completions:
   - name: npm scripts
     patterns:
       - "^(npm|pnpm|bun) run $"
-    sourceCommand:
-      jq -r '.scripts | to_entries | .[] | .key + " = " + .value' package.json
+    sourceCommand: jq -r '.scripts | to_entries | .[] | .key + " = " + .value' package.json
     options:
       --no-select-1: true
     callback: "awk '{print $1}'"

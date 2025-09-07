@@ -8,3 +8,5 @@ mise.local.toml
 .phpactor.json
 
 **/.claude/settings.local.json
+.codex/work-log/
+.codex/tmp/
