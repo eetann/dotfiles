@@ -58,4 +58,18 @@ return {
 			{ i(1) }
 		)
 	),
+	s(
+		"details",
+		fmt(
+			[[
+<details>
+  <summary>{}</summary>
+
+{}
+
+</details>
+      ]],
+			{ i(1), i(0) }
+		)
+	),
 }
