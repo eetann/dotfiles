@@ -44,7 +44,8 @@ export FZF_CTRL_T_COMMAND=$(cat <<"EOF"
     --exclude '{.git,node_modules,vendor,public/vendor}/**'
 
   fd --type f . .claude/ --hidden --no-ignore 2> /dev/null
-  )
+  fd --type f . .mywork/ --hidden --no-ignore 2> /dev/null
+  ) | sort -u
 ) || $find_ignore f -print 2> /dev/null
 EOF
 )

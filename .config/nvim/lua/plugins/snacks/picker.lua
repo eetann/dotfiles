@@ -31,10 +31,14 @@ local function project_files(use_git_root)
 	picker.pick({
 		multi = {
 			main_source,
-			-- ignoreしてても.claudeは表示
+			-- ignoreしててもAI系は表示
 			{
 				source = "files",
 				args = { ".", ".claude" },
+			},
+			{
+				source = "files",
+				args = { ".", ".mywork" },
 			},
 		},
 		transform = "unique_file",

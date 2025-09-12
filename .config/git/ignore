@@ -10,3 +10,5 @@ mise.local.toml
 **/.claude/settings.local.json
 .codex/work-logs/
 .codex/tmp/
+
+.mywork/
