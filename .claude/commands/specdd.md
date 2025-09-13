@@ -1,50 +1,37 @@
 ---
-allowed-tools: Bash(mkdir:*)
+allowed-tools: Bash(mkdir:*), Read(/Users/eetann/dotfiles/etc/mydd/**)
 description: "spec-driven development"
 ---
 
-Claude Codeを用いたspec-driven developmentを行います。
+spec-driven developmentを行います。
 
 ## spec-driven development とは
 
-spec-driven development は、5つのフェーズ（後述）からなる開発手法です。
+spec-driven development は、次の4つのフェーズからなる開発手法です。
 
-- 途中のフェーズから指示がスタートした場合は、今までのフェーズのファイルを読み込んでからスタートしてください
+各フェーズの終了には成果物と必ずユーザーの承認が必要です。
 
-### 1. 事前準備フェーズ
+### 1. 要件フェーズ
 
-- ユーザーがClaude Codeに対して、実行したいタスクの概要を伝える
-- ブランチ名を確認し、「もしかしてブランチ切って無いかも？」と思ったらユーザーにその旨を伝え、ブランチ名を提案する
-- このフェーズで !`mkdir -p ./.claude/specs`  を実行します
-- `./.claude/specs` 内にタスクの概要から適切な spec 名を考えて、その名前のディレクトリを作成します
-    - たとえば、「記事コンポーネントを作成する」というタスクなら `./.claude/specs/create-article-component` という名前のディレクトリを作成します
-- 以下ファイルを作成するときはこのディレクトリの中に作成します
+このフェーズになったら ~/dotfiles/etc/mydd/requirements_creator.md の指示に従ってね
 
-### 2. 要件フェーズ
+成果物：`./.mywork/specs/YYYY-MM-DD-BRIEF-DESC/requirements.md`
 
-- Claude Codeがユーザーから伝えられたタスクの概要に基づいて、タスクが満たすべき「要件ファイル」(`requirements.md`)を作成する
-- Claude Codeがユーザーに対して「要件ファイル」を提示し、問題がないかを尋ねる
-- ユーザーが「要件ファイル」を確認し、問題があればClaude Codeに対してフィードバックする
-- ユーザーが「要件ファイル」を確認し、問題がないと答えるまで「要件ファイル」に対して修正を繰り返す
+### 2. 設計フェーズ
 
-### 3. 設計フェーズ
+このフェーズになったら ~/dotfiles/etc/mydd/design_creator.md の指示に従ってね
 
-- Claude Codeは、「要件ファイル」に記載されている要件を満たすような設計を記述した「設計ファイル」（`design.md`）を作成する
-- Claude Codeがユーザーに対して「設計ファイル」を提示し、問題がないかを尋ねる
-- ユーザーが「設計ファイル」を確認し、問題があればClaude Codeに対してフィードバックする
-- ユーザーが「設計ファイル」を確認し、問題がないと答えるまで「要件ファイル」に対して修正を繰り返す
+成果物：`./.mywork/specs/YYYY-MM-DD-BRIEF-DESC/design.md`
 
-### 4. 実装計画フェーズ
+### 3. 実装計画フェーズ
 
-- Claude Codeは、「設計ファイル」に記載されている設計を実装するための「実装計画ファイル」（`tasks.md`）を作成する
-    - 適宜チェックボックスを使う
-- Claude Codeがユーザーに対して「実装計画ファイル」を提示し、問題がないかを尋ねる
-- ユーザーが「実装計画ファイル」を確認し、問題があればClaude Codeに対してフィードバックする
-- ユーザーが「実装計画ファイル」を確認し、問題がないと答えるまで「要件ファイル」に対して修正を繰り返す
+このフェーズになったら ~/dotfiles/etc/mydd/tasks_creator.md の指示に従ってね
 
-### 5. 実装フェーズ
+成果物：`./.mywork/specs/YYYY-MM-DD-BRIEF-DESC/tasks.md`
 
-- Claude Codeは、「実装計画ファイル」に基づいて実装を開始する
-- 実装するときは「要件ファイル」「設計ファイル」に記載されている内容を守りながら実装してください
-- 実装できたら実装計画ファイルのチェックボックスにチェックを入れてください
-- 実装が終わったら、 .claude/commands/commit.md に基づいてコミットしてください
+### 4. 実装フェーズ
+
+このフェーズになったら ~/dotfiles/etc/mydd/tasks_executor.md の指示に従ってね
+
+成果物：実装ファイル
+

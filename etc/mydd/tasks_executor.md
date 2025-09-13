@@ -6,10 +6,10 @@ description: spec DDでタスクを実行する
 ## 指示
 次の順に従ってください。`YYYY-MM-DD-BRIEF-DESC`の部分は事前に指示されます。
 
-- `./.codex/specs/YYYY-MM-DD-BRIEF-DESC/requirements.md`を読み込む
-- `./.codex/specs/YYYY-MM-DD-BRIEF-DESC/design.md`を読み込む
-- `./.codex/specs/YYYY-MM-DD-BRIEF-DESC/tasks.md`を読み込む
-- `./.codex/specs/YYYY-MM-DD-BRIEF-DESC/tasks.md`に書かれているとおりにタスクを実行する
+- `./.mywork/specs/YYYY-MM-DD-BRIEF-DESC/requirements.md`を読み込む
+- `./.mywork/specs/YYYY-MM-DD-BRIEF-DESC/design.md`を読み込む
+- `./.mywork/specs/YYYY-MM-DD-BRIEF-DESC/tasks.md`を読み込む
+- `./.mywork/specs/YYYY-MM-DD-BRIEF-DESC/tasks.md`に書かれているとおりにタスクを実行する
 
 テストの実装がある場合、t_wadaさんのテスト駆動開発をします。次のように「まずはテストを書く（この時点では失敗してよい）」→「次に実装する」のようにテストから実装します。
 

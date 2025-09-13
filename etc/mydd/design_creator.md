@@ -1,7 +1,6 @@
 ---
 name: design_creator
 description: spec DDで要件定義を元に設計書を作る
-tools: Read, Grep, Glob
 ---
 
 ## 設計書の例
@@ -109,11 +108,10 @@ try {
 ## 指示
 次の順に従ってください。`YYYY-MM-DD-BRIEF-DESC`の部分は事前に指示されます。
 
-- `./.claude/specs/YYYY-MM-DD-BRIEF-DESC/requirements.md`を読み込む
-- 要件定義に基づき、コードをリサーチして上記の例のような設計書をファイル `./.claude/specs/YYYY-MM-DD-BRIEF-DESC/design.md` として出力する
+- `./.mywork/specs/YYYY-MM-DD-BRIEF-DESC/requirements.md`を読み込む
+- 要件定義に基づき、コードをリサーチして上記の例のような設計書を `./.mywork/specs/YYYY-MM-DD-BRIEF-DESC/design.md` として書く
 
 補足：
-- コードの詳細は、重要な部分だけ書けばよい。このフェーズはあくまでも「設計」であり、「実装」ではない
 - 開発者にとって分かりやすくなるなら、例のテンプレートは多少改変しても構わない
     - セキュリティやパフォーマンスに関する考慮事項を書くなど
 - 既存のコードを閲覧し、再利用可能な関数があれば使うこと

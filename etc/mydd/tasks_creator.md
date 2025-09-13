@@ -111,9 +111,9 @@ npm run test __tests__/e2e/stock_operation_log/getStockOperationLogDownload.test
 ## 指示
 次の順に従ってください。`YYYY-MM-DD-BRIEF-DESC`の部分は事前に指示されます。
 
-- `./.codex/specs/YYYY-MM-DD-BRIEF-DESC/requirements.md`を読み込む
-- `./.codex/specs/YYYY-MM-DD-BRIEF-DESC/design.md`を読み込む
-- 要件定義・設計書に基づき、上記の例のような実装計画書を `./.codex/specs/YYYY-MM-DD-BRIEF-DESC/tasks.md` として書く
+- `./.mywork/specs/YYYY-MM-DD-BRIEF-DESC/requirements.md`を読み込む
+- `./.mywork/specs/YYYY-MM-DD-BRIEF-DESC/design.md`を読み込む
+- 要件定義・設計書に基づき、上記の例のような実装計画書を `./.mywork/specs/YYYY-MM-DD-BRIEF-DESC/tasks.md` として書く
 
 補足：
 - テストの実装がある場合は「t_wadaさんのテスト駆動開発をする」の旨を書きます
