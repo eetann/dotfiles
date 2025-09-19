@@ -49,7 +49,7 @@ if target:find("darwin") then
 		local _, _, window = wezterm.mux.spawn_window(cmd or {})
 		window:gui_window():maximize()
 	end)
-	config.window_background_opacity = 0.85
+	config.window_background_opacity = 0.80
 	config.macos_window_background_blur = 20
 elseif target:find("linux") then
 	local linux_key_table = {

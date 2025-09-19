@@ -24,6 +24,10 @@ snippets:
     keyword: "PA"
     snippet: "php artisan"
 
+  - name: "SJIS to UTF-8"
+    keyword: "UTF"
+    snippet: "nkf -w --overwrite"
+
   - name: "tmux popup neovim"
     keyword: "TN"
     snippet: tmux popup -E -w 95% -h 95%

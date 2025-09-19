@@ -1,5 +1,5 @@
 ---
-allowed-tools: Bash(mkdir:*), Read(/Users/eetann/dotfiles/etc/mydd/**)
+allowed-tools: Bash(mkdir:*), Read(~/dotfiles/etc/mydd/*)
 description: "spec-driven development"
 ---
 
