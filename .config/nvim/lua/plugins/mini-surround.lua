@@ -55,8 +55,8 @@ return {
 					end,
 				},
 				["B"] = {
-					input = { "%*%*().-()%*%*" },
-					output = { left = "**", right = "**" },
+					input = { " ?%*%*().-()%*%* ?" },
+					output = { left = " **", right = "** " },
 				},
 				["^"] = {
 					input = { "~~().-()~~" },
