@@ -26,7 +26,7 @@ snippets:
 
   - name: "difit"
     keyword: "difit"
-    snippet: "bun x difit"
+    snippet: "bun x difit ."
 
   - name: "SJIS to UTF-8"
     keyword: "UTF"
