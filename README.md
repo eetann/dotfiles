@@ -1,8 +1,13 @@
 # dotfiles  
 dotfilesのレポジトリです。
-WSL2のUbuntuがメインですが、純Ubuntuでも動作するように少しずつ書き換えを進めています。
+WSL2のUbuntuメインだったけどMacに移行中
 
 **TODO: このREADMEをもう少しシェルスクリプトに移す**
+
+##
+```
+sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install)
+```
 
 # Windows
 [アプリ インストーラー - Microsoft Apps](https://apps.microsoft.com/detail/9nblggh4nns1?rtc=1&hl=ja-jp&gl=JP)

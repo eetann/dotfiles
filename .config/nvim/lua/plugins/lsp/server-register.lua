@@ -1,7 +1,7 @@
 -- angular-language-server
 -- python-lsp-server # pylsp
 -- cssls
--- nil
+-- nil_ls
 -- phpactor
 -- php-cs-fixer
 -- stylua
