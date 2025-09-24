@@ -30,6 +30,12 @@ local key_table = {
 				act.SplitPane({
 					direction = "Down",
 					size = { Cells = 10 },
+					command = {
+						args = { "zsh", "-l", "-i" },
+						set_environment_variables = {
+							NO_TMUX = "true",
+						},
+					},
 				}),
 				pane
 			)
@@ -37,7 +43,8 @@ local key_table = {
 				window:perform_action(
 					act.SendString(
 						string.format(
-							"bun run ~/ghq/github.com/eetann/editprompt/dist/index.js --editor nvim -m wezterm --target-pane %s\n",
+							"%s --editor nvim --always-copy --mux wezterm --target-pane %s\n",
+							"bun run ~/ghq/github.com/eetann/editprompt/dist/index.js",
 							target_pane_id
 						)
 					),

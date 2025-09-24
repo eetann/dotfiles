@@ -37,7 +37,7 @@ fi
 typeset -U path PATH
 
 # tmux未起動、vim・VSCodeの中じゃない、ログインシェルなら
-if [[ -z "$TMUX" && -z "$VIM" && "$TERM_PROGRAM" != "vscode" && $- == *l* ]] ; then
+if [[ -z "$TMUX" && -z "$VIM" && "$TERM_PROGRAM" != "vscode" && $- == *l* && -z "$NO_TMUX" ]] ; then
   tmux attach-session -t default || tmux new-session -s default
 fi
 
