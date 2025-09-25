@@ -1,6 +1,6 @@
 return {
 	"akinsho/bufferline.nvim",
-	cond = not vim.g.vscode,
+	cond = not vim.g.vscode and not vim.env.EDITPROMPT,
 	event = "VeryLazy",
 	dependencies = "nvim-tree/nvim-web-devicons",
 	config = function()

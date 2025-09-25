@@ -95,6 +95,9 @@ return {
 							readonly = " ",
 							unnamed = "[No Name]",
 						},
+						cond = function()
+							return not vim.env.EDITPROMPT
+						end,
 					},
 				},
 				lualine_x = {
@@ -144,12 +147,26 @@ return {
 			winbar = {
 				-- lspsagaのwinbarは被って見づらくなる & そもそも活用していないので非表示へ
 				lualine_a = {},
-				lualine_b = { { "diagnostics", sources = { "nvim_lsp" } } },
+				lualine_b = {
+					{
+						"diagnostics",
+						sources = { "nvim_lsp" },
+						cond = function()
+							return not vim.env.EDITPROMPT
+						end,
+					},
+				},
 				lualine_c = {},
 				lualine_x = {},
 				lualine_y = {},
 				lualine_z = {
-					{ "filetype", icon_only = true },
+					{
+						"filetype",
+						icon_only = true,
+						cond = function()
+							return not vim.env.EDITPROMPT
+						end,
+					},
 					{
 						"filename",
 						path = 1,
@@ -158,16 +175,33 @@ return {
 							modified = "● ",
 							readonly = "󰌾 ",
 						},
+						cond = function()
+							return not vim.env.EDITPROMPT
+						end,
 					},
 				},
 			},
 			inactive_winbar = {
-				lualine_a = { { "diagnostics", sources = { "nvim_lsp" } } },
+				lualine_a = {
+					{
+						"diagnostics",
+						sources = { "nvim_lsp" },
+						cond = function()
+							return not vim.env.EDITPROMPT
+						end,
+					},
+				},
 				lualine_b = {},
 				lualine_c = {},
 				lualine_x = {},
 				lualine_y = {
-					{ "filetype", icon_only = true },
+					{
+						"filetype",
+						icon_only = true,
+						cond = function()
+							return not vim.env.EDITPROMPT
+						end,
+					},
 				},
 				lualine_z = {
 					{
@@ -178,6 +212,9 @@ return {
 							modified = "● ",
 							readonly = "󰌾 ",
 						},
+						cond = function()
+							return not vim.env.EDITPROMPT
+						end,
 					},
 				},
 			},

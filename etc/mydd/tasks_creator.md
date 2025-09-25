@@ -117,3 +117,4 @@ npm run test __tests__/e2e/stock_operation_log/getStockOperationLogDownload.test
 
 補足：
 - テストの実装がある場合は「t_wadaさんのテスト駆動開発をする」の旨を書きます
+- 実装・修正箇所の行番号はなるべく書かない。ファイルを編集すると行番号はズレるため
