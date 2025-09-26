@@ -46,6 +46,12 @@ snippets:
     keyword: "gs"
     snippet: "git switch"
 
+  # 指定したcsvの2列目に重複したデータがないか調べる
+  # 列を変えるなら`-f2`の部分を変更する
+  - name: "csv checker for duplicates col2"
+    keyword: "csv_checker_for_duplicates_col2"
+    snippet: "tail -n +2 {{csv_here}} | cut -d, -f2 | sort | uniq -d"
+
   # ディレクトリ名の短縮入力
   - name: "cd media for blog"
     keyword: "MEDIA"
