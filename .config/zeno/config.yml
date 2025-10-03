@@ -52,6 +52,12 @@ snippets:
     keyword: "csv_checker_for_duplicates_col2"
     snippet: "tail -n +2 {{csv_here}} | cut -d, -f2 | sort | uniq -d"
 
+  # カレントディレクトリのcsvファイルを全部tsvに変換
+  # ログをスプレッドシートに貼るときに便利
+  - name: "all csv to tsv"
+    keyword: "all_csv_to_tsv"
+    snippet: "for f (*.csv) bun run ~/dotfiles/bin/csv_to_tsv.ts --file $f"
+
   # ディレクトリ名の短縮入力
   - name: "cd media for blog"
     keyword: "MEDIA"
