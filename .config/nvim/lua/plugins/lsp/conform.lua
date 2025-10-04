@@ -8,7 +8,7 @@ return {
 	event = { "BufWritePre" },
 	cmd = { "ConformInfo", "Format", "FormatPrettierd" },
 	config = function()
-		local js_formatters = { "biome", "prettier", stop_after_first = true }
+		local js_formatters = { "biome", "prettierd", "prettier", stop_after_first = true }
 		require("conform").setup({
 			formatters_by_ft = {
 				lua = { "stylua" },

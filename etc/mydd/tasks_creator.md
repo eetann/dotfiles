@@ -103,6 +103,7 @@ npm run test __tests__/e2e/stock_operation_log/getStockOperationLogDownload.test
 ## 注意事項
 
 - t_wadaさんのテスト駆動開発をする
+- 各セクションの実装が終わったらそのたびにチェックリストを完了にすること
 - **重要**: `/download`エンドポイントは`/download/:id`より**前**に配置すること（ルーティングの優先順位）
 - populateで取得するフィールドは最小限に留める（パフォーマンス考慮）
 - エラーレスポンスの形式は既存のAPIと統一する
@@ -116,5 +117,6 @@ npm run test __tests__/e2e/stock_operation_log/getStockOperationLogDownload.test
 - 要件定義・設計書に基づき、上記の例のような実装計画書を `./.mywork/specs/YYYY-MM-DD-BRIEF-DESC/tasks.md` として書く
 
 補足：
+- `各セクションの実装が終わったらそのたびにチェックリストを完了にすること`は絶対書きます
 - テストの実装がある場合は「t_wadaさんのテスト駆動開発をする」の旨を書きます
 - 実装・修正箇所の行番号はなるべく書かない。ファイルを編集すると行番号はズレるため
