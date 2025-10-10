@@ -98,7 +98,7 @@ return {
 		dependencies = { "tyru/open-browser.vim" },
 		keys = {
 			{
-				"<Leader>gh",
+				"<Space>gh",
 				":OpenGithubFile<CR>",
 				mode = { "n", "v" },
 				silent = true,

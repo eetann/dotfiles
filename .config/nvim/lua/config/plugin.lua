@@ -74,7 +74,7 @@ require("lazy").setup({
 
 		-- ファイルタイプ固有
 		{ import = "plugins.emmet-vim" },
-		{ import = "plugins.rainbow_csv" },
+		{ import = "plugins.csvview" },
 		{ "vim-jp/vimdoc-ja", event = "VeryLazy" },
 		-- blade
 		{ "jwalton512/vim-blade", ft = "blade" }, -- インデント
