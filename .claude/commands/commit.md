@@ -1,6 +1,9 @@
-# Conventional Commit Helper
+---
+allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git commit:*), Bash(git diff:*)
+description: "コミットメッセージの作成"
+---
 
-Conventional Commitsに基づいてgit commitしてください
+このコマンドはConventional Commits仕様に基づいてgit commitします。
 
 ## 実行内容
 
@@ -21,12 +24,11 @@ Conventional Commitsに基づいてgit commitしてください
 - **perf** - パフォーマンス改善
 
 ### スコープ選択肢：
-./codex/commit-scope.md があればそのファイルに書いてあります。ファイルがない場合はスコープ不要です。
-
+なし
 
 ### フォーマット：
 ```
-<type>[scope]: <description>
+<type>: <description>
 
 [実際に行った作業の詳細]
 ```
@@ -34,7 +36,7 @@ descriptionは日本語で書いてください。
 
 Breaking changeの場合は、タイプの後に"!"を付けるか、フッターに`BREAKING CHANGE:`を記載してください。
 
-コミットに共著者フッターを追加しないでください。
+コミットに Claude の共著者フッターを追加しないでください。
 
 ```commit
 feat: 電話キャンセルボタンを追加
