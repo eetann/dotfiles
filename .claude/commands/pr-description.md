@@ -6,6 +6,8 @@ allowed-tools: Bash(git diff:*), Bash(git log:*), Bash(mkdir:*), Bash(rm -f ./.c
 PR説明文を作成します：
 
 ```markdown
+# PRのタイトル
+
 ## 概要
 <!-- PRの背景・目的・概要 -->
 

@@ -89,20 +89,20 @@ require("lazy").setup({
 		{ import = "plugins.overseer" },
 
 		-- AI系
-		{ import = "plugins.codecompanion.index" },
-		{ import = "plugins.avante" },
+		-- { import = "plugins.codecompanion.index" },
+		-- { import = "plugins.avante" },
 
 		-- プラグイン開発
 		{ import = "plugins.lsp-dev" },
 		{ import = "plugins.mini-doc" },
 		{ import = "plugins.mini-test" },
 		{ import = "plugins.denops" },
-		{ import = "plugins.senpai.index" },
-		{
-			"grapp-dev/nui-components.nvim",
-			dependencies = {
-				"MunifTanjim/nui.nvim",
-			},
-		},
+		-- { import = "plugins.senpai.index" },
+		-- {
+		-- 	"grapp-dev/nui-components.nvim",
+		-- 	dependencies = {
+		-- 		"MunifTanjim/nui.nvim",
+		-- 	},
+		-- },
 	},
 })
