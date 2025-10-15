@@ -1,6 +1,6 @@
 snippets:
   # 長いコマンドの展開
-  - name: "blog new articledocker"
+  - name: "blog new article"
     keyword: "BLOG"
     snippet: "node bin/new.mjs --slug"
 
@@ -100,6 +100,15 @@ snippets:
     snippet: ">/dev/null 2>&1"
     context:
       lbuffer: '.+\s'
+
+  # 自作スクリプト
+  - name: "docker log to TSV"
+    keyword: "docker-log-to-tsv"
+    snippet: "bun run ~/dotfiles/bin/docker-log-to-tsv.ts"
+
+  - name: "nginx access log to TSV"
+    keyword: "nginx-access-log-to-tsv"
+    snippet: "bun run ~/dotfiles/bin/nginx_to_tsv.ts"
 
 completions:
   - name: kill signal

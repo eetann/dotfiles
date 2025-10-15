@@ -152,10 +152,10 @@ table.insert(config.hyperlink_rules, {
 	regex = "\\b\\w+://(?:[\\w.-]+):\\d+\\S*\\b",
 	format = "$0",
 })
-
-wezterm.on("bell", function(window, pane)
-	window:toast_notification("Claude Code", "Task completed", nil, 4000)
-end)
+--
+-- wezterm.on("bell", function(window, pane)
+-- 	window:toast_notification("Claude Code", "Task completed", nil, 4000)
+-- end)
 config.audible_bell = "SystemBeep"
 
 return config
