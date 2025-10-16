@@ -29,6 +29,9 @@ bindkey "^Xe" fzf_nb_edit
 
 # こっちのほうがパフォーマンス的に良い
 function nbe() {
+  BUFFER=""
+  zle -I
+  echo "ノート一覧取得中..."
   nb
   zle reset-prompt
   BUFFER="nb e "
