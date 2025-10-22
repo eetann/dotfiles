@@ -20,7 +20,7 @@ local function insert_file_with_at_mark()
 			end
 
 			if #files > 0 then
-				local text = table.concat(files, " ")
+				local text = table.concat(files, " ") .. " "
 				vim.api.nvim_buf_set_text(bufnr, row - 1, col, row - 1, col, { text })
 				vim.api.nvim_win_set_cursor(0, { row, col + #text })
 			end
@@ -33,4 +33,3 @@ end
 M.insert_files = insert_file_with_at_mark
 
 return M
-

@@ -111,19 +111,24 @@ return {
 							-- チェックボックスがある場合
 							local checkbox_start = line:find("%[[%sx-]", list_end)
 							if checkbox_start and checkbox_start == list_end + 1 then
-								-- チェックボックスの後のスペースも含める
-								local checkbox_end = checkbox_start + 2
+								local checkbox_end = checkbox_start + 2 -- `[` + ((`x`or` `) + `]`)
+								-- 範囲はチェックボックスの後のスペースの更に後ろ
+								--   `- [x] foo` -> `foo`
 								return { from = checkbox_start, to = checkbox_end + 1 } --[[@as textrange]]
 							end
-							-- チェックボックスがない場合（リストアイテムの直後の位置を返す）
+							-- チェックボックスがない場合
+							-- リストアイテムの直後の位置を返す
 							return { from = list_end + 1, to = list_end } --[[@as textrange]]
 						end
 
-						-- リストアイテムじゃない場合（行全体を選択）
+						-- リストアイテムじゃない場合
 						local first_non_space = line:match("^%s*()")
 						if first_non_space then
+							-- 範囲は行頭スペースを除いたもの
+							--   `    foo bar`->`foo bar`
 							return { from = first_non_space, to = #line } --[[@as textrange]]
 						end
+						-- 範囲は行全体 `foo bar`
 						return { from = 1, to = #line } --[[@as textrange]]
 					end,
 					---@type fun(self: Augend, text: string, addend: integer, cursor?: integer): addresult
@@ -142,7 +147,7 @@ return {
 							elseif text == "[ ]" or text == "[ ] " then
 								-- [ ] → [x]
 								return { text = "[x] " } --[[@as addresult]]
-							elseif text == "[x]" or text == "[x] " then
+							elseif text == "[x]" or text == "[x] " or text == "[-]" or text == "[-] " then
 								-- [x] → チェックボックスなし（削除）
 								return { text = "", cursor = 0 } --[[@as addresult]]
 							end

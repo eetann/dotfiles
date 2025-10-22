@@ -82,6 +82,7 @@ require("lazy").setup({
 		{ import = "plugins.vim-table-mode" },
 		{ import = "plugins.markdown-preview" },
 		{ import = "plugins.render-markdown" },
+		{ import = "plugins.clipboard-image-to-agent" },
 
 		-- 外部連携など
 		{ import = "plugins.open-browser" },

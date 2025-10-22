@@ -32,6 +32,8 @@ vim.keymap.set("x", "k", function()
 	end
 end, { expr = true })
 
+-- vim.keymap.set({ "n", "x" }, "-", '"_', { desc = "ブラックホールレジスタを使う" })
+
 -- 誤爆防止
 vim.keymap.set("i", "<C-@>", "<C-[>")
 vim.keymap.set("n", "q", "<NOP>")
