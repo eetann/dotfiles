@@ -16,9 +16,6 @@ description: spec DDでタスクを定義する
 
 ### 2. 依存関係の追加
 - [ ] 2.1 `api/routes/foo.ts`のファイル冒頭にmomentをimportする
-  ```javascript
-  const moment = require('moment');
-  ```
 
 ### 3. エンドポイントの実装
 
@@ -28,11 +25,6 @@ description: spec DDでタスクを定義する
 
 #### 3.2 バリデーション処理
 - [ ] 3.2.1 リクエストパラメータの存在確認を実装
-  ```javascript
-  if (!req.query.book_id || !req.query.from || !req.query.to) {
-    return res.json({ error: '不正なパラメーターです' });
-  }
-  ```
 
 #### 3.3 データ取得処理
 - [ ] 3.3.1 日付範囲の処理を実装
@@ -40,35 +32,12 @@ description: spec DDでタスクを定義する
   - `to`: moment(to).endOf('day')で終了日の23:59:59に設定
 
 - [ ] 3.3.2 MongoDBクエリを実装
-  ```javascript
-  const log = await StockOperationLog.find({
-    '$and': [
-      { book_id: req.query.book_id },
-      { createdAt: { $gte: moment(req.query.from).startOf('day') }},
-      { createdAt: { $lte: moment(req.query.to).endOf('day') }}
-    ]
-  })
-  .sort({ createdAt: 'desc' })
-  .populate('book_id', 'name')
-  .populate('user_id', 'username');
-  ```
 
 #### 3.4 エラーハンドリング
 - [ ] 3.4.1 try-catchブロックでエラー処理を実装
-  ```javascript
-  try {
-    // メイン処理
-  } catch (e) {
-    console.info(e);
-    throw Error(e);
-  }
-  ```
 
 #### 3.5 レスポンス処理
 - [ ] 3.5.1 取得したログデータをJSON形式で返却する実装
-  ```javascript
-  res.json(log);
-  ```
 
 ### 4. テストファイルの実装
 - [ ] `__tests__/e2e/stock_operation_log/`ディレクトリを作成（存在しない場合）
@@ -121,3 +90,5 @@ npm run test __tests__/e2e/stock_operation_log/getStockOperationLogDownload.test
 - `各セクションの実装が終わったらそのたびにチェックリストを完了にすること`は絶対書きます
 - テストの実装がある場合は「t_wadaさんのテスト駆動開発をする」「テストケースは1つずつ実装」の旨を書きます
 - 実装・修正箇所の行番号はなるべく書かない。ファイルを編集すると行番号はズレるため
+- コードはなるべく書かない。設計書を見れば分かるし、tasks.mdと実際のコードの2重管理はよくないから
+    - もちろんどうしても必要だったら書いて良い
