@@ -117,8 +117,8 @@ return {
 								return { from = checkbox_start, to = checkbox_end + 1 } --[[@as textrange]]
 							end
 							-- チェックボックスがない場合
-							-- リストアイテムの直後の位置を返す
-							return { from = list_end + 1, to = list_end } --[[@as textrange]]
+							-- リストアイテムの後ろから行末までを返す（`- foo` -> `foo`）
+							return { from = list_end + 1, to = #line } --[[@as textrange]]
 						end
 
 						-- リストアイテムじゃない場合
@@ -140,16 +140,16 @@ return {
 						local is_list = line:find(list_pattern) ~= nil
 
 						if is_list then
-							-- リストアイテムの場合の既存処理
-							if text == "" then
-								-- チェックボックスなし → [ ]
-								return { text = "[ ] ", cursor = 4 } --[[@as addresult]]
-							elseif text == "[ ]" or text == "[ ] " then
+							-- リストアイテムの場合
+							if text == "[ ]" or text == "[ ] " then
 								-- [ ] → [x]
 								return { text = "[x] " } --[[@as addresult]]
 							elseif text == "[x]" or text == "[x] " or text == "[-]" or text == "[-] " then
 								-- [x] → チェックボックスなし（削除）
 								return { text = "", cursor = 0 } --[[@as addresult]]
+							else
+								-- チェックボックスなし（通常のテキスト） → [ ]
+								return { text = "[ ] " .. text, cursor = 4 + #text } --[[@as addresult]]
 							end
 						else
 							-- リストアイテムじゃない場合
@@ -157,7 +157,6 @@ return {
 							-- チェックボックス付きリストに変換
 							return { text = "- [ ] " .. text, cursor = 6 + #text } --[[@as addresult]]
 						end
-						return {}
 					end,
 				}),
 			},
