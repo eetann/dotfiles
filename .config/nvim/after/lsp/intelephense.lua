@@ -1,4 +1,4 @@
 ---@type vim.lsp.Config
 return {
-	filetypes = { "blade" },
+  filetypes = { "blade" },
 }

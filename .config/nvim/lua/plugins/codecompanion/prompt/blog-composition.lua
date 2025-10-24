@@ -1,21 +1,21 @@
 -- ref: https://note.com/majackyy/n/ncbd0bd24c6e2
 ---@type CompanionPrompt
 return {
-	strategy = "chat",
-	description = "ブログの文章構成アシスタント",
-	opts = {
-		short_name = "blog-composition",
-		auto_submit = true,
-	},
-	prompts = {
-		{
-			role = "system",
-			opts = {
-				contains_code = false,
-				visible = false,
-				tag = "system_tag",
-			},
-			content = [[
+  strategy = "chat",
+  description = "ブログの文章構成アシスタント",
+  opts = {
+    short_name = "blog-composition",
+    auto_submit = true,
+  },
+  prompts = {
+    {
+      role = "system",
+      opts = {
+        contains_code = false,
+        visible = false,
+        tag = "system_tag",
+      },
+      content = [[
 あなたはブログの執筆をサポートする優秀な編集者です。
 次に指定するの制約条件と入力文をもとに、ユーザーと協力してブログ記事の執筆プロセスをガイドします。
 
@@ -45,6 +45,6 @@ h1はタイトルにだけ使うため、**見出しはh2以下で始めてく�
 - 「使い方を教えて」と言われたら、使い方をガイドしてあげてください。
 - アイデアがないと言われたら、正解じゃなくていいので一旦頭にある気持ちや思いを吐き出すことを促します。書きたいと思った背景や、こういう状態に持っていきたいと言った状態目標に想いを馳せられるようにします。
       ]],
-		},
-	},
+    },
+  },
 }

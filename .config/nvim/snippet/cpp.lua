@@ -4,49 +4,49 @@ local i = ls.insert_node
 local fmt = require("luasnip.extras.fmt").fmt
 
 return {
-	s(
-		"ret",
-		fmt(
-			[[
+  s(
+    "ret",
+    fmt(
+      [[
         return {};
 		  ]],
-			{ i(0) }
-		)
-	),
-	s(
-		"cout",
-		fmt(
-			[[
+      { i(0) }
+    )
+  ),
+  s(
+    "cout",
+    fmt(
+      [[
         cout << {} << endl;
 		  ]],
-			{ i(0) }
-		)
-	),
-	s(
-		"cin",
-		fmt(
-			[[
+      { i(0) }
+    )
+  ),
+  s(
+    "cin",
+    fmt(
+      [[
         cin >> {};
 		  ]],
-			{ i(0) }
-		)
-	),
-	s(
-		"getline",
-		fmt(
-			[[
+      { i(0) }
+    )
+  ),
+  s(
+    "getline",
+    fmt(
+      [[
         getline(cin, {});
 		  ]],
-			{ i(0, "var_name") }
-		)
-	),
-	s(
-		{ trig = "fixed", desc = "出力する小数点以下の桁数の指定" },
-		fmt(
-			[[
+      { i(0, "var_name") }
+    )
+  ),
+  s(
+    { trig = "fixed", desc = "出力する小数点以下の桁数の指定" },
+    fmt(
+      [[
         cout << fixed << setprecision({});
 		  ]],
-			{ i(0, "10") }
-		)
-	),
+      { i(0, "10") }
+    )
+  ),
 }

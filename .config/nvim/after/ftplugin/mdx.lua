@@ -1,5 +1,5 @@
 if vim.b.my_plugin_mdx ~= nil then
-	return
+  return
 end
 vim.b.my_plugin_mdx = true
 

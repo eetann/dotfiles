@@ -4,21 +4,21 @@ local i = ls.insert_node
 local fmt = require("luasnip.extras.fmt").fmt
 
 return {
-	s(
-		"snote",
-		fmt(
-			[[
+  s(
+    "snote",
+    fmt(
+      [[
 <!--
 {}
 -->
 		  ]],
-			{ i(1) }
-		)
-	),
-	s(
-		"details",
-		fmt(
-			[[
+      { i(1) }
+    )
+  ),
+  s(
+    "details",
+    fmt(
+      [[
 <details>
   <summary>{}</summary>
 
@@ -26,7 +26,7 @@ return {
 
 </details>
       ]],
-			{ i(1), i(0) }
-		)
-	),
+      { i(1), i(0) }
+    )
+  ),
 }

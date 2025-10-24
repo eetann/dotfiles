@@ -14,23 +14,23 @@ vim.opt.sidescrolloff = 3
 -- コピペ関連-----------------------------------------------------
 vim.opt.clipboard = { "unnamedplus", "unnamed" }
 if vim.fn.has("wsl") == 1 then
-	vim.g.clipboard = {
-		name = "WslClipboard",
-		copy = {
-			["+"] = "xsel -bi",
-			["*"] = "xsel -bi",
-		},
-		paste = {
-			-- https://stackoverflow.com/questions/75548458/copy-into-system-clipboard-from-neovim
-			["+"] = function()
-				return vim.fn.systemlist('xsel -bo | cat | tr -d "\r"', { "" }, 1) -- '1' keeps empty lines
-			end,
-			["*"] = function()
-				return vim.fn.systemlist('xsel -bo | cat | tr -d "\r"', { "" }, 1) -- '1' keeps empty lines
-			end,
-		},
-		cache_enabled = 1,
-	}
+  vim.g.clipboard = {
+    name = "WslClipboard",
+    copy = {
+      ["+"] = "xsel -bi",
+      ["*"] = "xsel -bi",
+    },
+    paste = {
+      -- https://stackoverflow.com/questions/75548458/copy-into-system-clipboard-from-neovim
+      ["+"] = function()
+        return vim.fn.systemlist('xsel -bo | cat | tr -d "\r"', { "" }, 1) -- '1' keeps empty lines
+      end,
+      ["*"] = function()
+        return vim.fn.systemlist('xsel -bo | cat | tr -d "\r"', { "" }, 1) -- '1' keeps empty lines
+      end,
+    },
+    cache_enabled = 1,
+  }
 end
 
 -- タブ設定-------------------------------------------------------
@@ -50,9 +50,9 @@ vim.opt.smartcase = true
 vim.opt.includeexpr = string.gsub(vim.v.fname, "^\\/", "")
 
 vim.api.nvim_create_autocmd("QuickFixCmdPost", {
-	group = group_name,
-	pattern = { "*grep*" },
-	command = "cwindow",
+  group = group_name,
+  pattern = { "*grep*" },
+  command = "cwindow",
 })
 
 vim.opt.swapfile = false
@@ -75,37 +75,37 @@ vim.opt.whichwrap = "b,s,h,l,[,],<,>,~"
 vim.opt.signcolumn = "yes"
 vim.opt.list = true -- 空白文字の可視化
 vim.opt.listchars = {
-	tab = "| ", -- Tab
-	trail = "-", -- 行末スペース
-	eol = "↲", -- 改行
-	extends = "»", -- ウィンドウ幅狭い時の後方省略
-	precedes = "«", -- ウィンドウ幅狭い時の前方省略
-	nbsp = "%", -- 不可視のスペース
+  tab = "| ", -- Tab
+  trail = "-", -- 行末スペース
+  eol = "↲", -- 改行
+  extends = "»", -- ウィンドウ幅狭い時の後方省略
+  precedes = "«", -- ウィンドウ幅狭い時の前方省略
+  nbsp = "%", -- 不可視のスペース
 }
 -- minifyされたファイルを開いてしまったりプレビューに出てきたとき用に、
 -- シンタックスの制限
 vim.opt.synmaxcol = 150
 vim.opt.display = "lastline"
 if vim.fn.has("termguicolors") == 1 then
-	vim.opt.termguicolors = true
+  vim.opt.termguicolors = true
 end
 vim.opt.background = "dark"
 
 -- カーソル位置を復帰
 vim.api.nvim_create_autocmd("BufReadPost", {
-	callback = function()
-		if vim.bo.filetype == "Outline" or vim.bo.filetype == "gitcommit" then
-			-- 早期リターン
-			do
-				return
-			end
-		end
-		local row, col = unpack(vim.api.nvim_buf_get_mark(0, '"'))
-		if { row, col } ~= { 0, 0 } then
-			pcall(vim.api.nvim_win_set_cursor, 0, { row, 0 })
-		end
-	end,
-	group = group_name,
+  callback = function()
+    if vim.bo.filetype == "Outline" or vim.bo.filetype == "gitcommit" then
+      -- 早期リターン
+      do
+        return
+      end
+    end
+    local row, col = unpack(vim.api.nvim_buf_get_mark(0, '"'))
+    if { row, col } ~= { 0, 0 } then
+      pcall(vim.api.nvim_win_set_cursor, 0, { row, 0 })
+    end
+  end,
+  group = group_name,
 })
 
 vim.opt.splitbelow = true
@@ -117,5 +117,5 @@ vim.opt.equalalways = false
 vim.cmd("cabbrev H belowright vertical help")
 
 vim.api.nvim_create_user_command("EditAsSJIS", function()
-	vim.cmd("edit ++encoding=sjis")
+  vim.cmd("edit ++encoding=sjis")
 end, {})

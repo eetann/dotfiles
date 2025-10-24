@@ -1,24 +1,24 @@
 ---@type CompanionPrompt
 return {
-	strategy = "inline",
-	description = "Generate Japanese commit message",
-	opts = {
-		is_slash_cmd = true,
-		short_name = "japanese-commit",
-		auto_submit = true,
-		placement = "replace",
-	},
-	prompts = {
-		{
-			role = "system",
-			content = "You are an expert at following the Conventional Commit specification.",
-		},
-		{
-			role = "user",
-			content = function()
-				local git_diff = vim.fn.system("git diff --no-ext-diff --staged")
+  strategy = "inline",
+  description = "Generate Japanese commit message",
+  opts = {
+    is_slash_cmd = true,
+    short_name = "japanese-commit",
+    auto_submit = true,
+    placement = "replace",
+  },
+  prompts = {
+    {
+      role = "system",
+      content = "You are an expert at following the Conventional Commit specification.",
+    },
+    {
+      role = "user",
+      content = function()
+        local git_diff = vim.fn.system("git diff --no-ext-diff --staged")
 
-				return [[
+        return [[
 あなたの使命は、commitizenコミット規約に従って、変更内容と主に変更理由を説明する、クリーンで包括的なコミットメッセージを作成することです。
 合計80文字以内に収めるようにしてください。
 コミットはスコープを含まず、タイプのみ書いてください（`fix(deps):`ではなく`fix:`）。
@@ -32,10 +32,10 @@ return {
 タイプ以外は全て日本語で書いてください。
 
 ]]
-			end,
-			opts = {
-				contains_code = true,
-			},
-		},
-	},
+      end,
+      opts = {
+        contains_code = true,
+      },
+    },
+  },
 }

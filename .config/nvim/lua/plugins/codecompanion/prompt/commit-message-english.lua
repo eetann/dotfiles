@@ -1,24 +1,24 @@
 ---@type CompanionPrompt
 return {
-	strategy = "inline",
-	description = "Generate English commit message",
-	opts = {
-		is_slash_cmd = true,
-		short_name = "english-commit",
-		auto_submit = true,
-		placement = "replace",
-	},
-	prompts = {
-		{
-			role = "system",
-			content = "You are an expert at following the Conventional Commit specification.",
-		},
-		{
-			role = "user",
-			content = function()
-				local git_diff = vim.fn.system("git diff --no-ext-diff --staged")
+  strategy = "inline",
+  description = "Generate English commit message",
+  opts = {
+    is_slash_cmd = true,
+    short_name = "english-commit",
+    auto_submit = true,
+    placement = "replace",
+  },
+  prompts = {
+    {
+      role = "system",
+      content = "You are an expert at following the Conventional Commit specification.",
+    },
+    {
+      role = "user",
+      content = function()
+        local git_diff = vim.fn.system("git diff --no-ext-diff --staged")
 
-				return [[
+        return [[
 Your mission is to create clean and comprehensive commit messages as per the conventional commit convention and explain WHAT were the changes and mainly WHY the changes were done.
 Try to stay below 80 characters total.
 Don't specify the commit subcategory (`fix(deps):`), just the category (`fix:`).
@@ -31,10 +31,10 @@ Use the present tense.
 Lines must not be longer than 74 characters.
 
 ]]
-			end,
-			opts = {
-				contains_code = true,
-			},
-		},
-	},
+      end,
+      opts = {
+        contains_code = true,
+      },
+    },
+  },
 }

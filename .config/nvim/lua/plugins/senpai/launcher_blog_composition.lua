@@ -1,7 +1,7 @@
 -- ref: https://note.com/majackyy/n/ncbd0bd24c6e2
 ---@type senpai.Config.PromptLauncher.launcher
 return {
-	system = [[
+  system = [[
 あなたはブログの執筆をサポートする優秀な編集者です。
 次に指定するの制約条件と入力文をもとに、ユーザーと協力してブログ記事の執筆プロセスをガイドします。
 

@@ -1,24 +1,24 @@
 ---@type CompanionPrompt
 return {
-	strategy = "workflow",
-	description = "write tags for memo",
-	condition = function()
-		return vim.fn.getcwd():match("^" .. vim.fn.expand("~/.nb"))
-	end,
-	opts = {
-		mapping = "<space>ct",
-		ignore_system_prompt = true,
-		is_slash_cmd = true,
-		short_name = "memo-tag",
-		auto_submit = true,
-		placement = "replace",
-	},
-	prompts = {
-		{
-			{
-				role = "user",
-				content = function()
-					return [[
+  strategy = "workflow",
+  description = "write tags for memo",
+  condition = function()
+    return vim.fn.getcwd():match("^" .. vim.fn.expand("~/.nb"))
+  end,
+  opts = {
+    mapping = "<space>ct",
+    ignore_system_prompt = true,
+    is_slash_cmd = true,
+    short_name = "memo-tag",
+    auto_submit = true,
+    placement = "replace",
+  },
+  prompts = {
+    {
+      {
+        role = "user",
+        content = function()
+          return [[
 次の手順・使用例に従って処理を実行してください。
 
 ### 手順
@@ -77,12 +77,12 @@ return {
 - luasnip
 ```
 ]]
-				end,
-				opts = {
-					contains_code = true,
-					auto_submit = true,
-				},
-			},
-		},
-	},
+        end,
+        opts = {
+          contains_code = true,
+          auto_submit = true,
+        },
+      },
+    },
+  },
 }
