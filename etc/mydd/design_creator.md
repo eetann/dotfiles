@@ -20,14 +20,12 @@ description: spec DDで要件定義を元に設計書を作る
 ## エンドポイント詳細設計
 
 ### ルート定義
-```javascript
-router.get('/download', async function(req, res) { /* ... */ });
-```
 - メソッド: GET
 - パス: `/foo/download`
 - 認証: 既存の認証ミドルウェアを使用（他のエンドポイントと同様）
 
 ### リクエストバリデーション
+<!-- コードはコメントアウトなどを駆使してなるべく簡潔に書く -->
 ```typescript
 // 必須パラメータのチェック
 if (req.query.book_id) {
@@ -77,15 +75,6 @@ const foo = await Foo.find({
 | パラメータ不足 | 必須パラメータが未指定 | `{ error: 'パラメータ不足' }` を返却 |
 | データベースエラー | MongoDB接続エラー等 | catchブロックでエラーログ出力、500エラー |
 
-### エラー処理実装
-```typescript
-try {
-  // メイン処理
-} catch (e) {
-  console.info(e);
-  throw Error(e);
-}
-```
 
 
 ## テスト戦略
