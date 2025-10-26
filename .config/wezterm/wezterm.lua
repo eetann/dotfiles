@@ -21,38 +21,60 @@ local key_table = {
     mods = "SHIFT|META",
     action = wezterm.action.ToggleFullScreen,
   },
-  -- {
-  -- 	key = "e",
-  -- 	mods = "OPT",
-  -- 	action = wezterm.action_callback(function(window, pane)
-  -- 		local target_pane_id = tostring(pane:pane_id())
-  -- 		window:perform_action(
-  -- 			act.SplitPane({
-  -- 				direction = "Down",
-  -- 				size = { Cells = 10 },
-  -- 				command = {
-  -- 					args = { "zsh", "-l", "-i" },
-  -- 					set_environment_variables = {
-  -- 						NO_TMUX = "true",
-  -- 					},
-  -- 				},
-  -- 			}),
-  -- 			pane
-  -- 		)
-  -- 		wezterm.time.call_after(1, function()
-  -- 			window:perform_action(
-  -- 				act.SendString(
-  -- 					string.format(
-  -- 						"%s --editor nvim --always-copy --mux wezterm --target-pane %s\n",
-  -- 						"bun run ~/ghq/github.com/eetann/editprompt/dist/index.js",
-  -- 						target_pane_id
-  -- 					)
-  -- 				),
-  -- 				window:active_pane()
-  -- 			)
-  -- 		end)
-  -- 	end),
-  -- },
+  {
+    key = "e",
+    mods = "OPT",
+    action = wezterm.action_callback(function(window, pane)
+      local target_pane_id = tostring(pane:pane_id())
+      local editprompt_cmds =
+        { "node", "$HOME/ghq/github.com/eetann/editprompt/dist/index.js" }
+
+      -- resumeを試す
+      local success, stdout, stderr = wezterm.run_child_process({
+        "/opt/homebrew/bin/node", -- フルパス
+        os.getenv("HOME") .. "/ghq/github.com/eetann/editprompt/dist/index.js",
+        "--resume",
+        "--mux",
+        "wezterm",
+        "--target-pane",
+        target_pane_id,
+      })
+
+      -- resumeが失敗したら（エディタペインが存在しない）、新しく作る
+      if not success then
+        wezterm.log_error("editprompt info: " .. tostring(stdout))
+        wezterm.log_error(
+          "editprompt error: "
+            .. (tostring(stderr) ~= "" and tostring(stderr) or "unknown error")
+        )
+        window:perform_action(
+          act.SplitPane({
+            direction = "Down",
+            size = { Cells = 10 },
+            command = {
+              args = { "zsh", "-l", "-i" },
+              set_environment_variables = {
+                NO_TMUX = "true",
+              },
+            },
+          }),
+          pane
+        )
+        wezterm.time.call_after(0.1, function()
+          window:perform_action(
+            act.SendString(
+              string.format(
+                "%s --editor nvim --always-copy --mux wezterm --target-pane %s\n",
+                table.concat(editprompt_cmds, " "),
+                target_pane_id
+              )
+            ),
+            window:active_pane()
+          )
+        end)
+      end
+    end),
+  },
 }
 
 local target = wezterm.target_triple
