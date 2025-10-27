@@ -86,7 +86,6 @@ local function toggle_checkbox_line(line)
   local col_offset = 0
   local checkbox_end_pos = 0 -- チェックボックスの終了位置
 
-  -- パターンマッチングで状態を判定
   if vim.fn.match(line, [=[^\s*[-+*]\s\+\[ \]\s\+]=]) >= 0 then
     -- [ ] → [x]
     new_line =
@@ -99,15 +98,15 @@ local function toggle_checkbox_line(line)
       vim.fn.substitute(line, [=[^\(\s*[-+*]\s\+\)\[x\]\s\+]=], [[\1]], "")
     col_offset = -4 -- "[x] "の分
     checkbox_end_pos = #indent + 2 + 4
-  elseif vim.fn.match(line, [[^\s*[-+*]\s\+\[-\]\s\+]]) >= 0 then
+  elseif vim.fn.match(line, [=[^\s*[-+*]\s\+\[-\]\s\+]=]) >= 0 then
     -- [-] → 箇条書き
     new_line =
-      vim.fn.substitute(line, [[^\(\s*[-+*]\s\+\)\[-\]\s\+]], [[\1]], "")
+      vim.fn.substitute(line, [=[^\(\s*[-+*]\s\+\)\[-\]\s\+]=], [[\1]], "")
     col_offset = -4 -- "[-] "の分
     checkbox_end_pos = #indent + 2 + 4
-  elseif vim.fn.match(line, [[^\s*[-+*]\s\+]]) >= 0 then
+  elseif vim.fn.match(line, [=[^\s*[-+*]\s\+]=]) >= 0 then
     -- 箇条書き → [ ]
-    new_line = vim.fn.substitute(line, [[^\(\s*[-+*]\s\+\)]], [[\1[ ] ]], "")
+    new_line = vim.fn.substitute(line, [=[^\(\s*[-+*]\s\+\)]=], [[\1[ ] ]], "")
     col_offset = 4
     checkbox_end_pos = #indent + 2
   else
@@ -139,8 +138,15 @@ end
 
 local function toggle_checkbox_visual()
   -- ビジュアルモードの選択範囲を取得
-  local start_line = vim.fn.line("'<")
-  local end_line = vim.fn.line("'>")
+  local start_pos = vim.fn.getpos("v") -- Visualモード開始位置
+  local end_pos = vim.fn.getpos(".") -- 現在カーソル位置
+  local start_line = start_pos[2]
+  local end_line = end_pos[2]
+
+  -- 小さい方を先にする
+  if start_line > end_line then
+    start_line, end_line = end_line, start_line
+  end
 
   for line_num = start_line, end_line do
     local line = vim.fn.getline(line_num)
@@ -149,17 +155,12 @@ local function toggle_checkbox_visual()
   end
 end
 
-vim.keymap.set("n", "<C-q>", toggle_checkbox, {
+vim.keymap.set({ "n", "i" }, "<C-q>", toggle_checkbox, {
   desc = "チェックボックスのトグル",
   buffer = true,
 })
 
-vim.keymap.set("i", "<C-q>", toggle_checkbox, {
-  desc = "チェックボックスのトグル",
-  buffer = true,
-})
-
-vim.keymap.set("v", "<C-q>", toggle_checkbox_visual, {
+vim.keymap.set("x", "<C-q>", toggle_checkbox_visual, {
   desc = "チェックボックスのトグル",
   buffer = true,
 })
