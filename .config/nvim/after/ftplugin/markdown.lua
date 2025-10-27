@@ -79,7 +79,7 @@ end, { desc = "現在行のwikilinkを取得", buffer = true })
 
 -- チェックボックスのトグル
 local function toggle_checkbox_line(line)
-  local indent = line:match("^(%s*)")
+  local indent = vim.fn.matchstr(line, [[^\s*]])
   local content_start = #indent + 1
 
   local new_line
@@ -87,24 +87,27 @@ local function toggle_checkbox_line(line)
   local checkbox_end_pos = 0 -- チェックボックスの終了位置
 
   -- パターンマッチングで状態を判定
-  if line:match("^%s*[-+*]%s+%[ %]%s+") then
+  if vim.fn.match(line, [=[^\s*[-+*]\s\+\[ \]\s\+]=]) >= 0 then
     -- [ ] → [x]
-    new_line = line:gsub("^(%s*[-+*]%s+)%[ %]", "%1[x]")
+    new_line =
+      vim.fn.substitute(line, [=[^\(\s*[-+*]\s\+\)\[ \]]=], [=[\1[x]]=], "")
     col_offset = 0
     checkbox_end_pos = #indent + 2 + 4 -- インデント + "- " + "[ ] "
-  elseif line:match("^%s*[-+*]%s+%[x%]%s+") then
+  elseif vim.fn.match(line, [=[^\s*[-+*]\s\+\[x\]\s\+]=]) >= 0 then
     -- [x] → 箇条書き
-    new_line = line:gsub("^(%s*[-+*]%s+)%[x%]%s+", "%1")
+    new_line =
+      vim.fn.substitute(line, [=[^\(\s*[-+*]\s\+\)\[x\]\s\+]=], [[\1]], "")
     col_offset = -4 -- "[x] "の分
     checkbox_end_pos = #indent + 2 + 4
-  elseif line:match("^%s*[-+*]%s+%[%-%]%s+") then
+  elseif vim.fn.match(line, [[^\s*[-+*]\s\+\[-\]\s\+]]) >= 0 then
     -- [-] → 箇条書き
-    new_line = line:gsub("^(%s*[-+*]%s+)%[%-%]%s+", "%1")
+    new_line =
+      vim.fn.substitute(line, [[^\(\s*[-+*]\s\+\)\[-\]\s\+]], [[\1]], "")
     col_offset = -4 -- "[-] "の分
     checkbox_end_pos = #indent + 2 + 4
-  elseif line:match("^%s*[-+*]%s+") then
+  elseif vim.fn.match(line, [[^\s*[-+*]\s\+]]) >= 0 then
     -- 箇条書き → [ ]
-    new_line = line:gsub("^(%s*[-+*]%s+)", "%1[ ] ")
+    new_line = vim.fn.substitute(line, [[^\(\s*[-+*]\s\+\)]], [[\1[ ] ]], "")
     col_offset = 4
     checkbox_end_pos = #indent + 2
   else
