@@ -26,18 +26,20 @@ local key_table = {
     mods = "OPT",
     action = wezterm.action_callback(function(window, pane)
       local target_pane_id = tostring(pane:pane_id())
-      local editprompt_cmds =
-        { "node", "$HOME/ghq/github.com/eetann/editprompt/dist/index.js" }
+      local editprompt_cmd = "node "
+        .. os.getenv("HOME")
+        .. "/ghq/github.com/eetann/editprompt/dist/index.js"
+      -- local editprompt_cmd = "editprompt"
 
       -- resumeを試す
       local success, stdout, stderr = wezterm.run_child_process({
-        "/opt/homebrew/bin/node", -- フルパス
-        os.getenv("HOME") .. "/ghq/github.com/eetann/editprompt/dist/index.js",
-        "--resume",
-        "--mux",
-        "wezterm",
-        "--target-pane",
-        target_pane_id,
+        "/bin/zsh",
+        "-lc",
+        string.format(
+          "%s --resume --mux wezterm --target-pane %s",
+          editprompt_cmd,
+          target_pane_id
+        ),
       })
 
       -- resumeが失敗したら（エディタペインが存在しない）、新しく作る
@@ -52,7 +54,15 @@ local key_table = {
             direction = "Down",
             size = { Cells = 10 },
             command = {
-              args = { "zsh", "-l", "-i" },
+              args = {
+                "/bin/zsh",
+                "-lc",
+                string.format(
+                  "%s --editor nvim --always-copy --mux wezterm --target-pane %s",
+                  editprompt_cmd,
+                  target_pane_id
+                ),
+              },
               set_environment_variables = {
                 NO_TMUX = "true",
               },
@@ -60,18 +70,6 @@ local key_table = {
           }),
           pane
         )
-        wezterm.time.call_after(0.1, function()
-          window:perform_action(
-            act.SendString(
-              string.format(
-                "%s --editor nvim --always-copy --mux wezterm --target-pane %s\n",
-                table.concat(editprompt_cmds, " "),
-                target_pane_id
-              )
-            ),
-            window:active_pane()
-          )
-        end)
       end
     end),
   },
