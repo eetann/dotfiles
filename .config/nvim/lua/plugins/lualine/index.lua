@@ -83,23 +83,8 @@ return {
           [[vim.o.paste and 'PASTE' or '']],
           is_table_mode,
         },
-        lualine_b = { "branch", "diff" },
-        lualine_c = {
-          {
-            "filename",
-            file_status = true, -- readonly, modified
-            path = 1, -- Relative path
-            shorting_target = 40,
-            symbols = {
-              modified = " ●",
-              readonly = " ",
-              unnamed = "[No Name]",
-            },
-            cond = function()
-              return not vim.env.EDITPROMPT
-            end,
-          },
-        },
+        lualine_b = { "branch" },
+        lualine_c = {},
         lualine_x = {
           {
             -- for `@recording messsages`

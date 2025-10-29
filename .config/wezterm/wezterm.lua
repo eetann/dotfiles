@@ -42,7 +42,7 @@ local key_table = {
         ),
       })
 
-      -- resumeが失敗したら（エディタペインが存在しない）、新しく作る
+      -- resumeが失敗したらエディタペインを開く
       if not success then
         wezterm.log_error("editprompt info: " .. tostring(stdout))
         wezterm.log_error(

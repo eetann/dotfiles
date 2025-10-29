@@ -86,27 +86,27 @@ local function toggle_checkbox_line(line)
   local col_offset = 0
   local checkbox_end_pos = 0 -- チェックボックスの終了位置
 
-  if vim.fn.match(line, [=[^\s*[-+*]\s\+\[ \]\s\+]=]) >= 0 then
+  if vim.fn.match(line, [=[\v^\s*[-+*]\s+\[ \]\s+]=]) >= 0 then
     -- [ ] → [x]
     new_line =
-      vim.fn.substitute(line, [=[^\(\s*[-+*]\s\+\)\[ \]]=], [=[\1[x]]=], "")
+      vim.fn.substitute(line, [=[\v^(\s*[-+*]\s+)\[ \]]=], [=[\1[x]]=], "")
     col_offset = 0
     checkbox_end_pos = #indent + 2 + 4 -- インデント + "- " + "[ ] "
-  elseif vim.fn.match(line, [=[^\s*[-+*]\s\+\[x\]\s\+]=]) >= 0 then
+  elseif vim.fn.match(line, [=[\v^\s*[-+*]\s+\[x\]\s+]=]) >= 0 then
     -- [x] → 箇条書き
     new_line =
-      vim.fn.substitute(line, [=[^\(\s*[-+*]\s\+\)\[x\]\s\+]=], [[\1]], "")
+      vim.fn.substitute(line, [=[\v^(\s*[-+*]\s+)\[x\]\s+]=], [[\1]], "")
     col_offset = -4 -- "[x] "の分
     checkbox_end_pos = #indent + 2 + 4
-  elseif vim.fn.match(line, [=[^\s*[-+*]\s\+\[-\]\s\+]=]) >= 0 then
+  elseif vim.fn.match(line, [[\v^\s*[-+*]\s+\[-\]\s+]]) >= 0 then
     -- [-] → 箇条書き
     new_line =
-      vim.fn.substitute(line, [=[^\(\s*[-+*]\s\+\)\[-\]\s\+]=], [[\1]], "")
+      vim.fn.substitute(line, [=[\v^(\s*[-+*]\s+)\[-\]\s+]=], [[\1]], "")
     col_offset = -4 -- "[-] "の分
     checkbox_end_pos = #indent + 2 + 4
-  elseif vim.fn.match(line, [=[^\s*[-+*]\s\+]=]) >= 0 then
+  elseif vim.fn.match(line, [=[\v^\s*[-+*]\s+]=]) >= 0 then
     -- 箇条書き → [ ]
-    new_line = vim.fn.substitute(line, [=[^\(\s*[-+*]\s\+\)]=], [[\1[ ] ]], "")
+    new_line = vim.fn.substitute(line, [=[\v^(\s*[-+*]\s+)]=], [[\1[ ] ]], "")
     col_offset = 4
     checkbox_end_pos = #indent + 2
   else
