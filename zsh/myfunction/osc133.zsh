@@ -1,6 +1,6 @@
 _prompt_executing=""
 
-function after_command() {
+function osc133_after_command() {
   local ret="$?"
   if [[ "$_prompt_executing" -ne 0 ]]; then
     _PROMPT_SAVE_PS1="$PS1"
@@ -15,12 +15,12 @@ function after_command() {
   _prompt_executing=0
 }
 
-function before_command() {
+function osc133_before_command() {
   PS1="$_PROMPT_SAVE_PS1"
   PS2="$_PROMPT_SAVE_PS2"
   printf "\033]133;C;\007"
   _prompt_executing=1
 }
 autoload -U add-zsh-hook
-add-zsh-hook preexec before_command
-add-zsh-hook precmd after_command
+add-zsh-hook preexec osc133_before_command
+add-zsh-hook precmd osc133_after_command

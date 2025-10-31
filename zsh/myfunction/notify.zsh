@@ -96,7 +96,7 @@ function notify() {
   fi
 }
 
-function before_command() {
+function notify_before_command() {
   declare -g my_notify_last_command="$1"
   declare -g my_notify_start_time=$EPOCHSECONDS
 }
@@ -105,7 +105,7 @@ function unset_my_notify() {
   unset my_notify_last_command my_notify_start_time
 }
 
-function after_command() {
+function notify_after_command() {
   local command_complete_timeout=30
 
   if [ -z $my_notify_start_time ]; then
@@ -128,5 +128,5 @@ function after_command() {
 
 zmodload zsh/datetime
 autoload -U add-zsh-hook
-add-zsh-hook preexec before_command
-add-zsh-hook precmd after_command
+add-zsh-hook preexec notify_before_command
+add-zsh-hook precmd notify_after_command
