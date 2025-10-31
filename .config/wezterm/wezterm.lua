@@ -83,6 +83,11 @@ if target:find("darwin") then
     { key = "p", mods = "CMD", action = wezterm.action.Nop },
     { key = "w", mods = "CMD", action = wezterm.action.Nop },
     {
+      key = "_",
+      mods = "CTRL",
+      action = { SendKey = { key = "_", mods = "CTRL" } },
+    },
+    {
       key = "h",
       mods = "OPT",
       action = { SendKey = { key = "h", mods = "ALT" } },
