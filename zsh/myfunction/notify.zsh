@@ -5,6 +5,8 @@ SKIP_NOTIFY_COMMANDS=(
   fg
   bat
   cat
+  claude
+  codex
   lazygit
   lg
   man
@@ -17,26 +19,22 @@ SKIP_NOTIFY_COMMANDS=(
   ml
   mt
   "vagrant ssh"
-  "mise run emulate"
   "mise w"
   "npm run dev"
   "npm run preview"
   "npm run server"
   "npm run start"
   "npm run watch"
-  "npm run test"
   "pnpm run dev"
   "pnpm run preview"
   "pnpm run server"
   "pnpm run start"
   "pnpm run watch"
-  "pnpm run test"
   "yarn run dev"
   "yarn run preview"
   "yarn run server"
   "yarn run start"
   "yarn run watch"
-  "yarn run test"
 )
 
 function is_skip_command() {
