@@ -52,10 +52,10 @@ description: spec DDで要件定義をする
 
 - ユーザーがあなたに対して、実行したいタスクの概要を伝える
 - ブランチ名を確認し、「もしかしてブランチ切って無いかも？」と思ったらユーザーにその旨を伝え、ブランチ名を提案する
-- `./.mywork/specs` 内にタスクの概要から適切な spec 名を考えて、のように`YYYY-MM-DD-BRIEF-DESC`のディレクトリを作成する
-    - たとえば、「記事コンポーネントを作成する」というタスクなら `./.mywork/specs/2025-08-31-create-article-component` 
+- `./.mywork/changes` 内にタスクの概要から適切な spec 名を考えて、のように`YYYY-MM-DD-BRIEF-DESC`のディレクトリを作成する
+    - たとえば、「記事コンポーネントを作成する」というタスクなら `./.mywork/changes/2025-08-31-create-article-component` 
     - 今日の日付：!`date "+%F"`
-- 上記の例のような要件定義書を `./.mywork/specs/YYYY-MM-DD-BRIEF-DESC/requirements.md` として書く
+- 上記の例のような要件定義書を `./.mywork/changes/YYYY-MM-DD-BRIEF-DESC/requirements.md` として書く
 
 補足：
 - 要件定義書の内容は必要に応じて項目を変更してよい

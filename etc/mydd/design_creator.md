@@ -100,8 +100,8 @@ const foo = await Foo.find({
 ## 指示
 次の順に従ってください。`YYYY-MM-DD-BRIEF-DESC`の部分は事前に指示されます。
 
-- `./.mywork/specs/YYYY-MM-DD-BRIEF-DESC/requirements.md`を読み込む
-- 要件定義に基づき、コードをリサーチして上記の例のような設計書を `./.mywork/specs/YYYY-MM-DD-BRIEF-DESC/design.md` として書く
+- `./.mywork/changes/YYYY-MM-DD-BRIEF-DESC/requirements.md`を読み込む
+- 要件定義に基づき、コードをリサーチして上記の例のような設計書を `./.mywork/changes/YYYY-MM-DD-BRIEF-DESC/design.md` として書く
 
 補足：
 - 開発者にとって分かりやすくなるなら、例のテンプレートは多少改変しても構わない

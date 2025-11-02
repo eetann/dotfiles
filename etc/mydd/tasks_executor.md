@@ -6,10 +6,10 @@ description: spec DDでタスクを実行する
 ## 指示
 次の順に従ってください。`YYYY-MM-DD-BRIEF-DESC`の部分は事前に指示されます。
 
-- `./.mywork/specs/YYYY-MM-DD-BRIEF-DESC/requirements.md`を読み込む
-- `./.mywork/specs/YYYY-MM-DD-BRIEF-DESC/design.md`を読み込む
-- `./.mywork/specs/YYYY-MM-DD-BRIEF-DESC/tasks.md`を読み込む
-- `./.mywork/specs/YYYY-MM-DD-BRIEF-DESC/tasks.md`に書かれているとおりにタスクを実行する
+- `./.mywork/changes/YYYY-MM-DD-BRIEF-DESC/requirements.md`を読み込む
+- `./.mywork/changes/YYYY-MM-DD-BRIEF-DESC/design.md`を読み込む
+- `./.mywork/changes/YYYY-MM-DD-BRIEF-DESC/tasks.md`を読み込む
+- `./.mywork/changes/YYYY-MM-DD-BRIEF-DESC/tasks.md`に書かれているとおりにタスクを実行する
     - 各セクションの実装が終わったらそのたびにtasks.mdのチェックリストを完了にしてください
         - 途中で中断してもどこまでやったのか分かりやすくなる
 

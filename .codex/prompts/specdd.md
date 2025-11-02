@@ -10,19 +10,19 @@ spec-driven development は、次の4つのフェーズからなる開発手法�
 
 このフェーズになったら ~/dotfiles/etc/mydd/requirements_creator.md の指示に従ってね
 
-成果物：`./.mywork/specs/YYYY-MM-DD-BRIEF-DESC/requirements.md`
+成果物：`./.mywork/changes/YYYY-MM-DD-BRIEF-DESC/requirements.md`
 
 ### 2. 設計フェーズ
 
 このフェーズになったら ~/dotfiles/etc/mydd/design_creator.md の指示に従ってね
 
-成果物：`./.mywork/specs/YYYY-MM-DD-BRIEF-DESC/design.md`
+成果物：`./.mywork/changes/YYYY-MM-DD-BRIEF-DESC/design.md`
 
 ### 3. 実装計画フェーズ
 
 このフェーズになったら ~/dotfiles/etc/mydd/tasks_creator.md の指示に従ってね
 
-成果物：`./.mywork/specs/YYYY-MM-DD-BRIEF-DESC/tasks.md`
+成果物：`./.mywork/changes/YYYY-MM-DD-BRIEF-DESC/tasks.md`
 
 ### 4. 実装フェーズ
 
@@ -30,3 +30,4 @@ spec-driven development は、次の4つのフェーズからなる開発手法�
 
 成果物：実装ファイル
 
+全フェーズが終わったら、`./.mywork/changes/YYYY-MM-DD-BRIEF-DESC`から`./.mywork/specs/YYYY-MM-DD-BRIEF-DESC`にディレクトリを移動してね
