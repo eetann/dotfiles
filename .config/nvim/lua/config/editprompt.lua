@@ -37,6 +37,7 @@ vim.keymap.set("n", "<Space>x", function()
     end
   )
 end, { silent = true, desc = "Send buffer content to editprompt" })
+
 vim.keymap.set("n", "<Space>X", function()
   vim.cmd("update")
 
