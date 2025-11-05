@@ -4,8 +4,8 @@ return {
   -- スニペットはいちいち覚えていない & 短い文字なので優先表示
   -- lsp補完より優先されても、数文字打てば消える
   default = {
-    "avante",
     "conventional_commits",
+    "prompt_abbr",
     "snippets",
     "lazydev",
     "lsp",
@@ -66,6 +66,14 @@ return {
           return dir_name
         end,
       },
+    },
+    prompt_abbr = {
+      -- IMPORTANT: use the same name as you would for nvim-cmp
+      name = "prompt_abbr",
+      module = "blink.compat.source",
+      enabled = function()
+        return vim.env.EDITPROMPT == "1"
+      end,
     },
     -- minuet = {
     -- 	name = "minuet",
