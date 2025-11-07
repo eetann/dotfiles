@@ -1,4 +1,4 @@
-function fghq() {
+function select_repository() {
   local fzf_command="fzf"
   if type fzf-tmux > /dev/null; then
     fzf_command="fzf-tmux -p 80%"
@@ -15,8 +15,23 @@ function fghq() {
 '
 EOF
 )
+  local repository=$(ghq list | eval $fzf_command)
+  echo "$repository"
+}
 
-  local res=$(ghq list | eval $fzf_command)
+function fghq_in_new_window() {
+  local res=$(select_repository)
+  if [ -n "$res" ]; then
+    tmux new-window -c "$(ghq root)/$res"
+  else
+    return 1
+  fi
+}
+zle -N fghq_in_new_window
+bindkey '^xg' fghq_in_new_window
+
+function fghq_in_current_window() {
+  local res=$(select_repository)
   if [ -n "$res" ]; then
     BUFFER+="cd $(ghq root)/$res"
     zle accept-line
@@ -24,8 +39,8 @@ EOF
     return 1
   fi
 }
-zle -N fghq
-bindkey '^xg' fghq
+zle -N fghq_in_current_window
+bindkey '^xG' fghq_in_current_window
 
 function ghq-new() {
   local root=`ghq root`
