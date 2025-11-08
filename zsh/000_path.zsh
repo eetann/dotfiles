@@ -1,6 +1,7 @@
 export GOPATH=$HOME/go
 export BUN_INSTALL="$HOME/.bun"
 path+=(
+  $HOME/dotfiles/bin(N-/)
   $GOPATH(N-/)
   $GOPATH/bin(N-/)
   $HOME/.local/bin(N-/)
@@ -38,7 +39,7 @@ typeset -U path PATH
 
 # tmux未起動、vim・VSCodeの中じゃない、ログインシェルなら
 if [[ -z "$TMUX" && -z "$VIM" && "$TERM_PROGRAM" != "vscode" && $- == *l* && -z "$NO_TMUX" ]] ; then
-  tmux attach-session -t default || tmux new-session -s default
+  tmux-session-manager
 fi
 
 if type direnv > /dev/null; then

@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# tmuxセッション一覧を取得
+sessions=$(tmux list-sessions -F "#{session_name}" 2>/dev/null)
+
+# セッションが存在しない場合はdefaultを作成してアタッチ
+if [ -z "$sessions" ]; then
+  tmux new-session -s default
+  exit 0
+fi
+
+# セッション数をカウント
+session_count=$(echo "$sessions" | wc -l | tr -d ' ')
+
+# セッションが1つだけの場合はそこにアタッチ
+if [ "$session_count" -eq 1 ]; then
+  tmux attach-session -t "$sessions"
+  exit 0
+fi
+
+# 複数セッションがある場合はfzfで選択
+selected=$(echo "$sessions" | fzf --prompt="Select tmux session: " --height=40% --reverse)
+if [ -n "$selected" ]; then
+  tmux attach-session -t "$selected"
+fi

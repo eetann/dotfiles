@@ -18,6 +18,7 @@ SKIP_NOTIFY_COMMANDS=(
   idea
   ml
   mt
+  git
   "vagrant ssh"
   "mise w"
   "npm run dev"
