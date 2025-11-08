@@ -1,13 +1,62 @@
 #!/bin/bash
 
+# アイコン選択関数
+select_icon() {
+  selected=$(cat <<'EOF' | fzf --prompt="Icon: " --preview-window=hidden
+ : default
+󱄅 : nix
+ : paw
+ : key
+ : fan
+ : cut
+ : setting
+ : bug
+ : db
+ : tag
+ : sum
+ : pin
+ : script
+󰐟 : poll
+󰇥 : duck
+󱗆 : bird
+ : wind
+ : tree
+ : tint
+ : tool
+ : suse
+ : save
+ : plug
+ : mask
+ : leaf
+ : home
+ : gift
+ : frog
+ : fish
+ : bone
+ : neovim
+󰢱 : lua
+ : cpp
+ : typescript
+ : pen
+EOF
+)
+
+  if [ -n "$selected" ]; then
+    echo "$selected" | awk '{print $1}'
+  else
+    # キャンセルされた場合はデフォルト
+    echo ""
+  fi
+}
+
 # tmuxセッション一覧をfzfで表示し、アクションを実行
 result=$(tmux list-sessions -F '#{session_name}' 2>/dev/null | \
   fzf --prompt="Session: " \
       --preview='tmux list-windows -t {} -F "#{window_index}: #{window_name}"' \
       --preview-window=right:50% \
-      --expect=ctrl-q,ctrl-n,ctrl-r \
+      --expect=ctrl-q,ctrl-t,ctrl-r \
       --no-select-1 \
-      --header='Enter: switch | ^Q: kill | ^N: new | ^R: rename')
+      --header='Enter: switch | ^Q: kill | ^T: new | ^R: rename')
 
 # fzfがキャンセルされた場合は終了
 if [ -z "$result" ]; then
@@ -34,14 +83,18 @@ case "$key" in
     fi
     ;;
 
-  ctrl-n)
+  ctrl-t)
     # new: 新規セッション作成
     echo -n "New session name: "
     read -r new_session
     if [ -n "$new_session" ]; then
-      tmux new-session -d -s "$new_session"
-      tmux switch-client -t "$new_session"
-      echo "Session '$new_session' created."
+      # アイコン選択
+      icon=$(selected_icon)
+
+      full_session_name="$icon $new_session"
+      tmux new-session -d -s "$full_session_name"
+      tmux switch-client -t "$full_session_name"
+      echo "Session '$full_session_name' created."
     else
       echo "Cancelled."
     fi
@@ -53,8 +106,12 @@ case "$key" in
       echo -n "New name for '$session': "
       read -r new_name
       if [ -n "$new_name" ]; then
-        tmux rename-session -t "$session" "$new_name"
-        echo "Session renamed to '$new_name'."
+        # アイコン選択
+        icon=$(select_icon)
+
+        full_session_name="$icon $new_name"
+        tmux rename-session -t "$session" "$full_session_name"
+        echo "Session renamed to '$full_session_name'."
       else
         echo "Cancelled."
       fi
