@@ -1,0 +1,30 @@
+#!/bin/bash
+
+if [ -z "$TMUX" ]; then
+  echo "Error: This command must be run inside tmux."
+  exit 1
+fi
+
+# 現在のセッション名とウィンドウ情報を取得
+current_session=$(tmux display-message -p '#S')
+current_window=$(tmux display-message -p '#I')
+window_name=$(tmux display-message -p '#W')
+window_id=$(tmux display-message -p '#{window_id}')
+
+# 現在のセッション以外のセッション一覧を取得してfzfで選択
+target_session=$(tmux list-sessions -F '#{session_name}' 2>/dev/null | \
+  grep -v "^${current_session}$" | \
+  fzf --prompt="Move window '${window_name}' to: " \
+      --preview='tmux list-windows -t {} -F "#{window_index}: #{window_name}"' \
+      --preview-window=right:50% \
+      --header="Moving window ${current_window}: ${window_name}")
+
+# fzfがキャンセルされた場合は終了
+if [ -z "$target_session" ]; then
+  exit 0
+fi
+
+# ウィンドウを移動先セッションに移動
+tmux move-window -t "${target_session}:"
+# 移動したウィンドウにフォーカス
+tmux switch-client -t "${window_id}"

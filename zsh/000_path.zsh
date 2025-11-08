@@ -39,7 +39,7 @@ typeset -U path PATH
 
 # tmux未起動、vim・VSCodeの中じゃない、ログインシェルなら
 if [[ -z "$TMUX" && -z "$VIM" && "$TERM_PROGRAM" != "vscode" && $- == *l* && -z "$NO_TMUX" ]] ; then
-  tmux-session-manager
+  tmux-first-choose-session
 fi
 
 if type direnv > /dev/null; then
