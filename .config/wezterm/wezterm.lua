@@ -5,6 +5,27 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
+wezterm.on("editprompt-capture", function(window, pane)
+  local text = window:get_selection_text_for_pane(pane)
+  -- wezterm.log_info("selection is: " .. text)
+  local target_pane_id = tostring(pane:pane_id())
+  local editprompt_cmd = "node "
+    .. os.getenv("HOME")
+    .. "/ghq/github.com/eetann/editprompt/dist/index.js"
+  -- local editprompt_cmd = "editprompt"
+
+  wezterm.run_child_process({
+    "/bin/zsh",
+    "-lc",
+    string.format(
+      "%s --quote --mux wezterm --target-pane %s -- %s",
+      editprompt_cmd,
+      target_pane_id,
+      wezterm.shell_quote_arg(text) -- エスケープして位置引数として渡す
+    ),
+  })
+end)
+
 local function append_array(array, other)
   for _, value in ipairs(other) do
     table.insert(array, value)
@@ -80,6 +101,11 @@ local key_table = {
         )
       end
     end),
+  },
+  {
+    key = "e",
+    mods = "CMD",
+    action = wezterm.action.EmitEvent("editprompt-capture"),
   },
 }
 
