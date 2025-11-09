@@ -37,10 +37,6 @@ fi
 # 重複排除とパスの順序維持
 typeset -U path PATH
 
-# tmux未起動、vim・VSCodeの中じゃない、ログインシェルなら
-if [[ -z "$TMUX" && -z "$VIM" && "$TERM_PROGRAM" != "vscode" && $- == *l* && -z "$NO_TMUX" ]] ; then
-  tmux-first-choose-session
-fi
 
 if type direnv > /dev/null; then
   eval "$(direnv hook zsh)"
