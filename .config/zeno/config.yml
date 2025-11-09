@@ -33,6 +33,10 @@ snippets:
     keyword: "difitd"
     snippet: "bun x difit @ development"
 
+  - name: "nvim-noplugin"
+    keyword: "nvimno"
+    snippet: "nvim --noplugin -u NONE"
+
   - name: "SJIS to UTF-8"
     keyword: "UTF"
     snippet: "nkf -w --overwrite"
