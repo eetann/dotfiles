@@ -6,7 +6,7 @@ bg="#{@c-base-100}"
 color="#{@c-info}"
 text_fg="#{@c-info-content}"
 
-output=""
+output="#[bg=$bg,fg=$color]"
 
 # セッション一覧を取得してループ
 while IFS= read -r session; do
@@ -24,7 +24,7 @@ while IFS= read -r session; do
 
   if [ "$session" = "$current_session" ]; then
     # カレントセッション：アイコン+名前+区切り
-    output+="#[bg=$bg,fg=$color]#[bg=$color,fg=$text_fg]$icon $session_name#[bg=$bg,fg=$color] "
+    output+="#[bg=$color,fg=$text_fg]$icon $session_name#[bg=$bg,fg=$color] "
   else
     # その他：アイコンのみ
     output+="$icon "
