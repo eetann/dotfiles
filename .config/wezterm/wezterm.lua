@@ -11,6 +11,14 @@ local function append_array(array, other)
   end
 end
 
+local function opt_to_alt(key)
+  return {
+    key = key,
+    mods = "OPT",
+    action = { SendKey = { key = key, mods = "ALT" } },
+  }
+end
+
 local key_table = {
   { key = ";", mods = "CTRL", action = "IncreaseFontSize" },
   { key = "+", mods = "CTRL", action = "IncreaseFontSize" },
@@ -87,51 +95,17 @@ if target:find("darwin") then
       mods = "CTRL",
       action = { SendKey = { key = "_", mods = "CTRL" } },
     },
-    {
-      key = "h",
-      mods = "OPT",
-      action = { SendKey = { key = "h", mods = "ALT" } },
-    },
-    {
-      key = "l",
-      mods = "OPT",
-      action = { SendKey = { key = "l", mods = "ALT" } },
-    },
-    {
-      key = "n",
-      mods = "OPT",
-      action = { SendKey = { key = "n", mods = "ALT" } },
-    },
-    {
-      key = "o",
-      mods = "OPT",
-      action = { SendKey = { key = "o", mods = "ALT" } },
-    },
-    {
-      key = "p",
-      mods = "OPT",
-      action = { SendKey = { key = "p", mods = "ALT" } },
-    },
-    {
-      key = "q",
-      mods = "OPT",
-      action = { SendKey = { key = "q", mods = "ALT" } },
-    },
-    {
-      key = "s",
-      mods = "OPT",
-      action = { SendKey = { key = "s", mods = "ALT" } },
-    },
-    {
-      key = "t",
-      mods = "OPT",
-      action = { SendKey = { key = "t", mods = "ALT" } },
-    },
-    {
-      key = "z",
-      mods = "OPT",
-      action = { SendKey = { key = "z", mods = "ALT" } },
-    },
+    opt_to_alt("j"),
+    opt_to_alt("k"),
+    opt_to_alt("h"),
+    opt_to_alt("l"),
+    opt_to_alt("n"),
+    opt_to_alt("o"),
+    opt_to_alt("p"),
+    opt_to_alt("q"),
+    opt_to_alt("s"),
+    opt_to_alt("t"),
+    opt_to_alt("z"),
     { key = "¥", action = wezterm.action.SendKey({ key = "\\" }) },
   }
   append_array(key_table, mac_key_table)
