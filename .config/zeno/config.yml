@@ -67,6 +67,10 @@ snippets:
     keyword: "all_csv_to_tsv"
     snippet: "for f (*.csv) bun run ~/dotfiles/bin/csv_to_tsv.ts --file $f"
 
+  - name: "mdjanai"
+    keyword: "mdjanai"
+    snippet: "node ~/ghq/github.com/eetann/mdjanai/dist/index.js"
+
   # ディレクトリ名の短縮入力
   - name: "cd media for blog"
     keyword: "MEDIA"
