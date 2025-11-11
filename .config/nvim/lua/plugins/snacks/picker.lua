@@ -28,19 +28,25 @@ local function project_files(use_git_root)
       }
     end
   end
+  local multi_sources = { main_source }
+
+  -- ignoreしててもAI系は表示（存在する場合のみ）
+  if vim.fn.isdirectory(".claude") == 1 then
+    table.insert(multi_sources, {
+      source = "files",
+      args = { ".", ".claude" },
+    })
+  end
+
+  if vim.fn.isdirectory(".mywork") == 1 then
+    table.insert(multi_sources, {
+      source = "files",
+      args = { ".", ".mywork" },
+    })
+  end
+
   picker.pick({
-    multi = {
-      main_source,
-      -- ignoreしててもAI系は表示
-      {
-        source = "files",
-        args = { ".", ".claude" },
-      },
-      {
-        source = "files",
-        args = { ".", ".mywork" },
-      },
-    },
+    multi = multi_sources,
     transform = "unique_file",
     format = "file",
     layout = my_vertical,
@@ -215,5 +221,6 @@ M.config = {
     end,
   },
 }
+vim.api.nvim_set_hl(0, "SnacksPickerDir", { link = "Comment" })
 
 return M

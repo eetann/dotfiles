@@ -32,7 +32,12 @@ vim.keymap.set("x", "k", function()
   end
 end, { expr = true })
 
--- vim.keymap.set({ "n", "x" }, "-", '"_', { desc = "ブラックホールレジスタを使う" })
+vim.keymap.set(
+  { "n", "x" },
+  "X",
+  '"_',
+  { desc = "ブラックホールレジスタを使う" }
+)
 
 -- 誤爆防止
 vim.keymap.set("i", "<C-@>", "<C-[>")
@@ -93,15 +98,10 @@ vim.keymap.set(
   { desc = "選択範囲をヤンクしたら選択範囲の末尾へ移動" }
 )
 -- TODO: もっと賢そうな書き方あるかも
-vim.keymap.set(
-  "x",
-  "p",
-  [['pgv"'.v:register.'ygv<esc>']],
-  {
-    expr = true,
-    desc = "VisualModeで置換対象ペースト時のヤンク入れ替えを防ぐ",
-  }
-)
+vim.keymap.set("x", "p", [['pgv"'.v:register.'ygv<esc>']], {
+  expr = true,
+  desc = "VisualModeで置換対象ペースト時のヤンク入れ替えを防ぐ",
+})
 vim.keymap.set(
   "n",
   "sgv",
@@ -126,14 +126,9 @@ vim.keymap.set(
   "<Cmd>put!<CR>`[v`]=`<^",
   { desc = "下の行に貼り付けたら貼り付けの末尾へ" }
 )
-vim.keymap.set(
-  "n",
-  "sgp",
-  "<Cmd>put<CR>`[v`]=`>$",
-  {
-    desc = "上の行へ貼り付けたら貼り付けの先頭(インデントじゃない)へ",
-  }
-)
+vim.keymap.set("n", "sgp", "<Cmd>put<CR>`[v`]=`>$", {
+  desc = "上の行へ貼り付けたら貼り付けの先頭(インデントじゃない)へ",
+})
 vim.keymap.set("n", "sy", "<Cmd>%y<CR>", { desc = "全選択してyank" })
 vim.keymap.set("n", "sgf", function()
   local relative_path = vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.")

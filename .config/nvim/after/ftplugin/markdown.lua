@@ -3,6 +3,8 @@ if vim.b.my_plugin_markdown ~= nil then
 end
 vim.b.my_plugin_markdown = true
 
+vim.opt_local.wrap = true
+
 local function is_in_num_list()
   local current_line = vim.api.nvim_get_current_line()
   return current_line:match("^%s*%d+%.%s") ~= nil

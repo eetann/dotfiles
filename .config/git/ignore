@@ -11,4 +11,5 @@ mise.local.toml
 .codex/work-logs/
 .codex/tmp/
 
+.mywork
 .mywork/
