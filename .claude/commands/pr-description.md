@@ -44,5 +44,4 @@ PR説明文を作成します：
 
 ## 以前のPR文を空にしておく自動コマンド
 
-!`mkdir -p ./.mywork/tmp`
 !`rm -f ./.mywork/tmp/pr.md`
