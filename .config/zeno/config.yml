@@ -118,6 +118,10 @@ snippets:
     keyword: "nginx-access-log-to-tsv"
     snippet: "bun run ~/dotfiles/bin/nginx_to_tsv.ts"
 
+  - name: "tmux-first-choose-session"
+    keyword: "tf"
+    snippet: "tmux-first-choose-session"
+
 completions:
   - name: kill signal
     patterns:
