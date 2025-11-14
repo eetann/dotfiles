@@ -28,7 +28,7 @@ function fghq_in_new_window() {
   fi
 }
 zle -N fghq_in_new_window
-bindkey '^xg' fghq_in_new_window
+bindkey '^xG' fghq_in_new_window
 
 function fghq_in_current_window() {
   local res=$(select_repository)
@@ -40,7 +40,7 @@ function fghq_in_current_window() {
   fi
 }
 zle -N fghq_in_current_window
-bindkey '^xG' fghq_in_current_window
+bindkey '^xg' fghq_in_current_window
 
 function ghq-new() {
   local root=`ghq root`

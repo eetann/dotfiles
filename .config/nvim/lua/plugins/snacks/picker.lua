@@ -174,15 +174,6 @@ M.keys = {
   { "<space>fR", function() picker.resume() end, desc = "Picker: resume" },
 	{ "<space>fA", function() picker.pickers() end, desc = "Picker: All sources" },
   -- stylua: ignore end
-  -- insertモードでファイル名を@付きで挿入
-  {
-    "<C-g>@",
-    function()
-      require("plugins.snacks.insert-files-picker").insert_files()
-    end,
-    mode = { "n", "i" },
-    desc = "Insert files with @ prefix",
-  },
 }
 
 ---@type snacks.picker.Config
