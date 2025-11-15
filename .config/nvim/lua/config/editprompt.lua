@@ -38,6 +38,41 @@ vim.keymap.set("n", "<Space>x", function()
   )
 end, { silent = true, desc = "Send buffer content to editprompt" })
 
+vim.keymap.set("n", "<Space>sx", function()
+  vim.cmd("update")
+  -- バッファの内容を取得
+  local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+  local content = table.concat(lines, "\n")
+
+  -- editpromptコマンドを実行
+  vim.system(
+    {
+      "node",
+      vim.fn.expand("~/ghq/github.com/eetann/editprompt/dist/index.js"),
+      "--auto-send",
+      "--",
+      content,
+    },
+    -- { "editprompt", "--", content },
+    { text = true },
+    function(obj)
+      vim.schedule(function()
+        if obj.code == 0 then
+          -- 成功したらバッファを空にする
+          vim.api.nvim_buf_set_lines(0, 0, -1, false, {})
+          vim.cmd("silent write")
+        else
+          -- 失敗したら通知
+          vim.notify(
+            "editprompt failed: " .. (obj.stderr or "unknown error"),
+            vim.log.levels.ERROR
+          )
+        end
+      end)
+    end
+  )
+end, { silent = true, desc = "Send buffer content to editprompt" })
+
 vim.keymap.set("n", "<Space>X", function()
   vim.cmd("update")
 
@@ -102,9 +137,15 @@ local function insert_files_with_fzf()
 
   -- まず FZF_CTRL_T_COMMAND でファイルリストを取得
   local fzf_ctrl_t_cmd = vim.env.FZF_CTRL_T_COMMAND or "fd --type f"
-  local file_list_result = vim.system({ "sh", "-c", fzf_ctrl_t_cmd }, { text = true }):wait()
+  local file_list_result = vim
+    .system({ "sh", "-c", fzf_ctrl_t_cmd }, { text = true })
+    :wait()
 
-  if file_list_result.code ~= 0 or not file_list_result.stdout or file_list_result.stdout == "" then
+  if
+    file_list_result.code ~= 0
+    or not file_list_result.stdout
+    or file_list_result.stdout == ""
+  then
     return
   end
 
