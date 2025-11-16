@@ -157,3 +157,23 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
     vim.keymap.set("n", "q", "<Cmd>quit<CR>", { buffer = true, silent = true })
   end,
 })
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "typescript" },
+  callback = function(args)
+    if vim.g.enable_ts_ls_for_without_install then
+      return
+    end
+    local first_line = vim.api.nvim_buf_get_lines(args.buf, 0, 1, false)[1]
+      or ""
+    -- `#!/usr/bin/env bun`
+    if not first_line:match("^#!.*bun") then
+      return
+    end
+    vim.g.enable_ts_ls_for_without_install = true
+    vim.b[args.buf].bun_script = true
+    vim.lsp.enable("ts_ls_for_without_install")
+    vim.cmd("LspStop ts_ls")
+    vim.cmd("LspStart ts_ls_for_without_install")
+  end,
+})
