@@ -166,3 +166,7 @@ vim.keymap.set("x", "<C-q>", toggle_checkbox_visual, {
   desc = "チェックボックスのトグル",
   buffer = true,
 })
+
+if vim.fn.getcwd() == vim.fn.expand("~/.nb/home") then
+  vim.lsp.enable("markdown-language-server")
+end

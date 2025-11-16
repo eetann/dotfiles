@@ -15,7 +15,7 @@ local other_lsp = {
   "eslint",
   "jsonls",
   -- "laravel-language-server", -- disable
-  "markdown-language-server",
+  -- "markdown-language-server", -- disabled by default
   -- "ts_ls_for_without_install", -- disabled by default
 }
 for _, server_name in pairs(other_lsp) do
