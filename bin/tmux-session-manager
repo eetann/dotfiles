@@ -49,11 +49,20 @@ EOF
   fi
 }
 
+# セッション一覧を整形してソート
+sessions=$(tmux list-sessions -F '#{session_name}' 2>/dev/null | while read -r s; do
+  if [ "$(echo "$s" | cut -c2)" = " " ]; then
+    echo "$(echo "$s" | cut -c3-)|$s"
+  else
+    echo "$s|$s"
+  fi
+done | sort | cut -d'|' -f2)
+
 # tmuxセッション一覧をfzfで表示し、アクションを実行
-result=$(tmux list-sessions -F '#{session_name}' 2>/dev/null | \
+result=$(echo "$sessions" | \
   fzf --prompt="Session: " \
       --preview='tmux list-windows -t {} -F "#{window_index}: #{window_name}"' \
-      --preview-window=right:50% \
+      --preview-window=right:20% \
       --expect=ctrl-q,ctrl-t,ctrl-r \
       --no-select-1 \
       --header='Enter: switch | ^Q: kill | ^T: new | ^R: rename')

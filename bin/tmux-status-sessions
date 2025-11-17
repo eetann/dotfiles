@@ -8,6 +8,15 @@ text_fg="#{@c-info-content}"
 
 output="#[bg=$bg,fg=$color]"
 
+# セッション一覧を整形してソート
+sessions=$(tmux list-sessions -F '#{session_name}' 2>/dev/null | while read -r s; do
+  if [ "$(echo "$s" | cut -c2)" = " " ]; then
+    echo "$(echo "$s" | cut -c3-)|$s"
+  else
+    echo "$s|$s"
+  fi
+done | sort | cut -d'|' -f2)
+
 # セッション一覧を取得してループ
 while IFS= read -r session; do
   # 2文字目が空白かチェック
@@ -29,6 +38,6 @@ while IFS= read -r session; do
     # その他：アイコンのみ
     output+="$icon "
   fi
-done < <(tmux list-sessions -F '#{session_name}' 2>/dev/null | sort)
+done <<< "$sessions"
 
 echo -n " $output "
