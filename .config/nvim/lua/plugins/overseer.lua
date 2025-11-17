@@ -1,5 +1,8 @@
+---@module "lazy"
+---@type LazyPluginSpec
 return {
   "stevearc/overseer.nvim",
+  version = "v1.6.0",
   keys = {
     { "<space>r", "<CMD>OverseerRun<CR>" },
     { "<space>R", "<CMD>OverseerToggle<CR>" },
@@ -25,6 +28,7 @@ return {
       "deno.deno_test",
       "bun.bun_run",
       "bun.bun_test",
+      "markdown.mdjanai",
     },
   },
 }
