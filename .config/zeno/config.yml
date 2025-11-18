@@ -55,6 +55,14 @@ snippets:
     keyword: "gs"
     snippet: "git switch"
 
+  - name: "git worktree new brach"
+    keyword: "gwn"
+    snippet: "git worktree add -b"
+
+  - name: "git worktree already exists brach"
+    keyword: "gwe"
+    snippet: "git worktree add ../"
+
   # 指定したcsvの2列目に重複したデータがないか調べる
   # 列を変えるなら`-f2`の部分を変更する
   - name: "csv checker for duplicates col2"
@@ -82,6 +90,15 @@ snippets:
     keyword: "DL"
     snippet: "~/Downloads/"
     context:
+      lbuffer: '.+\s'
+
+  # 引数
+  - name: "--testNamePattern="
+    keyword: "TNP"
+    snippet: "--testNamePattern='{{cursor}}'"
+    context:
+      # jest以外でも`mise run 〇〇`のように
+      # タスクランナーの可能性ありのためcontextは簡素に
       lbuffer: '.+\s'
 
   # パイプ以降の展開
