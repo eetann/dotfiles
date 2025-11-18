@@ -45,7 +45,7 @@ EOF
     echo "$selected" | awk '{print $1}'
   else
     # キャンセルされた場合はデフォルト
-    echo ""
+    echo ""
   fi
 }
 
@@ -84,6 +84,12 @@ case "$key" in
       echo -n "Kill session '$session'? (y/N): "
       read -r answer
       if [ "$answer" = "y" ] || [ "$answer" = "Y" ]; then
+        # カレントセッションかチェック
+        current_session=$(tmux display-message -p '#S')
+        if [ "$session" = "$current_session" ]; then
+          # カレントセッションの場合は次のセッションに移動してから削除
+          tmux switch-client -n
+        fi
         tmux kill-session -t "$session"
         echo "Session '$session' killed."
       else
@@ -98,7 +104,7 @@ case "$key" in
     read -r new_session
     if [ -n "$new_session" ]; then
       # アイコン選択
-      icon=$(selected_icon)
+      icon=$(select_icon)
 
       full_session_name="$icon $new_session"
       tmux new-session -d -s "$full_session_name"
