@@ -22,7 +22,9 @@ function fzf_npm_scripts() {
   BUFFER="$prefix run "
   zle end-of-line
   zle zeno-completion # from zeno
-  zle accept-line
+  if [[ "$BUFFER" != "$prefix run " ]]; then
+    zle accept-line
+  fi
 }
 zle -N fzf_npm_scripts
 bindkey "^Xn" fzf_npm_scripts
