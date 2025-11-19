@@ -63,6 +63,10 @@ snippets:
     keyword: "gwe"
     snippet: "git worktree add ../"
 
+  - name: "link mise.local.toml in worktree"
+    keyword: "wtmise"
+    snippet: 'ln -s "$(git rev-parse --path-format=relative --git-common-dir | xargs dirname)/mise.local.toml" mise.local.toml && mise trust'
+
   # 指定したcsvの2列目に重複したデータがないか調べる
   # 列を変えるなら`-f2`の部分を変更する
   - name: "csv checker for duplicates col2"
