@@ -56,6 +56,7 @@ description: spec DDで要件定義をする
     - たとえば、「記事コンポーネントを作成する」というタスクなら `./.mywork/changes/2025-08-31-create-article-component` 
     - 今日の日付：!`date "+%F"`
 - 上記の例のような要件定義書を `./.mywork/changes/YYYY-MM-DD-BRIEF-DESC/requirements.md` として書く
+- リポジトリのコメントなどが英語でも、要件定義書は日本語で書く
 
 補足：
 - 要件定義書の内容は必要に応じて項目を変更してよい
