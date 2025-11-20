@@ -5,7 +5,7 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
-wezterm.on("editprompt-capture", function(window, pane)
+wezterm.on("editprompt-dump", function(window, pane)
   local text = window:get_selection_text_for_pane(pane)
   -- wezterm.log_info("selection is: " .. text)
   local target_pane_id = tostring(pane:pane_id())
@@ -18,7 +18,7 @@ wezterm.on("editprompt-capture", function(window, pane)
     "/bin/zsh",
     "-lc",
     string.format(
-      "%s --quote --mux wezterm --target-pane %s -- %s",
+      "%s collect --mux wezterm --target-pane %s -- %s",
       editprompt_cmd,
       target_pane_id,
       wezterm.shell_quote_arg(text) -- エスケープして位置引数として渡す
@@ -65,7 +65,7 @@ local key_table = {
         "/bin/zsh",
         "-lc",
         string.format(
-          "%s --resume --mux wezterm --target-pane %s",
+          "%s resume --mux wezterm --target-pane %s",
           editprompt_cmd,
           target_pane_id
         ),
@@ -87,7 +87,7 @@ local key_table = {
                 "/bin/zsh",
                 "-lc",
                 string.format(
-                  "%s --editor nvim --always-copy --mux wezterm --target-pane %s",
+                  "%s open --editor nvim --always-copy --mux wezterm --target-pane %s",
                   editprompt_cmd,
                   target_pane_id
                 ),
@@ -105,7 +105,7 @@ local key_table = {
   {
     key = "e",
     mods = "CMD",
-    action = wezterm.action.EmitEvent("editprompt-capture"),
+    action = wezterm.action.EmitEvent("editprompt-dump"),
   },
 }
 

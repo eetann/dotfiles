@@ -15,6 +15,7 @@ vim.keymap.set("n", "<Space>x", function()
     {
       "node",
       vim.fn.expand("~/ghq/github.com/eetann/editprompt/dist/index.js"),
+      "input",
       "--",
       content,
     },
@@ -49,6 +50,7 @@ vim.keymap.set("n", "<Space>sx", function()
     {
       "node",
       vim.fn.expand("~/ghq/github.com/eetann/editprompt/dist/index.js"),
+      "input",
       "--auto-send",
       "--",
       content,
@@ -80,7 +82,7 @@ vim.keymap.set("n", "<Space>X", function()
   vim.system({
     "node",
     vim.fn.expand("~/ghq/github.com/eetann/editprompt/dist/index.js"),
-    "--capture",
+    "dump",
   }, { text = true }, function(obj)
     vim.schedule(function()
       if obj.code == 0 then
