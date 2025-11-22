@@ -15,4 +15,13 @@ return {
   end,
   priority = 1,
   filetype = "markdown",
+  condition = {
+    callback = function()
+      if vim.fn.expand("%:p"):match("cyber%-blog") then
+        return false
+      else
+        return true
+      end
+    end,
+  },
 }

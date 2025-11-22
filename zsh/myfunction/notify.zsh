@@ -36,6 +36,12 @@ SKIP_NOTIFY_COMMANDS=(
   "yarn run server"
   "yarn run start"
   "yarn run watch"
+  "bun run dev"
+  "bun run preview"
+  "bun run server"
+  "bun run start"
+  "bun run watch"
+  "bun x difit"
 )
 
 function is_skip_command() {
