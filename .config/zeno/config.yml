@@ -83,6 +83,10 @@ snippets:
     keyword: "mdjanai"
     snippet: "node ~/ghq/github.com/eetann/mdjanai/dist/index.js"
 
+  - name: "convert to avif"
+    keyword: "AVIF"
+    snippet: 'ffmpeg -i screenshot.png "$R2_BACKUP_PATH/works/{{image_name}}.avif"'
+
   # ディレクトリ名の短縮入力
   - name: "cd media for blog"
     keyword: "MEDIA"
