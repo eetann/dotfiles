@@ -16,6 +16,7 @@ vim.keymap.set("n", "<Space>x", function()
       "node",
       vim.fn.expand("~/ghq/github.com/eetann/editprompt/dist/index.js"),
       "input",
+      "--always-copy",
       "--",
       content,
     },
