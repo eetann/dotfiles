@@ -225,22 +225,3 @@ completions:
     options:
       --no-select-1: true
     callback: "awk '{print $1}'"
-
-  # React Native IPA ファイルをリネーム
-  # - name: rename ipa file
-  #   patterns:
-  #     - "^ipa-rename $"
-  #   sourceCommand: "find . -maxdepth 1 -name '*.ipa' -type f -exec ls -la {} \\; | awk '{print $9, \"(\" $5 \" bytes, \" $6 \" \" $7 \" \" $8 \")\"}'"
-  #   options:
-  #     --header-lines: 0
-  #     --tmux: "80%"
-  #     --prompt: "'Select IPA file> '"
-  #     --no-select-1: true
-  #   callback: "
-  #     awk '{print $1}'
-  #     | xargs -I {} sh -c 'branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null
-  #         || echo \"main\");
-  #       datetime=$(date \"+%Y-%m-%d-%H-%M\");
-  #       mv \"{}\" \"build-$branch-$datetime.ipa\"
-  #       && echo \"Renamed to: build-$branch-$datetime.ipa\"'
-  #     "
