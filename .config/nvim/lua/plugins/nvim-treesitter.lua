@@ -88,7 +88,7 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     event = { "BufNewFile", "BufRead" },
     keys = {
-      { "<space>tc", ":TSContextToggle<CR>" },
+      { "<space>tc", ":TSContext toggle<CR>" },
     },
     opts = {
       max_lines = 3, -- How many lines the window should span. Values <= 0 mean no limit.

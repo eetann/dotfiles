@@ -65,6 +65,7 @@ require("lazy").setup({
     { import = "plugins.vim-sonictemplate" },
     { import = "plugins.mini-align" },
     { import = "plugins.dial" },
+    { import = "plugins.idyank" },
 
     -- fuzzy finder
     { import = "plugins.text-case" },
@@ -105,12 +106,5 @@ require("lazy").setup({
     { import = "plugins.mini-doc" },
     { import = "plugins.mini-test" },
     { import = "plugins.denops" },
-    -- { import = "plugins.senpai.index" },
-    -- {
-    -- 	"grapp-dev/nui-components.nvim",
-    -- 	dependencies = {
-    -- 		"MunifTanjim/nui.nvim",
-    -- 	},
-    -- },
   },
 })
