@@ -64,6 +64,13 @@ vim.keymap.set("n", "<Space>sx", function()
           -- 成功したらバッファを空にする
           vim.api.nvim_buf_set_lines(0, 0, -1, false, {})
           vim.cmd("silent write")
+          -- render-markdown.nvimの描画を空にする
+          vim.api.nvim_buf_clear_namespace(
+            0,
+            require("render-markdown.core.ui").ns,
+            0,
+            -1
+          )
         else
           -- 失敗したら通知
           vim.notify(
