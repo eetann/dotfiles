@@ -147,6 +147,11 @@ snippets:
     keyword: "tf"
     snippet: "tmux-first-choose-session"
 
+  - name: "import sjis CSV from Downloads and convert to UTF-8 TSV"
+    # 検索で引っ張る前提
+    keyword: "sjis_csv_to_utf8_tsv"
+    snippet: "sjis_csv_to_utf8_tsv"
+
 completions:
   - name: kill signal
     patterns:
