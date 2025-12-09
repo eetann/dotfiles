@@ -152,6 +152,10 @@ snippets:
     keyword: "sjis_csv_to_utf8_tsv"
     snippet: "sjis_csv_to_utf8_tsv"
 
+  - name: "wtman"
+    keyword: "wtman"
+    snippet: "~/ghq/github.com/eetann/wtman/dist/index.js"
+
 completions:
   - name: kill signal
     patterns:
