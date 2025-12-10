@@ -157,3 +157,11 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
     vim.keymap.set("n", "q", "<Cmd>quit<CR>", { buffer = true, silent = true })
   end,
 })
+
+-- 外部によるファイル編集の反映
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
+  pattern = "*",
+  callback = function()
+    vim.cmd("checktime")
+  end,
+})
