@@ -5,11 +5,23 @@ local fmt = require("luasnip.extras.fmt").fmt
 
 return {
   s(
-    "snote",
+    "qnote",
     fmt(
       [[
 <!--
 {}
+-->
+		  ]],
+      { i(1) }
+    )
+  ),
+  s(
+    "qressize",
+    fmt(
+      [[
+Buffer.byteLength(JSON.stringify(
+{}
+), 'utf8')
 -->
 		  ]],
       { i(1) }
