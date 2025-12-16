@@ -170,3 +170,75 @@ vim.keymap.set("x", "<C-q>", toggle_checkbox_visual, {
 if vim.fn.getcwd() == vim.fn.expand("~/.nb/home") then
   vim.lsp.enable("markdown-language-server")
 end
+
+-- TODOリスト間の移動（Treesitter使用）
+local function goto_todo(direction)
+  local bufnr = vim.api.nvim_get_current_buf()
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  local current_row = cursor[1] - 1 -- Treesitterは0-indexed
+  local current_col = cursor[2]
+
+  local parser = vim.treesitter.get_parser(bufnr, "markdown")
+  if not parser then
+    vim.notify("Markdown parser not found", vim.log.levels.WARN)
+    return
+  end
+
+  local tree = parser:parse()[1]
+  local root = tree:root()
+
+  -- チェック済み・未チェック両方を探すクエリ
+  local query = vim.treesitter.query.parse(
+    "markdown",
+    [[
+    [
+      (task_list_marker_unchecked)
+      (task_list_marker_checked)
+    ] @todo
+  ]]
+  )
+
+  if direction == "next" then
+    for _, node in query:iter_captures(root, bufnr, current_row, -1) do
+      local start_row, start_col = node:range()
+      if
+        start_row > current_row
+        or (start_row == current_row and start_col > current_col)
+      then
+        vim.api.nvim_win_set_cursor(0, { start_row + 1, start_col })
+        return
+      end
+    end
+    vim.notify("次のTODOが見つからなかった", vim.log.levels.INFO)
+  else
+    local last_match = nil
+    for _, node in query:iter_captures(root, bufnr, 0, current_row + 1) do
+      local start_row, start_col = node:range()
+      if
+        start_row < current_row
+        or (start_row == current_row and start_col < current_col)
+      then
+        last_match = { start_row + 1, start_col }
+      end
+    end
+    if last_match then
+      vim.api.nvim_win_set_cursor(0, last_match)
+    else
+      vim.notify("前のTODOが見つからなかった", vim.log.levels.INFO)
+    end
+  end
+end
+
+vim.keymap.set("n", "]T", function()
+  goto_todo("next")
+end, {
+  desc = "次のTODOに移動",
+  buffer = true,
+})
+
+vim.keymap.set("n", "[T", function()
+  goto_todo("prev")
+end, {
+  desc = "前のTODOに移動",
+  buffer = true,
+})
