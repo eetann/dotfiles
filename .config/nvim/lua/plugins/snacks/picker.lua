@@ -13,6 +13,7 @@ local function project_files(use_git_root)
   local text = get_text()
 
   local root = require("snacks.git").get_root()
+  -- TODO: 日本語だと文字が壊れることがあるのを修正
   local main_source = { source = "files", pattern = text }
   if root ~= nil then
     if use_git_root then
@@ -171,6 +172,7 @@ M.keys = {
   { "grr", function() picker.lsp_references() end, nowait = true, desc = "References" },
 
   -- pickerそのもの
+  -- TODO: 直前のpickerがテキスト選択始まりだと被る
   { "<space>fR", function() picker.resume() end, desc = "Picker: resume" },
 	{ "<space>fA", function() picker.pickers() end, desc = "Picker: All sources" },
   -- stylua: ignore end
