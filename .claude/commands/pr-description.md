@@ -1,6 +1,6 @@
 ---
 description: "PRの説明文作成"
-allowed-tools: Bash(git diff:*), Bash(git log:*), Bash(mkdir:*), Bash(rm -f ./.mywork/tmp/pr.md), List
+allowed-tools: Bash(git diff:*), Bash(git log:*), Bash(mkdir:*), List
 ---
 
 PR説明文を作成します：
@@ -42,6 +42,9 @@ PR説明文を作成します：
 
 ---
 
-## 以前のPR文を空にしておく自動コマンド
+## まず最初に必ずやること
 
-!`rm -f ./.mywork/tmp/pr.md`
+```sh
+rm .mywork/tmp/pr.md
+```
+これをやらないと「差分のレビュー」になってしまって見づらいため。
