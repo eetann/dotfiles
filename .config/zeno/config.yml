@@ -156,6 +156,10 @@ snippets:
     keyword: "wtman"
     snippet: "~/ghq/github.com/eetann/wtman/dist/index.js"
 
+  - name: "ASCII padded"
+    keyword: "ascii-padded"
+    snippet: 'bun run ~/dotfiles/bin/ascii-padded.ts -d "{{cursor}}"'
+
 completions:
   - name: kill signal
     patterns:
