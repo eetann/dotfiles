@@ -169,6 +169,32 @@ vim.keymap.set(
   "<Cmd>let @+ = histget('search',-1)<CR>:echo 'Clipboard << ' . @+<CR>",
   { desc = "直前の検索をヤンク" }
 )
+vim.keymap.set("n", "sgq", function()
+  local line = vim.fn.getline(".")
+  local result = "> " .. line
+  vim.fn.setreg("+", result)
+  vim.notify("Clipboard << " .. result)
+end, { desc = "現在行をMarkdown引用としてヤンク" })
+vim.keymap.set("x", "sgq", function()
+  local start_line = vim.fn.line("v")
+  local end_line = vim.fn.line(".")
+  if start_line > end_line then
+    start_line, end_line = end_line, start_line
+  end
+  local lines = vim.fn.getline(start_line, end_line)
+  local quoted = {}
+  if type(lines) == "string" then
+    table.insert(quoted, "> " .. lines)
+  else
+    for _, line in ipairs(lines) do
+      table.insert(quoted, "> " .. line)
+    end
+  end
+  local result = table.concat(quoted, "\n")
+  vim.fn.setreg("+", result)
+  vim.notify("Clipboard << quoted " .. #lines .. " lines")
+end, { desc = "選択範囲をMarkdown引用としてヤンク" })
+
 -- 検索モードで<C-v>を押すとvery magicをトグル
 vim.keymap.set("c", "<C-v>", function()
   local cmdtype = vim.fn.getcmdtype()
