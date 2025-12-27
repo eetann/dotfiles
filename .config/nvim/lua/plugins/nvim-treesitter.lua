@@ -39,7 +39,7 @@ return {
         "javascript",
         "json",
         "json5",
-        "jsonc",
+        -- "jsonc",
         "lua",
         "markdown",
         "php",
