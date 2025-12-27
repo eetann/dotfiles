@@ -130,7 +130,6 @@ return {
         lualine_z = {},
       },
       winbar = {
-        -- lspsagaのwinbarは被って見づらくなる & そもそも活用していないので非表示へ
         lualine_a = {},
         lualine_b = {
           {

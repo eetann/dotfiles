@@ -21,7 +21,6 @@ return {
     end,
   },
   -- { import = "plugins.lsp.tiny-inline-diagnostic" },
-  { import = "plugins.lsp.lspsaga" },
   { import = "plugins.lsp.tiny-code-action" },
   { import = "plugins.lsp.conform" },
   -- { import = "plugins.lsp.none-ls" },

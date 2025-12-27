@@ -3,13 +3,14 @@ vim.diagnostic.config({
   virtual_text = {
     prefix = "●",
     format = function(diagnostic)
-      return string.format(
-        "%s (%s: %s)",
-        diagnostic.message,
-        diagnostic.source,
-        diagnostic.code
-      )
+      return string.format("%s <%s>", diagnostic.message, diagnostic.source)
     end,
+  },
+  float = {
+    format = function(diagnostic)
+      return string.format("%s <%s>", diagnostic.message, diagnostic.source)
+    end,
+    border = "rounded",
   },
   signs = {
     text = {

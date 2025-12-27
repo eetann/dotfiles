@@ -8,9 +8,7 @@ return {
       "prompt",
       "cmp_docs",
       "cmp_menu",
-      "TelescopePrompt",
       "noice",
-      "LspsagaHover",
     },
   },
 }

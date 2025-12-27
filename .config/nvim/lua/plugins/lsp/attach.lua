@@ -27,33 +27,28 @@ local function attach_callback(ev)
     "<cmd>lua vim.lsp.buf.implementation()<CR>",
     bufopts
   )
-  vim.keymap.set("n", "gp", "<cmd>Lspsaga peek_definition<CR>", bufopts)
   vim.keymap.set(
     "n",
     "<space>D",
     "<cmd>lua vim.lsp.buf.type_definition()<CR>",
     bufopts
   )
-  vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", bufopts)
-  vim.keymap.set("n", "<C-g>", "<cmd>Lspsaga hover_doc<CR>", bufopts)
-  vim.keymap.set("i", "<C-g>h", "<cmd>Lspsaga hover_doc<CR>", bufopts)
-  -- vim.keymap.set("n", "gf", "<cmd>Lspsaga lsp_finder<CR>", bufopts)
-  vim.keymap.set("n", "gh", "<cmd>Lspsaga hover_doc<CR>", bufopts)
-  vim.keymap.set("n", "grn", "<cmd>Lspsaga rename<CR>", bufopts)
+  vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.signature_help()<CR>", bufopts)
   vim.keymap.set(
-    "n",
-    "<leader>ld",
-    "<cmd>Lspsaga show_line_diagnostics<CR>",
+    "i",
+    "<C-g>h",
+    "<cmd>lua vim.lsp.buf.signature_help()<CR>",
     bufopts
   )
+  vim.keymap.set("n", "grn", "<cmd>lua vim.lsp.buf.rename()<CR>", bufopts)
   vim.keymap.set(
     "n",
     "<leader>lc",
-    "<cmd>Lspsaga show_cursor_diagnostics<CR>",
+    "<cmd>lua vim.diagnostic.open_float()<CR>",
     bufopts
   )
-  vim.keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", bufopts)
-  vim.keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", bufopts)
+  vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_next()<CR>", bufopts)
+  vim.keymap.set("n", "]d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", bufopts)
 end
 
 vim.api.nvim_create_autocmd("LspAttach", {
