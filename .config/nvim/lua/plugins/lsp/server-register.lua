@@ -11,8 +11,9 @@ require("mason-lspconfig").setup()
 
 local other_lsp = {
   -- list
-  -- "biome",  -- disabled by default
+  "biome",
   "eslint",
+  "oxc_lsp",
   "jsonls",
   -- "laravel-language-server", -- disable
   -- "markdown-language-server", -- disabled by default
@@ -20,10 +21,6 @@ local other_lsp = {
 }
 for _, server_name in pairs(other_lsp) do
   vim.lsp.enable(server_name)
-end
-
-if vim.fn.filereadable("node_modules/.bin/biome") == 1 then
-  vim.lsp.enable("biome")
 end
 
 if os.getenv("TS_LS_GLOBAL") == "1" then
