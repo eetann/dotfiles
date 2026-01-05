@@ -15,6 +15,10 @@ function completion_dir() {
     query=${ary[-1]}
     prebuffer=${ary[1,-2]}
   fi
+  # コマンドがない場合は cd にする
+  if [ -z "$prebuffer" ]; then
+    prebuffer="cd"
+  fi
 
   fzf_command+=" "
   fzf_command+=$(cat << EOF
