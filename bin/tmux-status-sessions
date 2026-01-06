@@ -9,16 +9,21 @@ text_fg="#{@c-info-content}"
 output="#[bg=$bg,fg=$color]"
 
 # セッション一覧を整形してソート
-sessions=$(tmux list-sessions -F '#{session_name}' 2>/dev/null | while read -r s; do
+sessions=$(tmux list-sessions -F '#{session_name}	#{session_id}' 2>/dev/null | while read -r line; do
+  s=$(echo "$line" | cut -f1)
+  sid=$(echo "$line" | cut -f2)
   if [ "$(echo "$s" | cut -c2)" = " " ]; then
-    echo "$(echo "$s" | cut -c3-)|$s"
+    echo "$(echo "$s" | cut -c3-)|$s|$sid"
   else
-    echo "$s|$s"
+    echo "$s|$s|$sid"
   fi
-done | sort | cut -d'|' -f2)
+done | sort | cut -d'|' -f2,3)
 
 # セッション一覧を取得してループ
-while IFS= read -r session; do
+while IFS= read -r line; do
+  session=$(echo "$line" | cut -d'|' -f1)
+  session_id=$(echo "$line" | cut -d'|' -f2)
+
   # 2文字目が空白かチェック
   second_char=$(echo "$session" | cut -c2)
   if [ "$second_char" = " " ]; then
@@ -33,10 +38,10 @@ while IFS= read -r session; do
 
   if [ "$session" = "$current_session" ]; then
     # カレントセッション：アイコン+名前+区切り
-    output+="#[bg=$color,fg=$text_fg]$icon $session_name#[bg=$bg,fg=$color] "
+    output+="#[range=session|$session_id]#[bg=$color,fg=$text_fg]$icon $session_name#[norange]#[bg=$bg,fg=$color] "
   else
     # その他：アイコンのみ
-    output+="$icon "
+    output+="#[range=session|$session_id]$icon #[norange]"
   fi
 done <<< "$sessions"
 
