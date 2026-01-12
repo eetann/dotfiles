@@ -132,6 +132,55 @@ vim.keymap.set("n", "<Space>X", function()
   end)
 end, { silent = true, desc = "Capture from editprompt quote mode" })
 
+vim.keymap.set("n", "<Space>ss", function()
+  local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+  local content = table.concat(lines, "\n")
+  if content:gsub("%s", "") == "" then
+    vim.notify("Buffer is empty", vim.log.levels.WARN)
+    return
+  end
+  vim.system({
+    "node",
+    vim.fn.expand("~/ghq/github.com/eetann/editprompt/dist/index.js"),
+    "stash",
+    "push",
+    "--",
+    content,
+  }, { text = true }, function(obj)
+    vim.schedule(function()
+      if obj.code == 0 then
+        vim.api.nvim_buf_set_lines(0, 0, -1, false, {})
+        vim.notify("Prompt stashed", vim.log.levels.INFO)
+      else
+        vim.notify(
+          "Stash failed: " .. (obj.stderr or "unknown error"),
+          vim.log.levels.ERROR
+        )
+      end
+    end)
+  end)
+end, { silent = true, desc = "Stash buffer content" })
+
+-- Pop latest stashed prompt into buffer
+vim.keymap.set("n", "<Space>sS", function()
+  vim.system({
+    "node",
+    vim.fn.expand("~/ghq/github.com/eetann/editprompt/dist/index.js"),
+    "stash",
+    "pop",
+  }, { text = true }, function(obj)
+    vim.schedule(function()
+      if obj.code == 0 and obj.stdout ~= "" then
+        local lines = vim.split(obj.stdout, "\n")
+        vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+        vim.notify("Prompt popped", vim.log.levels.INFO)
+      else
+        vim.notify("No stash entries found", vim.log.levels.WARN)
+      end
+    end)
+  end)
+end, { silent = true, desc = "Pop stashed prompt" })
+
 -- ファイル選択して @ prefix で挿入
 local function insert_files_with_fzf()
   -- インサートモードでなければ挿入モードに移行
