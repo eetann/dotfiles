@@ -14,17 +14,7 @@ return {
     "dictionary",
     -- "copilot",
   },
-  per_filetype = {
-    codecompanion = { "codecompanion", "snippets", "path", "buffer" },
-  },
   providers = {
-    avante = {
-      module = "blink-cmp-avante",
-      name = "Avante",
-      opts = {
-        -- options for blink-cmp-avante
-      },
-    },
     conventional_commits = {
       name = "Conventional Commits",
       module = "blink-cmp-conventional-commits",
@@ -75,30 +65,6 @@ return {
         return vim.env.EDITPROMPT == "1"
       end,
     },
-    -- minuet = {
-    -- 	name = "minuet",
-    -- 	module = "minuet.blink",
-    -- 	-- score_offset = 8, -- Gives minuet higher priority among suggestions
-    -- 	async = true,
-    -- 	enabled = function()
-    -- 		if vim.env.OPENAI_API_KEY then
-    -- 			return true
-    -- 		end
-    -- 		return false
-    -- 	end,
-    -- },
-    -- copilot = {
-    -- 	name = "copilot",
-    -- 	module = "blink-cmp-copilot",
-    -- 	score_offset = 100,
-    -- 	async = true,
-    -- 	enabled = function()
-    -- 		if vim.env.OPENAI_API_KEY then
-    -- 			return false
-    -- 		end
-    -- 		return true
-    -- 	end,
-    -- },
   },
   min_keyword_length = function(ctx)
     -- :wq, :qa -> menu doesn't popup

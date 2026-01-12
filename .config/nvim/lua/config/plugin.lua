@@ -84,8 +84,6 @@ require("lazy").setup({
     { import = "plugins.emmet-vim" },
     { import = "plugins.csvview" },
     { "vim-jp/vimdoc-ja", event = "VeryLazy" },
-    -- blade
-    { "jwalton512/vim-blade", ft = "blade" }, -- インデント
     -- markdown
     { import = "plugins.vim-table-mode" },
     { import = "plugins.markdown-preview" },
@@ -98,8 +96,6 @@ require("lazy").setup({
     { import = "plugins.overseer" },
 
     -- AI系
-    -- { import = "plugins.codecompanion.index" },
-    -- { import = "plugins.avante" },
 
     -- プラグイン開発
     { import = "plugins.lsp-dev" },

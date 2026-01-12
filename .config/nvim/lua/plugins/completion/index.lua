@@ -17,9 +17,7 @@ return {
     dependencies = {
       { import = "plugins.completion.luasnip" },
       "disrupted/blink-cmp-conventional-commits",
-      "Kaiser-Yang/blink-cmp-avante",
       "Kaiser-Yang/blink-cmp-dictionary",
-      "giuxtaposition/blink-cmp-copilot",
       { import = "plugins.completion.cmp-prompt-abbr" },
       -- { import = "plugins.completion.minuet-ai" },
       -- { import = "plugins.copilot" },

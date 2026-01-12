@@ -65,12 +65,6 @@ return {
             "dapui_scopes",
             "dapui_watches",
             "dapui_stacks",
-            "Avante",
-            "AvanteSelectedFiles",
-            "AvanteInput",
-            "senpai_chat_log",
-            "senpai_chat_input",
-            "senpai_ai_buffer",
             "snacks_layout_box",
           },
         },
@@ -117,9 +111,7 @@ return {
           "fileformat",
           "filetype",
         },
-        lualine_z = {
-          { require("plugins.lualine.cc-component") },
-        },
+        lualine_z = {},
       },
       inactive_sections = {
         lualine_a = {},
