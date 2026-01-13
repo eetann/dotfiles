@@ -132,6 +132,27 @@ vim.keymap.set("n", "sgp", "<Cmd>put<CR>`[v`]=`>$", {
 vim.keymap.set("n", "sy", "<Cmd>%y<CR>", { desc = "全選択してyank" })
 vim.keymap.set("n", "sgf", function()
   local relative_path = vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.")
+
+  -- 絶対パスになってしまった場合、git common-dirを使って相対パスに変換
+  if relative_path:sub(1, 1) == "~" then
+    local git_common_dir = vim.fn
+      .system("git rev-parse --path-format=relative --git-common-dir 2>/dev/null")
+      :gsub("\n", "")
+    if git_common_dir ~= "" and not git_common_dir:match("^fatal:") then
+      -- .git を取り除いてメインワークツリーのディレクトリを得る
+      local main_worktree_relative = git_common_dir:gsub("/?%.git$", "")
+      if main_worktree_relative ~= "" then
+        local main_worktree_abs =
+          vim.fn.fnamemodify(main_worktree_relative, ":p"):gsub("/$", "")
+        local file_abs = vim.fn.expand("%:p")
+        if vim.startswith(file_abs, main_worktree_abs .. "/") then
+          relative_path = file_abs:sub(#main_worktree_abs + 2)
+        end
+      end
+    else
+    end
+  end
+
   vim.fn.setreg("+", relative_path)
   vim.notify("Clipboard << " .. relative_path)
 end, { desc = "現在のファイル名(相対パス)をyank", silent = true })
