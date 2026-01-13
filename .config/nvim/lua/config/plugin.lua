@@ -89,6 +89,7 @@ require("lazy").setup({
     { import = "plugins.markdown-preview" },
     { import = "plugins.render-markdown" },
     { import = "plugins.clipboard-image-to-agent" },
+    { import = "plugins.editprompt" },
 
     -- 外部連携など
     { import = "plugins.open-browser" },
