@@ -17,6 +17,10 @@ return {
         source = "pnext",
         target = "次へ",
       },
+      {
+        source = "pnew",
+        target = "一旦別のセッションにリセットしようと思うんだけど、その前にその「新しいセッション」で再スタートするための指示をまとめたファイルを用意してほしい",
+      },
     },
     matching = "prefix",
     case_sensitive = false,
