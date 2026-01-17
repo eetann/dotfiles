@@ -1,5 +1,5 @@
 alias rm='gomi'
-alias la='ls -F --color -al'
+alias la='ls -F --color -alh'
 alias ls='ls -F --color'
 alias reload="source ~/.zshrc"
 alias echopath="echo $PATH | sed -e 's/:/\n/g'"

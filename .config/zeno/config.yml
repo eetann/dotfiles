@@ -28,6 +28,11 @@ snippets:
     keyword: "difit"
     snippet: "bun x difit ."
 
+  - name: "nb add today's daily"
+    keyword: "nbd"
+    snippet: date "+nb a %Y-%m-%d.md"
+    evaluate: true
+
   # difitで今のHEADとdevelopmentブランチの比較
   - name: "difit to dev"
     keyword: "difitd"
