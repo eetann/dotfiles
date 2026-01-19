@@ -6,7 +6,7 @@ return {
   keys = {
     { "<Space>pi", "<Cmd>Editprompt input --auto-send<CR>" },
     { "<Space>pI", "<Cmd>Editprompt input<CR>" },
-    { "<Space>pc", "<Cmd>Editprompt capture<CR>" },
+    { "<Space>pd", "<Cmd>Editprompt dump<CR>" },
     { "<Space>ps", "<Cmd>Editprompt stash pop<CR>" },
     { "<Space>pS", "<Cmd>Editprompt stash push<CR>" },
   },
