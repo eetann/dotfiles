@@ -21,6 +21,10 @@ return {
         source = "pnew",
         target = "一旦別のセッションにリセットしようと思うんだけど、その前にその「新しいセッション」で再スタートするための指示をまとめたファイルを用意してほしい",
       },
+      {
+        source = "pcodex",
+        target = "Codex MCPにレビューしてもらおう",
+      },
     },
     matching = "prefix",
     case_sensitive = false,
