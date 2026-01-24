@@ -30,7 +30,7 @@ snippets:
 
   - name: "nb add today's daily"
     keyword: "nbd"
-    snippet: date "+nb a %Y-%m-%d.md"
+    snippet: date "+nb a daily-%Y-%m-%d.md"
     evaluate: true
 
   # difitで今のHEADとdevelopmentブランチの比較

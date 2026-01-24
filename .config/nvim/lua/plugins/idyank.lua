@@ -7,7 +7,7 @@ return {
     "nvim-treesitter/nvim-treesitter-context",
   },
   keys = {
-    { "<Space>y", "<Cmd>Idyank yank<CR>" },
+    { "<Space>y", "<Cmd>Idyank yank_with_filename<CR>" },
   },
   cmd = "Idyank",
   opts = {},
