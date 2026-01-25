@@ -104,6 +104,39 @@ Mac: [macOS（またはLinux）用パッケージマネージャー — Homebrew
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/eetann/dotfiles/master/etc/setup) --init"
 ```
 
+## home-manager（設定ファイルのシンボリックリンク管理）
+
+Nixとhome-managerで設定ファイルのシンボリックリンクを宣言的に管理する。
+
+### 初回セットアップ
+
+```sh
+# Nixインストール（まだの場合）
+sh <(curl -L https://nixos.org/nix/install)
+
+# dotfilesをクローン（まだの場合）
+git clone https://github.com/eetann/dotfiles.git ~/dotfiles
+
+# home-manager適用
+nix run home-manager/master -- switch --flake ~/dotfiles
+```
+
+### 以降の更新
+
+```sh
+home-manager switch --flake ~/dotfiles
+```
+
+### 世代管理
+
+```sh
+# 世代一覧を表示
+home-manager generations
+
+# 前の世代に戻す
+home-manager switch --rollback
+```
+
 ## zsh
 ```sh
 command -v zsh | sudo tee -a /etc/shells

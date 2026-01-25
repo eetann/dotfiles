@@ -18,10 +18,10 @@ all:
 update: ## Fetch changes for this repo
 	git pull origin master
 
-deploy: ## Create symlink to home directory
+deploy: ## Create symlink to home directory (via home-manager)
 	@echo '==> Start to deploy dotfiles to home directory.'
 	@echo ''
-	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/scripts/deploy
+	home-manager switch --flake $(DOTPATH)
 
 init: ## Setup environment settings
 	@echo '==> Start to install app.'
