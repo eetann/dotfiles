@@ -72,6 +72,10 @@ snippets:
     keyword: "wtmise"
     snippet: 'ln -s "$(git rev-parse --path-format=relative --git-common-dir | xargs dirname)/mise.local.toml" mise.local.toml && mise trust'
 
+  - name: "home-manager switch"
+    keyword: "hms"
+    snippet: "home-manager switch --flake ~/dotfiles"
+
   # 指定したcsvの2列目に重複したデータがないか調べる
   # 列を変えるなら`-f2`の部分を変更する
   - name: "csv checker for duplicates col2"

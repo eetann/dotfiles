@@ -9,12 +9,14 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs =
+    { nixpkgs, home-manager, ... }:
     let
       # 将来的にLinuxも対応できるように変数化
-      system = "aarch64-darwin";  # Apple Silicon Mac
+      system = "aarch64-darwin"; # Apple Silicon Mac
       pkgs = nixpkgs.legacyPackages.${system};
-    in {
+    in
+    {
       homeConfigurations."eetann" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ ./home.nix ];
