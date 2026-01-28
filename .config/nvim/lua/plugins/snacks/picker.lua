@@ -118,6 +118,24 @@ M.keys = {
 	-- stylua: ignore start
   { "<F6>", function() picker.git_files({ cwd = '~/dotfiles' }) end, desc = "Picker files: dotfiles" },
   { "<space>fr", function() picker.recent({ filter = { cwd = true } }) end, desc = "Picker: recent" },
+  -- stylua: ignore end
+  {
+    "<space>fs",
+    function()
+      picker.pick({
+        source = "files",
+        args = { ".", ".mywork" },
+        transform = function(item)
+          item.mtime = vim.fn.getftime(item.file)
+        end,
+        sort = { fields = { "mtime:desc", "file" } },
+        matcher = { sort_empty = true },
+        layout = my_vertical,
+      })
+    end,
+    desc = "Picker files: .mywork（更新順）",
+  },
+  -- stylua: ignore start
 
   -- grep
   -- stylua: ignore end
