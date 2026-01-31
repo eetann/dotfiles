@@ -165,3 +165,23 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
     vim.cmd("checktime")
   end,
 })
+
+-- ref: https://zenn.dev/vim_jp/articles/ff6cd224fab0c7
+vim.api.nvim_create_autocmd("QuitPre", {
+  callback = function()
+    local current_win = vim.api.nvim_get_current_win()
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+      if win ~= current_win then
+        local buf = vim.api.nvim_win_get_buf(win)
+        -- buftypeが空文字（通常のバッファ）があればループ終了
+        if vim.bo[buf].buftype == "" then
+          return
+        end
+      end
+    end
+    -- ここまで来たらカレント以外がすべて特殊ウィンドウということなので
+    -- カレント以外をすべて閉じる
+    vim.cmd.only({ bang = true })
+  end,
+  desc = "quiteで特殊ウィンドウまとめて閉じる",
+})
