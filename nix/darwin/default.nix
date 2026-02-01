@@ -14,7 +14,10 @@
   networking.localHostName = "eetann-mac";
 
   # ↓を指定しないとtmuxのpopupで使えない
-  environment.systemPath = [ "/opt/homebrew/bin" ];
+  environment.systemPath = [
+    "/opt/homebrew/bin"
+    "/Users/eetann/dotfiles/bin"
+  ];
 
   # エディタをnvimに設定（デフォルトはnano）
   environment.variables.EDITOR = "nvim";

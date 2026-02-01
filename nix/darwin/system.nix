@@ -4,7 +4,14 @@
   # nix-darwinのバージョン管理
   system.stateVersion = 5;
 
+  system.keyboard = {
+    enableKeyMapping = true;
+    # CapsLockをControlにマッピング
+    remapCapsLockToControl = true;
+  };
+
   system.defaults = {
+
     # Dock設定
     dock = {
       autohide = true; # 自動的に隠す
