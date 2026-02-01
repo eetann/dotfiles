@@ -54,6 +54,7 @@ in
     ".zshrc"
     ".claude/commands"
     ".claude/agents"
+    ".claude/settings.json"
     ".codex/prompts"
   ];
 

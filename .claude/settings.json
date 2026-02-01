@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "includeCoAuthoredBy": false,
+  "language": "japanese",
+  "outputStyle": "フレンドリーな快男児の先輩（標準語のみ）",
+  "permissions": {
+    "deny": [
+      "Bash(sudo:*)",
+      "Bash(rm -rf:*)",
+      "Bash(git push:*)",
+      "Bash(git reset:*)",
+      "Bash(git rebase:*)",
+      "Read(.env*)",
+      "Read(.secret*)",
+      "Read(id_rsa)",
+      "Read(id_ed25519)",
+      "Write(.env*)",
+      "Write(.secret*)",
+      "Bash(curl:*)",
+      "Bash(wget:*)",
+      "Bash(rm -rf /)",
+      "Bash(rm -rf ~)",
+      "Bash(rm -rf ~/*)",
+      "Bash(rm -rf /*)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "nixfmt ${CLAUDE_FILE_PATHS} 2>/dev/null || true",
+            "timeout": 100
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "permission_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "vde-notifier --claude --message 'Claude Codeが許可を求めています' --terminal wezterm"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bun x ccusage statusline",
+    "padding": 0
+  },
+  "alwaysThinkingEnabled": true,
+  "enabledPlugins": {
+    "typescript-lsp@claude-plugins-official": true
+  }
+}
