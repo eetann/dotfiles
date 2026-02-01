@@ -15,6 +15,8 @@
     };
 
     # Finder設定
+    # 設定変更後はFinderの再起動が必要。コマンド:
+    #   killall Finder
     finder = {
       AppleShowAllFiles = true; # 隠しファイルを表示
       ShowPathbar = true; # パスバー表示

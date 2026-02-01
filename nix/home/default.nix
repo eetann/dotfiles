@@ -43,7 +43,7 @@ in
 
   # home-managerで管理するパッケージ
   home.packages = [
-    pkgs.nixfmt-rfc-style
+    pkgs.nixfmt
   ];
 
   # ホームディレクトリ直下のdotfiles

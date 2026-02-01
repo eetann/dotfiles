@@ -13,6 +13,21 @@
   networking.computerName = "eetann-mac";
   networking.localHostName = "eetann-mac";
 
+  # ↓を指定しないとtmuxのpopupで使えない
+  environment.systemPath = [ "/opt/homebrew/bin" ];
+
+  # エディタをnvimに設定（デフォルトはnano）
+  environment.variables.EDITOR = "nvim";
+
+  # システム設定を適用するユーザー
+  system.primaryUser = "eetann";
+
+  # ユーザー設定（home-managerがhomeDirectoryを取得するために必要）
+  users.users.eetann = {
+    name = "eetann";
+    home = "/Users/eetann";
+  };
+
   # home-manager統合
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
