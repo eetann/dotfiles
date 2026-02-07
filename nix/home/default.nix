@@ -35,16 +35,15 @@ let
 
 in
 {
+  imports = [
+    ./packages.nix
+  ];
+
   home.username = "eetann";
   home.homeDirectory = "/Users/eetann";
   home.stateVersion = "24.11";
 
   programs.home-manager.enable = true;
-
-  # home-managerで管理するパッケージ
-  home.packages = [
-    pkgs.nixfmt
-  ];
 
   # ホームディレクトリ直下のdotfiles
   home.file = mkHomeFiles [
