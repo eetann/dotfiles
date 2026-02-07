@@ -1,6 +1,11 @@
 # macOSシステム設定（system.defaults）
 { ... }:
 {
+  security.pam.services.sudo_local = {
+    touchIdAuth = true;
+    reattach = true; # tmux内で必要
+  };
+
   # nix-darwinのバージョン管理
   system.stateVersion = 5;
 
