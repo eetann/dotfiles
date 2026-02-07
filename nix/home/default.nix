@@ -37,6 +37,7 @@ in
 {
   imports = [
     ./packages.nix
+    ./tmux.nix
   ];
 
   home.username = "eetann";
@@ -49,7 +50,6 @@ in
   home.file = mkHomeFiles [
     ".clang-format"
     ".latexmkrc"
-    ".tmux.conf"
     ".zshrc"
     ".claude/commands"
     ".claude/agents"

@@ -13,9 +13,10 @@ alias mt='mise watch test'
 alias tn="tmux popup -E -w 95% -h 95% -d '#{pane_current_path}' 'nvim'"
 case ${OSTYPE} in
   darwin*)
-    alias xargs="gxargs"
-    alias sed="gsed"
     alias awk="gawk"
+    # nix経由なので元からsed・xargsになる
+    # alias sed="gsed"
+    # alias xargs="gxargs"
     ;;
 esac
 alias idea='nb e idea.md'
