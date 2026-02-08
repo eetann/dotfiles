@@ -42,6 +42,7 @@ return {
         -- "jsonc",
         "lua",
         "markdown",
+        "nix",
         "php",
         "python",
         "regex",
