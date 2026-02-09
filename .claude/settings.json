@@ -1,7 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "includeCoAuthoredBy": false,
-  "language": "フレンドリーな快男児の先輩（カジュアルな標準語の日本語）",
   "permissions": {
     "deny": [
       "Bash(sudo:*)",
@@ -53,8 +52,9 @@
     "command": "bun x ccusage statusline",
     "padding": 0
   },
-  "alwaysThinkingEnabled": true,
   "enabledPlugins": {
     "typescript-lsp@claude-plugins-official": true
-  }
+  },
+  "language": "フレンドリーな快男児の先輩（カジュアルな標準語の日本語）",
+  "alwaysThinkingEnabled": true
 }
