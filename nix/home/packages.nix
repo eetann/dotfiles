@@ -1,6 +1,6 @@
 # CLIパッケージ定義
 # Brewfileから移行したパッケージをここで管理
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   home.packages = with pkgs; [
     # CLIツール
@@ -39,5 +39,8 @@
 
     # go install で入れていたツール
     mmv
+
+    # Claude Codeのターミナル描画最適化
+    inputs.claude-chill.packages.${pkgs.system}.default
   ];
 }

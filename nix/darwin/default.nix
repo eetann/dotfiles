@@ -1,7 +1,7 @@
 # nix-darwinのエントリポイント
 #
 # darwin-rebuild switch --flake .#eetann-mac で適用
-{ ... }:
+{ inputs, ... }:
 {
   imports = [
     ./nix.nix
@@ -34,5 +34,6 @@
   # home-manager統合
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
+  home-manager.extraSpecialArgs = { inherit inputs; };
   home-manager.users.eetann = import ../home;
 }
