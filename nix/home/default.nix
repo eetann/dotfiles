@@ -52,6 +52,7 @@ in
     ".latexmkrc"
     ".zshrc"
     ".claude/commands"
+    ".claude/skills"
     ".claude/agents"
     ".claude/settings.json"
     ".codex/prompts"
