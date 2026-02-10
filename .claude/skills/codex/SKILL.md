@@ -21,6 +21,8 @@ codex exec --full-auto --sandbox read-only --cd <project_directory> "<request>"
 
 > 「確認や質問は不要です。具体的な提案・修正案・コード例まで自主的に出力してください。」
 
+SpecDDの設計書などの場合、「ファイル内容をプロンプト化」するのではなく、ファイルパスを渡す
+
 ## パラメータ
 
 | パラメータ | 説明 |
