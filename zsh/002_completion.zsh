@@ -11,13 +11,14 @@ if [[ -d /opt/homebrew/share/zsh/site-functions ]]; then
 fi
 
 # compinit最適化: zcompdumpが1日以内なら-C（再スキャンをスキップ）
-autoload bashcompinit && bashcompinit
 autoload -Uz compinit
 _zcompdump="${ZSH_CACHE_DIR}/zcompdump"
 if [[ -f "$_zcompdump" ]] && (( $(date +%s) - $(stat -f %m "$_zcompdump") < 86400 )); then
   compinit -C -d "$_zcompdump"
 else
   compinit -d "$_zcompdump"
+  # 再生成時にコンパイルして次回以降の読み込みを高速化
+  zcompile "$_zcompdump"
 fi
 unset _zcompdump
 
@@ -59,7 +60,9 @@ bindkey "^O" edit-command-line
 
 bindkey "^Q" forward-word
 
+# bashcompinit + aws completerは必要になった時だけロード
 if [ -e /usr/local/bin/aws_completer ]; then
+  autoload bashcompinit && bashcompinit
   complete -C '/usr/local/bin/aws_completer' aws
 fi
 [ -s "${HOME}/.bun/_bun" ] && source "${HOME}/.bun/_bun"

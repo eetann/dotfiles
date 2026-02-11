@@ -2,6 +2,9 @@ export ZDIR=$HOME/dotfiles/zsh
 
 source $ZDIR/000_path.zsh
 source $ZDIR/001_operation.zsh
+# p10kのSSH検出(_p9k_init_ssh)をスキップ（ローカル専用なので不要）
+typeset -gix P9K_SSH=0
+typeset -gx _P9K_SSH_TTY=$TTY
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
