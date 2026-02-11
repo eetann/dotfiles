@@ -1,4 +1,7 @@
 function fzf_npm_scripts() {
+  _zeno_lazy_load
+  [[ -z $ZENO_LOADED ]] && return
+
   if [[ ! -f package.json ]]; then
     echo 'fzf_npm_scripts'
     echo 'There is no package.json'
