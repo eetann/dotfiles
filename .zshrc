@@ -26,15 +26,19 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-# mise activateのevalキャッシュ
+# mise activateの遅延ロード（precmd one-shot）
+# 起動時ではなく最初のプロンプト表示直前に初期化する
 if type mise > /dev/null; then
-  _mise_ver=$(mise version 2>/dev/null | awk '{print $1}')
-  _mise_cache="${HOME}/.cache/zsh/mise-activate.${_mise_ver}.zsh"
-  if [[ ! -f "$_mise_cache" ]]; then
-    mise activate zsh > "$_mise_cache"
-  fi
-  source "$_mise_cache"
-  unset _mise_ver _mise_cache
+  _mise_lazy_activate() {
+    precmd_functions=(${precmd_functions:#_mise_lazy_activate})
+    local _mise_ver=${$(mise version 2>/dev/null)%% *}
+    local _mise_cache="${HOME}/.cache/zsh/mise-activate.${_mise_ver}.zsh"
+    if [[ ! -f "$_mise_cache" ]]; then
+      mise activate zsh > "$_mise_cache"
+    fi
+    source "$_mise_cache"
+  }
+  precmd_functions+=(_mise_lazy_activate)
 fi
 export SKIP_FIREBASE_FIRESTORE_SWIFT=1
 
