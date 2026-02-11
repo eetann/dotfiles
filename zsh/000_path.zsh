@@ -38,7 +38,15 @@ fi
 typeset -U path PATH
 
 
+# direnv hookのevalキャッシュ
 if type direnv > /dev/null; then
-  eval "$(direnv hook zsh)"
+  _direnv_ver=$(direnv version)
+  _direnv_cache="$HOME/.cache/zsh/direnv-hook.${_direnv_ver}.zsh"
+  if [[ ! -f "$_direnv_cache" ]]; then
+    mkdir -p "$HOME/.cache/zsh"
+    direnv hook zsh > "$_direnv_cache"
+  fi
+  source "$_direnv_cache"
+  unset _direnv_ver _direnv_cache
 fi
 export LG_CONFIG_FILE="$HOME/dotfiles/.config/lazygit/config.yml"

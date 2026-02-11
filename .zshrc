@@ -26,8 +26,15 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+# mise activateのevalキャッシュ
 if type mise > /dev/null; then
-  eval "$(mise activate zsh)"
+  _mise_ver=$(mise version 2>/dev/null | awk '{print $1}')
+  _mise_cache="${HOME}/.cache/zsh/mise-activate.${_mise_ver}.zsh"
+  if [[ ! -f "$_mise_cache" ]]; then
+    mise activate zsh > "$_mise_cache"
+  fi
+  source "$_mise_cache"
+  unset _mise_ver _mise_cache
 fi
 export SKIP_FIREBASE_FIRESTORE_SWIFT=1
 

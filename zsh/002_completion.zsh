@@ -1,8 +1,26 @@
 # 補完------------------------------------------------------------
-# 補完を有効化
-fpath=(/usr/local/share/zsh-completions $fpath)
+
+# キャッシュディレクトリ
+ZSH_CACHE_DIR="${HOME}/.cache/zsh"
+mkdir -p "$ZSH_CACHE_DIR"
+
+# fpath設定（compinit前に完了させる）
+fpath=($HOME/.zsh/completions $fpath)
+if [[ -d /opt/homebrew/share/zsh/site-functions ]]; then
+  fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+fi
+
+# compinit最適化: zcompdumpが1日以内なら-C（再スキャンをスキップ）
 autoload bashcompinit && bashcompinit
-autoload -Uz compinit && compinit
+autoload -Uz compinit
+_zcompdump="${ZSH_CACHE_DIR}/zcompdump"
+if [[ -f "$_zcompdump" ]] && (( $(date +%s) - $(stat -f %m "$_zcompdump") < 86400 )); then
+  compinit -C -d "$_zcompdump"
+else
+  compinit -d "$_zcompdump"
+fi
+unset _zcompdump
+
 setopt correct # コマンドのスペルチェックをする
 setopt mark_dirs # file名の展開でdirectoryにマッチした場合末尾に/付加
 setopt auto_param_keys # カッコの対応などを自動的に補完する
@@ -44,5 +62,4 @@ bindkey "^Q" forward-word
 if [ -e /usr/local/bin/aws_completer ]; then
   complete -C '/usr/local/bin/aws_completer' aws
 fi
-if [[ ":$FPATH:" != *":$HOME/.zsh/completions:"* ]]; then export FPATH="$HOME/.zsh/completions:$FPATH"; fi
 [ -s "${HOME}/.bun/_bun" ] && source "${HOME}/.bun/_bun"

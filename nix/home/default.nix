@@ -38,6 +38,7 @@ in
   imports = [
     ./packages.nix
     ./tmux.nix
+    ./zsh.nix
   ];
 
   home.username = "eetann";

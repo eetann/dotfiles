@@ -1,26 +1,4 @@
-export ZSH=$HOME/.oh-my-zsh
-
-ZSH_THEME="powerlevel10k/powerlevel10k"
-plugins=(
-  colored-man-pages
-  zsh-autosuggestions
-  zsh-completions
-  fast-syntax-highlighting
-  zsh-history-substring-search
-  fzf
-)
-if command -v docker &>/dev/null; then
-  plugins+=(
-    docker
-    docker-compose
-  )
-fi
-
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
-source $HOME/rupaz/z.sh
-source $ZSH/oh-my-zsh.sh
-source $ZSH/custom/plugins/zeno/zeno.zsh
-
+# 環境変数
 export BAT_THEME="gruvbox-dark"
 
 export FZF_DEFAULT_OPTS=$(cat <<"EOF"
@@ -75,11 +53,59 @@ export FZF_ALT_C_OPTS="--preview 'tree -aC -L 1 {} | head -200'"
 export FZF_COMPLETION_TRIGGER='**'
 export FZF_TMUX=1
 export FZF_TMUX_OPTS="-p 80%"
-export FZF_BASE=$HOME/.fzf
 
 export ZENO_HOME=~/.config/zeno
 export ZENO_GIT_CAT="bat --color=always"
 
+# プラグインファイル一覧（読み込み順序）
+typeset -a PLUGIN_FILES=(
+  "$HOME/.zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme"
+  "$HOME/.zsh/plugins/fzf/key-bindings.zsh"
+  "$HOME/.zsh/plugins/fzf/completion.zsh"
+  "$HOME/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+  "$HOME/.zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh"
+  "$HOME/.zsh/plugins/zeno/zeno.zsh"
+  "$HOME/.zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
+)
+
+# プラグインキャッシュ統合ロジック
+# キャッシュキー: ZSH_VERSION + プラグイン一覧ハッシュ
+_plugin_hash=$(printf '%s\n' "${PLUGIN_FILES[@]}" | md5)
+_cache_key="${ZSH_VERSION}-${_plugin_hash}"
+_cache_file="${ZSH_CACHE_DIR}/plugins-cache.${_cache_key}.zsh"
+
+# 鮮度チェック: キャッシュ不在 or プラグインファイルがキャッシュより新しい場合に再生成
+_need_regen=0
+if [[ ! -f "$_cache_file" ]]; then
+  _need_regen=1
+else
+  for _f in "${PLUGIN_FILES[@]}"; do
+    if [[ "$_f" -nt "$_cache_file" ]]; then
+      _need_regen=1
+      break
+    fi
+  done
+fi
+
+if (( _need_regen )); then
+  {
+    for _f in "${PLUGIN_FILES[@]}"; do
+      echo "source \"$_f\""
+    done
+  } > "$_cache_file"
+  zcompile "$_cache_file"
+fi
+
+source "$_cache_file"
+unset _plugin_hash _cache_key _cache_file _need_regen _f
+
+# プラグインキャッシュ外で読み込む
+source $HOME/rupaz/z.sh
+
+# autosuggestions設定
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
+
+# zeno関連の設定
 # tmuxやwezterm(tmuxなし)の最初のプロンプトでzeno-auto-snippet発動時に
 # カーソルより左(p10kのプロンプトも含む)が消えるので、その応急処置
 # ※zenoのアップデートのタイミングではないのでzenoが原因ではなさそう
@@ -88,7 +114,6 @@ function my_zeno_fallback() {
   zle reset-prompt
 }
 zle -N my_zeno_fallback
-
 
 if [[ -n $ZENO_LOADED ]]; then
   ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(zeno-auto-snippet-and-accept-line)
