@@ -44,3 +44,7 @@ feat: 電話キャンセルボタンを追加
 packages/mobile/app/call.tsx にキャンセルボタンを実装。
 それに伴って余白を微調整
 ```
+
+その他
+
+- `.mywork`はglobal ignoreされているのでコミット対象には含まない
