@@ -1,0 +1,74 @@
+#!/bin/bash
+
+if [ -z "$TMUX" ]; then
+  echo "Error: This command must be run inside tmux."
+  exit 1
+fi
+
+TARGET_PANE="${1:-$TMUX_PANE}"
+ghq_root=$(ghq root)
+cwd=$(cd "$(git rev-parse --path-format=relative --git-common-dir)/.." 2>/dev/null && pwd)
+mode="ghq"
+tmux set-option -gu @ghq_cd
+
+while true; do
+  if [ "$mode" = "ghq" ]; then
+    result=$(ghq list | fzf \
+      --height=100% \
+      --prompt="GHQ> " \
+      --header='Enter: new window | ^O: cd | ^T: worktree list' \
+      --expect=ctrl-t,ctrl-o \
+      --preview "
+        ( (type bat > /dev/null) &&
+          bat --color=always \
+            --theme=gruvbox-dark \
+            --style=numbers \
+            --line-range :200 ${ghq_root}/{}/README.* \
+          || (cat {} | head -200) ) 2> /dev/null
+      " \
+      --preview-window 'right,50%,wrap')
+  else
+    result=$( { git gtr list --porcelain 2>/dev/null | awk -F'\t' '{print $1}'; echo "$cwd"; } \
+      | awk -v cur="$(pwd)" '!seen[$0]++ && $0 != cur' \
+      | sed "s|^${cwd}|.|" \
+      | WORKTREE_BASE="$cwd" fzf \
+        --height=100% \
+        --prompt="Worktree> " \
+        --header='Enter: new window | ^O: cd | ^T: ghq list' \
+        --expect=ctrl-t,ctrl-o \
+        --preview 'p="{}"; git -C "${p/#./$WORKTREE_BASE}" log --oneline -20 2>/dev/null' \
+        --preview-window 'right,50%,wrap')
+  fi
+
+  # キャンセル
+  if [ -z "$result" ]; then
+    exit 0
+  fi
+
+  key=$(echo "$result" | sed -n '1p')
+  selected=$(echo "$result" | sed -n '2p')
+
+  # ctrl-t: モード切り替え
+  if [ "$key" = "ctrl-t" ]; then
+    if [ "$mode" = "ghq" ]; then mode="worktree"; else mode="ghq"; fi
+    continue
+  fi
+
+  # パス解決
+  if [ -n "$selected" ]; then
+    if [ "$mode" = "ghq" ]; then
+      target_path="${ghq_root}/${selected}"
+    else
+      target_path="${selected/#./$cwd}"
+    fi
+
+    if [ "$key" = "ctrl-o" ]; then
+      # 変数にパスを保存（popup閉じた後にtmux側でsend-keys）
+      tmux set-option -g @ghq_cd "$target_path"
+    else
+      # Enter: 新規ウィンドウ
+      tmux new-window -c "$target_path"
+    fi
+    exit 0
+  fi
+done

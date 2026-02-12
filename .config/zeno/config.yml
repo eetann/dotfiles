@@ -100,6 +100,11 @@ snippets:
     keyword: "AVIF"
     snippet: 'ffmpeg -i screenshot.png "$R2_BACKUP_PATH/works/{{image_name}}.avif"'
 
+  - name: "gtr init"
+    keyword: "GTRINIT"
+    snippet: git gtr config set gtr.worktrees.dir "../"
+      && git gtr config set gtr.worktrees.prefix "$(basename $PWD)@"
+
   # ディレクトリ名の短縮入力
   - name: "cd media for blog"
     keyword: "MEDIA"

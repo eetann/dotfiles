@@ -39,6 +39,7 @@ in
     ./packages.nix
     ./tmux.nix
     ./zsh.nix
+    ./git-worktree-runner.nix
   ];
 
   home.username = "eetann";
