@@ -23,7 +23,7 @@ return {
       },
       {
         source = "pcodex",
-        target = "Codex MCPにレビューしてもらおう",
+        target = "Codexにレビューしてもらおう",
       },
     },
     matching = "prefix",
