@@ -15,6 +15,7 @@ local other_lsp = {
   "eslint",
   "oxc_lsp",
   "jsonls",
+  "denols",
   -- "laravel-language-server", -- disable
   -- "markdown-language-server", -- disabled by default
   -- "ts_ls_for_without_install", -- disabled by default

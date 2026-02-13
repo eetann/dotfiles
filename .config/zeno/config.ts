@@ -1,0 +1,322 @@
+#!/usr/bin/env -S deno run
+// deno-lint-ignore no-unversioned-import
+import { defineConfig } from "jsr:@yuki-yano/zeno";
+
+export default defineConfig((_context) => ({
+  snippets: [
+    // 長いコマンドの展開
+    {
+      name: "blog new article",
+      keyword: "BLOG",
+      snippet: "node bin/new.mjs --slug",
+    },
+    {
+      name: "claude code",
+      keyword: "cc",
+      snippet: "claude-chill -- claude",
+    },
+    {
+      name: "claude code continue",
+      keyword: "ccc",
+      snippet: "claude-chill -- claude --continue",
+    },
+    {
+      name: "codex",
+      keyword: "cx",
+      snippet: "codex",
+    },
+    {
+      name: "docker compose",
+      keyword: "DC",
+      snippet: "docker-compose",
+    },
+    {
+      name: "explorer",
+      keyword: "E",
+      snippet: "/mnt/c/windows/explorer.exe .",
+    },
+    {
+      name: "php artisan",
+      keyword: "PA",
+      snippet: "php artisan",
+    },
+    {
+      name: "difit",
+      keyword: "difit",
+      snippet: "bun x difit .",
+    },
+    {
+      name: "nb add today's daily",
+      keyword: "nbd",
+      snippet: 'date "+nb a daily-%Y-%m-%d.md"',
+      evaluate: true,
+    },
+    {
+      // difitで今のHEADとdevelopmentブランチの比較
+      name: "difit to dev",
+      keyword: "difitd",
+      snippet: "bun x difit @ development",
+    },
+    {
+      name: "nvim-noplugin",
+      keyword: "nvimno",
+      snippet: "nvim --noplugin -u NONE",
+    },
+    {
+      name: "SJIS to UTF-8",
+      keyword: "UTF",
+      snippet: "nkf -w --overwrite",
+    },
+    {
+      name: "tmux popup neovim",
+      keyword: "TN",
+      snippet: `tmux popup -E -w 95% -h 95% -d '#{pane_current_path}' 'nvim -c "{{command_here)}}"'`,
+    },
+    {
+      name: "tree",
+      keyword: "TREE",
+      snippet:
+        "tree -a -I '.git|node_modules|dist|vendor|platforms' --charset unicode",
+    },
+    {
+      name: "git switch",
+      keyword: "gs",
+      snippet: "git switch",
+    },
+    {
+      name: "git worktree new brach",
+      keyword: "gwn",
+      snippet: "git worktree add -b",
+    },
+    {
+      name: "git worktree already exists brach",
+      keyword: "gwe",
+      snippet: "git worktree add ../",
+    },
+    {
+      name: "link mise.local.toml in worktree",
+      keyword: "wtmise",
+      snippet:
+        'ln -s "$(git rev-parse --path-format=relative --git-common-dir | xargs dirname)/mise.local.toml" mise.local.toml && mise trust',
+    },
+    {
+      name: "home-manager switch",
+      keyword: "hms",
+      snippet: "home-manager switch --flake ~/dotfiles",
+    },
+    {
+      // 指定したcsvの2列目に重複したデータがないか調べる
+      // 列を変えるなら`-f2`の部分を変更する
+      name: "csv checker for duplicates col2",
+      keyword: "csv_checker_for_duplicates_col2",
+      snippet: "tail -n +2 {{csv_here}} | cut -d, -f2 | sort | uniq -d",
+    },
+    {
+      // カレントディレクトリのcsvファイルを全部tsvに変換
+      // ログをスプレッドシートに貼るときに便利
+      name: "all csv to tsv",
+      keyword: "all_csv_to_tsv",
+      snippet: "for f (*.csv) bun run ~/dotfiles/bin/csv_to_tsv.ts --file $f",
+    },
+    {
+      name: "mdjanai",
+      keyword: "mdjanai",
+      snippet: "node ~/ghq/github.com/eetann/mdjanai/dist/index.js",
+    },
+    {
+      name: "convert to avif",
+      keyword: "AVIF",
+      snippet:
+        'ffmpeg -i screenshot.png "$R2_BACKUP_PATH/works/{{image_name}}.avif"',
+    },
+    {
+      name: "gtr init",
+      keyword: "GTRINIT",
+      snippet:
+        'git gtr config set gtr.worktrees.dir "../" && git gtr config set gtr.worktrees.prefix "$(basename $PWD)@"',
+    },
+
+    // ディレクトリ名の短縮入力
+    {
+      name: "cd media for blog",
+      keyword: "MEDIA",
+      snippet: "$VITE_EXTERNAL_FOLDER",
+      context: {
+        lbuffer: ".+\\s",
+      },
+    },
+    {
+      name: "input 'download'",
+      keyword: "DL",
+      snippet: "~/Downloads/",
+      context: {
+        lbuffer: ".+\\s",
+      },
+    },
+
+    // 引数
+    {
+      name: "--testNamePattern=",
+      keyword: "TNP",
+      snippet: "--testNamePattern='{{cursor}}'",
+      // jest以外でも`mise run 〇〇`のように
+      // タスクランナーの可能性ありのためcontextは簡素に
+      context: {
+        lbuffer: ".+\\s",
+      },
+    },
+
+    // パイプ以降の展開
+    {
+      name: "cd there",
+      keyword: "CD",
+      snippet: "&& cd $_",
+      context: {
+        lbuffer: ".+\\s",
+      },
+    },
+    {
+      name: "copy",
+      keyword: "CC",
+      snippet: "| pbcopy",
+      context: {
+        lbuffer: ".+\\s",
+      },
+    },
+    {
+      name: "grep",
+      keyword: "G",
+      snippet: "| grep",
+      context: {
+        lbuffer: ".+\\s",
+      },
+    },
+    {
+      name: "null",
+      keyword: "NULL",
+      snippet: ">/dev/null 2>&1",
+      context: {
+        lbuffer: ".+\\s",
+      },
+    },
+
+    // 自作スクリプト
+    {
+      name: "docker log to TSV",
+      keyword: "docker-log-to-tsv",
+      snippet: "bun run ~/dotfiles/bin/docker-log-to-tsv.ts",
+    },
+    {
+      name: "nginx access log to TSV",
+      keyword: "nginx-access-log-to-tsv",
+      snippet: "bun run ~/dotfiles/bin/nginx_to_tsv.ts",
+    },
+    {
+      name: "tmux-first-choose-session",
+      keyword: "tf",
+      snippet: "tmux-first-choose-session",
+    },
+    {
+      name: "import sjis CSV from Downloads and convert to UTF-8 TSV",
+      // 検索で引っ張る前提
+      keyword: "sjis_csv_to_utf8_tsv",
+      snippet: "sjis_csv_to_utf8_tsv",
+    },
+    {
+      name: "wtman",
+      keyword: "wtman",
+      snippet: "~/ghq/github.com/eetann/wtman/dist/index.js",
+    },
+    {
+      name: "ASCII padded",
+      keyword: "ascii-padded",
+      snippet: 'bun run ~/dotfiles/bin/ascii-padded.ts -d "{{cursor}}"',
+    },
+  ],
+
+  completions: [
+    {
+      name: "kill signal",
+      patterns: ["^kill -s $"],
+      sourceCommand: "kill -l | tr ' ' '\\n'",
+      options: {
+        "--prompt": "'Kill Signal> '",
+        "--tmux": "80%",
+        "--no-select-1": true,
+      },
+    },
+    {
+      name: "kill pid",
+      patterns: ["^kill( .*)? $"],
+      excludePatterns: [" -[lns] $"],
+      sourceCommand: "LANG=C ps -ef",
+      options: {
+        "--header-lines": 1,
+        "--multi": true,
+        "--prompt": "'Kill Process> '",
+        "--tmux": "80%",
+        "--no-select-1": true,
+      },
+      callback: "awk '{print $2}'",
+    },
+    // Docker
+    {
+      name: "docker stop",
+      patterns: ["^docker stop $"],
+      sourceCommand: "docker ps",
+      options: {
+        "--header-lines": 1,
+        "--tmux": "80%",
+        "--prompt": "'Docker Stop> '",
+        "--no-select-1": true,
+      },
+      callback: "awk '{print $1}'",
+    },
+    {
+      name: "docker rm(コンテナ)",
+      patterns: ["^docker rm $"],
+      sourceCommand: "docker ps -a",
+      options: {
+        "--header-lines": 1,
+        "--tmux": "80%",
+        "--multi": true,
+        "--prompt": "'Docker Remove Container> '",
+        "--no-select-1": true,
+      },
+      callback: "awk '{print $1}'",
+    },
+    {
+      name: "docker rmi(イメージ)",
+      patterns: ["^docker rmi $"],
+      sourceCommand: "docker images",
+      options: {
+        "--header-lines": 1,
+        "--tmux": "80%",
+        "--multi": true,
+        "--prompt": "'Docker Remove Image> '",
+        "--no-select-1": true,
+      },
+      callback: "awk '{print $3}'",
+    },
+    // zsh/myfunction/mise.zsh から呼び出す
+    {
+      name: "mise run",
+      patterns: ["^mise run $"],
+      sourceCommand: "mise tasks --no-header",
+      options: {
+        "--no-select-1": true,
+      },
+      callback: "awk '{print $1}'",
+    },
+    // zsh/myfunction/npm_scripts.zsh から呼び出す
+    {
+      name: "npm scripts",
+      patterns: ["^(npm|pnpm|bun) run $"],
+      sourceCommand: `jq -r '.scripts | to_entries | .[] | .key + " = " + .value' package.json`,
+      options: {
+        "--no-select-1": true,
+      },
+      callback: "awk '{print $1}'",
+    },
+  ],
+}));
