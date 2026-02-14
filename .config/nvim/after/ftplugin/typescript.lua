@@ -5,7 +5,7 @@ vim.b.my_plugin_typescript = true
 
 -- Denoのシェバンを検出したらts_lsを停止
 local first_line = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1] or ""
-if first_line:match("^#!.*deno") then
+if first_line:match("^#!.*deno") or first_line:match("^//.*deno") then
   vim.api.nvim_create_autocmd("LspAttach", {
     buffer = 0,
     callback = function(args)

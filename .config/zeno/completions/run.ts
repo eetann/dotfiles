@@ -1,4 +1,4 @@
-// deno-lint-ignore no-unversioned-import
+// deno-lint-ignore-file no-unversioned-import
 import type { UserCompletionSource } from "jsr:@yuki-yano/zeno";
 import { join } from "jsr:@std/path";
 
