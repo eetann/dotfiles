@@ -44,8 +44,3 @@ if type mise > /dev/null; then
   precmd_functions+=(_mise_lazy_activate)
 fi
 export SKIP_FIREBASE_FIRESTORE_SWIFT=1
-
-# tmux未起動、vim・VSCodeの中じゃない、ログインシェルなら
-# if [[ -z "$TMUX" && -z "$VIM" && "$TERM_PROGRAM" != "vscode" && $- == *l* && -z "$NO_TMUX" ]] ; then
-#   tmux-first-choose-session
-# fi
