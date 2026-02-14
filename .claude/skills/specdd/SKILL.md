@@ -3,7 +3,6 @@ name: specdd
 description: |
   spec-driven developmentを行う。要件→設計→実装計画→実装の4フェーズで開発を進める。
   トリガー: "specdd", "spec-driven", "スペック駆動"
-disable-model-invocation: true
 allowed-tools: Bash(mkdir:*), Read
 ---
 
