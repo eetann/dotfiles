@@ -8,25 +8,25 @@ spec-driven development は、次の4つのフェーズからなる開発手法�
 
 ### 1. 要件フェーズ
 
-このフェーズになったら ~/dotfiles/etc/mydd/requirements_creator.md の指示に従ってね
+このフェーズになったら ~/dotfiles/.claude/skills/specdd/requirements_creator.md の指示に従ってね
 
 成果物：`./.mywork/changes/YYYY-MM-DD-BRIEF-DESC/requirements.md`
 
 ### 2. 設計フェーズ
 
-このフェーズになったら ~/dotfiles/etc/mydd/design_creator.md の指示に従ってね
+このフェーズになったら ~/dotfiles/.claude/skills/specdd/design_creator.md の指示に従ってね
 
 成果物：`./.mywork/changes/YYYY-MM-DD-BRIEF-DESC/design.md`
 
 ### 3. 実装計画フェーズ
 
-このフェーズになったら ~/dotfiles/etc/mydd/tasks_creator.md の指示に従ってね
+このフェーズになったら ~/dotfiles/.claude/skills/specdd/tasks_creator.md の指示に従ってね
 
 成果物：`./.mywork/changes/YYYY-MM-DD-BRIEF-DESC/tasks.md`
 
 ### 4. 実装フェーズ
 
-このフェーズになったら ~/dotfiles/etc/mydd/tasks_executor.md の指示に従ってね
+このフェーズになったら ~/dotfiles/.claude/skills/specdd/tasks_executor.md の指示に従ってね
 
 成果物：実装ファイル
 
