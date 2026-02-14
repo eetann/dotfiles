@@ -8,6 +8,8 @@ alias manen="man -L en"
 alias lg='lazygit --use-config-dir="$HOME/.config/lazygit"'
 alias zd='cd ~/dotfiles'
 alias zdev='cd ~/ghq/dev/'
+alias zeetann='cd ~/ghq/github.com/eetann/'
+alias zhome='cd ~/.nb/home/'
 alias ml='nvim .memo.local.md'
 alias mt='mise watch test'
 alias tn="tmux popup -E -w 95% -h 95% -d '#{pane_current_path}' 'nvim'"

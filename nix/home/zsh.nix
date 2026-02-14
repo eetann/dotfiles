@@ -16,8 +16,6 @@ in
     "${pkgs.zsh-autosuggestions}/share/zsh/plugins/zsh-autosuggestions";
   home.file.".zsh/plugins/fast-syntax-highlighting".source =
     "${pkgs.zsh-fast-syntax-highlighting}/share/zsh/plugins/fast-syntax-highlighting";
-  home.file.".zsh/plugins/zsh-history-substring-search".source =
-    "${pkgs.zsh-history-substring-search}/share/zsh/plugins/zsh-history-substring-search";
   home.file.".zsh/plugins/powerlevel10k".source =
     "${pkgs.zsh-powerlevel10k}/share/zsh/themes/powerlevel10k";
   home.file.".zsh/plugins/fzf".source = "${pkgs.fzf}/share/fzf";
