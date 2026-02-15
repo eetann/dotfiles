@@ -13,31 +13,30 @@ tmux set-option -gu @ghq_cd
 
 while true; do
   if [ "$mode" = "ghq" ]; then
-    result=$(ghq list | fzf \
+    # パスの最下層ディレクトリだけ目立たせるためにansi
+    result=$(ghq list \
+      | awk -F/ '{prefix=""; for(i=1;i<NF;i++) prefix=prefix (i>1?"/":"") $i; printf "\033[2m%s/\033[0m\033[1m%s\033[0m\n", prefix, $NF}' \
+      | fzf \
       --height=100% \
       --prompt="GHQ> " \
       --header='Enter: new window | ^O: cd | ^T: worktree list' \
       --expect=ctrl-t,ctrl-o \
-      --preview "
-        ( (type bat > /dev/null) &&
-          bat --color=always \
-            --theme=gruvbox-dark \
-            --style=numbers \
-            --line-range :200 ${ghq_root}/{}/README.* \
-          || (cat {} | head -200) ) 2> /dev/null
-      " \
-      --preview-window 'right,50%,wrap')
+      --ansi \
+      --preview "d=\$(echo {}); git -C ${ghq_root}/\$d log --color=always --oneline -10 2>/dev/null && echo '---' && git -C ${ghq_root}/\$d -c color.status=always status --short 2>/dev/null" \
+      --preview-window 'right,45%,wrap')
   else
+    # mode = worktree
     result=$( { git gtr list --porcelain 2>/dev/null | awk -F'\t' '{print $1}'; echo "$cwd"; } \
       | awk -v cur="$(pwd)" '!seen[$0]++ && $0 != cur' \
       | sed "s|^${cwd}|.|" \
-      | WORKTREE_BASE="$cwd" fzf \
+      | fzf \
         --height=100% \
         --prompt="Worktree> " \
         --header='Enter: new window | ^O: cd | ^T: ghq list' \
         --expect=ctrl-t,ctrl-o \
-        --preview 'p="{}"; git -C "${p/#./$WORKTREE_BASE}" log --oneline -20 2>/dev/null' \
-        --preview-window 'right,50%,wrap')
+        --ansi \
+        --preview "d=\$(echo {} | sed 's|^\\.|${cwd}|'); git -C \"\$d\" log --color=always --oneline -10 2>/dev/null && echo '---' && git -C \"\$d\" -c color.status=always status --short 2>/dev/null" \
+        --preview-window 'right,65%,wrap')
   fi
 
   # キャンセル
