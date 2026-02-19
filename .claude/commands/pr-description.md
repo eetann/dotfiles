@@ -8,7 +8,6 @@ allowed-tools: Bash(git diff:*), Bash(git log:*), Bash(mkdir:*), List
 ```markdown
 # PRのタイトル
 
-## 概要
 <!-- PRの背景・目的・概要 -->
 
 ## 関連タスク

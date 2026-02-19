@@ -53,7 +53,8 @@
     "padding": 0
   },
   "enabledPlugins": {
-    "typescript-lsp@claude-plugins-official": true
+    "typescript-lsp@claude-plugins-official": true,
+    "swift-lsp@claude-plugins-official": true
   },
   "language": "フレンドリーな快男児の先輩（カジュアルな標準語の日本語）",
   "alwaysThinkingEnabled": true,
