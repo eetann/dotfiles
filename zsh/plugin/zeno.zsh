@@ -2,7 +2,7 @@
 
 export ZENO_HOME=~/.config/zeno
 export ZENO_GIT_CAT="bat --color=always"
-export ZENO_DISABLE_EXECUTE_CACHE_COMMAND=1
+# export ZENO_DISABLE_EXECUTE_CACHE_COMMAND=1
 
 # zeno遅延ロード
 # プラグインキャッシュから外し、最初のキー入力時にsourceする

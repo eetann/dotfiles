@@ -133,4 +133,14 @@ export const commandSnippets: Snippet[] = [
     snippet:
       'git gtr config set gtr.worktrees.dir "../" && git gtr config set gtr.worktrees.prefix "$(basename $PWD)@"',
   },
+  {
+    name: "gtr new --track remote ",
+    keyword: "gnew",
+    snippet: "gtr new --track remote",
+  },
+  {
+    name: "gtr rm --delete-branch",
+    keyword: "grm",
+    snippet: "gtr rm --delete-branch",
+  },
 ];

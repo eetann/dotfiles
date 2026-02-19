@@ -10,6 +10,8 @@ function run_task() {
     BUFFER="${BUFFER#run }"
     BUFFER="${(Q)BUFFER}"
     zle accept-line
+  else
+    BUFFER=""
   fi
 }
 zle -N run_task

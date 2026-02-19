@@ -3,13 +3,13 @@
 let
   git-worktree-runner = pkgs.stdenvNoCC.mkDerivation {
     pname = "git-worktree-runner";
-    version = "2.2.0";
+    version = "2.3.1";
 
     src = pkgs.fetchFromGitHub {
       owner = "coderabbitai";
       repo = "git-worktree-runner";
-      rev = "d7d0db887da6383ae07da2dfc5fece5615e31358";
-      hash = "sha256-yJ8LfZEokFv3bMmRxwbKSn8XMBk92+boDcx9fM+1pb0=";
+      rev = "161b4789c0f52bfa368252493df16000d0145cc3";
+      hash = "sha256-NXA2K+9VUejfKnTkkO0V1PXd+PO6diVhGsMlRxWmcus=";
     };
 
     nativeBuildInputs = [ pkgs.installShellFiles ];
