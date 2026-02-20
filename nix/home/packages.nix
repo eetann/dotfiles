@@ -5,6 +5,7 @@
   home.packages = with pkgs; [
     # CLIツール
     bat
+    bun
     delta
     direnv
     fd
