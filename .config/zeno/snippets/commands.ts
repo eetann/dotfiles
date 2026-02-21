@@ -11,12 +11,14 @@ export const commandSnippets: Snippet[] = [
   {
     name: "claude code",
     keyword: "cc",
-    snippet: "claude-chill -- claude",
+    snippet: "claude",
+    // snippet: "claude-chill -- claude",
   },
   {
     name: "claude code continue",
     keyword: "ccc",
-    snippet: "claude-chill -- claude --continue",
+    snippet: "claude --continue",
+    // snippet: "claude-chill -- claude --continue",
   },
   {
     name: "codex",
