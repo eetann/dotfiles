@@ -22,5 +22,6 @@
     skills.enableAll = true;
 
     targets.claude.enable = true;
+    targets.codex.enable = true;
   };
 }

@@ -1,0 +1,6 @@
+#!/bin/sh
+# OSに応じたNixのswitch
+case "$(uname)" in
+  Darwin) sudo darwin-rebuild switch --flake . ;;
+  *) home-manager switch --flake . ;;
+esac

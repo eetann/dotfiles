@@ -100,9 +100,9 @@ export const commandSnippets: Snippet[] = [
       'ln -s "$(git rev-parse --path-format=relative --git-common-dir | xargs dirname)/mise.local.toml" mise.local.toml && mise trust',
   },
   {
-    name: "home-manager switch",
-    keyword: "hms",
-    snippet: "home-manager switch --flake ~/dotfiles",
+    name: "nix rebuild switch",
+    keyword: "ns",
+    snippet: "~/dotfiles/bin/nix-switch-cmd",
   },
   {
     // 指定したcsvの2列目に重複したデータがないか調べる
