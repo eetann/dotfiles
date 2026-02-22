@@ -3,8 +3,12 @@ vim.g.markdown_fenced_languages = {
 }
 ---@type vim.lsp.Config
 return {
-  workspace_required = true,
-  -- root_markers = { "deno.json", "deno.jsonc" },
+  root_dir = function(bufnr, on_dir)
+    local root = vim.fs.root(bufnr, { "deno.json", "deno.jsonc", "deno.lock", ".git" })
+    if root then
+      on_dir(root)
+    end
+  end,
   init_options = {
     lint = true,
     unstable = false,

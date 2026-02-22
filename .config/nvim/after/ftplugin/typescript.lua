@@ -12,6 +12,8 @@ if first_line:match("^#!.*deno") or first_line:match("^//.*deno") then
       local client = vim.lsp.get_client_by_id(args.data.client_id)
       if client and client.name == "ts_ls" then
         vim.cmd("LspStop ts_ls")
+        vim.lsp.enable("denols")
+        vim.cmd("LspStart denols")
         return true -- autocmd削除
       end
     end,
