@@ -14,6 +14,11 @@
     claude-chill = {
       url = "github:davidbeesley/claude-chill";
     };
+    agent-skills.url = "github:Kyure-A/agent-skills-nix";
+    design-skills = {
+      url = "github:mae616/design-skills";
+      flake = false;
+    };
   };
 
   outputs =
@@ -43,7 +48,10 @@
       homeConfigurations."eetann" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = { inherit inputs; };
-        modules = [ ./nix/home ];
+        modules = [
+          inputs.agent-skills.homeManagerModules.default
+          ./nix/home
+        ];
       };
     };
 }

@@ -35,7 +35,12 @@
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.extraSpecialArgs = { inherit inputs; };
-  home-manager.users.eetann = import ../home;
+  home-manager.users.eetann = {
+    imports = [
+      inputs.agent-skills.homeManagerModules.default
+      (import ../home)
+    ];
+  };
 
   # 高速起動のため自前で処理するので不要
   programs.zsh.enableCompletion = false;

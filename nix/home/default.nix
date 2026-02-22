@@ -9,7 +9,7 @@
 #       → /nix/store/.../hm_nvim
 #         → ~/dotfiles/.config/nvim  ← 最終的にここを指す
 #
-{ config, pkgs, ... }:
+{ config, ... }:
 
 let
   # mkOutOfStoreSymlinkを使うため、絶対パス文字列が必要
@@ -40,6 +40,7 @@ in
     ./tmux.nix
     ./zsh.nix
     ./git-worktree-runner.nix
+    ../skills
   ];
 
   home.username = "eetann";
@@ -54,7 +55,6 @@ in
     ".latexmkrc"
     ".zshrc"
     ".claude/commands"
-    ".claude/skills"
     ".claude/agents"
     ".claude/settings.json"
     ".codex/prompts"

@@ -1,9 +1,28 @@
 {
   "nodes": {
+    "agent-skills": {
+      "inputs": {
+        "home-manager": "home-manager",
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1771220443,
+        "narHash": "sha256-rBT1Wxiz4ePLpiv7nCTWbp3XJ7t2lwMzp5btuFxfLkg=",
+        "owner": "Kyure-A",
+        "repo": "agent-skills-nix",
+        "rev": "ce7c2e38cacfd5b8284af842117b1f3a8505108f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Kyure-A",
+        "repo": "agent-skills-nix",
+        "type": "github"
+      }
+    },
     "claude-chill": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
         "lastModified": 1770502636,
@@ -16,6 +35,22 @@
       "original": {
         "owner": "davidbeesley",
         "repo": "claude-chill",
+        "type": "github"
+      }
+    },
+    "design-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1769769661,
+        "narHash": "sha256-MUB4ZfcLfdhSmq4fpHHgspxPrT6BzlglaneHkGagwcM=",
+        "owner": "mae616",
+        "repo": "design-skills",
+        "rev": "79e3398bee27664de70c7b97a30dd928f6fe7976",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mae616",
+        "repo": "design-skills",
         "type": "github"
       }
     },
@@ -38,6 +73,27 @@
       }
     },
     "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "agent-skills",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1771188132,
+        "narHash": "sha256-qLXxN/tPrZtnekaLBQuVtxQfvqqs5cT5WbyH4zZaTGI=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "ae8003d8b61d0d373e7ca3da1a48f9c870d15df9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "home-manager_2": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
@@ -79,6 +135,22 @@
     },
     "nixpkgs": {
       "locked": {
+        "lastModified": 1771008912,
+        "narHash": "sha256-gf2AmWVTs8lEq7z/3ZAsgnZDhWIckkb+ZnAo5RzSxJg=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "a82ccc39b39b621151d6732718e3e250109076fa",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
         "lastModified": 1769461804,
         "narHash": "sha256-msG8SU5WsBUfVVa/9RPLaymvi5bI8edTavbIq3vRlhI=",
         "owner": "NixOS",
@@ -93,7 +165,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1771207753,
         "narHash": "sha256-b9uG8yN50DRQ6A7JdZBfzq718ryYrlmGgqkRm9OOwCE=",
@@ -111,10 +183,12 @@
     },
     "root": {
       "inputs": {
+        "agent-skills": "agent-skills",
         "claude-chill": "claude-chill",
-        "home-manager": "home-manager",
+        "design-skills": "design-skills",
+        "home-manager": "home-manager_2",
         "nix-darwin": "nix-darwin",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_3"
       }
     },
     "systems": {
