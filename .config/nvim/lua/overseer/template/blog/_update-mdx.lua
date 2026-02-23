@@ -78,7 +78,7 @@ return {
       cmd = "echo 'update mdx for blog images'",
     }
   end,
-  priority = 100,
+  tags = { require("overseer").TAG.RUN },
   condition = {
     dir = "~/ghq/github.com/eetann/cyber-blog",
   },

@@ -2,7 +2,7 @@
 ---@type LazyPluginSpec
 return {
   "stevearc/overseer.nvim",
-  version = "v1.6.0",
+  version = "^2",
   keys = {
     { "<space>r", "<CMD>OverseerRun<CR>" },
     { "<space>R", "<CMD>OverseerToggle<CR>" },

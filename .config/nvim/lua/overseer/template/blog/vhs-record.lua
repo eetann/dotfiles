@@ -8,7 +8,7 @@ return {
       args = { filename },
     }
   end,
-  priority = 0,
+  tags = { require("overseer").TAG.RUN },
   condition = {
     filetype = "vhs",
   },

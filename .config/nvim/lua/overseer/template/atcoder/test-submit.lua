@@ -15,7 +15,7 @@ return {
       },
     }
   end,
-  priority = 20,
+  tags = { require("overseer").TAG.TEST },
   condition = {
     dir = "~/ghq/github.com/eetann/myatcoder",
   },

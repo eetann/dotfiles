@@ -18,7 +18,7 @@ return {
     }
   end,
   -- DapのpreLaunchTaskから自動呼ぶため、優先度は低い
-  priority = 1000,
+  tags = { require("overseer").TAG.BUILD },
   condition = {
     filetype = { "cpp" },
   },

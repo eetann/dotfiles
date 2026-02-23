@@ -1,6 +1,6 @@
 ---@type overseer.TemplateDefinition
 return {
-  name = "run this file",
+  name = "run this Lua file",
   builder = function()
     local file = vim.fn.expand("%:p")
     vim.schedule(function()

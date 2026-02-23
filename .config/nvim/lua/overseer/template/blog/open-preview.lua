@@ -9,7 +9,7 @@ return {
       args = { basename },
     }
   end,
-  priority = 1,
+  tags = { require("overseer").TAG.RUN },
   condition = {
     dir = "~/ghq/github.com/eetann/cyber-blog",
   },
