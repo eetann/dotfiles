@@ -14,3 +14,5 @@ mise.local.toml
 # シンボリックリンク含む
 .mywork
 .mywork/
+
+/opensrc/
