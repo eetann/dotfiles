@@ -50,7 +50,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "bun x ccusage@17.2.1 statusline",
+    "command": "bun x ccusage statusline",
     "padding": 0
   },
   "enabledPlugins": {
@@ -61,4 +61,3 @@
   "alwaysThinkingEnabled": true,
   "effortLevel": "medium"
 }
-
