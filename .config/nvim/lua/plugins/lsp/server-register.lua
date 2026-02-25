@@ -13,7 +13,9 @@ local other_lsp = {
   -- list
   "biome",
   "eslint",
-  "oxc_lsp",
+  "oxc_lsp", -- 古い
+  "oxfmt",
+  "oxlint",
   "jsonls",
   -- "denols",
   -- "laravel-language-server", -- disable

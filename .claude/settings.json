@@ -21,7 +21,9 @@
       "Bash(rm -rf ~/*)",
       "Bash(rm -rf /*)"
     ],
-    "allow": ["mcp__pencil"]
+    "allow": [
+      "mcp__pencil"
+    ]
   },
   "hooks": {
     "PostToolUse": [
