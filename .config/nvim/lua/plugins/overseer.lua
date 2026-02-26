@@ -10,7 +10,7 @@ return {
   opts = {
     templates = {
       "builtin",
-      "blog.open-preview",
+      "blog.0-open-preview",
       "blog._update-mdx",
       "blog.convert-image",
       "blog.vhs-record",
