@@ -137,7 +137,7 @@ export const commandSnippets: Snippet[] = [
   },
   {
     name: "gtr new local",
-    keyword: "grew",
+    keyword: "gnew",
     snippet: "gtr new feature/",
   },
   {
