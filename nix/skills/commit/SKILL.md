@@ -1,6 +1,10 @@
 ---
+name: commit
+description: |
+  コミットメッセージの作成
+  トリガー: "commit", "コミット"
+user-invocable: true
 allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git commit:*), Bash(git diff:*)
-description: "コミットメッセージの作成"
 ---
 
 このコマンドはConventional Commits仕様に基づいてgit commitします。

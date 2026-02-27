@@ -1,5 +1,9 @@
 ---
-description: "PRの説明文作成"
+name: pr-description
+description: |
+  PRの説明文作成
+  トリガー: "pr-description", "PR説明文", "PR作成"
+user-invocable: true
 allowed-tools: Bash(git diff:*), Bash(git log:*), Bash(mkdir:*), List
 ---
 
@@ -41,7 +45,7 @@ allowed-tools: Bash(git diff:*), Bash(git log:*), Bash(mkdir:*), List
 
 上記のテンプレを参考に派生元ブランチとのdiffやコミット履歴を見て、Pull Requestの説明文を「ですます調」で `.mywork/tmp/pr.md` に出力してください。
 
-派生元ブランチ: `$1`（**空白なら`development`ブランチ**。masterやmainはありえない）
+派生元ブランチ: `$ARGUMENTS`（**空白なら`development`ブランチ**。masterやmainはありえない）
 
 引数として`.mywork/specs/xxx/yyy.md`のような`.mywork/specs/xxx/`のファイルが渡されたら、diffを見る前に`.mywork/specs/xxx/`内にあるMarkdownファイルを読み込んでください。タスクの目的などが書いてあり、事前に読めば理解しやすくなります。
 

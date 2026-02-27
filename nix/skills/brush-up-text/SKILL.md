@@ -1,6 +1,11 @@
 ---
-allowed-tools: Read
-description: "文章のブラッシュアップ"
+name: brush-up-text
+description: |
+  文章のブラッシュアップ
+  トリガー: "brush-up-text", "文章ブラッシュアップ", "文章整理"
+user-invocable: true
+allowed-tools:
+  - Read
 ---
 
 指定されたテキストファイルをブラッシュアップして、新しいファイルとして出力する。

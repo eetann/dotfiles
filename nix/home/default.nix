@@ -57,7 +57,6 @@ in
     ".claude/commands"
     ".claude/agents"
     ".claude/settings.json"
-    ".codex/prompts"
   ];
 
   # ~/.config 配下のファイル
