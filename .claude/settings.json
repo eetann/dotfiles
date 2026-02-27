@@ -21,9 +21,7 @@
       "Bash(rm -rf ~/*)",
       "Bash(rm -rf /*)"
     ],
-    "allow": [
-      "mcp__pencil"
-    ]
+    "allow": ["mcp__pencil"]
   },
   "hooks": {
     "PostToolUse": [
@@ -44,7 +42,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "vde-notifier --claude --message 'Claude Codeが許可を求めています' --terminal wezterm"
+            "command": "vde-notifier --claude --message 'Claude Codeが許可を求めています' --terminal wezterm --terminal-notifier"
           }
         ]
       }
@@ -63,3 +61,4 @@
   "alwaysThinkingEnabled": true,
   "effortLevel": "medium"
 }
+
