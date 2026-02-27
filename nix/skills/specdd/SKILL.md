@@ -1,7 +1,7 @@
 ---
 name: specdd
 description: |
-  spec-driven developmentを行う。要件→設計→実装計画→実装の4フェーズで開発を進める。
+  spec-driven developmentで機能開発したいときに使う。
   トリガー: "specdd", "spec-driven", "スペック駆動"
 allowed-tools: Bash(mkdir:*), Read
 ---
