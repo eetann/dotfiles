@@ -51,4 +51,4 @@ packages/mobile/app/call.tsx にキャンセルボタンを実装。
 
 その他
 
-- `.mywork`はglobal ignoreされているのでコミット対象には含まない
+- `.mywork/*`はglobal ignoreされているのでコミット対象には含めないこと
