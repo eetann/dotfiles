@@ -52,23 +52,24 @@ in
   # ホームディレクトリ直下のdotfiles
   home.file = mkHomeFiles [
     ".clang-format"
+    ".claude/agents"
+    ".claude/commands"
+    ".claude/settings.json"
     ".latexmkrc"
     ".zshrc"
-    ".claude/commands"
-    ".claude/agents"
-    ".claude/settings.json"
   ];
 
   # ~/.config 配下のファイル
   xdg.configFile = mkConfigFiles [
-    "efm-langserver"
-    "nvim"
     "alacritty"
-    "rofi"
+    "ccstatusline"
+    "efm-langserver"
     "git"
-    "wezterm"
-    "zeno"
     "i3/config"
     "lazygit/config.yml"
+    "nvim"
+    "rofi"
+    "wezterm"
+    "zeno"
   ];
 }
