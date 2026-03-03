@@ -146,6 +146,13 @@ export const commandSnippets: Snippet[] = [
     snippet: "gtr new --track remote",
   },
   {
+    // `gtr new ブランチ名`の次のコマンドで、`tow ^]Enter`すれば
+    // 作ったワークツリーに移動できる
+    name: "tmux-open-worktree",
+    keyword: "tow",
+    snippet: "tmux-open-worktree",
+  },
+  {
     name: "gtr rm --delete-branch",
     keyword: "grm",
     snippet: "gtr rm --delete-branch",

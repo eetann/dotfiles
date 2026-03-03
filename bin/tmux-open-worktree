@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if [ -z "$TMUX" ]; then
+  echo "Error: This command must be run inside tmux." >&2
+  exit 1
+fi
+
+if [ -z "$1" ]; then
+  echo "Usage: tmux-worktree <branch-name>" >&2
+  exit 1
+fi
+
+target_path=$(gtr go "$1" 2>/dev/null)
+
+if [ -z "$target_path" ]; then
+  echo "Error: worktree not found for '$1'" >&2
+  exit 1
+fi
+
+tmux new-window -c "$target_path"
