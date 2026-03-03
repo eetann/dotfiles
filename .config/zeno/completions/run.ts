@@ -61,6 +61,8 @@ async function getMiseTasks(): Promise<ReadonlyArray<string>> {
 
 export const runCompletions: UserCompletionSource[] = [
   {
+    // ZENO_DISABLE_SOCK=1を設定しないと
+    // 他のシェルでディレクトリ移動時にcwdが書き換わってしまう
     name: "統合タスクランナー",
     patterns: ["^run $"],
     sourceFunction: async ({ currentDirectory }) => {

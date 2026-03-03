@@ -2,7 +2,10 @@
 
 export ZENO_HOME=~/.config/zeno
 export ZENO_GIT_CAT="bat --color=always"
-# export ZENO_DISABLE_EXECUTE_CACHE_COMMAND=1
+
+# これを設定しないと .config/zeno/completions/run.ts で
+# 他のシェルでディレクトリ移動時にcwdが書き換わってしまう
+export ZENO_DISABLE_SOCK=1
 
 # zeno遅延ロード
 # プラグインキャッシュから外し、最初のキー入力時にsourceする
