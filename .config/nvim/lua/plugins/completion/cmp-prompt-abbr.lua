@@ -25,6 +25,10 @@ return {
         source = "pcodex",
         target = "Codexにレビューしてもらおう",
       },
+      {
+        source = "ppen",
+        target = "Pencil MCPを使って",
+      },
     },
     matching = "prefix",
     case_sensitive = false,
