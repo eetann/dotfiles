@@ -19,6 +19,10 @@
       url = "github:mae616/design-skills";
       flake = false;
     };
+    playwright-cli-skills = {
+      url = "github:microsoft/playwright-cli";
+      flake = false;
+    };
   };
 
   outputs =

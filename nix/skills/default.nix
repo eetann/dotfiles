@@ -2,7 +2,7 @@
 #
 # mainパターン（スキルソースはflake.nixのinputsに直接記載）
 # https://github.com/Kyure-A/agent-skills-nix
-# { inputs, ... }:
+{ inputs, ... }:
 {
   programs.agent-skills = {
     enable = true;
@@ -17,6 +17,11 @@
       #   path = inputs.design-skills;
       #   subdir = "skills";
       # };
+      # playwright-cli（GitHub）
+      playwright-cli = {
+        path = inputs.playwright-cli-skills;
+        subdir = "skills";
+      };
     };
 
     skills.enableAll = true;

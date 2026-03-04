@@ -181,6 +181,22 @@
         "type": "github"
       }
     },
+    "playwright-cli-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1772067144,
+        "narHash": "sha256-XjYib26oVoTEmjD5wHMlauEdtXkaC60OBitb1mj/Xnk=",
+        "owner": "microsoft",
+        "repo": "playwright-cli",
+        "rev": "fa6f6bcca9c3eeb4ac71051f83ebd623ac51d765",
+        "type": "github"
+      },
+      "original": {
+        "owner": "microsoft",
+        "repo": "playwright-cli",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "agent-skills": "agent-skills",
@@ -188,7 +204,8 @@
         "design-skills": "design-skills",
         "home-manager": "home-manager_2",
         "nix-darwin": "nix-darwin",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_3",
+        "playwright-cli-skills": "playwright-cli-skills"
       }
     },
     "systems": {
