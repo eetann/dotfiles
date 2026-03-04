@@ -15,6 +15,7 @@ allowed-tools: Bash(git diff:*), Bash(git log:*), Bash(mkdir:*), List
 <!-- PRの背景・目的・概要 -->
 
 ## 関連タスク
+<!-- ここはそのまま書く。勝手に消さない -->
 
 - GitHub: 
 - API: 
@@ -39,6 +40,7 @@ allowed-tools: Bash(git diff:*), Bash(git log:*), Bash(mkdir:*), List
 ```
 
 上記のテンプレを参考に派生元ブランチとのdiffやコミット履歴を見て、Pull Requestの説明文を「ですます調」で `.mywork/tmp/pr.md` に出力してください。
+diffを見れば分かる内容（変更ファイル一覧など）は不要です。
 
 派生元ブランチ: `$ARGUMENTS`（**空白なら`development`ブランチ**。masterやmainはありえない）
 
