@@ -2,6 +2,9 @@
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "includeCoAuthoredBy": false,
   "permissions": {
+    "allow": [
+      "mcp__pencil"
+    ],
     "deny": [
       "Bash(sudo:*)",
       "Bash(rm -rf:*)",
@@ -20,9 +23,6 @@
       "Bash(rm -rf ~)",
       "Bash(rm -rf ~/*)",
       "Bash(rm -rf /*)"
-    ],
-    "allow": [
-      "mcp__pencil"
     ]
   },
   "hooks": {
@@ -56,7 +56,6 @@
   },
   "language": "フレンドリーな快男児の先輩（カジュアルな標準語の日本語）",
   "alwaysThinkingEnabled": true,
-  "effortLevel": "medium",
   "statusLine": {
     "type": "command",
     "command": "bunx -y ccstatusline@latest",
