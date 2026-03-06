@@ -2,9 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "includeCoAuthoredBy": false,
   "permissions": {
-    "allow": [
-      "mcp__pencil"
-    ],
+    "allow": ["mcp__pencil"],
     "deny": [
       "Bash(sudo:*)",
       "Bash(rm -rf:*)",
@@ -24,6 +22,9 @@
       "Bash(rm -rf ~/*)",
       "Bash(rm -rf /*)"
     ]
+  },
+  "env": {
+    "ENABLE_CLAUDEAI_MCP_SERVERS": "false"
   },
   "hooks": {
     "PostToolUse": [
@@ -62,3 +63,4 @@
     "padding": 0
   }
 }
+
