@@ -24,34 +24,30 @@
         "type": "tokens-total",
         "color": "hex:F8F8F8",
         "backgroundColor": "hex:001C23"
-      },
-      {
-        "id": "79655ffc-90a9-4d64-9835-81619bea6fc3",
-        "type": "flex-separator",
-        "backgroundColor": "hex:001C23"
-      },
-      {
-        "id": "5",
-        "type": "block-timer",
-        "color": "hex:F8F8F8",
-        "backgroundColor": "hex:001C23",
-        "rawValue": false,
-        "metadata": {
-          "display": "progress-short"
-        }
-      },
-      {
-        "id": "9ddd041a-bae0-44c6-9aba-03b36aeda9eb",
-        "type": "block-timer",
-        "color": "hex:F8F8F8",
-        "backgroundColor": "hex:001C23",
-        "rawValue": true,
-        "metadata": {
-          "display": "time"
-        }
       }
     ],
-    [],
+    [
+      {
+        "id": "a32f3be4-df9f-4a34-8dc1-301897c686e4",
+        "type": "block-timer",
+        "metadata": {
+          "display": "progress-short"
+        },
+        "backgroundColor": "hex:001C23",
+        "color": "hex:F8F8F8"
+      },
+      {
+        "id": "c9633d81-0c3a-4c34-a94d-ff4635ba3e15",
+        "type": "reset-timer",
+        "metadata": {
+          "display": "time"
+        },
+        "rawValue": true,
+        "bold": false,
+        "backgroundColor": "hex:001C23",
+        "color": "hex:F8F8F8"
+      }
+    ],
     []
   ],
   "flexMode": "full",
