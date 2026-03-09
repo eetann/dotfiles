@@ -8,7 +8,9 @@ return {
     -- lazy.nvim will automatically load the plugin when it's required by blink.cmp
     lazy = true,
     -- make sure to set opts so that lazy.nvim calls blink.compat's setup
-    opts = {},
+    opts = {
+      impersonate_nvim_cmp = true,
+    },
   },
   {
     "saghen/blink.cmp",
@@ -19,6 +21,7 @@ return {
       "disrupted/blink-cmp-conventional-commits",
       "Kaiser-Yang/blink-cmp-dictionary",
       { import = "plugins.completion.cmp-prompt-abbr" },
+      { import = "plugins.completion.cmp-coding-agent" },
       -- { import = "plugins.completion.minuet-ai" },
       -- { import = "plugins.copilot" },
     },

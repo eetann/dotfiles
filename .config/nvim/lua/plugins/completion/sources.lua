@@ -6,6 +6,9 @@ return {
   default = {
     "conventional_commits",
     "prompt_abbr",
+    "coding_agent_slash",
+    "coding_agent_dollar",
+    "coding_agent_at",
     "snippets",
     "lazydev",
     "lsp",
@@ -64,6 +67,18 @@ return {
       enabled = function()
         return vim.env.EDITPROMPT == "1"
       end,
+    },
+    coding_agent_slash = {
+      name = "coding_agent_slash",
+      module = "blink.compat.source",
+    },
+    coding_agent_dollar = {
+      name = "coding_agent_dollar",
+      module = "blink.compat.source",
+    },
+    coding_agent_at = {
+      name = "coding_agent_at",
+      module = "blink.compat.source",
     },
   },
   min_keyword_length = function(ctx)
