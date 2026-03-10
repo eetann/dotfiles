@@ -11,6 +11,8 @@ export const gtrCompletions: UserCompletionSource[] = [
       "--tmux": "80%",
       "--prompt": "'Delete branch> '",
       "--no-select-1": true,
+      "--preview": "git log --color=always --oneline -20 {} 2>/dev/null",
+      "--preview-window": "right,55%,wrap",
     },
   },
 ];
