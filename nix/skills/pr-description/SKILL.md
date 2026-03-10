@@ -39,8 +39,11 @@ allowed-tools: Bash(git diff:*), Bash(git log:*), Bash(mkdir:*), List
 <!-- 別タスクでやりますとかが明示的になっていればその旨を書く -->
 ```
 
-上記のテンプレを参考に派生元ブランチとのdiffやコミット履歴を見て、Pull Requestの説明文を「ですます調」で `.mywork/tmp/pr.md` に出力してください。
-diffを見れば分かる内容（変更ファイル一覧など）は不要です。
+上記のテンプレを参考に派生元ブランチとのdiffやコミット履歴を見て、Pull Requestの説明文を`.mywork/tmp/pr.md` に出力してください。
+
+- diffを見れば分かる内容（変更ファイル一覧など）は不要
+- 地の文章は「です・ます」調で書く
+- 箇条書きは「だ・である」調で書く
 
 派生元ブランチ: `$ARGUMENTS`（**空白なら`development`ブランチ**。masterやmainはありえない）
 
