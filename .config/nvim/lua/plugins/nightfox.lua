@@ -8,6 +8,8 @@ return {
       groups = {
         all = {
           ["@markup.raw"] = { style = "NONE" },
+          -- ターミナル透過でも見やすいようにする
+          Visual = { bg = "#1a2e30" },
         },
       },
     })
