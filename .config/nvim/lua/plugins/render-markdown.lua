@@ -39,6 +39,9 @@ return {
     code = {
       width = "block",
       border = "thick",
+      highlight = "RenderMarkdownCodeBg",
+      highlight_border = false,
+      highlight_inline = "RenderMarkdownCodeBg",
     },
     checkbox = {
       checked = { scope_highlight = "@markup.strikethrough" },
