@@ -8,6 +8,7 @@
     bun
     delta
     direnv
+    dust
     fd
     ffmpeg
     findutils
