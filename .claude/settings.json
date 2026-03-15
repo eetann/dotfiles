@@ -2,7 +2,9 @@
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "includeCoAuthoredBy": false,
   "permissions": {
-    "allow": ["mcp__pencil"],
+    "allow": [
+      "mcp__pencil"
+    ],
     "deny": [
       "Bash(sudo:*)",
       "Bash(rm -rf:*)",
@@ -45,7 +47,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "vde-notifier --claude --message 'Claude Codeが許可を求めています' --terminal wezterm --terminal-notifier"
+            "command": "vde-notifier --claude --message 'Claude Codeが許可を求めています' --terminal wezterm --notifier terminal-notifier"
           }
         ]
       }
@@ -63,4 +65,3 @@
     "padding": 0
   }
 }
-
