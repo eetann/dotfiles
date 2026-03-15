@@ -34,6 +34,7 @@ require("lazy").setup({
     -- リッチにする
     { "nvim-tree/nvim-web-devicons", lazy = true },
     { import = "plugins.noice" },
+    { import = "plugins.modes" },
     { import = "plugins.lualine.index" },
     { import = "plugins.nvim-treesitter" },
     { import = "plugins.bufferline" },
@@ -54,7 +55,7 @@ require("lazy").setup({
     -- 編集
     { import = "plugins.mini-ai" },
     { import = "plugins.mini-surround" },
-    { import = "plugins.auto-cursorline" },
+    -- { import = "plugins.auto-cursorline" },
     { import = "plugins.nvim-autopairs" },
     { import = "plugins.lsp.index" },
     { import = "plugins.dap.index" },

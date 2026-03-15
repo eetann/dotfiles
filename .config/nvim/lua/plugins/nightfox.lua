@@ -9,7 +9,7 @@ return {
         all = {
           ["@markup.raw"] = { style = "NONE" },
           -- ターミナル透過でも見やすいようにする
-          Visual = { bg = "#1a2e30", style = "italic" },
+          -- Visual = { bg = "#1a2e30", style = "italic" },
           -- render-markdownのコードブロック用
           RenderMarkdownCodeBg = { bg = "#212e3f" },
         },
