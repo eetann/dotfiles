@@ -37,6 +37,7 @@ require("lazy").setup({
     { import = "plugins.lualine.index" },
     { import = "plugins.nvim-treesitter" },
     { import = "plugins.bufferline" },
+    { import = "plugins.bento" },
     { import = "plugins.nvim-colorizer" },
     { import = "plugins.nvim-hlslens" },
     { import = "plugins.nvim-scrollbar" },

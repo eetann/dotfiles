@@ -51,6 +51,23 @@ return {
       return tostring(lines) .. " lines, " .. tostring(chars) .. " characters"
     end
 
+    -- .nb/home/*.md のファイルはMarkdownの見出しをファイル名として表示する
+    local function nb_heading_fmt(name)
+      local buf_path = vim.api.nvim_buf_get_name(0)
+      if buf_path:match("%.nb/home/.*.md") then
+        local file = io.open(buf_path, "r")
+        if file then
+          local first_line = file:read("*l")
+          file:close()
+          local heading = first_line and first_line:match("^#%s+(.+)")
+          if heading then
+            return heading
+          end
+        end
+      end
+      return name
+    end
+
     require("lualine").setup({
       options = {
         icons_enabled = true,
@@ -77,7 +94,7 @@ return {
           [[vim.o.paste and 'PASTE' or '']],
           is_table_mode,
         },
-        lualine_b = { "branch" },
+        lualine_b = {},
         lualine_c = {},
         lualine_x = {
           {
@@ -132,10 +149,25 @@ return {
             end,
           },
         },
-        lualine_c = {},
+        lualine_c = {
+          {
+            function()
+              local count = 0
+              for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+                if vim.fn.buflisted(buf) == 1 then
+                  count = count + 1
+                end
+              end
+              return tostring(count)
+            end,
+            icon = "󰓩",
+            cond = function()
+              return not vim.env.EDITPROMPT
+            end,
+          },
+        },
         lualine_x = {},
-        lualine_y = {},
-        lualine_z = {
+        lualine_y = {
           {
             "filetype",
             icon_only = true,
@@ -143,6 +175,8 @@ return {
               return not vim.env.EDITPROMPT
             end,
           },
+        },
+        lualine_z = {
           {
             "filename",
             path = 1,
@@ -151,6 +185,7 @@ return {
               modified = "● ",
               readonly = "󰌾 ",
             },
+            fmt = nb_heading_fmt,
             cond = function()
               return not vim.env.EDITPROMPT
             end,
@@ -188,6 +223,7 @@ return {
               modified = "● ",
               readonly = "󰌾 ",
             },
+            fmt = nb_heading_fmt,
             cond = function()
               return not vim.env.EDITPROMPT
             end,
