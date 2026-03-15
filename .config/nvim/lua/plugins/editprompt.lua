@@ -17,6 +17,7 @@ return {
     { "<Space>pS", "<Cmd>Editprompt stash push<CR>" },
     { "<Space>pp", "<Cmd>Editprompt history prev<CR>" },
     { "<Space>pn", "<Cmd>Editprompt history next<CR>" },
+    { "<Space><Space>", "<Cmd>Editprompt press_mode<CR>" },
   },
   cmd = "Editprompt",
   opts = {
