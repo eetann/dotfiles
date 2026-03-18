@@ -2,7 +2,13 @@ return {
   "serhez/bento.nvim",
   cond = not vim.g.vscode and not vim.env.EDITPROMPT,
   event = "VeryLazy",
-  opts = {},
+  opts = {
+    -- ui = {
+    --   floating = {
+    --     minimal_menu = "full",
+    --   },
+    -- },
+  },
   keys = {
     {
       "<leader>;",
