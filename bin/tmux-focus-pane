@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ -z "$TMUX" ]; then
+  echo "Error: This command must be run inside tmux."
+  exit 1
+fi
+
+if [ -z "$1" ]; then
+  echo "Usage: tmux-focus-pane role"
+  exit 1
+fi
+
+pane_id=$(tmux list-panes -F "#{pane_id} #{@role}" | awk -v t="$1" '$2 == t {print $1}')
+
+if [ -n "$pane_id" ]; then
+  tmux select-pane -t "$pane_id"
+fi

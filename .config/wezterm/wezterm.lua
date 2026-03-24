@@ -51,7 +51,7 @@ local key_table = {
     action = wezterm.action.ToggleFullScreen,
   },
   {
-    key = "e",
+    key = "m",
     mods = "OPT",
     action = wezterm.action_callback(function(window, pane)
       local target_pane_id = tostring(pane:pane_id())
@@ -121,6 +121,8 @@ if target:find("darwin") then
       mods = "CTRL",
       action = { SendKey = { key = "_", mods = "CTRL" } },
     },
+    opt_to_alt("c"),
+    opt_to_alt("e"),
     opt_to_alt("j"),
     opt_to_alt("k"),
     opt_to_alt("h"),
