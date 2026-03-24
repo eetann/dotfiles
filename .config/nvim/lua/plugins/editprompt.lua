@@ -17,6 +17,14 @@ return {
     { "<Space>pS", "<Cmd>Editprompt stash push<CR>" },
     { "<Space>pp", "<Cmd>Editprompt history prev<CR>" },
     { "<Space>pn", "<Cmd>Editprompt history next<CR>" },
+    {
+      "<Space>pN",
+      function()
+        require("editprompt").press("/new")
+        vim.cmd("sleep 200ms")
+        require("editprompt").press("<CR>")
+      end,
+    },
     { "<Space><Space>", "<Cmd>Editprompt press_mode<CR>" },
     {
       "1",

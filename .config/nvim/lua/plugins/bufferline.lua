@@ -26,7 +26,7 @@ return {
       end,
       desc = "Close! current buffer without closing the current window",
     },
-    { "<Space><Space>", "<cmd>BufferLinePick<CR>", desc = "Pick buffer" },
+    { ";", "<cmd>BufferLinePick<CR>", desc = "Pick buffer" },
   },
   opts = function()
     local bufferline = require("bufferline")
