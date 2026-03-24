@@ -164,6 +164,7 @@ export const commandSnippets: Snippet[] = [
   },
   {
     name: "close window safety",
+    keyword: "vempty",
     snippet: "vde-layout empty --current-window && exit",
   },
 ];

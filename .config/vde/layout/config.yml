@@ -1,3 +1,5 @@
+defaults:
+  windowMode: current-window
 presets:
   dev:
     name: dev
