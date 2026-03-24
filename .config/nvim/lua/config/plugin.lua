@@ -38,7 +38,6 @@ require("lazy").setup({
     { import = "plugins.lualine.index" },
     { import = "plugins.nvim-treesitter" },
     { import = "plugins.bufferline" },
-    { import = "plugins.bento" },
     { import = "plugins.nvim-colorizer" },
     { import = "plugins.nvim-hlslens" },
     { import = "plugins.nvim-scrollbar" },
@@ -55,7 +54,6 @@ require("lazy").setup({
     -- 編集
     { import = "plugins.mini-ai" },
     { import = "plugins.mini-surround" },
-    -- { import = "plugins.auto-cursorline" },
     { import = "plugins.nvim-autopairs" },
     { import = "plugins.lsp.index" },
     { import = "plugins.dap.index" },
