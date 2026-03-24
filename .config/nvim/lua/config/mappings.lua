@@ -45,18 +45,6 @@ vim.keymap.set("n", "q", "<NOP>")
 vim.keymap.set("n", "<Leader>q", "q")
 vim.keymap.set("n", "s", "<NOP>")
 
--- バッファを閉じる（ウィンドウはそのまま）
-vim.keymap.set("n", "sq", function()
-  local now_bufnr = vim.fn.bufnr()
-  vim.cmd("bnext")
-  vim.cmd(("bdelete %d"):format(now_bufnr))
-end, { desc = "現在のバッファを閉じる（ウィンドウは残す）", silent = true })
-vim.keymap.set("n", "sQ", function()
-  local now_bufnr = vim.fn.bufnr()
-  vim.cmd("bnext")
-  vim.cmd(("bdelete! %d"):format(now_bufnr))
-end, { desc = "現在のバッファを強制的に閉じる（ウィンドウは残す）", silent = true })
-
 -- フォーカス移動
 vim.keymap.set("n", "sj", "<C-w>j")
 vim.keymap.set("n", "sk", "<C-w>k")
