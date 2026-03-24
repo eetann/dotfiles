@@ -18,7 +18,12 @@ if [[ -f "$_zcompdump" ]] && (( $(date +%s) - $(stat -f %m "$_zcompdump") < 8640
 else
   compinit -d "$_zcompdump"
   # 再生成時にコンパイルして次回以降の読み込みを高速化
-  zcompile "$_zcompdump"
+  # 複数ペイン同時起動時の競合を回避するためロックファイルで排他制御
+  local _lockfile="${_zcompdump}.lock"
+  if (set -o noclobber; echo $$ > "$_lockfile") 2>/dev/null; then
+    zcompile "$_zcompdump"
+    rm -f "$_lockfile"
+  fi
 fi
 unset _zcompdump
 

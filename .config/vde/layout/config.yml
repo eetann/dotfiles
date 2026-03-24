@@ -10,7 +10,7 @@ presets:
           ratio: [1, "12c"]
           panes:
             - name: "editor"
-              command: "git status -c"
+              command: "git status -s | grep . || echo '変更なし'"
             - name: "terminal"
         - type: vertical
           ratio: [1, "10c"]

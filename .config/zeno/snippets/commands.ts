@@ -158,6 +158,11 @@ export const commandSnippets: Snippet[] = [
     snippet: "gtr rm --delete-branch",
   },
   {
+    name: "create window for development",
+    keyword: "vdev",
+    snippet: 'vde-layout dev && tmux rename-window "$(basename $PWD)"',
+  },
+  {
     name: "close window safety",
     snippet: "vde-layout empty --current-window && exit",
   },
