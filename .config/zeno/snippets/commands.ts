@@ -157,4 +157,8 @@ export const commandSnippets: Snippet[] = [
     keyword: "grm",
     snippet: "gtr rm --delete-branch",
   },
+  {
+    name: "close window safety",
+    snippet: "vde-layout empty --current-window && exit",
+  },
 ];

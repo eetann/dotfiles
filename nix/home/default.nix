@@ -69,6 +69,7 @@ in
     "lazygit/config.yml"
     "nvim"
     "rofi"
+    "vde"
     "wezterm"
     "zeno"
   ];
