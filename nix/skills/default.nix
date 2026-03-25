@@ -22,6 +22,11 @@
         path = inputs.playwright-cli-skills;
         subdir = "skills";
       };
+      # drawio-mcp（GitHub）
+      drawio = {
+        path = inputs.drawio-mcp;
+        subdir = "skill-cli";
+      };
     };
 
     skills.enableAll = true;

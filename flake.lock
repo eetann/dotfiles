@@ -54,6 +54,22 @@
         "type": "github"
       }
     },
+    "drawio-mcp": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1774303244,
+        "narHash": "sha256-otnMZlooM7XyzK7MK1DOvzt1nMSmVZv+CVmGe5aeeE0=",
+        "owner": "jgraph",
+        "repo": "drawio-mcp",
+        "rev": "786dedf6495990eecf88a523483d73843d7e304e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jgraph",
+        "repo": "drawio-mcp",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -202,6 +218,7 @@
         "agent-skills": "agent-skills",
         "claude-chill": "claude-chill",
         "design-skills": "design-skills",
+        "drawio-mcp": "drawio-mcp",
         "home-manager": "home-manager_2",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs_3",

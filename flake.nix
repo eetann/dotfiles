@@ -23,6 +23,10 @@
       url = "github:microsoft/playwright-cli";
       flake = false;
     };
+    drawio-mcp = {
+      url = "github:jgraph/drawio-mcp";
+      flake = false;
+    };
   };
 
   outputs =
