@@ -19,6 +19,7 @@ SKIP_NOTIFY_COMMANDS=(
   ml
   mt
   git
+  "tmux set-option"
   "vagrant ssh"
   "mise w"
   "npm run dev"
