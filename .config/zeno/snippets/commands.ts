@@ -160,11 +160,16 @@ export const commandSnippets: Snippet[] = [
   {
     name: "create window for development",
     keyword: "vdev",
-    snippet: 'vde-layout dev && tmux rename-window "$(basename $PWD)"',
+    snippet: 'vde-layout dev && tmux rename-window "{{}}"',
+  },
+  {
+    name: "close panes safety",
+    keyword: "vempty",
+    snippet: "vde-layout empty",
   },
   {
     name: "close window safety",
-    keyword: "vempty",
-    snippet: "vde-layout empty --current-window && exit",
+    keyword: "vquit",
+    snippet: "vde-layout empty && exit",
   },
 ];

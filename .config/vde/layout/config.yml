@@ -34,3 +34,4 @@ presets:
     name: empty
     description: プロセス終了用の単一ペイン
     command: ""
+    windowMode: current-window
