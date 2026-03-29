@@ -1,6 +1,7 @@
 return {
   "lewis6991/gitsigns.nvim",
   event = { "VeryLazy" },
+  cond = not vim.g.vscode and not vim.env.EDITPROMPT,
   opts = {
     signs = {
       add = { text = "│" },
