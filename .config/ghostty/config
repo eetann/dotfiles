@@ -1,0 +1,8 @@
+font-family = HackGen Console NF
+font-size = 14
+theme = Terafox
+background-opacity = 0.60
+background-blur-radius = 45
+
+working-directory = ~/dotfiles/
+cursor-style-blink = false

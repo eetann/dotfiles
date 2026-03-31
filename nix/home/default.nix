@@ -65,6 +65,7 @@ in
     "ccstatusline"
     "efm-langserver"
     "git"
+    "ghostty"
     "i3/config"
     "lazygit/config.yml"
     "nvim"
