@@ -6,3 +6,45 @@ background-blur-radius = 45
 
 working-directory = ~/dotfiles/
 cursor-style-blink = false
+
+# キーバインド（ctrl+sをprefixとしたtrigger sequence）
+
+# ペイン分割
+keybind = ctrl+s>shift+backslash=new_split:right
+keybind = ctrl+s>backslash=new_split:right
+keybind = ctrl+s>minus=new_split:down
+
+# ペイン移動
+keybind = ctrl+s>h=goto_split:left
+keybind = ctrl+s>j=goto_split:bottom
+keybind = ctrl+s>k=goto_split:top
+keybind = ctrl+s>l=goto_split:right
+
+# ペインリサイズ
+keybind = ctrl+s>shift+h=resize_split:left,10
+keybind = ctrl+s>shift+j=resize_split:down,10
+keybind = ctrl+s>shift+k=resize_split:up,10
+keybind = ctrl+s>shift+l=resize_split:right,10
+
+# タブ操作
+keybind = ctrl+s>c=new_tab
+keybind = alt+p=previous_tab
+keybind = alt+n=next_tab
+keybind = alt+h=move_tab:-1
+keybind = alt+l=move_tab:1
+
+# ペインズーム
+keybind = alt+z=toggle_split_zoom
+
+# 設定再読み込み
+keybind = ctrl+s>r=reload_config
+
+# ペインを閉じる
+keybind = ctrl+s>q=close_surface
+
+# コピー・ペースト
+keybind = ctrl+s>p=paste_from_clipboard
+keybind = ctrl+s>v=start_search
+
+# ペイン均等化
+keybind = ctrl+s>equal=equalize_splits
