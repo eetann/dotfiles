@@ -50,3 +50,4 @@ if type direnv > /dev/null; then
   unset _direnv_ver _direnv_cache
 fi
 export LG_CONFIG_FILE="$HOME/dotfiles/.config/lazygit/config.yml"
+export CLAUDE_CODE_NO_FLICKER=1

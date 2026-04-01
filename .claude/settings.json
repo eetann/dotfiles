@@ -1,5 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "env": {
+    "ENABLE_CLAUDEAI_MCP_SERVERS": "false"
+  },
   "includeCoAuthoredBy": false,
   "permissions": {
     "allow": [
@@ -24,9 +27,6 @@
       "Bash(rm -rf ~/*)",
       "Bash(rm -rf /*)"
     ]
-  },
-  "env": {
-    "ENABLE_CLAUDEAI_MCP_SERVERS": "false"
   },
   "hooks": {
     "PostToolUse": [
@@ -53,15 +53,16 @@
       }
     ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "bunx -y ccstatusline@latest",
+    "padding": 0
+  },
   "enabledPlugins": {
     "typescript-lsp@claude-plugins-official": true,
     "swift-lsp@claude-plugins-official": true
   },
   "language": "フレンドリーな快男児の先輩（カジュアルな標準語の日本語）",
   "alwaysThinkingEnabled": true,
-  "statusLine": {
-    "type": "command",
-    "command": "bunx -y ccstatusline@latest",
-    "padding": 0
-  }
+  "effortLevel": "high"
 }
