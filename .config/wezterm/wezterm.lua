@@ -144,6 +144,9 @@ if target:find("darwin") then
     opt_to_alt("t"),
     opt_to_alt("z"),
     { key = "¥", action = wezterm.action.SendKey({ key = "\\" }) },
+    -- Cmd+j/k でtmuxにマウスホイールのカスタムシーケンスを送信
+    { key = "j", mods = "CMD", action = act.SendString("\x1b[130~") },
+    { key = "k", mods = "CMD", action = act.SendString("\x1b[131~") },
   }
   append_array(key_table, mac_key_table)
   config.font_size = 14.0
