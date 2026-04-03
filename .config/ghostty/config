@@ -10,8 +10,8 @@ cursor-style-blink = false
 # キーバインド（ctrl+sをprefixとしたtrigger sequence）
 
 # ペイン分割
-keybind = ctrl+s>shift+backslash=new_split:right
-keybind = ctrl+s>backslash=new_split:right
+keybind = ctrl+s>shift+¥=new_split:right
+keybind = ctrl+s>¥=new_split:right
 keybind = ctrl+s>minus=new_split:down
 
 # ペイン移動
