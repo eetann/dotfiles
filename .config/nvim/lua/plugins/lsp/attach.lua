@@ -47,8 +47,18 @@ local function attach_callback(ev)
     "<cmd>lua vim.diagnostic.open_float()<CR>",
     bufopts
   )
-  vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", bufopts)
-  vim.keymap.set("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", bufopts)
+  vim.keymap.set(
+    "n",
+    "[d",
+    "<cmd>lua vim.diagnostic.jump({count=-1, float=true})<CR>",
+    bufopts
+  )
+  vim.keymap.set(
+    "n",
+    "]d",
+    "<cmd>lua vim.diagnostic.jump({count=-1, float=true})<CR>",
+    bufopts
+  )
 end
 
 vim.api.nvim_create_autocmd("LspAttach", {
