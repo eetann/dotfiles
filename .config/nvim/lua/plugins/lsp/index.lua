@@ -23,7 +23,6 @@ return {
   -- { import = "plugins.lsp.tiny-inline-diagnostic" },
   { import = "plugins.lsp.tiny-code-action" },
   { import = "plugins.lsp.conform" },
-  -- { import = "plugins.lsp.none-ls" },
-  { import = "plugins.lsp.nvim-lint" },
+  { import = "plugins.lsp.none-ls" },
   { import = "plugins.lsp.lazydev" },
 }

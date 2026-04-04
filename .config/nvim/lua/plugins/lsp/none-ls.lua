@@ -6,30 +6,20 @@ return {
     local null_ls = require("null-ls")
 
     local sources = {
-      require("plugins.lsp.linters.redocly"),
       null_ls.builtins.diagnostics.textlint.with({
         filetypes = { "markdown", "mdx" },
         condition = function(utils)
-          local is_mdn = utils.root_matches("translated%-content")
           local is_not_dotfiles = not utils.root_matches("dotfiles")
-          return is_mdn
-            or (
-              is_not_dotfiles
-              and utils.root_has_file({
-                ".textlintrc",
-                ".textlintrc.js",
-                ".textlintrc.json",
-                ".textlintrc.yml",
-                ".textlintrc.yaml",
-              })
-            )
-        end,
-        cwd = function(params)
-          local is_mdn = params.root:find("translated%-content")
-          return is_mdn
-            and vim.fn.expand(
-              "~/ghq/github.com/mozilla-japan/translation/MDN/textlint"
-            )
+          return (
+            is_not_dotfiles
+            and utils.root_has_file({
+              ".textlintrc",
+              ".textlintrc.js",
+              ".textlintrc.json",
+              ".textlintrc.yml",
+              ".textlintrc.yaml",
+            })
+          )
         end,
       }),
     }

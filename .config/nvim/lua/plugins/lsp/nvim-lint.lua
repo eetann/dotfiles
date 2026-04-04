@@ -15,8 +15,10 @@ return {
     vim.api.nvim_create_autocmd(
       { "BufEnter", "BufWritePost", "InsertLeave", "TextChanged" },
       {
-        pattern = { "*.mdx" },
         callback = function()
+          if vim.bo.filetype ~= "mdx" then
+            return
+          end
           vim.defer_fn(require("lint").try_lint, 1)
           vim.defer_fn(function()
             if
