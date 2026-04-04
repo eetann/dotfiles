@@ -50,6 +50,7 @@ require("lazy").setup({
     { import = "plugins.nvim-tree" },
     { import = "plugins.outline" },
     { import = "plugins.trouble" },
+    { import = "plugins.screenkey" },
 
     -- 編集
     { import = "plugins.mini-ai" },
