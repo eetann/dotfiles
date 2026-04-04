@@ -1,7 +1,7 @@
 return {
   "nvim-lualine/lualine.nvim",
   cond = not vim.g.vscode,
-  dependencies = { "nvim-tree/nvim-web-devicons", "folke/noice.nvim" },
+  dependencies = { "nvim-tree/nvim-web-devicons" },
   event = "VeryLazy",
   config = function()
     vim.o.laststatus = 3
@@ -97,14 +97,6 @@ return {
         lualine_b = {},
         lualine_c = {},
         lualine_x = {
-          {
-            -- for `@recording messsages`
-            ---@diagnostic disable-next-line: undefined-field
-            require("noice").api.status.mode.get,
-            ---@diagnostic disable-next-line: undefined-field
-            cond = require("noice").api.status.mode.has,
-            color = { fg = "#ff9e64" },
-          },
           {
             -- https://www.reddit.com/r/neovim/comments/1aseug5/comment/kqq026j
             function()
