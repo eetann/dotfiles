@@ -69,6 +69,7 @@ in
     "i3/config"
     "lazygit/config.yml"
     "nvim"
+    "opencode/opencode.jsonc"
     "rofi"
     "vde"
     "wezterm"

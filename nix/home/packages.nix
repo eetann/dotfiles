@@ -24,6 +24,7 @@
     mise
     nb
     neovim
+    opencode
     ripgrep
     shellcheck
     shfmt

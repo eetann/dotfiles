@@ -8,3 +8,5 @@ source "$HOME/.zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme"
 source $ZDIR/plugin/typing.zsh
 source $ZDIR/plugin/fzf.zsh
 source $ZDIR/plugin/zeno.zsh
+
+export OLLAMA_MODELS=/Volumes/KIOXIA/ollama/
