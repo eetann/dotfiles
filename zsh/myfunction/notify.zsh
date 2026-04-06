@@ -12,6 +12,7 @@ SKIP_NOTIFY_COMMANDS=(
   man
   nb
   nvim
+  opencode
   ssh
   vim
   watch

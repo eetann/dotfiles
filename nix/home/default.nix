@@ -70,6 +70,7 @@ in
     "lazygit/config.yml"
     "nvim"
     "opencode/opencode.jsonc"
+    "opencode/tui.jsonc"
     "rofi"
     "vde"
     "wezterm"
