@@ -3,6 +3,7 @@
   "instructions": [
     "~/.config/opencode/instructions/japanese.md"
   ],
+  "share": "disabled",
   "provider": {
     "ollama": {
       "npm": "@ai-sdk/openai-compatible",
