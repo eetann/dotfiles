@@ -26,36 +26,15 @@ return {
       end,
     },
     { "<Space><Space>", "<Cmd>Editprompt press_mode<CR>" },
-    {
-      "1",
-      function()
-        require("editprompt").press("1")
-      end,
-    },
-    {
-      "2",
-      function()
-        require("editprompt").press("2")
-      end,
-    },
-    {
-      "3",
-      function()
-        require("editprompt").press("3")
-      end,
-    },
-    {
-      "4",
-      function()
-        require("editprompt").press("4")
-      end,
-    },
-    {
-      "<CR>",
-      function()
-        require("editprompt").press("<CR>")
-      end,
-    },
+    -- stylua: ignore start
+    { "1", function() require("editprompt").press("1") end },
+    { "2", function() require("editprompt").press("2") end },
+    { "3", function() require("editprompt").press("3") end },
+    { "4", function() require("editprompt").press("4") end },
+    { "<Up>", function() require("editprompt").press("<Up>") end },
+    { "<Down>", function() require("editprompt").press("<Down>") end },
+    { "<CR>", function() require("editprompt").press("<CR>") end },
+    -- stylua: ignore end
     {
       "<C-o>",
       function()
