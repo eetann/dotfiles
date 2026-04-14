@@ -24,6 +24,7 @@
     mise
     nb
     neovim
+    nvd # Nixプロファイルのdiff表示
     opencode
     ripgrep
     shellcheck
