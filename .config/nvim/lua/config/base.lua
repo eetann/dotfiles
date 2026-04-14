@@ -119,3 +119,34 @@ vim.cmd("cabbrev H belowright vertical help")
 vim.api.nvim_create_user_command("EditAsSJIS", function()
   vim.cmd("edit ++encoding=sjis")
 end, {})
+
+local banned_messages = { ".*written" }
+
+local messages = require("vim._core.ui2.messages")
+local original_msg_show = messages.msg_show
+
+messages.msg_show = function(
+  kind,
+  content,
+  replace_last,
+  history,
+  append,
+  id,
+  trigger
+)
+  -- 特定のメッセージをフィルタリング
+  if kind == "bufwrite" then
+    return -- 'written'メッセージを非表示
+  end
+
+  -- その他のメッセージは通常通り表示
+  original_msg_show(kind, content, replace_last, history, append, id, trigger)
+end
+
+require("vim._core.ui2").enable({
+  msg = {
+    targets = {
+      bufwrite = "msg",
+    },
+  },
+})

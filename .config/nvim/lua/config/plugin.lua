@@ -33,7 +33,8 @@ require("lazy").setup({
 
     -- リッチにする
     { "nvim-tree/nvim-web-devicons", lazy = true },
-    { import = "plugins.noice" },
+    -- { import = "plugins.noice" },
+    { import = "plugins.tiny-cmdline" },
     { import = "plugins.modes" },
     { import = "plugins.lualine.index" },
     { import = "plugins.nvim-treesitter" },
@@ -104,5 +105,8 @@ require("lazy").setup({
     { import = "plugins.mini-doc" },
     { import = "plugins.mini-test" },
     { import = "plugins.denops" },
+  },
+  change_detection = {
+    enabled = false,
   },
 })
