@@ -18,9 +18,17 @@ description: spec DDで要件定義をする
 
 #### 受入基準
 
-1. WHEN [イベント] THEN [システム] SHALL [応答]
-2. IF [前提条件] THEN [システム] SHALL [応答]
-3. WHEN [イベント] AND [条件] THEN [システム] SHALL [応答]
+1. WHEN [イベント]
+    THEN [システム]
+    SHALL [応答]
+2. IF [前提条件]
+    THEN [システム]
+    SHALL [応答]
+3. WHEN [イベント] AND [条件]
+    THEN [システム]
+    SHALL [応答]
+
+<!-- THENやSHALLは読みやすさのために改行する -->
 
 ### 要件 2
 
@@ -28,8 +36,12 @@ description: spec DDで要件定義をする
 
 #### 受入基準
 
-1. WHEN [イベント] THEN [システム] SHALL [応答]
-2. IF [前提条件] THEN [システム] SHALL [応答]
+1. WHEN [イベント]
+    THEN [システム]
+    SHALL [応答]
+2. IF [前提条件]
+    THEN [システム]
+    SHALL [応答]
 
 
 ## 非機能要件
