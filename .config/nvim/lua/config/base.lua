@@ -120,8 +120,6 @@ vim.api.nvim_create_user_command("EditAsSJIS", function()
   vim.cmd("edit ++encoding=sjis")
 end, {})
 
-local banned_messages = { ".*written" }
-
 local messages = require("vim._core.ui2.messages")
 local original_msg_show = messages.msg_show
 
@@ -139,6 +137,16 @@ messages.msg_show = function(
     return -- 'written'メッセージを非表示
   end
 
+  if kind == "echo" then
+    -- echo メッセージを vim.notify に転送
+    local text = ""
+    for _, chunk in ipairs(content) do
+      text = text .. chunk[2]
+    end
+    require("notify")(text, vim.log.levels.INFO)
+    return
+  end
+
   -- その他のメッセージは通常通り表示
   original_msg_show(kind, content, replace_last, history, append, id, trigger)
 end
@@ -146,7 +154,7 @@ end
 require("vim._core.ui2").enable({
   msg = {
     targets = {
-      bufwrite = "msg",
+      echo = "cmd",
     },
   },
 })
