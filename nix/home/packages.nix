@@ -4,6 +4,7 @@
 {
   home.packages = with pkgs; [
     # CLIツール
+    awscli2
     bat
     bun
     delta
