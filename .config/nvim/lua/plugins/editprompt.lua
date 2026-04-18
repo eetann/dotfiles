@@ -34,6 +34,7 @@ return {
     { "<Up>", function() require("editprompt").press("<Up>") end },
     { "<Down>", function() require("editprompt").press("<Down>") end },
     { "<CR>", function() require("editprompt").press("<CR>") end },
+    { "<S-Tab>", function() require("editprompt").press("<S-Tab>") end },
     -- stylua: ignore end
     {
       "<C-o>",
