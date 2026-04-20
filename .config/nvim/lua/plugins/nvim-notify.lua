@@ -7,6 +7,7 @@ return {
     require("notify").setup({
       merge_duplicates = true,
       render = "wrapped-compact",
+      stages = "static",
       top_down = false,
     })
     vim.notify = require("notify")
