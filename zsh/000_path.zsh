@@ -51,3 +51,4 @@ if type direnv > /dev/null; then
 fi
 export LG_CONFIG_FILE="$HOME/dotfiles/.config/lazygit/config.yml"
 export CLAUDE_CODE_NO_FLICKER=1
+export CLAUDE_CODE_TMUX_TRUECOLOR=1
