@@ -10,8 +10,23 @@ local skip_patterns = {
   "query: invalid node type",
   "No code actions available",
   "DiagnosticChanged Autocommands for.*Invalid",
+  "Already at .* change",
+  "more lines?",
+  "fewer lines?",
   "^wrap$",
   "^unwrap$",
+}
+
+-- mini表示するパターン一覧（render="minimal"で短く通知）
+local mini_patterns = {
+  "yanked",
+  "change;%sbefore",
+  "change;%safter",
+  "line less",
+  "lines indented",
+  "No lines in buffer",
+  "search hit .*, continuing at",
+  "E486: Pattern not found",
 }
 
 messages.msg_show = function(
@@ -40,6 +55,16 @@ messages.msg_show = function(
 
   for _, pattern in ipairs(skip_patterns) do
     if text:match(pattern) then
+      return
+    end
+  end
+
+  for _, pattern in ipairs(mini_patterns) do
+    if text:match(pattern) then
+      require("notify")(text, vim.log.levels.INFO, {
+        render = "minimal",
+        timeout = 1500,
+      })
       return
     end
   end
