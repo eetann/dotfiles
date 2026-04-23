@@ -93,3 +93,5 @@ npm run test __tests__/e2e/stock_operation_log/getStockOperationLogDownload.test
 - コードはなるべく書かない。設計書を見れば分かるし、tasks.mdと実際のコードの2重管理はよくないから
     - もちろんどうしても必要だったら書いて良い
 - リポジトリのコメントなどが英語でも、実装計画書は日本語で書く
+- tasks.mdには詳しい内容は書かず、`〇〇関数の実装`ぐらい短くてOK
+    - design.mdに書いた内容と重複すると、あとから変更が入ったときに修正箇所が増えて面倒なため
