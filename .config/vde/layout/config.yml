@@ -14,7 +14,7 @@ presets:
             - name: "other"
               command: >-
                 tmux set-option -p -t {{this_pane}} @role other;
-                git status -s | grep . || echo '変更なし'
+                s=$(git status -s); [ -n "$s" ] && echo "$s" || echo '変更なし'
             - name: "server"
               command: "tmux set-option -p -t {{this_pane}} @role server"
         - type: vertical
