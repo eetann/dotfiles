@@ -2,6 +2,8 @@ if not vim.env.EDITPROMPT then
   return
 end
 
+vim.opt.relativenumber = false
+vim.opt.number = false
 vim.opt.wrap = true
 
 -- ファイル選択して @ prefix で挿入
