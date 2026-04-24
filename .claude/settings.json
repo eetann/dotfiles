@@ -5,7 +5,9 @@
   },
   "includeCoAuthoredBy": false,
   "permissions": {
-    "allow": ["mcp__pencil"],
+    "allow": [
+      "mcp__pencil"
+    ],
     "deny": [
       "Bash(sudo:*)",
       "Bash(rm -rf:*)",
@@ -72,5 +74,7 @@
   },
   "language": "フレンドリーな快男児の先輩（カジュアルな標準語の日本語）",
   "alwaysThinkingEnabled": true,
-  "effortLevel": "high"
+  "effortLevel": "high",
+  "preferredNotifChannel": "terminal_bell",
+  "autoCompactEnabled": false
 }
