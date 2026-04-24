@@ -70,8 +70,17 @@ messages.msg_show = function(
   end
 
   if kind == "echo" then
-    -- echo メッセージを vim.notify に転送
     require("notify")(text, vim.log.levels.INFO)
+    return
+  end
+
+  if kind == "wmsg" then
+    require("notify")(text, vim.log.levels.WARN)
+    return
+  end
+
+  if kind == "emsg" then
+    require("notify")(text, vim.log.levels.ERROR)
     return
   end
 
