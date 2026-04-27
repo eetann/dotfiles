@@ -3,8 +3,12 @@ import type { UserCompletionSource } from "jsr:@yuki-yano/zeno";
 
 export const gtrCompletions: UserCompletionSource[] = [
   {
-    name: "gtr rm --delete-branch",
-    patterns: ["^gtr rm --delete-branch $", "^gtr rm $"],
+    name: "branch names",
+    patterns: [
+      "^gtr rm --delete-branch $",
+      "^gtr rm $",
+      "^tmux-open-worktree $",
+    ],
     sourceCommand: "git gtr list --porcelain | awk '!/detached/{print $2}'",
     options: {
       "--header-lines": 1,
