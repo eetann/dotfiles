@@ -29,6 +29,10 @@ return {
         source = "ppen",
         target = "Pencil MCPを使って",
       },
+      {
+        source = "pask",
+        target = "適宜AskUserQuestionを使って決めていこう",
+      },
     },
     matching = "prefix",
     case_sensitive = false,
