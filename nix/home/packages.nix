@@ -16,6 +16,7 @@
     gawk
     gh
     ghq
+    git-lfs
     gnused # gnu-sed
     go
     gomi
