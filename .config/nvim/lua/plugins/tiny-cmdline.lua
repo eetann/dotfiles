@@ -5,7 +5,6 @@ return {
   -- event = { "VeryLazy" },
   config = function()
     vim.o.cmdheight = 0
-    -- アダプター必要っぽい
     require("tiny-cmdline").setup({
       on_reposition = require("tiny-cmdline").adapters.blink,
       native_types = {},
