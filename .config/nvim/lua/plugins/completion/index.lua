@@ -25,8 +25,10 @@ return {
       -- { import = "plugins.completion.minuet-ai" },
       -- { import = "plugins.copilot" },
     },
-    -- use a release tag to download pre-built binaries
     version = "*",
+    build = function()
+      require("blink.cmp").build():wait(60000)
+    end,
     ---@module "blink.cmp"
     ---@type blink.cmp.Config
     opts = {

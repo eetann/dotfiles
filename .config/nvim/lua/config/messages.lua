@@ -12,6 +12,7 @@ local skip_patterns = {
   "DiagnosticChanged Autocommands for.*Invalid",
   "Already at .* change",
   ".*change; after .*ago",
+  ".*change; before .* ago",
   ".*less; before .* ago",
   "more lines?",
   "fewer lines?",
