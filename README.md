@@ -157,9 +157,6 @@ command -v zsh | sudo tee -a /etc/shells
 sudo chsh -s "$(command -v zsh)" "${USER}O
 zsh
 ```
-```sh
-bash ~/dotfiles/etc/init/oh-my-zsh.sh
-```
 
 ## Install tmux
 

@@ -1,5 +1,4 @@
-# zsh プラグイン設定
-# oh-my-zshを排除し、プラグインを~/.zsh/plugins/に配置
+# zsh プラグインを~/.zsh/plugins/に配置
 { pkgs, ... }:
 let
   # nixpkgsにないプラグイン
@@ -24,6 +23,5 @@ in
   home.file.".zsh/plugins/zeno".source = zeno-zsh;
 
   # zsh-completionsはfpath用（補完定義群）
-  home.file.".zsh/completions".source =
-    "${pkgs.zsh-completions}/share/zsh/site-functions";
+  home.file.".zsh/completions".source = "${pkgs.zsh-completions}/share/zsh/site-functions";
 }
