@@ -18,6 +18,7 @@ local skip_patterns = {
   "fewer lines?",
   "^wrap$",
   "^unwrap$",
+  "[null-ls] failed to run generator.*",
 }
 
 -- mini表示するパターン一覧（render="minimal"で短く通知）
@@ -30,6 +31,8 @@ local mini_patterns = {
   "No lines in buffer",
   "search hit .*, continuing at",
   "E486: Pattern not found",
+  "^LSP.*initialized.$",
+  "^Clipboard << ",
 }
 
 messages.msg_show = function(
