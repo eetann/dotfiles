@@ -5,6 +5,7 @@
   home.packages = with pkgs; [
     # CLIツール
     awscli2
+    ssm-session-manager-plugin
     bat
     bun
     delta

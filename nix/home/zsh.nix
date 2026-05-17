@@ -5,8 +5,8 @@ let
   zeno-zsh = pkgs.fetchFromGitHub {
     owner = "yuki-yano";
     repo = "zeno.zsh";
-    rev = "e790867f6d7abdf8c71cc441c669b985b6e079e1";
-    hash = "sha256-51BGfcKN0NtZ52ysATp3DjfhKZwvipBiKi09vd+Q/ZY=";
+    rev = "2e8fbecce0fc3692a5fcc9033ecca7ab35263e56";
+    hash = "sha256-05+w1WP/SHKp97JTGsvO3csI123U7py+fVSKnAWiUNY=";
   };
 in
 {
