@@ -1,5 +1,5 @@
 # zsh プラグインを~/.zsh/plugins/に配置
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
   # nixpkgsにないプラグイン
   zeno-zsh = pkgs.fetchFromGitHub {
@@ -19,8 +19,14 @@ in
     "${pkgs.zsh-powerlevel10k}/share/zsh/themes/powerlevel10k";
   home.file.".zsh/plugins/fzf".source = "${pkgs.fzf}/share/fzf";
 
-  # nixpkgsにないプラグイン
-  home.file.".zsh/plugins/zeno".source = zeno-zsh;
+  # zenoはdenoを `--node-modules-dir=auto` で起動するため、
+  # deno.jsonと同じ場所(=ソースディレクトリ)に node_modules を書き込もうとする。
+  # /nix/store は読み取り専用なので symlink ではなく書き込み可能なコピーとして配置する。
+  home.activation.installZeno = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    run rm -rf "$HOME/.zsh/plugins/zeno"
+    run cp -r ${zeno-zsh} "$HOME/.zsh/plugins/zeno"
+    run chmod -R u+w "$HOME/.zsh/plugins/zeno"
+  '';
 
   # zsh-completionsはfpath用（補完定義群）
   home.file.".zsh/completions".source = "${pkgs.zsh-completions}/share/zsh/site-functions";
