@@ -138,7 +138,7 @@ export const commandSnippets: Snippet[] = [
   {
     name: "gtr new local",
     keyword: "gnew",
-    snippet: "gtr new feature/",
+    snippet: "gtr new feature/{{}}",
   },
   {
     name: "gtr new --track remote",
