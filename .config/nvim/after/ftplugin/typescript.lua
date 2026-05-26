@@ -11,9 +11,9 @@ if first_line:match("^#!.*deno") or first_line:match("^//.*deno") then
     callback = function(args)
       local client = vim.lsp.get_client_by_id(args.data.client_id)
       if client and client.name == "ts_ls" then
-        vim.cmd("LspStop ts_ls")
+        vim.cmd("lsp disable ts_ls")
         vim.lsp.enable("denols")
-        vim.cmd("LspStart denols")
+        vim.cmd("lsp enable denols")
         return true -- autocmd削除
       end
     end,
@@ -22,13 +22,13 @@ end
 
 vim.api.nvim_create_user_command("TSLSWithoutInstallEnable", function()
   vim.b.bun_script = true
-  vim.cmd("LspStop ts_ls")
+  vim.cmd("lsp disable ts_ls")
   vim.lsp.enable("ts_ls_for_without_install")
-  vim.cmd("LspStart ts_ls_for_without_install")
+  vim.cmd("lsp enable ts_ls_for_without_install")
 end, {})
 
 vim.api.nvim_create_user_command("TSLSWithoutInstallDisable", function()
   vim.b.bun_script = false
-  vim.cmd("LspStop ts_ls_for_without_install")
-  vim.cmd("LspStart ts_ls")
+  vim.cmd("lsp disable ts_ls_for_without_install")
+  vim.cmd("lsp enable ts_ls")
 end, {})
