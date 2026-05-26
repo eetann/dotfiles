@@ -67,6 +67,7 @@ in
     "git"
     "ghostty"
     "i3/config"
+    "karabiner/karabiner.json"
     "lazygit/config.yml"
     "nvim"
     "opencode/opencode.jsonc"
