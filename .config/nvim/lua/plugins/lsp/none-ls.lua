@@ -12,6 +12,7 @@ return {
           local is_not_dotfiles = not utils.root_matches("dotfiles")
           return (
             is_not_dotfiles
+            and not vim.env.EDITPROMPT
             and utils.root_has_file({
               ".textlintrc",
               ".textlintrc.js",
