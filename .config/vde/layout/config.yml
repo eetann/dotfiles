@@ -24,7 +24,36 @@ presets:
             - name: "claude"
               command: >-
                 tmux set-option -p -t {{this_pane}} @role claude;
-                claude
+                CLAUDE_CONFIG_DIR=~/.claude claude
+            - name: "editprompt"
+              command: >-
+                tmux set-option -p -t {{this_pane}} @role editprompt;
+                node ~/ghq/github.com/eetann/editprompt/dist/index.js open --editor nvim --target-pane {{pane_id:claude}} --always-copy
+              ephemeral: true
+  wdev:
+    name: work-dev
+    description: Editor/Server | AI/editprompt
+    layout:
+      type: horizontal
+      ratio: [1, 1]
+      panes:
+        - type: vertical
+          ratio: [1, "12c"]
+          panes:
+            - name: "other"
+              command: >-
+                tmux set-option -p -t {{this_pane}} @role other;
+                s=$(git status -s); [ -n "$s" ] && echo "$s" || echo '変更なし'
+            - name: "server"
+              command: "tmux set-option -p -t {{this_pane}} @role server"
+              focus: true
+        - type: vertical
+          ratio: [1, "10c"]
+          panes:
+            - name: "claude"
+              command: >-
+                tmux set-option -p -t {{this_pane}} @role claude;
+                CLAUDE_CONFIG_DIR=~/.claude_work claude
             - name: "editprompt"
               command: >-
                 tmux set-option -p -t {{this_pane}} @role editprompt;
