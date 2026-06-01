@@ -9,21 +9,34 @@ export const commandSnippets: Snippet[] = [
     snippet: "node bin/new.mjs --slug",
   },
   {
-    name: "claude code",
-    keyword: "cc",
-    snippet: "claude",
-    // snippet: "claude-chill -- claude",
+    name: "my claude code",
+    keyword: "mcc",
+    snippet: "CLAUDE_CONFIG_DIR=~/.claude claude",
   },
   {
-    name: "claude code continue",
-    keyword: "ccc",
-    snippet: "claude --continue",
-    // snippet: "claude-chill -- claude --continue",
+    name: "my claude code continue",
+    keyword: "mccc",
+    snippet: "CLAUDE_CONFIG_DIR=~/.claude claude --continue",
   },
   {
-    name: "codex",
-    keyword: "cx",
-    snippet: "codex",
+    name: "work claude code",
+    keyword: "wcc",
+    snippet: "CLAUDE_CONFIG_DIR=~/.claude_work claude",
+  },
+  {
+    name: "work claude code continue",
+    keyword: "wccc",
+    snippet: "CLAUDE_CONFIG_DIR=~/.claude_work claude --continue",
+  },
+  {
+    name: "my codex",
+    keyword: "mcx",
+    snippet: "CODEX_HOME=~/.codex codex",
+  },
+  {
+    name: "work codex",
+    keyword: "wcx",
+    snippet: "CODEX_HOME=~/.codex_work codex",
   },
   {
     name: "docker compose",
@@ -159,13 +172,23 @@ export const commandSnippets: Snippet[] = [
   },
   {
     name: "create & rename window for development",
-    keyword: "vdev",
+    keyword: "vmdev",
     snippet: 'vde-layout dev && tmux rename-window "{{}}"',
   },
   {
     name: "create window for development",
-    keyword: "vdevv",
+    keyword: "vmdevv",
     snippet: "vde-layout dev",
+  },
+  {
+    name: "create & rename window for work development",
+    keyword: "vwdev",
+    snippet: 'vde-layout wdev && tmux rename-window "{{}}"',
+  },
+  {
+    name: "create window for work development",
+    keyword: "vwdevv",
+    snippet: "vde-layout wdev",
   },
   {
     name: "close panes safety",
