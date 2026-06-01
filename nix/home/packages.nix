@@ -48,6 +48,6 @@
     mmv
 
     # Claude Codeのターミナル描画最適化
-    inputs.claude-chill.packages.${pkgs.system}.default
+    inputs.claude-chill.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }
