@@ -11,9 +11,6 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    claude-chill = {
-      url = "github:davidbeesley/claude-chill";
-    };
     agent-skills.url = "github:Kyure-A/agent-skills-nix";
     design-skills = {
       url = "github:mae616/design-skills";
