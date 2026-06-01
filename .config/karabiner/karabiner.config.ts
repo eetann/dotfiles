@@ -1,3 +1,4 @@
+// #!/usr/bin/env -S deno run
 // karabiner-elements の complex_modifications を TypeScript で管理する。
 //
 // 実行方法:
