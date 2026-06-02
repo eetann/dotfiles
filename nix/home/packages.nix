@@ -29,6 +29,7 @@
     neovim
     nvd # Nixプロファイルのdiff表示
     opencode
+    orbstack
     ripgrep
     shellcheck
     shfmt
