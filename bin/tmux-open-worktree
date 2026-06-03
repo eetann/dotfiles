@@ -73,6 +73,9 @@ pane_id=$(tmux "${new_window_args[@]}")
 # レイアウト指定時は、作成したウィンドウのペインを対象にvde-layoutを実行する。
 # vde-layoutはcurrent-windowモードのとき$TMUX_PANEで対象ペインを決めるため、
 # 新ウィンドウのpane_idを渡すことでそのウィンドウにレイアウトを組ませる。
+# また、vde-layoutが作る分割ペインは-cを付けないためvde-layoutプロセスのcwdを
+# 継承する。サブシェルでworktreeディレクトリにcdしてから実行することで、
+# 分割ペインもworktreeディレクトリで作られるようにする。
 if [ -n "$layout" ]; then
-  TMUX_PANE="$pane_id" vde-layout "$layout" --currentWindow
+  (cd "$target_path" && TMUX_PANE="$pane_id" vde-layout "$layout" --currentWindow)
 fi
