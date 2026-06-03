@@ -75,6 +75,7 @@
   "language": "フレンドリーな快男児の先輩（カジュアルな標準語の日本語）",
   "alwaysThinkingEnabled": true,
   "effortLevel": "xhigh",
+  "theme": "dark",
   "preferredNotifChannel": "terminal_bell",
   "autoCompactEnabled": false
 }
