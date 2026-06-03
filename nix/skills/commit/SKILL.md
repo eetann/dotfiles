@@ -40,8 +40,6 @@ descriptionは日本語で書いてください。
 
 Breaking changeの場合は、タイプの後に"!"を付けるか、フッターに`BREAKING CHANGE:`を記載してください。
 
-コミットに Claude の共著者フッターを追加しないでください。
-
 ```commit
 feat: 電話キャンセルボタンを追加
 
