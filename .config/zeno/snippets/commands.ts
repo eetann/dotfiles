@@ -159,11 +159,18 @@ export const commandSnippets: Snippet[] = [
     snippet: "gtr new --track remote",
   },
   {
-    // `gtr new ブランチ名`の次のコマンドで、`tow ^]Enter`すれば
+    // `gtr new ブランチ名`の次のコマンドで、`toww ^]Enter`すれば
     // 作ったワークツリーに移動できる
-    name: "tmux-open-worktree",
-    keyword: "tow",
-    snippet: "tmux-open-worktree",
+    name: "tmux-open-worktree my-dev",
+    keyword: "toww",
+    snippet: "tmux-open-worktree {{}} --layout work-dev -n ",
+  },
+  {
+    // `gtr new ブランチ名`の次のコマンドで、`towm ^]Enter`すれば
+    // 作ったワークツリーに移動できる
+    name: "tmux-open-worktree work-dev",
+    keyword: "towm",
+    snippet: "tmux-open-worktree {{}} --layout my-dev -n ",
   },
   {
     name: "gtr rm --delete-branch",
@@ -173,22 +180,22 @@ export const commandSnippets: Snippet[] = [
   {
     name: "create & rename window for development",
     keyword: "vmdev",
-    snippet: 'vde-layout dev && tmux rename-window "{{}}"',
+    snippet: 'vde-layout my-dev && tmux rename-window "{{}}"',
   },
   {
     name: "create window for development",
     keyword: "vmdevv",
-    snippet: "vde-layout dev",
+    snippet: "vde-layout my-dev",
   },
   {
     name: "create & rename window for work development",
     keyword: "vwdev",
-    snippet: 'vde-layout wdev && tmux rename-window "{{}}"',
+    snippet: 'vde-layout work-dev && tmux rename-window "{{}}"',
   },
   {
     name: "create window for work development",
     keyword: "vwdevv",
-    snippet: "vde-layout wdev",
+    snippet: "vde-layout work-dev",
   },
   {
     name: "close panes safety",

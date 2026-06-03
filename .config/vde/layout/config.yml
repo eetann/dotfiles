@@ -1,8 +1,8 @@
 defaults:
   windowMode: current-window
 presets:
-  dev:
-    name: dev
+  my-dev:
+    name: my-dev
     description: Editor/Server | AI/editprompt
     layout:
       type: horizontal
@@ -15,6 +15,7 @@ presets:
               command: >-
                 tmux set-option -p -t {{this_pane}} @role other;
                 s=$(git status -s); [ -n "$s" ] && echo "$s" || echo '変更なし'
+                figlet -f larry3d "my-dev"
             - name: "server"
               command: "tmux set-option -p -t {{this_pane}} @role server"
               focus: true
@@ -30,7 +31,7 @@ presets:
                 tmux set-option -p -t {{this_pane}} @role editprompt;
                 node ~/ghq/github.com/eetann/editprompt/dist/index.js open --editor nvim --target-pane {{pane_id:claude}} --always-copy
               ephemeral: true
-  wdev:
+  work-dev:
     name: work-dev
     description: Editor/Server | AI/editprompt
     layout:
@@ -43,7 +44,8 @@ presets:
             - name: "other"
               command: >-
                 tmux set-option -p -t {{this_pane}} @role other;
-                s=$(git status -s); [ -n "$s" ] && echo "$s" || echo '変更なし'
+                s=$(git status -s); [ -n "$s" ] && echo "$s" || echo '変更なし';
+                figlet -f larry3d "work"
             - name: "server"
               command: "tmux set-option -p -t {{this_pane}} @role server"
               focus: true

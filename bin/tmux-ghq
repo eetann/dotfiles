@@ -5,7 +5,6 @@ if [ -z "$TMUX" ]; then
   exit 1
 fi
 
-TARGET_PANE="${1:-$TMUX_PANE}"
 ghq_root=$(ghq root)
 cwd=$(cd "$(git rev-parse --path-format=relative --git-common-dir)/.." 2>/dev/null && pwd)
 mode="ghq"
@@ -20,6 +19,7 @@ while true; do
       --height=100% \
       --prompt="GHQ> " \
       --header='Enter: new window | ^O: cd | ^T: worktree list' \
+        --no-select-1 \
       --expect=ctrl-t,ctrl-o \
       --ansi \
       --preview "d=\$(echo {}); git -C ${ghq_root}/\$d log --color=always --oneline -10 2>/dev/null && echo '---' && git -C ${ghq_root}/\$d -c color.status=always status --short 2>/dev/null" \
@@ -33,6 +33,7 @@ while true; do
         --height=100% \
         --prompt="Worktree> " \
         --header='Enter: new window | ^O: cd | ^T: ghq list' \
+        --no-select-1 \
         --expect=ctrl-t,ctrl-o \
         --ansi \
         --preview "d=\$(echo {} | sed 's|^\\.|${cwd}|'); git -C \"\$d\" log --color=always --oneline -10 2>/dev/null && echo '---' && git -C \"\$d\" -c color.status=always status --short 2>/dev/null" \

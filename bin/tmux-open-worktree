@@ -1,20 +1,78 @@
 #!/bin/bash
 
-if [ -z "$TMUX" ]; then
+set -euo pipefail
+
+usage() {
+  echo "Usage: tmux-open-worktree [-l|--layout <preset>] [-n|--name <window-name>] <branch-name>" >&2
+}
+
+if [ -z "${TMUX:-}" ]; then
   echo "Error: This command must be run inside tmux." >&2
   exit 1
 fi
 
-if [ -z "$1" ]; then
-  echo "Usage: tmux-worktree <branch-name>" >&2
+# --layout省略時はdevレイアウトを使う。--name省略時はリネームしない。
+layout="dev"
+name=""
+branch=""
+
+# 引数のパース（-l/--layout・-n/--name はオプション、ブランチ名は位置引数）
+while [ $# -gt 0 ]; do
+  case "$1" in
+    -l | --layout)
+      layout="${2:-}"
+      shift 2
+      ;;
+    --layout=*)
+      layout="${1#*=}"
+      shift
+      ;;
+    -n | --name)
+      name="${2:-}"
+      shift 2
+      ;;
+    --name=*)
+      name="${1#*=}"
+      shift
+      ;;
+    -h | --help)
+      usage
+      exit 0
+      ;;
+    -*)
+      echo "Error: unknown option '$1'" >&2
+      usage
+      exit 1
+      ;;
+    *)
+      branch="$1"
+      shift
+      ;;
+  esac
+done
+
+if [ -z "$branch" ]; then
+  usage
   exit 1
 fi
 
-target_path=$(gtr go "$1" 2>/dev/null)
+target_path=$(gtr go "$branch" 2>/dev/null)
 
 if [ -z "$target_path" ]; then
-  echo "Error: worktree not found for '$1'" >&2
+  echo "Error: worktree not found for '$branch'" >&2
   exit 1
 fi
 
-tmux new-window -c "$target_path"
+# worktreeディレクトリで新しいウィンドウを作成し、そのpane_idを取得する
+new_window_args=(new-window -c "$target_path" -P -F '#{pane_id}')
+if [ -n "$name" ]; then
+  new_window_args+=(-n "$name")
+fi
+pane_id=$(tmux "${new_window_args[@]}")
+
+# レイアウト指定時は、作成したウィンドウのペインを対象にvde-layoutを実行する。
+# vde-layoutはcurrent-windowモードのとき$TMUX_PANEで対象ペインを決めるため、
+# 新ウィンドウのpane_idを渡すことでそのウィンドウにレイアウトを組ませる。
+if [ -n "$layout" ]; then
+  TMUX_PANE="$pane_id" vde-layout "$layout" --currentWindow
+fi
