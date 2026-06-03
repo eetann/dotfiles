@@ -30,22 +30,41 @@
       {
         "id": "a32f3be4-df9f-4a34-8dc1-301897c686e4",
         "type": "block-timer",
+        "color": "hex:F8F8F8",
+        "backgroundColor": "hex:001C23",
         "metadata": {
           "display": "progress-short"
-        },
-        "backgroundColor": "hex:001C23",
-        "color": "hex:F8F8F8"
+        }
       },
       {
         "id": "c9633d81-0c3a-4c34-a94d-ff4635ba3e15",
         "type": "reset-timer",
+        "color": "hex:F8F8F8",
+        "backgroundColor": "hex:001C23",
+        "bold": false,
+        "rawValue": true,
         "metadata": {
           "display": "time"
-        },
-        "rawValue": true,
-        "bold": false,
+        }
+      },
+      {
+        "id": "0720adf3-15fd-4da8-b933-8871114adff5",
+        "type": "flex-separator"
+      },
+      {
+        "id": "48e66174-2b62-40a3-8c48-47706bb32d1e",
+        "type": "custom-command",
+        "commandPath": "[ \"$(basename \"$CLAUDE_CONFIG_DIR\")\" = \".claude_work\" ] && echo work || true",
+        "color": "hex:F8F8F8",
         "backgroundColor": "hex:001C23",
-        "color": "hex:F8F8F8"
+        "bold": true
+      },
+      {
+        "id": "70f50153-efa3-4fa9-b1a4-6a6f8fc608ba",
+        "type": "custom-command",
+        "commandPath": "[ \"$(basename \"$CLAUDE_CONFIG_DIR\")\" != \".claude_work\" ] && echo mine || true",
+        "color": "hex:F8F8F8",
+        "backgroundColor": "hex:001C23"
       }
     ],
     []
@@ -56,6 +75,8 @@
   "defaultPadding": " ",
   "inheritSeparatorColors": false,
   "globalBold": false,
+  "gitCacheTtlSeconds": 5,
+  "minimalistMode": false,
   "powerline": {
     "enabled": false,
     "separators": [
@@ -67,6 +88,7 @@
     "startCaps": [],
     "endCaps": [],
     "theme": "custom",
-    "autoAlign": false
+    "autoAlign": false,
+    "continueThemeAcrossLines": false
   }
 }
