@@ -13,6 +13,7 @@
     dust
     fd
     ffmpeg
+    figlet
     findutils
     gawk
     gh
@@ -24,6 +25,7 @@
     jq
     lazygit
     luarocks
+    meetingbar
     mise
     nb
     neovim
