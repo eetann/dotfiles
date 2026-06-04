@@ -41,7 +41,7 @@ export const commandSnippets: Snippet[] = [
   {
     name: "docker compose",
     keyword: "DC",
-    snippet: "docker-compose",
+    snippet: "docker compose",
   },
   {
     name: "explorer",
@@ -83,7 +83,8 @@ export const commandSnippets: Snippet[] = [
   {
     name: "tmux popup neovim",
     keyword: "TN",
-    snippet: `tmux popup -E -w 95% -h 95% -d '#{pane_current_path}' 'nvim -c "{{command_here)}}"'`,
+    snippet:
+      `tmux popup -E -w 95% -h 95% -d '#{pane_current_path}' 'nvim -c "{{command_here)}}"'`,
   },
   {
     name: "tree",
