@@ -124,7 +124,7 @@ M.keys = {
     function()
       picker.pick({
         source = "files",
-        args = { ".", ".mywork" },
+        args = { ".", ".mywork", "docs/adr", "docs/task-logs" },
         transform = function(item)
           item.mtime = vim.fn.getftime(item.file)
         end,
