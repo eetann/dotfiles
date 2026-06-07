@@ -30,6 +30,20 @@ end, {
 -- ref: https://vi.stackexchange.com/questions/9344/open-markdown-filename-under-cursor-like-gf-and-jump-to-the-section
 vim.keymap.set("n", "gf", function()
   local cfile = vim.fn.expand("<cfile>")
+
+  -- ファイル名部分（最初の`#`より前）を取り出す
+  local filename = cfile:match("^([^#]*)")
+  -- カレントディレクトリ基準で存在しない場合
+  if filename ~= "" and vim.fn.filereadable(filename) == 0 then
+    -- 今開いているファイルからの相対パスで存在するか試す
+    local candidate = vim.fn.expand("%:p:h") .. "/" .. filename
+    if vim.fn.filereadable(candidate) == 1 then
+      -- カレントディレクトリからの相対パスに変換して差し替える
+      local rel = vim.fn.fnamemodify(candidate, ":p:.")
+      cfile = rel .. cfile:sub(#filename + 1)
+    end
+  end
+
   -- ([^#]*) -> ファイル名 -> %1
   -- (#+) -> 見出しのシャープ -> %2
   -- ([^#]*) -> 見出しテキスト -> %3
