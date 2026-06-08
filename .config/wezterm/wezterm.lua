@@ -242,4 +242,22 @@ table.insert(config.hyperlink_rules, {
 -- end)
 config.audible_bell = "SystemBeep"
 
+wezterm.on("open-uri", function(_, _, uri)
+  -- GUIから起動したweztermはPATHが最小限でnixのtmuxを見つけられないため、
+  -- editpromptハンドラと同様にログインシェル経由でフルPATHを得る
+  local success, _, stderr = wezterm.run_child_process({
+    "/bin/zsh",
+    "-lc",
+    string.format(
+      "%s/dotfiles/bin/tmux-open-uri %s",
+      os.getenv("HOME"),
+      wezterm.shell_quote_arg(tostring(uri))
+    ),
+  })
+  if not success then
+    wezterm.log_error("tmux-open-uri failed: " .. tostring(stderr))
+  end
+  return false
+end)
+
 return config

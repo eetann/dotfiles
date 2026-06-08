@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+source ~/dotfiles/bin/tmux-open-uri.local.sh
+
+url="$1"
+cwd="$(tmux display-message -p '#{pane_current_path}')"
+
+for work_path in "${WORK_PATHS[@]}"; do
+  if [[ "$cwd" == "$work_path"* ]]; then
+    open -a "Google Chrome" "$url"
+    exit 0
+  fi
+done
+
+open -a "Zen" "$url"
