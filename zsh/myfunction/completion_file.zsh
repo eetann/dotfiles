@@ -27,7 +27,7 @@ fzf --tmux center,80% \
 --query '$query' \
 --multi \
 --expect=ctrl-t \
---header='^T: .mywork (recent)' \
+--header='^T: .mywork docs/adr docs/task-logs (recent)' \
 --preview '$preview_cmd' \
 --preview-window 'down,60%,wrap'
 EOF
@@ -43,14 +43,18 @@ EOF
 fzf --tmux center,80% \
 --query '$query' \
 --multi \
---header='.mywork (recent order)' \
+--header='.mywork docs/adr docs/task-logs (recent order)' \
 --preview '$preview_cmd' \
 --preview-window 'down,60%,wrap'
 EOF
 )
-    # .myworkが存在する場合のみ
-    if [[ -d ".mywork" ]]; then
-      selected=$(fd --type f . .mywork/ --hidden --no-ignore 2>/dev/null | xargs ls -t 2>/dev/null | eval $mywork_fzf)
+    # 存在する対象ディレクトリだけを集める
+    local mywork_dirs=()
+    [[ -d ".mywork" ]] && mywork_dirs+=(".mywork")
+    [[ -d "docs/adr" ]] && mywork_dirs+=("docs/adr")
+    [[ -d "docs/task-logs" ]] && mywork_dirs+=("docs/task-logs")
+    if (( ${#mywork_dirs} > 0 )); then
+      selected=$(fd --type f . $mywork_dirs --hidden --no-ignore 2>/dev/null | xargs ls -t 2>/dev/null | eval $mywork_fzf)
     fi
   fi
 
