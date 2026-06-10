@@ -21,12 +21,13 @@ export const commandSnippets: Snippet[] = [
   {
     name: "work claude code",
     keyword: "wcc",
-    snippet: "CLAUDE_CONFIG_DIR=~/.claude_work claude",
+    snippet: "CLAUDE_CONFIG_DIR=~/.claude_work CODEX_HOME=~/.codex_work claude",
   },
   {
     name: "work claude code continue",
     keyword: "wccc",
-    snippet: "CLAUDE_CONFIG_DIR=~/.claude_work claude --continue",
+    snippet:
+      "CLAUDE_CONFIG_DIR=~/.claude_work CODEX_HOME=~/.codex_work claude --continue",
   },
   {
     name: "my codex",
