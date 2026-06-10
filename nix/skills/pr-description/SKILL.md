@@ -2,7 +2,7 @@
 name: pr-description
 description: |
   PRの説明文作成
-  トリガー: "pr-description", "PR説明文", "PR作成"
+  トリガー: ユーザーから明示的に`/pr-description`と言われたときのみ使う。`PR作成`などのスキルはたいていリポジトリに用意されているのでそちらを優先して使う
 user-invocable: true
 allowed-tools: Bash(git diff:*), Bash(git log:*), Bash(mkdir:*), List
 ---

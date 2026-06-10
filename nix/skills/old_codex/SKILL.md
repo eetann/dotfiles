@@ -1,5 +1,5 @@
 ---
-name: codex
+name: old_codex
 description: |
   Codex CLI（OpenAI）を使用してコードや相談・レビューを行う。
   トリガー: "codex", "codexと相談", "codexに聞いて"
