@@ -152,10 +152,10 @@ if target:find("darwin") then
   config.font_size = 14.0
   config.send_composed_key_when_left_alt_is_pressed = true
   -- フルスクリーン
-  wezterm.on("gui-startup", function(cmd)
-    local _, _, window = wezterm.mux.spawn_window(cmd or {})
-    window:gui_window():maximize()
-  end)
+  -- wezterm.on("gui-startup", function(cmd)
+  --   local _, _, window = wezterm.mux.spawn_window(cmd or {})
+  --   window:gui_window():maximize()
+  -- end)
   config.window_background_opacity = 0.80
   config.macos_window_background_blur = 20
 elseif target:find("linux") then
