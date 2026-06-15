@@ -32,6 +32,7 @@
     nvd # Nixプロファイルのdiff表示
     opencode
     orbstack
+    pinact
     ripgrep
     shellcheck
     shfmt
