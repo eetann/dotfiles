@@ -95,7 +95,7 @@ return {
     vim.keymap.set("i", "<C-g>d", function()
       require("noice.lsp.docs").get("signature"):focus()
     end, { desc = "Focus noice docs" })
-    vim.keymap.set("n", "<Space>nd", function()
+    vim.keymap.set("n", "<Space>Nd", function()
       vim.cmd("NoiceDismiss")
     end, { desc = "NoiceDismiss" })
   end,

@@ -53,6 +53,7 @@ require("lazy").setup({
     { import = "plugins.outline" },
     { import = "plugins.trouble" },
     { import = "plugins.screenkey" },
+    { import = "plugins.feedback-notes" },
 
     -- 編集
     { import = "plugins.mini-ai" },
