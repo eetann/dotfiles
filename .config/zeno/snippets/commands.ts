@@ -55,21 +55,36 @@ export const commandSnippets: Snippet[] = [
     snippet: "php artisan",
   },
   {
-    name: "difit",
-    keyword: "difit",
-    snippet: "bun x difit .",
-  },
-  {
     name: "nb add today's daily",
     keyword: "nbd",
     snippet: 'date "+nb a daily-%Y-%m-%d.md"',
     evaluate: true,
   },
   {
+    name: "difit すべての未コミット差分（ステージングエリア + 未ステージ）",
+    snippet: "bun x difit .",
+  },
+  {
+    // difitで今のHEADとdevelopmentブランチの比較
+    name: "difit to development",
+    snippet: "bun x difit @ development",
+  },
+  {
+    // difitで今のHEADとmainブランチの比較
+    name: "difit to main",
+    snippet: "bun x difit @ main",
+  },
+  {
     // difitで今のHEADとdevelopmentブランチの比較
     name: "difit to dev",
-    keyword: "difitd",
     snippet: "bun x difit @ development",
+  },
+  {
+    name: "difit from PR",
+    keyword: "difitpr",
+    snippet:
+      'sh -c "echo bun x difit --pr $(gh repo view --json url -q .url)/pull/{{}}"',
+    evaluate: true,
   },
   {
     name: "nvim-noplugin",
