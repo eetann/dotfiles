@@ -25,7 +25,6 @@
     jq
     lazygit
     luarocks
-    meetingbar
     mise
     nb
     neovim
