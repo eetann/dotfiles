@@ -69,7 +69,7 @@ vim.opt.relativenumber = true
 vim.opt.number = true
 vim.opt.wrap = false
 vim.opt.showmatch = true -- 括弧入力時に対応括弧表示
-vim.wo.colorcolumn = "88" -- カラムラインを引く
+-- vim.wo.colorcolumn = "88" -- カラムラインを引く
 -- 行末から次の行へ移動できる
 vim.opt.whichwrap = "b,s,h,l,[,],<,>,~"
 vim.opt.signcolumn = "yes"
