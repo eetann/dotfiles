@@ -3,7 +3,7 @@ defaults:
 presets:
   my-dev:
     name: my-dev
-    description: Editor/Server | AI/editprompt
+    description: Editor/Server | AI/editprompt [個人用]
     layout:
       type: horizontal
       ratio: [1, 1]
@@ -33,7 +33,7 @@ presets:
               ephemeral: true
   work-dev:
     name: work-dev
-    description: Editor/Server | AI/editprompt
+    description: Editor/Server | AI/editprompt [仕事用]
     layout:
       type: horizontal
       ratio: [1, 1]

@@ -80,8 +80,13 @@ export const commandSnippets: Snippet[] = [
     snippet: "bun x difit @ development",
   },
   {
-    name: "difit from PR",
+    name: "difit from PR by AUTO",
     keyword: "difitpr",
+    snippet: 'sh -c "echo bun x difit --pr $(gh pr view --json url -q .url)"',
+    evaluate: true,
+  },
+  {
+    name: "difit from PR by MANUAL",
     snippet:
       'sh -c "echo bun x difit --pr $(gh repo view --json url -q .url)/pull/{{}}"',
     evaluate: true,
@@ -178,16 +183,16 @@ export const commandSnippets: Snippet[] = [
   {
     // `gtr new ブランチ名`の次のコマンドで、`toww ^]Enter`すれば
     // 作ったワークツリーに移動できる
-    name: "tmux-open-worktree my-dev",
+    name: "tmux-open-worktree work-dev",
     keyword: "toww",
-    snippet: "tmux-open-worktree {{}} --layout work-dev -n ",
+    snippet: "tmux-open-worktree --layout work-dev -n",
   },
   {
     // `gtr new ブランチ名`の次のコマンドで、`towm ^]Enter`すれば
     // 作ったワークツリーに移動できる
-    name: "tmux-open-worktree work-dev",
+    name: "tmux-open-worktree my-dev",
     keyword: "towm",
-    snippet: "tmux-open-worktree {{}} --layout my-dev -n ",
+    snippet: "tmux-open-worktree --layout my-dev -n",
   },
   {
     name: "gtr rm --delete-branch",
@@ -223,5 +228,10 @@ export const commandSnippets: Snippet[] = [
     name: "close window safety",
     keyword: "v:q",
     snippet: "vde-layout empty && exit",
+  },
+  {
+    name: "vde-layout",
+    keyword: "v:",
+    snippet: "vde-layout",
   },
 ];
