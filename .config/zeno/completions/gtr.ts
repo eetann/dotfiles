@@ -7,7 +7,7 @@ export const gtrCompletions: UserCompletionSource[] = [
     patterns: [
       "^gtr rm --delete-branch $",
       "^gtr rm $",
-      "^tmux-open-worktree $",
+      "^tmux-open-worktree --layout \\S* -n \\S* $",
     ],
     sourceCommand: "git gtr list --porcelain | awk '!/detached/{print $2}'",
     options: {
