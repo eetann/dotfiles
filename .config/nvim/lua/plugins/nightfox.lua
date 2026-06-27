@@ -8,6 +8,7 @@ return {
       groups = {
         all = {
           ["@markup.raw"] = { style = "NONE" },
+          ["@markup.strong"] = { fg = "#AD5C7C", style = "bold" },
           -- ターミナル透過でも見やすいようにする
           -- Visual = { bg = "#1a2e30", style = "italic" },
           -- render-markdownのコードブロック用

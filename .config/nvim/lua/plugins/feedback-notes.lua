@@ -22,8 +22,10 @@ return {
       border = {
         link = "MatchWord",
       },
-      virt = { link = "MatchWord" },
+      -- virt = { link = "MatchWord" },
       marker = { link = "MatchWord" },
+      input_border = { link = "MatchWord" },
+      input_title = { link = "MatchWord" },
     },
   },
 }
