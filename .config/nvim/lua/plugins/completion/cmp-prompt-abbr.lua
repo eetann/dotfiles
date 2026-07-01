@@ -14,16 +14,16 @@ return {
         target = "/commit ステージングのやつを英語でコミットして",
       },
       {
-        source = "pnext",
+        source = "pn",
         target = "次へ",
-      },
-      {
-        source = "pnew",
-        target = "一旦別のセッションにリセットしようと思うんだけど、その前にその「新しいセッション」で再スタートするための指示をまとめたファイルを用意してほしい",
       },
       {
         source = "pcodex",
         target = "Codexにレビューしてもらおう",
+      },
+      {
+        source = "pcodex:local-review",
+        target = "/codex:adversarial-review @.agents/skills/local-review/SKILL.md と次のタスクログに基づいて、このブランチをレビューして",
       },
       {
         source = "ppen",
@@ -31,7 +31,7 @@ return {
       },
       {
         source = "pask",
-        target = "適宜AskUserQuestionを使って決めていこう",
+        target = "適宜AskUserQuestionを使ってね",
       },
     },
     matching = "prefix",
