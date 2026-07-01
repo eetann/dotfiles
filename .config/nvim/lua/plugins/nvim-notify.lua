@@ -14,7 +14,7 @@ return {
   end,
   keys = {
     {
-      "<Space>Nd",
+      "<Space>nd",
       function()
         require("notify").dismiss()
       end,

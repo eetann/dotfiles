@@ -6,12 +6,10 @@ return {
   keys = {
     { "<Tab>", "<Cmd>FeedbackNotes add<CR>" },
     -- ':' (not '<Cmd>') so the visual range '<,'> is passed to the command.
-    { "<Tab>", ":FeedbackNotes add<CR>", mode = "x" },
-    { "<Space>nd", "<Cmd>FeedbackNotes delete<CR>" },
+    { "<Tab>", "<Cmd>FeedbackNotes add<CR>", mode = "x" },
     { "<Space>nl", "<Cmd>FeedbackNotes list<CR>" },
     { "<Space>ny", "<Cmd>FeedbackNotes export<CR>" },
     { "<Space>nt", "<Cmd>FeedbackNotes toggle<CR>" },
-    { "<Space>nC", "<Cmd>FeedbackNotes clear<CR>" },
   },
   cmd = "FeedbackNotes",
   opts = {
