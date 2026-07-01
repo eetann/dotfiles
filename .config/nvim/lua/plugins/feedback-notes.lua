@@ -2,6 +2,7 @@
 ---@type LazyPluginSpec
 return {
   dir = "~/ghq/github.com/eetann/feedback-notes.nvim",
+  event = { "VeryLazy" },
   keys = {
     { "<Tab>", "<Cmd>FeedbackNotes add<CR>" },
     -- ':' (not '<Cmd>') so the visual range '<,'> is passed to the command.
@@ -10,12 +11,14 @@ return {
     { "<Space>nl", "<Cmd>FeedbackNotes list<CR>" },
     { "<Space>ny", "<Cmd>FeedbackNotes export<CR>" },
     { "<Space>nt", "<Cmd>FeedbackNotes toggle<CR>" },
+    { "<Space>nC", "<Cmd>FeedbackNotes clear<CR>" },
   },
   cmd = "FeedbackNotes",
   opts = {
+    auto_restore = true,
     picker = "snacks",
     input = {
-      height = 3,
+      height = 5,
       save_keys = { "<CR>", "<Tab>" },
     },
     highlight = {
