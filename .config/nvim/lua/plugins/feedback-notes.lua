@@ -16,7 +16,6 @@ return {
     auto_restore = true,
     picker = "snacks",
     input = {
-      height = 5,
       save_keys = { "<CR>", "<Tab>" },
     },
     highlight = {

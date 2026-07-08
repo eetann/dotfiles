@@ -29,6 +29,7 @@ return {
       "bun.bun_run",
       "bun.bun_test",
       "markdown.mdjanai",
+      "markdown.markdown-preview",
     },
   },
 }
