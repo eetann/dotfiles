@@ -2,8 +2,10 @@
 return {
   condition = { filetype = "markdown" },
   generator = function(opts)
-    if vim.fn.expand("%:p"):match("cyber%-blog") then
-      return "cyber-blogディレクトリでは使用不可"
+    if
+      not vim.fn.expand("%:p"):match(".*local/share/nvim/scratch/.*markdown")
+    then
+      return "使用不可"
     end
     return {
       {
