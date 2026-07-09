@@ -33,6 +33,10 @@ return {
         source = "pask",
         target = "適宜AskUserQuestionを使ってね",
       },
+      {
+        source = "presult",
+        target = "結果が返ってきたら、そのままの形式ではなく読みやすくして解説してほしい",
+      },
     },
     matching = "prefix",
     case_sensitive = false,

@@ -77,6 +77,5 @@
   "effortLevel": "xhigh",
   "theme": "dark",
   "preferredNotifChannel": "terminal_bell",
-  "autoCompactEnabled": false,
-  "model": "claude-fable-5[1m]"
+  "autoCompactEnabled": false
 }
