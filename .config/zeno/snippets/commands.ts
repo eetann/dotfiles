@@ -62,33 +62,33 @@ export const commandSnippets: Snippet[] = [
   },
   {
     name: "difit すべての未コミット差分（ステージングエリア + 未ステージ）",
-    snippet: "bun x difit .",
+    snippet: "difit .",
   },
   {
     // difitで今のHEADとdevelopmentブランチの比較
     name: "difit to development",
-    snippet: "bun x difit @ development",
+    snippet: "difit @ development",
   },
   {
     // difitで今のHEADとmainブランチの比較
     name: "difit to main",
-    snippet: "bun x difit @ main",
+    snippet: "difit @ main",
   },
   {
     // difitで今のHEADとdevelopmentブランチの比較
     name: "difit to dev",
-    snippet: "bun x difit @ development",
+    snippet: "difit @ development",
   },
   {
     name: "difit from PR by AUTO",
     keyword: "difitpr",
-    snippet: 'sh -c "echo bun x difit --pr $(gh pr view --json url -q .url)"',
+    snippet: 'sh -c "echo difit --pr $(gh pr view --json url -q .url)"',
     evaluate: true,
   },
   {
     name: "difit from PR by MANUAL",
     snippet:
-      'sh -c "echo bun x difit --pr $(gh repo view --json url -q .url)/pull/{{}}"',
+      'sh -c "echo difit --pr $(gh repo view --json url -q .url)/pull/{{}}"',
     evaluate: true,
   },
   {
