@@ -6,7 +6,13 @@
   "includeCoAuthoredBy": false,
   "permissions": {
     "allow": [
-      "mcp__pencil"
+      "mcp__pencil",
+      "Bash(bun run typecheck *)",
+      "Bash(bun run lint *)",
+      "Bash(mise run test *)",
+      "Bash(stylua --check *)",
+      "Bash(lsappinfo *)",
+      "Bash(opensrc path *)"
     ],
     "deny": [
       "Bash(sudo:*)",

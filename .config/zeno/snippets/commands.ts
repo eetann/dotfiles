@@ -92,6 +92,12 @@ export const commandSnippets: Snippet[] = [
     evaluate: true,
   },
   {
+    name: "open PR",
+    keyword: "openpr",
+    snippet: 'sh -c "echo open $(gh pr view --json url -q .url)"',
+    evaluate: true,
+  },
+  {
     name: "nvim-noplugin",
     keyword: "nvimno",
     snippet: "nvim --noplugin -u NONE",
