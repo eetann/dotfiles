@@ -18,7 +18,6 @@ presets:
                 figlet -f larry3d "my-dev"
             - name: "server"
               command: "tmux set-option -p -t {{this_pane}} @role server"
-              focus: true
         - type: vertical
           ratio: [1, "10c"]
           panes:
@@ -31,6 +30,7 @@ presets:
                 tmux set-option -p -t {{this_pane}} @role editprompt;
                 node ~/ghq/github.com/eetann/editprompt/dist/index.js open --editor nvim --target-pane {{pane_id:claude}} --always-copy
               ephemeral: true
+              focus: true
   work-dev:
     name: work-dev
     description: Editor/Server | AI/editprompt [仕事用]
@@ -61,6 +61,7 @@ presets:
                 tmux set-option -p -t {{this_pane}} @role editprompt;
                 node ~/ghq/github.com/eetann/editprompt/dist/index.js open --editor nvim --target-pane {{pane_id:claude}} --always-copy
               ephemeral: true
+              focus: true
   empty:
     name: empty
     description: プロセス終了用の単一ペイン

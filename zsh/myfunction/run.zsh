@@ -16,3 +16,4 @@ function run_task() {
 }
 zle -N run_task
 bindkey "^Xr" run_task
+bindkey "^X^r" run_task
