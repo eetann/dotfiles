@@ -23,7 +23,7 @@ return {
       },
       {
         source = "pcodex:local-review",
-        target = "/codex:adversarial-review @.agents/skills/local-review/SKILL.md と次のタスクログに基づいて、このブランチをレビューして",
+        target = "/codex:adversarial-review --background @.agents/skills/local-review/SKILL.md と次のタスクログに基づいて、このブランチをレビューして",
       },
       {
         source = "ppen",
