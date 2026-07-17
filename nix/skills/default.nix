@@ -2,7 +2,13 @@
 #
 # mainパターン（スキルソースはflake.nixのinputsに直接記載）
 # https://github.com/Kyure-A/agent-skills-nix
-{ inputs, ... }:
+{ inputs, lib, ... }:
+let
+  # 仕事用の設定ディレクトリ（_work）には置きたくないスキルID。
+  # agent-skills-nixはターゲット単位でのスキル絞り込みに対応していないため、
+  # 同期後にactivationスクリプトでディレクトリごと削除する。
+  workExcludeSkills = [ "grilling" ];
+in
 {
   programs.agent-skills = {
     enable = true;
@@ -27,6 +33,12 @@
         path = inputs.drawio-mcp;
         subdir = "skill-cli";
       };
+      # grilling（GitHub, mattpocock/skills）
+      # https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md
+      grilling = {
+        path = inputs.mattpocock-skills;
+        subdir = "skills/productivity/grilling";
+      };
     };
 
     skills.enableAll = true;
@@ -45,4 +57,12 @@
       dest = "$HOME/.codex_work/skills";
     };
   };
+
+  # workExcludeSkillsに挙げたスキルを、agent-skills本体の同期後にwork系ディレクトリから削除する。
+  home.activation.agent-skills-work-exclude = lib.hm.dag.entryAfter [ "agent-skills" ] (
+    lib.concatMapStringsSep "\n" (skill: ''
+      $DRY_RUN_CMD rm -rf $VERBOSE_ARG "$HOME/.claude_work/skills/${skill}"
+      $DRY_RUN_CMD rm -rf $VERBOSE_ARG "$HOME/.codex_work/skills/${skill}"
+    '') workExcludeSkills
+  );
 }

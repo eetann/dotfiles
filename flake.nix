@@ -24,6 +24,10 @@
       url = "github:jgraph/drawio-mcp";
       flake = false;
     };
+    mattpocock-skills = {
+      url = "github:mattpocock/skills";
+      flake = false;
+    };
   };
 
   outputs =
