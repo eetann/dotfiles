@@ -86,12 +86,6 @@ export const commandSnippets: Snippet[] = [
     evaluate: true,
   },
   {
-    name: "difit from PR by MANUAL",
-    snippet:
-      'sh -c "echo difit --pr $(gh repo view --json url -q .url)/pull/{{}}"',
-    evaluate: true,
-  },
-  {
     name: "open PR",
     keyword: "openpr",
     snippet: 'sh -c "echo open $(gh pr view --json url -q .url)"',
@@ -204,40 +198,5 @@ export const commandSnippets: Snippet[] = [
     name: "gtr rm --delete-branch",
     keyword: "grm",
     snippet: "gtr rm --delete-branch",
-  },
-  {
-    name: "create & rename window for development",
-    keyword: "vmdev",
-    snippet: 'vde-layout my-dev && tmux rename-window "{{}}"',
-  },
-  {
-    name: "create window for development",
-    keyword: "vmdevv",
-    snippet: "vde-layout my-dev",
-  },
-  {
-    name: "create & rename window for work development",
-    keyword: "vwdev",
-    snippet: 'vde-layout work-dev && tmux rename-window "{{}}"',
-  },
-  {
-    name: "create window for work development",
-    keyword: "vwdevv",
-    snippet: "vde-layout work-dev",
-  },
-  {
-    name: "close panes safety",
-    keyword: "v:e",
-    snippet: "vde-layout empty",
-  },
-  {
-    name: "close window safety",
-    keyword: "v:q",
-    snippet: "vde-layout empty && exit",
-  },
-  {
-    name: "vde-layout",
-    keyword: "v:",
-    snippet: "vde-layout",
   },
 ];

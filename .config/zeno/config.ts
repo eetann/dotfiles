@@ -9,9 +9,15 @@ import { vdeLayoutCompletions } from "./completions/vde-layout.ts";
 import { commandSnippets } from "./snippets/commands.ts";
 import { contextSnippets } from "./snippets/context.ts";
 import { scriptSnippets } from "./snippets/scripts.ts";
+import { vdeLayoutSnippets } from "./snippets/vde-layout.ts";
 
 export default defineConfig((_context) => ({
-  snippets: [...commandSnippets, ...contextSnippets, ...scriptSnippets],
+  snippets: [
+    ...commandSnippets,
+    ...contextSnippets,
+    ...scriptSnippets,
+    ...vdeLayoutSnippets,
+  ],
   completions: [
     ...killCompletions,
     ...dockerCompletions,
