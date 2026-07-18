@@ -7,7 +7,10 @@ let
   # 仕事用の設定ディレクトリ（_work）には置きたくないスキルID。
   # agent-skills-nixはターゲット単位でのスキル絞り込みに対応していないため、
   # 同期後にactivationスクリプトでディレクトリごと削除する。
-  workExcludeSkills = [ "grilling" ];
+  workExcludeSkills = [
+    "grilling"
+    "adr-creator"
+  ];
 in
 {
   programs.agent-skills = {

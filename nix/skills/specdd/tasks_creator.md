@@ -10,36 +10,36 @@ description: spec DDでタスクを定義する
 
 ## 実装タスク一覧
 
-### 1. 事前準備
-- [ ] 1.1 `api/routes/foo.ts`の`/download`エンドポイントの実装を確認して参考にする
-- [ ] 1.2 Fooモデルのスキーマ構造を確認する
+### 事前準備
+- [ ] `api/routes/foo.ts`の`/download`エンドポイントの実装を確認して参考にする
+- [ ] Fooモデルのスキーマ構造を確認する
 
-### 2. 依存関係の追加
-- [ ] 2.1 `api/routes/foo.ts`のファイル冒頭にmomentをimportする
+### 依存関係の追加
+- [ ] `api/routes/foo.ts`のファイル冒頭にmomentをimportする
 
-### 3. エンドポイントの実装
+### エンドポイントの実装
 
-#### 3.1 エンドポイントの追加
-- [ ] 3.1.1 `api/routes/foo.ts`に新規エンドポイント`router.get('/download', ...)`を追加
+#### エンドポイントの追加
+- [ ]  `api/routes/foo.ts`に新規エンドポイント`router.get('/download', ...)`を追加
   - 既存の`/download/:id`エンドポイントの**前**に配置する（ルーティング優先順位のため）
 
-#### 3.2 バリデーション処理
-- [ ] 3.2.1 リクエストパラメータの存在確認を実装
+#### バリデーション処理
+- [ ] リクエストパラメータの存在確認を実装
 
-#### 3.3 データ取得処理
-- [ ] 3.3.1 日付範囲の処理を実装
+#### データ取得処理
+- [ ] 日付範囲の処理を実装
   - `from`: moment(from).startOf('day')で開始日の00:00:00に設定
   - `to`: moment(to).endOf('day')で終了日の23:59:59に設定
 
-- [ ] 3.3.2 MongoDBクエリを実装
+- [ ] MongoDBクエリを実装
 
-#### 3.4 エラーハンドリング
-- [ ] 3.4.1 try-catchブロックでエラー処理を実装
+#### エラーハンドリング
+- [ ] try-catchブロックでエラー処理を実装
 
-#### 3.5 レスポンス処理
-- [ ] 3.5.1 取得したログデータをJSON形式で返却する実装
+#### レスポンス処理
+- [ ] 取得したログデータをJSON形式で返却する実装
 
-### 4. テストファイルの実装
+### テストファイルの実装
 - [ ] `__tests__/e2e/stock_operation_log/`ディレクトリを作成（存在しない場合）
 - [ ] `getStockOperationLogDownload.test.ts`ファイルを作成
 
@@ -48,11 +48,11 @@ description: spec DDでタスクを定義する
 npm run test __tests__/e2e/stock_operation_log/getStockOperationLogDownload.test.ts
 ```
 
-#### 4.1 テストファイルの基本構造
-- [ ] 4.1.1 必要なモジュールをimport
-- [ ] 4.1.2 テストデータの作成
+#### テストファイルの基本構造
+- [ ] 必要なモジュールをimport
+- [ ] テストデータの作成
 
-#### 4.2 テストケースの実装
+#### テストケースの実装
 - [ ] 正常系テスト
   - [ ] `正常系_有効なパラメータでログ取得`
   - [ ] `正常系_該当データなし`
@@ -64,7 +64,7 @@ npm run test __tests__/e2e/stock_operation_log/getStockOperationLogDownload.test
   - [ ] `境界値_開始日と終了日が同じ`
   - [ ] `境界値_1日だけのデータ取得`
 
-### 5. テスト実行と確認
+### テスト実行と確認
 - [ ] テストを実行
 - [ ] 全テストケースがパスすることを確認
 
@@ -72,8 +72,6 @@ npm run test __tests__/e2e/stock_operation_log/getStockOperationLogDownload.test
 ## 注意事項
 
 - t_wadaさんのテスト駆動開発をする
-    - テストケースは1度につき1つまでの実装とし、テストケースを1つ実装するたびにテストを実行
-- 各セクションの実装が終わったらそのたびにチェックリストを完了にすること
 - **重要**: `/download`エンドポイントは`/download/:id`より**前**に配置すること（ルーティングの優先順位）
 - populateで取得するフィールドは最小限に留める（パフォーマンス考慮）
 - エラーレスポンスの形式は既存のAPIと統一する
@@ -85,10 +83,11 @@ npm run test __tests__/e2e/stock_operation_log/getStockOperationLogDownload.test
 - `./.mywork/changes/YYYY-MM-DD-BRIEF-DESC/requirements.md`を読み込む
 - `./.mywork/changes/YYYY-MM-DD-BRIEF-DESC/design.md`を読み込む
 - 要件定義・設計書に基づき、上記の例のような実装計画書を `./.mywork/changes/YYYY-MM-DD-BRIEF-DESC/tasks.md` として書く
+    - 最初にADRを書くべきか判断し、必要なら「〇〇という判断をADRとして記載」のようなタスクとして序盤のタスクとして書いておく
 
 補足：
 - `各セクションの実装が終わったらそのたびにチェックリストを完了にすること`は絶対書きます
-- テストの実装がある場合は「t_wadaさんのテスト駆動開発をする」「テストケースは1つずつ実装」の旨を書きます
+- テストの実装がある場合は「t_wadaさんのテスト駆動開発をする」の旨を書きます
 - 実装・修正箇所の行番号はなるべく書かない。ファイルを編集すると行番号はズレるため
 - コードはなるべく書かない。設計書を見れば分かるし、tasks.mdと実際のコードの2重管理はよくないから
     - もちろんどうしても必要だったら書いて良い
