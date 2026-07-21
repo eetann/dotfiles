@@ -67,17 +67,12 @@ export const commandSnippets: Snippet[] = [
   {
     // difitで今のHEADとdevelopmentブランチの比較
     name: "difit to development",
-    snippet: "difit @ development",
+    snippet: "difit @ development --merge-base",
   },
   {
     // difitで今のHEADとmainブランチの比較
     name: "difit to main",
-    snippet: "difit @ main",
-  },
-  {
-    // difitで今のHEADとdevelopmentブランチの比較
-    name: "difit to dev",
-    snippet: "difit @ development",
+    snippet: "difit @ main --merge-base",
   },
   {
     name: "difit from PR by AUTO",
