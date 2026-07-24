@@ -44,6 +44,7 @@
       "Bash(rm -rf /*)"
     ]
   },
+  "model": "claude-sonnet-5",
   "hooks": {
     "PostToolUse": [
       {
