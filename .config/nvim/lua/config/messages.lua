@@ -14,6 +14,7 @@ local skip_patterns = {
   ".*change; after",
   ".*change; before",
   ".*less; before",
+  ".*less; after",
   "more lines?",
   "fewer lines?",
   "^wrap$",

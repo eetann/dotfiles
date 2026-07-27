@@ -41,6 +41,10 @@ Codexプラグインのコマンド結果が返ってきたら、そのままの
         source = "presult",
         target = "結果が返ってきたら、そのままの形式ではなく読みやすくして解説してほしい",
       },
+      {
+        source = "pnotmain",
+        target = "メインツリーを見る必要は無いのでは？",
+      },
     },
     matching = "prefix",
     case_sensitive = false,
