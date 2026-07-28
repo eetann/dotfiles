@@ -1,6 +1,10 @@
 # CLIパッケージ定義
 # Brewfileから移行したパッケージをここで管理
-{ pkgs, ... }:
+{
+  pkgs,
+  inputs,
+  ...
+}:
 {
   home.packages = with pkgs; [
     # CLIツール
@@ -49,5 +53,9 @@
 
     # go install で入れていたツール
     mmv
+  ]
+  ++ [
+    # AI時代のcurl (github:yusukebe/ax)
+    inputs.ax.packages.${pkgs.system}.default
   ];
 }

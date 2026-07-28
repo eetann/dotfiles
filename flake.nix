@@ -12,6 +12,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     agent-skills.url = "github:Kyure-A/agent-skills-nix";
+    ax = {
+      url = "github:yusukebe/ax";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     design-skills = {
       url = "github:mae616/design-skills";
       flake = false;
