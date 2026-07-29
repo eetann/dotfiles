@@ -6,56 +6,59 @@
   ...
 }:
 {
-  home.packages = with pkgs; [
-    # CLIツール
-    awscli2
-    ssm-session-manager-plugin
-    bat
-    bun
-    delta
-    direnv
-    dust
-    fd
-    ffmpeg
-    figlet
-    findutils
-    gawk
-    gh
-    ghq
-    git-lfs
-    gnused # gnu-sed
-    go
-    gomi
-    jq
-    lazygit
-    luarocks
-    mise
-    nb
-    neovim
-    nvd # Nixプロファイルのdiff表示
-    opencode
-    orbstack
-    pinact
-    ripgrep
-    shellcheck
-    shfmt
-    terminal-notifier # macOS固有
-    tmux
-    tree
-    vhs
-    yq
+  home.packages =
+    with pkgs;
+    [
+      # CLIツール
+      awscli2
+      ssm-session-manager-plugin
+      bat
+      bun
+      delta
+      direnv
+      dust
+      fd
+      ffmpeg
+      figlet
+      findutils
+      gawk
+      gh
+      ghq
+      git-lfs
+      gnused # gnu-sed
+      go
+      gomi
+      jq
+      lazygit
+      luarocks
+      macism
+      mise
+      nb
+      neovim
+      nvd # Nixプロファイルのdiff表示
+      opencode
+      orbstack
+      pinact
+      ripgrep
+      shellcheck
+      shfmt
+      terminal-notifier # macOS固有
+      tmux
+      tree
+      vhs
+      yq
 
-    # rclone - macOS向けにサービス含むパッケージを使用
-    rclone
+      # rclone - macOS向けにサービス含むパッケージを使用
+      rclone
 
-    # フォーマッタ
-    nixfmt
+      # フォーマッタ
+      nixfmt
 
-    # go install で入れていたツール
-    mmv
-  ]
-  ++ [
-    # AI時代のcurl (github:yusukebe/ax)
-    inputs.ax.packages.${pkgs.system}.default
-  ];
+      # go install で入れていたツール
+      mmv
+    ]
+    ++ [
+      # AI時代のcurl (github:yusukebe/ax)
+      inputs.ax.packages.${pkgs.system}.default
+    ];
 }
