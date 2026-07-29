@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# もう存在しないdocker composeファイルから生成されたコンテナ（オーファン）を削除する
+
+for c in $(docker ps -q --filter label=com.docker.compose.project); do
+  dir=$(docker inspect -f '{{ index .Config.Labels "com.docker.compose.project.working_dir" }}' "$c")
+
+  if [ ! -f "$dir/docker-compose.yml" ] &&
+    [ ! -f "$dir/docker-compose.yaml" ] &&
+    [ ! -f "$dir/compose.yml" ] &&
+    [ ! -f "$dir/compose.yaml" ]; then
+    echo "orphan: $c ($dir)"
+    docker rm -f "$c"
+  fi
+done
