@@ -24,7 +24,7 @@ return {
       {
         source = "pcodex:local-review",
         target = [[
-Codexプラグインのコマンド結果が返ってきたら、そのままの形式ではなく読みやすくして解説してほしい
+Codexプラグインのコマンド結果が返ってきたら、そのままの形式ではなく読みやすくして解説+推奨案の提案をしてほしい
 
 /codex:adversarial-review --background @.agents/skills/local-review/SKILL.md と次のタスクログに基づいて、このブランチをレビューして
 @]],

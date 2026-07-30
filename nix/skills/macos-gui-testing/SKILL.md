@@ -36,6 +36,36 @@ end tell
 - **プロセス名はアプリ名と違うことがある**（例: Electrobunアプリは "bun"）。`osascript -e 'tell application "System Events" to get name of every process whose visible is true'` で確認
 - アプリ側にもフォーカス処理が必要な場合がある（webviewベースのアプリはDOM要素に `tabIndex` + `focus()` がないとkeydownが発火しない）
 
+## 同名プロセスが複数存在する場合の絞り込み
+
+同じ種類の自作アプリ（例: Electrobunアプリ）を複数同時に起動していると、System Events上ではどれもプロセス名が同じ（例: "bun"）になり、名前だけでは区別できない。区別を誤ると、意図しない別アプリのウィンドウを操作してしまう（他アプリを勝手にリサイズする等の事故につながる）。
+
+**`first process whose unix id is X` は同名プロセスが複数あると不安定**で、タイミングによって別プロセスに解決されることがある。`every process whose name is "..."` でリスト化し、repeatループの中で `unix id` を明示比較して絞り込むのが確実：
+
+```applescript
+tell application "System Events"
+  set targetProc to missing value
+  repeat with p in every process whose name is "bun"
+    if (unix id of p) is 46697 then
+      set targetProc to p
+      exit repeat
+    end if
+  end repeat
+end tell
+```
+
+さらに、1プロセスが複数ウィンドウを持つことがある（名前の付かない小さいヘルパーウィンドウ等）。**PIDが合っていてもウィンドウを取り違える**ことがあるので、操作前に必ずウィンドウ名でもチェックする：
+
+```applescript
+repeat with w in windows of targetProc
+  if (name of w) contains "対象アプリ名の一部" then
+    -- ここでsize/positionの取得・変更を完結させる（下記参照）
+  end if
+end repeat
+```
+
+**ウィンドウ参照を後で再利用すると失敗する**: `set w to item 1 of (windows of targetProc)` のように一度リストから取り出した参照を、別の行や別のブロックで使い回すと「window "..." を取り出すことはできません (-1728)」で失敗することがある（ウィンドウ名に特殊文字が含まれると特に起きやすい）。取得から操作（サイズ取得・変更など）まで、同じrepeatループのスコープ内で完結させること。
+
 ## 日本語IMEの罠
 
 ### 原因: 複数単語をまとめて`keystroke`に渡すと日本語IMEが未確定入力として扱う
