@@ -9,13 +9,16 @@ export const gtrCompletions: UserCompletionSource[] = [
       "^gtr rm $",
       "^tmux-open-worktree --layout \\S* -n \\S* $",
     ],
-    sourceCommand: "git gtr list --porcelain | awk '!/detached/{print $2}'",
+    sourceCommand: "gtr-branch-completion-source",
+    callback: "cut -f2",
     options: {
       "--header-lines": 1,
       "--tmux": "80%",
       "--prompt": "'Delete branch> '",
       "--no-select-1": true,
-      "--preview": "git log --color=always --oneline -20 {} 2>/dev/null",
+      "--delimiter": "$'\\t'",
+      "--preview":
+        "printf '%s\\n\\n' {1}; git log --color=always --oneline -20 {2} 2>/dev/null",
       "--preview-window": "right,55%,wrap",
     },
   },

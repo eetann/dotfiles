@@ -1,0 +1,30 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# gtr補完（.config/zeno/completions/gtr.ts）向けに、worktreeのブランチ一覧を
+# 「マージ済みマーク\tブランチ名」のタブ区切りで出力する。
+# マークにはANSIカラーを含めるため、fzf側は --ansi での表示が前提。
+
+# デフォルトブランチを解決（ローカルのmain/masterを優先し、なければリモートのHEADを見る）
+default_branch=""
+for candidate in main master; do
+  if git show-ref --verify --quiet "refs/heads/${candidate}"; then
+    default_branch="$candidate"
+    break
+  fi
+done
+if [ -z "$default_branch" ]; then
+  default_branch=$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null | sed 's#^origin/##')
+fi
+default_branch="${default_branch:-main}"
+
+merged_branches=$(git branch --format='%(refname:short)' --merged "$default_branch" 2>/dev/null || true)
+
+git gtr list --porcelain | awk '!/detached/{print $2}' | while IFS= read -r branch; do
+  if grep -qxF "$branch" <<<"$merged_branches"; then
+    printf '\033[32m✓ merged\033[0m\t%s\n' "$branch"
+  else
+    printf '\033[90m·\033[0m\t%s\n' "$branch"
+  fi
+done
