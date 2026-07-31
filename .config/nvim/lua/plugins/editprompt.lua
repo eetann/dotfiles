@@ -17,6 +17,7 @@ return {
     { "<Space>pS", "<Cmd>Editprompt stash push<CR>" },
     { "<Space>pp", "<Cmd>Editprompt history prev<CR>" },
     { "<Space>pn", "<Cmd>Editprompt history next<CR>" },
+    { "<Space>ph", "<Cmd>Editprompt history list<CR>" },
     {
       "<Space>pN",
       function()
