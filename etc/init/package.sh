@@ -11,6 +11,11 @@ fi
 # load useful functions
 . "$DOTPATH"/etc/scripts/header.sh
 
+if ! command -v brew >/dev/null 2>&1; then
+	error "brewが見つかりません。このスクリプトはmacOS専用です（NixOS-WSLでは使用しません）。"
+	exit 1
+fi
+
 brew bundle --file "$HOME/dotfiles/etc/init/Brewfile"
 
 echo ""

@@ -9,7 +9,7 @@
 #       → /nix/store/.../hm_nvim
 #         → ~/dotfiles/.config/nvim  ← 最終的にここを指す
 #
-{ config, ... }:
+{ config, pkgs, ... }:
 
 let
   # mkOutOfStoreSymlinkを使うため、絶対パス文字列が必要
@@ -44,7 +44,8 @@ in
   ];
 
   home.username = "eetann";
-  home.homeDirectory = "/Users/eetann";
+  # macOSは/Users/eetann、NixOS-WSL(Linux)は/home/eetannを使う
+  home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/eetann" else "/home/eetann";
   home.stateVersion = "24.11";
 
   programs.home-manager.enable = true;

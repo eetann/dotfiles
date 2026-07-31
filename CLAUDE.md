@@ -2,7 +2,7 @@
 
 ## リポジトリ概要
 
-eetannのdotfilesリポジトリ。macOS（Apple Silicon）の開発環境を **Nix Flakes + nix-darwin + home-manager** で宣言的に管理している。
+eetannのdotfilesリポジトリ。macOS（Apple Silicon、nix-darwin）とNixOS-WSL（x86_64-linux）の開発環境を **Nix Flakes + home-manager** で宣言的に管理している。
 
 ## アーキテクチャ
 
@@ -12,7 +12,10 @@ flake.nix                    ← エントリポイント
 │   ├── default.nix          ← ホスト名、PATH、home-manager統合
 │   ├── nix.nix              ← Nix自体の設定（GC、最適化）
 │   └── system.nix           ← macOS defaults（Dock、Finder、キーボード等）
-└── nix/home/                ← home-manager（dotfiles管理）
+├── nix/nixos/               ← NixOS-WSL（WSLシステム設定）
+│   ├── default.nix          ← ホスト名、wsl.enable、home-manager統合
+│   └── nix.nix               ← Nix自体の設定（GC、最適化）
+└── nix/home/                ← home-manager（dotfiles管理、両OS共通）
     ├── default.nix          ← シンボリックリンク管理（mkOutOfStoreSymlink）
     ├── packages.nix         ← CLIパッケージ一覧
     └── tmux.nix             ← tmuxプラグイン管理
@@ -47,10 +50,14 @@ flake.nix                    ← エントリポイント
 # macOSシステム設定 + dotfiles を一括適用。sudoが必要なのでユーザーに実行してもらう
 sudo darwin-rebuild switch --flake .
 
-# dotfilesのみ適用
+# NixOS-WSLシステム設定 + dotfiles を一括適用。sudoが必要
+sudo nixos-rebuild switch --flake .#eetann-wsl
+
+# dotfilesのみ適用（macOS専用。NixOS-WSLではhome-managerがNixOSモジュール経由で
+# 自動適用されるため使わない）
 make deploy  # = home-manager switch --flake ~/dotfiles
 
-# セットアップスクリプト実行
+# セットアップスクリプト実行（macOS専用、Homebrewが必要）
 make init
 ```
 
@@ -91,7 +98,8 @@ xdg.configFile = mkConfigFiles [
 
 ## 注意事項
 
-- Nixファイル編集後、パッケージやモジュール構成の変更は `darwin-rebuild switch` が必要
+- Nixファイル編集後、パッケージやモジュール構成の変更は `darwin-rebuild switch`（macOS）/ `nixos-rebuild switch`（NixOS-WSL）が必要
 - `.config/` 配下の設定変更は `mkOutOfStoreSymlink` により即時反映（rebuildは不要）
 - tmuxプラグインはtpmではなくhome-managerで管理（`nix/home/tmux.nix`）
 - macOSシステム設定の変更後、Finderの反映には `killall Finder` が必要な場合がある
+- `orbstack` / `macism` / `terminal-notifier` はmacOS専用パッケージのため、`nix/home/packages.nix` で `lib.optionals pkgs.stdenv.isDarwin` により分岐している

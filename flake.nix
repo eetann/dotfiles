@@ -11,6 +11,10 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     agent-skills.url = "github:Kyure-A/agent-skills-nix";
     ax = {
       url = "github:yusukebe/ax";
@@ -42,14 +46,14 @@
       ...
     }@inputs:
     let
-      # 将来的にLinuxも対応できるように変数化
-      system = "aarch64-darwin"; # Apple Silicon Mac
-      pkgs = nixpkgs.legacyPackages.${system};
+      darwinSystem = "aarch64-darwin"; # Apple Silicon Mac
+      linuxSystem = "x86_64-linux"; # NixOS-WSL
+      darwinPkgs = nixpkgs.legacyPackages.${darwinSystem};
     in
     {
       # nix-darwin設定（darwin-rebuild switch --flake .#eetann-mac）
       darwinConfigurations."eetann-mac" = nix-darwin.lib.darwinSystem {
-        inherit system;
+        system = darwinSystem;
         specialArgs = { inherit inputs; };
         modules = [
           ./nix/darwin
@@ -57,9 +61,20 @@
         ];
       };
 
+      # NixOS-WSL設定（nixos-rebuild switch --flake .#eetann-wsl）
+      nixosConfigurations."eetann-wsl" = nixpkgs.lib.nixosSystem {
+        system = linuxSystem;
+        specialArgs = { inherit inputs; };
+        modules = [
+          inputs.nixos-wsl.nixosModules.wsl
+          ./nix/nixos
+          home-manager.nixosModules.home-manager
+        ];
+      };
+
       # home-manager単体（home-manager switch --flake . も引き続き動作）
       homeConfigurations."eetann" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+        pkgs = darwinPkgs;
         extraSpecialArgs = { inherit inputs; };
         modules = [
           inputs.agent-skills.homeManagerModules.default

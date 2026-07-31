@@ -3,6 +3,7 @@
 {
   pkgs,
   inputs,
+  lib,
   ...
 }:
 {
@@ -24,6 +25,7 @@
       gawk
       gh
       ghq
+      git # NixOS側にはシステムgitがないため明示的に追加
       git-lfs
       gnused # gnu-sed
       go
@@ -31,18 +33,15 @@
       jq
       lazygit
       luarocks
-      macism
       mise
       nb
       neovim
       nvd # Nixプロファイルのdiff表示
       opencode
-      orbstack
       pinact
       ripgrep
       shellcheck
       shfmt
-      terminal-notifier # macOS固有
       tmux
       tree
       vhs
@@ -56,6 +55,11 @@
 
       # go install で入れていたツール
       mmv
+    ]
+    ++ lib.optionals pkgs.stdenv.isDarwin [
+      macism
+      orbstack
+      terminal-notifier # macOS固有
     ]
     ++ [
       # AI時代のcurl (github:yusukebe/ax)

@@ -1,20 +1,21 @@
 #!/bin/sh
 # OSに応じたNixのswitchとパッケージ差分表示
-case "$(uname)" in
-  Darwin)
-    before=$(readlink -f /run/current-system)
-    sudo darwin-rebuild switch --flake . || exit $?
-    after=$(readlink -f /run/current-system)
-    ;;
-  *)
-    before=$(readlink -f ~/.local/state/nix/profiles/home-manager)
-    home-manager switch --flake . || exit $?
-    after=$(readlink -f ~/.local/state/nix/profiles/home-manager)
-    ;;
-esac
+if [ "$(uname)" = "Darwin" ]; then
+	before=$(readlink -f /run/current-system)
+	sudo darwin-rebuild switch --flake . || exit $?
+	after=$(readlink -f /run/current-system)
+elif [ -e /etc/NIXOS ]; then
+	before=$(readlink -f /run/current-system)
+	sudo nixos-rebuild switch --flake .#eetann-wsl || exit $?
+	after=$(readlink -f /run/current-system)
+else
+	before=$(readlink -f ~/.local/state/nix/profiles/home-manager)
+	home-manager switch --flake . || exit $?
+	after=$(readlink -f ~/.local/state/nix/profiles/home-manager)
+fi
 
 if [ "$before" != "$after" ]; then
-  echo
-  echo "=== パッケージ差分 ==="
-  nvd diff "$before" "$after"
+	echo
+	echo "=== パッケージ差分 ==="
+	nvd diff "$before" "$after"
 fi

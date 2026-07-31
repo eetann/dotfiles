@@ -151,6 +151,35 @@ sudo darwin-rebuild switch --rollback
 home-manager switch --rollback
 ```
 
+## NixOS-WSL + home-manager（WSL上のシステム設定 + dotfiles管理）
+
+NixOS-WSLでは`nixos-rebuild switch`一発でシステム設定とdotfilesの両方が適用される
+（`make deploy`は使わない。standalone home-managerと二重管理するとhome-manager世代が競合するため）。
+
+### 初回セットアップ（NixOS-WSL）
+
+```sh
+# gitがまだ無いので、一時的にnix-shellで取得してclone
+nix-shell -p git --run "git clone https://github.com/eetann/dotfiles.git ~/dotfiles"
+cd ~/dotfiles
+
+# 初回のみ --extra-experimental-features が必要（flakesがまだ有効化されていないため）
+sudo nixos-rebuild switch --flake .#eetann-wsl --extra-experimental-features "nix-command flakes"
+```
+
+Linuxユーザー名を`eetann`にするには、`wsl.defaultUser`変更時の公式手順
+（`sudo nixos-rebuild boot --flake ~/dotfiles#eetann-wsl` → Windows側で`wsl -t NixOS` →
+`wsl -d NixOS --user root exit` → 再度`wsl -t NixOS` → `wsl -d NixOS`で開き直す）に従うこと。
+
+### 以降の更新
+
+```sh
+sudo nixos-rebuild switch --flake ~/dotfiles#eetann-wsl
+```
+
+`make init`（Homebrew）・`make deploy`（standalone home-manager）はmacOS専用です。
+NixOS-WSLでは実行しないでください。
+
 ## zsh
 ```sh
 command -v zsh | sudo tee -a /etc/shells
