@@ -22,6 +22,7 @@
       ffmpeg
       figlet
       findutils
+      fzf
       gawk
       gh
       ghq
