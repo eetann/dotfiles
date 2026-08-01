@@ -158,6 +158,7 @@ if target:find("darwin") then
   -- end)
   config.window_background_opacity = 0.80
   config.macos_window_background_blur = 20
+  config.window_decorations = "RESIZE"
 elseif target:find("linux") then
   local linux_key_table = {
     {
@@ -171,9 +172,10 @@ elseif target:find("linux") then
       action = { SendKey = { key = "p", mods = "ALT" } },
     },
   }
+  config.window_decorations = "TITLE"
   append_array(key_table, linux_key_table)
 else
-  config.default_domain = "WSL:Ubuntu" -- wsl -l -v
+  config.default_domain = "WSL:NixOS" -- wsl -l -v
   local wsl_key_table = {
     { key = "v", mods = "CTRL|SHIFT", action = act.PasteFrom("Clipboard") },
   }
@@ -188,6 +190,7 @@ else
       "#182848",
     },
   }
+  config.window_decorations = "TITLE"
   config.win32_system_backdrop = "Acrylic"
 end
 
@@ -227,7 +230,6 @@ config.font_rules = {
 }
 config.use_ime = true
 config.color_scheme = "Gruvbox Dark (Gogh)"
-config.window_decorations = "RESIZE"
 config.hide_tab_bar_if_only_one_tab = true
 config.adjust_window_size_when_changing_font_size = false
 config.keys = key_table
