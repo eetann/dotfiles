@@ -62,6 +62,9 @@
       orbstack
       terminal-notifier # macOS固有
     ]
+    ++ lib.optionals pkgs.stdenv.isLinux [
+      xsel # クリップボード操作。macOSはpbcopy/pbpasteが標準搭載のため不要
+    ]
     ++ [
       # AI時代のcurl (github:yusukebe/ax)
       inputs.ax.packages.${pkgs.system}.default
