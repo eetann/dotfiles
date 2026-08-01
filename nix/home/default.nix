@@ -40,6 +40,7 @@ in
     ./tmux.nix
     ./zsh.nix
     ./git-worktree-runner.nix
+    ./dictionary.nix
     ../skills
   ];
 

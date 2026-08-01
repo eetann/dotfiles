@@ -45,7 +45,10 @@ return {
       score_offset = -1000,
       max_items = 5,
       opts = {
-        dictionary_files = { "/usr/share/dict/words" },
+        -- NixOS-WSLには/usr/share/dict/wordsが無いため、
+        -- home-managerが配置したファイルを使う(nix/home/dictionary.nix参照)
+        dictionary_files = vim.fn.has("mac") == 1 and { "/usr/share/dict/words" }
+          or { vim.fn.expand("~/.local/share/dict/words") },
       },
     },
     path = {
