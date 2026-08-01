@@ -23,6 +23,7 @@ in
   # deno.jsonと同じ場所(=ソースディレクトリ)に node_modules を書き込もうとする。
   # /nix/store は読み取り専用なので symlink ではなく書き込み可能なコピーとして配置する。
   home.activation.installZeno = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    run mkdir -p "$HOME/.zsh/plugins"
     run rm -rf "$HOME/.zsh/plugins/zeno"
     run cp -r ${zeno-zsh} "$HOME/.zsh/plugins/zeno"
     run chmod -R u+w "$HOME/.zsh/plugins/zeno"

@@ -163,8 +163,10 @@ NixOS-WSLでは`nixos-rebuild switch`一発でシステム設定とdotfilesの�
 nix-shell -p git --run "git clone https://github.com/eetann/dotfiles.git ~/dotfiles"
 cd ~/dotfiles
 
-# 初回のみ --extra-experimental-features が必要（flakesがまだ有効化されていないため）
-sudo nixos-rebuild switch --flake .#eetann-wsl --extra-experimental-features "nix-command flakes"
+# 初回のみexperimental-featuresの指定が必要（flakesがまだ有効化されていないため）
+# nixos-rebuildは--extra-experimental-featuresを受け付けないのでNIX_CONFIGで渡す
+sudo NIX_CONFIG="experimental-features = nix-command flakes" \
+  nixos-rebuild switch --flake .#eetann-wsl
 ```
 
 Linuxユーザー名を`eetann`にするには、`wsl.defaultUser`変更時の公式手順
