@@ -13,7 +13,7 @@ fi
 # compinit最適化: zcompdumpが1日以内なら-C（再スキャンをスキップ）
 autoload -Uz compinit
 _zcompdump="${ZSH_CACHE_DIR}/zcompdump"
-if [[ -f "$_zcompdump" ]] && (( $(date +%s) - $(stat -f %m "$_zcompdump") < 86400 )); then
+if [[ -f "$_zcompdump" ]] && (( $(date +%s) - $(stat -f %m "$_zcompdump" 2>/dev/null || stat -c %Y "$_zcompdump") < 86400 )); then
   compinit -C -d "$_zcompdump"
 else
   compinit -d "$_zcompdump"
