@@ -172,7 +172,7 @@ elseif target:find("linux") then
       action = { SendKey = { key = "p", mods = "ALT" } },
     },
   }
-  config.window_decorations = "TITLE"
+  config.window_decorations = "TITLE | RESIZE"
   append_array(key_table, linux_key_table)
 else
   config.default_domain = "WSL:NixOS" -- wsl -l -v
