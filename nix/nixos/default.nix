@@ -4,7 +4,11 @@
 # 以降: sudo nixos-rebuild switch --flake .#eetann-wsl
 { inputs, pkgs, ... }:
 {
-  imports = [ ./nix.nix ];
+  imports = [
+    ./nix.nix
+    ./allow-unfree.nix
+    ./ollama.nix
+  ];
 
   wsl.enable = true;
   wsl.defaultUser = "eetann";
