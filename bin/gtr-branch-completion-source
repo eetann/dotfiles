@@ -6,20 +6,43 @@ set -euo pipefail
 # 「マージ済みマーク\tブランチ名」のタブ区切りで出力する。
 # マークにはANSIカラーを含めるため、fzf側は --ansi での表示が前提。
 
-# デフォルトブランチを解決（ローカルのmain/masterを優先し、なければリモートのHEADを見る）
-default_branch=""
-for candidate in main master; do
-  if git show-ref --verify --quiet "refs/heads/${candidate}"; then
-    default_branch="$candidate"
-    break
+# マージ済み判定はGitHub PRのstate（MERGED）を優先する。
+# devのように「マージ後も使い続ける常駐ブランチ」は、最新コミットが常に
+# default branchより先行するため、コミットの祖先関係（git branch --merged）
+# だけでは原理的に判定できない。lazygitも同様にghでPRの状態を見て
+# ブランチのマージ済みマークを出しているため、それに倣う。
+# ghが使えない・未認証・GitHub以外のリモート等の場合はフォールバックする。
+merged_branches=""
+gh_ok=false
+if command -v gh >/dev/null 2>&1 && command -v jq >/dev/null 2>&1 && gh auth status >/dev/null 2>&1; then
+  if merged_branches=$(gh pr list --state all --json headRefName,state,updatedAt --limit 200 2>/dev/null |
+    jq -r 'group_by(.headRefName) | map(max_by(.updatedAt)) | .[] | select(.state == "MERGED") | .headRefName' 2>/dev/null); then
+    gh_ok=true
   fi
-done
-if [ -z "$default_branch" ]; then
-  default_branch=$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null | sed 's#^origin/##')
 fi
-default_branch="${default_branch:-main}"
 
-merged_branches=$(git branch --format='%(refname:short)' --merged "$default_branch" 2>/dev/null || true)
+if ! $gh_ok; then
+  # デフォルトブランチを解決（リモートのHEADを優先し、なければローカルのmain/masterを見る）
+  # ローカルのmain/masterはfetchし忘れで古くなりがちで、それを基準にすると
+  # 実際はマージ済みのブランチが未マージ扱いになってしまう。
+  # また、ローカルにブランチが存在しないと `git branch --merged <name>` が
+  # "malformed object name" で失敗するため、いずれもフルref名で保持する。
+  default_branch=""
+  origin_head=$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null)
+  if [ -n "$origin_head" ]; then
+    default_branch="refs/remotes/${origin_head}"
+  else
+    for candidate in main master; do
+      if git show-ref --verify --quiet "refs/heads/${candidate}"; then
+        default_branch="refs/heads/${candidate}"
+        break
+      fi
+    done
+  fi
+  default_branch="${default_branch:-refs/heads/main}"
+
+  merged_branches=$(git branch --format='%(refname:short)' --merged "$default_branch" 2>/dev/null || true)
+fi
 
 git gtr list --porcelain | awk '!/detached/{print $2}' | while IFS= read -r branch; do
   if grep -qxF "$branch" <<<"$merged_branches"; then
