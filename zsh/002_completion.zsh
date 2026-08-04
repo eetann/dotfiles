@@ -13,7 +13,12 @@ fi
 # compinit最適化: zcompdumpが1日以内なら-C（再スキャンをスキップ）
 autoload -Uz compinit
 _zcompdump="${ZSH_CACHE_DIR}/zcompdump"
-if [[ -f "$_zcompdump" ]] && (( $(date +%s) - $(stat -f %m "$_zcompdump" 2>/dev/null || stat -c %Y "$_zcompdump") < 86400 )); then
+if [[ "$OSTYPE" == darwin* ]]; then
+  _zcompdump_mtime="stat -f %m"
+else
+  _zcompdump_mtime="stat -c %Y"
+fi
+if [[ -f "$_zcompdump" ]] && (( $(date +%s) - $(${=_zcompdump_mtime} "$_zcompdump") < 86400 )); then
   compinit -C -d "$_zcompdump"
 else
   compinit -d "$_zcompdump"
@@ -25,7 +30,7 @@ else
     rm -f "$_lockfile"
   fi
 fi
-unset _zcompdump
+unset _zcompdump _zcompdump_mtime
 
 setopt correct # コマンドのスペルチェックをする
 setopt mark_dirs # file名の展開でdirectoryにマッチした場合末尾に/付加
