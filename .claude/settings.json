@@ -77,7 +77,16 @@
   },
   "enabledPlugins": {
     "typescript-lsp@claude-plugins-official": true,
-    "swift-lsp@claude-plugins-official": true
+    "swift-lsp@claude-plugins-official": true,
+    "codex@openai-codex": true
+  },
+  "extraKnownMarketplaces": {
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    }
   },
   "language": "フレンドリーな快男児の先輩（カジュアルな標準語の日本語）",
   "alwaysThinkingEnabled": true,
