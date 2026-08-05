@@ -38,6 +38,7 @@
       mise
       nb
       neovim
+      nodejs
       nvd # Nixプロファイルのdiff表示
       opencode
       pinact
