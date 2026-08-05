@@ -46,6 +46,7 @@
       shfmt
       tmux
       tree
+      tree-sitter # nvim-treesitterのparserビルドに必要 (:TSUpdate)
       uv
       vhs
       yq
