@@ -6,13 +6,15 @@
   "share": "disabled",
   "provider": {
     "ollama": {
-      "npm": "@ai-sdk/openai-compatible",
       "options": {
         "baseURL": "http://localhost:11434/v1"
       },
       "models": {
-        "gemma4:e4b": {}
+        "hf.co/bigatuna/Qwen3.5-9b-Sushi-Coder-RL-GGUF:Q4_K_M": {
+          "name": "Qwen3.5 Sushi Coder 9B"
+        }
       }
     }
-  }
+  },
+  "model": "ollama/hf.co/bigatuna/Qwen3.5-9b-Sushi-Coder-RL-GGUF:Q4_K_M"
 }

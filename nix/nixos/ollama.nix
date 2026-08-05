@@ -9,6 +9,9 @@
     package = pkgs.ollama-cuda;
     environmentVariables = {
       LD_LIBRARY_PATH = "/usr/lib/wsl/lib";
+      # opencode等が長いプロンプトを送るため、デフォルトの4096から拡張
+      # (16GB VRAMなら9BモデルQ4_K_Mで32768でも収まる想定。OOMする場合は16384等に下げる)
+      OLLAMA_CONTEXT_LENGTH = "32768";
     };
   };
 
