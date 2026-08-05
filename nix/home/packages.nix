@@ -16,6 +16,7 @@
       bat
       bun
       delta
+      deno
       direnv
       dust
       fd
