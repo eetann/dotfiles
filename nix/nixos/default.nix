@@ -8,6 +8,7 @@
     ./nix.nix
     ./allow-unfree.nix
     ./ollama.nix
+    ./docker.nix
   ];
 
   wsl.enable = true;
@@ -25,7 +26,10 @@
 
   users.users.eetann = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # sudo可能にする
+    extraGroups = [
+      "wheel" # sudo可能にする
+      "docker" # dockerコマンドをsudoなしで実行可能にする
+    ];
     shell = pkgs.zsh;
   };
 

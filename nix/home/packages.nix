@@ -46,6 +46,7 @@
       shfmt
       tmux
       tree
+      uv
       vhs
       yq
 

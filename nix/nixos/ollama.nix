@@ -1,11 +1,6 @@
 # WSLホスト(Windows)側のNVIDIAドライバをGPUとして使えるようにし、
 # Ollamaをそのアクセラレーションで動かす
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}:
+{ pkgs, ... }:
 {
   wsl.useWindowsDriver = true;
 
@@ -19,9 +14,17 @@
 
   # /usr/lib/wsl/lib配下のバイナリ(nvidia-smi等)はWindows側が提供する
   # 非Nixビルドのため、標準の動的リンカが存在せずそのままでは実行できない。
-  # nix-ldで動的リンカを補い、動作確認用にnvidia-smiを実行可能にする
-  # (NIX_LDはnix-ldモジュールが自動設定するため上書きしない。
-  #  NIX_LD_LIBRARY_PATHはattrsOfのマージが型不一致で効かないためmkForceで連結する)
+  # nix-ldで動的リンカを補う
   programs.nix-ld.enable = true;
-  environment.variables.NIX_LD_LIBRARY_PATH = lib.mkForce "${config.environment.sessionVariables.NIX_LD_LIBRARY_PATH}:/usr/lib/wsl/lib";
+
+  # nvidia-smiは動作確認・デバッグ用のラッパーとして提供する。
+  # LD_LIBRARY_PATHはコマンド実行時にだけ設定し、システム全体には汚染させない
+  # (nix-ldは呼び出し元が設定したLD_LIBRARY_PATHをそのまま使う実装のため、
+  #  ここで設定すればNIX_LD_LIBRARY_PATH側の追加設定は不要)
+  environment.systemPackages = [
+    (pkgs.writeShellScriptBin "nvidia-smi" ''
+      export LD_LIBRARY_PATH="/usr/lib/wsl/lib''${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+      exec /usr/lib/wsl/lib/nvidia-smi "$@"
+    '')
+  ];
 }
