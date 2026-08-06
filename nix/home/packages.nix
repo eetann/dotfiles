@@ -68,6 +68,7 @@
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
       xsel # クリップボード操作。macOSはpbcopy/pbpasteが標準搭載のため不要
+      gcc # tree-sitter buildなどCコンパイラが必要な処理向け。macOSはXcode Command Line Toolsのccを使うため不要
     ]
     ++ [
       # AI時代のcurl (github:yusukebe/ax)
