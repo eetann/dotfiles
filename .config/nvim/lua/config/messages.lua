@@ -46,7 +46,9 @@ messages.msg_show = function(
   trigger
 )
   -- 特定のメッセージをフィルタリング
-  if kind == "bufwrite" then
+  -- Neovimの内部実装変更でkindは"progress"になり、
+  -- 書き込みメッセージの識別はidの"bufwrite"で行うようになった
+  if id == "bufwrite" then
     return -- 'written'メッセージを非表示
   end
 
