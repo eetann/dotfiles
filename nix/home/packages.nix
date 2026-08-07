@@ -42,6 +42,7 @@
       nvd # Nixプロファイルのdiff表示
       opencode
       pinact
+      pnpm
       ripgrep
       shellcheck
       shfmt
@@ -50,6 +51,7 @@
       tree-sitter # nvim-treesitterのparserビルドに必要 (:TSUpdate)
       uv
       vhs
+      yarn-berry # Yarn Berry(4.x)。pkgs.yarnはYarn Classic(1.x)でnpmMinimalAgeGate(.yarnrc.yml)非対応のため使わない。bin名は同じ"yarn"
       yq
 
       # rclone - macOS向けにサービス含むパッケージを使用
@@ -72,6 +74,6 @@
     ]
     ++ [
       # AI時代のcurl (github:yusukebe/ax)
-      inputs.ax.packages.${pkgs.system}.default
+      inputs.ax.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
 }

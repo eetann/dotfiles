@@ -41,6 +41,7 @@ in
     ./zsh.nix
     ./git-worktree-runner.nix
     ./dictionary.nix
+    ./pnpm.nix
     ../skills
   ];
 
@@ -52,12 +53,16 @@ in
   programs.home-manager.enable = true;
 
   # ホームディレクトリ直下のdotfiles
+  # 注意: .npmrcは実際のnpm認証トークンを含み、本リポジトリはpublicなためここに含めない
+  # (min-release-ageはzsh側のNPM_CONFIG_MIN_RELEASE_AGE環境変数で設定する)
   home.file = mkHomeFiles [
+    ".bunfig.toml"
     ".clang-format"
     ".claude/agents"
     ".claude/commands"
     ".claude/settings.json"
     ".latexmkrc"
+    ".yarnrc.yml"
     ".zshrc"
   ];
 
