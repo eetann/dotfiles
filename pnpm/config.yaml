@@ -1,0 +1,6 @@
+# npmサプライチェーンアタック対策: 公開されて間もないバージョンのインストールをブロックする
+# 単位は分(4320分 = 3日)
+# 参照元はOSごとに異なる(nix/home/pnpm.nix参照):
+#   macOS: ~/Library/Preferences/pnpm/config.yaml
+#   Linux: ~/.config/pnpm/config.yaml
+minimumReleaseAge: 4320

@@ -1,0 +1,10 @@
+# npmサプライチェーンアタック対策: 公開されて間もないバージョンのインストールをブロックする
+# 単位は秒(259200秒 = 3日)
+#
+# 既知の不具合(oven-sh/bun#30750, Closed as not planned):
+#   グローバル設定(~/.bunfig.toml)の[install].minimumReleaseAgeはbunに
+#   無視され、プロジェクトローカルの./bunfig.tomlでしか有効にならない。
+#   回避策はCLIフラグ `bun install --minimum-release-age=259200` のみ。
+#   将来bun側で修正された場合に備え、ここには設定を残しておく。
+[install]
+minimumReleaseAge = 259200
