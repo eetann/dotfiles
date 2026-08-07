@@ -7,6 +7,20 @@ export ZENO_GIT_CAT="bat --color=always"
 # 他のシェルでディレクトリ移動時にcwdが書き換わってしまう
 export ZENO_DISABLE_SOCK=1
 
+# NixOSではhome-manager switchのたびに~/.zsh/plugins/zenoが再構築されnode_modulesが
+# 消えるため、プラグイン読み込み時のdeno cacheが毎回「初回」扱いになり、
+# --quietなしのダウンロードログでzleのプロンプトが壊れる問題がある。
+# 依存キャッシュはactivation側(nix/home/zsh.nix)で事前に温めるため、ここでは無効化する。
+export ZENO_DISABLE_EXECUTE_CACHE_COMMAND=1
+
+# zenoのhistory機能が依存するjsr:@db/sqliteは、デフォルトでGitHub Releaseの
+# プリビルドsqlite3バイナリをFFI経由でロードするが、そのバイナリはNixOS-WSL環境で
+# sqlite3_mallocのような基本的なメモリ確保処理を呼ぶだけでSIGSEGVを起こし、
+# zenoのコマンド(auto-snippet含む)が起動時に毎回クラッシュする原因になっていた。
+# DENO_SQLITE_PATHでNixpkgs版のlibsqlite3を使うよう明示して回避する。
+# (Nixストアパスは動的なためnix/home/zsh.nixで生成したファイルから読み込む)
+[[ -f ~/.zsh/nix-env.zsh ]] && source ~/.zsh/nix-env.zsh
+
 # zeno関連の設定
 # tmuxやwezterm(tmuxなし)の最初のプロンプトでzeno-auto-snippet発動時に
 # カーソルより左(p10kのプロンプトも含む)が消えるので、その応急処置

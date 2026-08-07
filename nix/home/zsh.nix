@@ -27,8 +27,24 @@ in
     run rm -rf "$HOME/.zsh/plugins/zeno"
     run cp -r ${zeno-zsh} "$HOME/.zsh/plugins/zeno"
     run chmod -R u+w "$HOME/.zsh/plugins/zeno"
+    # node_modulesを作り直した直後は依存パッケージ未キャッシュの状態になり、
+    # シェル初回起動時のzeno-init(deno cache)が--quietなしのログを出して
+    # zleのプロンプトを壊すことがあるため、activation時に事前キャッシュしておく。
+    run ${pkgs.deno}/bin/deno cache --node-modules-dir=auto --no-lock --no-check \
+      -- "$HOME/.zsh/plugins/zeno/src/cli.ts" || true
   '';
 
   # zsh-completionsはfpath用（補完定義群）
   home.file.".zsh/completions".source = "${pkgs.zsh-completions}/share/zsh/site-functions";
+
+  # zenoのhistory機能が依存するjsr:@db/sqliteは、デフォルトでGitHub Releaseの
+  # プリビルドsqlite3バイナリをFFI経由でロードするが、そのバイナリはNixOS-WSL環境で
+  # sqlite3_mallocのような基本的なメモリ確保処理を呼ぶだけでSIGSEGVを起こす
+  # (Nixpkgsがビルドしたlibsqlite3.soでは同じ呼び出しが問題なく動作することを確認済み)。
+  # DENO_SQLITE_PATHで明示的にNixpkgs版を指定することで回避する。
+  # Nixストアパスは動的なため、zsh側の静的ファイルに直接書けず、ここで
+  # 環境変数定義ファイルとして書き出し、zsh/plugin/zeno.zshからsourceする。
+  home.file.".zsh/nix-env.zsh".text = ''
+    export DENO_SQLITE_PATH="${pkgs.sqlite.out}/lib/libsqlite3${pkgs.stdenv.hostPlatform.extensions.sharedLibrary}"
+  '';
 }
