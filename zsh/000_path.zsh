@@ -53,6 +53,8 @@ export LG_CONFIG_FILE="$HOME/dotfiles/.config/lazygit/config.yml"
 export CLAUDE_CODE_NO_FLICKER=1
 export CLAUDE_CODE_TMUX_TRUECOLOR=1
 
+export OPENCODE_ENABLE_EXA=1
+
 # npm / deno: サプライチェーンアタック対策(公開直後のバージョンのインストールをブロック)
 # ~/.npmrcには認証トークン等の秘匿情報が入っており、このdotfilesリポジトリは
 # publicなためコミットできない。min-release-ageは環境変数経由で設定する。

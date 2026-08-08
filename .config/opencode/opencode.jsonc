@@ -4,17 +4,25 @@
     "~/.config/opencode/instructions/japanese.md"
   ],
   "share": "disabled",
+  "permission": {
+    "read": "allow",
+    "glob": "allow",
+    "grep": "allow",
+    "todowrite": "allow",
+        "skill": "allow",
+    "webfetch": "allow"
+  },
   "provider": {
     "ollama": {
       "options": {
         "baseURL": "http://localhost:11434/v1"
       },
       "models": {
-        "hf.co/bigatuna/Qwen3.5-9b-Sushi-Coder-RL-GGUF:Q4_K_M": {
-          "name": "Qwen3.5 Sushi Coder 9B"
+        "HammerAI/gemma-4-26b-a4b-heretic:26b-q4_K_M": {
+          "name": "Gemma 4 26B A4B Heretic Q4_K_M"
         }
       }
     }
   },
-  "model": "ollama/hf.co/bigatuna/Qwen3.5-9b-Sushi-Coder-RL-GGUF:Q4_K_M"
+  "model": "ollama/HammerAI/gemma-4-26b-a4b-heretic:26b-q4_K_M"
 }

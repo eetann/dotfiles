@@ -78,6 +78,7 @@ in
     "lazygit/config.yml"
     "nvim"
     "opencode/opencode.jsonc"
+    "opencode/instructions"
     "opencode/tui.jsonc"
     "rofi"
     "vde"
