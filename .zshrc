@@ -31,6 +31,14 @@ esac
 # pnpm end
 # mise activateの遅延ロード（precmd one-shot）
 # 起動時ではなく最初のプロンプト表示直前に初期化する
+#
+# 注意: mise activate zshの出力には、生成した瞬間の$PATHを
+# そのままexport PATH='...'として埋め込んだ行が含まれる。
+# このキャッシュはmiseのバージョンが変わるまで使い回されるため、
+# キャッシュ生成後にbun/cargo等でグローバルインストールして
+# PATHにディレクトリを追加しても、次回シェル起動時にこのキャッシュの
+# 古いPATHで上書きされてしまい、新しいコマンドが見つからなくなることがある。
+# そうなったら ~/.cache/zsh/mise-activate.*.zsh を削除してシェルを開き直す。
 if type mise > /dev/null; then
   _mise_lazy_activate() {
     precmd_functions=(${precmd_functions:#_mise_lazy_activate})
