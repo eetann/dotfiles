@@ -9,9 +9,15 @@
     package = pkgs.ollama-cuda;
     environmentVariables = {
       LD_LIBRARY_PATH = "/usr/lib/wsl/lib";
-      # opencode等が長いプロンプトを送るため、デフォルトの4096から拡張
-      # (16GB VRAMなら9BモデルQ4_K_Mで32768でも収まる想定。OOMする場合は16384等に下げる)
-      OLLAMA_CONTEXT_LENGTH = "32768";
+      # opencode等が長いプロンプトを送るため、デフォルトの4096から拡張。
+      # gemma-4-26B-A4B(QAT UD-Q4_K_XL, 14.2GB)をRTX 5070 Ti(16GB)にフルGPUロードしつつ
+      # 128Kコンテキストを確保する構成を想定。OOMする場合は65536等に下げる
+      OLLAMA_CONTEXT_LENGTH = "131072";
+      # KVキャッシュ量子化(下記)の前提条件。有効化しないとOLLAMA_KV_CACHE_TYPEが効かない
+      OLLAMA_FLASH_ATTENTION = "1";
+      # KVキャッシュをq4_0に量子化してメモリ使用量を約1/4に削減し、
+      # 16GB VRAMでも大きいコンテキストを確保できるようにする(全ロードモデル共通設定)
+      OLLAMA_KV_CACHE_TYPE = "q4_0";
     };
   };
 
