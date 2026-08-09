@@ -20,9 +20,12 @@
       "models": {
         "HammerAI/gemma-4-26b-a4b-heretic:26b-q4_K_M": {
           "name": "Gemma 4 26B A4B Heretic Q4_K_M"
+        },
+        "hf.co/unsloth/gemma-4-26B-A4B-it-qat-GGUF:UD-Q4_K_XL": {
+          "name": "Gemma 4 26B A4B QAT UD-Q4_K_XL"
         }
       }
     }
   },
-  "model": "ollama/HammerAI/gemma-4-26b-a4b-heretic:26b-q4_K_M"
+  "model": "ollama/hf.co/unsloth/gemma-4-26B-A4B-it-qat-GGUF:UD-Q4_K_XL"
 }
