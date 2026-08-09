@@ -6,7 +6,7 @@ sessions=$(tmux list-sessions -F "#{session_name}" 2>/dev/null)
 # セッションが存在しない場合はdefaultを作成してアタッチ
 if [ -z "$sessions" ]; then
   tmux new-session -s default \; \
-    run-shell '~/.tmux/plugins/tmux-resurrect/scripts/restore.sh' \; \
+    run-shell '~/.tmux/plugins/resurrect/scripts/restore.sh' \; \
     kill-session -t default
   exit 0
 fi
