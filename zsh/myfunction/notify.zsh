@@ -2,27 +2,27 @@
 # ref: https://github.com/marzocchi/zsh-notify/blob/9c1dac81a48ec85d742ebf236172b4d92aab2f3f/notify.plugin.zsh#L84
 
 SKIP_NOTIFY_COMMANDS=(
-  fg
   bat
   cat
   claude
   codex
+  difit
+  fg
+  git
+  idea
   lazygit
   lg
   man
+  ml
+  mt
   nb
   nvim
   opencode
   ssh
   vim
   watch
-  idea
-  ml
-  mt
-  git
   "tmux set-option"
   "vagrant ssh"
-  "mise w"
   "npm run dev"
   "npm run preview"
   "npm run server"
@@ -43,7 +43,6 @@ SKIP_NOTIFY_COMMANDS=(
   "bun run server"
   "bun run start"
   "bun run watch"
-  "bun x difit"
 )
 
 function is_skip_command() {

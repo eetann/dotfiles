@@ -14,7 +14,7 @@ fi
 # check `npm ls -g`
 # vscode-langservers-extractedはESLintのため: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
 # tree-sitter-cliはnix/home/packages.nixのtree-sitterパッケージで管理するためここでは入れない
-PKG_DEFAULT="vscode-langservers-extracted vde-notifier opensrc vde-layout"
+PKG_DEFAULT="vscode-langservers-extracted vde-notifier opensrc vde-layout difit"
 
 ubuntu() {
 	# https://nodejs.org/en/download/package-manager
