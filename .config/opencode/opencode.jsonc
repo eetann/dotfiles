@@ -1,16 +1,68 @@
 {
+  "plugin": ["oh-my-openagent@latest"],
   "$schema": "https://opencode.ai/config.json",
   "instructions": [
     "~/.config/opencode/instructions/japanese.md"
   ],
   "share": "disabled",
   "permission": {
-    "read": "allow",
+    "read": {
+      "*": "allow",
+      ".env*": "deny",
+      "*.env*": "deny",
+      ".secret*": "deny",
+      "*.secret*": "deny",
+      "id_rsa": "deny",
+      "id_rsa.*": "deny",
+      "id_ed25519": "deny",
+      "id_ed25519.*": "deny",
+      "~/.ssh/id_rsa*": "deny",
+      "~/.ssh/id_ed25519*": "deny"
+    },
     "glob": "allow",
     "grep": "allow",
     "todowrite": "allow",
-        "skill": "allow",
-    "webfetch": "allow"
+    "skill": "allow",
+    "webfetch": "allow",
+    "edit": {
+      "*": "ask",
+      ".env*": "deny",
+      "*.env*": "deny",
+      ".secret*": "deny",
+      "*.secret*": "deny",
+      "id_rsa": "deny",
+      "id_rsa.*": "deny",
+      "id_ed25519": "deny",
+      "id_ed25519.*": "deny",
+      "~/.ssh/id_rsa*": "deny",
+      "~/.ssh/id_ed25519*": "deny"
+    },
+    "bash": {
+      "*": "ask",
+      "bun run typecheck*": "allow",
+      "bun run lint*": "allow",
+      "mise run test*": "allow",
+      "stylua --check*": "allow",
+      "lsappinfo*": "allow",
+      "opensrc path*": "allow",
+      "cat *.env*": "deny",
+      "head *.env*": "deny",
+      "tail *.env*": "deny",
+      "less *.env*": "deny",
+      "more *.env*": "deny",
+      "cat *.secret*": "deny",
+      "head *.secret*": "deny",
+      "tail *.secret*": "deny",
+      "less *.secret*": "deny",
+      "more *.secret*": "deny",
+      "curl*": "deny",
+      "wget*": "deny",
+      "git push*": "deny",
+      "git reset*": "deny",
+      "git rebase*": "deny",
+      "sudo*": "deny",
+      "rm -rf*": "deny"
+    }
   },
   "provider": {
     "ollama": {
@@ -27,5 +79,6 @@
       }
     }
   },
-  "model": "ollama/hf.co/unsloth/gemma-4-26B-A4B-it-qat-GGUF:UD-Q4_K_XL"
+  "model": "ollama/hf.co/unsloth/gemma-4-26B-A4B-it-qat-GGUF:UD-Q4_K_XL",
+  "small_model": "ollama/HammerAI/gemma-4-26b-a4b-heretic:26b-q4_K_M"
 }
