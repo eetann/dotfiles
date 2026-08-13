@@ -12,6 +12,27 @@ sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install)
 # Windows
 [アプリ インストーラー - Microsoft Apps](https://apps.microsoft.com/detail/9nblggh4nns1?rtc=1&hl=ja-jp&gl=JP)
 
+## WSL上でWezTerm/tmuxの特定のAltキーショートカットだけ効かない
+
+一部のAltキー（例: `Alt+z`）だけ反応せず、他のAltキー（`Alt+n`等）は動く場合、
+GPUベンダー製ソフトのグローバルオーバーレイホットキーに奪われている可能性が高い。
+
+- **AMD Software: Adrenalin Edition**: デフォルトで`Alt+Z`がオーバーレイ起動キー
+- **NVIDIA App / GeForce Experience**: 同じくデフォルトで`Alt+Z`がオーバーレイ起動キー
+
+いずれもアプリの設定画面からホットキーを変更 or 無効化すれば直る。
+
+### 切り分け方法
+
+1. tmuxまで届いているか: 該当キーを一時的に`display-message`に差し替えて確認
+   ```
+   bind-key -n M-z display-message "reached tmux"
+   ```
+2. WezTermまで届いているか: `wezterm.lua`のキーバインドに`wezterm.log_info(...)`を仕込み、
+   Debug Overlay（`Ctrl+Shift+L`）でログが出るか確認
+3. どちらにも届いていなければWindows側の常駐アプリ（GPUベンダー製ソフト、Discord、
+   ゲーミングデバイスソフト、PowerToys等）のグローバルホットキーを疑う
+
 # Installation
 ## Font
 1. download font
