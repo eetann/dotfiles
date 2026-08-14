@@ -8,5 +8,6 @@ source "$HOME/.zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme"
 source $ZDIR/plugin/typing.zsh
 source $ZDIR/plugin/fzf.zsh
 source $ZDIR/plugin/zeno.zsh
+[ -n "$NIWATERM_TAB_ID" ] && source ~/ghq/github.com/eetann/niwaterm/contrib/shell-integration/niwaterm.zsh
 
 export OLLAMA_MODELS=/Volumes/KIOXIA/ollama/
