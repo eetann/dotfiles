@@ -34,7 +34,7 @@ in
       # drawio-mcp（GitHub）
       drawio = {
         path = inputs.drawio-mcp;
-        subdir = "skill-cli";
+        subdir = "plugins/claude-code/skills";
       };
       # grilling（GitHub, mattpocock/skills）
       # https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md

@@ -5,9 +5,9 @@ gui:
 os:
   editPreset: "nvim"
 git:
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: delta --dark --paging=never
+      command: delta --dark --paging=never
 keybinding:
   universal:
     # <c-s>に割り当てたくないため、上書き
