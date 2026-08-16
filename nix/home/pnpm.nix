@@ -17,11 +17,11 @@ let
   pnpmConfigSource = config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/pnpm/config.yaml";
 in
 {
-  home.file = lib.optionalAttrs pkgs.stdenv.isDarwin {
+  home.file = lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
     "Library/Preferences/pnpm/config.yaml".source = pnpmConfigSource;
   };
 
-  xdg.configFile = lib.optionalAttrs pkgs.stdenv.isLinux {
+  xdg.configFile = lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
     "pnpm/config.yaml".source = pnpmConfigSource;
   };
 }

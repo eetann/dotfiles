@@ -47,7 +47,7 @@ in
 
   home.username = "eetann";
   # macOSは/Users/eetann、NixOS-WSL(Linux)は/home/eetannを使う
-  home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/eetann" else "/home/eetann";
+  home.homeDirectory = if pkgs.stdenv.hostPlatform.isDarwin then "/Users/eetann" else "/home/eetann";
   home.stateVersion = "24.11";
 
   programs.home-manager.enable = true;

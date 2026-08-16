@@ -4,7 +4,7 @@
 # 両OSで同じ単語リストになる。
 { pkgs, lib, ... }:
 {
-  home.file = lib.optionalAttrs pkgs.stdenv.isLinux {
+  home.file = lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
     ".local/share/dict/words".source = "${pkgs.miscfiles}/share/web2";
   };
 }
