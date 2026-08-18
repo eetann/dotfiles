@@ -9,7 +9,7 @@
 #       → /nix/store/.../hm_nvim
 #         → ~/dotfiles/.config/nvim  ← 最終的にここを指す
 #
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   # mkOutOfStoreSymlinkを使うため、絶対パス文字列が必要
@@ -76,6 +76,8 @@ in
     "i3/config"
     "karabiner/karabiner.json"
     "lazygit/config.yml"
+    "niwaterm/niwaterm.config.ts"
+    "niwaterm/tsconfig.json"
     "nvim"
     "opencode/opencode.jsonc"
     "opencode/instructions"
@@ -85,4 +87,15 @@ in
     "wezterm"
     "zeno"
   ];
+
+  # NixOS-WSL環境では、niwatermの実体がWindows側アプリのため、
+  # WSL側の~/.config/niwatermとは別にWindows側の設定ファイルにも
+  # 同じdotfilesへのシンボリックリンクを張る
+  home.activation.niwatermWindowsConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    windowsNiwatermDir="/mnt/c/Users/eetann/.config/niwaterm"
+    if [ -d "$windowsNiwatermDir" ]; then
+      run ln -sf "${dotfilesDir}/.config/niwaterm/niwaterm.config.ts" "$windowsNiwatermDir/niwaterm.config.ts"
+      run ln -sf "${dotfilesDir}/.config/niwaterm/tsconfig.json" "$windowsNiwatermDir/tsconfig.json"
+    fi
+  '';
 }
