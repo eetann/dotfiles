@@ -76,8 +76,10 @@ in
     "i3/config"
     "karabiner/karabiner.json"
     "lazygit/config.yml"
+    "niwaterm/bun.lock"
     "niwaterm/layouts.ts"
     "niwaterm/niwaterm.config.ts"
+    "niwaterm/package.json"
     "niwaterm/tsconfig.json"
     "nvim"
     "opencode/opencode.jsonc"
@@ -98,6 +100,8 @@ in
       run ln -sf "${dotfilesDir}/.config/niwaterm/layouts.ts" "$windowsNiwatermDir/layouts.ts"
       run ln -sf "${dotfilesDir}/.config/niwaterm/niwaterm.config.ts" "$windowsNiwatermDir/niwaterm.config.ts"
       run ln -sf "${dotfilesDir}/.config/niwaterm/tsconfig.json" "$windowsNiwatermDir/tsconfig.json"
+      run ln -sf "${dotfilesDir}/.config/niwaterm/package.json" "$windowsNiwatermDir/package.json"
+      run ln -sf "${dotfilesDir}/.config/niwaterm/bun.lock" "$windowsNiwatermDir/bun.lock"
     fi
   '';
 }

@@ -1,4 +1,6 @@
-export const layouts = {
+import type { LayoutsConfig } from "@niwaterm/config";
+
+export const layouts: LayoutsConfig = {
   "my-dev": {
     description: "Editor/Server | AI/editprompt [個人用]",
     layout: {

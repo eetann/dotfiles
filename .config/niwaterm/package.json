@@ -1,0 +1,8 @@
+{
+  "name": "niwaterm-user-config",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@niwaterm/config": "link:@niwaterm/config"
+  }
+}

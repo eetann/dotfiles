@@ -1,0 +1,15 @@
+{
+  "lockfileVersion": 1,
+  "configVersion": 1,
+  "workspaces": {
+    "": {
+      "name": "niwaterm-user-config",
+      "dependencies": {
+        "@niwaterm/config": "link:@niwaterm/config",
+      },
+    },
+  },
+  "packages": {
+    "@niwaterm/config": ["@niwaterm/config@link:@niwaterm/config", {}],
+  }
+}
