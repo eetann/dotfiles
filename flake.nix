@@ -36,6 +36,10 @@
       url = "github:mattpocock/skills";
       flake = false;
     };
+    natural-japanese = {
+      url = "github:coji/natural-japanese";
+      flake = false;
+    };
   };
 
   outputs =

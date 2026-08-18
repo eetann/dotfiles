@@ -214,6 +214,22 @@
         "type": "github"
       }
     },
+    "natural-japanese": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786928212,
+        "narHash": "sha256-msIYE+qitkcoBZEA95iPyE4pvh6u+kuCK9K78uvlxq0=",
+        "owner": "coji",
+        "repo": "natural-japanese",
+        "rev": "0f1cc1c5a4e2aa7590598c88a15c213a60d9545a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "coji",
+        "repo": "natural-japanese",
+        "type": "github"
+      }
+    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
@@ -311,6 +327,7 @@
         "drawio-mcp": "drawio-mcp",
         "home-manager": "home-manager_2",
         "mattpocock-skills": "mattpocock-skills",
+        "natural-japanese": "natural-japanese",
         "nix-darwin": "nix-darwin",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_2",

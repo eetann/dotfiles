@@ -42,6 +42,12 @@ in
         path = inputs.mattpocock-skills;
         subdir = "skills/productivity/grilling";
       };
+      # natural-japanese（GitHub, coji/natural-japanese）
+      # https://github.com/coji/natural-japanese
+      natural-japanese = {
+        path = inputs.natural-japanese;
+        subdir = "skills";
+      };
     };
 
     skills.enableAll = true;
