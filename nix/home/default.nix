@@ -76,6 +76,7 @@ in
     "i3/config"
     "karabiner/karabiner.json"
     "lazygit/config.yml"
+    "niwaterm/layouts.ts"
     "niwaterm/niwaterm.config.ts"
     "niwaterm/tsconfig.json"
     "nvim"
@@ -94,6 +95,7 @@ in
   home.activation.niwatermWindowsConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     windowsNiwatermDir="/mnt/c/Users/eetann/.config/niwaterm"
     if [ -d "$windowsNiwatermDir" ]; then
+      run ln -sf "${dotfilesDir}/.config/niwaterm/layouts.ts" "$windowsNiwatermDir/layouts.ts"
       run ln -sf "${dotfilesDir}/.config/niwaterm/niwaterm.config.ts" "$windowsNiwatermDir/niwaterm.config.ts"
       run ln -sf "${dotfilesDir}/.config/niwaterm/tsconfig.json" "$windowsNiwatermDir/tsconfig.json"
     fi
