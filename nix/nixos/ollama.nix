@@ -21,11 +21,6 @@
     };
   };
 
-  # /usr/lib/wsl/lib配下のバイナリ(nvidia-smi等)はWindows側が提供する
-  # 非Nixビルドのため、標準の動的リンカが存在せずそのままでは実行できない。
-  # nix-ldで動的リンカを補う
-  programs.nix-ld.enable = true;
-
   # nvidia-smiは動作確認・デバッグ用のラッパーとして提供する。
   # LD_LIBRARY_PATHはコマンド実行時にだけ設定し、システム全体には汚染させない
   # (nix-ldは呼び出し元が設定したLD_LIBRARY_PATHをそのまま使う実装のため、

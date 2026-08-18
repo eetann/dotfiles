@@ -7,6 +7,7 @@
   imports = [
     ./nix.nix
     ./allow-unfree.nix
+    ./nix-ld.nix
     ./ollama.nix
     ./docker.nix
   ];
