@@ -9,7 +9,12 @@
 #       → /nix/store/.../hm_nvim
 #         → ~/dotfiles/.config/nvim  ← 最終的にここを指す
 #
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   # mkOutOfStoreSymlinkを使うため、絶対パス文字列が必要
@@ -93,15 +98,37 @@ in
 
   # NixOS-WSL環境では、niwatermの実体がWindows側アプリのため、
   # WSL側の~/.config/niwatermとは別にWindows側の設定ファイルにも
-  # 同じdotfilesへのシンボリックリンクを張る
+  # 同じdotfilesへのシンボリックリンクを張る。
+  #
+  # WSL(Linux)側のln -sでDrvFs(/mnt/c/...)上に作るシンボリックリンクは、
+  # Windows専用のreparse point（IO_REPARSE_TAG_LX_SYMLINK）になり、
+  # Windowsネイティブアプリ（niwaterm実機のbun.exe）からは実体を読めない
+  # （PowerShellから見るとLength:0の壊れたファイルに見える）。そのため
+  # cmd.exeのmklinkでWindows形式のシンボリックリンクを作る。
+  # 要件: Windows側で開発者モードを有効化しておくこと（設定 > プライバシーと
+  # セキュリティ > 開発者向け）。管理者権限なしでのシンボリックリンク作成に必要。
+  # PowerShellのNew-Item -ItemType SymbolicLinkは開発者モードの緩和を認識しない
+  # 実装上の制限があるため、cmd.exeのmklinkを使う。
+  # cmd.exeはフルパスで呼ぶ。`sudo nixos-rebuild switch`はsystemd-run経由の
+  # systemdサービスとしてactivationを実行するため、対話シェルと違いWSL
+  # interopのWindows PATH（/mnt/c/Windows/System32等）が通っておらず、
+  # コマンド名だけだと `cmd.exe: command not found` (exit 127) で失敗する。
+  #
+  # 引数にダブルクォートを含めるとWSL interop経由でcmd.exeへ渡す際に
+  # エスケープが壊れ「ファイル名、ディレクトリ名、またはボリューム ラベルの
+  # 構文が間違っています」になるため、クォートなしで呼ぶ（対象パスに
+  # スペースを含まない前提）。またactivation実行時のカレントディレクトリが
+  # UNCパス（\\wsl.localhost\...）だとcmd.exeが警告を出すため、
+  # `env -C /mnt/c` でcmd.exe起動時の作業ディレクトリをCドライブ直下にする。
   home.activation.niwatermWindowsConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     windowsNiwatermDir="/mnt/c/Users/eetann/.config/niwaterm"
-    if [ -d "$windowsNiwatermDir" ]; then
-      run ln -sf "${dotfilesDir}/.config/niwaterm/layouts.ts" "$windowsNiwatermDir/layouts.ts"
-      run ln -sf "${dotfilesDir}/.config/niwaterm/niwaterm.config.ts" "$windowsNiwatermDir/niwaterm.config.ts"
-      run ln -sf "${dotfilesDir}/.config/niwaterm/tsconfig.json" "$windowsNiwatermDir/tsconfig.json"
-      run ln -sf "${dotfilesDir}/.config/niwaterm/package.json" "$windowsNiwatermDir/package.json"
-      run ln -sf "${dotfilesDir}/.config/niwaterm/bun.lock" "$windowsNiwatermDir/bun.lock"
+    cmdExe="/mnt/c/Windows/System32/cmd.exe"
+    if [ -d "$windowsNiwatermDir" ] && [ -x "$cmdExe" ]; then
+      winTarget='C:\Users\eetann\.config\niwaterm'
+      uncSrc='\\wsl.localhost\NixOS\home\eetann\dotfiles\.config\niwaterm'
+      for f in layouts.ts niwaterm.config.ts tsconfig.json package.json bun.lock; do
+        run env -C /mnt/c "$cmdExe" /c "del $winTarget\\$f 2>nul & mklink $winTarget\\$f $uncSrc\\$f"
+      done
     fi
   '';
 }
