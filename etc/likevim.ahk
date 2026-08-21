@@ -125,7 +125,7 @@ F13 & f::Send("{Right}")
 F13 & b::Send("{Left}")
 F13 & p::Send("{Up}")
 F13 & n::Send("{Down}")
-F13 & k::Send("+{End}{Del}")
+F13 & k::Send("{Blind}^k")
 ;-----------------------------------------------------------
 #HotIf WinActive("ahk_exe wezterm-gui.exe")
 F13 & a::Send("{Blind}^a")
@@ -136,7 +136,6 @@ F13 & f::Send("{Blind}^f")
 F13 & b::Send("{Blind}^b")
 F13 & p::Send("{Blind}^p")
 F13 & n::Send("{Blind}^n")
-F13 & k::Send("{Blind}^k")
 ; ターミナルでvimのためのIME
 Esc::
 {
