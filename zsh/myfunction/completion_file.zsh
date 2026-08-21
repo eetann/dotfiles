@@ -112,14 +112,23 @@ function _completion_file_niwaterm_popup() {
   # 軽量なpingで先に疎通確認する
   timeout 3 niwaterm ping > /dev/null 2>&1 || return 3
 
-  # popup内シェルには.zshrc等のFZF_CTRL_T_COMMAND定義が無い可能性があるため、
-  # 呼び出し元（今のシェル）で確定している値をそのまま環境変数として渡す
+  # popup内シェルはniwatermアプリ本体（別プロセス）の環境変数から起動されるため、
+  # このシェルのFZF_CTRL_T_COMMAND・FZF_DEFAULT_OPTS等はIPC越しには一切継承されない。
+  # 呼び出し元（今のシェル）で確定している値をそのまま環境変数として渡す。
+  #
+  # printf %qではなくbase64で渡す: FZF_CTRL_T_COMMANDはバックスラッシュによる行継続
+  # （`fd --type f \` の形）を含む複数行の値だが、zshのprintf %qは改行を`\` +
+  # ANSI-Cクォート($'...')の連結として出力するため、bash側で再評価すると行継続の
+  # バックスラッシュが独立した文字として扱われてしまい、fdのオプション解析が壊れる
+  # （実機で`--strip-cwd-prefix`が引数として認識されないエラーを確認済み）。
+  # base64なら文字コード上シェルのクォート・行継続と一切干渉しない
   local ctrl_t_command=${FZF_CTRL_T_COMMAND:-fd --type f --hidden --exclude .git}
   local runner="$ZDIR/myfunction/completion_file_popup_runner.sh"
 
-  local envs="COMPLETION_FILE_QUERY=$(printf %q "$query")"
-  envs+=" COMPLETION_FILE_PREVIEW_CMD=$(printf %q "$preview_cmd")"
-  envs+=" COMPLETION_FILE_CTRL_T_COMMAND=$(printf %q "$ctrl_t_command")"
+  local envs="COMPLETION_FILE_QUERY_B64=$(printf '%s' "$query" | base64 -w0)"
+  envs+=" COMPLETION_FILE_PREVIEW_CMD_B64=$(printf '%s' "$preview_cmd" | base64 -w0)"
+  envs+=" COMPLETION_FILE_CTRL_T_COMMAND_B64=$(printf '%s' "$ctrl_t_command" | base64 -w0)"
+  envs+=" COMPLETION_FILE_FZF_DEFAULT_OPTS_B64=$(printf '%s' "$FZF_DEFAULT_OPTS" | base64 -w0)"
 
   local selected
   selected=$(

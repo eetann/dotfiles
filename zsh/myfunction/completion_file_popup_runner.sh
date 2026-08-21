@@ -2,13 +2,20 @@
 # niwatermのpopup内（niwaterm popup open --capture-stdout）で実行される。
 # 標準出力はniwaterm側がキャプチャして呼び出し元シェルへそのまま返すため、選択結果だけを
 # 出力すること。UI（fzfの画面自体）はこのスクリプトの実行画面（popup内PTY）にそのまま出る。
-# query・preview_cmd・ctrl_t_commandはcompletion_file.zshが環境変数経由で渡す
-# （IPC越しの実行のため、popup内シェルはcompletion_file.zsh側のローカル変数を直接見えない）。
+# query・preview_cmd・ctrl_t_command・fzf_default_optsはcompletion_file.zshがbase64で
+# 環境変数経由で渡す（IPC越しの実行のため、popup内シェルはcompletion_file.zsh側の
+# ローカル変数はおろか、呼び出し元シェルのFZF_DEFAULT_OPTS等の環境変数も一切見えない。
+# base64にしているのはシェルのクォート・行継続と値の中身が干渉しないようにするため）
 set -o pipefail
 
-query="${COMPLETION_FILE_QUERY:-}"
-preview_cmd="${COMPLETION_FILE_PREVIEW_CMD:-}"
-ctrl_t_command="${COMPLETION_FILE_CTRL_T_COMMAND:-fd --type f --hidden --exclude .git}"
+b64d() { printf '%s' "$1" | base64 -d; }
+
+query=$(b64d "${COMPLETION_FILE_QUERY_B64:-}")
+preview_cmd=$(b64d "${COMPLETION_FILE_PREVIEW_CMD_B64:-}")
+ctrl_t_command=$(b64d "${COMPLETION_FILE_CTRL_T_COMMAND_B64:-}")
+[[ -z "$ctrl_t_command" ]] && ctrl_t_command="fd --type f --hidden --exclude .git"
+export FZF_DEFAULT_OPTS
+FZF_DEFAULT_OPTS=$(b64d "${COMPLETION_FILE_FZF_DEFAULT_OPTS_B64:-}")
 
 result=$(eval "$ctrl_t_command" | fzf \
   --query "$query" \
