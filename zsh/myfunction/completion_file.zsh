@@ -22,6 +22,39 @@ function completion_file() {
     || (cat {} | head -200) ) 2> /dev/null
 '
 
+  local selected
+
+  # niwatermのタブ内（NIWATERM_TAB_IDあり）かつniwatermコマンドが使える場合は、
+  # fzf --tmuxの代わりにniwatermのpopupでfzfを実行する。
+  # popup起動自体に失敗した場合（アプリ未起動・既にpopup使用中等）は通常のfzf --tmuxにフォールバックする
+  if [[ -n "$NIWATERM_TAB_ID" ]] && (( $+commands[niwaterm] )); then
+    selected=$(_completion_file_niwaterm_popup "$query" "$preview_cmd")
+    (( $? == 3 )) && selected=$(_completion_file_local_fzf "$query" "$preview_cmd")
+  else
+    selected=$(_completion_file_local_fzf "$query" "$preview_cmd")
+  fi
+
+  # ファイルを選択した場合のみバッファを更新
+  if [[ -n "$selected" ]]; then
+    # 改行で区切った配列へ 変数展開フラグfを使う
+    local select_arr=(${(f)selected})
+    local escaped=""
+    for val in $select_arr; do
+      escaped+=" "
+      escaped+=$(printf "%q" "$val")
+    done
+    BUFFER="${prebuffer}${escaped}"
+  fi
+  # カーソル位置を行末にして更新
+  CURSOR=$#BUFFER
+  zle reset-prompt
+}
+
+# ローカルのfzf --tmuxでファイルを選択し、選ばれたパス一覧を改行区切りで返す
+function _completion_file_local_fzf() {
+  local query=$1
+  local preview_cmd=$2
+
   local fzf_command=$(cat << EOF
 fzf --tmux center,80% \
 --query '$query' \
@@ -58,20 +91,44 @@ EOF
     fi
   fi
 
-  # ファイルを選択した場合のみバッファを更新
-  if [[ -n "$selected" ]]; then
-    # 改行で区切った配列へ 変数展開フラグfを使う
-    select_arr=(${(f)selected})
-    escaped=""
-    for val in $select_arr; do
-      escaped+=" "
-      escaped+=$(printf "%q" "$val")
-    done
-    BUFFER="${prebuffer}${escaped}"
-  fi
-  # カーソル位置を行末にして更新
-  CURSOR=$#BUFFER
-  zle reset-prompt
+  echo -n "$selected"
+}
+
+# niwatermのpopup（niwaterm popup open --capture-stdout）内でfzfを実行し、
+# 選ばれたパス一覧を改行区切りで返す。
+#
+# 実際にfzfを動かすロジックはcompletion_file_popup_runner.sh（静的なbashスクリプト、
+# 通常通りシンタックスハイライトが効く）に書いてあり、この関数はそれを呼び出すだけ。
+# query・preview_cmd・ctrl_t_commandは環境変数経由で渡す（printf %qでシェルエスケープ済み）。
+# niwaterm CLIの`--capture-stdout`（fzf-tmux相当。詳細: niwaterm docs show cli の
+# `popup open`節）が、結果の受け渡し・一時ファイルの生成/削除・完了待ちを全部面倒見てくれる。
+#
+# 戻り値: 0=選択あり/なし正常終了, 3=popup起動自体に失敗（呼び出し元はfzf --tmuxへフォールバックする）
+function _completion_file_niwaterm_popup() {
+  local query=$1
+  local preview_cmd=$2
+
+  # アプリ未起動時、popup openへ直接進むとTCP接続タイムアウト待ちで長時間固まりうるため、
+  # 軽量なpingで先に疎通確認する
+  timeout 3 niwaterm ping > /dev/null 2>&1 || return 3
+
+  # popup内シェルには.zshrc等のFZF_CTRL_T_COMMAND定義が無い可能性があるため、
+  # 呼び出し元（今のシェル）で確定している値をそのまま環境変数として渡す
+  local ctrl_t_command=${FZF_CTRL_T_COMMAND:-fd --type f --hidden --exclude .git}
+  local runner="$ZDIR/myfunction/completion_file_popup_runner.sh"
+
+  local envs="COMPLETION_FILE_QUERY=$(printf %q "$query")"
+  envs+=" COMPLETION_FILE_PREVIEW_CMD=$(printf %q "$preview_cmd")"
+  envs+=" COMPLETION_FILE_CTRL_T_COMMAND=$(printf %q "$ctrl_t_command")"
+
+  local selected
+  selected=$(
+    niwaterm popup open --width 80 --height 80 --capture-stdout \
+      "$envs bash $(printf %q "$runner")"
+  ) || return 3
+
+  echo -n "$selected"
+  return 0
 }
 
 zle -N completion_file
