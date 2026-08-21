@@ -80,7 +80,21 @@ function monorepo_cd() {
     display_list+=("$display_name | $d")
   done
 
-  local selected=$(printf '%s\n' "${display_list[@]}" | fzf)
+  local fzf_candidates=$(printf '%s\n' "${display_list[@]}")
+
+  local selected
+  # niwatermのタブ内（NIWATERM_TAB_IDあり）かつniwatermコマンドが使える場合は、
+  # fzf-tmuxの代わりにniwatermのpopupでfzfを実行する。
+  # popup起動自体に失敗した場合（アプリ未起動・既にpopup使用中等）は通常のfzf-tmux/fzfにフォールバックする
+  selected=$(_fzf_niwaterm_popup_select "$fzf_candidates" "" "" "" "" "")
+  if (( $? == 3 )); then
+    local fzf_command="fzf"
+    if type fzf-tmux > /dev/null; then
+      fzf_command="fzf-tmux -p 80%"
+    fi
+    selected=$(printf '%s\n' "$fzf_candidates" | eval $fzf_command)
+  fi
+
   if [[ -n "$selected" ]]; then
     local dest="${selected##*$' | '}"
     BUFFER="cd $dest"

@@ -8,21 +8,25 @@ function rg_fzf_nvim() {
   BUFFER=""
   zle -I
   echo "rg_fzf_nvim $query"
-  local fzf_command="fzf"
-  if type fzf-tmux > /dev/null; then
-    fzf_command="fzf-tmux -p 80%"
-  fi
-  fzf_command+=" "
-  fzf_command+=$(cat << EOF
---ansi \
---delimiter : \
---preview 'bat --style=numbers --color=always --highlight-line {2} {1}' \
---preview-window 'down,60%,wrap,+{2}/2'
-EOF
-)
+  local preview_cmd='bat --style=numbers --color=always --highlight-line {2} {1}'
+  local preview_window='down,60%,wrap,+{2}/2'
 
   # 入力途中の文字列をrgに渡す
-  selected=$(rg --column --line-number --no-heading --color=always --smart-case -- $query | eval $fzf_command)
+  local candidates=$(rg --column --line-number --no-heading --color=always --smart-case -- $query)
+
+  local selected
+  # niwatermのタブ内（NIWATERM_TAB_IDあり）かつniwatermコマンドが使える場合は、
+  # fzf-tmuxの代わりにniwatermのpopupでfzfを実行する。
+  # popup起動自体に失敗した場合（アプリ未起動・既にpopup使用中等）は通常のfzf-tmux/fzfにフォールバックする
+  selected=$(_fzf_niwaterm_popup_select "$candidates" "" "$preview_cmd" "$preview_window" ":" "1")
+  if (( $? == 3 )); then
+    local fzf_command="fzf"
+    if type fzf-tmux > /dev/null; then
+      fzf_command="fzf-tmux -p 80%"
+    fi
+    fzf_command+=" --ansi --delimiter : --preview '$preview_cmd' --preview-window '$preview_window'"
+    selected=$(printf '%s\n' "$candidates" | eval $fzf_command)
+  fi
   # ファイルを選択した場合のみバッファを更新
   if [[ -n "$selected" ]]; then
     # 改行で区切った配列へ 変数展開フラグfを使う
