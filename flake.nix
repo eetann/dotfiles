@@ -40,6 +40,10 @@
       url = "github:coji/natural-japanese";
       flake = false;
     };
+    rrmap-skills = {
+      url = "github:eetann/rrmap";
+      flake = false;
+    };
   };
 
   outputs =

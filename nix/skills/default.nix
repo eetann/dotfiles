@@ -10,6 +10,7 @@ let
   workExcludeSkills = [
     "grilling"
     "adr-creator"
+    "rrmap"
   ];
 in
 {
@@ -47,6 +48,12 @@ in
       natural-japanese = {
         path = inputs.natural-japanese;
         subdir = "skills";
+      };
+      # rrmap（GitHub, eetann/rrmap）
+      # https://github.com/eetann/rrmap
+      rrmap = {
+        path = inputs.rrmap-skills;
+        subdir = ".claude/skills";
       };
     };
 

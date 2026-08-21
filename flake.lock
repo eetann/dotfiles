@@ -331,7 +331,24 @@
         "nix-darwin": "nix-darwin",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_2",
-        "playwright-cli-skills": "playwright-cli-skills"
+        "playwright-cli-skills": "playwright-cli-skills",
+        "rrmap-skills": "rrmap-skills"
+      }
+    },
+    "rrmap-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1787286080,
+        "narHash": "sha256-kxGS71Px0nYFPO0VX894ytWS0K/oXRGP7X1ceh1okBI=",
+        "owner": "eetann",
+        "repo": "rrmap",
+        "rev": "1a70baf90790fc744623184dbdc35237bdbe3716",
+        "type": "github"
+      },
+      "original": {
+        "owner": "eetann",
+        "repo": "rrmap",
+        "type": "github"
       }
     },
     "systems": {
