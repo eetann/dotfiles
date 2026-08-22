@@ -54,6 +54,7 @@ export default defineConfig({
     // .tmux.conf: bind-key p (xsel/pbpaste -> paste-buffer)
     // デフォルトの"p"(prev-tab)を上書きする
     niwa.keybind("p", "paste-clipboard");
+    niwa.keybind("q", "restart-tab");
   },
   appearance: {
     ...defaultAppearance,
