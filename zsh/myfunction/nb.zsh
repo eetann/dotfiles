@@ -14,14 +14,15 @@ EOF
   local preview_cmd='bat --color=always --language=md --style=plain $(nb show {1} --relative-path)'
   local candidates=$(eval "$list_cmd")
 
-  local selected
   # niwatermのタブ内（NIWATERM_TAB_IDあり）かつniwatermコマンドが使える場合は、
-  # fzf --tmuxの代わりにniwatermのpopupでfzfを実行する。
-  # popup起動自体に失敗した場合（アプリ未起動・既にpopup使用中等）は通常のfzf --tmuxにフォールバックする
-  selected=$(_fzf_niwaterm_popup_select "$candidates" "" "$preview_cmd" "" "" "1")
-  if (( $? == 3 )); then
-    selected=$(printf '%s\n' "$candidates" | fzf --tmux 80% --ansi --preview "$preview_cmd")
+  # fzf --tmuxの代わりにniwatermのpopupでfzfを実行するfzf-niwatermを使う
+  # （niwaterm利用可否の判定・popup起動失敗時のローカルfzfへのフォールバックは
+  # fzf-niwaterm自身が行う。詳細: niwaterm本体のpackages/cli/bin/fzf-niwaterm）
+  local fzf_command="fzf --tmux 80%"
+  if [[ -n "$NIWATERM_TAB_ID" ]] && (( $+commands[niwaterm] )); then
+    fzf_command="fzf-niwaterm"
   fi
+  local selected=$(printf '%s\n' "$candidates" | eval "$fzf_command --ansi --preview \"\$preview_cmd\"")
 
   if [[ -z $selected ]]; then
     return 0
