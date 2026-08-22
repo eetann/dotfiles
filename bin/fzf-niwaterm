@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# fzf-tmux互換のniwaterm版ラッパー。
+# usage: fzf-niwaterm [FZF OPTIONS]
+#
+# fzf-tmux（$(command -v fzf-tmux)のソース参照）は、標準入力を一時ファイルへ保存し、
+# tmuxの新paneでfzfを実行し、標準出力だけを呼び出し元へ返す「リレー」に徹していて、
+# tmux固有の処理を呼び出し元（zeno-history-selection widget等）に一切露出させない。
+# niwatermのdocs/guide/cli.md（popup open --capture-stdout）もまさに同じ発想で設計
+# されている（「fzf-tmuxが新しいtmux paneでfzfを実行し、標準出力だけをFIFO経由で
+# 呼び出し元へ返す設計と同じ発想」と明記されている）。
+# このスクリプトはfzf-tmuxの役割をniwaterm版に置き換えたもの。
+# ZENO_FZF_COMMAND=fzf-niwaterm と設定するだけで、zeno側のwidget・completion_file.zsh
+# 等の呼び出し元は無改造のまま使える。
+#
+# popup起動に失敗した場合（アプリ未起動・既にpopup使用中等）は、
+# 標準入力をそのままローカルのfzfへ渡してフォールバックする。
+set -uo pipefail
+
+fzf_bin=$(command -v fzf) || { echo "fzf-niwaterm: fzf not found" >&2; exit 2; }
+
+# 標準入力は一時ファイルへ確定させる（popup成功時・フォールバック時の両方で使い回す。
+# fzf-tmuxのFIFOと違い、popup内シェルとの間はコマンド文字列のやり取りしかできないため、
+# ストリーミングではなく通常ファイルにする）
+tmpdir=$(mktemp -d "${ZDIR:-$HOME/dotfiles/zsh}/.cache/fzf-niwaterm.XXXXXX") || exec "$fzf_bin" "$@"
+trap 'rm -rf "$tmpdir"' EXIT
+inputfile="$tmpdir/input"
+cat <&0 > "$inputfile"
+
+# アプリ未起動時、popup openへ直接進むとTCP接続タイムアウト待ちで長時間固まりうるため、
+# 軽量なpingで先に疎通確認する
+if [[ -z "${NIWATERM_TAB_ID:-}" ]] || ! command -v niwaterm > /dev/null 2>&1 \
+  || ! timeout 3 niwaterm ping > /dev/null 2>&1; then
+  "$fzf_bin" "$@" < "$inputfile"
+  exit $?
+fi
+
+opts=$(printf '%q ' "$@")
+
+# popup内シェルはこのプロセスの環境変数（FZF_DEFAULT_OPTS等、zsh/plugin/fzf.zshで
+# 定義したもの）をIPC越しには一切継承しないため、fzf-tmux（$(command -v fzf-tmux)の
+# ソース参照）と同様に必要な分だけ明示的にexportして渡す。fzf.zsh全体をpopup内で
+# sourceする方式にはしない（_fzf_lazy_load等popup内では不要な処理まで走ってしまうため）
+envs="export FZF_DEFAULT_COMMAND=$(printf %q "${FZF_DEFAULT_COMMAND:-}") "
+envs+="FZF_DEFAULT_OPTS=$(printf %q "${FZF_DEFAULT_OPTS:-}") "
+envs+="FZF_DEFAULT_OPTS_FILE=$(printf %q "${FZF_DEFAULT_OPTS_FILE:-}"); "
+[[ -n "${BAT_THEME:-}" ]] && envs+="export BAT_THEME=$(printf %q "$BAT_THEME"); "
+
+if ! niwaterm popup open --width 80 --height 80 --capture-stdout \
+  "$envs fzf $opts < $(printf %q "$inputfile")"; then
+  "$fzf_bin" "$@" < "$inputfile"
+  exit $?
+fi
