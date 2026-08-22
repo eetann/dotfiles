@@ -72,6 +72,7 @@
       xsel # クリップボード操作。macOSはpbcopy/pbpasteが標準搭載のため不要
       gcc # tree-sitter buildなどCコンパイラが必要な処理向け。macOSはXcode Command Line Toolsのccを使うため不要
       claude-code # NixOSでは公式インストーラーが動かないためnixpkgs経由で導入。macOSは公式インストーラーで最新版を維持
+      openssl # portlessがTLS証明書生成に使用。macOSは標準搭載のため不要
     ]
     ++ [
       # AI時代のcurl (github:yusukebe/ax)
