@@ -14,6 +14,7 @@ alias ml='nvim .memo.local.md'
 alias mt='mise watch test'
 alias tn="tmux popup -E -w 95% -h 95% -d '#{pane_current_path}' 'nvim'"
 alias rrmap='bun run ~/ghq/github.com/eetann/rrmap/src/cli.ts'
+alias rrmapw="portless run sh -c 'bun run ~/ghq/github.com/eetann/rrmap/src/cli.ts web --port \$PORT'"
 case ${OSTYPE} in
   darwin*)
     alias awk="gawk"

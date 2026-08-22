@@ -9,6 +9,7 @@
     ./allow-unfree.nix
     ./nix-ld.nix
     ./docker.nix
+    ./ca-certificates.nix
   ];
 
   wsl.enable = true;
