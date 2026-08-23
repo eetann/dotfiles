@@ -4,5 +4,8 @@
   "type": "module",
   "dependencies": {
     "@niwaterm/config": "link:@niwaterm/config"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
   }
 }
