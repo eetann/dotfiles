@@ -64,6 +64,7 @@ export default defineConfig({
     // デフォルトの"p"(prev-tab)を上書きする
     niwa.keybind("p", "paste-clipboard");
     niwa.keybind("q", "restart-tab");
+    niwa.keybind("r", "reload-config");
 
     // .tmux.conf: bind-key -n M-q run-shell '
     //   #{@editprompt-cmd} resume --target-pane #{pane_id} || \
