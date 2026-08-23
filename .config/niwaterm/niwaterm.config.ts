@@ -39,8 +39,8 @@ export default defineConfig({
 
     // .tmux.conf: bind-key -r H/J/K/L resize-pane -L/-D/-U/-R
     niwa.keybind("shift+h", "resize-left", { repeat: true });
-    niwa.keybind("shift+j", "resize-down", { repeat: true });
-    niwa.keybind("shift+k", "resize-up", { repeat: true });
+    niwa.keybind("shift+j", "resize-up", { repeat: true });
+    niwa.keybind("shift+k", "resize-down", { repeat: true });
     niwa.keybind("shift+l", "resize-right", { repeat: true });
 
     // .tmux.conf: bind-key -N "ペインIDの表示" P (xsel/pbcopyでpane_idをコピー)
@@ -64,7 +64,10 @@ export default defineConfig({
     // デフォルトの"p"(prev-tab)を上書きする
     niwa.keybind("p", "paste-clipboard");
     niwa.keybind("q", "restart-tab");
-    niwa.keybind("r", "reload-config");
+    niwa.keybind("r", async () => {
+      await niwa.reloadConfig();
+      niwa.notify({ title: "設定をリロードしました" });
+    });
 
     // .tmux.conf: bind-key -n M-q run-shell '
     //   #{@editprompt-cmd} resume --target-pane #{pane_id} || \
