@@ -55,6 +55,12 @@ in
         path = inputs.rrmap-skills;
         subdir = ".claude/skills";
       };
+      # eli5（GitHub, anthropics/claude-plugins-community）
+      # https://github.com/anthropics/claude-plugins-community/tree/main/eli5
+      eli5 = {
+        path = inputs.claude-plugins-community;
+        subdir = "eli5/skills";
+      };
     };
 
     skills.enableAll = true;

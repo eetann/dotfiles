@@ -44,6 +44,10 @@
       url = "github:eetann/rrmap";
       flake = false;
     };
+    claude-plugins-community = {
+      url = "github:anthropics/claude-plugins-community";
+      flake = false;
+    };
   };
 
   outputs =

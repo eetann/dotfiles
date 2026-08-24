@@ -87,6 +87,22 @@
         "type": "github"
       }
     },
+    "claude-plugins-community": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1787339364,
+        "narHash": "sha256-iKvIn5H0+zoAB9svNl3v2Mss3akRF2WqiokgzcidegU=",
+        "owner": "anthropics",
+        "repo": "claude-plugins-community",
+        "rev": "f4c9452f5ca091f1be7064d9faab1b001ea21645",
+        "type": "github"
+      },
+      "original": {
+        "owner": "anthropics",
+        "repo": "claude-plugins-community",
+        "type": "github"
+      }
+    },
     "design-skills": {
       "flake": false,
       "locked": {
@@ -323,6 +339,7 @@
       "inputs": {
         "agent-skills": "agent-skills",
         "ax": "ax",
+        "claude-plugins-community": "claude-plugins-community",
         "design-skills": "design-skills",
         "drawio-mcp": "drawio-mcp",
         "home-manager": "home-manager_2",
