@@ -39,15 +39,18 @@ typeset -U path PATH
 
 
 # direnv hookのevalキャッシュ
+# キャッシュキーにはバイナリの実パス(Nix storeのhash込み)を使う。
+# direnv versionの値だけだとNix更新でstoreパスが変わってもキャッシュキーが
+# 変化せず、GC済みの古いstoreパスを参照し続けてエラーになるため。
 if type direnv > /dev/null; then
-  _direnv_ver=$(direnv version)
-  _direnv_cache="$HOME/.cache/zsh/direnv-hook.${_direnv_ver}.zsh"
+  _direnv_real=$(readlink -f "$(command -v direnv)")
+  _direnv_cache="$HOME/.cache/zsh/direnv-hook.${_direnv_real:h:h:t}.zsh"
   if [[ ! -f "$_direnv_cache" ]]; then
     mkdir -p "$HOME/.cache/zsh"
     direnv hook zsh > "$_direnv_cache"
   fi
   source "$_direnv_cache"
-  unset _direnv_ver _direnv_cache
+  unset _direnv_real _direnv_cache
 fi
 export LG_CONFIG_FILE="$HOME/dotfiles/.config/lazygit/config.yml"
 export CLAUDE_CODE_NO_FLICKER=1
