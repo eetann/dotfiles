@@ -40,17 +40,26 @@ export const layouts: LayoutsConfig = {
               name: "claude",
               vars: { role: "claude" },
               command: "CLAUDE_CONFIG_DIR=~/.claude claude",
-              // editprompt側のfocusを付け替え。理由は下のeditpromptタブのコメント参照
-              focus: true,
             },
           ],
         },
         second: {
           kind: "tile",
-          // editpromptは{{pane_id:claude}}のようなpane参照でtmuxのpaneへ文字列を送る作りのため、
-          // pane-id参照テンプレートを持たないniwatermではそのままでは動かせない。
-          // ひとまず空タブとして確保するのみ（起動は手動）
-          tabs: [{ name: "editprompt", vars: { role: "editprompt" } }],
+          // editpromptはniwaterm対応済み（--mux niwatermはNIWATERM_TAB_IDから自動判定）。
+          // ただしvde-layoutの{{pane_id:claude}}のようなプリセット定義時点でのpane-id参照は
+          // niwatermに無い（tabIdは適用のたびに再採番されるため）。代わりに`niwaterm tab var find`で
+          // 実行時にroleからclaudeタブのtabIdを検索する（詳細: docs/guide/config.md「レイアウト」節）
+          tabs: [
+            {
+              name: "editprompt",
+              vars: { role: "editprompt" },
+              command:
+                'editprompt="node ~/ghq/github.com/eetann/editprompt/dist/index.js open --editor nvim --always-copy --log-file /tmp/editprompt.log"; ' +
+                'target=$(niwaterm tab var find role claude | head -n1); ' +
+                '[ -n "$target" ] && $editprompt --target-pane "$target" || $editprompt',
+              focus: true,
+            },
+          ],
         },
       },
     },
@@ -91,13 +100,22 @@ export const layouts: LayoutsConfig = {
               name: "claude",
               vars: { role: "claude" },
               command: "CLAUDE_CONFIG_DIR=~/.claude_work CODEX_HOME=~/.codex_work claude",
-              focus: true,
             },
           ],
         },
         second: {
           kind: "tile",
-          tabs: [{ name: "editprompt", vars: { role: "editprompt" } }],
+          tabs: [
+            {
+              name: "editprompt",
+              vars: { role: "editprompt" },
+              command:
+                'editprompt="node ~/ghq/github.com/eetann/editprompt/dist/index.js open --editor nvim --always-copy --log-file /tmp/editprompt.log"; ' +
+                'target=$(niwaterm tab var find role claude | head -n1); ' +
+                '[ -n "$target" ] && $editprompt --target-pane "$target" || $editprompt',
+              focus: true,
+            },
+          ],
         },
       },
     },
