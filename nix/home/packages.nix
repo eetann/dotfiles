@@ -6,6 +6,32 @@
   lib,
   ...
 }:
+let
+  # nixpkgs stable/unstableがbun 1.4系に追従するまでの暫定固定。
+  # 追従したら通常の pkgs.bun に戻すこと
+  bun_1_4_0 = pkgs.bun.overrideAttrs (
+    finalAttrs: previousAttrs: {
+      version = "1.4.0";
+      __intentionallyOverridingVersion = true;
+      passthru = previousAttrs.passthru // {
+        sources = {
+          aarch64-darwin = pkgs.fetchurl {
+            url = "https://github.com/oven-sh/bun/releases/download/bun-v${finalAttrs.version}/bun-darwin-aarch64.zip";
+            hash = "sha256-xmnpf2Fk4cluBwF0jbmN+ndJKQjL2DlMdVcTSnNd44E=";
+          };
+          aarch64-linux = pkgs.fetchurl {
+            url = "https://github.com/oven-sh/bun/releases/download/bun-v${finalAttrs.version}/bun-linux-aarch64.zip";
+            hash = "sha256-SxozLuhhmD65O8/m93D/+U4+MbLDiL2uo8jtNeWO7Q4=";
+          };
+          x86_64-linux = pkgs.fetchurl {
+            url = "https://github.com/oven-sh/bun/releases/download/bun-v${finalAttrs.version}/bun-linux-x64-baseline.zip";
+            hash = "sha256-GE+0WV8NQBohfPfHjBvEMLqDMU2reouUgFurv3+nCX8=";
+          };
+        };
+      };
+    }
+  );
+in
 {
   home.packages =
     with pkgs;
@@ -14,7 +40,7 @@
       awscli2
       ssm-session-manager-plugin
       bat
-      bun
+      bun_1_4_0
       delta
       deno
       direnv
