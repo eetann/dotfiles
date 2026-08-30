@@ -82,6 +82,7 @@ in
     "karabiner/karabiner.json"
     "lazygit/config.yml"
     "niwaterm/bun.lock"
+    "niwaterm/keybindings.ts"
     "niwaterm/layouts.ts"
     "niwaterm/niwaterm.config.ts"
     "niwaterm/package.json"
@@ -126,7 +127,7 @@ in
     if [ -d "$windowsNiwatermDir" ] && [ -x "$cmdExe" ]; then
       winTarget='C:\Users\eetann\.config\niwaterm'
       uncSrc='\\wsl.localhost\NixOS\home\eetann\dotfiles\.config\niwaterm'
-      for f in layouts.ts niwaterm.config.ts tsconfig.json package.json bun.lock; do
+      for f in keybindings.ts layouts.ts niwaterm.config.ts tsconfig.json package.json bun.lock; do
         run env -C /mnt/c "$cmdExe" /c "del $winTarget\\$f 2>nul & mklink $winTarget\\$f $uncSrc\\$f"
       done
     fi
