@@ -1,74 +1,34 @@
 #!/bin/bash
 
+# ghq-select（fzfでの選択そのもの）の結果を受けて、tmux側の操作を行うラッパー。
+#   Enter : 選んだディレクトリで新規ウィンドウ
+#   ^O    : 呼び出し元ペインでcd（popupを閉じた後に.tmux.conf側がsend-keysする）
+
 if [ -z "$TMUX" ]; then
   echo "Error: This command must be run inside tmux."
   exit 1
 fi
 
-ghq_root=$(ghq root)
-cwd=$(cd "$(git rev-parse --path-format=relative --git-common-dir)/.." 2>/dev/null && pwd)
-mode="ghq"
 tmux set-option -gu @ghq_cd
 
-while true; do
-  if [ "$mode" = "ghq" ]; then
-    # パスの最下層ディレクトリだけ目立たせるためにansi
-    result=$(ghq list \
-      | awk -F/ '{prefix=""; for(i=1;i<NF;i++) prefix=prefix (i>1?"/":"") $i; printf "\033[2m%s/\033[0m\033[1m%s\033[0m\n", prefix, $NF}' \
-      | fzf \
-      --height=100% \
-      --prompt="GHQ> " \
-      --header='Enter: new window | ^O: cd | ^T: worktree list' \
-        --no-select-1 \
-      --expect=ctrl-t,ctrl-o \
-      --ansi \
-      --preview "d=\$(echo {}); git -C ${ghq_root}/\$d log --color=always --oneline -10 2>/dev/null && echo '---' && git -C ${ghq_root}/\$d -c color.status=always status --short 2>/dev/null" \
-      --preview-window 'right,45%,wrap')
-  else
-    # mode = worktree
-    result=$( { git gtr list --porcelain 2>/dev/null | awk -F'\t' '{print $1}'; echo "$cwd"; } \
-      | awk -v cur="$(pwd)" '!seen[$0]++ && $0 != cur' \
-      | sed "s|^${cwd}|.|" \
-      | fzf \
-        --height=100% \
-        --prompt="Worktree> " \
-        --header='Enter: new window | ^O: cd | ^T: ghq list' \
-        --no-select-1 \
-        --expect=ctrl-t,ctrl-o \
-        --ansi \
-        --preview "d=\$(echo {} | sed 's|^\\.|${cwd}|'); git -C \"\$d\" log --color=always --oneline -10 2>/dev/null && echo '---' && git -C \"\$d\" -c color.status=always status --short 2>/dev/null" \
-        --preview-window 'right,65%,wrap')
-  fi
+result=$(ghq-select)
 
-  # キャンセル
-  if [ -z "$result" ]; then
-    exit 0
-  fi
+# キャンセル
+if [ -z "$result" ]; then
+  exit 0
+fi
 
-  key=$(echo "$result" | sed -n '1p')
-  selected=$(echo "$result" | sed -n '2p')
+key=$(echo "$result" | sed -n '1p')
+target_path=$(echo "$result" | sed -n '2p')
 
-  # ctrl-t: モード切り替え
-  if [ "$key" = "ctrl-t" ]; then
-    if [ "$mode" = "ghq" ]; then mode="worktree"; else mode="ghq"; fi
-    continue
-  fi
+if [ -z "$target_path" ]; then
+  exit 0
+fi
 
-  # パス解決
-  if [ -n "$selected" ]; then
-    if [ "$mode" = "ghq" ]; then
-      target_path="${ghq_root}/${selected}"
-    else
-      target_path="${selected/#./$cwd}"
-    fi
-
-    if [ "$key" = "ctrl-o" ]; then
-      # 変数にパスを保存（popup閉じた後にtmux側でsend-keys）
-      tmux set-option -g @ghq_cd "$target_path"
-    else
-      # Enter: 新規ウィンドウ
-      tmux new-window -c "$target_path"
-    fi
-    exit 0
-  fi
-done
+if [ "$key" = "ctrl-o" ]; then
+  # 変数にパスを保存（popup閉じた後にtmux側でsend-keys）
+  tmux set-option -g @ghq_cd "$target_path"
+else
+  # Enter: 新規ウィンドウ
+  tmux new-window -c "$target_path"
+fi
