@@ -53,10 +53,13 @@ export const layouts: LayoutsConfig = {
             {
               name: "editprompt",
               vars: { role: "editprompt" },
+              // zshは変数展開の結果に単語分割もチルダ展開もかけないため、コマンド行全体を
+              // 変数へ入れて`$editprompt`で起動する書き方は動かない（コマンド名まるごと1語として
+              // 扱われ`no such file or directory`になる）。関数にまとめ、パスは$HOMEで書く
               command:
-                'editprompt="node ~/ghq/github.com/eetann/editprompt/dist/index.js open --editor nvim --always-copy --log-file /tmp/editprompt.log"; ' +
+                'ep() { node "$HOME/ghq/github.com/eetann/editprompt/dist/index.js" open --editor nvim --always-copy --log-file /tmp/editprompt.log "$@"; }; ' +
                 'target=$(niwaterm tab var find role claude | head -n1); ' +
-                '[ -n "$target" ] && $editprompt --target-pane "$target" || $editprompt',
+                '[ -n "$target" ] && ep --target-pane "$target" || ep',
               focus: true,
             },
           ],
@@ -109,10 +112,13 @@ export const layouts: LayoutsConfig = {
             {
               name: "editprompt",
               vars: { role: "editprompt" },
+              // zshは変数展開の結果に単語分割もチルダ展開もかけないため、コマンド行全体を
+              // 変数へ入れて`$editprompt`で起動する書き方は動かない（コマンド名まるごと1語として
+              // 扱われ`no such file or directory`になる）。関数にまとめ、パスは$HOMEで書く
               command:
-                'editprompt="node ~/ghq/github.com/eetann/editprompt/dist/index.js open --editor nvim --always-copy --log-file /tmp/editprompt.log"; ' +
+                'ep() { node "$HOME/ghq/github.com/eetann/editprompt/dist/index.js" open --editor nvim --always-copy --log-file /tmp/editprompt.log "$@"; }; ' +
                 'target=$(niwaterm tab var find role claude | head -n1); ' +
-                '[ -n "$target" ] && $editprompt --target-pane "$target" || $editprompt',
+                '[ -n "$target" ] && ep --target-pane "$target" || ep',
               focus: true,
             },
           ],
