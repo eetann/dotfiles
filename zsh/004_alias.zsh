@@ -14,7 +14,15 @@ alias ml='nvim .memo.local.md'
 alias mt='mise watch test'
 alias tn="tmux popup -E -w 95% -h 95% -d '#{pane_current_path}' 'nvim'"
 alias rrmap='bun run ~/ghq/github.com/eetann/rrmap/src/cli.ts'
-alias rrmapw="portless run sh -c 'bun run ~/ghq/github.com/eetann/rrmap/src/cli.ts web --port \$PORT'"
+# portlessは実コマンドをdetached(別セッション)で起動するうえ、SIGHUPを見ていない。
+# そのためターミナルを閉じるとportless本体だけがSIGHUPで即死し、後始末(killTree)が
+# 走らずにサーバーだけが孤児として残る。Linuxでは親(portless)の死に道連れにして落とす。
+# execでbunをportlessの直の子にするのが必須（PDEATHSIGはforkでクリアされる）。
+if [[ $OSTYPE == linux* ]]; then
+  alias rrmapw="portless run sh -c 'exec setpriv --pdeathsig TERM bun run ~/ghq/github.com/eetann/rrmap/src/cli.ts web --port \$PORT'"
+else
+  alias rrmapw="portless run sh -c 'bun run ~/ghq/github.com/eetann/rrmap/src/cli.ts web --port \$PORT'"
+fi
 case ${OSTYPE} in
   darwin*)
     alias awk="gawk"
