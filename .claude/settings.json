@@ -52,9 +52,9 @@
         "hooks": [
           {
             "type": "command",
-            "command": "if [ -n \"$NIWATERM_TAB_ID\" ] && command -v niwaterm >/dev/null 2>&1; then niwaterm tab var set agent claude-code >/dev/null 2>&1; niwaterm tab var set agent_status idle >/dev/null 2>&1; fi; exit 0",
+            "async": true,
             "timeout": 5,
-            "async": true
+            "command": "if [ -n \"$NIWATERM_TAB_ID\" ] && command -v niwaterm >/dev/null 2>&1; then niwaterm tab var set agent claude-code >/dev/null 2>&1; niwaterm tab var set agent_status idle >/dev/null 2>&1; niwaterm tab var set agent_status_text \"\" >/dev/null 2>&1; fi; exit 0"
           }
         ]
       }
@@ -65,9 +65,9 @@
         "hooks": [
           {
             "type": "command",
-            "command": "if [ -n \"$NIWATERM_TAB_ID\" ] && command -v niwaterm >/dev/null 2>&1; then niwaterm tab var set agent_status working >/dev/null 2>&1; fi; exit 0",
+            "async": true,
             "timeout": 5,
-            "async": true
+            "command": "if [ -n \"$NIWATERM_TAB_ID\" ] && command -v niwaterm >/dev/null 2>&1; then niwaterm tab var set agent_status working >/dev/null 2>&1; niwaterm tab var set agent_status_text \"\" >/dev/null 2>&1; fi; exit 0"
           }
         ]
       }
@@ -78,9 +78,9 @@
         "hooks": [
           {
             "type": "command",
-            "command": "if [ -n \"$NIWATERM_TAB_ID\" ] && command -v niwaterm >/dev/null 2>&1; then if command -v jq >/dev/null 2>&1; then raw=$(jq -r '(.tool_name // \"\") as $n | (.tool_input // {}) as $i | ($i.file_path // $i.command // $i.pattern // $i.url // $i.description // \"\") as $d | if $d == \"\" then $n else ($n + \": \" + $d) end' 2>/dev/null); status_text=$(printf '%s' \"$raw\" | tr '\\n\\r' '  '); status_text=\"${status_text:0:60}\"; [ -n \"$status_text\" ] && niwaterm tab var set agent_status_text \"$status_text\" >/dev/null 2>&1; fi; niwaterm tab var set agent_status working >/dev/null 2>&1; fi; exit 0",
+            "async": true,
             "timeout": 5,
-            "async": true
+            "command": "if [ -n \"$NIWATERM_TAB_ID\" ] && command -v niwaterm >/dev/null 2>&1; then status_text=\"\"; if command -v jq >/dev/null 2>&1; then status_text=$(jq -r '((.tool_name // \"\") as $n | (.tool_input // {}) as $i | ($i.file_path // $i.command // $i.pattern // $i.url // $i.description // \"\") as $d | if $d == \"\" then $n else ($n + \": \" + $d) end) | gsub(\"[\\n\\r]\"; \" \") | .[0:60]' 2>/dev/null); fi; niwaterm tab var set agent_status_text \"$status_text\" >/dev/null 2>&1; niwaterm tab var set agent_status working >/dev/null 2>&1; fi; exit 0"
           }
         ]
       }
@@ -95,6 +95,17 @@
             "timeout": 100
           }
         ]
+      },
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "async": true,
+            "timeout": 5,
+            "command": "if [ -n \"$NIWATERM_TAB_ID\" ] && command -v niwaterm >/dev/null 2>&1; then status_text=\"\"; if command -v jq >/dev/null 2>&1; then status_text=$(jq -r '((.tool_name // \"\") as $n | (.tool_input // {}) as $i | ($i.file_path // $i.command // $i.pattern // $i.url // $i.description // \"\") as $d | if $d == \"\" then $n else ($n + \": \" + $d) end) | gsub(\"[\\n\\r]\"; \" \") | .[0:60]' 2>/dev/null); fi; niwaterm tab var set agent_status_text \"$status_text\" >/dev/null 2>&1; niwaterm tab var set agent_status working >/dev/null 2>&1; fi; exit 0"
+          }
+        ]
       }
     ],
     "Stop": [
@@ -103,9 +114,9 @@
         "hooks": [
           {
             "type": "command",
-            "command": "if [ -n \"$NIWATERM_TAB_ID\" ] && command -v niwaterm >/dev/null 2>&1; then if command -v jq >/dev/null 2>&1; then raw=$(jq -r '(.last_assistant_message // \"\")' 2>/dev/null); status_text=$(printf '%s' \"$raw\" | tr '\\n\\r' '  '); status_text=\"${status_text:0:60}\"; [ -n \"$status_text\" ] && niwaterm tab var set agent_status_text \"$status_text\" >/dev/null 2>&1; fi; niwaterm tab var set agent_status idle >/dev/null 2>&1; fi; exit 0",
+            "async": true,
             "timeout": 5,
-            "async": true
+            "command": "if [ -n \"$NIWATERM_TAB_ID\" ] && command -v niwaterm >/dev/null 2>&1; then status_text=\"\"; if command -v jq >/dev/null 2>&1; then status_text=$(jq -r '(.last_assistant_message // \"\") | gsub(\"[\\n\\r]\"; \" \") | .[0:60]' 2>/dev/null); fi; niwaterm tab var set agent_status_text \"$status_text\" >/dev/null 2>&1; niwaterm tab var set agent_status idle >/dev/null 2>&1; fi; exit 0"
           }
         ]
       }
@@ -116,9 +127,9 @@
         "hooks": [
           {
             "type": "command",
-            "command": "if [ -n \"$NIWATERM_TAB_ID\" ] && command -v niwaterm >/dev/null 2>&1; then niwaterm tab var set agent \"\" >/dev/null 2>&1; niwaterm tab var set agent_status \"\" >/dev/null 2>&1; niwaterm tab var set agent_status_text \"\" >/dev/null 2>&1; fi; exit 0",
+            "async": true,
             "timeout": 5,
-            "async": true
+            "command": "if [ -n \"$NIWATERM_TAB_ID\" ] && command -v niwaterm >/dev/null 2>&1; then niwaterm tab var set agent \"\" >/dev/null 2>&1; niwaterm tab var set agent_status \"\" >/dev/null 2>&1; niwaterm tab var set agent_status_text \"\" >/dev/null 2>&1; fi; exit 0"
           }
         ]
       }
@@ -138,9 +149,22 @@
         "hooks": [
           {
             "type": "command",
-            "command": "if [ -n \"$NIWATERM_TAB_ID\" ] && command -v niwaterm >/dev/null 2>&1; then if command -v jq >/dev/null 2>&1; then raw=$(jq -r '(.notification_data.tool_name // \"\") as $n | (.notification_data.tool_input // {}) as $i | ($i.file_path // $i.command // $i.pattern // $i.url // $i.description // \"\") as $d | if $n == \"\" then \"確認が必要です\" elif $d == \"\" then ($n + \"の実行に許可が必要です\") else ($n + \": \" + $d + \" の実行に許可が必要です\") end' 2>/dev/null); status_text=$(printf '%s' \"$raw\" | tr '\\n\\r' '  '); status_text=\"${status_text:0:60}\"; [ -n \"$status_text\" ] && niwaterm tab var set agent_status_text \"$status_text\" >/dev/null 2>&1; fi; niwaterm tab var set agent_status blocked >/dev/null 2>&1; fi; exit 0",
+            "async": true,
             "timeout": 5,
-            "async": true
+            "command": "if [ -n \"$NIWATERM_TAB_ID\" ] && command -v niwaterm >/dev/null 2>&1; then status_text=\"\"; if command -v jq >/dev/null 2>&1; then status_text=$(jq -r '(.message // \"\") | gsub(\"[\\n\\r]\"; \" \") | .[0:60]' 2>/dev/null); fi; [ -n \"$status_text\" ] || status_text=\"確認が必要です\"; niwaterm tab var set agent_status_text \"$status_text\" >/dev/null 2>&1; niwaterm tab var set agent_status blocked >/dev/null 2>&1; fi; exit 0"
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "async": true,
+            "timeout": 5,
+            "command": "if [ -n \"$NIWATERM_TAB_ID\" ] && command -v niwaterm >/dev/null 2>&1; then status_text=\"\"; if command -v jq >/dev/null 2>&1; then status_text=$(jq -r '((.tool_name // \"\") as $n | (.tool_input // {}) as $i | ($i.file_path // $i.command // $i.pattern // $i.url // $i.description // \"\") as $d | if $d == \"\" then $n else ($n + \": \" + $d) end) | gsub(\"[\\n\\r]\"; \" \") | .[0:60]' 2>/dev/null); fi; niwaterm tab var set agent_status_text \"$status_text\" >/dev/null 2>&1; niwaterm tab var set agent_status working >/dev/null 2>&1; fi; exit 0"
           }
         ]
       }

@@ -6,6 +6,12 @@ GroupAdd("browser", "ahk_exe chrome.exe")
 GroupAdd("browser", "ahk_exe vivaldi.exe")
 GroupAdd("browser", "ahk_exe zen.exe")
 
+GroupAdd("terminal", "ahk_exe wezterm-gui.exe")
+GroupAdd("terminal", "ahk_exe niwaterm.exe")
+GroupAdd("terminal", "ahk_exe niwaterm-daily.exe")
+GroupAdd("terminal", "ahk_exe niwaterm-dev.exe")
+GroupAdd("terminal", "ahk_exe bun.exe")
+
 ; Win + r に`shll:startup`を実行して作成されたフォルダに、
 ; このファイルのショートカットを入れる
 
@@ -127,7 +133,7 @@ F13 & p::Send("{Up}")
 F13 & n::Send("{Down}")
 F13 & k::Send("{Blind}^k")
 ;-----------------------------------------------------------
-#HotIf WinActive("ahk_exe wezterm-gui.exe")
+#HotIf WinActive("ahk_group terminal", )
 F13 & a::Send("{Blind}^a")
 F13 & e::Send("{Blind}^e")
 F13 & d::Send("{Blind}^d")

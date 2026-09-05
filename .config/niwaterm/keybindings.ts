@@ -29,9 +29,13 @@ export const keybindings: KeybindingsFn = (niwa) => {
   // BoardがtmuxのWindowに対応するので、デフォルトの"c"(new-tab)を上書きする。
   // niwa.board.createはtab.createと違いcwd省略時にフォーカス中タブのcwdを引き継がない
   // （OS標準になる）ため、明示的に渡す
-  niwa.keybind("c", () => {
-    niwa.board.create(niwa.tile.current()?.cwd);
-  });
+  niwa.keybind(
+    "c",
+    () => {
+      niwa.board.create(niwa.tile.current()?.cwd);
+    },
+    { description: "現在のディレクトリで新規Boardを作る" },
+  );
 
   // .tmux.conf: Vimキーバインドでペイン移動
   // (if-shellでの端チェックはniwa.tile.focus側が境界で何もしないため不要)
@@ -47,10 +51,14 @@ export const keybindings: KeybindingsFn = (niwa) => {
   niwa.keybind("shift+l", "resize-right", { repeat: true });
 
   // .tmux.conf: bind-key -N "ペインIDの表示" P (xsel/pbcopyでpane_idをコピー)
-  niwa.keybind("shift+p", () => {
-    const tile = niwa.tile.current();
-    if (tile) niwa.clipboard.write(tile.id);
-  });
+  niwa.keybind(
+    "shift+p",
+    () => {
+      const tile = niwa.tile.current();
+      if (tile) niwa.clipboard.write(tile.id);
+    },
+    { description: "タイルIDをクリップボードへコピーする" },
+  );
 
   // .tmux.conf: bind-key w {
   //   display-popup -E -w 80% -h 80% -d '#{pane_current_path}' "tmux-ghq '#{pane_id}'"
@@ -61,48 +69,60 @@ export const keybindings: KeybindingsFn = (niwa) => {
   // 標準出力で受け取り、実際の操作はこのハンドラ側で行う。@ghq_cd変数を経由した
   // 「popupを閉じてからsend-keys」の二段構えは、niwa.popup.runがpopupを閉じた後に解決する
   // ためそのまま素直に書ける
-  niwa.keybind("w", async () => {
-    const tab = niwa.tab.current();
-    const tile = niwa.tile.current();
-    // ghq-selectは「1行目: 押されたキー（fzfの--expect形式。Enterなら空行）」
-    // 「2行目: 絶対パス」を標準出力へ返す
-    const output = await niwa.popup.run("ghq-select", {
-      width: 80,
-      height: 80,
-      cwd: tile?.cwd,
-    });
-    // null（既にpopupが開いている）・空文字列（fzfをキャンセル）
-    if (!output) return;
-    const [key, targetPath] = output.split("\n");
-    if (!targetPath) return;
-    if (key === "ctrl-o") {
-      // .tmux.confの@ghq_cd経由のsend-keys相当（呼び出し元タブでcdする）
-      if (tab) niwa.tab.sendKeys(tab.tabId, `cd "${targetPath}"`, "Enter");
-      return;
-    }
-    // Enter: tmuxのnew-window相当（niwatermではBoardがtmuxのWindowに対応する）
-    niwa.board.create(targetPath);
-  });
+  niwa.keybind(
+    "w",
+    async () => {
+      const tab = niwa.tab.current();
+      const tile = niwa.tile.current();
+      // ghq-selectは「1行目: 押されたキー（fzfの--expect形式。Enterなら空行）」
+      // 「2行目: 絶対パス」を標準出力へ返す
+      const output = await niwa.popup.run("ghq-select", {
+        width: 80,
+        height: 80,
+        cwd: tile?.cwd,
+      });
+      // null（既にpopupが開いている）・空文字列（fzfをキャンセル）
+      if (!output) return;
+      const [key, targetPath] = output.split("\n");
+      if (!targetPath) return;
+      if (key === "ctrl-o") {
+        // .tmux.confの@ghq_cd経由のsend-keys相当（呼び出し元タブでcdする）
+        if (tab) niwa.tab.sendKeys(tab.tabId, `cd "${targetPath}"`, "Enter");
+        return;
+      }
+      // Enter: tmuxのnew-window相当（niwatermではBoardがtmuxのWindowに対応する）
+      niwa.board.create(targetPath);
+    },
+    { description: "ghqのリポジトリをfzfで選んでBoard作成（ctrl-oで現在のタブをcd）" },
+  );
 
   // .tmux.conf: bind-key g display-popup ... lazygit
-  niwa.keybind("g", () => {
-    const tile = niwa.tile.current();
-    niwa.popup.open({
-      width: 95,
-      height: 90,
-      cwd: tile?.cwd,
-      command: "lazygit --use-config-dir=$HOME/.config/lazygit",
-    });
-  });
+  niwa.keybind(
+    "g",
+    () => {
+      const tile = niwa.tile.current();
+      niwa.popup.open({
+        width: 95,
+        height: 90,
+        cwd: tile?.cwd,
+        command: "lazygit --use-config-dir=$HOME/.config/lazygit",
+      });
+    },
+    { description: "lazygitをポップアップで開く" },
+  );
 
   // .tmux.conf: bind-key p (xsel/pbpaste -> paste-buffer)
   // デフォルトの"p"(prev-tab)を上書きする
   niwa.keybind("p", "paste-clipboard");
   niwa.keybind("q", "restart-tab");
-  niwa.keybind("r", async () => {
-    await niwa.reloadConfig();
-    niwa.notify({ title: "設定をリロードしました" });
-  });
+  niwa.keybind(
+    "r",
+    async () => {
+      await niwa.reloadConfig();
+      niwa.notify({ title: "設定をリロードしました" });
+    },
+    { description: "設定をリロードして通知する" },
+  );
 
   // .tmux.conf: bind-key -n M-n next-window / bind-key -n M-p previous-window
   // tmuxのWindowはniwatermのBoardに対応する（ADR 0006）ため、同じワークスペース内の
@@ -152,7 +172,7 @@ export const keybindings: KeybindingsFn = (niwa) => {
         command: `node ${EDITPROMPT_ENTRY} open --editor nvim --target-pane ${tab.tabId} --always-copy --log-file ${EDITPROMPT_LOG_FILE}`,
       });
     },
-    { noPrefix: true },
+    { noPrefix: true, description: "editpromptを再開する（無ければ新規タブで開く）" },
   );
 
   // .tmux.conf: bind-key -n M-o run-shell '
@@ -174,6 +194,6 @@ export const keybindings: KeybindingsFn = (niwa) => {
         command: `node ${EDITPROMPT_ENTRY} open --editor nvim --target-pane ${tab.tabId} --always-copy --log-file ${EDITPROMPT_LOG_FILE}`,
       });
     },
-    { noPrefix: true },
+    { noPrefix: true, description: "editpromptを新規タブで開く" },
   );
 };
