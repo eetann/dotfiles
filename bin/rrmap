@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# zshのaliasだとbashしか見ないAIエージェントから呼べないので、PATH上の実コマンドとして置く。
+exec bun run "$HOME/ghq/github.com/eetann/rrmap/src/cli.ts" "$@"

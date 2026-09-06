@@ -13,7 +13,6 @@ alias zhome='cd ~/.nb/home/'
 alias ml='nvim .memo.local.md'
 alias mt='mise watch test'
 alias tn="tmux popup -E -w 95% -h 95% -d '#{pane_current_path}' 'nvim'"
-alias rrmap='bun run ~/ghq/github.com/eetann/rrmap/src/cli.ts'
 # portlessは実コマンドをdetached(別セッション)で起動するうえ、SIGHUPを見ていない。
 # そのためターミナルを閉じるとportless本体だけがSIGHUPで即死し、後始末(killTree)が
 # 走らずにサーバーだけが孤児として残る。Linuxでは親(portless)の死に道連れにして落とす。
