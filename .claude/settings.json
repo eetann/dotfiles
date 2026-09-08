@@ -44,7 +44,7 @@
       "Bash(rm -rf /*)"
     ]
   },
-  "model": "opus",
+  "model": "opus[1m]",
   "hooks": {
     "SessionStart": [
       {
