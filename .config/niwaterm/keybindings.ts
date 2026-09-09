@@ -139,6 +139,9 @@ export const keybindings: KeybindingsFn = (niwa) => {
   niwa.keybind("alt+j", "next-workspace", { noPrefix: true });
   niwa.keybind("alt+k", "prev-workspace", { noPrefix: true });
 
+  // デフォルトのprefix+z（toggle-zoom）はそのまま残しつつ、prefix無しでも切り替えられるようにする
+  niwa.keybind("alt+z", "toggle-zoom", { noPrefix: true });
+
   // .tmux.conf: bind-key -n M-q run-shell '
   //   #{@editprompt-cmd} resume --target-pane #{pane_id} || \
   //   tmux-focus-pane editprompt || \

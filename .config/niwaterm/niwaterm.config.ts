@@ -15,6 +15,22 @@ export default defineConfig({
     name: "Notes",
     path: "./notes.html",
   },
+  mouse: {
+    copyOnSelect: true,
+    // 選択範囲を右クリックした時のメニュー項目
+    selectionMenu: (selection, niwa) => {
+      const path = selection.text.trim();
+      return [
+        {
+          label: "開く",
+          run: () =>
+            niwa.shell.run(isWindows ? `explorer.exe '${path}'` : `open '${path}'`, {
+              cwd: selection.cwd,
+            }),
+        },
+      ];
+    },
+  },
   shell: {
     // WindowsはNixOS(WSL)、Macはdefaultを未指定にしてOS標準の/bin/zsh -ilへフォールバックさせる
     default: isWindows ? "wsl.exe -d NixOS" : undefined,
