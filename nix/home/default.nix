@@ -66,6 +66,7 @@ in
     ".claude/agents"
     ".claude/commands"
     ".claude/settings.json"
+    ".codex/hooks.json"
     ".latexmkrc"
     ".yarnrc.yml"
     ".zshrc"
