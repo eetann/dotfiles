@@ -1,10 +1,12 @@
 {
   "font": {
     "body": [
+      "Noto Sans JP",
       "Inter",
       "BIZ UDPGothic"
     ],
     "code": [
+      "Noto Sans JP",
       "JetBrains Mono"
     ],
   },
