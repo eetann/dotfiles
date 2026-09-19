@@ -82,6 +82,7 @@ in
     "i3/config"
     "karabiner/karabiner.json"
     "lazygit/config.yml"
+    "mdecho"
     "niwaterm/bun.lock"
     "niwaterm/keybindings.ts"
     "niwaterm/layouts.ts"
