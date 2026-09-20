@@ -1,54 +1,32 @@
 # 30秒以上のコマンドは実行終了時にデスクトップ通知
 # ref: https://github.com/marzocchi/zsh-notify/blob/9c1dac81a48ec85d742ebf236172b4d92aab2f3f/notify.plugin.zsh#L84
 
-SKIP_NOTIFY_COMMANDS=(
-  bat
-  cat
-  claude
-  codex
-  difit
-  fg
-  git
-  idea
-  lazygit
-  lg
-  man
-  ml
-  mt
-  nb
-  nvim
-  opencode
-  ssh
-  vim
-  watch
-  "tmux set-option"
-  "vagrant ssh"
-  "npm run dev"
-  "npm run preview"
-  "npm run server"
-  "npm run start"
-  "npm run watch"
-  "pnpm run dev"
-  "pnpm run preview"
-  "pnpm run server"
-  "pnpm run start"
-  "pnpm run watch"
-  "yarn run dev"
-  "yarn run preview"
-  "yarn run server"
-  "yarn run start"
-  "yarn run watch"
-  "bun run dev"
-  "bun run preview"
-  "bun run server"
-  "bun run start"
-  "bun run watch"
+# 通知をスキップするコマンドのパターン（拡張正規表現）
+# - 先頭の環境変数指定（FOO=bar cmd ...）は除去してからマッチするのでパターンに含めない
+# - 末尾の `( |$)` はコマンド名の部分一致（git が gitlab-runner にマッチする等）を防ぐため
+SKIP_NOTIFY_PATTERNS=(
+  # 対話的に使うもの（エディタ・TUI・エージェント）
+  '^(claude|codex|opencode|nvim|vim|idea|lazygit|lg|ml|nb|man|fg|ssh)( |$)'
+  '^vagrant ssh( |$)'
+  # 出力を眺めるだけのもの
+  '^(bat|cat|git|difit)( |$)'
+  # 常駐するもの（開発サーバー・ウォッチャー）
+  '^(watch|mt)( |$)'
+  '^(npm|pnpm|yarn|bun)( run)? (dev|preview|server|start|watch)( |$)'
+  # 設定変更など、通知するまでもないもの
+  '^tmux set-option( |$)'
 )
 
 function is_skip_command() {
   local cmd="$1"
-  for skip_cmd in "${SKIP_NOTIFY_COMMANDS[@]}"; do
-    if [[ "$cmd" == "$skip_cmd" || "$cmd" == "$skip_cmd"* ]]; then
+  # 先頭の環境変数指定（FOO=bar cmd ...）を取り除く
+  while [[ "$cmd" == [A-Za-z_][A-Za-z0-9_]*=*[[:space:]]* ]]; do
+    cmd="${cmd#*[[:space:]]}"
+  done
+
+  local pattern
+  for pattern in "${SKIP_NOTIFY_PATTERNS[@]}"; do
+    if [[ "$cmd" =~ "$pattern" ]]; then
       return 0
     fi
   done

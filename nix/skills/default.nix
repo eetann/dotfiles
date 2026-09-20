@@ -22,11 +22,6 @@ in
       local = {
         path = ./.;
       };
-      # design-skills（GitHub）
-      # design = {
-      #   path = inputs.design-skills;
-      #   subdir = "skills";
-      # };
       # playwright-cli（GitHub）
       playwright-cli = {
         path = inputs.playwright-cli-skills;
