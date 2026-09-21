@@ -12,7 +12,8 @@ export const gtrCompletions: UserCompletionSource[] = [
     sourceCommand: "gtr-branch-completion-source",
     callback: "cut -f2",
     options: {
-      "--header-lines": 1,
+      // gtr-branch-completion-sourceはヘッダ行を出さないため --header-lines は付けない
+      // （付けると先頭のブランチが1件ヘッダとして食われて選べなくなる）
       "--tmux": "80%",
       "--prompt": "'Delete branch> '",
       "--no-select-1": true,

@@ -47,6 +47,13 @@ function _zeno_lazy_load() {
   source "$HOME/.zsh/plugins/zeno/zeno.zsh"
 
   if [[ -n $ZENO_LOADED ]]; then
+    # zenoはbootstrapでZENO_FZF_COMMANDをfzfへ固定するため、読み込んだ後に上書きする。
+    # niwatermのタブ内ではfzf-tmux互換のラッパー(fzf-niwaterm)を挟んでpopupへ出す
+    # （zeno-completion・zeno-insert-snippet等、zenoのwidget全部が対象になる）
+    if [[ -n $NIWATERM_TAB_ID ]] && (( $+commands[fzf-niwaterm] )); then
+      export ZENO_FZF_COMMAND="fzf-niwaterm"
+    fi
+
     ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(zeno-auto-snippet-and-accept-line)
 
     bindkey " " zeno-auto-snippet
