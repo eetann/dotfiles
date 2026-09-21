@@ -16,7 +16,7 @@ export default defineConfig({
     path: "./notes.html",
   },
   mouse: {
-    copyOnSelect: true,
+    copyOnSelect: false,
     // 選択範囲を右クリックした時のメニュー項目
     selectionMenu: (selection, niwa) => {
       const path = selection.text.trim();
