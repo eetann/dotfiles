@@ -139,6 +139,12 @@ export const keybindings: KeybindingsFn = (niwa) => {
   niwa.keybind("alt+j", "next-workspace", { noPrefix: true });
   niwa.keybind("alt+k", "prev-workspace", { noPrefix: true });
 
+  // ワークスペース切替はalt+j/alt+kに寄せるので、デフォルトのprefix+[ / prefix+]
+  // （prev-workspace/next-workspace）は解除する。解除したキーはprefix待ちを
+  // キャンセルするだけで、ターミナルへも送られない
+  niwa.unbind("[");
+  niwa.unbind("]");
+
   // デフォルトのprefix+z（toggle-zoom）はそのまま残しつつ、prefix無しでも切り替えられるようにする
   niwa.keybind("alt+z", "toggle-zoom", { noPrefix: true });
 
