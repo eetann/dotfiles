@@ -42,6 +42,18 @@ export default defineConfig({
     ],
     titleBar: "hidden",
   },
+  board: {
+    // 並行して動かしているワークツリーが今どの段階かをサイドバーのバッジで出す。
+    // 色はappearance.ansiColorsと同じ海テーマの配色から選ぶ
+    statuses: [
+      { id: "plan", label: "プラン作成", color: "#6fa8dc" },
+      { id: "plan-review", label: "プランレビュー", color: "#f0c070" },
+      { id: "implement", label: "実装", color: "#7fc7a6" },
+      { id: "ai-review", label: "AIレビュー", color: "#6fc6c9" },
+      { id: "human-review", label: "人間レビュー", color: "#b98cc4" },
+      { id: "pr-review", label: "PR自動レビュー", color: "#f59a84" },
+    ],
+  },
   customViews: [
     {
       name: "Worktrees",
