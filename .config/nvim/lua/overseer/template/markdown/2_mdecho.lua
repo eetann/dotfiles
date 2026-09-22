@@ -18,7 +18,7 @@ return {
               "run",
               vim.fn.expand("~/ghq/github.com/eetann/mdecho/src/index.ts"),
               "--file",
-              file,
+              vim.fn.expand("%"),
             },
           }
         end,
