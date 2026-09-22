@@ -86,6 +86,10 @@ in
       # フォーマッタ
       nixfmt
 
+      # textlint + AI語彙検出プリセット（nix/pkgs/textlint-ai-ja）。
+      # natural-japaneseスキルがPATH上の textlint-ai-ja を呼ぶ（nix/skills/default.nix）
+      (callPackage ../pkgs/textlint-ai-ja { })
+
       # go install で入れていたツール
       mmv
     ]

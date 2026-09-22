@@ -43,6 +43,7 @@ flake.nix                    ← エントリポイント
 | `bin/` | カスタムスクリプト群 |
 | `etc/init/` | セットアップスクリプト |
 | `nix/` | Nix設定モジュール |
+| `nix/pkgs/` | 自作Nixパッケージ（textlint-ai-ja等） |
 
 ## 主要コマンド
 
@@ -103,3 +104,5 @@ xdg.configFile = mkConfigFiles [
 - tmuxプラグインはtpmではなくhome-managerで管理（`nix/home/tmux.nix`）
 - macOSシステム設定の変更後、Finderの反映には `killall Finder` が必要な場合がある
 - `orbstack` / `macism` / `terminal-notifier` はmacOS専用パッケージのため、`nix/home/packages.nix` で `lib.optionals pkgs.stdenv.isDarwin` により分岐している
+- `textlint-ai-ja`（AI語彙検出プリセット入りtextlint）は `nix/pkgs/textlint-ai-ja` でビルドする。バージョン更新の手順は同ディレクトリの `default.nix` 冒頭コメントを参照
+- natural-japaneseスキルのSKILL.mdには、`nix/skills/default.nix` のtransformで `textlint-ai-ja` の実行手順を追記している（追記する本文は `nix/skills/natural-japanese-textlint.md`）。このスキルだけ `skills.enableAll` ではなく `skills.explicit` で拾っている（同じスキルIDが両方に入るとID衝突でevalが落ちるため）
