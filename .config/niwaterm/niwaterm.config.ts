@@ -1,6 +1,7 @@
 import { defaultAppearance, defineConfig } from "@niwaterm/config";
 import { keybindings } from "./keybindings.ts";
 import { layouts } from "./layouts.ts";
+import { worktreeHandlers } from "./custom-views/worktrees-handlers.ts";
 
 // このconfigはniwatermアプリのプロセス（Mac: ローカル / WSL運用時: Windows側のBun）で
 // 評価されるため、process.platformで実行中のOSを判定できる
@@ -39,11 +40,17 @@ export default defineConfig({
       "#8adadd",
       "#e2ecf0",
     ],
+    titleBar: "hidden",
   },
-  customView: {
-    name: "Notes",
-    path: "./notes.html",
-  },
+  customViews: [
+    {
+      name: "Worktrees",
+      path: "./custom-views/worktrees.html",
+      handlers: worktreeHandlers,
+    },
+    { name: "Notes", path: "./notes.html" },
+    { name: "メモ帳", path: "./memo.html" },
+  ],
   mouse: {
     copyOnSelect: false,
     // 選択範囲を右クリックした時のメニュー項目
