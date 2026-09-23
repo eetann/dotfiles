@@ -54,15 +54,6 @@ export default defineConfig({
       { id: "pr-review", label: "PR自動レビュー", color: "#f59a84" },
     ],
   },
-  customViews: [
-    {
-      name: "Worktrees",
-      path: "./custom-views/worktrees.html",
-      handlers: worktreeHandlers,
-    },
-    { name: "Notes", path: "./notes.html" },
-    { name: "メモ帳", path: "./memo.html" },
-  ],
   mouse: {
     copyOnSelect: false,
     // 選択範囲を右クリックした時のメニュー項目
