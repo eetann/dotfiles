@@ -4,6 +4,11 @@
 # 形態素解析で検出する textlint プリセットを、設定ごと固定して配布する。
 # https://github.com/p1ass/textlint-rule-preset-ai-words-ja
 #
+# 独自の辞書を足すときは ./ai-words.json の entries に追記する。
+# 相対パスは設定ファイル（textlintrc.json）のディレクトリから解決されるため、
+# 両方を同じディレクトリへ置いておけばstore内でも解決できる。
+# 指摘させたくない単語は textlintrc.json の allows に足す（正規表現も可）。
+#
 # バージョンを上げるときの手順:
 #   1. package.json の依存を書き換える
 #   2. cd nix/pkgs/textlint-ai-ja && npm install --package-lock-only --ignore-scripts
@@ -39,6 +44,8 @@ buildNpmPackage {
     mkdir -p "$libdir"
     cp -r node_modules "$libdir/"
     cp textlintrc.json "$libdir/textlintrc.json"
+    # dictionaryPath（相対パス）が textlintrc.json と同じディレクトリを見る
+    cp ai-words.json "$libdir/ai-words.json"
 
     makeWrapper ${nodejs}/bin/node "$out/bin/textlint-ai-ja" \
       --add-flags "$libdir/node_modules/textlint/bin/textlint.js" \
