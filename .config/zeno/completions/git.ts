@@ -1,18 +1,19 @@
 // deno-lint-ignore no-unversioned-import
 import type { UserCompletionSource } from "jsr:@yuki-yano/zeno";
 
-export const gtrCompletions: UserCompletionSource[] = [
+export const gitCompletions: UserCompletionSource[] = [
   {
     name: "branch names",
     patterns: [
       "^gtr rm --delete-branch $",
       "^gtr rm $",
       "^tmux-open-worktree --layout \\S* -n \\S* $",
+      "niwaterm worktree remove --delete-branch $",
     ],
-    sourceCommand: "gtr-branch-completion-source",
+    sourceCommand: "git-branch-completion-source",
     callback: "cut -f2",
     options: {
-      // gtr-branch-completion-sourceはヘッダ行を出さないため --header-lines は付けない
+      // git-branch-completion-sourceはヘッダ行を出さないため --header-lines は付けない
       // （付けると先頭のブランチが1件ヘッダとして食われて選べなくなる）
       "--tmux": "80%",
       "--prompt": "'Delete branch> '",

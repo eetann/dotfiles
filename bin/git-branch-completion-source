@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-# gtr補完（.config/zeno/completions/gtr.ts）向けに、worktreeのブランチ一覧を
+# worktreeのブランチ一覧を
 # 「マージ済みマーク\tブランチ名」のタブ区切りで出力する。
 # マークにはANSIカラーを含めるため、fzf側は --ansi での表示が前提。
 
@@ -44,7 +44,8 @@ if ! $gh_ok; then
   merged_branches=$(git branch --format='%(refname:short)' --merged "$default_branch" 2>/dev/null || true)
 fi
 
-git gtr list --porcelain | awk '!/detached/{print $2}' | while IFS= read -r branch; do
+# detached HEADのworktreeには `branch` 行が出ないため、自然に除外される
+git worktree list --porcelain | sed -n 's|^branch refs/heads/||p' | while IFS= read -r branch; do
   if grep -qxF "$branch" <<<"$merged_branches"; then
     printf '\033[32m✓ merged\033[0m\t%s\n' "$branch"
   else

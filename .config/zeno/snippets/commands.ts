@@ -159,39 +159,4 @@ export const commandSnippets: Snippet[] = [
     snippet:
       'ffmpeg -i screenshot.png "$R2_BACKUP_PATH/works/{{image_name}}.avif"',
   },
-  {
-    name: "gtr init",
-    keyword: "GTRINIT",
-    snippet:
-      'git gtr config set gtr.worktrees.dir "../" && git gtr config set gtr.worktrees.prefix "$(basename $PWD)@"',
-  },
-  {
-    name: "gtr new local",
-    keyword: "gnew",
-    snippet: "gtr new feature/{{}}",
-  },
-  {
-    name: "gtr new --track remote",
-    keyword: "gremote",
-    snippet: "gtr new --track remote",
-  },
-  {
-    // `gtr new ブランチ名`の次のコマンドで、`toww ^]Enter`すれば
-    // 作ったワークツリーに移動できる
-    name: "tmux-open-worktree work-dev",
-    keyword: "toww",
-    snippet: "tmux-open-worktree --layout work-dev -n",
-  },
-  {
-    // `gtr new ブランチ名`の次のコマンドで、`towm ^]Enter`すれば
-    // 作ったワークツリーに移動できる
-    name: "tmux-open-worktree my-dev",
-    keyword: "towm",
-    snippet: "tmux-open-worktree --layout my-dev -n",
-  },
-  {
-    name: "gtr rm --delete-branch",
-    keyword: "grm",
-    snippet: "gtr rm --delete-branch",
-  },
 ];
