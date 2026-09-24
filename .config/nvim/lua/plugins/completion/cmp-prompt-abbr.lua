@@ -45,6 +45,15 @@ Codexプラグインのコマンド結果が返ってきたら、そのままの
         source = "pnotmain",
         target = "メインツリーを見る必要は無いのでは？",
       },
+      {
+        source = "eli5",
+        target = [[
+eli5 で解説してほしい。
+具体的にはローカルの .mywork/work-logs/ にHTMLで解説を書いてほしい。
+Claude Codeのアーティファクト機能でクラウドにアップロードはやらなくてOK。あくまでローカルでのみ。
+また、既存のwork-logのフォーマットとかは無視してOK。
+        ]],
+      },
     },
     matching = "prefix",
     case_sensitive = false,
