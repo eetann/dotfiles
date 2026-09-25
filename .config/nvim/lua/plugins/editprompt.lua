@@ -21,9 +21,7 @@ return {
     {
       "<Space>pN",
       function()
-        require("editprompt").press("/new")
-        vim.cmd("sleep 200ms")
-        require("editprompt").press("<CR>")
+        require("editprompt").press_sequence({ "/new", "<CR>" }, { delay = 200 })
       end,
     },
     { "<Space><Space>", "<Cmd>Editprompt press_mode<CR>" },
@@ -40,9 +38,7 @@ return {
     {
       "<C-o>",
       function()
-        require("editprompt").press("ok")
-        vim.cmd("sleep 100ms")
-        require("editprompt").press("<CR>")
+        require("editprompt").press_sequence({ "ok", "<CR>" }, { delay = 100 })
       end,
     },
   },
