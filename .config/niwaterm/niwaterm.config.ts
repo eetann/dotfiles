@@ -45,7 +45,7 @@ export default defineConfig({
   board: {
     // 並行して動かしているワークツリーが今どの段階かをサイドバーのバッジで出す。
     // 色はappearance.ansiColorsと同じ海テーマの配色から選ぶ
-    statuses: [
+    phases: [
       { id: "plan", label: "プラン作成", color: "#6fa8dc" },
       { id: "plan-review", label: "プランレビュー", color: "#f0c070" },
       { id: "implement", label: "実装", color: "#7fc7a6" },
