@@ -159,4 +159,9 @@ export const commandSnippets: Snippet[] = [
     snippet:
       'ffmpeg -i screenshot.png "$R2_BACKUP_PATH/works/{{image_name}}.avif"',
   },
+  {
+    name: "mdecho",
+    keyword: "mde",
+    snippet: "node ~/ghq/github.com/eetann/mdecho/dist/index.js --file",
+  },
 ];

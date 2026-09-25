@@ -48,6 +48,16 @@ export const gitSnippets: Snippet[] = [
       "niwaterm worktree new --open board-switch --layout my-dev --trust feature/",
   },
   {
+    keyword: "nremotew",
+    snippet:
+      "niwaterm worktree new --open board-switch --layout work-dev --trust --remote",
+  },
+  {
+    keyword: "nremotem",
+    snippet:
+      "niwaterm worktree new --open board-switch --layout my-dev --trust --remote",
+  },
+  {
     keyword: "nrm",
     snippet: "niwaterm worktree remove --delete-branch",
   },
