@@ -64,7 +64,6 @@ let
   # natural-japaneseのSKILL.md末尾に足す、この環境固有の検査工程。本文は別ファイル。
   # textlint本体はnix/pkgs/textlint-ai-jaでビルドし、nix/home/packages.nix経由で
   # PATHに入れている（コマンド名: textlint-ai-ja）。
-  # 節番号は上流のSKILL.md（§3 静的検知 / §4 判断台帳 / §5 収束）に合わせてある。
   # 先頭の改行は、上流SKILL.mdの末尾との間に空行を1つ入れるため。
   textlintSection = "\n" + builtins.readFile ./natural-japanese-textlint.md;
 in
