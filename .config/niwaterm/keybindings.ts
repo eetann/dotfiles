@@ -1,12 +1,16 @@
+import { homedir } from "node:os";
 import type { KeybindingsFn } from "@niwaterm/config";
 
 // .tmux.conf: set-option -g @editprompt-cmd "node ~/ghq/github.com/eetann/editprompt/dist/index.js"
-// niwatermアプリ本体は`mise run start`でWSLからWindows実機側へ同期して起動される
+// Windowsのniwatermアプリ本体は`mise run start`でWSLからWindows実機側へ同期して起動される
 // （実プロセスはWindows側のBunランタイム）。キーバインドの関数ハンドラもそのプロセスで
 // 実行されるため、node:osのhomedir()はWindows側のユーザープロファイルを返してしまい
 // WSL側の/home/eetannとは一致しない。editprompt本体はWSL側にしか実体が無いため、
-// パスはWSL側の絶対パスを直書きする
-const EDITPROMPT_ENTRY = "/home/eetann/ghq/github.com/eetann/editprompt/dist/index.js";
+// Windowsのときだけパスを直書きする
+const EDITPROMPT_ENTRY =
+  process.platform === "win32"
+    ? "/home/eetann/ghq/github.com/eetann/editprompt/dist/index.js"
+    : `${homedir()}/ghq/github.com/eetann/editprompt/dist/index.js`;
 const EDITPROMPT_LOG_FILE = "/tmp/editprompt.log";
 
 // ~/.tmux.confからの移植。デフォルトキーバインドは先に登録済みの状態でこの関数が呼ばれるため、
