@@ -5,8 +5,8 @@ let
   zeno-zsh = pkgs.fetchFromGitHub {
     owner = "yuki-yano";
     repo = "zeno.zsh";
-    rev = "2e8fbecce0fc3692a5fcc9033ecca7ab35263e56";
-    hash = "sha256-05+w1WP/SHKp97JTGsvO3csI123U7py+fVSKnAWiUNY=";
+    rev = "490121876701f472e7596b606048a7e1b73b5b03";
+    hash = "sha256-sCZjmx13YjdUVJeG/OZ/O5hx34k5mo1enDS7smUv1K8=";
   };
 in
 {
@@ -30,8 +30,9 @@ in
     # node_modulesを作り直した直後は依存パッケージ未キャッシュの状態になり、
     # シェル初回起動時のzeno-init(deno cache)が--quietなしのログを出して
     # zleのプロンプトを壊すことがあるため、activation時に事前キャッシュしておく。
+    # deno 2.9.6以降は `--` の後ろのファイルを引数として扱わず何もせず終了するため、`--` は付けない
     run ${pkgs.deno}/bin/deno cache --node-modules-dir=auto --no-lock --no-check \
-      -- "$HOME/.zsh/plugins/zeno/src/cli.ts" || true
+      "$HOME/.zsh/plugins/zeno/src/cli.ts" || true
   '';
 
   # zsh-completionsはfpath用（補完定義群）
