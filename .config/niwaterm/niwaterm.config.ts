@@ -2,6 +2,13 @@ import { defaultAppearance, defineConfig } from "@niwaterm/config";
 import { keybindings } from "./keybindings.ts";
 import { layouts } from "./layouts.ts";
 import { worktreeHandlers } from "./custom-views/worktrees-handlers.ts";
+// 実体はniwaterm本体のcontrib。WSL側のリンクとWindows側へのコピーは
+// nix/home/niwaterm-prompt-jump.nixが置く
+import {
+  claudePromptCss,
+  claudePromptItems,
+  claudePromptShow,
+} from "./hover-buttons/claude-prompt-jump.ts";
 
 // このconfigはniwatermアプリのプロセス（Mac: ローカル / WSL運用時: Windows側のBun）で
 // 評価されるため、process.platformで実行中のOSを判定できる
@@ -70,6 +77,16 @@ export default defineConfig({
       ];
     },
   },
+  hoverButtons: [
+    // Claude Codeのタブの右端へマウスを寄せると、打ったプロンプトの目次を出す。
+    // クリックしたプロンプトへClaude Codeの表示を移す（Claude Code側のmodと対で動く）
+    {
+      position: "right",
+      show: claudePromptShow,
+      items: claudePromptItems,
+      css: claudePromptCss,
+    },
+  ],
   shell: {
     // WindowsはNixOS(WSL)、Macはdefaultを未指定にしてOS標準の/bin/zsh -ilへフォールバックさせる
     default: isWindows ? "wsl.exe -d NixOS" : undefined,

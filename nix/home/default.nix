@@ -47,6 +47,7 @@ in
     ./git-worktree-runner.nix
     ./dictionary.nix
     ./pnpm.nix
+    ./niwaterm-prompt-jump.nix
     ../skills
   ];
 
