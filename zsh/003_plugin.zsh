@@ -11,3 +11,4 @@ source $ZDIR/plugin/zeno.zsh
 [ -n "$NIWATERM_TAB_ID" ] && source ~/ghq/github.com/eetann/niwaterm/contrib/shell-integration/niwaterm.zsh
 
 export OLLAMA_MODELS=/Volumes/KIOXIA/ollama/
+export CLAUDE_CODE_ENABLE_FUNCTION_HOOKS=1
