@@ -10,4 +10,16 @@
       "JetBrains Mono"
     ],
   },
+  "lineBreak": {
+    "splitSentences": true,
+    "singleNewline": true
+  },
+  "layout": {
+    "contentWidth": 1024,
+    "fontSize": 16,
+    "lineHeight": 1.75
+  },
+  "theme": {
+    "mode": "light"
+  },
 }
