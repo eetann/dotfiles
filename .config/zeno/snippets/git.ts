@@ -50,12 +50,12 @@ export const gitSnippets: Snippet[] = [
   {
     keyword: "nremotew",
     snippet:
-      "niwaterm worktree new --open board-switch --layout work-dev --trust --remote",
+      "niwaterm worktree new --open board-switch --layout work-dev --trust origin/",
   },
   {
     keyword: "nremotem",
     snippet:
-      "niwaterm worktree new --open board-switch --layout my-dev --trust --remote",
+      "niwaterm worktree new --open board-switch --layout my-dev --trust origin/",
   },
   {
     keyword: "nrm",
