@@ -6,6 +6,7 @@
     "CLAUDE_CODE_PLUGIN_DIRS": "~/.config/claude-mods/niwaterm-prompt-jump"
   },
   "includeCoAuthoredBy": false,
+  "copyOnSelect": false,
   "permissions": {
     "allow": [
       "mcp__pencil",
