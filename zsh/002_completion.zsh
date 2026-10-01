@@ -10,26 +10,26 @@ if [[ -d /opt/homebrew/share/zsh/site-functions ]]; then
   fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
 fi
 
-# niwatermの補完スクリプト（niwaterm complete zsh）は生成物なのでキャッシュへ置く。
+# niwatermの補完スクリプト（niwa complete zsh）は生成物なのでキャッシュへ置く。
 # fpathへ足すのはcompinitより前でなければならない（compinitは呼んだ時点のfpathしか見ない）
-_niwaterm_comp="$ZSH_CACHE_DIR/completions/_niwaterm"
-if [[ ! -f $_niwaterm_comp ]] && (( $+commands[niwaterm] )); then
-  mkdir -p ${_niwaterm_comp:h}
+_niwa_comp="$ZSH_CACHE_DIR/completions/_niwa"
+if [[ ! -f $_niwa_comp ]] && (( $+commands[niwa] )); then
+  mkdir -p ${_niwa_comp:h}
   # 一時ファイルはプロセスごとに分ける。niwatermは起動時に複数タブのシェルを同時に
   # 立ち上げるため、固定名だと先にmvした1つ以外が"cannot stat"で落ちる。
   # 生成に失敗したとき中途半端なファイルを残さない意味もある
-  _niwaterm_tmp="$_niwaterm_comp.$$"
-  if niwaterm complete zsh > $_niwaterm_tmp; then
-    mv $_niwaterm_tmp $_niwaterm_comp
+  _niwa_tmp="$_niwa_comp.$$"
+  if niwa complete zsh > $_niwa_tmp; then
+    mv $_niwa_tmp $_niwa_comp
     # 下のcompinitがdumpを使い回す（-C）経路ではfpathを再スキャンしないため、
     # 新しく置いた補完ファイルを拾わせるようdumpを捨てる
     rm -f "$ZSH_CACHE_DIR/zcompdump" "$ZSH_CACHE_DIR/zcompdump.zwc"
   else
-    rm -f $_niwaterm_tmp
+    rm -f $_niwa_tmp
   fi
-  unset _niwaterm_tmp
+  unset _niwa_tmp
 fi
-fpath=(${_niwaterm_comp:h} $fpath)
+fpath=(${_niwa_comp:h} $fpath)
 
 # compinit最適化: zcompdumpが1日以内なら-C（再スキャンをスキップ）
 autoload -Uz compinit

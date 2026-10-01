@@ -7,7 +7,7 @@
           {
             "type": "command",
             "timeout": 5,
-            "command": "niwaterm _hook codex-cli >/dev/null 2>&1 || true"
+            "command": "niwa _hook codex-cli >/dev/null 2>&1 || true"
           }
         ]
       }
@@ -18,7 +18,7 @@
           {
             "type": "command",
             "timeout": 5,
-            "command": "niwaterm _hook codex-cli >/dev/null 2>&1 || true"
+            "command": "niwa _hook codex-cli >/dev/null 2>&1 || true"
           }
         ]
       }
@@ -29,7 +29,7 @@
           {
             "type": "command",
             "timeout": 5,
-            "command": "niwaterm _hook codex-cli >/dev/null 2>&1 || true"
+            "command": "niwa _hook codex-cli >/dev/null 2>&1 || true"
           }
         ]
       }
@@ -40,7 +40,7 @@
           {
             "type": "command",
             "timeout": 5,
-            "command": "niwaterm _hook codex-cli >/dev/null 2>&1 || true"
+            "command": "niwa _hook codex-cli >/dev/null 2>&1 || true"
           }
         ]
       }
@@ -51,7 +51,7 @@
           {
             "type": "command",
             "timeout": 5,
-            "command": "niwaterm _hook codex-cli >/dev/null 2>&1 || true"
+            "command": "niwa _hook codex-cli >/dev/null 2>&1 || true"
           }
         ]
       }
@@ -62,7 +62,7 @@
           {
             "type": "command",
             "timeout": 5,
-            "command": "niwaterm _hook codex-cli >/dev/null 2>&1 || true"
+            "command": "niwa _hook codex-cli >/dev/null 2>&1 || true"
           }
         ]
       }
@@ -73,7 +73,7 @@
           {
             "type": "command",
             "timeout": 3,
-            "command": "niwaterm _hook codex-cli >/dev/null 2>&1 || true"
+            "command": "niwa _hook codex-cli >/dev/null 2>&1 || true"
           }
         ]
       }
@@ -84,7 +84,7 @@
           {
             "type": "command",
             "timeout": 3,
-            "command": "niwaterm _hook codex-cli >/dev/null 2>&1 || true"
+            "command": "niwa _hook codex-cli >/dev/null 2>&1 || true"
           }
         ]
       }

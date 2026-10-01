@@ -83,12 +83,12 @@ function monorepo_cd() {
   local fzf_candidates=$(printf '%s\n' "${display_list[@]}")
 
   # niwatermのタブ内（NIWATERM_TAB_IDあり）かつniwatermコマンドが使える場合は、
-  # fzf-tmuxの代わりにniwatermのpopupでfzfを実行するfzf-niwatermを使う
+  # fzf-tmuxの代わりにniwatermのpopupでfzfを実行するfzf-niwaを使う
   # （niwaterm利用可否の判定・popup起動失敗時のローカルfzfへのフォールバックは
-  # fzf-niwaterm自身が行う。詳細: niwaterm本体のpackages/cli/bin/fzf-niwaterm）
+  # fzf-niwa自身が行う。詳細: niwaterm本体のpackages/cli/bin/fzf-niwa）
   local fzf_command
-  if [[ -n "$NIWATERM_TAB_ID" ]] && (( $+commands[niwaterm] )); then
-    fzf_command="fzf-niwaterm"
+  if [[ -n "$NIWATERM_TAB_ID" ]] && (( $+commands[niwa] )); then
+    fzf_command="fzf-niwa"
   elif type fzf-tmux > /dev/null; then
     fzf_command="fzf-tmux -p 80%"
   else

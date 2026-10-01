@@ -8,7 +8,7 @@ export const gitCompletions: UserCompletionSource[] = [
       "^gtr rm --delete-branch $",
       "^gtr rm $",
       "^tmux-open-worktree --layout \\S* -n \\S* $",
-      "niwaterm worktree remove --delete-branch $",
+      "niwa worktree remove --delete-branch $",
     ],
     sourceCommand: "git-branch-completion-source",
     callback: "cut -f2",

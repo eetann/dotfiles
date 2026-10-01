@@ -43,16 +43,16 @@ function completion_file() {
 # fzf（ローカル or niwatermのpopup）でファイルを選択し、選ばれたパス一覧を改行区切りで返す。
 #
 # niwatermのタブ内（NIWATERM_TAB_IDあり）かつniwatermコマンドが使える場合は、
-# fzf --tmuxの代わりにniwatermのpopupでfzfを実行するfzf-niwatermを使う
+# fzf --tmuxの代わりにniwatermのpopupでfzfを実行するfzf-niwaを使う
 # （niwaterm利用可否の判定・popup起動失敗時のローカルfzfへのフォールバックは
-# fzf-niwaterm自身が行う。詳細: niwaterm本体のpackages/cli/bin/fzf-niwaterm）
+# fzf-niwa自身が行う。詳細: niwaterm本体のpackages/cli/bin/fzf-niwa）
 function _completion_file_fzf() {
   local query=$1
   local preview_cmd=$2
 
   local fzf_base="fzf --tmux center,80%"
-  if [[ -n "$NIWATERM_TAB_ID" ]] && (( $+commands[niwaterm] )); then
-    fzf_base="fzf-niwaterm"
+  if [[ -n "$NIWATERM_TAB_ID" ]] && (( $+commands[niwa] )); then
+    fzf_base="fzf-niwa"
   fi
 
   local fzf_command=$(cat << EOF

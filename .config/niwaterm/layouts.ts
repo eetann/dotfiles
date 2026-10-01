@@ -47,7 +47,7 @@ export const layouts: LayoutsConfig = {
           kind: "tile",
           // editpromptはniwaterm対応済み（--mux niwatermはNIWATERM_TAB_IDから自動判定）。
           // ただしvde-layoutの{{pane_id:claude}}のようなプリセット定義時点でのpane-id参照は
-          // niwatermに無い（tabIdは適用のたびに再採番されるため）。代わりに`niwaterm tab var find`で
+          // niwatermに無い（tabIdは適用のたびに再採番されるため）。代わりに`niwa tab var find`で
           // 実行時にroleからclaudeタブのtabIdを検索する（詳細: docs/guide/config.md「レイアウト」節）
           tabs: [
             {
@@ -58,7 +58,7 @@ export const layouts: LayoutsConfig = {
               // 扱われ`no such file or directory`になる）。関数にまとめ、パスは$HOMEで書く
               command:
                 'ep() { node "$HOME/ghq/github.com/eetann/editprompt/dist/index.js" open --editor nvim --always-copy --log-file /tmp/editprompt.log "$@"; }; ' +
-                'target=$(niwaterm tab var find role claude | head -n1); ' +
+                'target=$(niwa tab var find role claude | head -n1); ' +
                 '[ -n "$target" ] && ep --target-pane "$target" || ep',
               focus: true,
             },
@@ -117,7 +117,7 @@ export const layouts: LayoutsConfig = {
               // 扱われ`no such file or directory`になる）。関数にまとめ、パスは$HOMEで書く
               command:
                 'ep() { node "$HOME/ghq/github.com/eetann/editprompt/dist/index.js" open --editor nvim --always-copy --log-file /tmp/editprompt.log "$@"; }; ' +
-                'target=$(niwaterm tab var find role claude | head -n1); ' +
+                'target=$(niwa tab var find role claude | head -n1); ' +
                 '[ -n "$target" ] && ep --target-pane "$target" || ep',
               focus: true,
             },

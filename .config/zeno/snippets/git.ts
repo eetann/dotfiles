@@ -40,30 +40,30 @@ export const gitSnippets: Snippet[] = [
   {
     keyword: "nneww",
     snippet:
-      "niwaterm worktree new --open board-switch --layout work-dev --trust feature/",
+      "niwa worktree new --open board-switch --layout work-dev --trust feature/",
   },
   {
     keyword: "nnewm",
     snippet:
-      "niwaterm worktree new --open board-switch --layout my-dev --trust feature/",
+      "niwa worktree new --open board-switch --layout my-dev --trust feature/",
   },
   {
     keyword: "nremotew",
     snippet:
-      "niwaterm worktree new --open board-switch --layout work-dev --trust origin/",
+      "niwa worktree new --open board-switch --layout work-dev --trust origin/",
   },
   {
     keyword: "nremotem",
     snippet:
-      "niwaterm worktree new --open board-switch --layout my-dev --trust origin/",
+      "niwa worktree new --open board-switch --layout my-dev --trust origin/",
   },
   {
     keyword: "nrm",
-    snippet: "niwaterm worktree remove --delete-branch",
+    snippet: "niwa worktree remove --delete-branch",
   },
   {
-    name: "niwaterm worktree open --layout work-dev",
+    name: "niwa worktree open --layout work-dev",
     keyword: "nwow",
-    snippet: "niwaterm worktree open --layout work-dev",
+    snippet: "niwa worktree open --layout work-dev",
   },
 ];
