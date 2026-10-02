@@ -11,7 +11,7 @@ const EDITPROMPT_ENTRY =
   process.platform === "win32"
     ? "/home/eetann/ghq/github.com/eetann/editprompt/dist/index.js"
     : `${homedir()}/ghq/github.com/eetann/editprompt/dist/index.js`;
-const EDITPROMPT_LOG_FILE = "/tmp/editprompt.log";
+// const EDITPROMPT_LOG_FILE = "/tmp/editprompt.log";
 
 // ~/.tmux.confからの移植。デフォルトキーバインドは先に登録済みの状態でこの関数が呼ばれるため、
 // 上書き・追加したい分だけniwa.keybindで書く。再現できなかった項目はdocs/planning/roadmap.md参照
@@ -173,7 +173,7 @@ export const keybindings: KeybindingsFn = (niwa) => {
       if (!tab) return;
 
       const resume = await niwa.shell.run(
-        `node ${EDITPROMPT_ENTRY} resume --target-pane ${tab.tabId} --log-file ${EDITPROMPT_LOG_FILE}`,
+        `node ${EDITPROMPT_ENTRY} resume --target-pane ${tab.tabId}`,
         { env: { NIWATERM_TAB_ID: tab.tabId } },
       );
       if (resume.exitCode === 0) return;
@@ -182,7 +182,7 @@ export const keybindings: KeybindingsFn = (niwa) => {
       const split = niwa.tile.split({ orientation: "horizontal", ratio: 0.8, cwd: tile?.cwd });
       if (!split) return;
       niwa.tab.respawn(split.tabId, {
-        command: `node ${EDITPROMPT_ENTRY} open --editor nvim --target-pane ${tab.tabId} --always-copy --log-file ${EDITPROMPT_LOG_FILE}`,
+        command: `node ${EDITPROMPT_ENTRY} open --editor nvim --target-pane ${tab.tabId} --always-copy`,
       });
     },
     { noPrefix: true, description: "editpromptを再開する（無ければ新規タブで開く）" },
@@ -204,7 +204,7 @@ export const keybindings: KeybindingsFn = (niwa) => {
       const split = niwa.tile.split({ orientation: "horizontal", ratio: 0.8, cwd: tile?.cwd });
       if (!split) return;
       niwa.tab.respawn(split.tabId, {
-        command: `node ${EDITPROMPT_ENTRY} open --editor nvim --target-pane ${tab.tabId} --always-copy --log-file ${EDITPROMPT_LOG_FILE}`,
+        command: `node ${EDITPROMPT_ENTRY} open --editor nvim --target-pane ${tab.tabId} --always-copy`,
       });
     },
     { noPrefix: true, description: "editpromptを新規タブで開く" },
