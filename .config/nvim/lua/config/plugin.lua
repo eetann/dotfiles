@@ -69,7 +69,7 @@ require("lazy").setup({
     { import = "plugins.vim-sonictemplate" },
     { import = "plugins.mini-align" },
     { import = "plugins.dial" },
-    { import = "plugins.idyank" },
+    -- { import = "plugins.idyank" },
 
     -- fuzzy finder
     { import = "plugins.text-case" },

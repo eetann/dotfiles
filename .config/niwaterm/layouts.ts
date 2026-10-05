@@ -57,7 +57,7 @@ export const layouts: LayoutsConfig = {
               // 変数へ入れて`$editprompt`で起動する書き方は動かない（コマンド名まるごと1語として
               // 扱われ`no such file or directory`になる）。関数にまとめ、パスは$HOMEで書く
               command:
-                'ep() { node "$HOME/ghq/github.com/eetann/editprompt/dist/index.js" open --editor nvim --always-copy --log-file /tmp/editprompt.log "$@"; }; ' +
+                'ep() { node "$HOME/ghq/github.com/eetann/editprompt/dist/index.js" open --editor nvim --always-copy "$@"; }; ' +
                 'target=$(niwa tab var find role claude | head -n1); ' +
                 '[ -n "$target" ] && ep --target-pane "$target" || ep',
               focus: true,
@@ -116,7 +116,7 @@ export const layouts: LayoutsConfig = {
               // 変数へ入れて`$editprompt`で起動する書き方は動かない（コマンド名まるごと1語として
               // 扱われ`no such file or directory`になる）。関数にまとめ、パスは$HOMEで書く
               command:
-                'ep() { node "$HOME/ghq/github.com/eetann/editprompt/dist/index.js" open --editor nvim --always-copy --log-file /tmp/editprompt.log "$@"; }; ' +
+                'ep() { node "$HOME/ghq/github.com/eetann/editprompt/dist/index.js" open --editor nvim --always-copy "$@"; }; ' +
                 'target=$(niwa tab var find role claude | head -n1); ' +
                 '[ -n "$target" ] && ep --target-pane "$target" || ep',
               focus: true,

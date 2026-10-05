@@ -181,9 +181,9 @@ vim.keymap.set("x", "<C-q>", toggle_checkbox_visual, {
   buffer = true,
 })
 
-if vim.fn.getcwd() == vim.fn.expand("~/.nb/home") then
-  vim.lsp.enable("markdown-language-server")
-end
+-- if vim.fn.getcwd() == vim.fn.expand("~/.nb/home") then
+--   vim.lsp.enable("markdown-language-server")
+-- end
 
 -- TODOリスト間の移動（Treesitter使用）
 local function goto_todo(direction)
