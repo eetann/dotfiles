@@ -28,13 +28,10 @@
     ],
     [
       {
-        "id": "a32f3be4-df9f-4a34-8dc1-301897c686e4",
-        "type": "block-timer",
+        "id": "f13c2153-e119-444a-8cd3-8acdcf1fcb19",
+        "type": "session-usage",
         "color": "hex:F8F8F8",
-        "backgroundColor": "hex:001C23",
-        "metadata": {
-          "display": "progress-short"
-        }
+        "backgroundColor": "hex:001C23"
       },
       {
         "id": "c9633d81-0c3a-4c34-a94d-ff4635ba3e15",
@@ -42,10 +39,16 @@
         "color": "hex:F8F8F8",
         "backgroundColor": "hex:001C23",
         "bold": false,
-        "rawValue": true,
+        "rawValue": false,
         "metadata": {
           "display": "time"
         }
+      },
+      {
+        "id": "692b8b24-a248-4003-ad90-41eabecf1c27",
+        "type": "weekly-usage",
+        "color": "hex:F8F8F8",
+        "backgroundColor": "hex:001C23"
       },
       {
         "id": "0720adf3-15fd-4da8-b933-8871114adff5",
@@ -54,17 +57,17 @@
       {
         "id": "48e66174-2b62-40a3-8c48-47706bb32d1e",
         "type": "custom-command",
-        "commandPath": "[ \"$(basename \"$CLAUDE_CONFIG_DIR\")\" = \".claude_work\" ] && echo work || true",
         "color": "hex:F8F8F8",
         "backgroundColor": "hex:001C23",
-        "bold": true
+        "bold": true,
+        "commandPath": "[ \"$(basename \"$CLAUDE_CONFIG_DIR\")\" = \".claude_work\" ] && echo work || true"
       },
       {
         "id": "70f50153-efa3-4fa9-b1a4-6a6f8fc608ba",
         "type": "custom-command",
-        "commandPath": "[ \"$(basename \"$CLAUDE_CONFIG_DIR\")\" != \".claude_work\" ] && echo mine || true",
         "color": "hex:F8F8F8",
-        "backgroundColor": "hex:001C23"
+        "backgroundColor": "hex:001C23",
+        "commandPath": "[ \"$(basename \"$CLAUDE_CONFIG_DIR\")\" != \".claude_work\" ] && echo mine || true"
       }
     ],
     []
@@ -73,9 +76,12 @@
   "compactThreshold": 60,
   "colorLevel": 3,
   "defaultPadding": " ",
+  "defaultPaddingSide": "both",
   "inheritSeparatorColors": false,
   "globalBold": false,
   "gitCacheTtlSeconds": 5,
+  "terminalWidthCacheTtlSeconds": 5,
+  "customCommandCacheTtlSeconds": 0,
   "minimalistMode": false,
   "powerline": {
     "enabled": false,
