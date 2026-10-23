@@ -10,6 +10,7 @@
     ./nix-ld.nix
     ./docker.nix
     ./ca-certificates.nix
+    ../common/ca-blacklist.nix
   ];
 
   wsl.enable = true;

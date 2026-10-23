@@ -8,6 +8,7 @@
     ./system.nix
     ./allow-unfree.nix
     ./homebrew.nix
+    ../common/ca-blacklist.nix
   ];
 
   # ホスト名を統一（ターミナル、共有、Bonjour全て）

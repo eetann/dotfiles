@@ -15,6 +15,8 @@ flake.nix                    ← エントリポイント
 ├── nix/nixos/               ← NixOS-WSL（WSLシステム設定）
 │   ├── default.nix          ← ホスト名、wsl.enable、home-manager統合
 │   └── nix.nix               ← Nix自体の設定（GC、最適化）
+├── nix/common/              ← nix-darwin / NixOS 共通のシステム設定（両方の default.nix からimport）
+│   └── ca-blacklist.nix     ← 信頼しないルートCA証明書
 └── nix/home/                ← home-manager（dotfiles管理、両OS共通）
     ├── default.nix          ← シンボリックリンク管理（mkOutOfStoreSymlink）
     ├── packages.nix         ← CLIパッケージ一覧
@@ -103,6 +105,7 @@ xdg.configFile = mkConfigFiles [
 - `.config/` 配下の設定変更は `mkOutOfStoreSymlink` により即時反映（rebuildは不要）
 - tmuxプラグインはtpmではなくhome-managerで管理（`nix/home/tmux.nix`）
 - macOSシステム設定の変更後、Finderの反映には `killall Finder` が必要な場合がある
+- `nix/common/` にはnix-darwinとNixOSの両方に存在するオプションしか書けない（片方にしかないオプションを書くともう片方のevalが落ちる）
 - `orbstack` / `macism` / `terminal-notifier` はmacOS専用パッケージのため、`nix/home/packages.nix` で `lib.optionals pkgs.stdenv.isDarwin` により分岐している
 - `textlint-ai-ja`（AI語彙検出プリセット入りtextlint）は `nix/pkgs/textlint-ai-ja` でビルドする。バージョン更新の手順は同ディレクトリの `default.nix` 冒頭コメントを参照
 - natural-japaneseスキルのSKILL.mdには、`nix/skills/default.nix` のtransformで `textlint-ai-ja` の実行手順を追記している（追記する本文は `nix/skills/natural-japanese-textlint.md`）。このスキルだけ `skills.enableAll` ではなく `skills.explicit` で拾っている（同じスキルIDが両方に入るとID衝突でevalが落ちるため）
