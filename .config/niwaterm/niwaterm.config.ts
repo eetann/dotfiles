@@ -51,6 +51,7 @@ export default defineConfig({
       { id: "ai-review", label: "AIレビュー", color: "#6fc6c9" },
       { id: "human-review", label: "人間レビュー", color: "#b98cc4" },
       { id: "pr-review", label: "PR自動レビュー", color: "#f59a84" },
+      { id: "need-apply", label: "apply必須", color: "#e8836f" },
       { id: "test-functionality", label: "動作確認", color: "#f59a84" },
     ],
   },
