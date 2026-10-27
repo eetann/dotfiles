@@ -61,6 +61,7 @@ export const layouts: LayoutsConfig = {
                 'target=$(niwa tab var find role claude | head -n1); ' +
                 '[ -n "$target" ] && ep --target-pane "$target" || ep',
               focus: true,
+              closeOnExit: true,
             },
           ],
         },
@@ -120,6 +121,7 @@ export const layouts: LayoutsConfig = {
                 'target=$(niwa tab var find role claude | head -n1); ' +
                 '[ -n "$target" ] && ep --target-pane "$target" || ep',
               focus: true,
+              closeOnExit: true,
             },
           ],
         },
