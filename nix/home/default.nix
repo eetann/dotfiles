@@ -48,6 +48,7 @@ in
     ./dictionary.nix
     ./pnpm.nix
     ./niwaterm-prompt-jump.nix
+    ./cleanup.nix
     ../skills
   ];
 

@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+set -uo pipefail
+
+# 消しても必要になったら再取得されるだけのキャッシュを削除する。
+# nix/home/cleanup.nix で2週に1回（毎月1日と15日）定期実行している。手動で実行してもよい。
+# 1つ失敗しても残りは続けたいので set -e は使わない。
+
+log() {
+  echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*"
+}
+
+# どのプロジェクトからも参照されていないパッケージだけを消す
+if command -v pnpm >/dev/null 2>&1; then
+  log "pnpm store prune"
+  pnpm store prune
+fi
+
+if command -v uv >/dev/null 2>&1; then
+  log "uv cache prune"
+  uv cache prune
+fi
+
+if command -v npm >/dev/null 2>&1; then
+  log "npm cache clean"
+  npm cache clean --force
+fi
+
+# 丸ごと消してよいキャッシュ
+# ~/Library/Caches/Yarn と ~/.cache/yarn はYarn Classic(1.x)のキャッシュ
+for dir in \
+  "$HOME/.bun/install/cache" \
+  "$HOME/.cache/zig" \
+  "$HOME/.cache/yarn" \
+  "$HOME/Library/Caches/Yarn" \
+  "$HOME/Library/Developer/CoreSimulator/Caches"; do
+  if [ -d "$dir" ]; then
+    log "rm -rf $dir"
+    rm -rf "$dir"
+  fi
+done
+
+if [ "$(uname)" = "Darwin" ]; then
+  # 14日以上ビルドしていないプロジェクトのXcodeビルド成果物
+  derived_data="$HOME/Library/Developer/Xcode/DerivedData"
+  if [ -d "$derived_data" ]; then
+    log "remove DerivedData older than 14 days"
+    find "$derived_data" -mindepth 1 -maxdepth 1 -mtime +14 -print -exec rm -rf {} +
+  fi
+
+  # Xcode本体がない（Command Line Toolsだけの）場合はsimctlが使えない
+  if xcrun --find simctl >/dev/null 2>&1; then
+    log "xcrun simctl delete unavailable"
+    xcrun simctl delete unavailable
+  fi
+fi
+
+log "done"

@@ -35,6 +35,7 @@
       ShowStatusBar = false; # ステータスバー非表示
       FXPreferredViewStyle = "Nlsv"; # リスト表示
       FXDefaultSearchScope = "SCcf"; # 現在のフォルダを検索
+      FXRemoveOldTrashItems = true; # ゴミ箱に入れて30日経った項目を自動削除（日数は変更不可）
     };
 
     # スクリーンキャプチャ設定
