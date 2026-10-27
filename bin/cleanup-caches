@@ -29,6 +29,7 @@ fi
 # ~/Library/Caches/Yarn と ~/.cache/yarn はYarn Classic(1.x)のキャッシュ
 for dir in \
   "$HOME/.bun/install/cache" \
+  "$HOME/.cache/opencode" \
   "$HOME/.cache/zig" \
   "$HOME/.cache/yarn" \
   "$HOME/Library/Caches/Yarn" \
@@ -36,6 +37,16 @@ for dir in \
   if [ -d "$dir" ]; then
     log "rm -rf $dir"
     rm -rf "$dir"
+  fi
+done
+
+# Neovimのログ（lsp.logはローテーションされず溜まり続ける）
+# ~/.local/state/nvim にはshada（コマンド履歴やマーク）なども入っているので、ディレクトリごとは消さない。
+# 起動中のNeovimが開いたままでも容量が空くよう、削除ではなく中身を空にする
+for file in "$HOME"/.local/state/nvim/*.log "$HOME/.local/state/nvim/log"; do
+  if [ -f "$file" ]; then
+    log "truncate $file"
+    : >"$file"
   fi
 done
 
