@@ -4,7 +4,7 @@
   "private": true,
   "description": "textlint + textlint-rule-preset-ai-words-ja (AI語彙検出) を固定バージョンで束ねるための定義",
   "dependencies": {
-    "textlint": "15.7.1",
+    "textlint": "15.8.0",
     "textlint-rule-preset-ai-words-ja": "1.2.1"
   }
 }
