@@ -5,7 +5,10 @@
         "dictionaryPath": "./ai-words.json",
         "dictionaryMode": "append",
         "allows": [
-          "正本"
+          "正本",
+          "パッチを当て",
+          "手順を踏",
+          "段階を踏"
         ]
       }
     }
