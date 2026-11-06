@@ -50,6 +50,16 @@ for file in "$HOME"/.local/state/nvim/*.log "$HOME/.local/state/nvim/log"; do
   fi
 done
 
+# どのコンテナからも使われていないDockerイメージとビルドキャッシュ（2週間以内のものは残す）。
+# イメージのuntilは最後に使った日時ではなく作成日時で判定するので、pullしたイメージはほぼ全て対象になる
+if command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1; then
+  log "docker image prune"
+  docker image prune -a -f --filter until=336h
+
+  log "docker builder prune"
+  docker builder prune -f --filter until=336h
+fi
+
 if [ "$(uname)" = "Darwin" ]; then
   # 14日以上ビルドしていないプロジェクトのXcodeビルド成果物
   derived_data="$HOME/Library/Developer/Xcode/DerivedData"

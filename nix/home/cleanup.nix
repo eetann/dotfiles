@@ -22,6 +22,20 @@ let
 
   # 消しても必要になったら再取得されるだけのキャッシュを削除するスクリプト
   cleanupCaches = "${dotfilesDir}/bin/cleanup-caches";
+
+  # worktreeの削除後に残ったcomposeプロジェクトなどを削除するスクリプト
+  cleanupDocker = "${dotfilesDir}/bin/cleanup-docker";
+
+  # launchdのPATHは/usr/bin:/bin:/usr/sbin:/sbinだけなので、nixで入れたpnpm等が見つかるようにする
+  servicePath = lib.concatStringsSep ":" [
+    "${config.home.profileDirectory}/bin"
+    "/run/current-system/sw/bin"
+    "/opt/homebrew/bin"
+    "/usr/bin"
+    "/bin"
+    "/usr/sbin"
+    "/sbin"
+  ];
 in
 {
   # gomiのゴミ箱: 毎日
@@ -75,16 +89,7 @@ in
           Minute = 0;
         }
       ];
-      # launchdのPATHは/usr/bin:/bin:/usr/sbin:/sbinだけなので、nixで入れたpnpm等が見つかるようにする
-      EnvironmentVariables.PATH = lib.concatStringsSep ":" [
-        "${config.home.profileDirectory}/bin"
-        "/run/current-system/sw/bin"
-        "/opt/homebrew/bin"
-        "/usr/bin"
-        "/bin"
-        "/usr/sbin"
-        "/sbin"
-      ];
+      EnvironmentVariables.PATH = servicePath;
       StandardOutPath = "${config.home.homeDirectory}/Library/Logs/cleanup-caches.log";
       StandardErrorPath = "${config.home.homeDirectory}/Library/Logs/cleanup-caches.log";
     };
@@ -102,6 +107,42 @@ in
     Unit.Description = "Run cache cleanup on the 1st and 15th";
     Timer = {
       OnCalendar = "*-*-01,15 12:00:00";
+      Persistent = true;
+    };
+    Install.WantedBy = [ "timers.target" ];
+  };
+
+  # Docker: 毎日
+  # ネットワークは上限に達すると新しいプロジェクトを起動できなくなるので、キャッシュより短い間隔にしている
+  launchd.agents.cleanup-docker = {
+    enable = true;
+    config = {
+      ProgramArguments = [ cleanupDocker ];
+      StartCalendarInterval = [
+        {
+          Hour = 12;
+          Minute = 0;
+        }
+      ];
+      EnvironmentVariables.PATH = servicePath;
+      StandardOutPath = "${config.home.homeDirectory}/Library/Logs/cleanup-docker.log";
+      StandardErrorPath = "${config.home.homeDirectory}/Library/Logs/cleanup-docker.log";
+    };
+  };
+
+  # NixOSのdockerは/run/current-system/sw/binに入るのでPATHを明示する
+  systemd.user.services.cleanup-docker = {
+    Unit.Description = "Remove unused Docker resources";
+    Service = {
+      Type = "oneshot";
+      Environment = "PATH=${servicePath}";
+      ExecStart = cleanupDocker;
+    };
+  };
+  systemd.user.timers.cleanup-docker = {
+    Unit.Description = "Run Docker cleanup daily";
+    Timer = {
+      OnCalendar = "daily";
       Persistent = true;
     };
     Install.WantedBy = [ "timers.target" ];

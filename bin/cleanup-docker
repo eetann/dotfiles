@@ -1,0 +1,97 @@
+#!/usr/bin/env bash
+set -uo pipefail
+
+# Dockerの使われなくなったコンテナ・ネットワーク・ボリュームを削除する。
+# nix/home/cleanup.nix で毎日定期実行している。手動で実行してもよい。
+# イメージとビルドキャッシュは消すと次の起動が遅くなるので、頻度の低い bin/cleanup-caches で削除している。
+# 1つ失敗しても残りは続けたいので set -e は使わない。
+#
+# 何が消えるかを確認するだけなら cleanup-docker --dry-run
+
+dry_run=false
+case "${1:-}" in
+  "") ;;
+  -n | --dry-run) dry_run=true ;;
+  *)
+    echo "Usage: cleanup-docker [-n|--dry-run]" >&2
+    exit 1
+    ;;
+esac
+
+log() {
+  echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*"
+}
+
+run() {
+  log "$*"
+  if [ "$dry_run" = false ]; then
+    "$@"
+  fi
+}
+
+# OrbStackなどが止まっていれば何もしない
+if ! docker info >/dev/null 2>&1; then
+  log "docker is not running"
+  exit 0
+fi
+
+# カレントディレクトリの.envをdocker composeに読ませない
+cd / || exit 1
+
+# この配下のプロジェクトだけを削除の対象にする。
+# launchdからはTCCで保護された場所（~/Documentsなど）が存在しないように見える。
+# 未接続の外部ドライブやdevcontainer内のパスも同じで、動いているプロジェクトを消してしまうため。
+projects_root="$HOME/ghq"
+
+is_gone() {
+  case "$1" in
+    "$projects_root"/*) [ ! -d "$1" ] ;;
+    *) return 1 ;;
+  esac
+}
+
+# 作業ディレクトリが消えたcomposeプロジェクト（worktreeの削除後に残ったものなど）を出力する。
+# 同じプロジェクト名を複数のディレクトリから使っている場合は、1つでも残っていれば対象にしない。
+orphan_projects() {
+  docker ps -a --filter label=com.docker.compose.project \
+    --format '{{.Label "com.docker.compose.project"}}{{"\t"}}{{.Label "com.docker.compose.project.working_dir"}}' |
+    sort -u |
+    while IFS=$'\t' read -r project dir; do
+      if is_gone "$dir"; then
+        echo "$project gone"
+      else
+        echo "$project alive"
+      fi
+    done |
+    awk '
+      $2 == "gone" { gone[$1] = 1 }
+      $2 == "alive" { alive[$1] = 1 }
+      END { for (project in gone) if (!(project in alive)) print project }
+    '
+}
+
+# composeファイルがなくても、プロジェクト名があればラベルをたどって
+# コンテナ・ネットワーク・名前付きボリュームをまとめて削除できる。
+# 起動中のコンテナがあるプロジェクトは使っている可能性があるので残す（止めれば次の実行で削除される）。
+for project in $(orphan_projects); do
+  running=$(docker ps -q --filter "label=com.docker.compose.project=$project") || continue
+  if [ -n "$running" ]; then
+    log "skip running: $project"
+    continue
+  fi
+  run docker compose -p "$project" down --volumes --remove-orphans
+done
+
+# docker runの残骸（composeと無関係の、2週間以上前に作られた停止中のコンテナ）。
+# composeのコンテナまで消すと、匿名ボリュームにあるデータを次のupで引き継げなくなるので残す。
+run docker container prune -f --filter until=336h --filter 'label!=com.docker.compose.project'
+
+# コンテナが動いていないネットワーク。作成直後でまだつながっていないものは残す
+run docker network prune -f --filter until=24h
+
+# どのコンテナからも参照されていない匿名ボリューム。
+# 名前付きボリュームはコンテナがなくなると持ち主を判定できず、
+# `docker compose down` しただけのプロジェクトのDBを消しかねないので対象にしない。
+run docker volume prune -f
+
+log "done"
