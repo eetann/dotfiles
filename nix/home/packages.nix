@@ -43,6 +43,7 @@
       opencode
       pinact
       pnpm
+      postgresql # psql用。nixpkgsのlibpqにはpsqlが含まれないためpostgresqlごと入れる（サーバーは起動しない）
       ripgrep
       shellcheck
       shfmt
