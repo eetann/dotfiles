@@ -1,0 +1,93 @@
+#!/usr/bin/env bash
+set -uo pipefail
+
+# グループ専用VPN（Interlink の GroupVPN.app）がクラッシュして、ネットにつながらなくなったときの復旧用。
+# アプリは接続時に同梱の set-dns.sh で Wi-Fi サービスの DNS を VPN 用に書き換え、切断時に元へ戻す。
+# クラッシュすると戻す処理が走らず、書き換えた DNS が動的ストア（OSのメモリ上の設定）に残る。
+# 動的ストアの Setup: キーは DHCP の DNS より優先されるため、Wi-Fi をつなぎ直しても直らない（再起動では消える）。
+# ここでは残った DNS 設定を消して Wi-Fi を入れ直し、DHCP の DNS に戻す。
+# Wi-Fi に手動で DNS を設定していない前提（設定していると、その DNS も一緒に消える）。
+#
+# 何をするか確認するだけなら groupvpn-recover --dry-run
+
+dry_run=false
+case "${1:-}" in
+  "") ;;
+  -n | --dry-run) dry_run=true ;;
+  *)
+    echo "Usage: groupvpn-recover [-n|--dry-run]" >&2
+    exit 1
+    ;;
+esac
+
+run() {
+  echo "+ $*"
+  if [ "$dry_run" = false ]; then
+    "$@"
+  fi
+}
+
+# デバイス（en0など）に対応するネットワークサービスIDを動的ストアから探す
+find_service_id() {
+  local device=$1 key
+  printf 'list Setup:/Network/Service/[^/]+/Interface\n' | scutil | awk '{ print $4 }' |
+    while read -r key; do
+      if printf 'show %s\n' "$key" | scutil | grep -q "DeviceName : ${device}\$"; then
+        key=${key#Setup:/Network/Service/}
+        echo "${key%/Interface}"
+        break
+      fi
+    done
+}
+
+# 動的ストアにある DNS サーバーを空白区切りで出力する。kind は Setup か State
+show_dns() {
+  local kind=$1
+  printf 'show %s:/Network/Service/%s/DNS\n' "$kind" "$wifi_service" | scutil |
+    awk '/^ +[0-9]+ : / { print $3 }' | paste -sd ' ' -
+}
+
+wifi_device=$(networksetup -listallhardwareports | awk '/^Hardware Port: Wi-Fi$/ { getline; print $2 }')
+if [ -z "$wifi_device" ]; then
+  echo "Wi-Fi device not found" >&2
+  exit 1
+fi
+
+wifi_service=$(find_service_id "$wifi_device")
+if [ -z "$wifi_service" ]; then
+  echo "network service for $wifi_device not found" >&2
+  exit 1
+fi
+
+echo "Wi-Fi: $wifi_device (service $wifi_service)"
+echo "Setup DNS: $(show_dns Setup)"
+echo "State DNS: $(show_dns State)"
+
+# 本体が落ちても openvpn（root で動く）が残っていることがある。
+# アプリ本体と Application Support のどちらに置いた openvpn でも当たるようにパスの末尾で探す
+openvpn_pattern='/OpenVPN/openvpn'
+if pgrep -f "$openvpn_pattern" >/dev/null; then
+  run sudo pkill -f "$openvpn_pattern"
+fi
+
+echo "+ sudo scutil  # remove Setup/State DNS of $wifi_service"
+if [ "$dry_run" = false ]; then
+  printf 'remove Setup:/Network/Service/%s/DNS\nremove State:/Network/Service/%s/DNS\n' \
+    "$wifi_service" "$wifi_service" | sudo scutil
+fi
+
+# 入れ直すと DHCP で DNS を取り直し、State: のキーが作り直される
+run networksetup -setairportpower "$wifi_device" off
+run networksetup -setairportpower "$wifi_device" on
+
+if [ "$dry_run" = true ]; then
+  exit 0
+fi
+
+dns=""
+for _ in $(seq 1 20); do
+  dns=$(show_dns State)
+  [ -n "$dns" ] && break
+  sleep 1
+done
+echo "DNS: ${dns:-(Wi-Fi がまだつながっていない。少し待って scutil --dns で確認して)}"
