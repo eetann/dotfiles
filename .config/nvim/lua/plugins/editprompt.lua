@@ -18,6 +18,8 @@ return {
     { "<Space>pp", "<Cmd>Editprompt history prev<CR>" },
     { "<Space>pn", "<Cmd>Editprompt history next<CR>" },
     { "<Space>ph", "<Cmd>Editprompt history list<CR>" },
+    { "<Space>pg", "<Cmd>Editprompt suggestion<CR>" },
+    { "<Space>pG", "<Cmd>Editprompt suggestion --auto-send<CR>" },
     {
       "<Space>pN",
       function()

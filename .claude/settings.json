@@ -3,7 +3,14 @@
   "env": {
     "ENABLE_CLAUDEAI_MCP_SERVERS": "false",
     "CLAUDE_CODE_ENABLE_FUNCTION_HOOKS": "1",
-    "CLAUDE_CODE_PLUGIN_DIRS": "~/.config/claude-mods/niwaterm-prompt-jump"
+    "CLAUDE_CODE_PLUGIN_DIRS": "~/.config/claude-mods/niwaterm-prompt-jump:~/ghq/github.com/eetann/editprompt/claude-plugin"
+  },
+  "pluginConfigs": {
+    "editprompt@inline": {
+      "options": {
+        "command": "node /home/eetann/ghq/github.com/eetann/editprompt/dist/index.js"
+      }
+    }
   },
   "includeCoAuthoredBy": false,
   "copyOnSelect": false,
