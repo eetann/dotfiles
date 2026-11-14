@@ -1,4 +1,5 @@
 import { claudePromptJump, defaultAppearance, defineConfig } from "@niwaterm/config";
+import { commandTemplates } from "./command-templates.ts";
 import { keybindings } from "./keybindings.ts";
 import { layouts } from "./layouts.ts";
 
@@ -82,4 +83,5 @@ export default defineConfig({
     default: isWindows ? "wsl.exe -d NixOS" : undefined,
   },
   layouts,
+  commandTemplates,
 });

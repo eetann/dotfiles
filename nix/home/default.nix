@@ -38,6 +38,18 @@ let
   };
   mkConfigFiles = files: builtins.listToAttrs (map mkConfigFile files);
 
+  # ~/.config/niwaterm配下に置くファイル。WSL側のxdg.configFileとWindows側の
+  # mklink（niwatermWindowsConfig）の両方がこのリストを使う
+  niwatermFiles = [
+    "bun.lock"
+    "command-templates.ts"
+    "keybindings.ts"
+    "layouts.ts"
+    "niwaterm.config.ts"
+    "package.json"
+    "tsconfig.json"
+  ];
+
 in
 {
   imports = [
@@ -75,31 +87,28 @@ in
   ];
 
   # ~/.config 配下のファイル
-  xdg.configFile = mkConfigFiles [
-    "alacritty"
-    "ccstatusline"
-    "efm-langserver"
-    "git"
-    "ghostty"
-    "i3/config"
-    "karabiner/karabiner.json"
-    "lazygit/config.yml"
-    "mdecho"
-    "niwaterm/bun.lock"
-    "niwaterm/keybindings.ts"
-    "niwaterm/layouts.ts"
-    "niwaterm/niwaterm.config.ts"
-    "niwaterm/package.json"
-    "niwaterm/tsconfig.json"
-    "nvim"
-    "opencode/opencode.jsonc"
-    "opencode/instructions"
-    "opencode/tui.jsonc"
-    "rofi"
-    "vde"
-    "wezterm"
-    "zeno"
-  ];
+  xdg.configFile = mkConfigFiles (
+    [
+      "alacritty"
+      "ccstatusline"
+      "efm-langserver"
+      "git"
+      "ghostty"
+      "i3/config"
+      "karabiner/karabiner.json"
+      "lazygit/config.yml"
+      "mdecho"
+      "nvim"
+      "opencode/opencode.jsonc"
+      "opencode/instructions"
+      "opencode/tui.jsonc"
+      "rofi"
+      "vde"
+      "wezterm"
+      "zeno"
+    ]
+    ++ map (f: "niwaterm/${f}") niwatermFiles
+  );
 
   # NixOS-WSL環境では、niwatermの実体がWindows側アプリのため、
   # WSL側の~/.config/niwatermとは別にWindows側の設定ファイルにも
@@ -131,7 +140,7 @@ in
     if [ -d "$windowsNiwatermDir" ] && [ -x "$cmdExe" ]; then
       winTarget='C:\Users\eetann\.config\niwaterm'
       uncSrc='\\wsl.localhost\NixOS\home\eetann\dotfiles\.config\niwaterm'
-      for f in keybindings.ts layouts.ts niwaterm.config.ts tsconfig.json package.json bun.lock; do
+      for f in ${lib.concatStringsSep " " niwatermFiles}; do
         run env -C /mnt/c "$cmdExe" /c "del $winTarget\\$f 2>nul & mklink $winTarget\\$f $uncSrc\\$f"
       done
     fi
