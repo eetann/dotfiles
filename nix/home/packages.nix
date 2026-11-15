@@ -25,7 +25,6 @@
       findutils
       fzf
       gawk
-      gh
       ghq
       git # NixOS側にはシステムgitがないため明示的に追加
       git-lfs

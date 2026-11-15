@@ -52,6 +52,7 @@ in
 {
   imports = [
     ./packages.nix
+    ./gh.nix
     ./tmux.nix
     ./zsh.nix
     ./git-worktree-runner.nix
