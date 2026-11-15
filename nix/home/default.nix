@@ -38,15 +38,13 @@ let
   };
   mkConfigFiles = files: builtins.listToAttrs (map mkConfigFile files);
 
-  # ~/.config/niwaterm配下に置くファイル。WSL側のxdg.configFileとWindows側の
-  # mklink（niwatermWindowsConfig）の両方がこのリストを使う
-  niwatermFiles = [
-    "bun.lock"
+  # Windows側の~/.config/niwatermへmklinkで張るファイル（niwatermWindowsConfig）。
+  # WSL・macOS側はディレクトリごとリンクするので、このリストは使わない
+  niwatermWindowsFiles = [
     "command-templates.ts"
     "keybindings.ts"
     "layouts.ts"
     "niwaterm.config.ts"
-    "package.json"
     "tsconfig.json"
   ];
 
@@ -87,28 +85,28 @@ in
   ];
 
   # ~/.config 配下のファイル
-  xdg.configFile = mkConfigFiles (
-    [
-      "alacritty"
-      "ccstatusline"
-      "efm-langserver"
-      "git"
-      "ghostty"
-      "i3/config"
-      "karabiner/karabiner.json"
-      "lazygit/config.yml"
-      "mdecho"
-      "nvim"
-      "opencode/opencode.jsonc"
-      "opencode/instructions"
-      "opencode/tui.jsonc"
-      "rofi"
-      "vde"
-      "wezterm"
-      "zeno"
-    ]
-    ++ map (f: "niwaterm/${f}") niwatermFiles
-  );
+  # niwatermはディレクトリごとリンクする。アプリが型定義（.niwaterm-types/）を
+  # このディレクトリへ書き込むため、ファイル単位のリンクでは置き場所が無い
+  xdg.configFile = mkConfigFiles [
+    "alacritty"
+    "ccstatusline"
+    "efm-langserver"
+    "git"
+    "ghostty"
+    "i3/config"
+    "karabiner/karabiner.json"
+    "lazygit/config.yml"
+    "mdecho"
+    "niwaterm"
+    "nvim"
+    "opencode/opencode.jsonc"
+    "opencode/instructions"
+    "opencode/tui.jsonc"
+    "rofi"
+    "vde"
+    "wezterm"
+    "zeno"
+  ];
 
   # NixOS-WSL環境では、niwatermの実体がWindows側アプリのため、
   # WSL側の~/.config/niwatermとは別にWindows側の設定ファイルにも
@@ -140,7 +138,7 @@ in
     if [ -d "$windowsNiwatermDir" ] && [ -x "$cmdExe" ]; then
       winTarget='C:\Users\eetann\.config\niwaterm'
       uncSrc='\\wsl.localhost\NixOS\home\eetann\dotfiles\.config\niwaterm'
-      for f in ${lib.concatStringsSep " " niwatermFiles}; do
+      for f in ${lib.concatStringsSep " " niwatermWindowsFiles}; do
         run env -C /mnt/c "$cmdExe" /c "del $winTarget\\$f 2>nul & mklink $winTarget\\$f $uncSrc\\$f"
       done
     fi
