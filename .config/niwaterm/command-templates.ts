@@ -7,10 +7,6 @@ import type {
 } from "@niwaterm/config";
 import { layouts } from "./layouts.ts";
 
-// niwa.shell.runの標準出力には、シェル統合が出すOSC 7（cwdの通知）が混ざることがあるので
-// エスケープシーケンスを取り除いてから行に分ける
-const OSC_PATTERN = /\u001b\][^\u0007\u001b]*(?:\u0007|\u001b\\)/g;
-
 async function runLines(
   niwa: Niwa,
   command: string,
@@ -19,7 +15,6 @@ async function runLines(
   const result = await niwa.shell.run(command, { cwd: ctx.cwd });
   if (result.exitCode !== 0) return [];
   return result.stdout
-    .replace(OSC_PATTERN, "")
     .split("\n")
     .map((line) => line.trim())
     .filter((line) => line !== "");
