@@ -15,6 +15,8 @@
 
   wsl.enable = true;
   wsl.defaultUser = "eetann";
+  # binfmt_miscのWSLInteropが消えて.exeがexec format errorになるため、NixOS側で明示的に登録する
+  wsl.interop.register = true;
 
   networking.hostName = "eetann-wsl";
 
