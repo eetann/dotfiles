@@ -5,14 +5,11 @@ export const layouts: LayoutsConfig = {
     description: "Editor/Server | AI/editprompt [個人用]",
     layout: {
       kind: "split",
-      // vde-layoutのtype: horizontal（左右）はniwatermではvertical
       orientation: "vertical",
       ratio: 0.5,
       first: {
         kind: "split",
-        // vde-layoutのtype: vertical（上下）はniwatermではhorizontal
         orientation: "horizontal",
-        // vde-layoutの ratio: [1, "12c"] 相当。niwatermは固定行数指定が無いため比率で近似
         ratio: 0.75,
         first: {
           kind: "tile",
@@ -32,12 +29,13 @@ export const layouts: LayoutsConfig = {
       second: {
         kind: "split",
         orientation: "horizontal",
-        ratio: 0.8, // vde-layoutの ratio: [1, "10c"] 相当（近似）
+        ratio: 0.8,
         first: {
           kind: "tile",
           tabs: [
             {
               name: "claude",
+              ref: "claude",
               vars: { role: "claude" },
               command: "CLAUDE_CONFIG_DIR=~/.claude claude",
             },
@@ -45,21 +43,12 @@ export const layouts: LayoutsConfig = {
         },
         second: {
           kind: "tile",
-          // editpromptはniwaterm対応済み（--mux niwatermはNIWATERM_TAB_IDから自動判定）。
-          // ただしvde-layoutの{{pane_id:claude}}のようなプリセット定義時点でのpane-id参照は
-          // niwatermに無い（tabIdは適用のたびに再採番されるため）。代わりに`niwa tab var find`で
-          // 実行時にroleからclaudeタブのtabIdを検索する（詳細: docs/guide/config.md「レイアウト」節）
           tabs: [
             {
               name: "editprompt",
               vars: { role: "editprompt" },
-              // zshは変数展開の結果に単語分割もチルダ展開もかけないため、コマンド行全体を
-              // 変数へ入れて`$editprompt`で起動する書き方は動かない（コマンド名まるごと1語として
-              // 扱われ`no such file or directory`になる）。関数にまとめ、パスは$HOMEで書く
               command:
-                'ep() { node "$HOME/ghq/github.com/eetann/editprompt/dist/index.js" open --editor nvim --always-copy "$@"; }; ' +
-                'target=$(niwa tab var find role claude | head -n1); ' +
-                '[ -n "$target" ] && ep --target-pane "$target" || ep',
+                'node "$HOME/ghq/github.com/eetann/editprompt/dist/index.js" open --editor nvim --always-copy --target-pane {{tab:claude}}',
               focus: true,
               closeOnExit: true,
             },
@@ -102,6 +91,7 @@ export const layouts: LayoutsConfig = {
           tabs: [
             {
               name: "claude",
+              ref: "claude",
               vars: { role: "claude" },
               command: "CLAUDE_CONFIG_DIR=~/.claude_work CODEX_HOME=~/.codex_work claude",
             },
@@ -113,13 +103,8 @@ export const layouts: LayoutsConfig = {
             {
               name: "editprompt",
               vars: { role: "editprompt" },
-              // zshは変数展開の結果に単語分割もチルダ展開もかけないため、コマンド行全体を
-              // 変数へ入れて`$editprompt`で起動する書き方は動かない（コマンド名まるごと1語として
-              // 扱われ`no such file or directory`になる）。関数にまとめ、パスは$HOMEで書く
               command:
-                'ep() { node "$HOME/ghq/github.com/eetann/editprompt/dist/index.js" open --editor nvim --always-copy "$@"; }; ' +
-                'target=$(niwa tab var find role claude | head -n1); ' +
-                '[ -n "$target" ] && ep --target-pane "$target" || ep',
+                'node "$HOME/ghq/github.com/eetann/editprompt/dist/index.js" open --editor nvim --always-copy --target-pane {{tab:claude}}',
               focus: true,
               closeOnExit: true,
             },
