@@ -8,7 +8,7 @@
   "pluginConfigs": {
     "editprompt@inline": {
       "options": {
-        "command": "node /home/eetann/ghq/github.com/eetann/editprompt/dist/index.js"
+        "command": "mise -C ~/ghq/github.com/eetann/editprompt exec -- node dist/index.js"
       }
     }
   },
