@@ -75,7 +75,7 @@ export const commandTemplates: CommandTemplateConfig[] = [
   {
     id: "worktree-remote",
     name: "リモートのブランチからワークツリーを作る",
-    description: "リモートのブランチを選んでワークツリーを作る（一覧は最後にfetchした時点のもの）",
+    description: "fetchしてからリモートのブランチを選んでワークツリーを作る",
     // -wはワークスペース名の部分一致でも探せるので、review用のワークスペースへ作る
     command:
       "niwa worktree new --open board-switch -w review --layout {{layout}} --trust {{branch}}",
@@ -83,11 +83,25 @@ export const commandTemplates: CommandTemplateConfig[] = [
       layout: layoutField,
       branch: {
         label: "リモートのブランチ",
-        // refname:shortだとorigin/HEADは"origin"だけになるので、"/"を含まない行を落とす
-        options: async (ctx, niwa) =>
-          (await runLines(niwa, "git branch -r --format='%(refname:short)'", ctx)).filter(
+        focus: true,
+        options: async (ctx, niwa) => {
+          // 認証を求められても止まらないようにプロンプトを切る。オフライン等で失敗しても手元の一覧で続ける
+          await niwa.shell.run("git fetch --prune --quiet", {
+            cwd: ctx.cwd,
+            env: { GIT_TERMINAL_PROMPT: "0" },
+          });
+          // refname:shortだとorigin/HEADは"origin"だけになるので、"/"を含まない行を落とす
+          return (await runLines(niwa, "git branch -r --format='%(refname:short)'", ctx)).filter(
             (name) => name.includes("/") && !name.endsWith("/HEAD"),
-          ),
+          );
+        },
+        // PRページ等でコピーしたブランチ名がクリップボードにあれば初期値にする。
+        // 候補に無い値ならniwaterm側で先頭の候補へ落ちる
+        default: async (_ctx, niwa) => {
+          const text = (await niwa.clipboard.read()).trim();
+          if (!/^[\w.-]+(\/[\w.-]+)*$/.test(text)) return undefined;
+          return text.startsWith("origin/") ? text : `origin/${text}`;
+        },
       },
     },
   },
